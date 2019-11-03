@@ -8,16 +8,16 @@
 							<div class="g-s-i-img"><img src="{$info.shop_logo}" /></div>
 							<div class="g-s-i-title box-flex">
 								<h3 class="ellipsis-one">{$info.shop_name}</h3>
-                                <p class="t-remark m-top04">已经有 <span class="num{$info.ru_id}">{$info.count_gaze}</span> 人关注</p>
+								<p class="t-remark m-top04">已经有 <span class="num{$info.ru_id}">{$info.count_gaze}</span> 人关注</p>
 							</div>
 							<div class="g-s-info-add">
-
+								
 								<a class="gaze{$info.ru_id} {$info.gaze_status}"  onclick="addgaze({$info.ru_id})">
 									<span id="store-list">
 									{if $info.gaze_status =='active'}
 										已关注
 									{else}
-										<i class="iconfont icon-aixin"></i>关注
+										<i class="iconfont icon-aixin"></i>关注 
 									{/if}
 								</span>
 								</a>
@@ -31,7 +31,7 @@
 							<p class="box-flex">
 								<label class="fl">时效</label><span class="t-center margin-lr fl">{$info.commentdelivery}</span><em class="em-promotion em-p-center fl">{$info.commentdelivery_font}</em></p>
 						</section>
-
+						
 					</header>
 				</section>
 			</div>
@@ -47,7 +47,7 @@
 
 
 					<li class="box-flex">
-                    <a href="{url('store/index/pro_list',array('ru_id'=>$info.ru_id,'type'=>'store_new'))}">
+                    <a href="{url('store/index/pro_list',array('ru_id'=>$info.ru_id,'type'=>'is_new'))}">
 						<h4>{$info.count_goods_new}</h4>
 						<p class="t-remark3 m-top02">新品</p>
                     </a>
@@ -63,22 +63,23 @@
 
 				</ul>
 			</div>
-
-
-
+                    
+                    
+                    
 			<div class="m-top08 shopping-about-icon">
 				<section class="padding-all b-color-f m-top1px">
-                    {if $has_kefu ==1 }
-                        <a href="{url('chat/index/index', array('ru_id'=> $info.ru_id))}">
-                        <div class="dis-box">
+                <!--
+                        {if $has_kefu ==1 }
+                                <a href="{url('touchim/index/index', array('ru_id'=> $info.ru_id))}">
+                                        <div class="dis-box">
 						<label class="t-remark p-top g-t-temark">在线客服</label>
 						<span class="box-flex p-top"></span>
 						<div class="f-04"><span class="t-jiantou fr"><i class="iconfont icon-kefu"></i></span></div>
-                        </div>
-                        </a>
-
+					</div>
+                                </a>
+                                    
                     {elseif $info.kf_appkey &&$info.is_im ==1 }
-                    <a href="{url('chat/yunwang/index', array('ru_id'=> $info.ru_id))}">
+                    <a href="{url('chat/index/index', array('ru_id'=> $info.ru_id))}">
                         <div class="dis-box">
 						<label class="t-remark p-top g-t-temark">在线客服</label>
 						<span class="box-flex p-top"></span>
@@ -86,7 +87,7 @@
 					</div>
                      </a>
                     {elseif !empty($info.meiqia) }
-                    <a href="https://static.meiqia.com/dist/standalone.html?eid={$info.meiqia}">
+                       <a href="https://static.meiqia.com/dist/standalone.html?eid={$info.meiqia}">
 					<div class="dis-box">
 						<label class="t-remark p-top g-t-temark">在线客服</label>
 						<span class="box-flex p-top"></span>
@@ -101,10 +102,10 @@
 						<div class="f-04"><span class="t-jiantou fr"><i class="iconfont icon-kefu"></i></span></div>
 					</div>
                     </a>
-                    {/if}
-
-
-
+                    {/if}           
+                        -->   
+                          
+                                    
 				</section>
                 <section class="padding-all b-color-f m-top1px">
                     <div class="dis-box j-show-div">
@@ -132,7 +133,7 @@
 				<section class="padding-all b-color-f m-top1px">
 					<div class="dis-box">
 						<label class="t-remark g-t-temark">店铺简介</label>
-						<span class="box-flex t-goods1">{$info.street_desc}</span>
+						<span class="box-flex t-goods1">{$info.shop_name}</span>
 					</div>
 				</section>
 				<section class="padding-all b-color-f m-top1px">
@@ -141,46 +142,34 @@
 						<span class="box-flex t-goods1">{$info.shop_desc}</span>
 					</div>
 				</section>
-
 				<section class="padding-all b-color-f m-top1px">
-                    <a class="dis-box" href="http://apis.map.qq.com/uri/v1/geocoder?coord={$info.lat},{$info.long}&referer=ectouch">
+					<div class="dis-box">
+						<label class="t-remark g-t-temark">开店时间</label>
+						<span class="box-flex t-goods1">{$info.shop_start}</span>
+					</div>
+				</section>
+				<section class="padding-all b-color-f m-top1px">
+					<div class="dis-box">
 						<label class="t-remark g-t-temark">所在地区</label>
 						<span class="box-flex t-goods1">{$info.shop_address}</span>
-                        {if $info.shop_address }
-                        <div class="f-04"><span class="t-jiantou fr" style="padding-right:0;margin-top:0;"><i class="iconfont icon-dingwei" style="font-size:1.8rem"></i></span></div>
-                        {/if}
-					</a>
+					</div>
 				</section>
-
-                <section class="padding-all b-color-f m-top1px">
-                    <div class="dis-box">
-                        <label class="t-remark g-t-temark">主营品牌</label>
-                        <span class="box-flex t-goods1">{$info.shoprz_brandName}</span>
-                    </div>
-                </section>
-
-                <section class="padding-all b-color-f m-top1px">
-                    <div class="dis-box">
-                        <label class="t-remark g-t-temark">商家等级</label>
-                        <span class="box-flex t-goods1"><img src="{$info.grade_img}" width="20" /> {$info.grade_name}</span>
-                    </div>
-                </section>
 			</div>
 		</div>
         <div class="mask-filter-div"></div>
      <!--快捷导航-->
-    {include file="float_nav"}
+    {include file="float_nav"} 
                 <li>
                     <a href="{url('store/index/index')}">
                          <i class="iconfont icon-viewlist"></i>
                          <p>店铺街</p>
-                    </a>
+                    </a> 
                 </li>
                 <li>
                     <a href="javascript:history.go(-1);">
                          <i class="iconfont icon-dianpu"></i>
                          <p>店铺</p>
-                    </a>
+                    </a> 
                 </li>
     {include file="float_nav_footer"}
 		<script>

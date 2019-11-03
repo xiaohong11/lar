@@ -20,12 +20,7 @@
                 <input type="hidden" value="{$permanent.dt_id}" name="permanent_title_{$permanent.cat_id}[]">
             </td>
             <td>
-                <div class="type-file-box">
-                    <input type="button" name="button" class="type-file-button" id="button" value="" />
-                    <input type="file" name="permanentFile_{$permanent.cat_id}[]" class="type-file-file" value="{$permanent.permanent_file}" data-state="" hidefocus="true" />
-                    {if $permanent.permanent_file}<a href="{$permanent.permanent_file}" class="chakan" target="_blank">{$lang.view}</a>{/if}
-                    <input type="text" name="textfile" class="type-file-text" style="width:150px;" value="{$permanent.permanent_file}" readonly />
-                </div>
+                <input name="permanentFile_{$permanent.cat_id}[]" type="file" style="width:160px;">{if $permanent.permanent_file}&nbsp;&nbsp;<a href="{$permanent.permanent_file}" target="_blank">{$lang.view}</a>{/if}
             </td>
             <td>
                 {if $permanent.permanent_date}

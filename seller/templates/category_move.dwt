@@ -1,39 +1,3 @@
-{if $action_type eq 'move_pic'}
-<form action="gallery_album.php" method="post" name="theForm" enctype="multipart/form-data" id="movepicalbum">
-<div class="pic_album">
-        <div class="items">
-            <div class="item">
-                <div class="label">操作相册：</div>
-                <div class="imitate_select select_w320">
-                    <div class="cite">请选择</div>
-                    <ul>
-                        {foreach from=$cat_select item=list}
-                        <li><a href="javascript:;" data-value="{$list.album_id}" class="ftx-01">{$list.name}</a></li>
-                        {/foreach}
-                    </ul>
-                    <input name="album_id" type="hidden" value="{$album_id}">
-                </div>
-            </div>
-            <div class="item">
-                <div class="label">目标相册：</div>
-                <div class="imitate_select select_w320">
-                    <div class="cite">请选择</div>
-                    <ul>
-                        {foreach from=$cat_select item=list}
-                        <li><a href="javascript:;" data-value="{$list.album_id}" class="ftx-01">{$list.name}</a></li>
-                        {/foreach}
-                    </ul>
-                    <input name="target_album_id" type="hidden" value="0" >
-                </div>
-            </div>
-        </div>
-        <input type="hidden" name="act" value="{$form_act}" />		
-        <input type="hidden" name="inherit" value="{$inherit}" />		
-        <div class="clear"></div>
-    </div>
-</form>
-{else}
-
 <form action="{$file_name}.php" method="post" name="theForm" enctype="multipart/form-data" id="moveCategory">
     <div class="transfer_goods_info">
         <div class="prompt">
@@ -77,5 +41,3 @@
         </div>
     </div>
 </form>
-
-{/if}

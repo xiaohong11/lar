@@ -6,7 +6,7 @@
                 <nav style="cursor: grab;" class="shopping-list-nav article-list-nav box-flex">
                     <ul class="swiper-wrapper">
                         {foreach $data as $dat}
-                        <li class="div{$dat.id} swiper-slide article-li-select {if $dat.id == $cat_id}active{/if}" category="{$dat.id}">
+                        <li class="div{$dat.id} swiper-slide article-li-select" category="{$dat.id}">
                             {$dat.cat_name}
                         </li>
                         {/foreach}
@@ -19,7 +19,7 @@
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
                             {foreach $data as $da}
-                            <li class="div{$da.id} {if $da.id == $cat_id}active{/if}" category="{$da.id}">{$da.cat_name}</li>
+                            <li class="div{$da.id}" category="{$da.id}">{$da.cat_name}</li>
                             {/foreach}
                         </div>
                     </div>
@@ -135,12 +135,13 @@
                 <p>亲，此处没有文章～！</p>
             </div>
             <%/if%>
-        </script>
+            </script>
     </div>
 
 </div>
 <div class="mask-filter-div"></div>
 
+</div>
 <div class="footer-cont"><span><img src='{elixir('img/loading1.gif')}'>正在加载……</span></div>
 <!--快捷导航-->
 {include file="float_nav"}
@@ -166,27 +167,25 @@ $(function($){
     $(window).scroll(function() {
         loadimgCont();
     });
+});
 
-    // 首次加载显示第一个分类id
-    var cat_id = $('.shopping-list-nav li.active').attr('category');
+    function viewnum(id) {
+        $.ajax({
+            type: "post",
+            url: "{url('article/index/view')}",
+            data: {id: id},
+            dataType: "json",
+            success: function (data) {
+                $("#view_num").html(data.view_num);
+            }
+        });
+    }
 
     // var url = ROOT_URL + 'index.php?m=article';
-    var url = "{url('article/index/index')}";
+    var url = "{url('article/index/index', array('id' => $cat_id))}";
     var infinite = $('.article_info').infinite({
         url: url,
         template: 'j-product',
-        params: 'cat_id=' + cat_id
-    });
-
-    $('.shopping-list-nav li').on('click', function (e) {
-        var cat_id = $(this).attr('category');
-        var index = $(".shopping-list-nav li").index(this);
-        $(this).siblings().removeClass("active");
-        $('.shopping-abs .swiper-slide li').removeClass("active");
-        $(".div" + cat_id).addClass("active");
-        swiper_nav.slideTo(index, 1000, false);//切换到第一个slide，速度为1秒
-        // 加载
-        infinite.onload('cat_id=' + cat_id);
     });
 
     var swiper_nav = new Swiper('.shopping-list-nav', {
@@ -203,7 +202,18 @@ $(function($){
         } else {
             d_messages('请输入搜索关键字');
         }
-    });
+    })
+
+    $('.shopping-list-nav li').on('click', function (e) {
+        var category = $(this).attr('category');
+        var index = $(".shopping-list-nav li").index(this);
+        $(this).siblings().removeClass("active");
+        $('.shopping-abs .swiper-slide li').removeClass("active");
+
+        $(".div" + category).addClass("active");
+        swiper_nav.slideTo(index, 1000, false);//切换到第一个slide，速度为1秒
+        infinite.onload('cat_id=' + category);
+    })
 
     $('.shopping-abs .swiper-slide li').on('click', function (e) {
         var index = $(".shopping-abs .swiper-slide li").index(this);
@@ -216,21 +226,6 @@ $(function($){
         $(".j-shopping-menu").removeClass("nav-active");
         $(".mask-filter-div").removeClass("show");
     });
-
-});
-
-function viewnum(id)
-{
-    $.ajax({
-        type: "post",
-        url: "{url('article/index/view')}",
-        data: {id: id},
-        dataType: "json",
-        success: function (data) {
-            $("#view_num").html(data.view_num);
-        }
-    });
-}
 </script>
 </body>
 </html>

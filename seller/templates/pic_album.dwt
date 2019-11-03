@@ -48,9 +48,6 @@
                                     </div>
                                 </div>
                                 <i class="icon icon-remove" onclick="remove_pic('{$agency.pic_id}')"></i>
-                                {if $agency.verific_pic eq 1}
-                                <i class="i-img"><img src="images/yin.png"></i>
-                                {/if}
                             </div>
                             {/foreach}
                         </div>
@@ -69,12 +66,12 @@
                             </ul>
                             <input name="type" type="hidden" value="remove" id="type_value">
                         </div>
-                        <div id="album_id" class="imitate_select select_w320" style="display:none">
+                        <div id="album_id" class="imitate_select select_w120" style="display:none">
                             <div class="cite">{$lang.select_please}</div>
                             <ul>
                                 <li><a href="javascript:;" data-value="-1" class="ftx-01">{$lang.select_please}</a></li>
-                                {foreach from=$cat_select item=list}
-                                <li><a href="javascript:;" data-value="{$list.album_id}" class="ftx-01">{$list.name}</a></li>
+                                {foreach from=$album_list item=list}
+                                <li><a href="javascript:;" data-value="{$list.album_id}" class="ftx-01">{$list.album_mame}</a></li>
                                 {/foreach}
                             </ul>
                             <input name="album_id" type="hidden" value="-1">
@@ -94,7 +91,7 @@
         </div>
     </div>
 </div>
-{insert_scripts files="../js/plupload.full.min.js,../js/spectrum-master/spectrum.js,jquery.purebox.js"}
+{insert_scripts files="../js/plupload.full.min.js,spectrum-master/spectrum.js,jquery.purebox.js"}
 {include file="library/seller_footer.lbi"}
 {if $full_page}
 <script type="text/javascript">
@@ -189,8 +186,8 @@ function album_moveResponse(result){
 			if(album_id != result.old_album_id && album_id != 0){
 				Ajax.call('get_ajax_content.php', 'act=album_move_back' + '&pic_id=' + result.pic_id + "&album_id=" + album_id, album_move_backResponse, 'POST', 'JSON');
 			}else{
-				alert("请选择转移相册!");
-			}
+                            alert("请选择转移相册!");
+                        }
 		}
 	});
 }

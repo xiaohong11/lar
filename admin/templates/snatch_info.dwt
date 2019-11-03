@@ -4,20 +4,20 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="snatch.php?act=list" class="s-back">{$lang.back}</a>{$lang.promotion} - {$ur_here}</div>
+    	<div class="title"><a href="snatch.php?act=list" class="s-back">{$lang.back}</a>促销 - {$ur_here}</div>
         <div class="content">
         	<div class="tabs_info">
                 <ul>
-                    <li class="curr"><a href="javascript:void(0);">{$lang.self_info}</a></li>
-                    <li><a href="javascript:void(0);">{$lang.snatch_introduce}</a></li>
-                    <li><a href="javascript:void(0);">{$lang.service_guarantee}</a></li>
-                    <li><a href="javascript:void(0);">{$lang.snatch_strategy}</a></li>
+                    <li class="curr"><a href="javascript:void(0);">基本信息</a></li>
+                    <li><a href="javascript:void(0);">夺宝介绍</a></li>
+                    <li><a href="javascript:void(0);">服务保障</a></li>
+                    <li><a href="javascript:void(0);">夺宝攻略</a></li>
                 </ul>
             </div>
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content_common}</li>
+                	<li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -29,7 +29,7 @@
                                     <div class="search_select">
                                         <div class="categorySelect">
                                             <div class="selection">
-                                                <input type="text" name="category_name" id="category_name" class="text w250 valid" value="{$lang.select_cat}" autocomplete="off" readonly data-filter="cat_name" />
+                                                <input type="text" name="category_name" id="category_name" class="text w250 valid" value="请选择分类" autocomplete="off" readonly data-filter="cat_name" />
                                                 <input type="hidden" name="category_id" id="category_id" value="0" data-filter="cat_id" />
                                             </div>
                                             <div class="select-container" style="display:none;">
@@ -40,7 +40,7 @@
                                     <div class="search_select">
                                         <div class="brandSelect">
                                             <div class="selection">
-                                                <input type="text" name="brand_name" id="brand_name" class="text w120 valid" {$lang.select_barnd} autocomplete="off" readonly data-filter="brand_name" />
+                                                <input type="text" name="brand_name" id="brand_name" class="text w120 valid" value="请选择品牌" autocomplete="off" readonly data-filter="brand_name" />
                                                 <input type="hidden" name="brand_id" id="brand_id" value="0" data-filter="brand_id" />
                                             </div>
                                             <div class="brand-select-container" style="display:none;">
@@ -49,9 +49,9 @@
                                         </div>                            
                                     </div>
                                     <input type="hidden" name="ru_id" value="{$ru_id}" />
-                                    <input type="text" name="keyword" class="text w150" placeholder={$lang.input_keywords} autocomplete="off" data-filter="keyword" autocomplete="off" />
-                                    <a href="javascript:void(0);" class="btn btn30 fl" onclick="searchGoods()" ><i class="icon icon-search"></i>{$lang.search_word}</a>
-                                	<div class="notic ml10 lh30">{$lang.search_select_notice}</div>
+                                    <input type="text" name="keyword" class="text w150" placeholder="请输入关键字" autocomplete="off" data-filter="keyword" autocomplete="off" />
+                                    <a href="javascript:void(0);" class="btn btn30 fl" onclick="searchGoods()" ><i class="icon icon-search"></i>搜索</a>
+                                	<div class="notic ml10 lh30">搜索结果在活动商品里面显示出来</div>
                                 </div>
                                 <div class="items">
                                     <div class="item">
@@ -65,9 +65,9 @@
                                         <div class="label">{$lang.require_field}{$lang.goodsid}：</div>
                                         <div class="label_value">
                                        		<div id="activity_goods" class="imitate_select select_w320">
-                                                <div class="cite">{if $snatch.goods_name}{$snatch.goods_name}{else}{$lang.please_select}{/if}</div>
+                                                <div class="cite">{if $snatch.goods_name}{$snatch.goods_name}{else}请选择{/if}</div>
                                                 <ul>
-                                                	<li class="li_not">{$lang.please_search_goods}</li>
+                                                	<li class="li_not">请先搜索商品</li>
                                                 </ul>
                                                 <input name="goods_id" type="hidden" value="{if $snatch.goods_id}{$snatch.goods_id}{else}0{/if}" id="activity_goods_val">
                                             </div>
@@ -75,11 +75,14 @@
                                     </div>
                                     <div class="item">
                                         <div class="label">{$lang.require_field}{$lang.start_end_time}：</div>
-                                        <div class="label_value text_time">
-                                          <input type="text" name="start_time" value="{$snatch.start_time}" id="start_time" class="text mr0" readonly />
+                                        <div class="label_value">
+										  <div class="text_time" id="text_time_start">
+											  <input type="text" name="start_time" value="{$snatch.start_time}" id="start_time_id" class="text mr0" readonly />
+										  </div>
 										  <span class="bolang">&nbsp;&nbsp;~&nbsp;&nbsp;</span>
-                                          <input type="text" name="end_time" value="{$snatch.end_time}" id="end_time" class="text" readonly />
-                                          <div class="form_prompt"></div>
+										  <div class="text_time" id="text_time_end">
+											  <input type="text" name="end_time" value="{$snatch.end_time}" id="end_time_id" class="text" readonly />
+										  </div>
                                         </div>
                                     </div>
                                     <div class="item">
@@ -114,11 +117,11 @@
 											<div class="checkbox_items">
 												<div class="checkbox_item"> 
 													<input name="is_hot" type="radio" class="ui-radio" value="0" id="is_hot_0"{if $snatch.is_hot eq 0||$snatch.is_hot eq ''}checked="checked"{/if} />
-													<label for="is_hot_0" class="ui-radio-label">{$lang.no}</label>
+													<label for="is_hot_0" class="ui-radio-label">否</label>
 												</div>
 												<div class="checkbox_item"> 
 													<input name="is_hot" type="radio" class="ui-radio" value="1" id="is_hot_1" {if $snatch.is_hot}checked="checked"{/if} />
-													<label for="is_hot_1" class="ui-radio-label">{$lang.yes}</label>
+													<label for="is_hot_1" class="ui-radio-label">是</label>
 												</div>
 											</div>
                                         </div>
@@ -127,17 +130,17 @@
                                     <div class="item">
                                         <div class="label">{$lang.adopt_status}：</div>
                                         <div class="label_value">
-											<div class="checkbox_items" ectype="general_audit_status">
+											<div class="checkbox_items">
 												<div class="checkbox_item"> 
-													<input name="review_status" type="radio" class="ui-radio" value="1" id="review_status_1" {if $snatch.review_status eq 1}checked="checked"{/if} />
+													<input name="review_status" type="radio" class="ui-radio" value="1" id="review_status_1" {if $snatch.review_status eq 1}checked="checked"{/if} onclick="get_review_status(this.value)" />
 													<label for="review_status_1" class="ui-radio-label">{$lang.not_audited}</label>
 												</div>
 												<div class="checkbox_item"> 
-													<input name="review_status" type="radio" class="ui-radio" value="2" id="review_status_2" {if $snatch.review_status eq 2}checked="checked"{/if} />
+													<input name="review_status" type="radio" class="ui-radio" value="2" id="review_status_2" {if $snatch.review_status eq 2}checked="checked"{/if} onclick="get_review_status(this.value)" />
 													<label for="review_status_2" class="ui-radio-label">{$lang.audited_not_adopt}</label>
 												</div>
                                                 <div class="checkbox_item"> 
-													<input name="review_status" type="radio" class="ui-radio" value="3" id="review_status_3" {if $snatch.review_status eq 3}checked="checked"{/if} />
+													<input name="review_status" type="radio" class="ui-radio" value="3" id="review_status_3" {if $snatch.review_status eq 3}checked="checked"{/if} onclick="get_review_status(this.value)" />
 													<label for="review_status_3" class="ui-radio-label">{$lang.audited_yes_adopt}</label>
 												</div>
 											</div>
@@ -177,15 +180,15 @@
 	
 	//时间选择
 	var opts1 = {
-		'targetId':'start_time',//时间写入对象的id
-		'triggerId':['start_time'],//触发事件的对象id
-		'alignId':'start_time',//日历对齐对象
+		'targetId':'start_time_id',//时间写入对象的id
+		'triggerId':['start_time_id'],//触发事件的对象id
+		'alignId':'text_time_start',//日历对齐对象
 		'format':'-',//时间格式 默认'YYYY-MM-DD HH:MM:SS'
 		'min':'{$snatch.start_time}' //最小时间
 	},opts2 = {
-		'targetId':'end_time',
-		'triggerId':['end_time'],
-		'alignId':'end_time',
+		'targetId':'end_time_id',
+		'triggerId':['end_time_id'],
+		'alignId':'text_time_end',
 		'format':'-',
 		'min':'{$snatch.start_time}'
 	}
@@ -214,14 +217,21 @@
 			  $("#activity_goods").find("ul").append("<li><a href='javascript:;' data-value='"+goods[i].goods_id+"' class='ftx-01'>"+goods[i].goods_name+"</li>");
 				  
 		  }
-		  $("#activity_goods").find("ul").perfectScrollbar("destroy");
-		  $("#activity_goods").find("ul").perfectScrollbar();
-          $("#activity_goods").find("ul").show();
+                  $("#activity_goods").find("ul").show();
 		}		
+	}
+	
+	function get_review_status(val){
+		if(val == 2){
+			$("#review_content").show();
+		}else{
+			$("#review_content").hide();
+		}
 	}
 
 	//表单验证
 	$(function(){
+		
 		$('#goods_class_form').validate({
 			errorPlacement:function(error, element){
 				var error_div = element.parents('div.label_value').find('div.form_prompt');
@@ -231,42 +241,11 @@
 			rules : {
 				snatch_name : {
 					required : true
-				},
-				start_time :{
-					required : true
-				},
-				end_time :{
-					required : true,
-					compareDate:"#start_time",
 				}
 			},
 			messages : {
 				snatch_name : {
-					required : '<i class="icon icon-exclamation-sign"></i>'+no_name
-				},
-				start_time :{
-					required : '<i class="icon icon-exclamation-sign"></i>'+start_data_notnull
-				},
-				end_time :{
-					required : '<i class="icon icon-exclamation-sign"></i>'+end_data_notnull,
-					compareDate:'<i class="icon icon-exclamation-sign"></i>'+data_invalid_gt
-				}
-			},
-			onfocusout:function(element,event){
-				//实时去除结束时间是否大于开始时间验证
-				var name = $(element).attr("name");
-				
-				if(name == "end_time"){
-					var endDate = $(element).val();
-					var startDate = $(element).siblings("input[name='start_time']").val();
-					
-					var date1 = new Date(Date.parse(startDate.replace(/-/g, "/")));
-					var date2 = new Date(Date.parse(endDate.replace(/-/g, "/")));
-					
-					if(date1 > date2){
-						$(element).removeClass("error");
-						$(element).siblings(".form_prompt").html("");
-					}
+					required : '<i class="icon icon-exclamation-sign"></i>用户名不能为空'
 				}
 			}
 		});

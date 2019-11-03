@@ -14,17 +14,17 @@
 						<div class="fl">
 							<div class="ui-dropdown smartdropdown alien">
 								<input type="hidden" value="{$fields.textAreaForm.country}" name="{$fields.textFields}[]">
-								<div class="txt">{$lang.country}</div>
+								<div class="txt">国家</div>
 								<i class="down u-dropdown-icon"></i>
 								<div class="options clearfix" style="max-height:300px;">
                                 <!-- {foreach from=$country_list item=country} -->
-									<span class="liv" data-text="{$lang.china}"  data-type="1" data-value="{$country.region_id}">{$lang.china}</span>
+									<span class="liv" data-text="中国"  data-type="1" data-value="{$country.region_id}">中国</span>
                                 <!--{/foreach}-->
 								</div>
 							</div>
 							<div class="ui-dropdown smartdropdown alien">
 								<input type="hidden" value="{$fields.textAreaForm.province}" name="{$fields.textFields}[]" id="selProvinces">
-								<div class="txt">{$lang.province_alt}</div>
+								<div class="txt">省/直辖市</div>
 								<i class="down u-dropdown-icon"></i>
 								<div class="options clearfix" style="max-height:300px;">
 									<!--{foreach from=$province_list item=list}-->
@@ -34,21 +34,21 @@
 							</div>
 							<div class="ui-dropdown smartdropdown alien">
 								<input type="hidden" value="{$fields.textAreaForm.city}" name="{$fields.textFields}[]" id="selCities">
-								<div class="txt">{$lang.city}</div>
+								<div class="txt">市</div>
 								<i class="down u-dropdown-icon"></i>
 								<div class="options clearfix" style="max-height:300px;">
                                 <!-- {foreach from=$fields.city_list item=city_list} -->
-									<span class="liv hide" data-text="{$lang.city}" data-type="3" data-value="{$city_list.region_id}">{$lang.city}</span>
+									<span class="liv hide" data-text="市" data-type="3" data-value="{$city_list.region_id}">市</span>
                                 <!--{/foreach}-->
 								</div>
 							</div>
 							<div class="ui-dropdown smartdropdown alien">
 								<input type="hidden" value="{$fields.textAreaForm.district}" name="{$fields.textFields}[]" id="selDistricts">
-								<div class="txt">{$lang.area_alt}</div>
+								<div class="txt">区/县</div>
 								<i class="down u-dropdown-icon"></i>
 								<div class="options clearfix" style="max-height:300px;">
                                 	<!-- {foreach from=$fields.district_list item=district_list} -->
-									<span class="liv hide" data-text="{$lang.area_alt}" data-type="4" data-value="{$district_list.region_id}">{$lang.area_alt}</span>
+									<span class="liv hide" data-text="区/县" data-type="4" data-value="{$district_list.region_id}">区/县</span>
                                     <!--{/foreach}-->
 								</div>
 							</div>
@@ -61,12 +61,12 @@
 						<input name="text_{$fields.textFields}" type="hidden" value="{$fields.titles_centents}" />
 						{if $fields.titles_centents neq ''}
                         <span class="show">
-							<a href="../{$fields.titles_centents}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="../{$fields.titles_centents}" ectype="tooltip" title="tooltip"></i></a>
+							<a href="../{$fields.titles_centents}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../{$fields.titles_centents}>')" onmouseout="toolTip()"></i></a>
 						</span>
                         {/if}
 						<input type="text" name="textfile" class="type-file-text" id="textfield" readonly />
 					</div>
-				{elseif $fields.otherForm eq 'dateTime'}
+				{elseif $fields.otherForm eq 'dateTime'} 
 					{foreach from=$fields.dateTimeForm item=date key=dk name=date}
 						{if $dk eq 0}  
 						<div class="text_time" id="text_time_{$fields.textFields}_{$dk}">
@@ -77,10 +77,6 @@
 						<div class="text_time" id="text_time_{$fields.textFields}_{$dk}">
 							<input name="{$fields.textFields}[]" type="text" class="text" id="{$fields.textFields}_{$dk}" size="{$date.dateSize}" value='{$date.dateCentent}' readonly />
 						</div>
-						<div class="checkbox_item fl">
-                            <input type="checkbox" id="authorizeCheckBox" value="1" name="ec_shop_permanent" class="ui-checkbox" onClick="get_shopTime_term(this)" {if $fields.shopTime_term eq 1}checked{/if}>
-                            <label for="authorizeCheckBox" class="ui-label">{$lang.permanent}</label>
-                        </div>
 						{/if}
 						<script type="text/javascript">
 							var opts = {
@@ -119,7 +115,7 @@
                 	<div class="checkbox_items">
 					{foreach from=$fields.radioCheckboxForm item=checkbox key=rc_k}
 						<div class="checkbox_item">
-                       		<input name="{$fields.textFields}" type="checkbox" class="ui-checkbox" value="{$checkbox.radioCheckbox}" id="{$fields.textFields}_{$checkbox.radioCheckbox}" {if $fields.shopTime_term eq 1}checked="checked"{/if} />
+                       		<input name="{$fields.textFields}" type="checkbox" class="ui-checkbox" value="{$checkbox.radioCheckbox}" id="{$fields.textFields}_{$checkbox.radioCheckbox}" {if $fields.titles_centents eq $checkbox.radioCheckbox}checked="checked"{else}{if $rc_k eq 0}checked="checked"{/if}{/if} />
                         	<label for="{$fields.textFields}_{$checkbox.radioCheckbox}" class="ui-label">{$checkbox.radioCheckbox}</label>
                         </div>
                     {/foreach}
@@ -131,16 +127,3 @@
 {/foreach}
 </div>
 </div>
-<script>
-function get_shopTime_term(f){
-	var business_term_0 = document.getElementById('business_term_0');
-	var business_term_1 = document.getElementById('business_term_1');
-	if(f.checked){
-		$(f).parent().addClass("cart-checkbox-checked");
-		business_term_0.value = '';
-		business_term_1.value = '';
-	}else{
-		$(f).parent().removeClass("cart-checkbox-checked");
-	}
-}
-</script>

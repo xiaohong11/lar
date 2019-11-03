@@ -46,7 +46,7 @@
                     <!-- 推荐 end-->
                     
                     <!-- 供货商 -->
-					{if $suppliers_exists eq 1 && $action eq 'wholesale_list'}
+					{if $suppliers_exists eq 1}
 					<dl class="w140">
 						<dt>{$lang.supplier}</dt>
 						<dd>
@@ -84,18 +84,19 @@
                     <!-- 上架 end-->
 					
                     <!-- 品牌 -->
-                    <dl class="w300">
+                    <dl class="w140">
 						<dt>{$lang.brand}</dt>
 						<dd>
-							<div class="brandSelect">
-                                <div class="selection">
-                                    <input type="text" name="brand_name" id="brand_name" class="text w120 valid" value="请选择品牌" autocomplete="off" readonly data-filter="brand_name" />
-                                    <input type="hidden" name="brand_id" id="brand_id" value="0" data-filter="brand_id" />
-                                </div>
-                                <div class="brand-select-container" style="display:none;">
-                                    {include file="library/filter_brand.lbi"}
-                                </div>
-                            </div>						
+							<div id="selbrand" class="imitate_select select_w140 mr10">
+								<div class="cite">请选择</div>
+								<ul>
+                                	<li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.goods_brand}</a></li>
+                                	{foreach from=$brand_list item=brand key=key}
+									<li><a href="javascript:;" data-value="{$key}" class="ftx-01">{$brand}</a></li>
+                                    {/foreach}
+								</ul>
+								<input name="brand_id" type="hidden" value="0">
+							</div>						
 						</dd>
 					</dl>
                     <!-- 品牌 -->

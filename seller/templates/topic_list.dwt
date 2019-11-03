@@ -77,7 +77,7 @@
                                   {/if}
                               </td>
                               <td class="ecsc-table-handle tr">
-                                  <span><a href="../topic.php?topic_id={$topic.topic_id}&&preview=1" title="{$lang.view}" target="_blank" class="btn-orange"><i class="icon sc_icon_see"></i><p>{$lang.view}</p></a></span>
+                                  <span><a href="../topic.php?topic_id={$topic.topic_id}" title="{$lang.view}" target="_blank" class="btn-orange"><i class="icon sc_icon_see"></i><p>{$lang.view}</p></a></span>
                                   <span><a href="topic.php?act=visual&topic_id={$topic.topic_id}" target="_blank" title="装修" class="btn-green"><i class="icon icon-edit"></i><p>装修</p></a></span>
                                   <span><a href="topic.php?act=edit&topic_id={$topic.topic_id}" title="{$lang.edit}" class="btn-green"><i class="icon icon-edit"></i><p>{$lang.edit}</p></a></span>
                                   <span><a href="javascript:;" on title="{$lang.drop}" onclick="listTable.remove({$topic.topic_id},delete_topic_confirm,'delete');" class="btn-red"><i class="icon icon-trash"></i><p>{$lang.drop}</p></a></span>

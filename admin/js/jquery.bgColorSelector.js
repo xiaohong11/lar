@@ -35,7 +35,7 @@
         $(this).empty().append(x);
         j = q.length;
         var y = $(p).width();
-        var z = r;
+        var z = r + 5;
         $(o).width(y);
         $(o).find('img').width(y + 17).css('left', '-9px');
         var A = r >= z ? r: z;

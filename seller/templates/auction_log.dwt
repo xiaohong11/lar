@@ -66,8 +66,8 @@
 {include file ='library/seller_footer.lbi'}
 <script type="text/javascript" language="JavaScript">
 <!--
-  listTable.recordCount = {$record_count|default:0};
-  listTable.pageCount = {$page_count|default:1};
+  listTable.recordCount = '{$record_count}';
+  listTable.pageCount = '{$page_count}';
 
   {foreach from=$filter item=item key=key}
   listTable.filter.{$key} = '{$item}';

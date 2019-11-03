@@ -39,8 +39,9 @@
                         <dl>
                             <dt>{$lang.refund_money}：</dt>
                             <dd>
+                                
                                 <!--{if $refound_pay_points > 0}-->
-                                <div class="fl lh30">{$lang.pay_points}：</div><input name="refound_pay_points" id="refound_pay_points" class="text text_3 mr10" type="text" size="10" value="{$refound_pay_points}" onchange="refound_points(this.value)" />
+                                <div class="fl lh30">{$lang.pay_points}：</div><input name="refound_pay_points" id="refound_pay_points" type="text" size="10" value="{$refound_pay_points}" onchange="refound_points(this.value)" />
                                 <!--{/if}-->
                                 <div class="fl lh30">{$lang.money}：</div><input name="refound_amount" id="refoundAmount" class="text text_3 mr10" type="text" size="10" value="{$refound_amount|default:0}" onchange="get_refound_amount(this.value, 1)" />
                                 <div class="fl lh30">{$lang.shipping_money}：</div><input type="text" name="shipping" value="{$shipping_fee|default:0}" id="shippingFee" size="6" onchange="get_refound_amount(this.value, 2)" class="text text_3 mr10" />
@@ -51,17 +52,6 @@
                                 </div>
                             </dd>
                         </dl>
-                        
-                            {if $value_card && $is_whole neq 1}
-                            	<dl>
-                                    <dt>{$lang.18_value_card}：</dt>
-                                    <dd>
-                                    	<div class="fl lh30">{$lang.money}：</div>
-                                        <input name="refound_vcard" id="refound_vcard" class="text text_3 mr10" type="text" size="10" value="{$value_card.use_val}" autocomplete="off" onchange="get_refound_value_card(this.value, {$value_card.vc_id|default:0})" />
-                                        <input type="hidden" name="vc_id" value="{$value_card.vc_id|default:0}" />
-                                    </dd>
-                        		</dl>
-                            {/if}
                         {/if}
                     {/if}    
                     {if $show_refund1}
@@ -89,9 +79,9 @@
                     	<dt>{$lang.label_handle_refund}</dt>
                         <dd>
                         	<div class="checkbox_items">
-                                {if !$anonymous}<div class="checkbox_item"><input type="radio" class="ui-radio" name="refund" value="1" id="refund_1" checked="checked" autocomplete="off" /><label class="ui-radio-label" for="refund_1">{$lang.return_user_money}</label></div>{/if}
-                                <div class="checkbox_item"><input type="radio" class="ui-radio" name="refund" value="2" id="refund_2" {if $anonymous}checked="checked"{/if} autocomplete="off" /><label class="ui-radio-label" for="refund_2">{$lang.create_user_account}</label></div>
-                                <div class="checkbox_item"><input name="refund" type="radio" class="ui-radio" value="3" id="refund_3" autocomplete="off" /><label class="ui-radio-label" for="refund_3">{$lang.not_handle}</label></div>
+                                {if !$anonymous}<div class="checkbox_item"><input type="radio" class="ui-radio" name="refund" value="1" id="refund_1" /><label class="ui-radio-label" for="refund_1">{$lang.return_user_money}</label></div>{/if}
+                                <div class="checkbox_item"><input type="radio" class="ui-radio" name="refund" value="2" id="refund_2" /><label class="ui-radio-label" for="refund_2">{$lang.create_user_account}</label></div>
+                                <div class="checkbox_item"><input name="refund" type="radio" class="ui-radio" value="3" id="refund_3" /><label class="ui-radio-label" for="refund_3">{$lang.not_handle}</label></div>
                             </div>
                         </dd>
                     </dl>
@@ -105,9 +95,9 @@
                         <dd>
                         	<input type="submit" name="submit" value="{$lang.button_submit}" class="sc-btn sc-blueBg-btn btn35" />
                             <input type="button" name="back" value="{$lang.back}" class="sc-btn btn35 sc-blue-btn" onclick="history.back()" />
-                            <input type="hidden" id="orderId" name="order_id" value="{$order_id|default:0}" />
-                            <input type="hidden" id="recId" name="rec_id" value="{$rec_id|default:0}"/>
-                            <input type="hidden" id="retId" name="ret_id" value="{$ret_id|default:0}"/>
+                            <input type="hidden" id="orderId" name="order_id" value="{$order_id}" />
+                            <input type="hidden" id="recId" name="rec_id" value="{$rec_id}"/>
+                            <input type="hidden" id="retId" name="ret_id" value="{$ret_id}"/>
                             <input type="hidden" name="operation" value="{$operation}" />
                             <input type="hidden" name="act" value="{if $batch}batch_operate_post{else}operate_post{/if}" />
                         </dd>
@@ -176,19 +166,6 @@
 	  }
 	  
   }
-  
-  function get_refound_value_card(refound_vcard, vc_id){
-	  
-	  var order_id = document.getElementById('orderId').value;
-	  var retId = document.getElementById('retId').value;
-	  
-	  Ajax.call('order.php?is_ajax=1&act=edit_refound_value_card', "vc_id="+ vc_id + "&order_id=" + order_id + "&refound_vcard=" + refound_vcard + "&ret_id=" + retId, refoundValueCardResponse, "GET", "JSON");
-  }
-  
-  function refoundValueCardResponse(result){
-	  $("#refound_vcard").val(result.content.refound_vcard);
-  }
-  
   /*判断返回积分的值   BY kong*/
   function refound_points(refound_pay_points){
       var old_refound_pay_points = parseInt(Number("{$refound_pay_points}"));

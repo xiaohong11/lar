@@ -55,7 +55,7 @@
                                 <span class="col3">{$store.merch_cmt.cmt.commentDelivery.zconments.goodReview}%<i class="iconfont icon-arrow-down"></i></span>
                             </div>
                         </div>
-                        <div class="tel">电话：{if $store.kf_tel}{$store.kf_tel}{else}未设置电话{/if}</div>
+                        <div class="tel">电话：{$basic_info.kf_tel}</div>
                     </div>
                 </div>
                 <div class="shop-btn">
@@ -99,59 +99,7 @@
                 </div>
 				{/if}
             </div>
-            {elseif $store.hot_goods}
-			<div class="shop-right">
-                <div class="shop-bd">
-                    <ul>
-                    {foreach from=$store.hot_goods item=goods}
-                        <li>
-                            <div class="p-img"><a href="{$goods.url}"><img src="{$goods.goods_thumb}"></a></div>
-                            <div class="p-price">
-                            <!-- {if $goods.promote_price neq ""} -->
-                            {$goods.promote_price}
-                            <!-- {else}-->
-                            {$goods.shop_price}
-                            <!--{/if}-->
-                            </div>
-                        </li>
-                    {/foreach}
-                    </ul>
-                </div>
-				{if $store.new_goods_count > 3}
-                <div class="shop-cont">
-                    <span class="pageState"></span>
-                    <a href="javascript:void(0);" class="prev"><i class="iconfont icon-left"></i></a>
-                    <a href="javascript:void(0);" class="next"><i class="iconfont icon-right"></i></a>
-                </div>
-				{/if}
-            </div>
-			{elseif $store.common_goods}
-			<div class="shop-right">
-                <div class="shop-bd">
-                    <ul>
-                    {foreach from=$store.common_goods item=goods}
-                        <li>
-                            <div class="p-img"><a href="{$goods.url}"><img src="{$goods.goods_thumb}"></a></div>
-                            <div class="p-price">
-                            <!-- {if $goods.promote_price neq ""} -->
-                            {$goods.promote_price}
-                            <!-- {else}-->
-                            {$goods.shop_price}
-                            <!--{/if}-->
-                            </div>
-                        </li>
-                    {/foreach}
-                    </ul>
-                </div>
-				{if $store.new_goods_count > 3}
-                <div class="shop-cont">
-                    <span class="pageState"></span>
-                    <a href="javascript:void(0);" class="prev"><i class="iconfont icon-left"></i></a>
-                    <a href="javascript:void(0);" class="next"><i class="iconfont icon-right"></i></a>
-                </div>
-				{/if}
-            </div>
-			{else}
+            {else}
             <div class="no_records no_records_min">
                 <i class="no_icon no_icon_two"></i>
                 <div class="no_info"><h3>{$lang.no_store_goods}</h3></div>

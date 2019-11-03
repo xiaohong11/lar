@@ -1,7 +1,7 @@
 <?php
 
 $debug = [
-    'show_page_trace' => isset($_GET['debug'])
+    'show_page_trace' => true
 ];
 
 // 本地 Homestead 开发环境

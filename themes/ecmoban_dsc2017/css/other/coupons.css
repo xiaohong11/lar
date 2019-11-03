@@ -128,7 +128,6 @@ img{ float:none;vertical-align: middle;}
 .quan-list .quan-item{ float: left;margin: 2px 28px 28px 2px;}
 .quan-item .q-type{ padding: 25px 0 20px 25px;}
 .quan-item .q-price{ display: inline-block;display: block;margin-bottom: 10px;color: #74d2d4; overflow:hidden;}
-.quan-item .q-price .icon-my{ float:left; width:72px; height:36px; background:url(../../images/my.png) no-repeat; display:block;margin:5px 10px 0 0;}
 .quan-item .q-price em{ float: left;margin: 5px 0 0;font-family: verdana;font-size: 24px;}
 .quan-item .q-price strong{ float: left;line-height: 50px;margin: 0 10px 0 5px;font-size: 60px;font-family: arial;_display: inline;}
 .quan-item .q-price .txt{ float: left;line-height: 22px;}
@@ -149,7 +148,6 @@ img{ float:none;vertical-align: middle;}
 .quan-gray-item .q-opbtns a{ color: #868686;}
 .quan-gray-item .q-opbtns a:hover{ color: #868686;cursor: default;}
 .quan-gray-item .btn-getend{ background-position: 0 -79px;}
-.quan-gray-item .q-price .icon-my{ background-position:0 -36px;}
 .quan-item .btn-overdued { background-position: -184px -65px;}
 
 .quan-cats{ display: inline-block;display: block;padding: 0 0 30px;text-align: center;}

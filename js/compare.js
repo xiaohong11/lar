@@ -62,7 +62,6 @@ Compare = {
 		{
 			obj.checked = '';
 		}
-		
         pbDialog(json_languages.goods_type_different.replace("%s", goodsName)," ",0,"",90,10);
         return;
       }
@@ -126,12 +125,10 @@ Compare = {
       var compare_goods = document.getElementById('compare_goods' + j);
       var del = document.getElementById('del_img_' + j);
       var checkBoxId = document.getElementById(del.className);
-      var checkBoxId_2 = document.getElementById('duibi_'+del.className);
       if(checkBoxId)
       {
-        checkBoxId.checked = '';
-		    if(checkBoxId_2){checkBoxId_2.checked = '';}
-		    checkBoxId.parentNode.id = 'compareLink';
+          checkBoxId.checked = '';
+		  checkBoxId.parentNode.id = 'compareLink';
       }
 		
 
@@ -174,8 +171,7 @@ Compare = {
         var obj = $.evalJSON(cookieValue);
 		
         var url = document.location.href;
-		var urlArr = url.split('?');
-        url = urlArr[0].substring(0,urlArr[0].lastIndexOf('/')+1) + "category_compare.php";
+        url = url.substring(0,url.lastIndexOf('/')+1) + "category_compare.php";
         var i = 0;
         for(var k in obj)
         {

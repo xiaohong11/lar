@@ -4,10 +4,10 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-		<div class="title">{$lang.12_template} - 设置模板</div>
+		<div class="title">模板 - 设置模板</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                     <li>该页面可设置商城各个页面的模板。</li>
                     <li>点击楼层品牌设置则可进行相应设置。</li>
@@ -331,7 +331,7 @@
     {/foreach}
     
     {foreach from=$arr_brands item=brand key=id}
-    selBrands[{$brand.brand_id}] = '{$brand.brand_name|escape:quotes}';
+    selBrands[{$id}] = '{$brand|escape:quotes}';
     {/foreach}
     
     {foreach from=$arr_article_cats item=cat key=id}
@@ -431,7 +431,7 @@
     function addCatGoods(obj)
     {
         var rowId = rowindex(obj.parentNode.parentNode);
-
+    
         var table = obj.parentNode.parentNode.parentNode.parentNode;
     
         var row  = table.insertRow(rowId + 1);
@@ -484,14 +484,6 @@
         cell           = row.insertCell(-1);
         cell.innerHTML = '<div class="tDiv"><input type="text" name="number[cat_goods][]" value="5" class="text w40" size="4" /></div>';
     
-        cell           = row.insertCell(-1);
-        cell.innerHTML = '<div class="tDiv tpl-label"><div class="imitate_select select_w120" ectype="tplSelect"><div class="cite">默认楼层模板</div>' +
-                         '<ul class="category_template"><li><a href="javascript:;" data-value="0" class="ftx-01">默认楼层模板</a></li><li><a href="javascript:;" data-value="1" class="ftx-01">楼层模板1</a></li>' +
-						 '<li><a href="javascript:;" data-value="2" class="ftx-01">楼层模板2</a></li><li><a href="javascript:;" data-value="3" class="ftx-01">楼层模板3</a></li></ul>' +
-                         '<input name="categories[floor_tpl][]" type="hidden" value="{$library.floor_tpl|default:0}"></div>' +
-						 '<span class="show fl mr10 mt5">' +
-						 '<a href="images/floor-tpl-{$library.floor_tpl|default:0}.png" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip(' + "'" + '<img src=images/floor-tpl-{$library.floor_tpl|default:0}.png>' + "'" + ')" onmouseout="toolTip()"></i></a>' +
-						 '</span></div>';							
         cell           = row.insertCell(-1);
     }
     

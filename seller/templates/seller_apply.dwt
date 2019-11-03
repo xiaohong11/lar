@@ -78,14 +78,14 @@
                             <td align="center">{$list.add_time}</td>
                             <td align="center">{$list.status_paid},{$list.status_apply}</td>
                             <td class="ecsc-table-handle{if $list.apply_status eq 3 || $list.pay_status eq 0} tr{/if}">
-                                <span><a href="merchants_upgrade.php?act=edit&apply_id={$list.apply_id}&grade_id={$list.grade_id}" title="{if $list.apply_status eq 0 && $list.pay_status eq 0}{$lang.edit}{else}{$lang.view}{/if}" class="btn-orange"><i class="{if $list.apply_status eq 0 && $list.pay_status eq 0}icon-edit{else}sc_icon_see{/if} icon"></i><p>{if $list.apply_status eq 0 && $list.pay_status eq 0}{$lang.edit}{else}{$lang.view}{/if}</p></a></span>
+                                <span><a href="merchants_upgrade.php?act=edit&apply_id={$list.apply_id}&grade_id={$list.grade_id}" title="{$lang.icon_edit}" class="btn-green"><i class="icon icon-edit"></i><p>{$lang.edit}</p></a></span>
                                 {if $list.apply_status eq 3 || $list.pay_status eq 0}
                                 <span><a href="javascript:;" onclick="listTable.remove({$list.apply_id}, '{$lang.drop_confirm}')" title="{$lang.drop}" class="btn-red"><i class="icon icon-trash"></i><p>{$lang.drop}</p></a></span>
                                 {/if}
                             </td>
                         </tr>
                         {foreachelse}
-                        <tr><td class="no-records" colspan="11">{$lang.no_article}</td></tr>
+                        <tr><td class="no-records" colspan="10">{$lang.no_article}</td></tr>
                         {/foreach}
                         </tbody>
                         <tfoot>

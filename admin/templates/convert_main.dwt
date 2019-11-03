@@ -4,11 +4,11 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.13_backup} - {$ur_here}</div>
+    	<div class="title">数据库管理 - {$ur_here}</div>
         <div class="content">
 			<form name="theForm" action="convert.php?act=check" method="post" id="convert_form">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>使用说明：</h4><span id="explanationZoom" title="使用说明"></span></div>
                 <ul>
                 	<li class="red">{$lang.confirm_convert}</li>
 					<li>{$lang.backup_data}<a href="database.php?act=backup" class="blue">{$lang.backup}</a></li>
@@ -24,7 +24,7 @@
 									<div class="label">{$lang.require_field}{$lang.select_system}</div>
 									<div class="label_value">
 										<div id="selModule" class="imitate_select select_w320">
-											<div class="cite">{$lang.please_select}</div>
+											<div class="cite">请选择</div>
 											<ul>
 												{foreach from=$module_list item=module}
 												<li><a href="javascript:;" data-value="{$module.code}" class="ftx-01">{$module.desc}</a></li>
@@ -39,7 +39,7 @@
 									<div class="label">{$lang.require_field}{$lang.select_charset}</div>
 									<div class="label_value">
 										<div id="selCharset" class="imitate_select select_w320">
-											<div class="cite">{$lang.please_select}</div>
+											<div class="cite">请选择</div>
 											<ul>
 												{foreach from=$charset_list item=v key=k}
 												<li><a href="javascript:;" data-value="{$k}" class="ftx-01">{$v}</a></li>
@@ -147,16 +147,16 @@
 					 required : '<i class="icon icon-exclamation-sign"></i>{$lang.select_charset}'
 				},
 				host :{
-					required : '<i class="icon icon-exclamation-sign"></i>' + host_not_null
+					required : '<i class="icon icon-exclamation-sign"></i>主机名称或地址不能为空'
 				},
 				db :{
-					required : '<i class="icon icon-exclamation-sign"></i>' + db_not_null
+					required : '<i class="icon icon-exclamation-sign"></i>数据库名称不能为空'
 				},
 				user :{
-					required : '<i class="icon icon-exclamation-sign"></i>' + user_not_null
+					required : '<i class="icon icon-exclamation-sign"></i>登录账号不能为空'
 				},
 				path :{
-					required : '<i class="icon icon-exclamation-sign"></i>' + path_not_null
+					required : '<i class="icon icon-exclamation-sign"></i>原商城根目录不能为空'
 				}
 			}			
 		});

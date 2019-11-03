@@ -4,7 +4,7 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="order.php?act=delivery_list" class="s-back">{$lang.back}</a>{$lang.order_word} - {$ur_here}</div>
+    	<div class="title"><a href="order.php?act=delivery_list" class="s-back">{$lang.back}</a>订单 - {$ur_here}</div>
         <div class="content">
         	<div class="flexilist order_info">
 			<form method="post" action="order.php?act=operate" name="listForm" onsubmit="return check()">
@@ -181,8 +181,8 @@
                                 </table>
                             </div>
                         </div>
-                	</div>
-				</form>
+                </div>
+			</form>
             </div>
 		</div>
 	</div>

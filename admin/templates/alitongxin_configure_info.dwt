@@ -7,10 +7,10 @@
     <div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>短信管理 - {$ur_here}</div>
         <div class="content">
         <div class="explanation" id="explanation">
-            <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
             <ul>
                 <li>填写短信签名名称和模板ID请与阿里短信申请的保持一致。</li>
-                <li>{$lang.operation_prompt_content_common}</li>
+                <li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
                 <li>编辑短信内容时请根据提供的模板进行修改，模板内的每个变量是固定的，且不可改变位置。</li>
             </ul>
         </div>
@@ -191,11 +191,11 @@ function loadTemplateResponse(result, textResult)
 	}
 	
 	if(result.tpl == 'sms_order_placed' || result.tpl == 'sms_order_payed'){
-		personal = "consignee(收货人), ordermobile(联系方式)";
-		company = "shopname(店铺名称), ordersn(订单号), consignee(收货人), orderregion(收货地区), address(收货地址), ordermobile(联系方式)";
+		personal = "consignee(收货人), order_mobile(联系方式)";
+		company = "shop_name(店铺名称), order_sn(订单号), consignee(收货人), order_region(收货地区), address(收货地址), order_mobile(联系方式)";
 	}else if(result.tpl == 'sms_order_shipped'){
-		personal = "username(会员名称), consignee(收货人)";
-		company = "shopname(店铺名称), username(会员名称), consignee(收货人), ordersn(订单号)";
+		personal = "user_name(会员名称), consignee(收货人)";
+		company = "shop_name(店铺名称), user_name(会员名称), consignee(收货人), order_sn(订单号)";
 	}else if(result.tpl == 'sms_signin'){
 		personal = "code(验证码), product(会员名称)";
 		company = "code(验证码), product(会员名称)";
@@ -203,17 +203,17 @@ function loadTemplateResponse(result, textResult)
 		personal = "code(验证码)";
 		company = "code(验证码)";
 	}else if(result.tpl == 'sms_price_notic'){
-		personal = "username(验证码), goodssn(商品编号)";
-		company = "username(验证码), goodssn(商品编号)";
+		personal = "user_name(验证码), goods_sn(商品编号)";
+		company = "user_name(验证码), goods_sn(商品编号)";
 	}else if(result.tpl == 'sms_seller_signin'){
-		personal = "loginname(登录账号),password(登录密码)";
-		company = "sellername( 商家名称), loginname(登录账号),password(登录密码)";
+		personal = "login_name(登录账号),password(登录密码)";
+		company = "seller_name( 商家名称), login_name(登录账号),password(登录密码)";
 	}else if(result.tpl == 'store_order_code'){
-		personal = "username(用户名),code(提货码)";
-		company = "username(用户名), ordersn(订单号),code(提货码),storeaddress(门店地址)";
+		personal = "user_name(用户名),code(提货码)";
+		company = "user_name(用户名), order_sn(订单号),code(提货码),store_address(门店地址)";
 	}else if(result.tpl == 'user_account_code'){
-		personal = "username(用户名),fmtamount(申请金额),processtype(申请类型，提现或充值),examine(审核状态),usermoney(余额)";
-		company = "username(用户名),addtime(添加时间),fmtamount(申请金额),processtype(申请类型，提现或充值),optime(审核时间),examine(审核状态),usermoney(余额)";
+		personal = "user_name(用户名),fmt_amount(申请金额),process_type(申请类型，提现或充值),examine(审核状态),user_money(余额)";
+		company = "user_name(用户名),add_time(添加时间),fmt_amount(申请金额),process_type(申请类型，提现或充值),op_time(审核时间),examine(审核状态),user_money(余额)";
 	}
 	
 	if(result.tpl){

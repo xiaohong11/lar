@@ -96,18 +96,51 @@ function addToCartShowDivResponse(result)
     // 如果需要缺货登记，跳转
     if (result.error == 2)
     {
-		pbDialog(result.message," ",0,450,80,50,true,function(){
-			location.href = 'user.php?act=add_booking&id=' + result.goods_id + '&spec=' + result.product_spec;
+		var add_cart_divId = 'flow_add_cart';
+		var content = '<div id="flow_add_cart">' + 
+							'<div class="tip-box icon-box">' +
+								'<span class="warn-icon m-icon"></span>' + 
+								'<div class="item-fore">' +
+									'<h3 class="rem ftx-04">' + result.message + '</h3>' +
+								'</div>' +
+							'</div>' +
+						'</div>';
+		pb({
+			id:add_cart_divId,
+			title:json_languages.title,
+			width:455,
+			height:88,
+			ok_title:json_languages.determine,
+			cl_title:json_languages.cancel,
+			content:content, 	//调取内容
+			drag:false,
+			foot:true,
+			onOk:function(){
+				location.href = 'user.php?act=add_booking&id=' + result.goods_id + '&spec=' + result.product_spec;
+			}
 		});
+		
+		$('#' + add_cart_divId + ' .tip-box h3').css({
+			'line-height' : '20px',
+			'padding-top' : '5px',
+			'font-size'	  : '14px'	
+		});
+		
+		$('#' + add_cart_divId + ' .item-fore').css({
+			'height' : '68px'
+		});
+		
+		$('#' + add_cart_divId + ' .pb-ft .pb-ok').addClass('color_df3134');
     }
     // 没选规格，弹出属性选择框
     else if (result.error == 6)
-    {	
+    {
+			
       openSpeDivShowDiv(result.message, result.goods_id, result.parent, result.script_name,result.goods_recommend);
     }
     else
     {
-	  pbDialog(result.message,"",0,500,80,50);
+	  get_user_prompt_message(result.message);
     }
   }
   else
@@ -489,9 +522,41 @@ function addToCartResponse(result)
     // 如果需要缺货登记，跳转
     if (result.error == 2)
     {
-		pbDialog(result.message," ",0,450,80,50,true,function(){
-			location.href = 'user.php?act=add_booking&id=' + result.goods_id + '&spec=' + result.product_spec;
+		var add_cart_divId = 'flow_add_cart';
+		var content = '<div id="flow_add_cart">' + 
+							'<div class="tip-box icon-box">' +
+								'<span class="warn-icon m-icon"></span>' + 
+								'<div class="item-fore">' +
+									'<h3 class="rem ftx-04">' + result.message + '</h3>' +
+								'</div>' +
+							'</div>' +
+						'</div>';
+		pb({
+			id:add_cart_divId,
+			title:json_languages.title,
+			width:455,
+			height:88,
+			ok_title:json_languages.determine,
+			cl_title:json_languages.cancel,
+			content:content, 	//调取内容
+			drag:false,
+			foot:true,
+			onOk:function(){
+				location.href = 'user.php?act=add_booking&id=' + result.goods_id + '&spec=' + result.product_spec;
+			}
 		});
+		
+		$('#' + add_cart_divId + ' .tip-box h3').css({
+			'line-height' : '20px',
+			'padding-top' : '5px',
+			'font-size'	  : '14px'	
+		});
+		
+		$('#' + add_cart_divId + ' .item-fore').css({
+			'height' : '68px'
+		});
+		
+		$('#' + add_cart_divId + ' .pb-ft .pb-ok').addClass('color_df3134');
     }
     // 没选规格，弹出属性选择框
     else if (result.error == 6)
@@ -500,7 +565,7 @@ function addToCartResponse(result)
     }
     else
     {
-		pbDialog(result.message,"",0,500,80,50);
+		get_user_prompt_message(result.message);
     }
   }
   else
@@ -679,12 +744,10 @@ function gotoPage(page, id, type)
 
 function gotoPageResponse(result)
 {
-	document.getElementById("ECS_COMMENT").innerHTML = result.content;
+  document.getElementById("ECS_COMMENT").innerHTML = result.content;
   	
-	if($(".pinglun").length>0){
-		var t = $('.pinglun').offset().top;
-		$(window).scrollTop(t);
-	}
+	var t = $('.pinglun').offset().top;
+	$(window).scrollTop(t);
 }
 
 /* *
@@ -1008,58 +1071,70 @@ function getFormatedPrice(price)
  * 夺宝奇兵会员出价
  */
 
-function bid(step){
-	var price = '';
-	var msg   = '';
-	
-	var region_id = $("#formBid :input[name='region_id']").val();
-	var area_id = $("#formBid :input[name='area_id']").val();
-	var goods_attr_id = $("#formBid :input[name='goods_attr_id']").val();
-	
-	if(step != - 1){
-		var frm = document.forms['formBid'];
-		price   = frm.elements['buy-price'].value;
-		id = frm.elements['snatch_id'].value;
-		
-		if (price.length == 0){
-			pbDialog(bid_prompt_null,"",0);
-			msg += bid_prompt_null + '\n';
-		}else{
-			var reg = /^[\.0-9]+/;
-			if (!reg.test(price)){
-				pbDialog(bid_prompt_number,"",0);
-				msg += bid_prompt_number + '\n';
-			}
-		}
-	}else{
-		price = step;
-	}
+function bid(step)
+{
+  var price = '';
+  var msg   = '';
+  if (step != - 1)
+  {
+    var frm = document.forms['formBid'];
+    price   = frm.elements['buy-price'].value;
+    id = frm.elements['snatch_id'].value;
+    if (price.length == 0)
+    {
+        var message = bid_prompt_null;
+        var divId = 'bid_msg';
+        dialogPrompt(divId,message);
+      msg += bid_prompt_null + '\n';
+    }
+    else
+    {
+      var reg = /^[\.0-9]+/;
+      if ( ! reg.test(price))
+      {
+        var message = bid_prompt_number;
+        var divId = 'bid_msg';
+        dialogPrompt(divId,message);
+        msg += bid_prompt_number + '\n';
+      }
+    }
+  }
+  else
+  {
+    price = step;
+  }
 
-  	if(msg.length > 0){
-    	return ;
-	}
-	 
-	Ajax.call('snatch.php?act=bid&id=' + id, 'price=' + price + '&region_id=' + region_id + '&area_id=' + area_id + '&goods_attr_id=' + goods_attr_id, bidResponse, 'POST', 'JSON');
+  if (msg.length > 0)
+  {
+    
+    return ;
+  }
+
+  Ajax.call('snatch.php?act=bid&id=' + id, 'price=' + price, bidResponse, 'POST', 'JSON');
 }
 
 /* *
  * 夺宝奇兵会员出价反馈
  */
-function bidResponse(result){
-	if(result.error == 0){
-		document.getElementById('records-list').innerHTML = result.content;
-		document.getElementById('ECS_PRICE_LIST').innerHTML = result.content_price;
-		//刷新价格列表
-		newPrice(result.id);
-		
-		pbDialog("恭喜您！出价成功了","",1);
-	}else{
-		if(result.prompt == 1){
-			$.notLogin("get_ajax_content.php?act=get_login_dialog",result.back_url);
-		}else{
-			pbDialog(result.content,"",0);
-		}
-	}
+
+function bidResponse(result)
+{
+  if (result.error == 0)
+  {
+    document.getElementById('records-list').innerHTML = result.content;
+	document.getElementById('ECS_PRICE_LIST').innerHTML = result.content_price;
+    newPrice(result.id); //刷新价格列表
+  }
+  else
+  {
+      if(result.prompt == 1){
+          $.notLogin("get_ajax_content.php?act=get_login_dialog",result.back_url);
+      }else{
+        var divId = 'bid_msg';
+        dialogPrompt(divId,result.content);
+      }
+    
+  }
 }
 
 /* *
@@ -1575,28 +1650,6 @@ function addPackageToCart(packageId)
   Ajax.call('flow.php?step=add_package_to_cart', 'package_info=' + $.toJSON(package_info), addPackageToCartResponse, 'POST', 'JSON');
 }
 
-/* 购物车加减 */
-function addPackageToCartFlow(packageId, rec_id, diff, warehouse_id, area_id, type)
-{
-  var package_info = new Object();
-  
-  if(type == 1){
-	  var number = Number($('#goods_number_' + rec_id).val()) + Number(diff);  
-  }else if(type == 2){
-	  var number = Number(diff);  
-  }
-  
-
-  package_info.package_id = packageId
-  package_info.number     = number;
-  package_info.confirm_type   = 3; 
-  package_info.warehouse_id   = warehouse_id; 
-  package_info.area_id   = area_id;
-  package_info.type   = type;
-  
-  Ajax.call('flow.php?step=add_package_to_cart', 'package_info=' + $.toJSON(package_info), addPackageToCartResponse, 'POST', 'JSON');
-}
-
 /* *
  * 处理添加礼包到购物车的反馈信息
  */
@@ -1604,11 +1657,16 @@ function addPackageToCartResponse(result)
 {
   if (result.error > 0)
   {
-	  if(result.error > 1){
-		  pbDialog(result.message," ",0,650,100,50);
-	  }else{
-		  pbDialog(result.message,"",0);
-	  }
+    if (result.error == 2)
+    {
+        var message = result.message;
+        var divId = 'flow_add_cart';
+        dialogPrompt(divId,message);
+    }
+    else
+    {
+      alert(result.message);    
+    }
   }
   else
   {
@@ -1673,21 +1731,21 @@ function docEle()
 function openSpeDiv(message, goods_id, parent, warehouse_id, area_id,divId,confirm_type,number) 
 {
 	pb({
-		id:'addCartLog',
-		title:json_languages.Select_attr,
-		width:500,
-		content:message,
-		ok_title:json_languages.determine,
-		cl_title:json_languages.cancel,
-		drag:false,
-		foot:true,
-		onOk:function(){
-			submit_div(goods_id, parent, warehouse_id, area_id,divId,confirm_type,number);	
-		}
+			id:'addCartLog',
+			title:json_languages.Select_attr,
+			width:500,
+			content:message,
+			ok_title:json_languages.determine,
+			cl_title:json_languages.cancel,
+			drag:false,
+			foot:true,
+			onOk:function(){
+				submit_div(goods_id, parent, warehouse_id, area_id,divId,confirm_type,number);	
+			}
 	});
-	
+	$('.pb-ok').addClass('color_df3134');
 	$(".attr_list .item li").click(function(){
-		var type=$(this).find("input").attr("type");
+		var type=$(this).find('input').attr("type");
 		if(type == "checkbox")
 		{
 			var length = 0;
@@ -1697,7 +1755,7 @@ function openSpeDiv(message, goods_id, parent, warehouse_id, area_id,divId,confi
 				$(this).find("input[type='checkbox']").prop("checked",false);
 				length =$(this).parent().find(".selected").length;
 				if(length<1){
-					pbDialog(json_languages.Select_attr,"",0);
+					get_user_prompt_message(json_languages.Select_attr);
 					$(this).addClass("selected");
 					$(this).find("input[type='checkbox']").prop("checked",true);	
 				}
@@ -1887,7 +1945,9 @@ function get_collect_store(type, ru_id){
     var error = $("#error").val();
 	
 	if(error == 1){
-	   pbDialog(json_languages.Focus_prompt_one,"",0);
+	   var message = json_languages.Focus_prompt_one;
+	   var divId = 'goods_merchants';
+	   dialogPrompt(divId,message);
     }
 	if(ru_id > 0){
 		merchant_id = ru_id;
@@ -1960,7 +2020,7 @@ function get_collect_store(type, ru_id){
 						'</div>';
 			pb({
 				id:divId,
-				title:json_languages.store_focus,
+				title:store_focus,
 				width:455,
 				height:58,
 				ok_title:ok_title, 	//按钮名称

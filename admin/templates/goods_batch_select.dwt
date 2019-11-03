@@ -4,16 +4,16 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.goods_alt} - {$ur_here}</div>
+    	<div class="title">商品 - {$ur_here}</div>
         <div class="content">
         	{include file ='library/batch_tab.lbi'}
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.select.0}</li>
-                    <li>{$lang.operation_prompt_content.select.1}</li>
-                    <li>{$lang.operation_prompt_content.select.2}</li>
-                    <li>{$lang.operation_prompt_content.select.3}</li>
+                	<li>根据分类、品牌或者货号搜索商品，在选择的商品列表中选中需要批量编辑的商品。</li>
+                    <li>选择逐个编辑或是统一编辑，点击进入编辑开始编辑。</li>
+                    <li>逐个编辑可在选中商品编辑列表进行编辑，如修改市场价格、本地价格、赠送积分、库存等信息。</li>
+					<li>统一编辑是选中需要统一信息的商品进行编辑。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -25,21 +25,22 @@
                             	<div class="checkbox_items">
                                 	<div class="checkbox_item">
                                     	<input type="radio" name="select_method" id="sm_cat" class="ui-radio-16x16" value="cat" checked />
-                                        <label for="sm_cat" class="ui-radio-label-16x16">{$lang.by_cat}</label>
+                                        <label for="sm_cat" class="ui-radio-label-16x16">根据商品分类、品牌</label>
                                     </div>
                                     <div class="checkbox_item">
                                     	<input type="radio" name="select_method" id="sm_sn" value="sn" class="ui-radio-16x16" />
-                                        <label for="sm_sn" class="ui-radio-label-16x16">{$lang.by_sn}</label>
+                                        <label for="sm_sn" class="ui-radio-label-16x16">根据商品货号</label>
                                     </div>
                                 </div>
                             </div>
                             <div id="category_brand_screen">
                                 <div class="goods_search_div">
+									<!--通用部分 start-->
 									<div class="goods_search_div">
 										<div class="search_select">
 											<div class="categorySelect">
 												<div class="selection">
-													<input type="text" name="category_name" id="category_name" class="text w250 valid" value="{$lang.select_cat}" autocomplete="off" readonly data-filter="cat_name" />
+													<input type="text" name="category_name" id="category_name" class="text w250 valid" value="请选择分类" autocomplete="off" readonly data-filter="cat_name" />
 													<input type="hidden" name="category_id" id="category_id" value="0" data-filter="cat_id" />
 												</div>
 												<div class="select-container" style="display:none;">
@@ -50,7 +51,7 @@
 										<div class="search_select">
 											<div class="brandSelect">
 												<div class="selection">
-													<input type="text" name="brand_name" id="brand_name" class="text w120 valid" {$lang.select_barnd} autocomplete="off" readonly data-filter="brand_name" />
+													<input type="text" name="brand_name" id="brand_name" class="text w120 valid" value="请选择品牌" autocomplete="off" readonly data-filter="brand_name" />
 													<input type="hidden" name="brand_id" id="brand_id" value="0" data-filter="brand_id" />
 												</div>
 												<div class="brand-select-container" style="display:none;">
@@ -58,36 +59,37 @@
 												</div>
 											</div>                            
 										</div>
-										<input type="text" name="keyword" class="text w150" value="" placeholder={$lang.input_keywords} data-filter="keyword" autocomplete="off" />
-										<a href="javascript:void(0);" class="btn btn30" ectype="search"><i class="icon icon-search"></i>{$lang.search_word}</a>
+										<input type="text" name="keyword" class="text w150" value="" placeholder="请输入关键字" data-filter="keyword" autocomplete="off" />
+										<a href="javascript:void(0);" class="btn btn30" ectype="search"><i class="icon icon-search"></i>搜索</a>
 									</div>
+									<!--通用部分 end-->
                                 </div>
                                 <div class="move_div">
                                     <div class="move_left">
-                                        <h4>{$lang.src_list}</h4>
+                                        <h4>待选列表</h4>
                                         <div class="move_info">
                                             <div class="move_list">
 												{include file="library/move_left.lbi"}
                                             </div>
                                         </div>
                                         <div class="move_handle">
-                                            <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">{$lang.check_all}</a>
-                                            <a href="javascript:void(0);" class="btn btn25 red_btn" ectype="sub" data-operation="add_edit_goods">{$lang.button_submit_alt}</a>
+                                            <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">全选</a>
+                                            <a href="javascript:void(0);" class="btn btn25 red_btn" ectype="sub" data-operation="add_edit_goods">确定</a>
                                         </div>
                                     </div>
                                     <div class="move_middle">
                                         <div class="move_point" data-operation="add_edit_goods"></div>
                                     </div>
                                     <div class="move_right">
-                                        <h4>{$lang.dest_list}</h4>
+                                        <h4>已选列表</h4>
                                         <div class="move_info">
                                             <div class="move_list">
 												{include file="library/move_right.lbi"}	
                                             </div>
                                         </div>
                                         <div class="move_handle">
-                                            <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">{$lang.check_all}</a>
-											<a href="javascript:void(0);" class="btn btn25 btn_red" ectype="sub" data-operation="drop_edit_goods">{$lang.remove}</a>
+                                            <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">全选</a>
+											<a href="javascript:void(0);" class="btn btn25 btn_red" ectype="sub" data-operation="drop_edit_goods">移除</a>
                                         </div>
                                     </div>
                                 </div>
@@ -95,7 +97,7 @@
                             <div id="sn_screen" style="display:none;">
                             	<div class="move_div">
                                 	<div class="move_all tc">
-                                    	<h4>{$lang.input_sn}</h4>
+                                    	<h4>输入商品货号(每行只能输入一个货号)</h4>
                                         <textarea name="sn_list" id="sn_list" class="textarea"></textarea>
                                     </div>
                                 </div>
@@ -104,13 +106,14 @@
                             	<div class="checkbox_items">
                                 	<div class="checkbox_item">
                                     	<input type="radio" name="edit_method" id="edit_oneby" class="ui-radio" checked value="each"/>
-                                        <label for="edit_oneby" class="ui-radio-label">{$lang.edit_each}</label>
+                                        <label for="edit_oneby" class="ui-radio-label">逐个编辑</label>
                                     </div>
                                     <div class="checkbox_item">
                                     	<input type="radio" name="edit_method" id="edit_unified" class="ui-radio" value="all"/>
-                                        <label for="edit_unified" class="ui-radio-label">{$lang.edit_all}</label>
+                                        <label for="edit_unified" class="ui-radio-label">统一编辑</label>
                                     </div>
                                 </div>
+                                <!--<a href="javascript:void(0);" class="btn btn35 red_btn mt30">进入编辑</a>-->
 								<input type="submit" name="submit" value="{$lang.go_edit}" class="btn btn35 red_btn mt30" />
 								<input type="hidden" name="goods_ids" value="" />								
                             </div>
@@ -118,10 +121,11 @@
                     </div>
 					</form>
                 </div>
+                <!--添加新商品end-->
             </div>
 		</div>
 	</div>
- 	{include file ='library/pagefooter.lbi'}
+ {include file ='library/pagefooter.lbi'}
     <script type="text/javascript">
 		//批量修改方式切换
 		$(".batch_tab").find("input[type='radio']").on("click",function(){

@@ -7,7 +7,7 @@
 {include file ='library/seller_header.lbi'}
 <div class="ecsc-layout">
     <div class="site wrapper">
-        {include file ='library/seller_menu_left.lbi'}
+        {include file ='library/seller_menu_left.lbi'} 
         <div class="ecsc-layout-right">
             <div class="main-content" id="mainContent">
                 {include file ='library/url_here.lbi'}
@@ -44,7 +44,7 @@
                     </div>
                 </th>
                 <th width="20%" class="tl"><a href="javascript:listTable.sort('goods_name'); ">{$lang.goods_name}</a><div class="img">{$sort_goods_name}</div></th>
-                <th width="30%">{$lang.rank_name}</th>
+                <th width="30%">最小起订量</th>
                 <th width="10%"><a href="javascript:listTable.sort('enabled'); ">{$lang.enabled}</a><div class="img">{$sort_enabled}</div></th>
                 <th width="10%">{$lang.adopt_status}</th>
                 <th width="20%">{$lang.handler}</th>
@@ -55,7 +55,7 @@
                 <tr>
                 <td><div class="first_all"><input value="{$wholesale.act_id}" name="checkboxes[]" type="checkbox" id="checkbox_{$wholesale.act_id}" class="ui-checkbox"><label class="ui-label" for="checkbox_{$wholesale.act_id}">{$wholesale.act_id}</label></div></td>
                 <td class="tl"><span class="activity_name w410">{$wholesale.goods_name|escape:html}</span></td>
-                <td>{$wholesale.rank_names}</td>
+                <td>{$wholesale.moq}</td>
                 <td>
 					<div class="switch {if $wholesale.enabled}active{/if}" title="{if $wholesale.enabled}是{else}否{/if}" onclick="listTable.switchBt(this, 'toggle_enabled', {$wholesale.act_id})">
 						<div class="circle"></div>

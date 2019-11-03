@@ -12,7 +12,7 @@
                     {if $open eq 1}
                         {if !$type}
                         <div class="view-case">
-                        <div class="view-case-tit"><i></i>{$lang.view_tutorials}</div>
+                        <div class="view-case-tit"><i></i>查看教程</div>
                             <div class="view-case-info">
                                 <a href="http://help.ecmoban.com/article-6893.html" target="_blank">商城广告设置操作说明</a>
                             </div>
@@ -23,6 +23,7 @@
                 <ul>
                 	<li>展示网站所有的广告位置。</li>
                     <li>点击查看可查看广告位置相关广告位的广告。</li>
+                    <li>可搜索关键词进行查询，侧边栏可进行高级搜索。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -36,11 +37,10 @@
                         <div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
                         <div class="refresh_span">{$lang.refresh} - {$lang.total_data}{$record_count}{$lang.data}</div>
                     </div>
-                     <form action="javascript:;" name="searchForm" onSubmit="searchGoodsname(this);">
+                    <form action="javascript:searchAd_position()" name="searchForm">
                         <div class="search">
                             <div class="input">
-                                <input type="text" name="keyword" class="text nofocus" placeholder="{$lang.position_name}" autocomplete="off" />
-                                <input type="submit" value="" class="not_btn" />
+                                <input type="text" name="keyword" class="text nofocus" placeholder="{$lang.keyword}" autocomplete="off" /><input type="submit" value="" class="not_btn" />
                             </div>
                         </div>
                     </form>
@@ -81,7 +81,7 @@
                                         <div class="tDiv a3">
                                             <a href="{if $type eq 1}touch_ads.php{else}ads.php{/if}?act=list&pid={$list.position_id}" title="{$lang.view}{$lang.ad_content}" class="btn_see"><i class="sc_icon sc_icon_see"></i>{$lang.view}</a>
                                             <a href="{if $type eq 1}touch_ad_position.php{else}ad_position.php{/if}?act=edit&id={$list.position_id}" title="{$lang.edit}" class="btn_edit"><i class="icon icon-edit"></i>{$lang.edit}</a>
-                                            <a href="javascript:;" onclick="listTable.remove({$list.position_id}, '{$lang.drop_confirm}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                            <a href="javascript:;" onclick="listTable.remove({$list.position_id}, '{$lang.drop_confirm}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -108,12 +108,51 @@
     </div>
  	{include file ='library/pagefooter.lbi'}
     <script type="text/javascript">
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
+		listTable.recordCount = '{$record_count}';
+		listTable.pageCount = '{$page_count}';
+		
+		{foreach from=$filter item=item key=key}
+		listTable.filter.{$key} = '{$item}';
+		{/foreach}
+
+        $.divselect("#shop_name_select","#shop_name_val",function(obj){
+            var val = obj.attr("data-value");
+            get_store_search(val);
+        });
+        function get_store_search(val){
+                if(val == 1){
+                        $("#merchant_box").css("display",'');
+                        $("#store_keyword").css("display",'none');
+                        $("#store_type").css("display",'none')
+                }else if(val == 2){
+                        $("#merchant_box").css("display",'none');
+                        $("#store_keyword").css("display",'');
+                        $("#store_type").css("display",'none')
+                }else if(val == 3){
+                        $("#merchant_box").css("display",'none');
+                        $("#store_keyword").css("display",'');
+                        $("#store_type").css("display",'')
+                }else{
+                         $("#merchant_box").css("display",'none');
+                        $("#store_keyword").css("display",'none');
+                        $("#store_type").css("display",'none')
+                }
+        }
+
+    function searchAd_position()
+    {
+        var frm = $("form[name='formSearch_senior']");
+        listTable.filter['store_search'] = Utils.trim(frm.find("input[name='store_search']").val());
+        listTable.filter['merchant_id'] = Utils.trim(frm.find("input[name='merchant_id']").val());
+        listTable.filter['store_keyword'] = Utils.trim(frm.find("input[name='store_keyword']").val());
+        listTable.filter['store_type'] = Utils.trim(frm.find("input[name='store_type']").val());
 	
-	{foreach from=$filter item=item key=key}
-	listTable.filter.{$key} = '{$item}';
-	{/foreach}
+        listTable.filter['keyword'] = Utils.trim(($("form[name='searchForm']").find("input[name='keyword']").val() != '') ? $("form[name='searchForm']").find("input[name='keyword']").val() :  frm.find("input[name='keyword']").val());
+        listTable.filter['page'] = 1;
+
+        listTable.loadList();
+    }
+    $.gjSearch("-240px");  //高级搜索
     </script>
 </body>
 </html>

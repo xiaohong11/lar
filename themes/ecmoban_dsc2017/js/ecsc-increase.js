@@ -23,7 +23,7 @@ function incre(){
 	if(limitPrice){
 		if(price+priceLowerOffset>maxPrice){
 			$("#buyPrice").val(maxPrice);
-			pbDialog(json_languages.highest_price,"",0);
+			alert("已是最高价！");
 			return;
 		}
 	}

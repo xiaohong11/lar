@@ -7,9 +7,9 @@
         <div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>营销顾问 - {$ur_here}</div>
         <div class="content">
             <div class="explanation" id="explanation">
-                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content_common}</li>
+                    <li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
                     <li>此快捷菜单的图片标准宽度为：120px 标准高度为：120px</li>
                 </ul>
             </div>
@@ -43,7 +43,7 @@
                                     <div class="label">管理员：</div>
                                     <div class="label_value">
                                         <div id="admin_id" class="imitate_select select_w320">
-                                            <div class="cite">{if $adviser.admin_id}{$admin_name}{else}{$lang.please_select}{/if}</div>
+                                            <div class="cite">{if $adviser.admin_id}{$admin_name}{else}请选择{/if}</div>
                                             <ul class="ps-container" style="display: none;">
                                                 {foreach from=$administrator item=administrator key=key}
                                                 <li><a href="javascript:;" data-value="{$administrator.user_id}" class="ftx-01">{$administrator.user_name}</a></li>
@@ -57,7 +57,7 @@
                                     <div class="label">入驻商家：</div>
                                     <div class="label_value">
                                         <div id="seller_id" class="imitate_select select_w320">
-                                            <div class="cite">{if $adviser.seller_id}{$seller_shopname}{else}{$lang.please_select}{/if}</div>
+                                            <div class="cite">{if $adviser.seller_id}{$seller_shopname}{else}请选择{/if}</div>
                                             <ul class="ps-container" style="display: none;">
                                                 {foreach from=$administrator item=administrator key=key}
                                                 <li><a href="javascript:;" data-value="{$administrator.ru_id}" class="ftx-01">{$administrator.rz_shopName}</a></li>

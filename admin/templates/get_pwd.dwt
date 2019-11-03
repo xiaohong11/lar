@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>{$ur_here}</title>
+    <title>找回密码</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="css/login.css" rel="stylesheet" type="text/css" />
@@ -16,18 +16,21 @@
     {if $form_act eq "forget_pwd"}
     <form action="get_password.php" method="post" id="theForm">
         <div class="backPwd_form">
-            <div class="title">{$lang.get_password}</div>
+            <div class="title">找回密码</div>
             <div id="error"></div>
             <div class="formInfo">
                 <div class="formText">
-                    <input type="text" name="user_name" autocomplete="off" class="input-text" value="" placeholder="{$lang.sr_admin_username}" />
+                    <input type="text" name="user_name" autocomplete="off" class="input-text" value="" placeholder="输入管理员账号" />
                 </div>
                 <div class="formText">
-                    <input type="text" name="email" autocomplete="off" class="input-text" value="" placeholder="{$lang.sr_email}" />
+                    <input type="text" name="email" autocomplete="off" class="input-text" value="" placeholder="输入电子邮箱" />
                 </div>
                 <div class="formText btn_div">
-                    <input type="submit" name="submit" onclick="send_validate()" class="sub" value="{$lang.get_password}" />
-                    <a href="privilege.php?act=login" class="cancel">{$lang.return_login}</a>
+                    <input type="submit" name="submit" onclick="send_validate()" class="sub" value="找回密码" />
+                    <input type="button" name="qx" class="cancel" value="取消" />
+                </div>
+                <div class="formText">
+                    <a href="privilege.php?act=login" class="return">返回登录</a>
                 </div>
             </div>
         </div>
@@ -42,21 +45,21 @@
             var email=true;
 
             if($('#theForm input[name=user_name]').val() == ''){
-                $('#error').html('<span class="error_msg">'+user_name_empty+'</span>');
+                $('#error').html('<span class="error_msg">管理员用户名不能为空!</span>');
                 $('#theForm input[name=user_name]').focus();
                 username = false;
                 return false;
             }
 
             if($('#theForm input[name=email]').val() == ''){
-                $('#error').html('<span class="error_msg">'+email_empty+'</span>');
+                $('#error').html('<span class="error_msg">邮箱不能为空!</span>');
                 $('#theForm input[name=email]').focus();
                 email = false;
                 return false;
             }
 
             if(CheckMail($('#theForm input[name=email]').val()) == false){
-                $('#error').html('<span class="error_msg">'+email_error+'</span>');
+                $('#error').html('<span class="error_msg">邮箱格式不正确!</span>');
                 $('#theForm input[name=email]').focus();
                 email = false;
                 return false;
@@ -66,8 +69,7 @@
                 var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
                 if (filter.test(mail)) return true;
                 else {
-                    return false;
-				}
+                    return false;}
             }
 
 
@@ -79,28 +81,29 @@
         });
         /*  @author-bylu  end  */
     </script>
+
     {/if}
 
     {if $form_act eq "reset_pwd"}
 
     <form action="get_password.php" method="post" id="theForm">
         <div class="backPwd_form">
-            <div class="title">{$lang.reset_pwd}</div>
+            <div class="title">重置密码</div>
             <div id="error"></div>
             <div class="formInfo">
                 <div class="formText">
                     <input type="password"   style="display:none"/> 
-                    <input type="password" name="password" autocomplete="off" class="input-text" value="" placeholder="{$lang.sr_new_pwd}" />
+                    <input type="password" name="password" autocomplete="off" class="input-text" value="" placeholder="输入新密码" />
                 </div>
                 <div class="formText">
-                    <input type="password" name="confirm_pwd" autocomplete="off" class="input-text" value="" placeholder="{$lang.confirm_pwd}" />
+                    <input type="password" name="confirm_pwd" autocomplete="off" class="input-text" value="" placeholder="确认密码" />
                 </div>
                 <div class="formText btn_div">
-                    <input type="submit" name="submit" onclick="reset_validate()" class="sub" value="{$lang.button_submit_alt}" />
-                    <input type="button" name="qx" class="cancel" value="{$lang.cancel}" />
+                    <input type="submit" name="submit" onclick="reset_validate()" class="sub" value="确定" />
+                    <input type="button" name="qx" class="cancel" value="取消" />
                 </div>
                 <div class="formText">
-                    <a href="privilege.php?act=login" class="return">{$lang.return_login}</a>
+                    <a href="privilege.php?act=login" class="return">返回登录</a>
                 </div>
             </div>
         </div>
@@ -117,21 +120,21 @@
             var confirm_pwd=true;
 
             if($('#theForm input[name=password]').val() == ''){
-                $('#error').html('<span class="error_msg">'+admin_pwd_empty+'</span>');
+                $('#error').html('<span class="error_msg">新密码不能为空!</span>');
                 $('#theForm input[name=password]').focus();
                 password = false;
                 return false;
             }
 
             if($('#theForm input[name=confirm_pwd]').val() == ''){
-                $('#error').html('<span class="error_msg">'+confirm_pwd_empty+'</span>');
+                $('#error').html('<span class="error_msg">确认密码不能为空!</span>');
                 $('#theForm input[name=confirm_pwd]').focus();
                 confirm_pwd = false;
                 return false;
             }
 
             if($('#theForm input[name=confirm_pwd]').val() != $('#theForm input[name=password]').val()){
-                $('#error').html('<span class="error_msg">'+both_pwd_error+'</span>');
+                $('#error').html('<span class="error_msg">2次密码不一致!</span>');
                 $('#theForm input[name=confirm_pwd]').focus();
                 confirm_pwd = false;
                 return false;

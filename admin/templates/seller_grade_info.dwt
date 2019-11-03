@@ -3,14 +3,14 @@
 <head>{include file ='library/admin_html_head.lbi'}</head>
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="seller_grade.php?act=list" class="s-back">{$lang.back}</a> {$lang.seller} - {$ur_here}</div>
+    	<div class="title"><a href="seller_grade.php?act=list" class="s-back">{$lang.back}</a> 商家 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content.list.0}</li>
-                    <li>{$lang.operation_prompt_content.list.1}</li>
-                    <li>{$lang.operation_prompt_content_common}</li>
+                    <li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
+                    <li>请根据提示正确的填写商家等级信息。</li>
+                    <li>请上传合适的等级标志图片。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -30,35 +30,42 @@
                                         <div class="label">{$lang.goods_sun}：</div>
                                         <div class="label_value">
                                         	<input type="text" name="goods_sun" id="goods_sun" class="text" value="{if $seller_grade.goods_sun > 0}{$seller_grade.goods_sun}{else}-1{/if}" autocomplete="off" />
-                                            <label class="blue_label">{$lang.goods_sun_notic}</label>
+                                            <label class="blue_label">如果为‘-1’，将不做限制</label>
                                         </div>
                                     </div>
                                     <div class="item">
                                         <div class="label">{$lang.seller_temp}：</div>
                                         <div class="label_value">
                                         	<input type="text" name="seller_temp" id="seller_temp" class="text" value="{if $seller_grade.seller_temp > 0}{$seller_grade.seller_temp}{else}-1{/if}" autocomplete="off" />
-                                            <label class="blue_label">{$lang.seller_temp_notice}</label>
+                                            <label class="blue_label">如果为‘-1’，将不做限制</label>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="label">{$lang.favorable_rate}：</div>
+                                        <div class="label_value">
+                                        	<input type="text" name="favorable_rate" id="favorable_rate" class="text" value="{$seller_grade.favorable_rate|default:100}" autocomplete="off" />
+                                            &nbsp;%<label class="blue_label">根据百分比控制商家所能设置的值</label>
                                         </div>
                                     </div>
                                     <div class="item">
                                         <div class="label">{$lang.give_integral}：</div>
                                         <div class="label_value">
-                                        	<input type="text" name="give_integral" id="give_integral" class="text" value="{$seller_grade.give_integral|default:0}" autocomplete="off" />
-                                            &nbsp;%&nbsp;<label class="blue_label">{$lang.give_integral_notic}</label>
+                                        	<input type="text" name="give_integral" id="give_integral" class="text" value="{$seller_grade.give_integral|default:100}" autocomplete="off" />
+                                            &nbsp;%<label class="blue_label">根据百分比控制商家所能设置的值</label>
                                         </div>
                                     </div>
                                     <div class="item">
                                         <div class="label">{$lang.rank_integral}：</div>
                                         <div class="label_value">
-                                        	<input type="text" name="rank_integral" id="rank_integral" class="text" value="{$seller_grade.rank_integral|default:0}" autocomplete="off" />
-                                            &nbsp;%&nbsp;<label class="blue_label">{$lang.give_integral_notic}</label>
+                                        	<input type="text" name="rank_integral" id="rank_integral" class="text" value="{$seller_grade.rank_integral|default:100}" autocomplete="off" />
+                                            &nbsp;%<label class="blue_label">根据百分比控制商家所能设置的值</label>
                                         </div>
                                     </div>
                                     <div class="item">
                                         <div class="label">{$lang.pay_integral}：</div>
                                         <div class="label_value">
-                                        	<input type="text" name="pay_integral" id="pay_integral" class="text" value="{$seller_grade.pay_integral|default:0}" autocomplete="off" />
-                                            &nbsp;%&nbsp;<label class="blue_label">{$lang.give_integral_notic}</label>
+                                        	<input type="text" name="pay_integral" id="pay_integral" class="text" value="{$seller_grade.pay_integral|default:100}" autocomplete="off" />
+                                            &nbsp;%<label class="blue_label">根据百分比控制商家所能设置的值</label>
                                         </div>
                                     </div>
 									<div class="item">
@@ -67,13 +74,13 @@
 											<div class="checkbox_items">
 												<div class="checkbox_item"> 
 													<input name="white_bar" type="radio" class="ui-radio" value="0" id="white_bar_0"{if $seller_grade.white_bar eq 0||$seller_grade.white_bar eq ''}checked="checked"{/if} />
-													<label for="white_bar_0" class="ui-radio-label">{$lang.no}</label>
+													<label for="white_bar_0" class="ui-radio-label">否</label>
 												</div>
 												<div class="checkbox_item"> 
 													<input name="white_bar" type="radio" class="ui-radio" value="1" id="white_bar_1" {if $seller_grade.white_bar}checked="checked"{/if} />
-													<label for="white_bar_1" class="ui-radio-label">{$lang.yes}</label>
-												</div>	
-												<label class="blue_label" style="padding-left:235px;">{$lang.pay_integral_notic}</label>
+													<label for="white_bar_1" class="ui-radio-label">是</label>
+												</div>
+												<label class="blue_label" style="padding-left:235px;"> 设置商家是否拥有白条支付权限</label>
                                             </div>
                                         </div>
                                     </div>
@@ -85,7 +92,7 @@
                                                 <input type="file" class="type-file-file" id="file" name="file" data-state="imgfile" size="30" hidefocus="true" value="">
                                                 {if $seller_grade.grade_img}
 												<span class="show">
-                                                    <a href="../{$seller_grade.grade_img}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="../{$seller_grade.grade_img}" ectype="tooltip" title="tooltip"></i></a>
+                                                    <a href="../{$seller_grade.grade_img}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../{$seller_grade.grade_img}')" onmouseout="toolTip()"></i></a>
                                                 </span>
 												{/if}
                                                 <input type="text" name="textfile" class="type-file-text" {if $seller_grade.grade_img}value="../{$seller_grade.grade_img}"{/if} id="textfield" autocomplete="off" readonly>
@@ -121,11 +128,11 @@
 											<div class="checkbox_items">
 												<div class="checkbox_item"> 
 													<input name="is_open" type="radio" class="ui-radio" value="0" id="is_open_0"{if $seller_grade.is_open eq 0||$seller_grade.is_open eq ''}checked="checked"{/if} />
-													<label for="is_open_0" class="ui-radio-label">{$lang.no}</label>
+													<label for="is_open_0" class="ui-radio-label">否</label>
 												</div>
 												<div class="checkbox_item"> 
 													<input name="is_open" type="radio" class="ui-radio" value="1" id="is_open_1" {if $seller_grade.is_open}checked="checked"{/if} />
-													<label for="is_open_1" class="ui-radio-label">{$lang.yes}</label>
+													<label for="is_open_1" class="ui-radio-label">是</label>
 												</div>
 											</div>
                                         </div>
@@ -136,11 +143,11 @@
 											<div class="checkbox_items">
 												<div class="checkbox_item"> 
 													<input name="is_default" type="radio" class="ui-radio" value="0" id="is_default_0"{if $seller_grade.is_default eq 0||$seller_grade.is_default eq ''}checked="checked"{/if} />
-													<label for="is_default_0" class="ui-radio-label">{$lang.no}</label>
+													<label for="is_default_0" class="ui-radio-label">否</label>
 												</div>
 												<div class="checkbox_item"> 
 													<input name="is_default" type="radio" class="ui-radio" value="1" id="is_default_1" {if $seller_grade.is_default}checked="checked"{/if} />
-													<label for="is_default_1" class="ui-radio-label">{$lang.yes}</label>
+													<label for="is_default_1" class="ui-radio-label">是</label>
 												</div>
 											</div>
                                         </div>
@@ -163,6 +170,7 @@
 		</div>
 	</div>
  	{include file ='library/pagefooter.lbi'}
+    
 	<script type="text/javascript">
         var myTopic = Object();
     
@@ -391,10 +399,10 @@
                  },
                  messages : {
                      grade_name : {
-                         required : '<i class="icon icon-exclamation-sign"></i>'+please_enter_grade_name
+                         required : '<i class="icon icon-exclamation-sign"></i>请输入等级名称'
                      },
 					 textfile : {
-                         required : '<i class="icon icon-exclamation-sign"></i>'+file_grade_img
+                         required : '<i class="icon icon-exclamation-sign"></i>请上传等级图标'
                      }
                  }
              });

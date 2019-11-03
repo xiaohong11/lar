@@ -5,38 +5,37 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.goods_alt} - {$ur_here}</div>
+    	<div class="title">商品 - {$ur_here}</div>
         <div class="content">
         	<div class="tabs_info">
             	<ul>
-                    <li {if $menu_select.current eq '06_goods_brand_list'}class="curr"{/if}><a href="brand.php?act=list">{$lang.06_goods_brand_list}</a></li>
-                    <li {if $menu_select.current eq '07_merchants_brand'}class="curr"{/if}><a href="merchants_brand.php?act=list">{$lang.07_merchants_brand}</a></li>
+                    <li {if $menu_select.current eq '06_goods_brand_list'}class="curr"{/if}><a href="brand.php?act=list">自营品牌</a></li>
+                    <li {if $menu_select.current eq '07_merchants_brand'}class="curr"{/if}><a href="merchants_brand.php?act=list">商家品牌</a></li>
                 </ul>
             </div>			
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.list.0}</li>
-                    <li>{$lang.operation_prompt_content.list.1}</li>
+                	<li>展示了商城自营品牌的相关信息。</li>
+                    <li>可以通过品牌关键字搜索相关品牌信息。</li>
                 </ul>
             </div>
             <div class="flexilist">
+            	<!--商品列表-->
                 <div class="common-head">
                     <div class="fl">
-                    	<a href="brand.php?act=add"><div class="fbutton"><div class="add" title="{$lang.07_brand_add}"><span><i class="icon icon-plus"></i>{$lang.07_brand_add}</span></div></div></a>
-                        <a href="brand.php?act=create_brand_letter"><div class="fbutton"><div class="add" title="{$lang.generate_brand_first_char}"><span><i class="icon icon-plus"></i>{$lang.generate_brand_first_char}</span></div></div></a>
+                    	<a href="brand.php?act=add"><div class="fbutton"><div class="add" title="添加品牌"><span><i class="icon icon-plus"></i>添加品牌</span></div></div></a>
+                        <a href="brand.php?act=create_brand_letter"><div class="fbutton"><div class="add" title="生成品牌首字母"><span><i class="icon icon-plus"></i>生成品牌首字母</span></div></div></a>
                     </div>				
                     <div class="refresh">
-                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    	<div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>
 					<div class="search">
-                    	<form action="javascript:;" name="searchForm" onSubmit="searchGoodsname(this);">
                     	<div class="input">
-                        	<input type="text" name="brand_name" class="text nofocus" placeholder="{$lang.brand_name}" autocomplete="off">
-                            <input type="submit" class="btn" name="secrch_btn" ectype="secrch_btn" value="" />
+                        	<input type="text" name="brand_name" class="text nofocus" placeholder="品牌名称" autocomplete="off">
+							<button class="btn" name="secrch_btn"></button>
                         </div>
-                        </form>
                     </div>
                 </div>
                 <div class="common-content">
@@ -49,7 +48,7 @@
                                     <th width="12%"><div class="tDiv">{$lang.brand_name_cn}</div></th>
                                     <th width="12%"><div class="tDiv">{$lang.brand_name_en}</div></th>
                                     <th width="12%"><div class="tDiv">{$lang.brand_first_char}</div></th>
-                                    <th width="8%"><div class="tDiv">{$lang.brand_img}</div></th>
+                                    <th width="8%"><div class="tDiv">品牌图片</div></th>
                                     <!--<th width="15%"><div class="tDiv">{$lang.site_url}</div></th>-->
                                     <th width="20%"><div class="tDiv">{$lang.brand_desc}</div></th>
                                     <th width="6%"><div class="tDiv">{$lang.sort_order}</div></th>
@@ -72,7 +71,7 @@
                                     <td>
                                     <div class="tDiv">
                                     	<span class="show">
-                                            <a href="{if $brand.brand_logo}{$brand.brand_logo}{else}images/default/brand_logo_default.jpg{/if}" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="{if $brand.brand_logo}{$brand.brand_logo}{else}images/default/brand_logo_default.jpg{/if}" ectype="tooltip" title="tooltip"></i></a>
+                                            <a href="{$brand.brand_logo}" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$brand.brand_logo}>')" onmouseout="toolTip()"></i></a>
                                         </span>
                                     </div>
                                     </td>
@@ -97,8 +96,8 @@
                                     </td>                               
                                     <td class="handle">
                                         <div class="tDiv a2">
-                                            <a href="brand.php?act=edit&id={$brand.brand_id}" class="btn_edit"><i class="icon icon-edit"></i>{$lang.edit}</a>
-                                            <a href="javascript:;" onclick="listTable.remove({$brand.brand_id}, '{$lang.drop_confirm}')" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                            <a href="brand.php?act=edit&id={$brand.brand_id}" class="btn_edit"><i class="icon icon-edit"></i>编辑</a>
+                                            <a href="javascript:;" onclick="listTable.remove({$brand.brand_id}, '{$lang.drop_confirm}')" class="btn_trash"><i class="icon icon-trash"></i>删除</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -119,21 +118,22 @@
 						{if $full_page}
                     </div>
                 </div>
+                <!--商品列表end-->
             </div>
 		</div>
 	</div>
     {include file ='library/pagefooter.lbi'}
 	<script type="text/javascript">
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
-	
-	{foreach from=$filter item=item key=key}
-	listTable.filter.{$key} = '{$item}';
-	{/foreach}
-	
-	$(function(){
-		$('.nyroModal').nyroModal();
-	})	
+	  listTable.recordCount = '{$record_count}';
+	  listTable.pageCount = '{$page_count}';
+
+	  {foreach from=$filter item=item key=key}
+	  listTable.filter.{$key} = '{$item}';
+	  {/foreach}
+	  
+		$(function(){
+			$('.nyroModal').nyroModal();
+		})	
 	</script>
 </body>
 </html>

@@ -4,11 +4,11 @@
  
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.batch} - {$ur_here}</div>
+    	<div class="title">批量 - {$ur_here}</div>
         <div class="content">
             {include file ='library/batch_tab.lbi'}
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
 				{$lang.use_help}
             </div>
             <div class="flexilist">
@@ -28,9 +28,9 @@
                                     <div class="label">{$lang.file_charset}</div>
                                     <div class="label_value">
 										<div id="format" class="imitate_select select_w320">
-											<div class="cite">{$lang.please_select}</div>
+											<div class="cite">请选择</div>
 											<ul>
-												<li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.please_select}</a></li>
+												<li><a href="javascript:;" data-value="0" class="ftx-01">请选择</a></li>
 												{foreach from=$lang_list item=data key=key}
 												<li><a href="javascript:;" data-value="{$key}" class="ftx-01">{$data}</a></li>
 												{/foreach}
@@ -52,7 +52,7 @@
                                         <div class="fl bf100">
                                         	{foreach from=$download_list item=download key=charset}
 												{if $charset eq 'zh_cn'}
-                                                	<a onclick="get_produts_batch('{$charset}', {$goods_id}, {$model}, {$area_id}, {$city_id});" href="javascript:;" class="bule">{$download}</a>
+                                                	<a onclick="get_produts_batch('{$charset}', {$goods_id}, {$model}, {$area_id});" href="javascript:;" class="bule">{$download}</a>
                                                 {/if}
 											{/foreach}
                                         </div>
@@ -97,14 +97,14 @@
 				},
 				messages:{
 					textfile:{
-						required : '<i class="icon icon-exclamation-sign"></i>'+file_null
+						required : '<i class="icon icon-exclamation-sign"></i>请选择上传文件'
 					}
 				}			
 			});
 		});
 		
-		function get_produts_batch(charset, goods_id, model, area_id, city_id){
-			location.href="goods_produts_area_batch.php?act=download&charset=" +charset+ "&goods_id=" +goods_id+ "&model=" + model+ "&area_id=" + area_id+ "&city_id=" + city_id;
+		function get_produts_batch(charset, goods_id, model, area_id){
+			location.href="goods_produts_area_batch.php?act=download&charset=" +charset+ "&goods_id=" +goods_id+ "&model=" + model+ "&area_id=" + area_id;
 		}
 	</script>
 	{/literal}

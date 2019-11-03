@@ -1,6 +1,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-<div class="take_their" id="take_their">
+<div id="take_their">
     <div class="their—tab-nav">
         <ul>
             <li onclick="doSwith311Tab('311')" id="li_311_id" class="tab-nav-item tab-item-selected">指定时间<b></b></li> 

@@ -4,10 +4,10 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$lang.11_system} - {$ur_here}</div>
+    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>系统设置 - {$ur_here}</div>
             <div class="content">
             <div class="explanation" id="explanation">
-                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                     <li>获取转移的数据库表内容</li>
                 </ul>
@@ -25,7 +25,7 @@
                                 <div class="label">请选择导入模块：</div>
                                 <div class="label_value">
                                     <div id="suppliers_id" class="imitate_select select_w120">
-                                        <div class="cite">{$lang.please_select}</div>
+                                        <div class="cite">请选择</div>
                                         <ul>
                                             <li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.select_please}</a></li>
                                            
@@ -89,6 +89,11 @@
 <script type="Text/Javascript" language="JavaScript">
 <!--
 {literal}
+onload = function()
+{
+    // 开始检查订单
+    startCheckOrder();
+}
 
 var restart = 1;
 /**

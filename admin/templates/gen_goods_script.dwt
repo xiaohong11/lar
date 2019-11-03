@@ -7,11 +7,11 @@
     	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.info.0}</li>
-                    <li>{$lang.operation_prompt_content.info.1}</li>
-                    <li>{$lang.operation_prompt_content.info.2}</li>
+                	<li>上架，当商品处于非上架状态时，前台将不能浏览该商品，店主可控制商品上架状态。</li>
+                    <li>违规下架，当商品处于违规下架状态时，前台将不能购买该商品，只有管理员可控制商品违规下架状态，并且商品只有重新编辑后才能上架。</li>
+                    <li>设置项中可以查看商品详细、查看商品SKU。查看商品详细，跳转到商品详细页。查看商品SKU，显示商品的SKU、图片、价格、库存信息。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -25,7 +25,7 @@
                                         <div class="search_select">
                                             <div class="categorySelect">
                                                 <div class="selection">
-                                                    <input type="text" name="category_name" id="category_name" class="text w250 valid" value="{$lang.select_cat}" autocomplete="off" readonly data-filter="cat_name" />
+                                                    <input type="text" name="category_name" id="category_name" class="text w250 valid" value="请选择分类" autocomplete="off" readonly data-filter="cat_name" />
                                                     <input type="hidden" name="category" id="category_id" value="0" data-filter="cat_id" />
                                                 </div>
                                                 <div class="select-container" style="display:none;">
@@ -41,7 +41,7 @@
                                         <div class="search_select">
                                             <div class="brandSelect">
                                                 <div class="selection">
-                                                    <input type="text" name="brand_name" id="brand_name" class="text w120 valid" {$lang.select_barnd} autocomplete="off" readonly data-filter="brand_name" />
+                                                    <input type="text" name="brand_name" id="brand_name" class="text w120 valid" value="请选择品牌" autocomplete="off" readonly data-filter="brand_name" />
                                                     <input type="hidden" name="brand" id="brand_id" value="0" data-filter="brand_id" />
                                                 </div>
                                                 <div class="brand-select-container" style="display:none;">
@@ -55,7 +55,7 @@
                                     <div class="label">{$lang.label_intro_type}</div>
                                     <div class="label_value">
 										<div id="" class="imitate_select select_w320">
-											<div class="cite">{$lang.please_select}</div>
+											<div class="cite">请选择</div>
 											<ul>
 												<li><a href="javascript:;" data-value="all" class="ftx-01">{$lang.all_intro_type}</a></li>
 												{foreach from=$intro_list item=data key=key}
@@ -70,7 +70,7 @@
                                     <div class="label">{$lang.label_need_image}</div>
                                     <div class="label_value">
 										<div id="" class="imitate_select select_w320">
-											<div class="cite">{$lang.please_select}</div>
+											<div class="cite">请选择</div>
 											<ul>
 												<li><a href="javascript:;" data-value="true" class="ftx-01">{$lang.need}</a></li>
 												<li><a href="javascript:;" data-value="false" class="ftx-01">{$lang.need_not}</a></li>
@@ -89,7 +89,7 @@
                                     <div class="label">{$lang.label_arrange}</div>
                                     <div class="label_value">
 										<div id="" class="imitate_select select_w320">
-											<div class="cite">{$lang.please_select}</div>
+											<div class="cite">请选择</div>
 											<ul>
 												<li><a href="javascript:;" data-value="h" class="ftx-01">{$lang.horizontal}</a></li>
 												<li><a href="javascript:;" data-value="v" class="ftx-01">{$lang.verticle}</a></li>
@@ -108,7 +108,7 @@
                                     <div class="label">{$lang.label_charset}</div>
                                     <div class="label_value">
 										<div id="" class="imitate_select select_w320">
-											<div class="cite">{$lang.please_select}</div>
+											<div class="cite">请选择</div>
 											<ul>
 												{foreach from=$lang_list item=data key=key}
 												<li><a href="javascript:;" data-value="{$key}" class="ftx-01">{$data}</a></li>
@@ -144,7 +144,8 @@
 		</div>
     </div>
 	{include file ='library/pagefooter.lbi'}
-	<script type="text/javascript">
+	{literal}
+	<script language="JavaScript">
 		var elements = document.forms['theForm'].elements;
 		var url = '{$url}';
 		/**
@@ -203,5 +204,6 @@
 			}
 		}
 	</script>
+	{/literal}
 </body>
 </html>

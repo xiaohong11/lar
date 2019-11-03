@@ -7,7 +7,7 @@
     	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                 	<li>上架，当商品处于非上架状态时，前台将不能浏览该商品，店主可控制商品上架状态。</li>
                     <li>违规下架，当商品处于违规下架状态时，前台将不能购买该商品，只有管理员可控制商品违规下架状态，并且商品只有重新编辑后才能上架。</li>
@@ -58,7 +58,7 @@
     </div>
  	{include file ='library/pagefooter.lbi'}
 	{literal}
-	<script type="text/javascript">
+	<script language="JavaScript">
 	function searchGoods()
 	{
 	  var filter = new Object;

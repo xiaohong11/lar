@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 {include file ='library/seller_html_head.lbi'}
+{insert_scripts files='./sms/sms.js'}
 </head>
 
 <body>
@@ -22,7 +23,7 @@
                 </div>
                 
                 <div class="ecsc-form-goods">
-                <form method="post" action="merchants_commission.php" name="listForm" id="submitForm">
+                <form method="post" action="merchants_commission.php" name="listForm">
                 <div class="wrapper-list">
                 	<dl>
                     	<dt>账单编号：</dt>
@@ -62,7 +63,7 @@
                     <dl>
                     	<dt>本期应结：</dt>
                         <dd class="txtline red">
-                        	{if $bill.settle_accounts > 0}{$bill.should_amount}【总额】 - {$bill.settle_accounts}【已结】 = {/if}{$bill.format_should_amount}{if $bill.settle_accounts > 0}【实结】{/if}
+                        	{if $bill.settle_accounts > 0}{$bill.should_amount}【总额】 - {$bill.settle_accounts}【已结】 = {/if}{$bill.format_should_amount}【实结】
                         </dd>
                     </dl>
                     {if $bill.frozen_money}
@@ -166,20 +167,5 @@
     </div>
 </div>
 {include file ='library/seller_footer.lbi'}
-<script type="text/javascript">
-$(function(){
-	//避免表单重复提交
-	var btn = document.getElementById("query");
-
-	btn.onclick = function(){     
-		//验证表单重复提交
-		if(checkSubmit() == true){
-			$(this).parents("form").submit();
-		}else{
-			return false;
-		}
-	};
-});
-</script>
 </body>
 </html>

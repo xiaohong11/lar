@@ -53,6 +53,5 @@ function deleteCollectGoods(col_id)
 function return_CollectGoods(result)
 {
 	$(".pop_panel").html(result.content);
-	tbplHeigth();
 }
 </script>

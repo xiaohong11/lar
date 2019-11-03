@@ -1,11 +1,13 @@
+
 {if $full_page}
+
 <!doctype html>
 <html>
 <head>{include file ='library/admin_html_head.lbi'}</head>
 
 <body class="iframe_body">
 <div class="warpper">
-    <div class="title">{$lang.report_form} - 会员统计</div>
+    <div class="title">报表 - 会员统计</div>
     <div class="content">
         <div class="tabs_info">
             <ul>
@@ -14,10 +16,9 @@
             </ul>
         </div>
         <div class="explanation" id="explanation">
-            <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
             <ul>
                 <li>搜索某个时间段的会员消费统计排行榜。</li>
-                <li>统计的订单都是会员确认收货后的订单</li>
             </ul>
         </div>
         <div class="flexilist mt30">
@@ -39,7 +40,7 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="query_result mt20">
+                        <div class="query_result mt30">
                             <div class="common-head">
                                 <div class="fl">
                                     <div class="fbutton m0"><div class="csv" title="导出数据"><span><i class="icon icon-download-alt"></i>导出列表</span></div></div>
@@ -122,11 +123,13 @@
 
     //日期选择插件调用start sunle
     var opts1 = {
+        'hms':'off',
         'targetId':'start_date',//时间写入对象的id
         'triggerId':['start_date'],//触发事件的对象id
         'alignId':'text_time1',//日历对齐对象
         'format':'-'//时间格式 默认'YYYY-MM-DD HH:MM:SS'
     },opts2 = {
+        'hms':'off',
         'targetId':'end_date',
         'triggerId':['end_date'],
         'alignId':'text_time2',

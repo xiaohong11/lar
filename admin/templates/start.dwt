@@ -5,36 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link href="css/main.css" rel="stylesheet" type="text/css" />
 <link href="css/purebox.css" rel="stylesheet" type="text/css">
-<link href="../js/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css">
+<link href="js/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css">
 <link href="../js/perfect-scrollbar/perfect-scrollbar.min.css" rel="stylesheet" type="text/css">
-{insert_scripts files="../js/jquery-1.9.1.min.js,../js/jquery.json.js,../js/transport_jquery.js,../js/jquery.cookie.js,../js/perfect-scrollbar/perfect-scrollbar.min.js,../js/jquery-ui/jquery-ui.min.js,common.js,dsc_admin2.0.js"}
+{insert_scripts files="../js/jquery-1.9.1.min.js,../js/jquery.json.js,../js/transport_jquery.js,../js/jquery.cookie.js"}
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/dsc_admin2.0.js"></script>
+<script type="text/javascript" src="js/jquery-ui/jquery-ui.min.js"></script>
 </head>
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.01_admin_core}</div>
+    	<div class="title">管理中心</div>
         <div class="content start_content">
-        	{if !$phone_num && !$user_name && !$email && !$oss}
-        	<div class="contentWarp">
-            	<div class="explanation" id="explanation">
-                	<div class="ex_tit"><h4>{$lang.system_setup}</h4></div>
-                    <div class="ex_con">
-						{if !$phone_num && !$user_name}
-                    	<span>{$lang.message_setup}<a href="sms_setting.php?act=step_up">{$lang.goto_setup}</a></span>
-						{/if}
-						{if !$email}
-                        <span>{$lang.email_setup}<a href="shop_config.php?act=mail_settings">{$lang.goto_setup}</a></span>
-						{/if}
-						{if !$pay}
-                        <span>{$lang.pay_setup}<a href="payment.php?act=list">{$lang.goto_setup}</a></span>
-						{/if}
-						{if !$oss}
-                        <span>{$lang.oss_setup}<a href="oss_configure.php?act=list">{$lang.goto_setup}</a></span>
-						{/if}
-                    </div>
-                </div>
-            </div>
-            {/if}
             <div class="contentWarp">
                 <div class="contentWarp_item clearfix">
                     <div class="section_select">
@@ -42,8 +24,8 @@
                         <div class="item item_price">
                             <i class="icon"><img src="images/1.png" width="71" height="74" /></i>
                             <div class="desc">
-                                <div class="tit"><!--{if $today.formatted_money}-->{$today.formatted_money|default:0.00}<!--{/if}--></div>
-                                <span>{$lang.today_stats_total}</span>
+                                <div class="tit"><!--{if $today.formatted_money}-->{$today.formatted_money}<!--{else}-->0.00<!--{/if}--></div>
+                                <span>今日销售总额</span>
                             </div>
                         </div>
 						{/if}
@@ -52,7 +34,7 @@
                             <i class="icon"><img src="images/2.png" /></i>
                             <div class="desc">
                                 <div class="tit">{$today.order}</div>
-                                <span>{$lang.today_order_number}</span>
+                                <span>今日订单总数</span>
                             </div>
                             <i class="icon"></i>
                         </div>
@@ -62,7 +44,7 @@
                             <i class="icon"><img src="images/3.png" width="90" height="86" /></i>
                             <div class="desc">
                                 <div class="tit">{$today_comment_number}</div>
-                                <span>{$lang.today_comment}</span>
+                                <span>今日评论数</span>
                             </div>
                         </div>
 						{/if}
@@ -71,7 +53,7 @@
                             <i class="icon"><img src="images/4.png" width="86" /></i>
                             <div class="desc">
                                 <div class="tit">{$seller_num}</div>
-                                <span>{$lang.seller_number}</span>
+                                <span>店铺数量</span>
                             </div>
                             <i class="icon"></i>
                         </div>
@@ -81,25 +63,25 @@
                     <div class="section user_section">
                         <div class="sc_title">
                             <i class="sc_icon"></i>
-                            <h3>{$lang.user_name_info}</h3>
-                            <cite>{$lang.company_ge}</cite>
+                            <h3>个人会员信息</h3>
+                            <cite>（单位：个）</cite>
                         </div>
                         <div class="sc_warp">
                             <div class="user_item user_today_new">
                                 <div class="num">{$today_user_number}</div>
-                                <span class="tit">{$lang.today_user_number}</span>
+                                <span class="tit">今日新增</span>
                             </div>
                             <div class="user_item user_yest_new">
                                 <div class="num">{$yesterday_user_number}</div>
-                                <span class="tit">{$lang.yesterday_user_number}</span>
+                                <span class="tit">昨日新增</span>
                             </div>
                             <div class="user_item user_month_new">
                                 <div class="num">{$month_user_number}</div>
-                                <span class="tit">{$lang.month_user_number}</span>
+                                <span class="tit">本月新增</span>
                             </div>
                             <div class="user_item user_total">
                                 <div class="num">{$user_number}</div>
-                                <span class="tit">{$lang.user_number}</span>
+                                <span class="tit">会员总数</span>
                             </div>
                         </div>
                     </div>
@@ -108,22 +90,22 @@
                     <div class="section goods_section">
                         <div class="sc_title">
                             <i class="sc_icon"></i>
-                            <h3>{$lang.goods_yilan}</h3>
-                            <cite>{$lang.company_jian}</cite>
+                            <h3>商品一览</h3>
+                            <cite>（单位：件）</cite>
                         </div>
                         <div class="sc_warp">
                             <div class="goods_item">
-                                <div class="tit">{$lang.self_goods}</div>
+                                <div class="tit">自营商品</div>
                                 <div class="number">
-                                    <div class="st">{$lang.goods_state.0}：<a href="goods.php?act=list&self=1">{$platform_real_goods_number}</a></div>
-                                    <div class="xn">{$lang.goods_state.1}：<a href="goods.php?act=list&extension_code=virtual_card&self=1">{$platform_virtual_goods_number}</a></div>
+                                    <div class="st">实体：<a href="goods.php?act=list&self=1">{$platform_real_goods_number}</a></div>
+                                    <div class="xn">虚拟：<a href="goods.php?act=list&extension_code=virtual_card&self=1">{$platform_virtual_goods_number}</a></div>
                                 </div>
                             </div>
                             <div class="goods_item">
-                                <div class="tit">{$lang.seller_goods}</div>
+                                <div class="tit">商家商品</div>
                                 <div class="number">
-                                    <div class="st">{$lang.goods_state.0}：<a href="goods.php?act=list&merchants=1">{$merchants_real_goods_number}</a></div>
-                                    <div class="xn">{$lang.goods_state.1}：<a href="goods.php?act=list&extension_code=virtual_card&merchants=1">{$merchants_virtual_goods_number}</a></div>
+                                    <div class="st">实体：<a href="goods.php?act=list&merchants=1">{$merchants_real_goods_number}</a></div>
+                                    <div class="xn">虚拟：<a href="goods.php?act=list&extension_code=virtual_card&merchants=1">{$merchants_virtual_goods_number}</a></div>
                                 </div>
                             </div>
                         </div>
@@ -135,52 +117,52 @@
                     <div class="section_order_select">
                         <ul>
                             <li>
-                                <a href="javascript:void(0);" data-url="order.php?act=list&seller_list=0&serch_type=0" data-param="menushopping|02_order_list" ectype="iframeHref">
+                                <a href="order.php?act=list&composite_status={$status.unconfirmed}&source=start">
                                     <i class="ice ice_w"></i>
                                     <div class="t">{$lang.unconfirmed}</div>
-                                    <span class="number">{$order.unconfirmed|default:0}</span>
+                                    <span class="number">{$order.unconfirmed}</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);" data-url="order.php?act=list&seller_list=0&serch_type=1" data-param="menushopping|02_order_list" ectype="iframeHref">
+                                <a href="order.php?act=list&composite_status={$status.await_pay}&source=start">
                                     <i class="ice ice_d"></i>
                                     <div class="t">{$lang.await_pay}</div>
-                                    <span class="number">{$order.await_pay|default:0}</span>
+                                    <span class="number">{$order.await_pay}</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);" data-url="order.php?act=list&seller_list=0&serch_type=8" data-param="menushopping|02_order_list" ectype="iframeHref">
+                                <a href="order.php?act=list&composite_status={$status.await_ship}&source=start">
                                     <i class="ice ice_n"></i>
                                     <div class="t">{$lang.await_ship}</div>
-                                    <span class="number">{$order.await_ship|default:0}</span>
+                                    <span class="number">{$order.await_ship}</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);" data-url="order.php?act=list&composite_status={$status.finished}&source=start" data-param="menushopping|02_order_list" ectype="iframeHref">
+                                <a href="order.php?act=list&composite_status={$status.finished}&source=start">
                                     <i class="ice ice_f"></i>
                                     <div class="t">{$lang.finished}</div>
-                                    <span class="number">{$order.finished|default:0}</span>
+                                    <span class="number">{$order.finished}</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);" data-url="goods_booking.php?act=list_all" data-param="menushopping|06_undispose_booking" ectype="iframeHref">
+                                <a href="goods_booking.php?act=list_all">
                                     <i class="ice ice_y"></i>
                                     <div class="t">{$lang.new_booking}</div>
-                                    <span class="number">{$booking_goods|default:0}</span>
+                                    <span class="number">{$booking_goods}</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);" data-url="order.php?act=list&composite_status={$status.shipped_part}&source=start" data-param="menushopping|02_order_list" ectype="iframeHref">
+                                <a href="order.php?act=list&composite_status={$status.shipped_part}&source=start">
                                     <i class="ice ice_q"></i>
                                     <div class="t">{$lang.shipped_part}</div>
-                                    <span class="number">{$order.shipped_part|default:0}</span>
+                                    <span class="number">{$order.shipped_part}</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);" data-url="user_account.php?act=list&process_type=1&is_paid=1" data-param="menuplatform|09_user_account" ectype="iframeHref">
+                                <a href="user_account.php?act=list&process_type=1&is_paid=0">
                                     <i class="ice ice_b"></i>
                                     <div class="t">{$lang.new_reimburse}</div>
-                                    <span class="number">{$new_repay|default:0}</span>
+                                    <span class="number">{$new_repay}</span>
                                 </a>
                             </li>
                         </ul>
@@ -191,11 +173,11 @@
                     <div class="section section_order_count">
                     	<div class="sc_title">
                             <i class="sc_icon"></i>
-                            <h3>{$lang.order_stats}</h3>
+                            <h3>订单统计</h3>
 							<div class="filter_date">
-								<a href="javascript:;" onclick="set_statistical_chart(this, 'order', 'week')">{$lang.week}</a>
-								<a href="javascript:;" onclick="set_statistical_chart(this, 'order', 'month')">{$lang.month}</a>
-								<a href="javascript:;" onclick="set_statistical_chart(this, 'order', 'year')">{$lang.year}</a>
+								<a href="javascript:;" onclick="set_statistical_chart(this, 'order', 'week')">七天</a>
+								<a href="javascript:;" onclick="set_statistical_chart(this, 'order', 'month')">一月</a>
+								<a href="javascript:;" onclick="set_statistical_chart(this, 'order', 'year')">半年</a>
 							</div>
                         </div>
                         <div class="sc_warp">
@@ -207,11 +189,11 @@
                     <div class="section section_total_count">
                     	<div class="sc_title">
                             <i class="sc_icon"></i>
-                            <h3>{$lang.sales_stats}</h3>
+                            <h3>销售统计</h3>
 							<div class="filter_date">
-								<a href="javascript:;" onclick="set_statistical_chart(this, 'sale', 'week')">{$lang.week}</a>
-								<a href="javascript:;" onclick="set_statistical_chart(this, 'sale', 'month')">{$lang.month}</a>
-								<a href="javascript:;" onclick="set_statistical_chart(this, 'sale', 'year')">{$lang.year}</a>
+								<a href="javascript:;" onclick="set_statistical_chart(this, 'sale', 'week')">七天</a>
+								<a href="javascript:;" onclick="set_statistical_chart(this, 'sale', 'month')">一月</a>
+								<a href="javascript:;" onclick="set_statistical_chart(this, 'sale', 'year')">半年</a>
 							</div>							
                         </div>
                         <div class="sc_warp">
@@ -226,56 +208,56 @@
             	<div class="section col_section">
                 	<div class="sc_title">
                         <i class="sc_icon"></i>
-                        <h3>{$lang.control_panel}</h3>
+                        <h3>控制面板</h3>
                     </div>
                     <div class="sc_warp">
                     	<div class="item_section item_section_frist">
-                        	<div class="section_header">{$lang.shopping_management}</div>
+                        	<div class="section_header">商城管理</div>
                             <div class="section_body">
                             	<dl>
-                                	<dt>{$lang.shopping_index}：</dt>
+                                	<dt>商城首页：</dt>
                                     <dd><a href="{$ecs_url}" target="_blank">{$ecs_url}</a></dd>
                                 </dl>
                                 <dl>
-                                	<dt>{$lang.admin}：</dt>
+                                	<dt>平台后台：</dt>
                                     <dd><a href="{$ecs_url}admin" target="_blank">{$ecs_url}admin</a></dd>
                                 </dl>
                                 <dl>
-                                	<dt>{$lang.seller}：</dt>
+                                	<dt>商家后台：</dt>
                                     <dd><a href="{$ecs_url}seller" target="_blank">{$ecs_url}seller</a></dd>
                                 </dl>
                                 <dl>
-                                	<dt>{$lang.stores}：</dt>
+                                	<dt>门店后台：</dt>
                                     <dd><a href="{$ecs_url}stores" target="_blank">{$ecs_url}stores</a></dd>
                                 </dl>
                                 <dl>
-                                	<dt>{$lang.mobile}：</dt>
+                                	<dt>WAP首页：</dt>
                                     <dd><a href="{$ecs_url}mobile" target="_blank">{$ecs_url}mobile</a></dd>
                                 </dl>
                             </div>
                         </div>
                         <div class="item_section">
-                        	<div class="section_header">{$lang.customer_service}</div>
+                        	<div class="section_header">客户服务</div>
                             <div class="section_body">
                             	<dl>
-                                	<dt>{$lang.customer_service_tel}：</dt>
+                                	<dt>客服电话：</dt>
                                     <dd>4001-021-758</dd>
                                 </dl>
                                 <dl>
-                                	<dt>{$lang.customer_service_qq}：</dt>
+                                	<dt>客服 QQ：</dt>
                                     <dd><a href="http://crm2.qq.com/page/portalpage/wpa.php?uin=800007167&aty=0&a=0&curl=&ty=1" target="_blank">800007167</a></dd>
                                 </dl>
                                 <dl>
-                                	<dt>{$lang.community}：</dt>
+                                	<dt>问答反馈：</dt>
                                     <dd><a href="http://wenda.ecmoban.com" target="_blank">http://wenda.ecmoban.com</a></dd>
                                 </dl>
                                 <dl>
-                                	<dt>{$lang.dscmall}：</dt>
-                                    <dd><a href="http://www.dscmall.cn" target="_blank">http://www.dscmall.cn</a></dd>
+                                	<dt>官方网站：</dt>
+                                    <dd><a href="http://www.ecmoban.com" target="_blank">http://www.ecmoban.com</a></dd>
                                 </dl>
                                 <dl>
-                                	<dt>{$lang.dacmall_qq}：</dt>
-                                    <dd>{$lang.dacmall_qq_content}</dd>
+                                	<dt>大商创官网：</dt>
+                                    <dd><a href="http://www.dscmall.cn" target="_blank">http://www.dscmall.cn</a></dd>
                                 </dl>
                             </div>
                         </div>
@@ -290,7 +272,7 @@
                         <div class="sc_title">
                             <i class="sc_icon"></i>
                             <h3>{$lang.system_info}</h3>
-                            <span class="stop stop_jia" title="{$lang.unfold_the_details}"></span>
+                            <span class="stop stop_jia" title="展开详情"></span>
                         </div>
                         <div class="sc_warp">
                             <table cellpadding="0" cellspacing="0" class="system_table">
@@ -332,7 +314,7 @@
                                 </tr>
                                 <tr>
                                     <td class="gray_bg">{$lang.ecs_version}</td>
-                                    <td>{$ecs_version} RELEASE {$ecs_release} <a href="upgrade.php?act=index">[在线升级]</a></td>
+                                    <td>{$ecs_version} RELEASE {$ecs_release}</td>
                                     <td class="gray_bg">{$lang.install_date}</td>
                                     <td>{$install_date}</td>
                                 </tr>
@@ -350,46 +332,12 @@
 			{/if}
         </div>
     </div>
-    <div class="guide_dialog" ectype="guide_dialog" style="display:none;">
-        <div class="guide_content" ectype="guide_content">
-        	<div class="guide_step">
-            	<div class="item current">
-                	<h2>{$lang.novice_guide_step_0}</h2>
-                	<div class="spliy">••••••••••••••••<i class="gicon"></i></div>
-                </div>
-                <div class="item">
-                	<h2>{$lang.novice_guide_step_1}</h2>
-                    <div class="spliy">••••••••••••••••<i class="gicon"></i></div>
-                </div>
-                <div class="item">
-                	<h2>{$lang.novice_guide_step_2}</h2>
-                    <div class="spliy">••••••••••••••••<i class="gicon"></i></div>
-                </div>
-                <div class="item">
-                	<h2>{$lang.novice_guide_step_3}</h2>
-                </div>
-            </div>
-            <div class="guide_list">
-                <div class="guide_item guide_one"><a href="shop_config.php?act=list_edit" target="_blank"><img src="images/guide/guide_img_1.jpg" /></a></div>
-                <div class="guide_item guide_two" style="display:none;"><a href="index.php?act=clear_cache" target="_blank"><img src="images/guide/guide_img_2.jpg" /></a></div>
-                <div class="guide_item guide_three" style="display:none;"><a href="goods.php?act=step_up" target="_blank" class="a_left"></a><a href="merchants_steps.php?act=step_up" target="_blank" class="a_right"></a><img src="images/guide/guide_img_3.jpg" /></div>
-                <div class="guide_item guide_four" style="display:none;"><a href="visualhome.php?act=list" target="_blank" class="a_top"></a><a href="../mobile/index.php?r=admin/editor" target="_blank" class="a_bot"></a><img src="images/guide/guide_img_4.jpg" /></div>
-            </div>
-            <div class="guide_btn" data-type="0">
-                <a href="javascript:void(0);" class="btn_next" ectype="btnNext">{$lang.novice_guide_step_next}</a>
-                <a href="javascript:void(0);" class="btn_prev btn_disabled" ectype="btnPrev">{$lang.novice_guide_step_prev}</a>
-            </div>
-        </div>
-    </div>
  	{include file ='library/pagefooter.lbi'}
-    {insert_scripts files="../js/echarts-all.js"}
+    {insert_scripts files="jquery.purebox.js,../js/echarts-all.js"}
+    <script type="text/javascript" src=""></script>
     <script type="text/javascript">
-        if($(".section_order_count").length > 0){
-            set_statistical_chart(".section_order_count .filter_date a:first", "order", "week"); //初始设置
-        }
-        if($(".section_total_count").length > 0){
-            set_statistical_chart(".section_total_count .filter_date a:first", "sale", "week"); //初始设置
-        }
+		set_statistical_chart(".section_order_count .filter_date a:first", "order", "week"); //初始设置
+		set_statistical_chart(".section_total_count .filter_date a:first", "sale", "week"); //初始设置
 		function set_statistical_chart(obj, type, date)
 		{
 			var obj = $(obj);
@@ -416,77 +364,6 @@
 		
 		//展开收起系统信息
 		$.upDown(".stop",".sc_title",".system_section",73);
-
-		$(function(){
-			if($.cookie('adminStartHome') == null){
-				var content = $("*[ectype='guide_dialog']").html();
-				pb({
-					id:"guide_dialog",
-					title:"{$lang.novice_guide}",
-					width:960,
-					height:550,
-					content:content,
-					drag:false,
-					foot:false
-				});
-				
-				$("#guide_dialog .guide_list").perfectScrollbar("destroy");
-				$("#guide_dialog .guide_list").perfectScrollbar();
-				
-				$("*[ectype='btnNext']").on("click",function(){
-					if(!$(this).hasClass("btn_disabled")){
-						var type = $(this).parents(".guide_btn").data("type");
-						var g_con = $(this).parents("*[ectype='guide_content']");
-						
-						g_con.find(".guide_step .item").eq(type+1).addClass("current").siblings().removeClass("current");
-						g_con.find(".guide_list .guide_item").eq(type+1).show().siblings().hide();
-						
-						$(this).parents(".guide_btn").data("type",type+1);
-						$(this).siblings("*[ectype='btnPrev']").removeClass("btn_disabled");
-		
-						if(type == 2){
-							$(this).addClass("btn_disabled");
-							$(this).html(novice_guide_step_hint);
-						}else{
-							$(this).removeClass("btn_disabled");
-							$(this).html(novice_guide_step_next);
-						}
-						
-						$("#guide_dialog .guide_list").perfectScrollbar("destroy");
-						$("#guide_dialog .guide_list").perfectScrollbar();
-					}else{
-						$("#guide_dialog,#pb-mask").remove();
-						
-					}
-				});
-				
-				$("*[ectype='btnPrev']").on("click",function(){
-					if(!$(this).hasClass("btn_disabled")){
-						var type = $(this).parents(".guide_btn").data("type");
-						var g_con = $(this).parents("*[ectype='guide_content']");
-		
-						g_con.find(".guide_step .item").eq(type-1).addClass("current").siblings().removeClass("current");
-						g_con.find(".guide_list .guide_item").eq(type-1).show().siblings().hide();
-						
-						$(this).parents(".guide_btn").data("type",type-1);
-						$(this).siblings("*[ectype='btnNext']").removeClass("btn_disabled");
-						$(this).siblings("*[ectype='btnNext']").html(novice_guide_step_next);
-		
-						if(type == 1){
-							$(this).addClass("btn_disabled");
-						}else{
-							$(this).removeClass("btn_disabled");
-						}
-						
-						$("#guide_dialog .guide_list").perfectScrollbar("destroy");
-						$("#guide_dialog .guide_list").perfectScrollbar();
-					}
-				});
-				
-				//生成cookie
-				$.cookie('adminStartHome','cookieValue', { expires: 1 ,path:'/'});
-			};
-		});
     </script>
 </body>
 </html>

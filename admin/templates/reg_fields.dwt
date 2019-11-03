@@ -4,26 +4,27 @@
 <head>{include file ='library/admin_html_head.lbi'}</head>
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.11_system} - {$ur_here}</div>
+    	<div class="title">系统设置 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
             	<div class="ex_tit">
-					<i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span>
+					<i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span>
                     {if $open eq 1}
                     <div class="view-case">
-                    	<div class="view-case-tit"><i></i>{$lang.view_tutorials}</div>
+                    	<div class="view-case-tit"><i></i>查看教程</div>
                         <div class="view-case-info">
-                        	<a href="http://help.ecmoban.com/article-6876.html" target="_blank">{$lang.tutorials_bonus_list_one}</a>
+                        	<a href="http://help.ecmoban.com/article-6876.html" target="_blank">商城会员注册项设置</a>
                         </div>
                     </div>			
                     {/if}	
 				</div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.list.0}</li>
-                    <li>{$lang.operation_prompt_content.list.1}</li>
+                	<li>该页面展示了会员注册项相关信息。</li>
+                    <li>可在列表页点击是否显示和是否必填。</li>
                 </ul>
             </div>
             <div class="flexilist">
+            	<!--商品分类列表-->
                 <div class="common-head">
                     <div class="fl">
                     	<a href="{$action_link.href}"><div class="fbutton"><div class="add" title="{$action_link.text}"><span><i class="icon icon-plus"></i>{$action_link.text}</span></div></div></a>
@@ -53,7 +54,7 @@
                                     </td>
                                     <td>
                                     	<div class="tDiv">
-                                            <div class="switch {if $field.display eq 1}active{/if}" title="{if $field.display eq 1}{$lang.yes}{else}{$lang.no}{/if}" onclick="listTable.switchBt(this, 'toggle_dis', {$field.id})">
+                                            <div class="switch {if $field.display eq 1}active{/if}" title="{if $field.display eq 1}是{else}否{/if}" onclick="listTable.switchBt(this, 'toggle_dis', {$field.id})">
                                             	<div class="circle"></div>
                                             </div>
                                             <input type="hidden" value="0" name="">
@@ -61,7 +62,7 @@
                                     </td>
                                     <td>
                                     	<div class="tDiv">
-                                            <div class="switch {if $field.is_need eq 1}active{/if}" title="{if $field.is_need eq 1}{$lang.yes}{else}{$lang.no}{{/if}" onclick="listTable.switchBt(this, 'toggle_need', {$field.id})">
+                                            <div class="switch {if $field.is_need eq 1}active{/if}" title="{if $field.is_need eq 1}是{else}否{/if}" onclick="listTable.switchBt(this, 'toggle_need', {$field.id})">
                                             	<div class="circle"></div>
                                             </div>
                                             <input type="hidden" value="0" name="">
@@ -71,7 +72,7 @@
                                         <div class="tDiv a2">
                                             <a href="?act=edit&id={$field.id}" title="{$lang.edit}" class="btn_edit"><i class="icon icon-edit"></i>{$lang.edit}</a>
                                             {if $field.type eq 0}
-                                            <a href="javascript:;" onclick="listTable.remove({$field.id}, '{$lang.drop_confirm}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                            <a href="javascript:;" onclick="listTable.remove({$field.id}, '{$lang.drop_confirm}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>
                                             {/if}
                                         </div>
                                     </td>
@@ -84,10 +85,11 @@
                         {if $full_page}
                     </div>
                 </div>
+                <!--商品分类列表end-->
             </div>
 		</div>
 	</div>   
-	{include file ='library/pagefooter.lbi'}
+ {include file ='library/pagefooter.lbi'}
 </body>
 </html>
 {/if}

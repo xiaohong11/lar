@@ -4,14 +4,14 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$lang.11_system} - {$ur_here}</div>
+    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>系统设置 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content_common}</li>
-                	<li>{$lang.operation_prompt_content.info.0}</li>
-                	<li>{$lang.operation_prompt_content.info.1}</li>
+                	<li>请先选择系统已有的内容进行添加。</li>
+                    <li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
+                    <li>请注意填写根目录下的相对链接地址。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -23,10 +23,10 @@
                                     <div class="label">{$lang.system_main}：</div>
                                     <div class="label_value">
 										<div id="" class="imitate_select select_w320">
-											<div class="cite">{$lang.please_select}</div>
+											<div class="cite">请选择</div>
 											<ul>
 												<li><a href="javascript:add_main('-');" class="add_category" data-value="-1" class="ftx-01">-</a></li>
-                                                <li><a href="javascript:;" class="add_category" data-value="-2" class="ftx-01">{$lang.03_category_manage}</a></li>
+                                                <li><a href="javascript:;" class="add_category" data-value="-2" class="ftx-01">商品分类</a></li>
 												{foreach from=$sysmain item=val key=key}
 												<li><a href="javascript:add_main('{$key}');" class="add_category" data-value="{$key}" class="ftx-01">{if $val.2}{$val.2}{else}{$val.0}{/if}</a></li>
 												{/foreach}
@@ -41,7 +41,7 @@
                                         <div class="search_select">
                                             <div class="categorySelect">
                                                 <div class="selection">
-                                                    <input type="text" name="category_name" id="category_name" class="text w250 valid" value="{$lang.select_cat}" autocomplete="off" readonly data-filter="cat_name" />
+                                                    <input type="text" name="category_name" id="category_name" class="text w250 valid" value="请选择分类" autocomplete="off" readonly data-filter="cat_name" />
                                                     <input type="hidden" name="category_id" id="category_id" value="0" data-filter="cat_id" />
                                                 </div>
                                                 <div class="select-container" style="display:none;">
@@ -76,12 +76,12 @@
                                     <div class="label">{$lang.item_ifshow}：</div>
                                     <div class="label_value">
 										<div id="" class="imitate_select select_w120">
-											<div class="cite">{$lang.please_select}</div>
+											<div class="cite">请选择</div>
 											<ul>
 												<li><a href="javascript:;" data-value="1" class="ftx-01">{$lang.yes}</a></li>
 												<li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.no}</a></li>
 											</ul>
-											<input name="item_ifshow" type="hidden" value="{$rt.ifshow}" id="">
+											<input name="item_ifshow" type="hidden" value="{$rt.ifshow|default:1}" id="">
 										</div>										
                                     </div>
                                 </div>
@@ -89,7 +89,7 @@
                                     <div class="label">{$lang.item_opennew}：</div>
                                     <div class="label_value">
 										<div id="" class="imitate_select select_w120">
-											<div class="cite">{$lang.please_select}</div>
+											<div class="cite">请选择</div>
 											<ul>
 												<li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.no}</a></li>
 												<li><a href="javascript:;" data-value="1" class="ftx-01">{$lang.yes}</a></li>
@@ -102,7 +102,7 @@
                                     <div class="label">{$lang.item_type}：</div>
                                     <div class="label_value">
 										<div id="" class="imitate_select select_w120">
-											<div class="cite">{$lang.please_select}</div>
+											<div class="cite">请选择</div>
 											<ul>
 												<li><a href="javascript:;" data-value="top" class="ftx-01">{$lang.top}</a></li>
 												<li><a href="javascript:;" data-value="middle" class="ftx-01">{$lang.middle}</a></li>
@@ -188,7 +188,8 @@
 	})
 	
 	var last;
-	function add_main(key){
+	function add_main(key)
+	{
 		var sysm = new Object;
 		{foreach from=$sysmain item=val key=key}
 			sysm[{$key}] = new Array();
@@ -225,8 +226,8 @@
 			document.getElementById('item_url').value = sysm[last-1][1];
 		}
 	}
-	
-	function key(){
+	function key()
+	{
 		last = document.getElementById('menulist').selectedIndex = 0;
 	}
 	</script>

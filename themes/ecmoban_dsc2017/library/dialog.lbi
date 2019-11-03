@@ -18,17 +18,6 @@
             </div>
         </div>
     </div>
-<!-- {elseif $act eq 'goods_rank_prices'} -->
-<dt>
-    <span>{$lang.rank}</span>
-    <span>{$lang.prices}</span>
-</dt>
-<!-- {foreach from=$rank_prices item=rank key=price_key} -->
-<dd>
-    <span>{$rank.rank_name}</span>
-    <span>{$rank.price}</span>
-</dd>
-<!-- {/foreach} -->
 <!--{else}-->
     <!--{foreach from=$regions_list item=list}-->
     <div class="option" data-value="{$list.region_id}" data-type="{$type}" data-text="{$list.region_name}" ectype="ragionItem">{$list.region_name}</div>

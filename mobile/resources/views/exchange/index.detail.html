@@ -4,21 +4,15 @@
     <div class="goods">
         <div class="goods-photo j-show-goods-img">
             <span class="goods-num" id="goods-num"><span id="g-active-num"></span>/<span id="g-all-num"></span></span>
-           <div class="swiper-wrapper my-gallery-box" data-pswp-uid="10">
-						{foreach $goods_img as $goods_img}
-						<figure class="swiper-slide tb-lr-center">
-							<div class="img-box">
-							<a href="{$goods_img.img_url}" data-size="640x640">
-								<img src="{$goods_img.img_url}" />
-							</a>
-						</div>
-						</figure>
-						{/foreach}
-					</div>
+            <div class="swiper-wrapper">
+                {foreach $goods_img as $goods_img}
+                <li class="swiper-slide tb-lr-center"><img src="{$goods_img.img_url}"/></li>
+                {/foreach}
+            </div>
             <div class="swiper-pagination"></div>
         </div>
 
-        <section class="goods-title b-color-f padding-all ">
+        <section class="goods-title b-color-f padding-all "> 
                 <h3>
                 {if empty($goods.user_id)}
                     <em class="em-promotion">自营</em>
@@ -131,7 +125,7 @@
                             </div>
                             <p><span class="p-price t-first class-exchange">{$goods.exchange_integral}</span><em
                                     class="g-p-tthree in-new">积分</em></p>
-                            <p class="dis-box p-t-remark"><span class="box-flex">库存:<font class="goods_attr_num">{$goods.goods_number}</font><span id="measure_unit" >{$goods.measure_unit}</span></span>
+                            <p class="dis-box p-t-remark"><span class="box-flex">库存:<font class="goods_attr_num">{$goods.goods_number}</font> {$goods.measure_unit}</span>
                             </p>
                         </div>
                     </div>
@@ -197,6 +191,11 @@
                     <div class="swiper-scrollbar"></div>
                 </section>
                 <section class="ect-button-more dis-box">
+                    <input type="hidden" value="{$province_row.region_id}" id="province_id" name="province_region_id">
+                    <input type="hidden" value="{$city_row.region_id}" id="city_id" name="city_region_id">
+                    <input type="hidden" value="{if $district_row.region_id}{$district_row.region_id}{else}0{/if}"
+                           id="district_id" name="district_region_id">
+                    <input type="hidden" value="{$region_id}" id="region_id" name="region_id">
                     <input type="hidden" value="{$goods_id}" id="good_id" name="good_id">
                     <input type="hidden" value="{$user_id}" id="user_id" name="user_id">
                     <input type="hidden" value="{$area_id}" id="area_id" name="area_id">
@@ -302,7 +301,7 @@
             {/if}
               <div class="ect-button-more n-ect-button-more m-top10 dis-box goods-shop-btn">
                         {if isset($basic_info.kf_appkey) && !empty($basic_info.kf_appkey)}
-                            <a class="box-flex  btn-default-new br-5 min-btn" href="{url('chat/yunwang/index', array('goods_id'=> $goods.goods_id))}"><i class="iconfont icon-kefu t-first"></i>联系客服</a>
+                            <a class="box-flex  btn-default-new br-5 min-btn" href="{url('chat/index/index', array('goods_id'=> $goods.goods_id))}"><i class="iconfont icon-kefu t-first"></i>联系客服</a>
                         {elseif isset($basic_info.meiqia) && !empty($basic_info.meiqia)}
                             <a class="box-flex  btn-default-new br-5 min-btn" href="https://static.meiqia.com/dist/standalone.html?eid={$basic_info.meiqia}"><i class="iconfont icon-kefu t-first"></i>联系客服</a>
                         {else}
@@ -346,7 +345,7 @@
             <!--悬浮btn star-->
             <section class="filter-btn dis-box">
                       {if isset($basic_info.kf_appkey) && !empty($basic_info.kf_appkey)}
-                    <a class="filter-btn-kefu heart " href="{url('chat/yunwang/index', array('goods_id'=> $goods.goods_id))}"><i class="kefu"></i><em>客服</em></a>
+                    <a class="filter-btn-kefu heart " href="{url('chat/index/index', array('goods_id'=> $goods.goods_id))}"><i class="kefu"></i><em>客服</em></a>
                 {elseif isset($basic_info.meiqia) && !empty($basic_info.meiqia)}
                     <a class="filter-btn-kefu heart" href="https://static.meiqia.com/dist/standalone.html?eid={$basic_info.meiqia}"><i class="kefu"></i><em>客服</em></a>
                 {else}
@@ -355,24 +354,19 @@
                     {else}
                     <a class="filter-btn-kefu heart" href="http://wpa.qq.com/msgrd?v=3&uin={$basic_info.kf_qq}&site=qq&menu=yes"><i class="kefu"></i><em>客服</em></a>
                     {/if}
-                {/if}
+                {/if}   
               <a class="filter-btn-flow  heart j-heart {if $goods_collect}active{/if}" onclick="collect({$goods.goods_id})" id="ECS_COLLECT">
                 <i class="shoucang ts-2"></i>
                 <em>收藏</em>
-              </a>
+              </a>               
                  <a class="btn-disab box-flex quehuo" href="javascript:;" {if $goods.review_status > 2}style="display:none"{/if}>已经兑完</a>
         <button type="sumbit" class="btn-submit box-flex add-to-cart" {if $goods.review_status <= 2}style="display:none"{/if}>立即兑换</button>
             </section>
 
     <!--悬浮btn end-->
     </form>
-</div>
-   {include file="image"}
-    {include file="float_nav"}
-    {include file="float_nav_footer"}
+</div>   
 <script>
-	//相册
-    initPhotoSwipeFromDOM('.my-gallery-box');
     /*商品详情相册切换*/
     var swiper = new Swiper('.goods-photo', {
         paginationClickable: true,
@@ -462,7 +456,7 @@
             }
             var goods_number = $("#goods_number").val();
             goods_number = parseInt(goods_number) ? parseInt(goods_number) : 1;
-            get_text = get_text + goods_number + '{$goods.measure_unit}';
+            get_text = get_text + goods_number + "个";
             $(".j-goods-attr").find(".t-goods1").text(get_text);
             if ($(".goods_attr_num").length > 0){
                 $(".goods_attr_num").html(res.attr_number);

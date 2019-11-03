@@ -10,7 +10,7 @@
             <div class="explanation" id="explanation">
                 <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>显示采购订单列表信息</li>
+                    <li></li>
                 </ul>
             </div>
             <div class="flexilist mt30"  id="listDiv">
@@ -49,8 +49,7 @@
                                     <td>
 										<div class="tDiv relative">
                                             <a href="wholesale_order.php?act=info&order_id={$order.order_id}" class="order_number" id="order_{$order.order_id}" data-orderId="{$order.order_id}">{$order.order_sn}</a>
-											<div class="order_icon_items"><div class="order_icon order_icon_wholesale" title="批发">批发</div></div>
-                                        </div>
+										</div>
 									</td>
                                     <td>
 										<div class="tDiv">
@@ -84,7 +83,7 @@
                                     <td>
                                     	<div class="tDiv">
                                             <div class="fl cl">
-                                            	<span class="fl">{$lang.label_order_amount}</span>
+                                            	<span class="fl">{$lang.label_order_amount}：</span>
                                                 <div class="fl">
                                                     {$order.formated_order_amount}
                                                 </div>
@@ -138,8 +137,8 @@
 <script type="text/javascript" src="js/jquery.purebox.js"></script>
 <script type="text/javascript">
 //分页传值
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
+	listTable.recordCount = '{$record_count}';
+	listTable.pageCount = '{$page_count}';
 
 	{foreach from=$filter item=item key=key}
 	listTable.filter.{$key} = '{$item}';

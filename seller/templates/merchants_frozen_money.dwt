@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 {include file ='library/seller_html_head.lbi'}
+{insert_scripts files='./sms/sms.js'}
 </head>
 
 <body>
@@ -16,7 +17,7 @@
 				{include file ='library/seller_menu_tab.lbi'}
                 {/if}
                 <div class="ecsc-form-goods">
-                <form method="post" action="merchants_account.php" name="listForm" enctype="multipart/form-data" id="submitForm">
+                <form method="post" action="merchants_account.php" name="listForm" onsubmit="return accountCheck();" enctype="multipart/form-data">
                 <div class="wrapper-list">
                 	<dl>
                     	<dt>冻结资金：</dt>
@@ -26,7 +27,6 @@
                     	<dt>{$lang.require_field}&nbsp;申请解冻金额：</dt>
                         <dd>
                         	<input name="frozen_money" type="text" id="topup_account" class="text">
-                            <div class="form_prompt"></div>
                         </dd>
                     </dl>
                     <dl>
@@ -55,41 +55,21 @@
     </div>
 </div>
 <script type="text/javascript">
-$(function(){
-	//表单验证
-	$("#query").click(function(){
-		if($("#submitForm").valid()){
-			//防止表单重复提交
-			if(checkSubmit() == true){
-				$(this).parents("form").submit();
-			}else{
-				return false;
-			}
-        }
-    });
+
+function accountCheck(){
+	var topup_account = $("#topup_account").val();
+	var user_money = $("#seller_money").html();
+	user_money = Number(user_money);
 	
-	$('#submitForm').validate({
-        errorPlacement:function(error, element){
-            var error_div = element.parents('dl').find('div.form_prompt');
-            element.parents('dd').find(".notic").hide();
-            error_div.append(error);
-        },
-        rules : {
-            frozen_money : {
-                required : true,
-				min : 1,
-				max : {$seller_shopinfo.frozen_money}
-            }
-        },
-        messages : {
-            frozen_money : {
-                required : '<i class="icon icon-exclamation-sign"></i>'+frozen_money_not_null,
-				min:'<i class="icon icon-exclamation-sign"></i>'+number_is_0,
-				max : '<i class="icon icon-exclamation-sign"></i>'+frozen_money_is_seller_money,
-            }
-        }
-    });
-});
+	if(topup_account == ''){
+		alert("解冻金额不能为空");
+		return false;
+	}else if(topup_account > user_money){
+		alert("解冻金额不能大于您当前冻结资金");
+		return false;
+	}
+	return true;
+}
 </script>
 {include file ='library/seller_footer.lbi'}
 </body>

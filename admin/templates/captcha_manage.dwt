@@ -4,24 +4,24 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.11_system} - {$ur_here}</div>
+    	<div class="title">系统设置 - {$ur_here}</div>
             <div class="content">
             <div class="explanation" id="explanation">
             	<div class="ex_tit">
-					<i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span>
+					<i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span>
                     {if $open eq 1}
                     <div class="view-case">
-                    	<div class="view-case-tit"><i></i>{$lang.view_tutorials}</div>
+                    	<div class="view-case-tit"><i></i>查看教程</div>
                         <div class="view-case-info">
-                        	<a href="http://help.ecmoban.com/article-6899.html" target="_blank">{$lang.tutorials_bonus_list_one}</a>
+                        	<a href="http://help.ecmoban.com/article-6899.html" target="_blank">商城验证码设置操作说明</a>
                         </div>
-                    </div>
-                    {/if}
+                    </div>			
+                    {/if}	
 				</div>
                 <ul>
-                    <li>{$lang.operation_prompt_content.0}</li>
-                    <li>{$lang.operation_prompt_content.1}</li>
-                    <li>{$lang.operation_prompt_content.2}</li>
+                    <li>该功能可以设置开启验证码的场景。</li>
+                    <li>可以设置验证码的高度、宽度和大小。</li>
+                    <li>请按照每个操作下的提示进行设置。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -30,25 +30,25 @@
                         <form method="post" action="captcha_manage.php" name="theForm" id="captcha_frm">
                             <table>
                                 <tr>
-                                	<th colspan="2"><div class="tDiv">{$lang.captcha_setting}</div></th>
+                                  <th colspan="2"><div class="tDiv">{$lang.captcha_setting}</div></th>
                                 </tr>
                                 <tr>
-                                	<td width="60%">
-                                        <div class="tDiv">
-                                            <p><strong>{$lang.captcha_turn_on}</strong></p>
-                                            <p class="blue mt5">{$lang.turn_on_note}</p>
-                                            <p class="mt5"><img src="../captcha_verify.php?code_config=1&width={$codeConfig.width}&height={$codeConfig.height}&font_size={$codeConfig.font_size}&length={$codeConfig.length}&{$rand}" alt="captcha" style="vertical-align: middle;cursor: pointer;" onClick="this.src='../captcha_verify.php?code_config=1&width={$codeConfig.width}&height={$codeConfig.height}&font_size={$codeConfig.font_size}&length={$codeConfig.length}&'+Math.random()" /></p>
-                                        </div>
-									</td>
-                                    <td>
-                                        <div class="tDiv">
-                                            <div class="checkbox_item"><input type="checkbox" name="captcha_register" value="1" id="captcha_register" class="ui-checkbox" {$captcha.register} /><label class="ui-label" for="captcha_register">{$lang.captcha_register}</label></div>
-                                            <div class="checkbox_item"><input type="checkbox" name="captcha_login" value="2" id="captcha_login" class="ui-checkbox" {$captcha.login} /><label class="ui-label" for="captcha_login">{$lang.captcha_login}</label></div>
-                                            <div class="checkbox_item"><input type="checkbox" name="captcha_comment" value="4" id="captcha_comment" class="ui-checkbox" {$captcha.comment} /><label class="ui-label" for="captcha_comment">{$lang.captcha_comment}</label></div>
-                                            <div class="checkbox_item"><input type="checkbox" name="captcha_admin" value="8" id="captcha_admin" class="ui-checkbox" {$captcha.admin} /><label class="ui-label" for="captcha_admin">{$lang.captcha_admin}</label></div>
-                                            <div class="checkbox_item"><input type="checkbox" name="captcha_message" value="32" id="captcha_message" class="ui-checkbox" {$captcha.message} /><label class="ui-label" for="captcha_message">{$lang.captcha_message}</label></div>
-                                        </div>
-                                    </td>
+                                  <td width="60%">
+                                    <div class="tDiv">
+                                      <p><strong>{$lang.captcha_turn_on}</strong></p>
+                                      <p class="blue mt5">{$lang.turn_on_note}</p>
+                                      <p class="mt5"><img src="../captcha_verify.php?code_config=1&width={$codeConfig.width}&height={$codeConfig.height}&font_size={$codeConfig.font_size}&length={$codeConfig.length}&{$rand}" alt="captcha" style="vertical-align: middle;cursor: pointer;" onClick="this.src='../captcha_verify.php?code_config=1&width={$codeConfig.width}&height={$codeConfig.height}&font_size={$codeConfig.font_size}&length={$codeConfig.length}&'+Math.random()" /></p>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="tDiv">
+                                      <div class="checkbox_item"><input type="checkbox" name="captcha_register" value="1" id="captcha_register" class="ui-checkbox" {$captcha.register} /><label class="ui-label" for="captcha_register">{$lang.captcha_register}</label></div>
+                                      <div class="checkbox_item"><input type="checkbox" name="captcha_login" value="2" id="captcha_login" class="ui-checkbox" {$captcha.login} /><label class="ui-label" for="captcha_login">{$lang.captcha_login}</label></div>
+                                      <div class="checkbox_item"><input type="checkbox" name="captcha_comment" value="4" id="captcha_comment" class="ui-checkbox" {$captcha.comment} /><label class="ui-label" for="captcha_comment">{$lang.captcha_comment}</label></div>
+                                      <div class="checkbox_item"><input type="checkbox" name="captcha_admin" value="8" id="captcha_admin" class="ui-checkbox" {$captcha.admin} /><label class="ui-label" for="captcha_admin">{$lang.captcha_admin}</label></div>
+                                      <div class="checkbox_item"><input type="checkbox" name="captcha_message" value="32" id="captcha_message" class="ui-checkbox" {$captcha.message} /><label class="ui-label" for="captcha_message">{$lang.captcha_message}</label></div>
+                                    </div>
+                                  </td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -117,10 +117,11 @@
                                 <tr>
                                     <td colspan="2" class="info_btn pt20 pb20 tc">
                                         <input type="hidden" name="act" value="save_config" />
-                                        <input type="submit" value="{$lang.save_setting}" class="button fn" id="submitBtn"/>
+                                        <input type="submit" value="保存设置" class="button fn" id="submitBtn"/>
                                     </td>
                                 </tr>
                             </table>
+
                         </form>
                     </div>
                 </div>

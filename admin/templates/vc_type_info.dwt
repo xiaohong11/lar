@@ -4,13 +4,14 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="value_card.php?act=list" class="s-back">{$lang.back}</a>{$lang.promotion} - {$ur_here}</div>
+    	<div class="title"><a href="value_card.php?act=list" class="s-back">{$lang.back}</a>促销 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.prompt_for_action}</h4><span id="explanationZoom" title="{$lang.prompt_for_action}"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content_common}</li>
-                    <li>储值卡类型添加后，需发放储值卡，填写发放数量，则该类型的储值卡将能被多次利用。</li>
+                	<li>标识“*”的选项为必填项，其余为选填项。</li>
+                        <li>储值卡类型添加后，需发放储值卡，填写发放数量，则该类型的储值卡将能被多次利用。</li>
+
                 </ul>
             </div>
             <div class="flexilist">
@@ -59,64 +60,39 @@
                                             <div class="form_prompt"></div>
                                         </div>
                                     </div>
-                                    <div class="item">
-                                        <div class="label">{$lang.use_merchants}：</div>
-                                        <div class="value">
-											<div class="checkbox_items">
-												<div class="checkbox_item">
-												  <input type="radio" name="use_merchants" class="ui-radio" id="use_merchants_0" value="0" autocomplete="off" {if $vc.use_merchants eq 0}checked="checked"{/if}/>
-												  <label for="use_merchants_0" class="ui-radio-label">{$lang.all_merchants}</label> 
-												</div>											
-												<div class="checkbox_item">
-												  <input type="radio" name="use_merchants" class="ui-radio" id="use_merchants_1" value="1" autocomplete="off" {if $vc.use_merchants eq 1}checked="checked"{/if}/>
-												  <label for="use_merchants_1" class="ui-radio-label">{$lang.self_merchants}</label> 
-												</div>
-												<div class="checkbox_item">
-												  <input type="radio" name="use_merchants" class="ui-radio" id="use_merchants_2" value="2" autocomplete="off" {if $vc.use_merchants eq 2}checked="checked"{/if}/>
-												  <label for="use_merchants_2" class="ui-radio-label">{$lang.assign_merchants}</label> 
-												</div>
-												<input type="hidden" name="selected_merchants" value='{$vc.selected_merchants}'>
-												<input type="button" id="review_content" ectype="selectMerchants" style="{if $vc.use_merchants neq 2}display:none;{/if}" class="button" value="{$lang.choice_merchant}">
-											</div>	
-										</div>
-                                    </div>
                                     <div class="item mb20">
                                         <div class="label">{$lang.use_condition}：</div>
                                         <div class="label_value">
                                         	<div class="checkbox_items">
                                                 <div class="checkbox_item">
-                                                    <input type="radio" class="ui-radio" name="use_condition" value="0" id="use_condition_1" autocomplete="off" {if $vc.use_condition eq 0}checked="checked"{/if} />
+                                                    <input type="radio" class="ui-radio" name="use_condition" value="0" id="use_condition_1" {if $vc.use_condition eq 0}checked="checked"{/if} />
                                                     <label class="ui-radio-label" for="use_condition_1">{$lang.all_goods}</label>
                                                 </div>
                                                 <div class="checkbox_item">
-                                                    <input type="radio" class="ui-radio" name="use_condition" value="2" id="use_condition_3" autocomplete="off" {if $vc.use_condition eq 2}checked="checked"{/if}/>
+                                                    <input type="radio" class="ui-radio" name="use_condition" value="2" id="use_condition_3" {if $vc.use_condition eq 2}checked="checked"{/if}/>
                                                     <label class="ui-radio-label" for="use_condition_3">{$lang.spec_goods}</label>
                                                 </div>
                                                 <div class="checkbox_item">
-                                                    <input type="radio" class="ui-radio" name="use_condition" value="1" id="use_condition_2" autocomplete="off" {if $vc.use_condition eq 1}checked="checked"{/if}/>
+                                                    <input type="radio" class="ui-radio" name="use_condition" value="1" id="use_condition_2" {if $vc.use_condition eq 1}checked="checked"{/if}/>
                                                     <label class="ui-radio-label" for="use_condition_2">{$lang.spec_cat}</label>
                                                 </div>
                                             </div>
                                             <div class="notic bf100"></div>
-                                            <div class="rank_list range-content">
-                                            	<div class="checkbox_items" id="cat_range_div">
+                                            <div class="rank_list" id="cat_range_div">
                                                 {foreach from=$vc.cats item=cat key=key}
                                                 <div class="checkbox_item">
                                                     <input name="vc_cat[]" type="checkbox" class="ui-checkbox" value="{$cat.cat_id}" id="vc_cat[{$key}]" checked="checked" />
                                                     <label for="vc_cat[{$key}]" class="ui-label">{$cat.cat_name}</label>
                                                 </div>
                                                 {/foreach}
-                                                </div>
                                             </div>
-                                            <div class="rank_list range-content">
-                                                <div class="checkbox_items" id="goods_range_div">
+                                            <div class="rank_list" id="goods_range_div">
                                                 {foreach from=$vc.goods item=goods key=key}
                                                 <div class="checkbox_item">
                                                     <input name="vc_goods[]" type="checkbox" class="ui-checkbox" value="{$goods.goods_id}" id="vc_goods[{$key}]" checked="checked" />
                                                     <label for="vc_goods[{$key}]" class="ui-label">{$goods.goods_name}</label>
                                                 </div>
                                                 {/foreach}
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -127,7 +103,7 @@
 												<div class="search_select">
 													<div class="categorySelect">
 														<div class="selection">
-															<input type="text" name="category_name" id="category_name" class="text w250 valid" value="{$lang.select_cat}" autocomplete="off" readonly data-filter="cat_name" />
+															<input type="text" name="category_name" id="category_name" class="text w250 valid" value="请选择分类" autocomplete="off" readonly data-filter="cat_name" />
 															<input type="hidden" name="category_id" id="category_id" value="0" data-filter="cat_id" />
 														</div>
 														<div class="select-container" style="display:none;">
@@ -146,15 +122,36 @@
 											<input name="keyword1" type="text" id="keyword1" class="text text_2 mr10 mb10" autocomplete="off" />
 											<input name="search1" type="button" id="search1" value="{$lang.button_search}" class="button fl mr10" onclick="searchItem1()" />
 											<div id="result1" class="imitate_select select_w320">
-												<div class="cite">{$lang.please_select}</div>
+												<div class="cite">请选择</div>
 												<ul>
-                                                	<li class="li_not">{$lang.please_search_goods}</li>
+                                                	<li class="li_not">请先搜索商品</li>
 												</ul>
                                                 <input name="result1" type="hidden" value="0" id="result1_val">
 											</div>
 											<input name="spec_goods" type="button" class="button" id="add_gift" onclick="addGoods()" value="+" />
                                         </div>
-                                    </div>									
+                                    </div>
+                                    <div class="item">
+                                        <div class="label">{$lang.use_merchants}：</div>
+                                        <div class="value">
+											<div class="checkbox_items">
+												<div class="checkbox_item">
+												  <input type="radio" name="use_merchants" class="ui-radio" id="use_merchants_0" value="0" {if $vc.use_merchants eq 0}checked="checked"{/if}/>
+												  <label for="use_merchants_0" class="ui-radio-label">{$lang.all_merchants}</label> 
+												</div>											
+												<div class="checkbox_item">
+												  <input type="radio" name="use_merchants" class="ui-radio" id="use_merchants_1" value="1" {if $vc.use_merchants eq 1}checked="checked"{/if}/>
+												  <label for="use_merchants_1" class="ui-radio-label">{$lang.self_merchants}</label> 
+												</div>
+												<div class="checkbox_item">
+												  <input type="radio" name="use_merchants" class="ui-radio" id="use_merchants_2" value="2" {if $vc.use_merchants eq 2}checked="checked"{/if}/>
+												  <label for="use_merchants_2" class="ui-radio-label">{$lang.assign_merchants}</label> 
+												</div>
+												<input type="hidden" name="selected_merchants" value='{$vc.selected_merchants}'>
+												<input type="button" id="review_content" ectype="selectMerchants" style="{if $vc.use_merchants neq 2}display:none;{/if}" class="button" value="{$lang.choice_merchant}">
+											</div>	
+										</div>
+                                    </div>										
                                     <div class="item">
                                         <div class="label">{$lang.indate}：</div>
                                         <div class="label_value">
@@ -164,7 +161,7 @@
                                         </div>
                                     </div>
                                     <div class="item">
-                                        <div class="label">{$lang.require_field}{$lang.vc_prefix}：</div>
+                                        <div class="label">{$lang.vc_prefix}：</div>
                                         <div class="label_value">
                                         	<input type="text" name="prefix" id="prefix" class="text w100" value="{$vc.vc_prefix}" autocomplete="off" />
 											<div class="notic">{$lang.notice_prefix}</div>
@@ -209,6 +206,7 @@
 {insert_scripts files="jquery.purebox.js"}
 <script type="text/javascript">
 	$(function(){
+		
 		//初始显示使用条件筛选
 		$(":input[name='use_condition']").each(function(index, element) {
 			
@@ -258,7 +256,7 @@
 					number:true
 				},
 				prefix:{
-                    required : true
+					specialchar: ''
 				}
 			},
 			messages:{
@@ -272,15 +270,9 @@
 				value:{
 					required : '<i class="icon icon-exclamation-sign"></i>请输入优惠券张数',
 					number : '<i class="icon icon-exclamation-sign"></i>请输入正确的数字'
-				},
-                prefix:{
-                     required : '<i class="icon icon-exclamation-sign"></i>请输入储值卡前缀'
-                }
+				}
 			}			
 		});
-		
-		$(".range-content").perfectScrollbar("destroy");
-		$(".range-content").perfectScrollbar();
 	});
 
 	//选择指定分类
@@ -365,9 +357,6 @@
 	  {
 		var html = '<div class="checkbox_item"><input name="vc_goods[]" id="goods_id" type="checkbox" class="ui-checkbox" value="' + id + '" checked="checked" /><label for="goods_id" class="ui-label">' + name+'</label></div>';
 		document.getElementById('goods_range_div').innerHTML += html;
-		
-		$(".range-content").perfectScrollbar("destroy");
-		$(".range-content").perfectScrollbar();
 		}
 	}
 	
@@ -409,7 +398,7 @@
 			  is_cat = 1;
 		  }
 		  
-		  id_index = index + 1;
+		  id_index = index;
       });
 	  id_index += 1;
 	  
@@ -419,9 +408,6 @@
 		var html = '<div class="checkbox_item"><input name="vc_cat[]" id="vc_cat[' + id_index + ']" type="checkbox" class="ui-checkbox" value="' + id + '" checked="checked" /><label for="vc_cat[' + id_index + ']" class="ui-label">' + name+'</label></div>';
 		document.getElementById('cat_range_div').innerHTML += html;
 	  }
-	  
-	  $(".range-content").perfectScrollbar("destroy");
-	  $(".range-content").perfectScrollbar();
 	}
 
 	$("input[name='use_condition']").click(function(){
@@ -454,8 +440,8 @@
 				title:"选择指定店铺",
 				width:600,
 				content:content,
-				ok_title:"{$lang.button_submit_alt}",
-				cl_title:"{$lang.cancel}",
+				ok_title:"确定",
+				cl_title:"取消",
 				drag:true,
 				foot:true,
 				onOk:function(){

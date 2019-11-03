@@ -66,33 +66,27 @@
                         <a href="exchange.php?sort=exchange_integral&order=<!--{if $pager.search.sort eq 'exchange_integral' && $pager.search.order eq 'ASC'}-->DESC<!--{else}-->ASC<!--{/if}-->#exchange_list" class="sort-item {if $pager.search.sort eq 'exchange_integral'}curr{/if}">积分值<i class="iconfont <!--{if $pager.search.sort eq 'exchange_integral' && $pager.search.order eq 'ASC'}-->icon-up1<!--{else}-->icon-down1<!--{/if}-->"></i></a>
                     </div>
                 </div>
-                <!--{if $goods_list}-->
-                <div class="exchange-list">
-                    <ul class="clearfix" ectype="items">
-                        <!--{foreach from=$goods_list item=goods}-->
-                            <!-- {if $goods.goods_id} -->
-                                <li class="mod-shadow-card">
-                                    <a  href="{$goods.url}" target="_blank" class="img"><img src="{$goods.goods_thumb}" alt="{$goods.name|escape:html}"></a>
-                                    <div class="clearfix">
-                                        <div class="score">{$lang.integral} {$goods.exchange_integral}</div>
-                                        <div class="market">{$goods.market_price}</div>
-                                    </div>
-                                    <a  href="{$goods.url}" target="_blank" class="name" title="{$goods.name|escape:html}">{$goods.name}</a>
-                                    <div class="already">
-                                        <i class="iconfont icon-package"></i>
-                                        {$goods.sales_volume|default:0}{$lang.People_exchange}
-                                    </div>
-                                    <a href="{$goods.url}" class="ex-btn" target="_blank">{$lang.Redeem_now}</a>
-                                </li>
-                            <!--{/if}-->
-                        <!--{/foreach}-->
-                    </ul>
-                </div>
-                <!-- {if $category_load_type} AJAX 商品瀑布流加载-->
-                <div class="floor-loading goods-floor-loading" ectype="floor-loading"><div class="floor-loading-warp"><img src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/images/load/loading.gif"></div></div>
-                <!-- {else}-->
+                 <!--{if $goods_list}-->
+                <ul class="exchange-list clearfix">
+                    <!--{foreach from=$goods_list item=goods}-->
+                        <!-- {if $goods.goods_id} -->
+                            <li class="mod-shadow-card">
+                                <a  href="{$goods.url}" target="_blank" class="img"><img src="{$goods.goods_thumb}" alt="{$goods.name|escape:html}" title="{$goods.name|escape:html}" ></a>
+                                <div class="clearfix">
+                                    <div class="score">{$lang.integral} {$goods.exchange_integral}</div>
+                                    <div class="market">{$goods.market_price}</div>
+                                </div>
+                                <a  href="{$goods.url}" target="_blank" class="name" title="{$goods.name|escape:html}">{$goods.name|escape:html}</a>
+                                <div class="already">
+                                    <i class="iconfont icon-package"></i>
+                                    {$goods.sales_volume|default:0}{$lang.People_exchange}
+                                </div>
+                                <a href="{$goods.url}" class="ex-btn" target="_blank">{$lang.Redeem_now}</a>
+                            </li>
+                        <!--{/if}-->
+                    <!--{/foreach}-->
+                </ul>
                 <!-- #BeginLibraryItem "/library/pages.lbi" --> <!-- #EndLibraryItem -->
-                <!-- {/if}-->
                 <!--{else}-->
                 <div class="no_records no_records_tc">
                     <i class="no_icon_two"></i>
@@ -104,20 +98,11 @@
             </div>
         </div>
     </div>
-    {* DSC 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
+    {* ECSHOP 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
     <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
     
     {insert_scripts files='cart_common.js,cart_quick_links.js'}
     <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/dsc-common.js"></script>
     <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/jquery.purebox.js"></script>
-    <!-- {if $category_load_type}-->
-	<script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/asyLoadfloor.js"></script>
-	<script type="text/javascript">
-	$(function(){
-		var query_string = '{$query_string}';
-		$.itemLoad('.exchange-list','','',query_string,0);
-	});
-    </script>
-    <!-- {/if} 异步加载更多商品 by wu end-->
 </body>
 </html>

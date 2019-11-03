@@ -1,6 +1,6 @@
 <div class="catetop-tree-blank"></div>
 <div class="banner catetop-banner">
-	{* DSC 提醒您：动态载入category_top_banner.lbi，显示顶级分类页（默认）轮播图 *}{insert name='get_adv_child' ad_arr=$category_top_banner id=$cate_info.cat_id}
+	{* ECSHOP 提醒您：动态载入category_top_banner.lbi，显示顶级分类页（默认）轮播图 *}{insert name='get_adv_child' ad_arr=$category_top_banner id=$cate_info.cat_id}
 </div>
 <div class="catetop-main w w1200">
 	<!-- 排行榜 -->
@@ -17,7 +17,7 @@
 				<!--{if $smarty.foreach.hot.iteration lte 5}-->
 				<li>
 					<div class="p-img"><a href="{$goods.url}"><img src="{$goods.thumb}" alt=""></a></div>
-					<div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.name}</a></div>
+					<div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.name|escape:html}</a></div>
 					<div class="p-price">
 						{if $goods.promote_price neq ''}
 							 {$goods.promote_price}
@@ -34,7 +34,7 @@
 				<!--{if $smarty.foreach.promote.iteration lte 5}-->
 				<li>
 					<div class="p-img"><a href="{$goods.url}"><img src="{$goods.thumb}" alt=""></a></div>
-					<div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.name}</a></div>
+					<div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.name|escape:html}</a></div>
 					<div class="p-price">
 						{if $goods.promote_price neq ''}
 							 {$goods.promote_price}
@@ -84,7 +84,7 @@
 	<div class="catetop-floor-wp">
 		<div class="catetop-floor" id="recToday">
 			<div class="f-banner">
-				{* DSC 提醒您：动态载入category_top_default_head.lbi，显示顶级分类页（默认）今日推荐头部广告 *}{insert name='get_adv_child' ad_arr=$category_top_default_best_head}
+				{* ECSHOP 提醒您：动态载入category_top_default_head.lbi，显示顶级分类页（默认）今日推荐头部广告 *}{insert name='get_adv_child' ad_arr=$category_top_default_best_head}
 			</div>
 			<div class="f-hd">
 				<h2>今日推荐</h2>
@@ -92,13 +92,13 @@
 			<div class="f-bd">
 				<ul class="clearfix">
 					<li class="first">
-						{* DSC 提醒您：动态载入category_top_default_left.lbi，显示顶级分类页（默认）今日推荐左侧广告 *}{insert name='get_adv_child' ad_arr=$category_top_default_best_left}
+						{* ECSHOP 提醒您：动态载入category_top_default_left.lbi，显示顶级分类页（默认）今日推荐左侧广告 *}{insert name='get_adv_child' ad_arr=$category_top_default_best_left}
 					</li>
 					<!--{foreach from=$cate_top_best_goods item=goods name=best}-->
 					<!--{if $smarty.foreach.best.iteration lte 10}-->
 					<li class="goods-item">
 						<div class="p-img"><a href="{$goods.url}"><img src="{$goods.thumb}" alt=""></a></div>
-						<div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.name}</a></div>
+						<div class="p-name"><a href="{$goods.url}">{$goods.name|escape:html}</a></div>
 						<div class="p-price">
 							{if $goods.promote_price neq ''}
 								 {$goods.promote_price}
@@ -114,7 +114,7 @@
 		</div>
 		<div class="catetop-floor" id="newPic">
 			<div class="f-banner">
-				{* DSC 提醒您：动态载入category_top_default_head.lbi，显示顶级分类页（默认）新品到货头部广告 *}{insert name='get_adv_child' ad_arr=$category_top_default_new_head}
+				{* ECSHOP 提醒您：动态载入category_top_default_head.lbi，显示顶级分类页（默认）新品到货头部广告 *}{insert name='get_adv_child' ad_arr=$category_top_default_new_head}
 			</div>
 			<div class="f-hd">
 				<h2>新品到货</h2>
@@ -122,13 +122,13 @@
 			<div class="f-bd">
 				<ul class="clearfix">
 					<li class="first">
-						{* DSC 提醒您：动态载入category_top_default_left.lbi，显示顶级分类页（默认）新品到货左侧广告 *}{insert name='get_adv_child' ad_arr=$category_top_default_new_left}
+						{* ECSHOP 提醒您：动态载入category_top_default_left.lbi，显示顶级分类页（默认）新品到货左侧广告 *}{insert name='get_adv_child' ad_arr=$category_top_default_new_left}
 					</li>
 					<!--{foreach from=$cate_top_new_goods item=goods name=new}-->
 					<!--{if $smarty.foreach.new.iteration lte 10}-->
 					<li class="goods-item">
 						<div class="p-img"><a href="{$goods.url}"><img src="{$goods.thumb}" alt=""></a></div>
-						<div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.name}</a></div>
+						<div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.name|escape:html}</a></div>
 						<div class="p-price">
 							{if $goods.promote_price neq ''}
 								 {$goods.promote_price}
@@ -144,7 +144,7 @@
 		</div>
 	</div>
 	<!-- 浏览记录 -->
-	{* DSC 提醒您：动态载入cate_top_history_goods.lbi，显示浏览记录 *}{insert name='history_goods_pro'}
+	{* ECSHOP 提醒您：动态载入cate_top_history_goods.lbi，显示浏览记录 *}{insert name='history_goods_pro'}
 
 	<!-- 楼层电梯 -->
 	<div class="catetop-lift lift-hide" ectype="lift">

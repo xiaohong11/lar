@@ -28,11 +28,7 @@
 								<a href="# ">进入专区</a>
 							</div>-->
 						</section>
-                                            <!--{if !empty($brand_info.brand_bg)}-->
-                                                 <img class="bg " src="{$brand_info.brand_bg}">
-                                            <!--{else}-->
-						<!--<img class="bg " src="{elixir('img/shopping_info_b.png ')}">-->
-                                            <!--{/if}-->
+						<img class="bg " src="{elixir('img/shopping_info_b.png ')}">
 					</div>
 				</div>
 			</div>
@@ -43,7 +39,7 @@
 									<nav style="cursor: grab;" class="shopping-list-nav brand-index-nav box-flex">
 									<ul class="swiper-wrapper">
 										{foreach $brand_cat_list as $brand_cat}
-										<li class="div{$brand_cat.cat_id} swiper-slide article-li-select {if $brand_cat.cat_id == $cate}active{/if}" category="{$brand_cat.cat_id}" ><a href="{$brand_cat.url}" >{$brand_cat.cat_name}</a></li>
+										<li class="div{$brand_cat.cat_id} swiper-slide article-li-select" category="{$brand_cat.cat_id}"><a href="{$brand_cat.url}" >{$brand_cat.cat_name}</a></li>
 										{/foreach}
 									</ul>
 								</nav>
@@ -158,13 +154,13 @@
 
 	<script>
 		$(function(){
-
 			var url = "{url('brand/index/goods', array('id' => $brand_id, 'cat' => $cate, 'type'=> $type))}";
 			//品牌列表
 			$('.brand-goodlist').infinite({url: url, template:'j-product'});
 
 			// var url = ROOT_URL + 'index.php?m=article';
-
+	var url = "{url('article/index/index', array('id' => $cat_id))}";
+	var infinite = $('.article_info').infinite({url: url, template: 'j-product'});
 	var swiper_nav = new Swiper('.shopping-list-nav', {
 		scrollbarHide: true,
 		slidesPerView: 'auto',

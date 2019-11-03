@@ -4,10 +4,10 @@
 
 <body class="iframe_body">
 <div class="warpper">
-    <div class="title">{$lang.12_template} - 模板选择</div>
+    <div class="title">模板 - 模板选择</div>
     <div class="content">
         <div class="explanation" id="explanation">
-            <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
             <ul>
                 <li>该页面展示了当前模板，可备份当前模板。</li>
                 <li>可查看当前商城模板大图。</li>
@@ -36,7 +36,7 @@
                                     {if $template.screenshot}<img src="{$template.screenshot}" alt="{$template.name}" border="0" width="263" height="338" id="{$template.code}" />{/if}
                                     <div class="bg"></div>
                                 </div>
-                                <a href="images/template/screenshot{$template.version}.png" class="nyroModal" target="_blank">查看大图</a>
+                                <a href="images/template/screenshot{$template.version}.png" class="nyroModal">查看大图</a>
                                 <div class="box">
                                     <i class="icon icon-gou"></i>
                                     <span>使用该模版</span>
@@ -55,7 +55,7 @@
 <script type="text/javascript">
     // 点击查看图片
     $(function(){
-       // $(".nyroModal").nyroModal();
+        $(".nyroModal").nyroModal();
     });
 
     /**

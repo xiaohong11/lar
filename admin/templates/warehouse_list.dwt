@@ -5,11 +5,20 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.11_system} - {$ur_here}</div>
+    	<div class="title">系统设置 - {$ur_here}</div>
         <div class="content">
-        	{include file ='library/shipping_menu_tab.lbi'}		
+        	<div class="tabs_info">
+            	<ul>
+                    <li {if $menu_select.current eq '03_shipping_list'}class="curr"{/if}><a href="shipping.php?act=list">配送方式</a></li>
+                    <li {if $menu_select.current eq '05_area_list'}class="curr"{/if}><a href="area_manage.php?act=list">地区列表</a></li>
+                    <li {if $menu_select.current eq '09_region_area_management'}class="curr"{/if}><a href="region_area.php?act=list">区域管理</a></li>
+                    <li {if $menu_select.current eq '09_warehouse_management'}class="curr"{/if}><a href="warehouse.php?act=list">仓库管理</a></li>
+                    <li {if $menu_select.current eq 'warehouse_ship_list'}class="curr"{/if}><a href="warehouse.php?act=ship_list">仓库运费模板</a></li>
+                    <li {if $menu_select.current eq 'shipping_date_list'}class="curr"{/if}><a href="shipping.php?act=date_list">自提时间段</a></li>
+                </ul>
+            </div>
             <div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                 	<li>仓库下的地区，展示一级仓库下的所有地区。</li>
                     <li>仓库地区最多可添加到四级地区。</li>
@@ -20,6 +29,7 @@
                     <div class="newRegion">
                     	<div class="fr">
                         <form method="post" action="area_manage.php" name="theForm">
+                            <input type="hidden" name="region_name" value="1" maxlength="150" size="40" />
                             <div id="regionId_select" class="imitate_select select_w120" style="margin-top:1px;">
                               <div class="cite">{$lang.select_please}</div>
                               <ul>
@@ -32,7 +42,7 @@
                             </div>
                             <input type="hidden" name="region_type" value="{$region_type}" />
                             <input type="hidden" name="parent_id" value="{$parent_id}" />
-                            <a href="javascript:void(0);" class="btn btn30 red_btn mr0" ectype="addRegion"><i class="icon icon-plus"></i>新增地区</a>
+                            <a href="javascript:void(0);" class="btn btn30 red_btn mr0"><i class="icon icon-plus"></i>新增地区</a>
                         </form>
                         </div>
                         {if $action_link.href}
@@ -49,13 +59,10 @@
                         	<thead>
                             	<tr>
                                     <th width="3%"><div class="tDiv">&nbsp;</div></th>
-                                    <th width="20%"><div class="tDiv">地区名称</div></th>
-                                    <th width="20%"><div class="tDiv">所属地区</div></th>
-                                    {if $region_type eq 1}
-                                    <th width="16%"><div class="tDiv">地区编码</div></th>
-                                    {/if}
-                                    <th width="20%"><div class="tDiv">所在仓库</div></th>
-                                    <th width="20%" class="handle">操作</th>
+                                    <th width="24%"><div class="tDiv">地区名称</div></th>
+                                    <th width="24%"><div class="tDiv">所属地区</div></th>
+                                    <th width="24%"><div class="tDiv">所在仓库</div></th>
+                                    <th width="24%" class="handle">操作</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -71,19 +78,10 @@
                                         </div>
                                     </td>
                                     <td><div class="tDiv">{$region_here}</div></td>
-                                    {if $region_type eq 1}
-                                    <td>
-                                    <div class="tDiv">
-                                    	<div class="editSpanInput" ectype="editSpanInput">
-                                            <span onclick="listTable.edit(this, 'edit_region_code', '{$list.region_id}'); return false;">{$list.region_code|default:N/A}</span>
-                                            <i class="icon icon-edit"></i>
-										</div>
-                                    </div>
-                                    </td>
-                                    {/if}
                                     <td><div class="tDiv">{$area_here}</div></td>
                                     <td class="handle">
                                         <div class="tDiv a3">
+                                        	{if $list.regionId > 0 && $freight_model eq 1}<a href="warehouse.php?act=freight&id={$list.region_id}" title="{$lang.freight_guanli}" class="btn_region"><i class="icon icon-cog"></i>{$lang.freight_guanli}</a>{/if}
                                         	<a href="warehouse.php?act=list&pid={$list.region_id}&regionId={$list.regionId}" title="{$lang.manage_area}" class="btn_see"><i class="sc_icon sc_icon_see"></i>{$lang.manage_area}</a>
                                             <a href="javascript:listTable.remove('{$list.region_id}|{$area_here}', '{$lang.area_drop_confirm}', 'drop_area')" title="{$lang.drop}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
                                         </div>
@@ -102,8 +100,7 @@
     </div>
      {include file ='library/pagefooter.lbi'}
     <script type="text/javascript">
-    	$.divselect("#regionId_select","#regionId_val");
-		
+    $.divselect("#regionId_select","#regionId_val");
         $(".region_name").blur(function(){
             var val = $(this).val();
             var id = $(this).attr("data-id");
@@ -114,26 +111,26 @@
                     $(this).val(data.content);
                 }
             }, 'POST', 'JSON');
+         
         });
-		
         //添加扩展分类
-		$("*[ectype='addRegion']").click(function(){
+	$(".red_btn").click(function(){
             var region_name = $("input[name='region_name']").val();
             var region_type = $("input[name='region_type']").val();
             var parent_id   = $("input[name='parent_id']").val();
-            
-			if($("input[name='regionId']")){
-            	var regionId   =$("input[name='regionId']").val(); 
+            if($("input[name='regionId']")){
+                    var regionId   =$("input[name='regionId']").val(); 
             }else{
-            	var regionId = 0;
+                    var regionId = 0;
             }
-			
-            if (regionId == 0){
-                pbDialog(select_region_name_empty,"",0);
-            }else{
+            if (region_name.length == 0)
+            {
+                alert(region_name_empty);
+            }
+            else
+            {
                 $.jqueryAjax("warehouse.php", "is_ajax=1&act=add_area&parent_id="+parent_id+ '&region_name=' + region_name + '&region_type=' + region_type + '&regionId=' + regionId + '&area_here={$area_here|default:0}', listTable.listCallback, 'POST', 'JSON');
             }
-			
             return false;
         });
     </script>

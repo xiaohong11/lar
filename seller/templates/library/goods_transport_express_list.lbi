@@ -5,8 +5,4 @@
         <label for="shipping_{$shipping.shipping_id}" class="ui-label">{$shipping.shipping_name}</label>
 	</li>
 	{/foreach}
-    <li>
-    	<input type="checkbox" name="all" value="" id="all" class="ui-checkbox" />
-        <label class="ui-label" for="all">全选</label>
-    </li>
 </ul>

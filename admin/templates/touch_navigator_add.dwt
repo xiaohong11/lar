@@ -7,10 +7,10 @@
     	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>手机-{$ur_here}</div>
             <div class="content">
             <div class="explanation" id="explanation">
-                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                     <li>可从管理平台手动添加一名新会员，并填写相关信息。</li>
-                    <li>{$lang.operation_prompt_content_common}</li>
+                    <li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
                     <li>新增会员后可从会员列表中找到该条数据，并再次进行编辑操作，但该会员名称不可变。</li>
                 </ul>
             </div>
@@ -22,7 +22,7 @@
                                 <div class="label">{$lang.system_main}：</div>
                                 <div class="label_value">
                                     <div id="" class="imitate_select select_w320">
-                                        <div class="cite">{$lang.please_select}</div>
+                                        <div class="cite">请选择</div>
                                         <ul>
                                             <li><a href="javascript:add_main('-');" class="add_category" data-value="-1" class="ftx-01">-</a></li>
                                             <li><a href="javascript:;" class="add_category" data-value="-2" class="ftx-01">商品分类</a></li>
@@ -40,7 +40,7 @@
                                     <div class="search_select">
                                         <div class="categorySelect">
                                             <div class="selection">
-                                                <input type="text" name="category_name" id="category_name" class="text w250 valid" value="{$lang.select_cat}" autocomplete="off" readonly data-filter="cat_name" />
+                                                <input type="text" name="category_name" id="category_name" class="text w250 valid" value="请选择分类" autocomplete="off" readonly data-filter="cat_name" />
                                                 <input type="hidden" name="category_id" id="category_id" value="0" data-filter="cat_id" />
                                             </div>
                                             <div class="select-container" style="display:none;">
@@ -110,7 +110,7 @@
                                         <input type="file" class="type-file-file" name="pic" size="30" hidefocus="true" value="" />
                                         {if $rt.pic}
                                         <span class="show">
-                                                <a href="../{$rt.pic}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="../{$rt.pic}" ectype="tooltip" title="tooltip"></i></a>
+                                                <a href="../{$rt.pic}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../{$rt.pic}>')" onmouseout="toolTip()"></i></a>
                                         </span>
                                         {/if}
                                         <input type="text" name="textfile" class="type-file-text" id="textfield" readonly />

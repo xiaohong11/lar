@@ -5,7 +5,7 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.seller} - {$ur_here}</div>
+    	<div class="title">商家 - {$ur_here}</div>
         <div class="content">
         	<div class="tabs_info">
             	<ul>
@@ -19,28 +19,27 @@
                 </ul>
             </div>
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.list.0}</li>
-                    <li>{$lang.operation_prompt_content.list.1}</li>
-                    <li>{$lang.operation_prompt_content.list.2}</li>
+                	<li>商家提交结算申请相关信息管理。</li>
+					<li>可对商家提交申请进行操作。</li>
+                    <li>可根据关键字进行查询，侧边栏进行高级搜索。</li>
                 </ul>
             </div>
             <div class="flexilist">
                 <div class="common-head">
                    	<div class="refresh ml0">
-                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    	<div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>
                     {if $act_type eq 'detail'}
-                    <div class="search">
-                    	<form action="javascript:;" name="searchForm" onSubmit="searchGoodsname(this);">
-                        <div class="input">
-                            <input type="text" name="order_sn" class="text nofocus" placeholder="{$lang.label_order_sn}" autocomplete="off" />
-                            <input type="submit" class="btn" name="secrch_btn" ectype="secrch_btn" value="" />
+                    <form action="javascript:searchUser()" name="searchForm">
+                        <div class="search">
+                            <div class="input">
+                                <input type="text" name="order_sn" class="text nofocus" placeholder="{$lang.label_order_sn}" autocomplete="off" /><input type="submit" value="" class="not_btn" />
+                            </div>
                         </div>
-                        </form>
-                    </div>
+                    </form>
                     {/if}
                 </div>
                 <div class="common-content">
@@ -139,11 +138,11 @@
             </div>
             <div class="gj_search">
                 <div class="search-gao-list" id="searchBarOpen">
-                    <i class="icon icon-zoom-in"></i>{$lang.advanced_search}
+                    <i class="icon icon-zoom-in"></i>高级搜索
                 </div>
                 <div class="search-gao-bar">
-                    <div class="handle-btn" id="searchBarClose"><i class="icon icon-zoom-out"></i>{$lang.pack_up}</div>
-                    <div class="title"><h3>{$lang.advanced_search}</h3></div>
+                    <div class="handle-btn" id="searchBarClose"><i class="icon icon-zoom-out"></i>收起边栏</div>
+                    <div class="title"><h3>高级搜索</h3></div>
                     <form method="get" name="formSearch_senior" action="javascript:searchUser()">
                         <div class="searchContent">
                             <div class="layout-box">
@@ -156,9 +155,9 @@
                                     <dt>{$lang.label_out_up}</dt>
                                     <dd>
                                         <div  class="select_w145 imitate_select">
-                                            <div class="cite">{$lang.please_select}</div>
+                                            <div class="cite">请选择</div>
                                             <ul>
-                                               <li><a href="javascript:;" data-value="0">{$lang.please_select}</a></li>
+                                               <li><a href="javascript:;" data-value="0">请选择</a></li>
                                                <li><a href="javascript:;" data-value="2">{$lang.label_account_up}</a></li>
                                                 <li><a href="javascript:;" data-value="4">{$lang.label_account_out}</a></li>
                                             </ul>
@@ -170,9 +169,9 @@
                                     <dt>{$lang.label_log_type}</dt>
                                     <dd>
                                         <div  class="select_w145 imitate_select">
-                                            <div class="cite">{$lang.please_select}</div>
+                                            <div class="cite">请选择</div>
                                             <ul>
-                                               <li><a href="javascript:;" data-value="0">{$lang.please_select}</a></li>
+                                               <li><a href="javascript:;" data-value="0">请选择</a></li>
                                                <li><a href="javascript:;" data-value="2">结算</a></li>
                                                 <li><a href="javascript:;" data-value="3">充值</a></li>
                                                 <li><a href="javascript:;" data-value="4">提现</a></li>
@@ -187,9 +186,9 @@
                                     <dt>{$lang.handler}</dt>
                                     <dd>
                                         <div  class="select_w145 imitate_select">
-                                            <div class="cite">{$lang.please_select}</div>
+                                            <div class="cite">请选择</div>
                                             <ul>
-                                               <li><a href="javascript:;" data-value="0">{$lang.please_select}</a></li>
+                                               <li><a href="javascript:;" data-value="0">请选择</a></li>
                                                <li><a href="javascript:;" data-value="1">{$lang.off_stocks}</a></li>
                                                 <li><a href="javascript:;" data-value="2">{$lang.stay_dispose}</a></li>
                                             </ul>
@@ -201,7 +200,7 @@
                                     <dt>{$lang.steps_shop_name}</dt>
                                     <dd>
                                         <div id="shop_name_select" class="select_w145 imitate_select">
-                                            <div class="cite">{$lang.please_select}</div>
+                                            <div class="cite">请选择</div>
                                             <ul>
                                                <li><a href="javascript:;" data-value="0">{$lang.select_please}</a></li>
                                                <li><a href="javascript:;" data-value="1">{$lang.s_shop_name}</a></li>
@@ -216,9 +215,9 @@
                                     
                                     <dd>
                                         <div class="select_w145 imitate_select">
-                                            <div class="cite">{$lang.please_select}</div>
+                                            <div class="cite">请选择</div>
                                             <ul>
-                                               <li><a href="javascript:;" data-value="0">{$lang.please_select}</a></li>
+                                               <li><a href="javascript:;" data-value="0">请选择</a></li>
                                                {foreach from=$store_list item=store}
                                                <li><a href="javascript:;" data-value="{$store.ru_id}">{$store.store_name}</a></li>
                                                {/foreach}
@@ -233,7 +232,7 @@
                                 <dl style="display:none" id="store_type">
                                     <dd>
                                         <div class="select_w145 imitate_select">
-                                            <div class="cite">{$lang.please_select}</div>
+                                            <div class="cite">请选择</div>
                                             <ul>
                                                <li><a href="javascript:;" data-value="0">{$lang.steps_shop_type}</a></li>
                                                <li><a href="javascript:;" data-value="{$lang.flagship_store}">{$lang.flagship_store}</a></li>
@@ -245,9 +244,9 @@
                                         </div>
                                     </dd>
                                 </dl>
-                                <dl class="bot_btn">
-                                    <dd>
-                                       <input type="submit" class="btn red_btn" name="tj_search" value="{$lang.button_inquire}" /><input type="reset" class="btn btn_reset" name="reset" value="{$lang.button_reset_alt}" />
+                                <dl>
+                                    <dd class="bot_btn">
+                                       <input type="submit" class="btn red_btn" name="tj_search" value="提交查询" /><input type="reset" class="btn btn_reset" name="reset" value="重置" />
                                     </dd>
                                 </dl>
                             </div>
@@ -257,62 +256,65 @@
             </div>
 		</div>
 	</div>
-	{include file ='library/pagefooter.lbi'}
+ {include file ='library/pagefooter.lbi'}
     <script type="text/javascript" src="js/jquery.purebox.js"></script>
     <script type="text/javascript">
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
-	listTable.act_type = '{$act_type}';
+        
+                listTable.recordCount = '{$record_count}';
+                listTable.pageCount = '{$page_count}';
+                listTable.act_type = '{$act_type}';
 
-	{foreach from=$filter item=item key=key}
-	listTable.filter.{$key} = '{$item}';
-	{/foreach}
-	
-	$.divselect("#shop_name_select","#shop_name_val",function(obj){
-		var val = obj.attr("data-value");
-		get_store_search(val);
-	});
-	
-	function get_store_search(val){
-		if(val == 1){
-			$("#merchant_box").css("display",'');
-			$("#store_keyword").css("display",'none');
-			$("#store_type").css("display",'none')
-		}else if(val == 2){
-			$("#merchant_box").css("display",'none');
-			$("#store_keyword").css("display",'');
-			$("#store_type").css("display",'none')
-		}else if(val == 3){
-			$("#merchant_box").css("display",'none');
-			$("#store_keyword").css("display",'');
-			$("#store_type").css("display",'')
-		}else{
-			$("#merchant_box").css("display",'none');
-			$("#store_keyword").css("display",'none');
-			$("#store_type").css("display",'none')
-		}
-	}
+                {foreach from=$filter item=item key=key}
+                listTable.filter.{$key} = '{$item}';
+                {/foreach}
+                $.divselect("#shop_name_select","#shop_name_val",function(obj){
+                    var val = obj.attr("data-value");
+                    get_store_search(val);
+                });
+                function get_store_search(val){
+                        if(val == 1){
+                                $("#merchant_box").css("display",'');
+                                $("#store_keyword").css("display",'none');
+                                $("#store_type").css("display",'none')
+                        }else if(val == 2){
+                                $("#merchant_box").css("display",'none');
+                                $("#store_keyword").css("display",'');
+                                $("#store_type").css("display",'none')
+                        }else if(val == 3){
+                                $("#merchant_box").css("display",'none');
+                                $("#store_keyword").css("display",'');
+                                $("#store_type").css("display",'')
+                        }else{
+                                 $("#merchant_box").css("display",'none');
+                                $("#store_keyword").css("display",'none');
+                                $("#store_type").css("display",'none')
+                        }
+                }
 		
-	$.gjSearch("-240px");  //高级搜索
+$.gjSearch("-240px");  //高级搜索
+
+
+/**
+ * 搜索用户
+ */
+function searchUser()
+{
+    
+    var frm = $("form[name='formSearch_senior']");
+    listTable.filter['store_search'] = Utils.trim(frm.find("input[name='store_search']").val());
+    listTable.filter['merchant_id'] = Utils.trim(frm.find("input[name='merchant_id']").val());
+    listTable.filter['store_keyword'] = Utils.trim(frm.find("input[name='store_keyword']").val());
+    listTable.filter['store_type'] = Utils.trim(frm.find("input[name='store_type']").val());
+    listTable.filter['handler'] = Utils.trim(frm.find("input[name='handler']").val());
+    {if $act_type eq 'detail'}
+        listTable.filter['order_sn'] = Utils.trim(($("form[name='searchForm']").find("input[name='order_sn']").val() != '') ? $("form[name='searchForm']").find("input[name='order_sn']").val() :  frm.find("input[name='order_sn']").val());
+	listTable.filter['out_up'] = Utils.trim(frm.find("input[name='out_up']").val());
+	listTable.filter['log_type'] = Utils.trim(frm.find("input[name='log_type']").val());
+    {/if}
 	
-	
-	/* 搜索用户 */
-	function searchUser(){
-		var frm = $("form[name='formSearch_senior']");
-		listTable.filter['store_search'] = Utils.trim(frm.find("input[name='store_search']").val());
-		listTable.filter['merchant_id'] = Utils.trim(frm.find("input[name='merchant_id']").val());
-		listTable.filter['store_keyword'] = Utils.trim(frm.find("input[name='store_keyword']").val());
-		listTable.filter['store_type'] = Utils.trim(frm.find("input[name='store_type']").val());
-		listTable.filter['handler'] = Utils.trim(frm.find("input[name='handler']").val());
-		{if $act_type eq 'detail'}
-			listTable.filter['order_sn'] = Utils.trim(($("form[name='searchForm']").find("input[name='order_sn']").val() != '') ? $("form[name='searchForm']").find("input[name='order_sn']").val() :  frm.find("input[name='order_sn']").val());
-		listTable.filter['out_up'] = Utils.trim(frm.find("input[name='out_up']").val());
-		listTable.filter['log_type'] = Utils.trim(frm.find("input[name='log_type']").val());
-		{/if}
-		
-		listTable.filter['page'] = 1;
-		listTable.loadList();
-	}
+    listTable.filter['page'] = 1;
+    listTable.loadList();
+}
     </script>
 </body>
 </html>

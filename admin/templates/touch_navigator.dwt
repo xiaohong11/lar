@@ -8,11 +8,10 @@
     	<div class="title">手机-{$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>展示了手机端的导航栏</li>
-                    <li>针对手机导航栏进行管理</li>
-                    <li>{$lang.operation_prompt_content_common}</li>
+                	<li>您需要到系统设置->计划任务中开启该功能后才能使用。</li>
+                    <li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -22,8 +21,8 @@
                     	<a href="{$action_link.href}"><div class="fbutton"><div class="add" title="{$action_link.text}"><span><i class="icon icon-plus"></i>{$action_link.text}</span></div></div></a>
                     </div>
                     <div class="refresh{if !$action_link} ml0{/if}">
-                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    	<div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>
                 </div>
                 <div class="common-content">
@@ -65,7 +64,7 @@
                                     <td class="handle">
                                         <div class="tDiv a2">
                                             <a href="touch_navigator.php?act=edit&id={$val.id}" title="{$lang.edit}" class="btn_edit"><i class="icon icon-edit"></i>{$lang.edit}</a>
-                                            <a href="javascript:confirm_redirect('{$lang.ckdel}', 'touch_navigator.php?act=del&id={$val.id}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                            <a href="javascript:confirm_redirect('{$lang.ckdel}', 'touch_navigator.php?act=del&id={$val.id}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>删除</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -92,8 +91,8 @@
  {include file ='library/pagefooter.lbi'}
 <script type="text/javascript">
 
-listTable.recordCount = {$record_count|default:0};
-listTable.pageCount = {$page_count|default:1};
+listTable.recordCount = '{$record_count}';
+listTable.pageCount = '{$page_count}';
 
 {foreach from=$filter item=item key=key}
 listTable.filter.{$key} = '{$item}';

@@ -4,7 +4,7 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.batch} - {$ur_here}</div>
+    	<div class="title">批量 - {$ur_here}</div>
         <div class="content">
             {include file ='library/batch_tab.lbi'}
         	<div class="explanation" id="explanation">
@@ -27,9 +27,9 @@
                                     <div class="label">{$lang.file_charset}</div>
                                     <div class="label_value">
 										<div id="format" class="imitate_select select_w320">
-											<div class="cite">{$lang.please_select}</div>
+											<div class="cite">请选择</div>
 											<ul>
-												<li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.please_select}</a></li>
+												<li><a href="javascript:;" data-value="0" class="ftx-01">请选择</a></li>
 												{foreach from=$lang_list item=data key=key}
 												<li><a href="javascript:;" data-value="{$key}" class="ftx-01">{$data}</a></li>
 												{/foreach}

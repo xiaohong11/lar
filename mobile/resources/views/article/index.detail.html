@@ -1,20 +1,14 @@
 {include file="page_header"}
-
-<div class="con{if !isset($_GET['display'])} mb-7{/if}">
+<div class="con mb-7">
     <!--晒单列表-->
     <section class="com-nav article-list">
         <div class="art-tit-box padding-all">
             <h4 class="com-cont-box art-cont-box">{$article.title}</h4>
-            {if !isset($_GET['display'])}
             <small>
                 <time>{$article.amity_time}</time>
-                <span>{$article.author}</span>
-            </small>
-            {/if}
+                <span>{$article.author}</span></small>
         </div>
         <div class=" dis-n-detail padding-all">{$article.content}</div>
-
-        {if !isset($_GET['display'])}
         <div class="padding-all  b-color-f  m-top06 fx-deta-box">
             <ul class="dis-box com-list-1">
                 <li class="box-flex">
@@ -27,12 +21,68 @@
                         <input id="isclick" type="hidden" name="isclick" value="0"/>
                         </a>
                     </div>
+
+                </li>
+                <li class="box-flex j-show-div">
+                    <div class="yuan oncle-color new-color">
+                        <i class="iconfont icon-fenxiang"></i>
+                        <p>分享</p>
+                    </div>
+                    <div class="com-icon">
+                        <section class="j-show-div j-show-get-val padding-lr">
+                            <!--充值方式弹出层-->
+                            <div class="show-time-con ts-3 b-color-1 j-filter-show-div">
+                                <section class="goods-show-title of-hidden padding-all b-color-f">
+                                    <h3 class="fl g-c-title-h3">分享到：</h3>
+                                    <i class="iconfont icon-guanbi2 show-div-guanbi fr"></i>
+                                </section>
+                                <section class="s-g-list-con swiper-scroll">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide select-two">
+                                            <ul class="j-get-one padding-all ul-4 pt-1 is-over">
+                                                <div class="bdsharebuttonbox" data-tag="share_1">
+                                                    <!--<a class="bds_weixin" data-cmd="weixin"></a>-->
+                                                    <a class="bds_sqq" data-cmd="sqq"></a>
+                                                    <a class="bds_qzone" data-cmd="qzone" href="#"></a>
+                                                    <a class="bds_tsina" data-cmd="tsina"></a>
+                                                    <a class="bds_pyq user-shop-fx"></a>
+                                                </div>
+                                                <script>
+                                                    window._bd_share_config = {
+                                                        common: {
+                                                            bdText: '{$article.content_fx}',
+                                                            bdDesc: '{$article.title}',
+                                                            bdUrl: window.location.href
+                                                        },
+                                                        share: [{
+                                                            "bdSize": 16
+                                                        }],
+                                                        image: [{
+                                                            viewType: 'list',
+                                                            viewPos: 'top',
+                                                            viewColor: 'black',
+                                                            viewSize: '16',
+                                                            viewList: ['qzone', 'tsina', 'huaban', 'tqq', 'renren']
+                                                        }],
+                                                        selectShare: [{
+                                                            "bdselectMiniList": ['qzone', 'tqq', 'kaixin001', 'bdxc', 'tqf']
+                                                        }]
+                                                    }
+                                                    with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion=' + ~(-new Date() / 36e5)];
+                                                </script>
+                                            </ul>
+                                        </div>
+                                        <div class="swiper-scrollbar"></div>
+                                    </div>
+                                </section>
+                            </div>
+                        </section>
+                    </div>
+
                 </li>
             </ul>
         </div>
-        {/if}
     </section>
-
     {if $article['goods']}
     <section>
         <div class="dis-box padding-all my-bottom b-color-f my-nav-box m-top06">
@@ -53,17 +103,17 @@
         {/foreach}
     </section>
     {/if}
-
-    <!--评论列表-->
-    {if $article['comment']}
     <section>
+
+        <!--评论列表-->
+        {if $article['comment']}
         <div class="dis-box padding-all my-bottom b-color-f my-nav-box m-top06">
             <h3 class="box-flex text-all-span my-u-title-size-1">评论列表</h3>
         </div>
         {foreach $article['comment'] as $key => $cf}
         <ul class="padding-all b-color-f my-com-max-box">
             <li class="com-img-left">
-                <div class="com-left-box"><div class="p-r img-commom"><img src="{$cf.user.user_picture}"></div></div>
+                <div class="com-left-box"><img src="{$cf.user.user_picture}"></div>
             </li>
             <li class="com-con-right">
                 <ul class="dis-box">
@@ -98,17 +148,14 @@
                 </ul> -->
             </li>
         </ul>
-
+ 
         {/foreach}
+        {/if}
     </section>
-
     <section class="article-comments-btn  b-color-f">
-        <a href="{url('article/index/comments','id'.'='.$article.id)}" class="f-05 col-4 text-c padding-all">查看更多评论</a>
+        <a href="{url('article/index/comments','id'.'='.$article.id)}" class="f-05 col-4 text-c padding-all">查看更多</a>
     </section>
-    {/if}
 </div>
-
-{if !isset($_GET['display'])}
 <section class="filter-btn consult-filter-btn">
     <div class="dis-box">
         <div class="box-flex text-all">
@@ -116,16 +163,13 @@
         </div>
         <button type="button" class="btn-submit">发送</button>
     </div>
-    <input type="hidden" name="id" value="{$article.id}"/>
-    <input type="hidden" name="cid" value=""/>
 </section>
-{/if}
-
+<input type="hidden" name="id" value="{$article.id}"/>
+<input type="hidden" name="cid" value=""/>
 <div class="mask-filter-div"></div>
 <div class="shopping-prompt ts-2">
     <img src="{elixir('img/fengxiang.png')}"/>
 </div>
-
 {include file="float_nav"}
 <li>
     <a href="{url('article/index/index')}">
@@ -134,7 +178,6 @@
     </a>
 </li>
 {include file="float_nav_footer"}
-
 <script>
     //    function init() {
     //        clip = new ZeroClipboard.Client(); //初始化对象
@@ -148,6 +191,18 @@
     function copylink() {
         clip.setText(window.location.href);
     }
+    $(function ($) {
+        //分享弹框
+        $(".goods-share-img").click(function () {
+            $(".share-bg-box-y").addClass("display-current");
+            $(".share-ts-title-y").addClass("display-current");
+        });
+        $(".share-bg-box-y").click(function () {
+            $(".share-bg-box-y").removeClass("display-current");
+            $(".share-ts-title-y").removeClass("display-current");
+        });
+
+    });
     $('.mb-7').click(function () {
         $(".j-input-text").attr('placeholder', '回复文章:');
         $("input[name='cid']").val('');
@@ -177,7 +232,9 @@
         function status(json) {
             window.location.href = json;
         }
+
     });
+
 
     function dianzan(id) {
         if ($("#red" + id).hasClass("active")) {
@@ -201,6 +258,8 @@
                 }
             });
         }
+
+
     }
 
     /*店铺信息商品滚动*/
@@ -210,11 +269,8 @@
         centeredSlides: false,
         grabCursor: true
     });
-    header_img()
-    window.onresize = function () {
-        header_img()
-    }
 </script>
 
 </body>
+
 </html>

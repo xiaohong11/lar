@@ -52,7 +52,7 @@
                               {if $brand.brand_logo}
                               <div class="tDiv">
                                   <span class="show">
-                                      <a href="{if $brand.brand_logo}../{$brand.brand_logo}{else}images/default/brand_logo_default.jpg{/if}" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={if $brand.brand_logo}../{$brand.brand_logo}{else}images/default/brand_logo_default.jpg{/if}>')" onmouseout="toolTip()"></i></a>
+                                      <a href="../{$brand.brand_logo}" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../{$brand.brand_logo}>')" onmouseout="toolTip()"></i></a>
                                   </span>                                    
                               </div>
                               {/if}
@@ -93,10 +93,10 @@
     </div>
 </div>
 {include file ='library/seller_footer.lbi'}
-<script type="text/javascript" src="../js/jquery.picTip.js"></script>
+<script type="text/javascript" src="js/jquery.picTip.js"></script>
 <script type="text/javascript">
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
+	listTable.recordCount = '{$record_count}';
+	listTable.pageCount = '{$page_count}';
 	
 	{foreach from=$filter item=item key=key}
 	listTable.filter.{$key} = '{$item}';

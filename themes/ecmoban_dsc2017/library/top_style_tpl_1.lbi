@@ -1,5 +1,5 @@
 <div class="banner catetop-banner">
-	<div class="bd">{* DSC 提醒您：动态载入cat_top_ad.lbi，显示首页分类小广告 *}{insert name='get_adv_child' ad_arr=$cat_top_ad id=$cate_info.cat_id}</div>
+	<div class="bd">{* ECSHOP 提醒您：动态载入cat_top_ad.lbi，显示首页分类小广告 *}{insert name='get_adv_child' ad_arr=$cat_top_ad id=$cate_info.cat_id}</div>
 	<div class="cloth-hd"><ul></ul></div>
 </div>
 <div class="catetop-main w w1200" ectype="catetopWarp">
@@ -59,7 +59,7 @@
                                     {/if}
                                 </div>
                                 <div class="p-name"><a href="{$look.url}" target="_blank" title="{$look.name|escape:html}">{$look.name}</a></div>
-                                <div class="p-btn"><a href="{$look.url}" target="_blank">查看详情</a></div>
+                                <div class="p-btn"><a href="{$look.url}" target="_blank">{$lang.add_to_cart}</a></div>
                             </li>
                             <!--{/foreach}-->
                         </ul>

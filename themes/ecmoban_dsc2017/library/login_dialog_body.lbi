@@ -7,11 +7,7 @@
             <div class="tit"><h3>{$lang.Third_party_Lgion}</h3><span></span></div>
             <div class="coagent-warp">
             	{foreach from=$website_list item=website}
-                {if $website.web_type eq 'weixin'}
-                	<a href="wechat_oauth.php?act=login{if $website.back_act neq ''}&user_callblock={$website.back_act}{/if}" class="{$website.web_type}"><b class="third-party-icon {$website.web_type}-icon"></b></a>
-                {else}
-                    <a href="user.php?act=oath&type={$website.web_type}{if $website.back_act neq ''}&user_callblock={$website.back_act}{/if}" class="{$website.web_type}"><b class="third-party-icon {$website.web_type}-icon"></b></a>
-                {/if}
+                <a href="user.php?act=oath&type={$website.web_type}" class="qq"><b class="third-party-icon {$website.web_type}-icon"></b></a>
                 {/foreach}
             </div>
         </div>
@@ -48,7 +44,6 @@
                         <label for="remember" class="ui-label">{$user_lang.remember}</label>
                     </div>
                     <div class="item item-button">
-                    	<input type="hidden" name="dsc_token" value="{$dsc_token|default:0}" />
                         <input type="hidden" name="act" value="act_login" />
                         <input type="hidden" name="back_act" value="{$back_act}" />
                         <input type="submit" name="submit" value="{$lang.signin_now}" class="btn sc-redBg-btn" />
@@ -74,7 +69,6 @@
 			var username = frm.find("input[name='username']");
 			var password = frm.find("input[name='password']");
 			var captcha = frm.find("input[name='captcha']");
-			var dsc_token = frm.find("input[name='dsc_token']");
 			var error = frm.find(".msg-error");
 			var msg = '';
 			
@@ -105,7 +99,7 @@
 			
 			{if $is_jsonp && $site_domain}
 				
-				var post_url = "act=act_login&is_jsonp=" + {$is_jsonp} + '&username=' + username.val()+'&password='+password.val()+'&dsc_token='+dsc_token.val()+'&captcha='+captcha.val()+'&back_act='+back_act;
+				var post_url = "act=act_login&is_jsonp=" + {$is_jsonp} + '&username=' + username.val()+'&password='+password.val()+'&captcha='+captcha.val()+'&back_act='+back_act;
 
 				$.ajax({
 				   type: "POST",
@@ -119,7 +113,7 @@
 				   }
 				});
 			{else}
-				Ajax.call( 'user.php?act=act_login', 'username=' + username.val()+'&password='+password.val()+'&dsc_token='+dsc_token.val()+'&captcha='+captcha.val()+'&back_act='+back_act, return_login , 'POST', 'JSON');
+				Ajax.call( 'user.php?act=act_login', 'username=' + username.val()+'&password='+password.val()+'&captcha='+captcha.val()+'&back_act='+back_act, return_login , 'POST', 'JSON');
 			{/if}
 		}
 		

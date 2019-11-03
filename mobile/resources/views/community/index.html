@@ -3,15 +3,16 @@
     <!--头部导航-->
     <section class="b-color-f my-nav-box community">
         <div class=" t-s-i-title-1 dis-box my-dingdan purse-f">
-            <a href="{url('community/index/list', array('type'=>1))}" class="box-flex">
+            <a href="{url('community/index/list', array('type'=>3))}" class="box-flex">
                 <ul class="dis-box">
                     <li class="theme-left">
-                    <div class="theme-box tm-ns"><i class="iconfont icon-xiao36"></i></div>
+                    <div class="theme-box tm-zs">
+                        <i class="iconfont icon-quanzi"></i></div>
                     </li>
                     <li class="box-flex">
-                    <h4 class="ellipsis-one">讨论贴</h4>
-                    <p class="t-remark3">{$tao.num}条</p>
-                    <!--{if $tao.has_new}
+                    <h4 class="ellipsis-one">圈子贴</h4>
+                    <p class="t-remark3">{$quan.num}条</p>
+                   <!-- {if $quan.has_new}
                     <div class="purse-ts-box" style="display:block"></div>
                     {/if}-->
                     </li>
@@ -33,16 +34,15 @@
             </a>
         </div>
         <div class=" t-s-i-title-1 dis-box my-dingdan purse-f">
-            <a href="{url('community/index/list', array('type'=>3))}" class="box-flex">
+            <a href="{url('community/index/list', array('type'=>1))}" class="box-flex">
                 <ul class="dis-box">
                     <li class="theme-left">
-                    <div class="theme-box tm-zs">
-                        <i class="iconfont icon-quanzi"></i></div>
+                    <div class="theme-box tm-ns"><i class="iconfont icon-xiao36"></i></div>
                     </li>
                     <li class="box-flex">
-                    <h4 class="ellipsis-one">圈子贴</h4>
-                    <p class="t-remark3">{$quan.num}条</p>
-                   <!-- {if $quan.has_new}
+                    <h4 class="ellipsis-one">讨论贴</h4>
+                    <p class="t-remark3">{$tao.num}条</p>
+                    <!--{if $tao.has_new}
                     <div class="purse-ts-box" style="display:block"></div>
                     {/if}-->
                     </li>
@@ -56,9 +56,9 @@
                     <li class="box-flex">
                     <h4 class="ellipsis-one">晒单贴</h4>
                     <p class="t-remark3">{$sun.num}条</p>
-                    <!-- {if $sun.has_new}
+                    {if $sun.has_new}
                     <div class="purse-ts-box" style="display:block"></div>
-                    {/if} -->
+                    {/if}
                     </li>
                 </ul>
             </a>

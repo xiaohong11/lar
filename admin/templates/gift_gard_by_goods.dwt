@@ -7,11 +7,10 @@
     	<div class="title"><a href="javascript:;" ectype="goback" class="s-back">{$lang.back}</a>{$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content.config.0}</li>
-                    <li>{$lang.operation_prompt_content.config.1}</li>
-                    <li>{$lang.operation_prompt_content.config.2}</li>
+                    <li>礼品卡配置商品页面，给礼品卡设置相对应的商品，谨慎设置商品。</li>
+                    <li>可批量设置礼品卡商品。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -24,7 +23,7 @@
 										<div class="search_select">
 											<div class="categorySelect">
 												<div class="selection">
-													<input type="text" name="category_name" id="category_name" class="text w250 valid" value="{$lang.select_cat}" autocomplete="off" readonly data-filter="cat_name" />
+													<input type="text" name="category_name" id="category_name" class="text w250 valid" value="请选择分类" autocomplete="off" readonly data-filter="cat_name" />
 													<input type="hidden" name="category_id" id="category_id" value="0" data-filter="cat_id" />
 												</div>
 												<div class="select-container" style="display:none;">
@@ -35,7 +34,7 @@
 										<div class="search_select">
 											<div class="brandSelect">
 												<div class="selection">
-													<input type="text" name="brand_name" id="brand_name" class="text w120 valid" {$lang.select_barnd} autocomplete="off" readonly data-filter="brand_name" />
+													<input type="text" name="brand_name" id="brand_name" class="text w120 valid" value="请选择品牌" autocomplete="off" readonly data-filter="brand_name" />
 													<input type="hidden" name="brand_id" id="brand_id" value="0" data-filter="brand_id" />
 												</div>
 												<div class="brand-select-container" style="display:none;">
@@ -44,8 +43,8 @@
 											</div>                            
 										</div>
 										<input type="hidden" name="ru_id" value="{$ru_id}" />
-										<input type="text" name="keyword" class="text w150" placeholder={$lang.input_keywords} autocomplete="off" data-filter="keyword" autocomplete="off" />
-										<a href="javascript:void(0);" class="btn btn30" onclick="searchGoods()"><i class="icon icon-search"></i>{$lang.search_word}</a>
+										<input type="text" name="keyword" class="text w150" placeholder="请输入关键字" autocomplete="off" data-filter="keyword" autocomplete="off" />
+										<a href="javascript:void(0);" class="btn btn30" onclick="searchGoods()"><i class="icon icon-search"></i>搜索</a>
 									</div>
                                 </form>
                                 <form name="theForm" >
@@ -60,8 +59,8 @@
                                         </div>
                                         <div class="move_handle">
 											<input type="hidden" value="{$gift_ids}" id="gift_ids">
-                                            <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">{$lang.check_all}</a>
-                                            <a href="javascript:void(0);" onclick="addGoods()" class="btn btn25 red_btn">{$lang.button_submit_alt}</a>
+                                            <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">全选</a>
+                                            <a href="javascript:void(0);" onclick="addGoods()" class="btn btn25 red_btn">确定</a>
                                         </div>
                                     </div>
                                     <div class="move_middle" onclick="addGoods()">
@@ -79,13 +78,13 @@
                                             </div>
                                         </div>
                                         <div class="move_handle">
-                                            <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">{$lang.check_all}</a><a href="javascript:void(0);" onclick="delGoods()" class="btn btn25 btn_red">{$lang.drop}</a>
+                                            <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">全选</a><a href="javascript:void(0);" onclick="delGoods()" class="btn btn25 btn_red">移除</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="tc mt50">
-								<input type="button"  class="btn btn35 red_btn mr20" value="{$lang.grant}" onClick="javascript:location.href='gift_gard.php?act=bonus_list&bonus_type={$bonus_type}'" style="float:none;" />
+								<input type="button"  class="btn btn35 red_btn mr20" value="发放" onClick="javascript:location.href='gift_gard.php?act=bonus_list&bonus_type={$bonus_type}'" style="float:none;" />
                             </div>
 							</form>
                         </div>
@@ -102,8 +101,10 @@
         //滚动轴
         $(".move_list").perfectScrollbar();
         $(".brand-list").perfectScrollbar();
-    
+    </script>
+	<script type="text/javascript">
         function searchGoods(){
+            
             var elements  = document.forms['searchForm'].elements;
             var filters   = new Object;
             filters.cat_id = elements['category_id'].value;
@@ -112,6 +113,7 @@
             $("#source_select").find("ul").html("<i class='icon-spinner icon-spin'></i>");
             
             setTimeout(function(){Ajax.call('bonus.php?is_ajax=1&act=get_goods_list', filters, searchGoodsResponse, 'GET', 'JSON');},300);
+            
         }
         
         function searchGoodsResponse(result){

@@ -6,23 +6,16 @@
 		<div class="d-g-info">
 			<div class="p-img"><a href="{$goodsInfo.goods_url}" target="_blank"><img src="{$goodsInfo.goods_thumb}"></a></div>
 			<div class="p-price">{$goodsInfo.goods_price}</div>
-			<div class="p-name"><a href="{$goodsInfo.goods_url}" target="_blank" title="{$goodsInfo.goods_name|escape:html}">{$goodsInfo.goods_name|escape:html}</a> {if $is_presale}<span class='red'>预</span>{/if}</div>
+			<div class="p-name"><a href="{$goodsInfo.goods_url}" target="_blank">{$goodsInfo.goods_name}</a></div>
 			<div class="p-lie">累计评论<b>{$comment_all.allmen}</b></div>
 			<div class="tc">
-				{if $is_presale}
-				<a href="{$goodsInfo.goods_url}" rev="{$goodsInfo.goods_thumb}" class="btn">加入购物车</a>
-				{else}
 				<a href="javascript:void(0);" onClick="addToCart({$goodsInfo.goods_id},0,event,this,'flyItem');" rev="{$goodsInfo.goods_thumb}" class="btn">加入购物车</a>
-				{/if}
-				
             </div>
 		</div>
 	</div>
-	{if $act neq 'discuss_show'}
 	<div class="my-post">
 		<a href="#doPost" class="btn sc-redBg-btn"><i class="iconfont icon-edit"></i>我要发帖</a>
 	</div>
-	{/if}
 	{if $hot_list.list}
 	<div class="d-main d-hot">
 		<div class="d-tit">热门帖子</div>

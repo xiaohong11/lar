@@ -7,14 +7,15 @@
     <div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>短信管理 - {$ur_here}</div>
         <div class="content">
         <div class="explanation" id="explanation">
-            <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
             <ul>
                 <li>填写短信签名名称和模板ID请与阿里大于申请的保持一致。</li>
-                <li>{$lang.operation_prompt_content_common}</li>
+                <li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
                 <li>编辑短信内容时请根据提供的模板进行修改，模板内的每个变量是固定的，且不可改变位置。</li>
             </ul>
         </div>
         <div class="flexilist">
+
             <div class="mian-info">
                 <form action="alidayu_configure.php" method="post" name="theForm" enctype="multipart/form-data"  id="agency_form">
                     <div class="switch_info user_basic" style="display:block;">
@@ -99,6 +100,7 @@ $("input[name='signature']").change(function(){
 });
 
 $(function(){
+	
 	{if $note.id}
 	loadTemplate({$note.id});
 	{/if}

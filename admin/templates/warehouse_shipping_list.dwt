@@ -4,7 +4,7 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.11_system} - {$ur_here}</div>
+    	<div class="title">系统设置 - {$ur_here}</div>
         <div class="content">
         	<div class="tabs_info">
             	<ul>
@@ -17,7 +17,7 @@
                 </ul>
             </div>
             <div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                 	<li>展示所有仓库配送方式。</li>
                     <li>给仓库配送方式设置运费模板，如果仓库单个地区没有设置仓库运费时，系统会默认调用仓库运费模板。</li>

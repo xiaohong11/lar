@@ -57,7 +57,6 @@
     <div class="w1200 pb40 w">
         <div class="special-item">
             <div class="special-product">
-            	{if $goods}
                 <ul>
                 <!-- {foreach from=$goods item=goods} -->
                     <li>
@@ -67,7 +66,7 @@
                                 <span><em>￥</em>{$goods.shop_price}</span>
                                 <del><em>￥</em>{$goods.market_price}</del>
                             </div>
-                            <div class="p-name"><a href="{$goods.url}" title="{$goods.goods_name|escape:html}" target="_blank">{$goods.goods_name}</a></div>
+                            <div class="p-name"><a href="{$goods.url}" target="_blank">{$goods.goods_name}</a></div>
                             <div class="p-info">
                                 <div class="p-left">
                                     <!-- {if $goods.no_start} -->
@@ -83,24 +82,13 @@
                                             {$lang.Count_down}<span class="days">00</span>{$lang.day}&nbsp;<span class="hours">01</span>:<span class="minutes">56</span>:<span class="seconds">23</span>
                                         </div>
                                     <!-- {/if} -->
-                                    <span class="appointment">{$lang.existing}<em>{$goods.pre_num}</em>{$lang.subscribe_p}</span>
+                                    <span class="appointment">{$lang.existing}<em>{$goods.sales_volume}</em>{$lang.subscribe_p}</span>
                                 </div>
                             </div>
                         </div>
                     </li>
                     <!-- {/foreach} -->
                 </ul>
-                {else}
-                <div class="no_records no_records_tc">
-                    <i class="no_icon_two"></i>
-                    <div class="no_info no_info_line">
-                        <h3>{$lang.information_null}</h3>
-                        <div class="no_btn">
-                            <a href="index.php" class="btn sc-redBg-btn">返回首页</a>
-                        </div>
-                    </div>
-                </div>
-                {/if}
             </div>
         </div>
     </div>

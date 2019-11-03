@@ -4,34 +4,35 @@
 <head>{include file ='library/admin_html_head.lbi'}</head>
 <body class="iframe_body">
 <div class="warpper">
-    <div class="title">{$lang.order_word} - {$ur_here}</div>
+    <div class="title">订单 - {$ur_here}</div>
     <div class="content">			
         <div class="explanation" id="explanation">
             <div class="ex_tit">
-                <i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span>					
+                <i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span>					
             </div>
             <ul>
-                <li>{$lang.operation_prompt_content.list.0}</li>
-                <li>{$lang.operation_prompt_content.list.1}</li>
+                <li>商城所有门店相关信息管理。</li>
+                <li>可对门店进行开启或关闭状态。</li>
+                <li>可对门店名称关键字进行搜索，侧边栏进行高级搜索。</li>
             </ul>
         </div>
         <div class="flexilist">
+            <!--商品列表-->
             <div class="common-head">
                 <div class="fl">
                     <a href="{$action_link.href}"><div class="fbutton"><div class="add" title="{$action_link.text}"><span><i class="icon icon-plus"></i>{$action_link.text}</span></div></div></a>
                 </div>
                 <div class="refresh">
-                    <div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    <div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    <div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    <div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                 </div>
-                <div class="search">
-                	<form action="javascript:;" name="searchForm" onSubmit="searchGoodsname(this);">
-                    <div class="input">
-                        <input type="text" name="keyword" class="text nofocus" placeholder="{$lang.label_user_name}" autocomplete="off" />
-                        <input type="submit" class="btn" name="secrch_btn" ectype="secrch_btn" value="" />
+                <form action="javascript:searchUser()" name="searchForm">
+                    <div class="search">
+                        <div class="input">
+                            <input type="text" name="keyword" class="text nofocus" placeholder="{$lang.label_user_name}" autocomplete="off" /><input type="submit" value="" class="not_btn" />
+                        </div>
                     </div>
-                    </form>
-                </div>
+                </form>
             </div>
             <div class="common-content">
                 <form method="POST" action="" name="listForm">
@@ -66,6 +67,10 @@
                         </tbody>
                         <tfoot>
                             <tr>
+                                <!--<td colspan="2">
+                                    <input type="hidden" name="act" value="batch_remove" />
+                                    <input type="submit" id="btnSubmit" value="{$lang.button_remove}" disabled="true" class="button" />
+                                </td>-->
                                 <td colspan="12">
                                     <div class="list-page">
                                         {include file="library/page.lbi"}
@@ -74,23 +79,46 @@
                             </tr>
                         </tfoot>
                     </table>
+                    
                     {if $full_page}
                 	</div>
             	</form>
             </div>
+            <!--商品列表end-->
         </div>
     </div>
 </div>
 
 {include file ='library/pagefooter.lbi'}
 <script type="text/javascript" language="JavaScript">
+<!--
 listTable.recordCount = {$record_count};
 listTable.pageCount = {$page_count};
 
 {foreach from=$filter item=item key=key}
 listTable.filter.{$key} = '{$item}';
 {/foreach}
+
+{literal}
+onload = function()
+{
+    document.forms['searchForm'].elements['keyword'].focus();
+    // 开始检查订单
+    startCheckOrder();
+}
+
+/**
+ * 搜索用户
+ */
+function searchUser()
+{
+    listTable.filter['keywords'] = Utils.trim(document.forms['searchForm'].elements['keyword'].value);
+    listTable.filter['page'] = 1;
+    listTable.loadList();
+}
+//-->
 </script>
+{/literal}
 </body>
 </html>
 {/if}

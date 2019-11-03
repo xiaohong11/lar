@@ -27,7 +27,6 @@
                     </div>
                     <div class="task-rcol">
                         <div class="p-name"><a href="javascript:;" target="_blank">{$vo.cou_name}</a></div>
-						<div class="range-item">{$vo.store_name}</div>
                         <div class="p-ad"><i class="i1"></i><i class="i2"></i>{$lang.Top_up_coupons}</div>
                         <div class="p-price">
                             <em>￥</em>
@@ -64,7 +63,7 @@
     <input name="script_name" value="{$script_name}" type="hidden" />
 	<input name="cur_url" value="{$cur_url}" type="hidden" />
 </div>
-{* DSC 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
+{* ECSHOP 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
 <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
 {insert_scripts files='jquery.SuperSlide.2.1.1.js,jquery.yomi.js,parabola.js,cart_common.js,cart_quick_links.js'}
 <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/dsc-common.js"></script>

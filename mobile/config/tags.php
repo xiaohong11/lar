@@ -1,17 +1,15 @@
 <?php
 
 return [
-    'app_init' => [
-        'App\Behavior\UpgradeBehavior',
-    ],
+    'app_init' => [],
     'app_begin' => [
-        'App\Behavior\SaaSServiceBehavior',
+        'app\behavior\SaaSServiceBehavior',
     ],
     'frontend_init' => [
-        'App\Behavior\ReplaceLangBehavior',
+        'app\behavior\ReplaceLangBehavior',
     ],
     'template_replace' => [
-        'App\Behavior\ParseTemplateBehavior',
+        'app\behavior\ParseTemplateBehavior',
     ],
     'view_filter' => [
         'Behavior\TokenBuildBehavior'

@@ -3,12 +3,13 @@
  * @return
  */
 jQuery.levelLink = function (type){
+	
 	var regionLinkage = "*[ectype='regionLinkage']",
-		opt = "*[ectype='layer']",
-		Item = "*[ectype='ragionItem']",
-		txt = "*[ectype='txt']",
-		input = 'input[type="hidden"]',
-		dropdown = "*[ectype='smartdropdown']";
+	opt = "*[ectype='layer']",
+	Item = "*[ectype='ragionItem']",
+	txt = "*[ectype='txt']",
+	input = 'input[type="hidden"]',
+	dropdown = "*[ectype='smartdropdown']";
 	
 	if(type == ""){
 		type = 0;
@@ -33,8 +34,8 @@ jQuery.levelLink = function (type){
 					
 					//type == 1 表示新增，type==0 表示编辑
 					if(type == 1){
-						//新增默认选中中国，并且默认第一个是国家
-						if(k == 0 && $(v).find("input[type='hidden']").attr("name") == "country"){
+						//新增默认选中中国
+						if(k == 0){
 							val = t.find(Item).eq(0).data("value");
 						}
 					}else{
@@ -59,7 +60,7 @@ jQuery.levelLink = function (type){
 							t.find(input).val(val);
 						}
 					}, 'POST', 'JSON');
-					
+
 					t.find(Item).each(function(){	
 						if($(this).data('value') == val){
 							t.find(txt).html($(this).data("text"));
@@ -80,6 +81,7 @@ jQuery.levelLink = function (type){
 		});*/
 	}
 	$(document).find(txt).on('click',$(dropdown),function(){
+		
 		var t = $(this);
 		$(dropdown).removeClass("visible");
 		if(t.parent(dropdown).hasClass("visible")){
@@ -125,16 +127,6 @@ jQuery.levelLink = function (type){
 				}
 			});
 		}
-		
-		//前台筛选门店 门店订单使用
-		if(type == 4){
-			if(parents.data("store") == 1){
-				var done_cart_value = $("input[name='done_cart_value']").val();
-				get_store_list(value,"flow",done_cart_value); //筛选出门店方法
-			}else if(parents.data("store") == 2){
-				get_store_list_goods(value);
-			}
-		}
 
 		Ajax.call('region.php?act=consigne', 'type='+type+'&parent=' + value, function (data) {
 			//判断当前地区是否有下一级地区
@@ -144,7 +136,6 @@ jQuery.levelLink = function (type){
 				if(parents.next().length > 0){
 					parents.next().show();
 					parents.next().find(opt).show();
-					parents.next().find(input).removeClass("ignore");
 				}else{
 					//验证赋值 在没有使用5级地区时
 					if(t.parents(regionLinkage).next("input[name='validate_region']")){
@@ -155,18 +146,12 @@ jQuery.levelLink = function (type){
 				parents.next().find(opt).perfectScrollbar("destroy");
 				parents.next().find(opt).perfectScrollbar();
 			}else{
-				if(type == 4 && parents.data("store") == 1){
-					//门店
-					parents.next(dropdown).show();
-				}else{
-					parents.next(dropdown).hide();
-				}
+				parents.next().hide();
 				
 				//验证赋值 在使用到5级地区时
 				if(t.parents(regionLinkage).next("input[name='validate_region']")){
 					t.parents(regionLinkage).next("input[name='validate_region']").val(1);
 				}
-				parents.next().find(input).addClass("ignore");
 			}
 			
 		}, 'POST', 'JSON');
@@ -174,7 +159,7 @@ jQuery.levelLink = function (type){
 		parents.find(input).val(value);
 		parents.find(txt).html(text);
 		t.parents(opt).hide();
-		parents.removeClass("visible");	
+		//parents.removeClass("visible");	
 	});
 
 	$(document).click(function(e){

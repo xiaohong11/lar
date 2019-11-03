@@ -4,7 +4,7 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$lang.article} - {$ur_here}</div>
+    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>文章 - {$ur_here}</div>
 		<div class="content">
         	<div class="tabs_info">
             	<ul>
@@ -14,10 +14,10 @@
                 </ul>
             </div>
             <div class="explanation" id="explanation">
-                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                     <li>请注意选择文章分类；请严谨描述文章内容。</li>
-                    <li>{$lang.operation_prompt_content_common}</li>
+                    <li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -27,7 +27,7 @@
                             <div class="item">
                                 <div class="label">{$lang.require_field}&nbsp;{$lang.title}：</div>
                                 <div class="label_value">
-                                    <input type="text" name="title" class="text" value="{$article.title|escape}" maxlength="40" autocomplete="off" id="title"/>
+                                    <input type="text" name="title" class="text" value="{$article.title|escape}" autocomplete="off" id="title"/>
                                     <div class="form_prompt"></div>
                                 </div>
                             </div>
@@ -42,7 +42,6 @@
                                       </ul>
                                       <input name="article_cat" type="hidden" value="{$article.cat_id}" id="parent_cat_val">
                                     </div>
-                                    <div class="form_prompt"></div>
                                 </div>
                             </div>
                             <div class="item">
@@ -99,10 +98,6 @@
                                 </div>
                             </div>
                             <div class="item">
-                                <div class="label">{$lang.sort_order}：</div>
-                                <div class="label_value"><input type="text" name="sort_order" class="text text_2" autocomplete="off" id="sort_order" value="{if $article.sort_order neq ''}{$article.sort_order|escape}{else}50{/if}"/></div>
-                            </div>
-                            <div class="item">
                                 <div class="label">{$lang.external_links}：</div>
                                 <div class="label_value"><input type="text" name="link_url" class="text" autocomplete="off" id="link_url" value="{if $article.link neq ''}{$article.link|escape}{else}http://{/if}"/></div>
                             </div>
@@ -114,17 +109,16 @@
 										<input type="file" class="type-file-file" id="file" name="file" data-state="imgfile" size="30" hidefocus="true" value="" />
 										{if $article.file_url}
 										<span class="show">
-											<a href="{$article.file_url}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="{$article.file_url}" ectype="tooltip" title="tooltip"></i></a>
+											<a href="../{$article.file_url}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../{$article.file_url}>')" onmouseout="toolTip()"></i></a>
 										</span>
-										<input type="text" name="textfile" class="type-file-text" id="textfield" value="{$article.file_url}" autocomplete="off" readonly />
+										<input type="text" name="textfile" class="type-file-text" id="textfield" value="../{$article.file_url}" autocomplete="off" readonly />
 										{/if}
 									</div>
 									{if $article.file_url}
-									<a href="article.php?act=del_file&article_id={$article.article_id}" class="btn red_btn h30 mr10 fl" style="line-height:30px;">{$lang.drop}</a>
+									<a href="?act=del_file&article_id={$article.article_id}" class="btn red_btn h30 mr10 fl" style="line-height:30px;">{$lang.drop}</a>
 									{/if}
-                                    <div class="notic">图片尺寸280*160</div>
 								</div>	
-                        	</div>
+                        	</div>        
                         </div>    
                         <div class="switch_info" style="display:none">
                             <div class="item">
@@ -138,7 +132,7 @@
                                         <div class="search_select">
                                             <div class="categorySelect">
                                                 <div class="selection">
-                                                    <input type="text" name="category_name" id="category_name" class="text w250 valid" value="{$lang.select_cat}" autocomplete="off" readonly data-filter="cat_name" />
+                                                    <input type="text" name="category_name" id="category_name" class="text w250 valid" value="请选择分类" autocomplete="off" readonly data-filter="cat_name" />
                                                     <input type="hidden" name="category_id" id="category_id" value="0" data-filter="cat_id" />
                                                 </div>
                                                 <div class="select-container" style="display:none;">
@@ -149,7 +143,7 @@
                                         <div class="search_select">
                                             <div class="brandSelect">
                                                 <div class="selection">
-                                                    <input type="text" name="brand_name" id="brand_name" class="text w120 valid" {$lang.select_barnd} autocomplete="off" readonly data-filter="brand_name" />
+                                                    <input type="text" name="brand_name" id="brand_name" class="text w120 valid" value="请选择品牌" autocomplete="off" readonly data-filter="brand_name" />
                                                     <input type="hidden" name="brand_id" id="brand_id" value="0" data-filter="brand_id" />
                                                 </div>
                                                 <div class="brand-select-container" style="display:none;">
@@ -158,8 +152,8 @@
                                             </div>
                                         </div>
                                         <input type="hidden" name="ru_id" value="{$ru_id}" />
-                                        <input type="text" name="keyword" class="text w150" placeholder={$lang.input_keywords} autocomplete="off" data-filter="keyword" autocomplete="off" />
-                                        <a href="javascript:void(0);" class="btn btn30" onclick="searchGoods()" ><i class="icon icon-search"></i>{$lang.search_word}</a>
+                                        <input type="text" name="keyword" class="text w150" placeholder="请输入关键字" autocomplete="off" data-filter="keyword" autocomplete="off" />
+                                        <a href="javascript:void(0);" class="btn btn30" onclick="searchGoods()" ><i class="icon icon-search"></i>搜索</a>
                                     </div>
                                     <div class="move_div">
                                         <div class="move_left">
@@ -171,8 +165,8 @@
                                                 </div>
                                             </div>
                                             <div class="move_handle">
-                                                <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">{$lang.check_all}</a>
-                                                <a href="javascript:void(0);" ectype="sub" data-operation="add_link_artic_goods" class="btn btn25 red_btn">{$lang.button_submit_alt}</a>
+                                                <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">全选</a>
+                                                <a href="javascript:void(0);" onclick="addGoods()" class="btn btn25 red_btn" ectype="sub">确定</a>
                                             </div>
                                         </div>
                                         <div class="move_middle">
@@ -183,15 +177,14 @@
                                             <div class="move_info">
                                                 <div class="move_list" id="target_select" >
                                                     <ul>
-														{foreach from=$goods_list item=goods}
-														<li data-value="{$goods.goods_id}" data-text="{$goods.goods_name}"><i class="sc_icon sc_icon_no"></i><a href="javascript:;" data-value="{$goods.goods_id}" class="ftx-01">{$goods.goods_name}</a></li>
-														{/foreach}
+                                                    {foreach from=$goods_list item=goods}
+                                                    <li><i class="sc_icon sc_icon_no"></i><a href="javascript:;" data-value="{$goods.goods_id}" class="ftx-01">{$goods.goods_name}</a><input type="hidden" name="target_select[]" value="{$goods.goods_id}"></li>
+                                                    {/foreach}
                                                     </ul>											
                                                 </div>
                                             </div>
                                             <div class="move_handle">
-                                                <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">{$lang.check_all}</a>
-												<a href="javascript:void(0);" ectype="sub" data-operation="drop_link_artic_goods" class="btn btn25 btn_red">{$lang.remove}</a>
+                                                <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">全选</a><a href="javascript:void(0);" onclick="delGoods()" class="btn btn25 btn_red">移除</a>
                                             </div>
                                         </div>
                                     </div>
@@ -212,6 +205,10 @@
             </div>
         </div>
     </div>
+    <style type="text/css">
+		.button-info-item0,.button-info-item3{ text-align:left;}
+    	.button-info-item0 .label,.button-info-item3 .label{ width:30%; padding-right:9px;}
+    </style>
     {include file ='library/pagefooter.lbi'}
 	<script type="text/javascript">
         $(function(){
@@ -238,22 +235,15 @@
 					element.parents('div.label_value').find(".notic").hide();
 					error_div.append(error);
 				},
-                ignore:'.ignore',
 				rules : {
 					title : {
 						required : true
-					},
-                    article_cat :{
-                        required : true
-                    }
+					}
 				},
 				messages : {
 					title : {
 						required : '<i class="icon icon-exclamation-sign"></i>'+no_title
-					},
-                    article_cat : {
-                        required : '<i class="icon icon-exclamation-sign"></i>'+no_cat
-                    }
+					}
 				}
 			});
         });
@@ -304,7 +294,7 @@
             {
                     for (i = 0; i < goods.length; i++)
                     {
-                            $("#source_select").children("ul").append("<li data-value='"+goods[i].value+"'><i class='sc_icon sc_icon_ok'></i><a href='javascript:;' data-value='"+goods[i].value+"' class='ftx-01'>"+goods[i].text+"</a><input type='hidden' name='user_search[]' value='"+goods[i].value+"'></li>")
+                            $("#source_select").children("ul").append("<li><i class='sc_icon sc_icon_ok'></i><a href='javascript:;' data-value='"+goods[i].value+"' class='ftx-01'>"+goods[i].text+"</a><input type='hidden' name='user_search[]' value='"+goods[i].value+"'></li>")
                     }
             }
             step.find(".move_list").perfectScrollbar();
@@ -335,10 +325,8 @@
     
         function delGoods()
         {
-			<!-- var filters  = new Array(); -->
 			$("#target_select").find("li").each(function(){
 				if($(this).attr("class") == 'current'){
-					<!-- filters.push($(this).find("a").data("value")); -->
 					$(this).remove();
 				}
 			});

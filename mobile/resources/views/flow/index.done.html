@@ -2,16 +2,12 @@
     <div class="con">
         <div class="flow-done">
             <div class="flow-done-con">
-                {if $order.pay_code == 'balance' || $order.is_surplus == 1}
+                {if $order.pay_code == 'balance'}
                 <i class="iconfont icon-hookring2"></i>
                 <p class="flow-done-title">余额支付成功</p>
                 {else}
                 <i class="iconfont icon-qian"></i>
-                {if $child_order > 1}
-                <p class="flow-done-title">已付款金额</p>
-                {else}
-                <p class="flow-done-title">应付款金额</p>
-                {/if}
+                <p class="flow-done-title">付款金额</p>
                 {if $child_order > 1}
                 <p class="flow-done-price">{$total.amount_formated}</p>
                 {else}
@@ -37,12 +33,10 @@
                     <label class="t-remark g-t-temark">订单号：</label>
                     <span class="box-flex t-goods1 text-right">{$order.order_sn}</span>
                 </section>
-                 </div>
                 {if $store}
-                  <div class="padding-all b-color-f flow-done-id">
                 <section class="dis-box">
                     <label class="t-remark g-t-temark">门店信息：</label>
-                    <span class="box-flex t-goods1" style="height:inherit">{$store.stores_name}[{$store.province_name} {$store.city_name} {$store.district_name}] {$store.stores_address}</span>
+                    <span class="box-flex t-goods1 text-right">{$store.stores_name}[{$store.province_name} {$store.city_name} {$store.district_name}] {$store.stores_address}</span>
                 </section>
                 {/if}
             </div>
@@ -54,11 +48,9 @@
                 {$pay_online}
                 <!-- {/if} -->
             </div>
-            {if $order.order_amount==0 || $order.presaletime > 0 || $order.pay_code == 'cod'}
             <div class="flow-done-other dis-box">
-               <a href="{url('user/order/index')}" class="flow-done-btn btn-default-new min-two-btn br-5">查看订单</a>
+               <a href="{url('user/order/detail', array('order_id'=>$order['order_id']))}" class="flow-done-btn btn-default-new min-two-btn br-5">查看订单</a>
             </div>
-            {/if}
         </div>
     </div>
      <!--快捷导航-->

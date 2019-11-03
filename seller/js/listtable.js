@@ -96,23 +96,9 @@ listTable.editInput = function(obj, act, id, val, str)
 	var type = '';
 	var org = obj.innerHTML;
 	if(val && str){
+		if(str == 'goods_model'){
+		}
 		type += "&goods_model=" + val;
-	}
-	        
-	//获取属性是否是临时表数据
-	var changelog = $(obj).parents('tr').data('changelog');
-	if(changelog == 1){
-		type += "&changelog=1";
-	}
-	
-	if($(":input[name='warehouse']").length > 0){
-	  if($("#attribute_model").attr("style") != 'display:none;'){
-		  var warehouse_id = $("#attribute_model :input[name='warehouse']:checked").val();
-		  type += "&warehouse_id=" + warehouse_id;
-		  
-		  var area_id = $("#attribute_region :input[name='region']:checked").val();
-		  type += "&area_id=" + area_id;
-	  }
 	}
 	
 	var value = obj.value
@@ -159,9 +145,6 @@ listTable.switchBt = function(obj, act, id)
 
   var res = Ajax.call(this.url, "act="+act+"&val=" + val + "&id=" +id, null, "POST", "JSON", false);
 
-  /* 判断是否唯一 */
-  var type = obj.data("type");	
-
   if (res.message)
   {
     alert(res.message);
@@ -170,11 +153,6 @@ listTable.switchBt = function(obj, act, id)
   if (res.error == 0)
   {
     obj.src = (res.content > 0) ? 'images/yes.gif' : 'images/no.gif';
-  }
-  
-  if(type == "only"){
-	 obj.parents("tr").siblings().find(".switch").removeClass("active").attr("title","否");
-	 obj.parents("tr").siblings().find(".switch").next("input[type='hidden']").val(0);
   }
 }
 

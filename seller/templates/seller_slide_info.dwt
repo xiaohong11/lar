@@ -98,7 +98,7 @@
 </div>
 {include file="library/seller_footer.lbi"}
 {literal}
-<script type="text/javascript" src="../js/jquery.picTip.js"></script>
+<script type="text/javascript" src="js/jquery.picTip.js"></script>
 <script language="JavaScript">
 $(function(){
 	//点击查看图片

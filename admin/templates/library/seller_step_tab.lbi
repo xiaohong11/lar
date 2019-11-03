@@ -12,11 +12,5 @@
         <li {if $menu_select.current eq '10_seller_grade'}class="curr"{/if}>
             <a href="seller_grade.php?act=list">店铺等级</a>
         </li>
-        <li {if $menu_select.current eq 'template_mall'}class="curr"{/if}>
-            <a href="template_mall.php?act=list">{$lang.template_mall}</a>
-        </li>
-        <li {if $menu_select.current eq 'template_apply_list'}class="curr"{/if}>
-            <a href="template_mall.php?act=template_apply_list">模板订单</a>
-        </li>
     </ul>
 </div>	

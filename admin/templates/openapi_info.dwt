@@ -4,13 +4,13 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$lang.27_interface} - {$ur_here}</div>
+    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>接口管理 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content_common}</li>
-                	<li>{$lang.operation_prompt_content.info.0}</li>
+                	<li>设置商城对外接口配置的信息。</li>
+                    <li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -19,7 +19,7 @@
                         <form action="open_api.php" method="post" name="theForm" enctype="multipart/form-data" id="oss_configure_form">
                             <div class="switch_info">
                                 <div class="item">
-                                    <div class="label">{$lang.require_field}{$lang.user_name}：</div>
+                                    <div class="label">{$lang.require_field}用户名称：</div>
                                     <div class="label_value">
 										<input type='text' name='name' value='{$api.name|escape:html}' size='55' class="text" />
                                    		<div class="form_prompt"></div>
@@ -31,20 +31,20 @@
                                     <div class="label_value">
 										<input type='text' name='app_key' value='{$api.app_key|escape:html}' size='55' class="text" />
                                         <div class="form_prompt"></div>
-                                        <div class="notic"><input name="AppKeyAuto" class="btn btn25 blue_btn" value="{$lang.AppKeyAuto}" type="button"></div>	
+                                        <div class="notic"><input name="AppKeyAuto" class="btn btn25 blue_btn" value="自动生成AppKey" type="button"></div>	
                                     </div>
                                 </div>
                                 <div class="item">
-                                    <div class="label">{$lang.is_open}：</div>
+                                    <div class="label">是否开启：</div>
                                     <div class="label_value">
                                         <div class="checkbox_items">
                                             <div class="checkbox_item">
                                                 <input type="radio" class="ui-radio" name="is_open" id="is_open_0" value="0" {if $api.is_open eq 0} checked="true" {/if}  />
-                                                <label for="is_open_0" class="ui-radio-label">{$lang.close}</label>
+                                                <label for="is_open_0" class="ui-radio-label">关闭</label>
                                             </div>
                                             <div class="checkbox_item">
                                                 <input type="radio" class="ui-radio" name="is_open" id="is_open_1" value="1" {if $api.is_open eq 1} checked="true" {/if}  />
-                                                <label for="is_open_1" class="ui-radio-label">{$lang.open}</label>
+                                                <label for="is_open_1" class="ui-radio-label">开启</label>
                                             </div>
                                         </div>	
                                     </div>
@@ -94,7 +94,9 @@
 		</div>
     </div>
  	{include file ='library/pagefooter.lbi'}
+	{literal}
 	<script language="javascript">
+		
 		$(function(){
 			var name = $(":input[name='name']").val();
 			$(":input[name='AppKeyAuto']").click(function(){
@@ -146,5 +148,6 @@
 			}
         });
     </script>
+	{/literal}
 </body>
 </html>

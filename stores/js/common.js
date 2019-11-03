@@ -432,10 +432,6 @@ function dialog(dialog_type, obj)
 		ext_info += "&message=" + obj.message;
 	}
 	
-	if(obj.page){
-		ext_info += "&page=" + obj.page;
-	}
-	
 	var content = "";
 	$.jqueryAjax("dialog.php", 'act=operate&dialog_type='+dialog_type+ext_info, function(data){
 		if(data.content){
@@ -456,7 +452,7 @@ function dialog(dialog_type, obj)
 				listTable.remove(obj.id, obj.opt);
 			}
 		});
-	}else if(dialog_type == 'success' || dialog_type == 'ajaxfail'){
+	}else if(dialog_type == 'success'){
 		if(obj.url == "index.php"){
 			window.location.href = "index.php";
 		}else{
@@ -506,7 +502,6 @@ function send_form_data(obj)
 	var method = obj.attr('method'); //方法：get/post
 	var action = obj.attr('action'); //程序
 	var inputs = obj.find("input"); //表单集合
-	var textareas = obj.find("textarea"); //表单集合
 	var data = new Array(); //数据集合
 	inputs.each(function(){
 		var type = $(this).attr('type');
@@ -526,16 +521,9 @@ function send_form_data(obj)
 		
 		data.push(name+'='+value);
 	})
-	
-	textareas.each(function(){
-		var name = $(this).attr('name');
-		var value = $(this).val();	
-		data.push(name+'='+value);		
-	})		
 
 	var queryString = ""; //查询字符串
 	queryString = data.join('&');
-	
 
 	$.ajax({
 		type:method,
@@ -543,73 +531,58 @@ function send_form_data(obj)
 		data:queryString,
 		dataType:'json',
 		success:function(data){
-			
-			if(!data.page){
-				data.page = 0;
-			}
 			if(data.error == 1){
-				dialog('success', {message:data.message, url:data.url, page:data.page});
-			}
-                        else if(data.error == 2){
-				dialog('ajaxfail', {message:data.message, url:data.url, page:data.page});
-			}
-                        else{
-				dialog('failure', {message:data.message, url:data.url, page:data.page});
+				dialog('success', {message:data.message, url:data.url});
+			}else{
+				dialog('failure', {message:data.message, url:data.url});
 			}
 		}
 	});
 }
-$(function () {
-//全选切换效果
-    $(document).on("click", "input[name='all_list']", function () {
-        if ($(this).prop("checked") == true) {
-            $(".list-div").find("input[type='checkbox']").prop("checked", true);
-            $(".list-div").find("input[type='checkbox']").parents("tr").addClass("tr_bg_org");
-        } else {
-            $(".list-div").find("input[type='checkbox']").prop("checked", false);
-            $(".list-div").find("input[type='checkbox']").parents("tr").removeClass("tr_bg_org");
-        }
-        btnSubmit();
-    });
-
-    //列表单选
-    $(document).on("click", ".sign .checkbox", function () {
-        if ($(this).is(":checked")) {
-            $(this).parents("tr").addClass("tr_bg_org");
-        } else {
-            $(this).parents("tr").removeClass("tr_bg_org");
-        }
-        btnSubmit();
-    });
-
-    $(document).on('click',"*[id='all']",function(){
-        var frm = $("form[name='listForm']");
-        var checkboxes = [];
-        frm.find("input[name='checkboxes[]']").each(function(){
-            var val = $(this).val();
-            if(val){
-                checkboxes.push(val);
-            }
-        });
-        if(checkboxes){
-            $(":input[name='order_id']").val(checkboxes);
-        }
-
-        btnSubmit()
-    });
-
-    function btnSubmit() {
-        var length = $(".list-div").find("input[name='checkboxes[]']:checked").length;
-        if (length > 0) {
-            if ($("*[ectype='btnSubmit']").length > 0) {
-                $("*[ectype='btnSubmit']").removeClass("btn_disabled");
-                $("*[ectype='btnSubmit']").attr("disabled", false);
-            }
-        } else {
-            if ($("*[ectype='btnSubmit']").length > 0) {
-                $("*[ectype='btnSubmit']").addClass("btn_disabled");
-                $("*[ectype='btnSubmit']").attr("disabled", true);
-            }
-        }
-    }
+//div仿select下拉选框 start
+$(document).on("click", ".imitate_select .cite", function () {
+    $(".imitate_select ul").hide();
+    $(this).parents(".imitate_select").find("ul").show();
+//    $(this).siblings("ul").perfectScrollbar("destroy");
+//    $(this).siblings("ul").perfectScrollbar();
 });
+
+$(document).on("click", ".imitate_select li  a", function () {
+    var _this = $(this);
+    var val = _this.data('value');
+    var text = _this.html();
+    _this.parents(".imitate_select").find(".cite").html(text);
+    _this.parents(".imitate_select").find("input[type=hidden]").val(val);
+    _this.parents(".imitate_select").find("ul").hide();
+});
+//div仿select下拉选框 end
+//jq仿select -- 带返回函数的
+jQuery.divselect = function(divselectid,inputselectid,fn) {
+	var inputselect = $(inputselectid);
+	$(document).on('click',divselectid+" .cite",function(event){
+		$(".imitate_select").find("ul").hide();
+		event.stopImmediatePropagation();
+		var ul = $(divselectid+" ul");
+		if(ul.css("display")=="none"){
+			ul.css("display","block");
+		}else{
+			ul.css("display","none");
+		}
+//		$(this).siblings("ul").perfectScrollbar("destroy");
+//		$(this).siblings("ul").perfectScrollbar();
+	});
+	$(document).on("click",divselectid+" ul li a",function(event){
+		event.stopImmediatePropagation();
+		var txt = $(this).text();
+		$(divselectid+" .cite").html(txt);
+		var value = $(this).data("value");
+		inputselect.val(value);
+		$(divselectid+" ul").hide();
+		if(fn){
+			fn($(this));
+		}		
+	});
+	$(document).on("click",function(){
+		$(divselectid+" ul").hide();
+	});
+};

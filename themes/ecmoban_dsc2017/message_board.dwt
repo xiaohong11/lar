@@ -42,7 +42,7 @@
                         <img src="{if $user_id}{if $user_info.user_picture}{$user_info.user_picture}{else}themes/<?php echo $GLOBALS['_CFG']['template']; ?>/images/touxiang.jpg{/if}{else}themes/<?php echo $GLOBALS['_CFG']['template']; ?>/images/avatar.png{/if}" alt="">
                     </div>				
                     <div class="message">
-                        <form action="message.php" method="post" name="formMsg" class="feedback-form">
+                        <form action="message.php" method="post" name="formMsg" onsubmit="return submitMsgBoard(this);" class="feedback-form">
                             <div class="form-row">
                                 <div class="ff-hd"><span class="red">*</span>留言类型</div>
                                 <div class="ff-bd clearfix">
@@ -60,38 +60,22 @@
                                 <div class="ff-hd"><span class="red">*</span>主题</div>
                                 <div class="ff-bd clearfix">
                                     <input type="text" name="msg_title" class="text" placeholder="">
-                                    <div class="form_prompt"></div>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="ff-hd"><span class="red">*</span>您对商城有哪些意见或建议，或者在使用过程中有什么问题，请告诉我们：</div>
                                 <div class="ff-bd clearfix">
                                     <textarea name="msg_content" id="" cols="30" rows="10" class="textarea"></textarea>
-                                    <div class="form_prompt"></div>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="ff-hd"><span class="red">*</span>您的联系方式：</div>
                                 <div class="ff-bd clearfix">
                                     <input type="text" name="user_email" class="text" placeholder="邮箱">
-                                    <div class="form_prompt"></div>
                                 </div>
                             </div>
-                            <!--{if $enabled_captcha}-->
                             <div class="form-row">
-                                <div class="ff-hd"><span class="red">*</span>{$lang.comment_captcha}：</div>
-                                <div class="ff-bd clearfix">
-                                    <div class="captcha_input">
-                                        <input type="text" class="text w100" id="captcha" name="captcha">
-                                        <img src="captcha_verify.php?captcha=is_common&{$rand}" alt="captcha" class="captcha_img" onClick="this.src='captcha_verify.php?captcha=is_common&'+Math.random()" data-key="captcha_common" />
-                                    </div>
-                                    <div class="form_prompt"></div>
-                                </div>
-                            </div>
-                            <!--{/if}-->
-                            <div class="form-row">
-                            	<input type="submit" name="submit" class="sc-btn sc-redBg-btn" value="提交" id="btnSubmit" />
-                                <!--<a href="javascript:$('form[name=formMsg]').submit();" class="sc-btn sc-redBg-btn">提交</a>-->
+                                <a href="javascript:$('form[name=formMsg]').submit();" class="sc-btn sc-redBg-btn">提交</a>
                             	<input type="hidden" name="act" value="act_add_message" />
                             </div>
                         </form>
@@ -100,12 +84,13 @@
             </div>
         </div>
     </div>
-	{* DSC 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
+	{* ECSHOP 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
     <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
     
-    {insert_scripts files='common.js,cart_common.js,parabola.js,cart_quick_links.js,jquery.validation.min.js'}
+    {insert_scripts files='jquery.SuperSlide.2.1.1.js,common.js,compare.js,parabola.js,shopping_flow.js,jquery.yomi.js'}
     <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/dsc-common.js"></script>
     <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/jquery.purebox.js"></script>
+    <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/asyLoadfloor.js"></script>
 	<script type="text/javascript">
 	{foreach from=$lang.message_board_js item=item key=key}
 	var {$key} = "{$item}";
@@ -115,103 +100,72 @@
 	/**
 	 * 提交留言信息
 	*/
-	$(function(){
-		$("#btnSubmit").on("click",function(){
-			//判断用户是否登录
-			if(user_id <= 0){
-				{if $rewrite}
-				var back_url = "message.html";	
-				{else}
-				var back_url = "message.php";
-				{/if}
-				$.notLogin("get_ajax_content.php?act=get_login_dialog",back_url);
+	function submitMsgBoard(frm)
+	{
+		{if $user_id eq 0}
+			{if $rewrite}
+			var back_url = "message.html";	
+			{else}
+			var back_url = "message.php";
+			{/if}
+			$.notLogin("get_ajax_content.php?act=get_login_dialog",back_url);
+			return false;
+		{/if}
+		var msg = new Object;
+
+		 msg.user_email  = frm.elements['user_email'].value;
+		 msg.msg_title   = frm.elements['msg_title'].value;
+		 msg.msg_content = frm.elements['msg_content'].value;
+		 msg.captcha     = frm.elements['captcha'] ? frm.elements['captcha'].value : '';
+
+		var msg_err = '';
+
+		if (msg.user_email.length == 0)
+		{
+			msg_err += msg_empty_email + '\n';
+			pbDialog(msg_err,"",0);
+			return false;
+		}
+		else if (msg.user_email.length > 0)
+		{
+			if (!(Utils.isEmail(msg.user_email)))
+			{
+				msg_err += msg_error_email + '\n';
+				
+				pbDialog(msg_err,"",0);
 				return false;
-			}else{
-				if($("form[name='formMsg']").valid()){
-					$("form[name='formMsg']").submit();
-				}
 			}
-		});
+		}
 		
-		$("form[name='formMsg']").validate({
-			errorPlacement:function(error, element){
-				var error_div = element.parents('div.form-row').find('div.form_prompt');
-				error_div.html("").append(error);
-			},
-			ignore:".ignore",
-			rules : {
-				msg_title : {
-					required : true,
-					minlength: 2,
-					maxlength: 50
-				},
-				msg_content:{
-					required : true
-				},
-				user_email:{
-					required : true,
-					email : true
-				}
-				<!--{if $enabled_captcha}-->
-				,captcha:{
-					required : true,
-					maxlength : 4,
-					remote : {
-						cache: false,
-						async:false,
-						type:'POST',
-						url:'ajax_dialog.php?act=ajax_captcha&seKey='+$("input[name='captcha']").siblings(".captcha_img").data("key"),
-						data:{
-							captcha:function(){
-								return $("input[name='captcha']").val();
-							}
-						},
-						dataFilter:function(data,type){
-							if(data == "false"){
-								$("input[name='captcha']").siblings(".captcha_img").click();
-							}
-							return data;
-						}
-					}
-				}
-				<!--{/if}-->
-			},
-			messages : {
-				msg_title : {
-					required : "<i class='iconfont icon-info-sign'></i> {$lang.commentTitle_not}",
-					minlength: "<i class='iconfont icon-info-sign'></i> {$lang.commentTitle_xz}",
-					maxlength: "<i class='iconfont icon-info-sign'></i> {$lang.commentTitle_xz}"
-				},
-				msg_content : {
-					required : "<i class='iconfont icon-info-sign'></i> {$lang.content_not}"
-				},
-				user_email:{
-					required : "<i class='iconfont icon-info-sign'></i> " + msg_empty_email,
-					email : "<i class='iconfont icon-info-sign'></i> " + msg_error_email
-				}
-				<!--{if $enabled_captcha}-->
-				,captcha:{
-					required : "<i class='iconfont icon-info-sign'></i> " + json_languages.captcha_not,
-					maxlength: "<i class='iconfont icon-info-sign'></i> " + json_languages.captcha_xz,
-					remote : "<i class='iconfont icon-info-sign'></i> " + json_languages.captcha_cw
-				}
-				<!--{/if}-->
-			},
-			success:function(label){
-				label.removeClass().addClass("succeed").html("<i></i>");
-			},
-			onkeyup:function(element,event){
-				var name = $(element).attr("name");
-				if(name == "captcha"){
-					//不可去除，当是验证码输入必须失去焦点才可以验证（错误刷新验证码）
-					return true;
-				}else{
-					$(element).valid();
-				}
-			}
-		});
-	});
-	
+		if (msg.msg_title.length == 0)
+		{
+			msg_err += msg_title_empty + '\n';
+		}
+		else if (frm.elements['captcha'] && msg.captcha.length==0)
+		{
+			msg_err += msg_captcha_empty + '\n'
+		}
+		else if (msg.msg_content.length == 0)
+		{
+			msg_err += msg_content_empty + '\n'
+		}
+		else if (msg.msg_title.length > 200)
+		{
+			msg_err += msg_title_limit + '\n';
+		}
+
+		if (msg_err.length > 0)
+		{
+			pbDialog(msg_err,"",0);
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	{/literal}
+
 	/**
 	 * 首页分类树 头部
 	 */

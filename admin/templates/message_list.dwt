@@ -5,22 +5,23 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.juris} - {$ur_here}</div>
+    	<div class="title">权限 - {$ur_here}</div>
         <div class="content">		
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.list.0}</li>
+                	<li>该页面展示管理员的留言，可进行操作。</li>
                 </ul>
             </div>
 			<div class="flexilist">
+            	<!--数据列表-->
                 <div class="common-head">
                     <div class="fl">
                     	<a href="{$action_link.href}"><div class="fbutton"><div class="add" title="{$action_link.text}"><span><i class="icon icon-plus"></i>{$action_link.text}</span></div></div></a>
                     </div>
                     <div class="refresh">
-                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    	<div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>
                     <div class="search">
                     	<form method="post" action="javascript:searchMessage()" name="theForm">
@@ -79,7 +80,7 @@
                             <td class="handle">
                             	<div class="tDiv a2">
                                     <a href="message.php?act=view&id={$msg.message_id}" title="{$lang.view_msg}" class="btn_see"><i class="sc_icon sc_icon_see"></i>{$lang.view}</a>
-                                    <a href="javascript:;" onclick="listTable.remove({$msg.message_id}, '{$lang.drop_confirm}')" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                    <a href="javascript:;" onclick="listTable.remove({$msg.message_id}, '{$lang.drop_confirm}')" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>
                                 </div>
                             </td>
                         </tr>
@@ -108,23 +109,26 @@
     	</div>        
 	</div>    
     {include file ='library/pagefooter.lbi'}            
-	<script type="text/javascript">
-	listTable.recordCount = {$record_count};
-	listTable.pageCount = {$page_count};
-	
-	{foreach from=$filter item=item key=key}
-	listTable.filter.{$key} = '{$item}';
-	{/foreach}
-	
-	/**
-	* 查询留言
-	*/
-	function searchMessage()
-	{
-		listTable.filter.msg_type = document.forms['theForm'].elements['msg_type'].value;
-		listTable.filter.page = 1;
-		listTable.loadList();
-	}
+	<script type="text/javascript" language="JavaScript">
+		listTable.recordCount = {$record_count};
+		listTable.pageCount = {$page_count};
+		
+		{foreach from=$filter item=item key=key}
+		listTable.filter.{$key} = '{$item}';
+		{/foreach}
+		
+		{literal}
+		
+		/**
+		* 查询留言
+		*/
+		function searchMessage()
+		{
+			listTable.filter.msg_type = document.forms['theForm'].elements['msg_type'].value;
+			listTable.filter.page = 1;
+			listTable.loadList();
+		}
+		{/literal}
     </script>
 </body>
 </html>

@@ -213,6 +213,7 @@
     $.levelLink();
 <!--
 {literal}
+region.isAdmin = true;
 
 /**
 * 新增自提点信息

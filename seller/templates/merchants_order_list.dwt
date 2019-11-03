@@ -64,78 +64,78 @@
                     &nbsp;&nbsp;{$lang.is_brokerage_amount}：<font style="color:#179f27" id="is_brokerage_amount">{$order_list.brokerage_amount.is_settlement}</font><!--liu-->
                     &nbsp;&nbsp;{$lang.no_brokerage_amount}：<font style="color:#F00" id="no_brokerage_amount">{$order_list.brokerage_amount.no_settlement}</font><!--liu-->
                 </div>
-				<table class="ecsc-default-table goods-default-table">
+                  <table class="ecsc-default-table">
                     <thead>
                     <tr>
-                        <th width="16%" class="tl pl10">{$lang.order_sn}</th>
-                        <th width="15%" class="tl">{$lang.consignee}</th>
-                        <th width="22%" class="tl">{$lang.total_fee}</th>
-                        <th width="9%" class="tl">有效优惠</th>
-                        <!--{if $is_dir} 分销商品开关begin -->
-                        <th width="7%">{$lang.drp_comm}</th>
-                        <!--{/if} 分销商品开关end -->
-                        <th width="7%">{$lang.all_status}</th>
-                        <th width="7%">{$lang.settlement_state}</th>
-                        <th width="7%">{$lang.handler}</th>
+                      <th width="17%"><div class="first_all"><input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox" id="all" class="ui-checkbox" /><label class="ui-label" for="all">{$lang.order_sn}</label></div></th>
+                      <th width="8%" class="tl">{$lang.order_time}</th>
+                      <th width="9%" class="tl">{$lang.consignee}</th>
+                      <th width="7%">{$lang.total_fee}</th>
+                      <th width="9%"><div class="tDiv">有效优惠</div></th>
+                      <!--分销商品开关begin -->
+                    {if $is_dir}
+                    <th width="6%"><div class="tDiv">{$lang.drp_comm}</div></th>
+                    {/if}
+                    <!--分销商品开关end -->
+                      <th width="7%">{$lang.return_amount}</th>
+                      <th width="7%">{$lang.effective_amount_into}</th>
+                      <th width="7%">{$lang.brokerage_amount}</th>
+                      <th width="7%">{$lang.all_status}</th>
+                      <th width="5%">{$lang.settlement_state}</th>
+                      <th width="5%">{$lang.handler}</th>
                     </tr>
                     </thead>
                     <tbody>
                     {foreach from=$order_list item=order name=noorder}
                     {if !$smarty.foreach.noorder.last}
                     <tr>
-                      <td class="tl">
-                      <div class="tc_items pl10">
-                      	<div class="item">
-                        	<p>{$order.order_sn}{if $order.return_amount > 0}<font class="red">【{$lang.refund}】</font>{/if}</p>
-                        </div>
-                        <div class="item">{$order.buyer|escape}<br />{$order.short_order_time}</div>
-                        {if $order.chargeoff_status neq 0}<div class="item"><font class="red">【账单：{$order.bill_sn}】</font></div>{/if}
-                      </div>
-                      </td>
-                      <td class="tl"><a href="mailto:{$order.email}">{$order.consignee|escape}</a>{if $order.tel} [TEL: {$order.tel|escape}]{/if}<br />{$order.address|escape}</td>
-                      <td class="tl">
-                      	<div class="tc_items">
-                            <div class="item">
-                            	<span>{$lang.total_fee}：</span>
-                                <span>{$order.formated_order_total_fee}<!--{if $order.shipping_fee neq 0}--><em class="red">(含运费：{$order.formated_shipping_fee})</em><!--{/if}--></span>
-                            </div>
-                            <div class="item">
-                            	<span>{$lang.return_amount}：</span>
-                                <span>{$order.formated_return_amount}{if $order.return_amount > 0}<a href="order.php?act=return_list&order_id={$order.order_id}&return_type=1" target="_blank">(查看)</a>{/if}</span>
-                            </div>
-                            <div class="item">
-                            	<span>{$lang.effective_amount_into}：</span>
-                                <span>
-                                    {if $order.is_goods_rate eq 1}
-                                        <!--{if $order.brokerage_amount_price neq 0}-->{$order.formated_effective_amount}【订单】<!--{/if}-->
-                                        {$order.goods_rate.format_total_fee}【商品】
-                                    {else}
-                                        {$order.formated_effective_amount}
-                                    {/if}
-                                    <em class="org2">(不含运费)</em>
-                                </span>
-                            </div>
-                            <div class="item">
-                            	<span>{$lang.brokerage_amount}：</span>
-                            	<span>
-                                    {$order.formated_brokerage_amount}
-                                    <!-- {if $order.shipping_fee neq 0} --><em class="red">(含运费：{$order.formated_shipping_fee})</em><!-- {/if} -->
-                                </span>
-                                {if $order.is_goods_rate}<br /><em class="blue">(部分商品比例)</em>{/if}
-                            </div>
-                        </div>
+                      <td class="first_td_checkbox"><div class="first_all tl"><input type="checkbox" name="checkboxes[]" value="{$order.order_id}" id="checkbox_{$order.order_id}" class="ui-checkbox" /><label for="checkbox_{$order.order_id}" class="ui-label">{$order.order_sn}{if $order.return_amount > 0}<br/><font class="red" style=" padding-left:12px;">【{$lang.refund}】</font>{/if}</label></div></td>
+                      <td class="tl">{$order.buyer|escape}<br />{$order.short_order_time}</td>
+                      <td class="tl"><a href="mailto:{$order.email}">{$order.consignee|escape}</a>{if $order.tel} [TEL: {$order.tel|escape}]{/if} <br />{$order.address|escape}</td>
+                      <td>
+                        {$order.formated_order_amount_field}
+                        <!-- {if $order.shipping_fee neq 0} -->
+                        <br/><em style="color:#F00">（含运费：{$order.formated_shipping_fee}）</em>
+                        <!-- {/if} -->
                       </td>  
-                      <td class="tl">
-                      	<div class="tc_items">
-                            <div class="item">折扣：-{$order.formated_discount}</div>
-                            <div class="item">优惠券：-{$order.formated_coupons}</div>
-                            <div class="item">积分：-{$order.formated_integral_money}</div>
-                            <div class="item">红包：-{$order.formated_bonus}</div>
-                        </div>
+                      <td>
+                            折扣：-{$order.formated_discount}<br />
+                            优惠券：-{$order.formated_coupons}<br />
+                            积分：-{$order.formated_integral_money}<br />
+                            红包：-{$order.formated_bonus}<br />
                       </td>  
-                      <!--{if $is_dir} 分销商品开关begin -->
+                      <!--分销商品开关begin -->
+                      {if $is_dir}
                       <td><div class="tDiv">{$order.formated_drp_commission}</div></td>
-                      <!--{/if} 分销商品开关end -->
+                      {/if}
+                      <!--分销商品开关end -->
+                      <td>{$order.formated_return_amount}{if $order.return_amount > 0}<br/><a href="order.php?act=return_list&order_id={$order.order_id}&return_type=1" target="_blank" style="color:#930">(查看)</a>{/if}</td>
+                      <td>
+                        <!-- {if $order.shipping_fee neq 0} -->
+                        {$order.formated_order_amount_field}
+                        <br/> - {$order.formated_shipping_fee}
+                        <br/><em style="color:#F00"> = {$order.formated_effective_amount}</em>
+                        <!-- {else} -->
+                        {$order.formated_effective_amount}
+                        <!-- {/if} -->
+                      </td>
+                      
+                      <td>
+                        <p>
+                        <!-- {if $order.shipping_fee neq 0} -->
+                        + {$order.formated_effective_amount_price}
+                        <br/>+ {$order.formated_shipping_fee}
+                        <br/><em style="color:#F00"> = {$order.formated_brokerage_amount}</em>
+                        <!-- {else} -->
+                        {$order.formated_brokerage_amount}
+                        <!-- {/if} -->
+                        </p>
+                        {if $order.is_goods_rate}
+                            <p>
+                                <em style=" color:#31b4e1;">(部分商品比例)</em>
+                            </p>
+                        {/if}
+                      </td>
                       <td>{$lang.os[$order.order_status]}<br />{$lang.ps[$order.pay_status]}<br />{$lang.ss[$order.shipping_status]}</td>
                       <td>
                         <img src="images/{if $order.is_settlement}yes{else}no{/if}.png" />
@@ -149,9 +149,13 @@
                     <tr><td class="no-records" colspan="10">{$lang.no_records}</td></tr>
                     {/foreach}
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="10">{include file="page.dwt"}</td>
+                        </tr>
+                    </tfoot>
                   </table>
                   </form>
-                  {include file="page.dwt"}
                   {if $full_page}
                 </div>
             </div>
@@ -164,17 +168,20 @@
 <!--高级搜索 end-->
 
 {include file ='library/seller_footer.lbi'}
-<script type="text/javascript" src="js/jquery.purebox.js"></script>
+<!--start-->
 <script type="text/javascript">
-	listTable.recordCount = {$record_count};
-	listTable.pageCount = {$page_count};
-	listTable.query = "order_query";
-	
-	{foreach from=$filter item=item key=key}
-	listTable.filter.{$key} = '{$item}';
-	{/foreach}
+  <!--
+  listTable.recordCount = {$record_count};
+  listTable.pageCount = {$page_count};
+  listTable.query = "order_query";
 
-  	/**
+  {foreach from=$filter item=item key=key}
+  listTable.filter.{$key} = '{$item}';
+  {/foreach}
+
+  {literal}
+  
+  /**
      * 搜索订单
      */
     function merchants_searchOrder()
@@ -186,9 +193,20 @@
         listTable.loadList();
 		listTable.query = "order_query";
     }
-
-	function order_downloadList(){
-		page_downloadList("{$page_count}",'merchants_commission','ajax_download','merchants_commission','merchant_download','订单结算导出弹窗');
+	
+	//导出商家佣金列表
+	function order_downloadList()
+	{
+	  var args = '';
+	  for (var i in listTable.filter)
+	  {
+		if (typeof(listTable.filter[i]) != "function" && typeof(listTable.filter[i]) != "undefined")
+		{
+		  args += "&" + i + "=" + encodeURIComponent(listTable.filter[i]);
+		}
+	  }
+	  
+	  location.href = "merchants_commission.php?act=merchant_download" + args;
 	}
 	
 	//日期选择插件调用start sunle
@@ -206,7 +224,11 @@
 
 	xvDate(opts1);
 	xvDate(opts2);
+	//日期选择插件调用end sunle
+  {/literal}
+  //-->
 </script>
+<!--end-->
 </body>
 </html>
 {/if}

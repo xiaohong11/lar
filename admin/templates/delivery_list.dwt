@@ -5,27 +5,25 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.order_word} - {$ur_here}</div>
+    	<div class="title">订单 - {$ur_here}</div>
         <div class="content">
-            {include file="library/common_tabs_info.lbi"}
         	<div class="explanation" id="explanation">
-                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content.delivery_list.0}</li>
-                    <li>{$lang.operation_prompt_content.delivery_list.1}</li>
-                    <li>{$lang.operation_prompt_content.delivery_list.2}</li>
+                    <li>商城和平台所有已发货的订单列表管理。</li>
+                    <li>可通过订单号进行查询，侧边栏进行高级搜索。</li>
+                    <li>可进入查看取消发货。</li>
                 </ul>
             </div>
             <div class="flexilist">
             	<div class="common-head">
-                    <div class="search">
-                    	<form action="javascript:;" name="searchForm" onSubmit="searchGoodsname(this);">
-                        <div class="input">
-                            <input type="text" name="order_sn" class="text nofocus" placeholder="{$lang.order_sn}" autocomplete="off" />
-                            <input type="submit" class="btn" name="secrch_btn" ectype="secrch_btn" value="" />
+                    <form action="javascript:searchOrder()" name="searchForm">
+                        <div class="search">
+                            <div class="input">
+                                <input type="text" name="order_sn" class="text nofocus" placeholder="{$lang.order_sn}" autocomplete="off" /><input type="submit" value="" class="not_btn" />
+                            </div>
                         </div>
-                        </form>
-                    </div>
+                    </form>
                 </div>
                 <div class="common-content">
 				<form method="post" action="order.php?act=operate" name="listForm" onsubmit="return check()">
@@ -61,7 +59,7 @@
 									<td class="handle">
 										<div class="tDiv a2">
 											<a href="order.php?act=delivery_info&delivery_id={$delivery.delivery_id}" class="btn_see"><i class="sc_icon sc_icon_see"></i>{$lang.view}</a>
-											<a onclick="{if(confirm('{$lang.confirm_delete}')){return true;}return false;}" href="order.php?act=operate&remove_invoice=1&delivery_id={$delivery.delivery_id}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+											<a onclick="{if(confirm('{$lang.confirm_delete}')){return true;}return false;}" href="order.php?act=operate&remove_invoice=1&delivery_id={$delivery.delivery_id}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>
 										</div>
 									</td>
 								</tr>
@@ -75,8 +73,8 @@
                                         <div class="tDiv">
                                             <div class="tfoot_btninfo">
                                                 <input type="submit" value="{$lang.drop}" name="remove_invoice" ectype="btnSubmit" class="btn btn_disabled" disabled="" onclick="{if(confirm('{$lang.confirm_delete}')){return true;}return false;}">
-												<input type="submit" value="{$lang.batch_delivery}" name="batch_delivery" ectype="btnSubmit" class="btn btn_disabled" disabled="" style="display:none">
-												<input type="button" value="{$lang.batch_delivery}" name="batch_button" ectype="btnSubmit" class="btn btn_disabled" disabled="">
+												<input type="submit" value="批量发货" name="batch_delivery" ectype="btnSubmit" class="btn btn_disabled" disabled="" style="display:none">
+												<input type="button" value="批量发货" name="batch_button" ectype="btnSubmit" class="btn btn_disabled" disabled="">
 												<div class="hide" ectype="daDialog"></div>
                                             </div>
                                             <div class="list-page">
@@ -94,11 +92,11 @@
             </div>
             <div class="gj_search">
                 <div class="search-gao-list" id="searchBarOpen">
-                    <i class="icon icon-zoom-in"></i>{$lang.advanced_search}
+                    <i class="icon icon-zoom-in"></i>高级搜索
                 </div>
                 <div class="search-gao-bar">
-                    <div class="handle-btn" id="searchBarClose"><i class="icon icon-zoom-out"></i>{$lang.pack_up}</div>
-                    <div class="title"><h3>{$lang.advanced_search}</h3></div>
+                    <div class="handle-btn" id="searchBarClose"><i class="icon icon-zoom-out"></i>收起边栏</div>
+                    <div class="title"><h3>高级搜索</h3></div>
                     <form method="get" name="formSearch_senior" action="javascript:searchOrder()">
                         <div class="searchContent">
                             <div class="layout-box">
@@ -115,10 +113,10 @@
                                     <dd><input type="text" value="" name="consignee" class="s-input-txt" autocomplete="off" /></dd>
                                 </dl>
                                 <dl>
-                                    <dt>{$lang.delivery_status_dt}</dt>
+                                    <dt>发货单状态</dt>
                                     <dd>
-                                        <div class="imitate_select select_w145">
-                                            <div class="cite">{$lang.please_select}</div>
+                                        <div  class="imitate_select select_w145">
+                                            <div class="cite">请选择</div>
                                             <ul>
                                                <li><a href="javascript:;" data-value="-1">{$lang.select_please}</a></li>
                                                {foreach from=$lang.delivery_status item=list key=k}
@@ -129,79 +127,68 @@
                                         </div>
                                     </dd>
                                 </dl>
-                                <dl>
-                                    <dt>订单来源</dt>
-                                    <dd>
-                                        <div id="order_referer" class="imitate_select select_w145">
-                                          <div class="cite">{$lang.select_please}</div>
-                                          <ul>
-                                             <li><a href="javascript:;" data-value="">{$lang.select_please}</a></li>
-                                             <li><a href="javascript:;" data-value="pc">PC</a></li>
-                                             <li><a href="javascript:;" data-value="touch">WAP</a></li>
-                                             <li><a href="javascript:;" data-value="mobile">APP</a></li>
-                                             <li><a href="javascript:;" data-value="ecjia-cashdesk">收银台</a></li>
-                                          </ul>
-                                        <input name="order_referer" type="hidden" value="" id="order_referer_val">
-                                        </div>
-                                    </dd>
-                                </dl>                                 
                             </div>
                         </div>
-                        <div class="bot_btn">
-                            <input type="submit" class="btn red_btn" name="tj_search" value="{$lang.button_inquire}" /><input type="reset" class="btn btn_reset" name="reset" value="{$lang.button_reset_alt}" />
+                         <div class="bot_btn">
+                            <input type="submit" class="btn red_btn" name="tj_search" value="提交查询" /><input type="reset" class="btn btn_reset" name="reset" value="重置" />
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-	{include file ='library/pagefooter.lbi'}
-	<script type="text/javascript" src="js/jquery.purebox.js"></script>
-    <script type="text/javascript">
+ {include file ='library/pagefooter.lbi'}
+<script type="text/javascript" src="js/jquery.purebox.js"></script>
+<script type="text/javascript">
 	//列表导航栏设置下路选项
 	$(".ps-container").perfectScrollbar();
 	
 	//分页传值
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
+	listTable.recordCount = '{$record_count}';
+	listTable.pageCount = '{$page_count}';
 	listTable.query = "delivery_query";
 		
 	{foreach from=$filter item=item key=key}
 	listTable.filter.{$key} = '{$item}';
 	{/foreach}
 
-	$.gjSearch("-240px");  //高级搜索
+$.gjSearch("-240px");  //高级搜索
 
- 	/* 搜索订单 */
-	function searchOrder()
-	{
-		var frm = $("form[name='formSearch_senior']");
-		listTable.filter['order_sn'] = Utils.trim(($("form[name='searchForm']").find("input[name='order_sn']").val() != '') ? $("form[name='searchForm']").find("input[name='order_sn']").val() :  frm.find("input[name='order_sn']").val());
-		listTable.filter['consignee'] = Utils.trim(frm.find("input[name='consignee']").val());
-		listTable.filter['status'] = frm.find("input[name='status']").val();
-		listTable.filter['delivery_sn'] = frm.find("input[name='delivery_sn']").val();
-        listTable.filter['order_referer'] = frm.find("input[name='order_referer']").val();
-		listTable.filter['page'] = 1;
-		listTable.query = "delivery_query";
-		listTable.loadList();
-	}
-
-	function check()
+ /**
+     * 搜索订单
+     */
+    function searchOrder()
     {
-		var snArray = new Array();
-		var eles = document.forms['listForm'].elements;
-		for (var i=0; i<eles.length; i++){
-			if (eles[i].tagName == 'INPUT' && eles[i].type == 'checkbox' && eles[i].checked && eles[i].value != 'on'){
-				snArray.push(eles[i].value);
-			}
-		}
-		
-		if (snArray.length == 0){
-			return false;
-		}else{
-			eles['order_id'].value = snArray.toString();
-			return true;
-		}
+        var frm = $("form[name='formSearch_senior']");
+        listTable.filter['order_sn'] = Utils.trim(($("form[name='searchForm']").find("input[name='order_sn']").val() != '') ? $("form[name='searchForm']").find("input[name='order_sn']").val() :  frm.find("input[name='order_sn']").val());
+        listTable.filter['consignee'] = Utils.trim(frm.find("input[name='consignee']").val());
+        listTable.filter['status'] = frm.find("input[name='status']").val();
+        listTable.filter['delivery_sn'] = frm.find("input[name='delivery_sn']").val();
+        listTable.filter['page'] = 1;
+        listTable.query = "delivery_query";
+        listTable.loadList();
+    }
+
+ function check()
+    {
+      var snArray = new Array();
+      var eles = document.forms['listForm'].elements;
+      for (var i=0; i<eles.length; i++)
+      {
+        if (eles[i].tagName == 'INPUT' && eles[i].type == 'checkbox' && eles[i].checked && eles[i].value != 'on')
+        {
+          snArray.push(eles[i].value);
+        }
+      }
+      if (snArray.length == 0)
+      {
+        return false;
+      }
+      else
+      {
+        eles['order_id'].value = snArray.toString();
+        return true;
+      }
     }
 	
 	//批量发货弹窗
@@ -217,10 +204,10 @@
 		$.jqueryAjax('order.php', 'act=batch_ship&delivery_ids='+delivery_ids, function(data){
 			pb({
 				id:"delivery_dialog",
-				title:'{$lang.batch_delivery}',
+				title:'批量发货',
 				width:1000,
-				ok_title:'{$lang.button_submit_alt}', 	//按钮名称
-				cl_title:'{$lang.cancel}', 	//按钮名称
+				ok_title:'确定', 	//按钮名称
+				cl_title:'取消', 	//按钮名称
 				content:data.content, 	//调取内容
 				drag:false,
 				foot:true,
@@ -233,8 +220,8 @@
 				onClose:function(){}
 			});			
 		})
-	});
-	</script>
+	})
+</script>
 </body>
 </html>
 {/if}

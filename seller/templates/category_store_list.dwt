@@ -46,14 +46,15 @@
 										<li><a href="category_store.php?act=add&parent_id={$cat.cat_id}">新增下一级</a></li>
 										<li><a href="category_store.php?act=list&parent_id={$cat.cat_id}&level={$level}">查看下一级</a></li>
 										{/if}
-										<li><a href="javascript:void(0);" ectype="transfer_goods" data-cid="{$cat.cat_id}">转移商品</a></li>                                      
+										<li><a href="javascript:void(0);" ectype="transfer_goods" data-cid="{$cat.cat_id}">转移商品</a></li>
+                                                                                
 									</ul>
 								</div>
 							</div>
 						  </td>
                           <td class="first-cell tl" id="level_{$cat.level}_{$cat.cat_id}">
                               <div class="first_column">
-                              	<span><a href="goods.php?act=list&cat_id={$cat.cat_id}&cat_type=seller">{$cat.cat_name}</a></span>
+                                <i class="up" id="icon_{$cat.level}_{$cat.cat_id}" data-level="{$cat.level}" data-catid="{$cat.cat_id}" data-isclick="0"></i><span><a href="goods.php?act=list&cat_id={$cat.cat_id}&cat_type=seller">{$cat.cat_name}</a></span>
                               </div>
                               {if $cat.cat_image}
                               <img src="../{$cat.cat_image}" border="0" style="vertical-align:middle;" width="60px" height="21px">
@@ -78,9 +79,6 @@
                         <tr><td class="no-records" colspan="11">{$lang.no_records}</td></tr>
                         {/foreach}
                     </tbody>
-                    <tfoot>
-                        <tr><td colspan="10">{include file="page.dwt"}</td></tr>
-                    </tfoot>
                 </table>
                     {if $full_page}
                 </div>
@@ -91,43 +89,35 @@
 {include file ='library/seller_footer.lbi'}
 <script type="text/javascript" src="js/jquery.purebox.js"></script>
 <script type="text/javascript">
-
-listTable.recordCount = {$record_count};
-listTable.pageCount = {$page_count};
-
-{foreach from=$filter item=item key=key}
-listTable.filter.{$key} = '{$item}';
-{/foreach}
-{literal}
-  
-//转移分类
-$(document).on('click',"*[ectype='transfer_goods']",function(){
-	if(confirm('执行此操作时，当前分类所有下级分类也同时转移，确定执行吗？')){
-		var cat_id = $(this).data("cid");
-		$.jqueryAjax("category_store.php", "act=move&cat_id="+cat_id, function(data){
-			var content = data.content;
-			pb({
-				id:"transfer_dialog",
-				title:"转移商品",
-				width:732,
-				content:content,
-				ok_title:"开始转移",
-				cl_title:"重置",
-				drag:false,
-				foot:true,
-				onOk:function(){
-					$("#moveCategory").submit();
-				}
+		//转移分类
+		$(document).on('click',"*[ectype='transfer_goods']",function(){
+                    if(confirm('执行此操作时，当前分类所有下级分类也同时转移，确定执行吗？')){
+                        var cat_id = $(this).data("cid");
+			$.jqueryAjax("category_store.php", "act=move&cat_id="+cat_id, function(data){
+				var content = data.content;
+				pb({
+					id:"transfer_dialog",
+					title:"转移商品",
+					width:732,
+					content:content,
+					ok_title:"开始转移",
+					cl_title:"重置",
+					drag:false,
+					foot:true,
+					onOk:function(){
+						$("#moveCategory").submit();
+					}
+				});
+				$.category();  //分类选择
+				$(".select-list").hover(function(){
+					$(".select-list").perfectScrollbar("destroy");
+					$(".select-list").perfectScrollbar();
+				});
 			});
-			$.category();  //分类选择
-			$(".select-list").hover(function(){
-				$(".select-list").perfectScrollbar("destroy");
-				$(".select-list").perfectScrollbar();
-			});
+                    }
+			
 		});
-	}
-});
-</script>
+    </script>
 </body>
 </html>
 {/if}

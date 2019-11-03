@@ -4,23 +4,23 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.11_system} - {$ur_here}</div>
+    	<div class="title">系统设置 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
             	<div class="ex_tit">
-					<i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span>
+					<i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span>
                     {if $open eq 1}
                     <div class="view-case">
-                    	<div class="view-case-tit"><i></i>{$lang.view_tutorials}</div>
+                    	<div class="view-case-tit"><i></i>查看教程</div>
                         <div class="view-case-info">
-                        	<a href="http://help.ecmoban.com/article-6878.html" target="_blank">{$lang.tutorials_bonus_list_one}</a>
+                        	<a href="http://help.ecmoban.com/article-6878.html" target="_blank">商城计划任务操作说明</a>
                         </div>
                     </div>			
                     {/if}	
 				</div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.list.0}</li>
-                    <li>{$lang.operation_prompt_content.list.1}</li>
+                	<li>展示计划任务列表、计划任务描述、版本、插件记者等信息。</li>
+                    <li>可开启或关闭计划任务，计划任务可安装、卸载、编辑等操作。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -47,7 +47,7 @@
                                     <td>
                                     	<div class="tDiv">
                                             {if $module.install == "1"}
-                                            <div class="switch {if $module.enable eq 1}active{/if}" title="{if $module.enable eq 1}{$lang.yes}{else}{$lang.no}{/if}" onclick="listTable.switchBt(this, 'toggle_show', '{$module.code}')">
+                                            <div class="switch {if $module.enable eq 1}active{/if}" title="{if $module.enable eq 1}是{else}否{/if}" onclick="listTable.switchBt(this, 'toggle_show', '{$module.code}')">
                                             	<div class="circle"></div>
                                             </div>
                                             <input type="hidden" value="0" name="">
@@ -67,7 +67,7 @@
                                     </td>
                                 </tr>
                                 {foreachelse}
-                                <tr><td class="no-records" colspan="12">{$lang.no_records}</td></tr>
+                                    <tr><td class="no-records" colspan="12">{$lang.no_records}</td></tr>
                                 {/foreach}
                             </tbody>
                         </table>

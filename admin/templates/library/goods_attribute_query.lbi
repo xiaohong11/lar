@@ -3,33 +3,26 @@
         <tbody>
             {foreach from=$attr_group item=group}
             {if $group.attr_info}
-            <tr data-changelog="{$group.changelog}">
-                <td class="td_bg_blue" {if $add_shop_price eq 1}width="20%"{/if}>
-                	{foreach from=$group.attr_info item=one name=one}
-                        {$one.attr_value}
-                        <input type="hidden" name="attr[{$one.attr_id}][]" value="{$one.attr_value}" />
-                        <input type="hidden" name="goods_attr_id[{$one.goods_attr_id}][]" value="{$one.goods_attr_id}" />
-                        {if !$smarty.foreach.one.last}，{/if}
-                    {/foreach}
-                </td>		
+            <tr>
+                {foreach from=$group.attr_info item=one}
+                <td class="td_bg_blue" width="7%">{$one.attr_value}<input type="hidden" name="attr[{$one.attr_id}][]" value="{$one.attr_value}" /></td>		
+                {/foreach}		
                 <td width="5%" {if $region_name eq ''}class="hide"{/if}>{$region_name}</td>
-                <td width="8%" {if $goods_attr_price eq 0 || $add_shop_price eq 1}class="hide"{/if}><input type="text" name="product_market_price[]" onBlur="listTable.editInput(this, 'edit_product_market_price', {$group.product_id|default:0}, $('#goods_model').val(), 'goods_model');" class="text w60" autocomplete="off" value="{$group.product_market_price|default:0.00}" /></td>
+                <td width="15%" class="hide"><input type="text" name="product_market_price[]" class="text w60" autocomplete="off" value="{$group.product_market_price|default:0.00}" /></td>
                 <td width="8%" {if $goods_attr_price eq 0}class="hide"{/if}><input type="text" name="product_price[]" onBlur="listTable.editInput(this, 'edit_product_price', {$group.product_id|default:0}, $('#goods_model').val(), 'goods_model');" class="text w60" autocomplete="off" value="{$group.product_price|default:0.00}" /></td>
-                <td width="8%" {if $goods_attr_price eq 0 || $add_shop_price eq 1}class="hide"{/if}><input type="text" name="product_promote_price[]" onBlur="listTable.editInput(this, 'edit_product_promote_price', {$group.product_id|default:0}, $('#goods_model').val(), 'goods_model');" class="text w60" autocomplete="off" value="{$group.product_promote_price|default:0.00}" /></td>
-                <td width="10%"><input type="text" name="product_number[]" onBlur="listTable.editInput(this, 'edit_product_number', {$group.product_id|default:0}, $('#goods_model').val(), 'goods_model');" class="text w60" autocomplete="off" value="{$group.product_number|default:0}" /></td>
-                <td width="10%"><input type="text" name="product_warn_number[]" onBlur="listTable.editInput(this, 'edit_product_warn_number', {$group.product_id|default:0}, $('#goods_model').val(), 'goods_model');" class="text w60" autocomplete="off" value="{$group.product_warn_number|default:1}" /></td>
-                <td width="12%"><input type="text" name="product_sn[]" onBlur="listTable.editInput(this, 'edit_product_sn', {$group.product_id|default:0}, $('#goods_model').val(), 'goods_model');" class="text w120" autocomplete="off" value="{$group.product_sn}" /></td>
-                <td width="12%"><input type="text" name="product_bar_code[]" onBlur="listTable.editInput(this, 'edit_product_bar_code', {$group.product_id|default:0}, $('#goods_model').val(), 'goods_model');" class="text w120" autocomplete="off" value="{$group.bar_code}" /></td>
+                <td width="8%"><input type="text" name="product_number[]" onBlur="listTable.editInput(this, 'edit_product_number', {$group.product_id|default:0}, $('#goods_model').val(), 'goods_model');" class="text w60" autocomplete="off" value="{$group.product_number|default:0}" /></td>
+                <td width="8%"><input type="text" name="product_warn_number[]" onBlur="listTable.editInput(this, 'edit_product_warn_number', {$group.product_id|default:0}, $('#goods_model').val(), 'goods_model');" class="text w60" autocomplete="off" value="{$group.product_warn_number|default:1}" /></td>
+                <td width="10%"><input type="text" name="product_sn[]" onBlur="listTable.editInput(this, 'edit_product_sn', {$group.product_id|default:0}, $('#goods_model').val(), 'goods_model');" class="text w120" autocomplete="off" value="{$group.product_sn}" /></td>
+                <td width="10%"><input type="text" name="product_bar_code[]" onBlur="listTable.editInput(this, 'edit_product_bar_code', {$group.product_id|default:0}, $('#goods_model').val(), 'goods_model');" class="text w120" autocomplete="off" value="{$group.bar_code}" /></td>
                 <td class="handle" width="5%">
-                    {if $group.product_id && $group.changelog eq 0}
+                    {if $group.product_id}
                         <div class="tDiv pl0 a1">
-                        <a href="javascript:void(0);" class="btn_trash" onclick="if (confirm('{$lang.trash_product_confirm}')) dropProduct('{$group.product_id}')"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                        <a href="javascript:void(0);" class="btn_trash" onclick="if (confirm('{$lang.trash_product_confirm}')) dropProduct('{$group.product_id}')"><i class="icon icon-trash"></i>删除</a>
                         </div>
                     {else}
                         {$lang.n_a}
                     {/if}
-                    <input type="hidden" name="product_id[]" value="{if $group.changelog eq 1}0{else}{$group.product_id|default:0}{/if}" />
-                    <input type="hidden" name="changelog_product_id[]" value="{if $group.changelog eq 1}{$group.product_id|default:0}{else}0{/if}" />
+                    <input type="hidden" name="product_id[]" value="{$group.product_id|default:0}" />
                 </td>
             </tr>
             {/if}

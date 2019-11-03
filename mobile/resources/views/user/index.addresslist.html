@@ -1,6 +1,6 @@
 {include file="page_header"}
 		<div class="con">
-		 {if $consignee_list}
+		 {if $consignee_list}      
 			<div class="flow-consignee-list j-get-consignee-one select-three">
                  {foreach $consignee_list as $consignee}
 				<section class="flow-checkout-adr m-top08">
@@ -42,21 +42,22 @@
 				<p>亲，还没有收货地址哦～！</p>
 				<a href="{url('index/addaddress')}" class="t-first">点击添加一个收货地址</a>
 			</div>
-			{/if}
+			{/if}	
 		</div>
     <!--快捷导航-->
-    {include file="float_nav"}
-    {include file="float_nav_footer"}
-    <script type="text/javascript">
-        //设置默认收获地址
-        function adderss_user(address_id){
-            $.get("{url('user/index/ajax_make_address')}",{address_id:address_id},function(data){
-                if(data['address_id']){
-                    d_messages('设置成功');
-                }
-                return false;
-            },'json');
-        }
+    {include file="float_nav"}             
+    {include file="float_nav_footer"}  
+         <script type="text/javascript">
+
+                //设置默认收获地址
+       function adderss_user(address_id){
+                $.get('{url('user/index/ajax_make_address ' )}',{address_id:address_id},function(data){
+                   
+                        
+                },'json') ; 
+               
+            }
     </script>
 	</body>
+
 </html>

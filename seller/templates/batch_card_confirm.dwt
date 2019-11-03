@@ -14,44 +14,28 @@
                 <!--start-->
 				<div class="list-div" id="listDiv">
 				  <form action="virtual_card.php" method="post">
-					<table class="ecsc-default-table">
-					  <thead>
-                      <tr>
-						<th>
-                        	<div class="first_all">
-                                <input type="checkbox" checked onclick="listTable.selectAll(this, 'checked')" id="all" class="ui-checkbox" />
-                                <label class="ui-label" for="all">{$lang.lab_card_id}</label>
-                            </div>
-                        </th>
+					<table cellspacing='0' cellpadding='0'>
+					  <tr>
+						<th><input type="checkbox" checked onclick="listTable.selectAll(this, 'checked')" />{$lang.lab_card_id}</th>
 						<th>{$lang.lab_card_sn}</th>
 						<th>{$lang.lab_card_password}</th>
 						<th>{$lang.lab_end_date}</th>
 					  </tr>
-                      </thead>
-                      <tbody>
 					  {foreach from=$list key=key item=card}
 					  <tr>
-						<td>
-                        	<div class="first_all">
-                            	<input type="checkbox" name="checked[]" value="{$key}" id="checkbox_{$key}" class="ui-checkbox" checked />
-                            	<label for="checkbox_{$key}" class="ui-label">{$key}</label>
-                            </div>
-                        </td>
-						<td class="tc"><input type="text" name="card_sn[{$key}]" value="{$card.card_sn}" class="text w140 fn" size="15" /></td>
-						<td class="tc"><input type="text" name="card_password[{$key}]" value="{$card.card_password}" class="text w140 fn" size="15" /></td>
-						<td class="tc"><input type="text" name="end_date[{$key}]" value="{$card.end_date}" class="text w140 fn" size="15" /></td>
+						<td><input type="checkbox" name="checked[]" value="{$key}" checked /> {$key}</td>
+						<td><input type="text" name="card_sn[{$key}]" value="{$card.card_sn}" size="15" /></td>
+						<td><input type="text" name="card_password[{$key}]" value="{$card.card_password}" size="15" /></td>
+						<td><input type="text" name="end_date[{$key}]" value="{$card.end_date}" size="15" /></td>
 					  </tr>
 					  {/foreach}
-                      </tbody>
-                      <tfoot>
-                          <tr>
-                            <td class="td_border tc" colspan="10">
-								<input type="hidden" name="goods_id" value="{$smarty.request.goods_id}" />
-                                <input type="hidden" name="act" value="batch_insert" />
-                                <input type="submit" name="submit" value="{$lang.button_submit}" class="sc-btn sc-blueBg-btn fn btn32" />
-                          	</td>
-                          </tr>
-                      </tfoot>
+					  <tr align="center">
+						<td colspan="6">
+						  <input type="hidden" name="goods_id" value="{$smarty.request.goods_id}" />
+						  <input type="hidden" name="act" value="batch_insert" />
+						  <input type="submit" name="submit" value="{$lang.button_submit}" />
+						</td>
+					  </tr>
 					</table>
 				  </form>
 				</div>

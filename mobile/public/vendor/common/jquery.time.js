@@ -9,8 +9,6 @@
                             hour: $this.find(".hour"),
                             day: $this.find(".day")
                         };
-                        var block=0;
-                        ($(this).attr('block') == 1) ? block = 1 : block = 0;
                         var f = {
                             haomiao: function(n){
                                 if(n < 10)return "00" + n.toString();
@@ -49,10 +47,8 @@
 
                                 }else{
                                     pms.day=pms.hour=pms.mini=pms.sec="00";
-                                    if(block != 1){
-                                        $(".btn-submit").remove();
-                                        $(".btn-disab").css('display','block');
-                                    }
+                                    $(".btn-submit").remove();
+                                    $(".btn-disab").css('display','block');
                                 }
                                 return pms;
                             },

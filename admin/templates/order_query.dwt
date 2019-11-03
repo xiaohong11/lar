@@ -4,18 +4,18 @@
 
 <body class="iframe_body">
     <div class="warpper">
-    	<div class="title">{$lang.order_word} - {$ur_here}</div>
+    	<div class="title">订单 - {$ur_here}</div>
         <div class="content">
             <div class="explanation" id="explanation">
-                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content.search.0}</li>
+                    <li>订单查询提供多个条件进行精准查询。</li>
                 </ul>
             </div>
             <div class="flexilist">
                 <div class="common-content">
                     <div class="mian-info">
-                        <form action="order.php?act=list{$seller_list}" method="post" enctype="multipart/form-data" name="searchForm">
+                        <form action="order.php?act=list" method="post" enctype="multipart/form-data" name="searchForm">
                             <div class="switch_info">
                                 <div class="items">
                                     <div class="item">
@@ -116,7 +116,7 @@
                                         </div>
                                     </div>
                                     <div class="item">
-                                        <div class="label">{$lang.confirmation_receipt_time}：</div>
+                                        <div class="label">确认收货时间：</div>
                                         <div class="label_value">
                                             <div class="text_time" id="text_time3">
                                                 <input type="text" name="start_take_time" id="start_take_time" class="text mr0" autocomplete="off" readonly />
@@ -133,7 +133,7 @@
                                             <div class="level_linkage">
                                                 <div id="dlcountry" class="ui-dropdown smartdropdown alien">
                                                     <input type="hidden" value="0" name="order_country" id="selcountry">
-                                                    <div class="txt">{$lang.country}</div>
+                                                    <div class="txt">国家</div>
                                                     <i class="down u-dropdown-icon"></i>
                                                     <div class="options clearfix" style="max-height:300px;">
                                                         {foreach from=$country_list item=list}
@@ -143,7 +143,7 @@
                                                 </div>
                                                 <div id="dlProvinces" class="ui-dropdown smartdropdown alien">
                                                     <input type="hidden" value="0" name="order_province" id="selProvinces">
-                                                    <div class="txt">{$lang.province_alt}</div>
+                                                    <div class="txt">省/直辖市</div>
                                                     <i class="down u-dropdown-icon"></i>
                                                     <div class="options clearfix" style="max-height:300px;">
                                                         {foreach from=$province_all item=list}
@@ -153,18 +153,18 @@
                                                 </div>
                                                 <div id="dlCity" class="ui-dropdown smartdropdown alien">
                                                     <input type="hidden" value="0" name="order_city" id="selCities">
-                                                    <div class="txt">{$lang.city}</div>
+                                                    <div class="txt">市</div>
                                                     <i class="down u-dropdown-icon"></i>
                                                     <div class="options clearfix" style="max-height:300px;">
-                                                        <span class="liv hide" data-text="{$lang.city}" data-value="0">{$lang.city}</span>
+                                                        <span class="liv hide" data-text="市" data-value="0">市</span>
                                                     </div>
                                                 </div>
                                                 <div id="dlRegion" class="ui-dropdown smartdropdown alien">
                                                     <input type="hidden" value="0" name="order_district" id="selDistricts">
-                                                    <div class="txt">{$lang.area_alt}</div>
+                                                    <div class="txt">区/县</div>
                                                     <i class="down u-dropdown-icon"></i>
                                                     <div class="options clearfix" style="max-height:300px;">
-                                                        <span class="liv hide" data-text="{$lang.area_alt}" data-value="0">{$lang.area_alt}</span>
+                                                        <span class="liv hide" data-text="区/县" data-value="0">区/县</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -213,43 +213,27 @@
                                         </div>
                                     </div>
                                     <div class="item">
-                                        <div class="label">{$lang.order_category}：</div>
+                                        <div class="label">订单分类：</div>
                                         <div class="label_value">
                                             <div id="order_status" class="imitate_select select_w320">
                                                 <div class="cite">{$lang.select_please}</div>
                                                 <ul>
                                                     <li><a href="javascript:;" data-value="">{$lang.select_please}</a></li>
-                                                    <li><a href="javascript:;" data-value="stages">{$lang.baitiao_order}</a></li>
-                                                    <li><a href="javascript:;" data-value="zc">{$lang.zc_order}</a></li>
-                                                    <li><a href="javascript:;" data-value="store">{$lang.so_order}</a></li>
-                                                    <li><a href="javascript:;" data-value="other">{$lang.other_order}</a></li>
-                                                    <li><a href="javascript:;" data-value="dbdd">{$lang.db_order}</a></li>
-                                                    <li><a href="javascript:;" data-value="msdd">{$lang.ms_order}</a></li>
-                                                    <li><a href="javascript:;" data-value="tgdd">{$lang.tg_order}</a></li>
-                                                    <li><a href="javascript:;" data-value="pmdd">{$lang.pm_order}</a></li>
-                                                    <li><a href="javascript:;" data-value="jfdd">{$lang.jf_order}</a></li>
-                                                    <li><a href="javascript:;" data-value="ysdd">{$lang.ys_order}</a></li>
+                                                    <li><a href="javascript:;" data-value="stages">白条订单</a></li>
+                                                    <li><a href="javascript:;" data-value="zc">众筹订单</a></li>
+                                                    <li><a href="javascript:;" data-value="store">门店订单</a></li>
+                                                    <li><a href="javascript:;" data-value="other">促销订单</a></li>
+                                                    <li><a href="javascript:;" data-value="dbdd">夺宝订单</a></li>
+                                                    <li><a href="javascript:;" data-value="msdd">秒杀订单</a></li>
+                                                    <li><a href="javascript:;" data-value="tgdd">团购订单</a></li>
+                                                    <li><a href="javascript:;" data-value="pmdd">拍卖订单</a></li>
+                                                    <li><a href="javascript:;" data-value="jfdd">积分订单</a></li>
+                                                    <li><a href="javascript:;" data-value="ysdd">预售订单</a></li>
                                                 </ul>
                                                 <input name="order_cat" type="hidden" value="" id="order_cat_val">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="item">
-                                        <div class="label">{$lang.from_order}：</div>
-                                        <div class="label_value">
-                                            <div id="order_referer" class="imitate_select select_w320">
-                                                <div class="cite">{$lang.select_please}</div>
-                                                <ul>
-                                                     <li><a href="javascript:;" data-value="">{$lang.select_please}</a></li>
-                                                     <li><a href="javascript:;" data-value="pc">PC</a></li>
-                                                     <li><a href="javascript:;" data-value="touch">WAP</a></li>
-                                                     <li><a href="javascript:;" data-value="mobile">APP</a></li>
-                                                     <li><a href="javascript:;" data-value="ecjia-cashdesk">{$lang.cashdesk}</a></li>
-                                                </ul>
-                                                <input name="order_referer" type="hidden" value="" id="order_referer_val">
-                                            </div>
-                                        </div>
-                                    </div>                                    
                                     <div class="item">
                                         <div class="label">{$lang.label_pay_status}</div>
                                         <div class="label_value">
@@ -275,6 +259,20 @@
                                                     {/foreach}
                                                 </ul>
                                                 <input name="shipping_status" type="hidden" value="-1" id="shipping_status_val">
+                                            </div>	  
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="label">订单类型：</div>
+                                        <div class="label_value">
+                                            <div id="order_type" class="imitate_select select_w320">
+                                                <div class="cite">{$lang.select_please}</div>
+                                                <ul>
+                                                    <li><a href="javascript:;" data-value="0">{$lang.select_please}</a></li>
+                                                     <li><a href="javascript:;" data-value="1">主订单</a></li>
+                                                     <li><a href="javascript:;" data-value="2">子订单</a></li>
+                                                </ul>
+                                                <input name="order_type" type="hidden" value="0" id="order_type_val">
                                             </div>	  
                                         </div>
                                     </div>

@@ -7,7 +7,7 @@
 <body style="background-color: #31b4e1; overflow:hidden;">
 	{insert_scripts files="adminIndex.js"}
     {include file ='library/pageheader.lbi'}
-    <div class="admin-main">
+    <div class="admin-main start_home">
     	<div class="top-border"></div>
         {include file ='library/admin_main_left.lbi'}
         <div class="admin-main-right">
@@ -17,22 +17,9 @@
     <script type="text/javascript" src="js/jquery.purebox.js"></script>
     <script type="text/javascript">
     	var bodyWidth = $("body").width();
-		
-		if(bodyWidth<1380){
-			$("#workspace").attr("height","92%");
-		}else{
-			$("#workspace").attr("height","95%");
+		if(bodyWidth<1204){
+			$("#workspace").height("92%");
 		}
-		
-		$(window).resize(function(e) {
-            bodyWidth = $("body").width();
-		
-			if(bodyWidth<1380){
-				$("#workspace").attr("height","92%");
-			}else{
-				$("#workspace").attr("height","95%");
-			}
-        });
     </script>
 </body>
 </html>

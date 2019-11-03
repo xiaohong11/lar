@@ -18,7 +18,7 @@
 		</td>
 		<td class="handle">
 			<div class="tDiv a1">
-				<a href="javascript:;" ectype="remove_group" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>									
+				<a href="javascript:;" ectype="remove_group" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>									
 			</div>
 		</td>
 	</tr>

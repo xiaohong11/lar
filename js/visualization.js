@@ -1,7 +1,7 @@
 /**
  * 大商创 平台后台、商家后台可视化js
  * ============================================================================
- * 版权所有 2005-2016 上海商创网络科技有限公司，并保留所有权利。
+ * * 版权所有 2005-2016 上海商创网络科技有限公司，并保留所有权利。
  * 网站地址: http://www.ecmoban.com；
  * ----------------------------------------------------------------------------
  * 这不是一个自由软件！您只能在不用于商业目的的前提下对程序代码进行修改和
@@ -12,25 +12,14 @@
  */
 
 $(function(){
+	
 	var suffix_obj = $("input[name='suffix']"),
 		suffix = suffix_obj.val(),
-		section = suffix_obj.data("section"),
-		topic_type = "",
-        adminpath = suffix_obj.data("adminpath"),
-		ru_id = 0;
+		section = suffix_obj.data("section");
 	
 	var doc = $(document),
-		visualShell = $("*[ectype='visualShell']");
+		visualShell = $("*[ectype='visualShell']");	
 		
-	if(section == "vis_seller_topic" || section == "vis_topic" ){
-		topic_type = "topic_type";
-	}
-	
-	/* 判断浏览器是ie6 - ie8 后台不可以进入*/
-	if(!$.support.leadingWhitespace){
-		notIe();
-	}
-	
 	$(document).ready(function(e){
 		var arrLunbotu = [];
 		
@@ -46,8 +35,8 @@ $(function(){
 				width = $(window).width();
 
 			$(".page-head-bg-content-wrap").css({"height": height-30});
+			$(".demo").css({"min-height":height});
 			$(".pc-page").css({"height": height-61});
-			$(".pc-page .demo").css({"min-height":height});
 			
 			$(".main-wrapper").addClass("wpst-toolbar-show");
 			$(".tab-bar").find("li").eq(0).addClass("current");
@@ -80,9 +69,7 @@ $(function(){
 		//可视化左侧侧边栏区域js
 		function db_column(){
 			var height = $(window).height(),
-				width = $(window).width(),
-				url = '';
-				
+				width = $(window).width();
 			//左侧侧边栏 展开
 			var li = $(".tab-bar").find("li"),
 				ul = li.parent(".tab-bar"),
@@ -91,14 +78,14 @@ $(function(){
 	
 			li.on("click",function(){
 				var index = $(this).index();
-				
-				if($(this).hasClass("current")){
+	
+				if ($(this).hasClass("current")) {
 					$(this).removeClass("current");
 					wrapper.removeClass("wpst-toolbar-show");
 					$(".pc-page").css({"width":width-80});
 				}else{
 					$(this).addClass("current").siblings().removeClass("current");
-					toolbar.find("*[ectype='toolbar_li']").eq(index).addClass("current").siblings().removeClass("current");
+					toolbar.find(".li").eq(index).addClass("current").siblings().removeClass("current");
 					wrapper.addClass("wpst-toolbar-show");
 					$(".pc-page").css({"width":width-310});
 				}
@@ -127,79 +114,67 @@ $(function(){
 				generate(style);
 			});
 			
-			var hdfile_url = "visual_editing.php?act=header_bg&type=headerbg&name=hdfile&suffix="+suffix+"&topic_type="+topic_type;
-			
-			if(adminpath == 'admin'){
-				hdfile_url = "topic.php?act=header_bg&type=headerbg&name=hdfile&suffix="+suffix+"&topic_type="+topic_type;
-			}
-			
 			//左侧侧边栏 头部添加背景图
-			$.upload_file("input[name='hdfile']",hdfile_url,"#showbgfile",function fn(obj,img){
-				var parent = obj.parents(".page-head-bgimg");
-				var repeat = parent.siblings(".bg-show").find(".current").data("bg-show");
-				var position = parent.siblings(".bg-align").find(".current").data("bg-align");
-			
+			//var suffix = $("input[name='suffix']").val();
+			$.upload_file("input[name='hdfile']","topic.php?act=header_bg&type=headerbg&name=hdfile&hometype=1&suffix="+suffix,"#showbgfile",function fn(obj,img){
+				var parent = obj.parents(".page-head-bgimg"),
+					repeat = parent.siblings(".bg-show").find(".current").data("bg-show"),
+					position = parent.siblings(".bg-align").find(".current").data("bg-align");
+				
 				parent.siblings(".bg-show,.bg-align").show();
+				
 				$(".pc-page").find(".hd_bg").css({"background-image":"url("+img+")","background-repeat":repeat,"background-position":position});
 				
 				visual();
 			});
-
-			if(section == "vis_home"){
-				url = "topic.php?act=header_bg&type=contentbg&name=confile&suffix="+suffix + "&hometype=1";
-			}else if(section == "vis_topic" || adminpath == 'admin'){
-				url = "topic.php?act=header_bg&type=contentbg&name=confile&suffix="+suffix+"&topic_type="+topic_type;
-			}else if((section == "vis_seller_topic" || section == "vis_seller_store") && adminpath != 'admin'){
-				url = "visual_editing.php?act=header_bg&type=contentbg&name=confile&suffix="+suffix+"&topic_type="+topic_type;
-			}
 			
 			//左侧侧边栏 中间添加背景图
-			$.upload_file("input[name='confile']",url,"#confilefile",function fn(obj,img){
+			$("input[name='content_dis']").on("click",function(){
+				var style = $(this).parents(".li").data("style");
+				var bgDiv = $(this).parents(".page-head-bg");
+				var bgColor = bgDiv.find(".tm-picker-trigger").val();
+			
+				if($(this).prop("checked") == true){
+					$(".demo").css({"background-color":bgColor});
+				}else{
+					$(".demo").css({"background-color":"transparent"});
+				}
+				generate(style);
+			});
+			
+			//左侧侧边栏 中间添加背景图
+			$.upload_file("input[name='confile']","topic.php?act=header_bg&type=contentbg&name=confile&suffix="+suffix + "&hometype=1","#confilefile",function fn(obj,img){
 				var parent = obj.parents(".page-head-bgimg");
 				var repeat = parent.siblings(".bg-show").find(".current").data("bg-show");
 				var position = parent.siblings(".bg-align").find(".current").data("bg-align");
 				parent.siblings(".bg-show,.bg-align").show();
 				
-				var demo = $(".demo");
-				if(suffix == 'backup_festival_1'){
-					demo = $(".festival_home");
-				}	
-				
-				demo.css({"background-image":"url("+img+")","background-repeat":repeat,"background-position":position});
-				
+				$(".demo").css({"background-image":"url("+img+")","background-repeat":repeat,"background-position":position});
 				visual();
 			});
 			
 			//左侧侧边栏 中间选择背景颜色
-			$("input[name='content_dis']").on("click",function(){
-				var style = $(this).parents(".li").data("style");
-				var bgDiv = $(this).parents(".page-head-bg");
+			$(".sp-choose").on("click",function(){
+				var _this = $("input[name='content_dis']");
+				var style = _this.parents(".li").data("style");
+				var bgDiv = _this.parents(".page-head-bg");
 				var bgColor = bgDiv.find(".tm-picker-trigger").val();
 				
-				var demo = $(".demo");
-				if(suffix == 'backup_festival_1'){
-					demo = $(".festival_home");
-				}
-				
-				if($(this).prop("checked") == true){
-					demo.css({"background-color":bgColor});
+				if(_this.prop("checked") == true){
+					$(".demo").css({"background-color":bgColor});
 				}else{
-					demo.css({"background-color":"transparent"});
+					$(".demo").css({"background-color":"transparent"});
 				}
 				generate(style);
 			});
 			
-			$(".sp-replacer").on("click",function(){
-				$(this).parents("li.li").find("input[type='checkbox']").prop("checked",false);
-				$(".demo").css({"background-color":"transparent"});
-			});
-			
 			//左侧侧边栏 删除头部或者中间背景图
-			$(document).on("click","*[ectype='delete_bg']",function(){
-				var form =$(this).parents("form"),
+			$(document).on("click",".action-btn_bg .delete",function(){
+				var //suffix = $("input[name='suffix']").val(),
+					form =$(this).parents("form"),
 					fileimg = form.find("input[name='fileimg']").val(),
 					type = form.parents('li').data("style");
-
+				
 				form.find("input[name='fileimg']").val("");
 				form.find(".bgimg img").attr("src","../data/gallery_album/visualDefault/bgimg.gif");
 				form.parent(".page-head-bgimg").siblings(".bg-show,.bg-align").hide();
@@ -207,13 +182,8 @@ $(function(){
 				$(".pc-page").find(".hd_bg").css({"background-image":"none"});
 				$(".demo").css({"background-image":"none"});
 				
-				if(section == "vis_home"){
-					Ajax.call('topic.php', "act=remove_img&fileimg=" + fileimg + "&suffix="+suffix + "&type=" + type + "&hometype=1", '', 'POST', 'JSON');
-				}else if(section == "vis_topic"){
-					Ajax.call('topic.php', "act=remove_img&fileimg=" + fileimg + "&suffix="+suffix + "&type=" + type, '', 'POST', 'JSON');
-				}else{
-					Ajax.call('visual_editing.php', "act=remove_img&fileimg=" + fileimg + "&suffix="+suffix + "&type=" + type, '', 'POST', 'JSON');
-				}
+				Ajax.call('topic.php', "act=remove_img&fileimg=" + fileimg + "&suffix="+suffix + "&type=" + type + "&hometype=1", '', 'POST', 'JSON');
+				
 				visual();
 			});
 		
@@ -247,8 +217,6 @@ $(function(){
 				generate(style);
 			});
 			
-			
-			
 			//左侧侧边栏 弹出广告保存
 			$(document).on('click','*[ectype="adcSubmit"]',function(){
 				submitForm(1);
@@ -261,6 +229,7 @@ $(function(){
 			
 			/* 左侧侧边栏 弹出广告方法 */
 			function submitForm(i){
+				//var suffix = $("input[name='suffix']").val();
 				$("#advfileForm").ajaxSubmit({
 					type: "POST",
 					dataType: "json",
@@ -286,6 +255,7 @@ $(function(){
 			
 			/* 删除弹出广告 */
 			$(document).on('click','*[ectype="delete_adv"]',function(){
+				//var suffix = $("input[name='suffix']").val();
 				var _this = $(this);
 				
 				Ajax.call('visualhome.php', "act=delete_adv&suffix=" +  suffix, function(data){
@@ -293,22 +263,6 @@ $(function(){
 					$("input[name='adv_url']").val('');
 				}, 'POST', 'JSON');
 			});
-			
-			$(window).ready(function(e) {
-            	if($(".demo").hasClass("store_default_temp1")){
-					$("*[ectype='stores_modules']").find("*[data-mode='storeOneFloor1']").show().siblings().hide();
-				}else if($(".demo").hasClass("store_default_temp2")){
-					$("*[ectype='stores_modules']").find("*[data-mode='storeTwoFloor1']").show().siblings().hide();
-				}else if($(".demo").hasClass("store_default_temp3")){
-					$("*[ectype='stores_modules']").find("*[data-mode='storeThreeFloor1']").show().siblings().hide();
-				}else if($(".demo").hasClass("store_default_temp4")){
-					$("*[ectype='stores_modules']").find("*[data-mode='storeFourFloor1']").show().siblings().hide();
-				}else if($(".demo").hasClass("store_default_temp5")){
-					$("*[ectype='stores_modules']").find("*[data-mode='storeFiveFloor1']").show().siblings().hide();
-				}else{
-					$("*[ectype='stores_modules']").hide();
-				}
-            });
 		}
 		db_column();
 		
@@ -320,7 +274,6 @@ $(function(){
 			stop:function(e,t){
 				var zhi = $(this).hasClass('lunbotu');
                 var brandList = $(this).hasClass('brandList');
-                var homeseckill = $(this).hasClass('homeseckill');
 				var mode = $(this).data("mode");
 				
 				$(".demo *[data-mode=" + mode + "]").each(function(index, element) {
@@ -329,14 +282,12 @@ $(function(){
 						$(this).find("*[data-type='range']").attr("id",mode + "_" + index);
 					}
 				});
-				if(zhi || brandList || homeseckill){
+				if(zhi || brandList){
 					if(zhi){
 						var lunbotu = $(".demo").find('.lunbotu');
 					}else if(brandList){
 						var lunbotu = $(".demo").find('.brandList');
-					}else if(homeseckill){
-                                            var lunbotu = $(".demo").find('.homeseckill');
-                                        }
+					}
 					
 					arrLunbotu.push(t.position.top);
 					if(arrLunbotu.length == 1){
@@ -403,7 +354,7 @@ $(function(){
 			demo.find(".visual-item .move-down").removeClass("disabled");
 			demo.find(".visual-item:last .move-down").addClass("disabled");
 		}
-		disabled();
+		
 		//删除模块
 		function removeElm() {
 			$(".demo").delegate(".move-remove", "click", function(e) {
@@ -479,104 +430,56 @@ $(function(){
 			downloadModal = btn.find("*[ectype='downloadModal']"),
 			back = btn.find("*[ectype='back']"),
 			preview = btn.find("*[ectype='preview']"),
-			information = btn.find("*[ectype='information']"),
-			releaseTemp = btn.find("*[ectype='releaseTemp']"); //店铺设为默认
+			information = btn.find("*[ectype='information']");
 		
 		/* 确认发布 */
 		downloadModal.on("click",function(){
-			var Release_url = '';
-			var Release_where = '';
-                        if (suffix) {
-                            if (section == "vis_home") {
-                                Release_url = "visualhome.php";
-                                Release_where = "act=downloadModal&suffix=" + suffix;
-                            } else if (section == "vis_topic") {
-                                //专题可视化
-                                Release_url = "topic.php";
-                                Release_where = "act=downloadModal&suffix=" + suffix;
-                            } else {
-                                if (adminpath == 'admin') {
-                                    //商家模板
-                                    Release_url = "visualhome.php";
-                                    Release_where = "act=downloadModal&suffix=" + suffix + "&adminpath=" + adminpath;
-                                } else {
-                                    //商家 店铺和专题可视化
-                                    Release_url = "visual_editing.php";
-                                    Release_where = "act=downloadModal&suffix=" + suffix + "&topic_type=" + topic_type;
-                                }
-                            }
-                        }else{
-                            Release_url = "visualhome.php";
-                            Release_where = "act=downloadModal&new=1";
-                        }
-			if(confirm("确定发布？")){
-				Ajax.call(Release_url, Release_where, function(data){
-					alert("发布成功");
-					$("[ectype='back']").hide();
-				}, 'POST', 'JSON');
-			}
-		});
-		
-		/* 商家店铺可视化 设为默认 */
-		releaseTemp.on("click",function(){
-			Ajax.call('visual_editing.php', "act=release&suffix=" + suffix,function(data){
-				if(data.error == 1){
-					location.href = 'visual_editing.php?act=first';
-				}else{
-					alert(data.content);
+			if(section == "vis_home"){
+				//首页可视化
+				if(confirm("确定发布？")){
+					Ajax.call('visualhome.php', "act=downloadModal&suffix=" +  suffix, function(data){
+						alert("发布成功");
+						$("[ectype='back']").hide();
+					}, 'POST', 'JSON');
 				}
-			} , 'POST', 'JSON');
+			}else if(section == "vis_topic"){
+				//专题可视化
+				if(confirm("确定发布？")){
+					Ajax.call('topic.php', "act=downloadModal&suffix=" +  suffix, function(data){
+						alert("发布成功");
+						$("[ectype='back']").hide();
+					}, 'POST', 'JSON');
+				}
+			}
 		});
 		
 		/* 预览 */
 		preview.on("click",function(){
 			var code = suffix;
-			if(code){
-                            if(section == "vis_home"){
-                                    //首页可视化
-                                    window.open('../index.php?suffix=' + code);
-                            }else if(section == "vis_topic"){
-                                    //专题可视化
-                                    code = code.replace("topic_","");
-                                    window.open('../topic.php?topic_id='+code+'&preview=1');
-                            }else{            
-                                    //商家店铺和专题可视化
-                                    code = code.replace("topic_","");
-                                    ru_id = $(this).data("ruid");
-                                    if(section == "vis_seller_topic"){
-                                            window.open('../topic.php?topic_id='+code+'&preview=1');
-                                    }else if(section == "vis_seller_store"){
-                                            window.open('../merchants_store.php?merchant_id='+ru_id+"&preview=1&temp_code="+code);
-                                    }
-                            }
-                        }else{
-                             window.open('../news.php?preview=1');
-                        }
-			
+				
+			if(section == "vis_home"){
+				//首页可视化
+				window.open('../index.php?suffix=' + code);
+			}else if(section == "vis_topic"){
+				//专题可视化
+				window.open('../topic.php?topic_id='+code+'&preview=1');
+			}
 		});
 		
 		/* 还原编辑前的模板 */
 		back.on("click",function(){
-			var url = "",
-				where = "";
-                        
-			if(section == "vis_home" || suffix == ''){
-				url = 'visualhome.php';
-                                if(suffix == ''){
-                                    where = "&new=1";
-                                }
-			}else if(section == "vis_topic" || section == "vis_seller_store"){
-				url = 'topic.php';
-				where = "&section=" + section;
-			}else{
-				url = 'visual_editing.php';
-				where = "&topic_type=" + topic_type;
-			}
-			
-			if(confirm("还原只能还原到你最后一次确认发布后的版本，还原后当前未保存的数据将丢失，不可找回，确定还原吗？")){
-				Ajax.call(url, "act=backmodal&suffix=" +  suffix + where , function(data){
-					location=location 
-				}, 'POST', 'JSON');
+			if(section == "vis_home"){
+				if(confirm("还原只能还原到你最后一次确认发布后的版本，还原后当前未保存的数据将丢失，不可找回，确定还原吗？")){
+					Ajax.call('visualhome.php', "act=backmodal&suffix=" + suffix, function(data){
+						location=location 
+					}, 'POST', 'JSON');
+				}
+			}else if(section == "vis_topic"){
+				if(confirm("还原只能还原到你最后一次确认发布后的版本，还原后当前未保存的数据将丢失，不可找回，确定还原吗？")){
+					Ajax.call('topic.php', "act=backmodal&suffix=" + suffix, function(data){
+						location=location 
+					}, 'POST', 'JSON');
+				}
 			}
 		});
 		
@@ -589,7 +492,7 @@ $(function(){
 		});
 		
 		/* 可视化模板信息编辑 弹窗*/
-		function informationResponse(result){
+		function informationResponse (result){
 			var content = result.content;
 			pb({
 				id: "template_information",
@@ -639,29 +542,43 @@ $(function(){
 				}
 			});
 		}
-		
-		//默认模板颜色设置
-		$("*[ectype='templateColorSet']").on("click",function(){
-			var templateName = $(".demo").data("default");
-			var typeColor = $(".demo").attr("data-color");
-			if(typeof typeColor == 'undefined'){
-				typeColor = '';
-			}
-			if(templateName){
-				$.jqueryAjax('dialog.php', 'act=templateColorSet&temp=' + templateName + "&typeColor=" + typeColor, function(data){
-					goods_visual_desc("模板色调选择",750,data.content,function(){
-						var colorItem = $(".dtColorSet").find(".selected");
-						var colorInput = colorItem.find("input[type='hidden']").val();
-						
-						$(".demo").attr("data-color",colorInput);
-						
-						visual();
-					},"templateColor");
-				});
-			}
-		});
 	}
 	visualOperation();
+	
+	/* 预览 */
+	/*$(document).on("click","a[ectype='preview']",function(){
+		//var suffix = $("input[name='suffix']"),
+		//	code = suffix.val(),
+		//	section = suffix.data("section");
+		var code = suffix,
+			section = suffix_obj.data("section");
+		if(section == "vis_home"){
+			window.open('../index.php?suffix=' + code);
+		}else if(section == "vis_topic"){
+			window.open('../topic.php?topic_id='+code+'&preview=1');
+		}
+	});*/
+	
+	/* 确认发布
+	$(document).on('click','*[ectype="downloadModal"]',function(){
+		if(confirm("确定发布？")){
+			//var suffix = $("input[name='suffix']").val();
+			Ajax.call('visualhome.php', "act=downloadModal&suffix=" +  suffix, function(data){
+				alert("发布成功");
+				$("[ectype='back']").hide();
+			}, 'POST', 'JSON');
+		}
+	}); */
+		
+	/* 还原编辑前的模板
+	$(document).on('click','*[ectype="back"]',function(){
+		if(confirm("还原只能还原到你最后一次确认发布后的版本，还原后当前未保存的数据将丢失，不可找回，确定还原吗？")){
+			//var suffix = $("input[name='suffix']").val();
+			Ajax.call('visualhome.php', "act=backmodal&suffix=" +  suffix, function(data){
+				location=location 
+			}, 'POST', 'JSON');
+		}
+	}); */	
 	
 	/************************可视化主区域编辑 start**************************/
 	//可视化区域编辑
@@ -685,11 +602,11 @@ $(function(){
 		}
 		
 		spec_attr = lyrow.find('.spec').data('spec');
-                
+		
 		if(purebox == "banner"){
 			purebox = "adv";
 		}
-                
+		
 		switch(purebox){
 			case "homeAdv":
 				//广告模块编辑
@@ -701,101 +618,51 @@ $(function(){
 				}
 			
 				spec_attr = JSON.stringify(spec_attr);
-				Ajax.call('dialog.php', "act=home_adv&mode=" + mode + '&spec_attr=' + encodeURIComponent(spec_attr) + "&masterTitle=" + escape(masterTitle) + "&lift=" + lift + "&diff=" + diff + "&hierarchy=" + hierarchy + "&suffix=" + suffix,dialogResponse, 'POST', 'JSON');	
+				Ajax.call('dialog.php', "act=home_adv&mode=" + mode + '&spec_attr=' + encodeURIComponent(spec_attr) + "&masterTitle=" + escape(masterTitle) + "&lift=" + lift + "&diff=" + diff + "&hierarchy=" + hierarchy,dialogResponse, 'POST', 'JSON');	
 			
 			break; 
 			
 			case "homeFloor":
 				//楼层模块编辑	
-				if(mode == 'homeFloorModule' || mode == 'FhomeFloorModule'){
+				if(mode == 'homeFloorModule'){
                     hierarchy = $this.parents("*[ectype='module']").find(".view").data('hierarchy');
                     spec_attr = $this.parents("*[ectype='module']").find(".spec").data('spec');
                 }
 				
 				spec_attr = JSON.stringify(spec_attr);
-				var reg=/&/g;
-				spec_attr=spec_attr.replace(reg,'＆');
-                Ajax.call('dialog.php', 'act=homeFloor' + "&mode=" + mode + '&spec_attr=' + spec_attr + "&diff=" + diff + "&lift=" + lift + "&hierarchy=" + hierarchy + "&suffix=" + suffix, dialogResponse, 'POST', 'JSON');
+                Ajax.call('dialog.php', 'act=homeFloor' + "&mode=" + mode + '&spec_attr=' + spec_attr + "&diff=" + diff + "&lift=" + lift + "&hierarchy=" + hierarchy, dialogResponse, 'POST', 'JSON');
 			break;
 			
 			case "cust":
 				//自定义模块编辑
 				var custom_content = encodeURIComponent(range.html());	
-                Ajax.call('dialog.php', 'act=custom' + '&mode=' + mode + '&custom_content=' + custom_content + "&diff=" + diff  + "&lift=" + lift + "&suffix=" + suffix, customResponse, 'POST', 'JSON');
+                Ajax.call('dialog.php', 'act=custom' + '&mode=' + mode + '&custom_content=' + custom_content + "&diff=" + diff  + "&lift=" + lift, customResponse, 'POST', 'JSON');
 			break;
 			
 			case "adv":
-				var where = '';
-				pic_number = lyrow.data("length");
-				if(mode == 'fh-haohuo' || mode == 'h-phb') {
-					hierarchy = $this.parents("*[ectype='module']").find(".sepmodule_warp").data('hierarchy');
-					if(hierarchy == 2 && mode == 'fh-haohuo'){
-						pic_number = 4;
-					}else if(hierarchy == 2 && mode == 'h-phb'){
-						pic_number = 6;
-					}
-					where = "&hierarchy=" + hierarchy + "&lift=" + lift;
-					spec_attr = $this.parents("*[ectype='module']").find(".spec").data('spec');
-				}
 				//广告模块编辑
-				
+				pic_number = lyrow.data("length");
+					
                 spec_attr = JSON.stringify(spec_attr);
-				var reg=/&/g;
-				spec_attr=spec_attr.replace(reg,'＆');
-                                
-                Ajax.call('dialog.php', "act=shop_banner&spec_attr=" + spec_attr  + "&pic_number=" + pic_number + "&mode=" + mode + "&diff=" + diff + "&suffix=" + suffix + where, query_banner, 'POST', 'JSON');
+                Ajax.call('dialog.php', "act=shop_banner&spec_attr=" + spec_attr  + "&pic_number=" + pic_number + "&mode=" + mode + "&diff=" + diff, query_banner, 'POST', 'JSON');
 			break;
 			
 			case "nav_mode":
 				//导航模板编辑
                 spec_attr = JSON.stringify(spec_attr);
 				
-				if(section == "vis_topic" || adminpath == 'admin'){
+				if(section == "vis_topic"){
 					where = '&topic=1';
 				}
-                                
-				Ajax.call('dialog.php', 'act=nav_mode' + '&mode=' + mode + '&spec_attr=' + encodeURIComponent(spec_attr) + where + "&suffix=" + suffix, navigatorResponse, 'POST', 'JSON');
+				
+				Ajax.call('dialog.php', 'act=nav_mode' + '&mode=' + mode + '&spec_attr=' + encodeURIComponent(spec_attr) + where, navigatorResponse, 'POST', 'JSON');
 			break;
 			
 			case "goods":
 				//商品模块编辑
 				spec_attr = JSON.stringify(spec_attr);
-                Ajax.call('dialog.php', "act=goods_info" + "&mode=" + mode + "&diff=" + diff + "&spec_attr=" + encodeURIComponent(spec_attr) + "&lift=" + lift  + "&suffix=" + suffix, query_goods, 'POST', 'JSON');
+                Ajax.call('dialog.php', "act=goods_info" + "&mode=" + mode + "&diff=" + diff + "&spec_attr=" + encodeURIComponent(spec_attr) + "&lift=" + lift , query_goods, 'POST', 'JSON');
 			break;
-			
-			case "header":
-				//店铺可视化头部
-                spec_attr = JSON.stringify(spec_attr);
-                var custom_content = encodeURIComponent(lyrow.find('.spec').html());
-                Ajax.call('dialog.php', 'act=header' + '&mode=' + mode + "&spec_attr=" + encodeURIComponent(spec_attr) + "&custom_content=" + custom_content + "&suffix="+suffix, headerResponse, 'POST', 'JSON');
-			break;
-			
-			case "nav":
-				//店铺可视化导航
-                spec_attr = JSON.stringify(spec_attr);
-                Ajax.call('dialog.php', 'act=navigator' + '&mode=' + mode + '&spec_attr=' + encodeURIComponent(spec_attr) + "&topic_type=" + topic_type, navigatorResponse, 'POST', 'JSON');
-			break;
-			
-			case "CMS":
-				spec_attr = JSON.stringify(spec_attr);
-				Ajax.call('dialog.php', "act=edit_cmsAdv&mode=" + mode + '&spec_attr=' + encodeURIComponent(spec_attr) + "&diff=" + diff + "&hierarchy=" + hierarchy,dialogResponse, 'POST', 'JSON');	
-			break
-                        case "CMS_ARTI":
-				spec_attr = JSON.stringify(spec_attr);
-				Ajax.call('dialog.php', "act=edit_cmsarti&mode=" + mode + '&spec_attr=' + encodeURIComponent(spec_attr) + "&diff=" + diff,dialogResponse, 'POST', 'JSON');	
-			break
-                        case "CMS_THREE_LIE":
-				spec_attr = JSON.stringify(spec_attr);
-				Ajax.call('dialog.php', "act=edit_cmsarti&mode=" + mode + '&spec_attr=' + encodeURIComponent(spec_attr) + "&diff=" + diff,dialogResponse, 'POST', 'JSON');	
-			break
-                        case "CMS_FAST_LIE":
-				spec_attr = JSON.stringify(spec_attr);
-				Ajax.call('dialog.php', "act=edit_cmsarti&mode=" + mode + '&spec_attr=' + encodeURIComponent(spec_attr) + "&diff=" + diff,dialogResponse, 'POST', 'JSON');	
-			break
-                        case "CMS_HEAT_LIE":
-				spec_attr = JSON.stringify(spec_attr);
-				Ajax.call('dialog.php', "act=edit_cmsgoods&mode=" + mode + '&spec_attr=' + encodeURIComponent(spec_attr) + "&diff=" + diff,dialogResponse, 'POST', 'JSON');	
-			break
 		}
 	});
 	
@@ -807,7 +674,7 @@ $(function(){
 			
 		spec_attr = JSON.stringify(spec_attr);
 		
-		Ajax.call('dialog.php', 'act=vipEdit&spec_attr=' + encodeURIComponent(spec_attr) + "&suffix=" + suffix, function(result){
+		Ajax.call('dialog.php', 'act=vipEdit&spec_attr=' + encodeURIComponent(spec_attr), function(result){
 			visual_edit_dialog("vip_dialog","用户信息",950,result.content,function(){
 				vipEditInsert(mode);
 			});
@@ -815,97 +682,42 @@ $(function(){
 	});
 	
 	//可视化编辑弹窗
-	headerResponse = function(result){
-		//店铺可视化头部编辑弹窗
-		visual_edit_dialog("header_dialog","头部编辑器",950,result.content,function(){
-			 header_back(result.mode,$("#header_dialog"));
-		});
-		
-		/* 店铺可视头部回调函数 */
-		function header_back(mode,obj) {
-            var header_type =  obj.find("input[name='header_type']:checked").val(),
-            	headerbg_img = obj.find("input[name='fileimg']").val(),
-				picHeight = obj.find("input[name='picHeight']").val(),
-				custom_content = obj.find("input[name='custom_content']").val(),
-				spec_attr = new Object(),
-				range = $("*[data-mode=" + mode + "]").find('[data-type="range"]');
-			
-            spec_attr.header_type = header_type;
-            spec_attr.headerbg_img = headerbg_img;
-            spec_attr.picHeight = picHeight;
-//            spec_attr.custom_content = custom_content;
-
-            if(header_type == 'defalt_type'){
-            	range.html("<div class='spec' data-spec='"+$.toJSON(spec_attr)+"' style='height:"+picHeight+"px;'><img src='"+headerbg_img+"' /></div>");
-            }else{
-            	range.html("<div class='spec' data-spec='"+$.toJSON(spec_attr)+"' style='height:"+picHeight+"px;'>"+custom_content+"</div>");
-            }
-			
-            visual();
-        }
-	},
 	navigatorResponse = function(result){
-		//平台可视化 导航编辑弹出窗口
+		//导航编辑弹出窗口
 		visual_edit_dialog("navigator_dialog","导航编辑器",850,result.content,function(){
-			if((section == "vis_home" || section == "vis_seller_store") && adminpath != 'admin'){
+			if(section == "vis_home"){
 				navigator_back(result.mode)
-			}
-            
-			if(section == "vis_topic" || section == "vis_seller_topic" || adminpath == 'admin'){
+			}else if(section == "vis_topic"){
 				navigator_back_topic(result.mode);
 			}
 		});
 		
 		/* 首页可视化 导航回调函数 */
 		function navigator_back(mode) {
-			if(section == "vis_seller_store"){
-				var spec_attr = new Object(),
-					obj = $("#navigator_dialog"),
-					navColor = '',
-					target = '',
-					align = '',
-					url = '';
-
-				navColor = obj.find(".navColor").val();
-				align = obj.find("select[name='align']").val();
-				target = obj.find("input[name='target']:checked").val();
-				
-				spec_attr.navColor = navColor;
-				spec_attr.align = align;
-				spec_attr.target = target;
-				
-				Ajax.call('get_ajax_content.php', "act=navigator" + "&spec_attr=" + encodeURIComponent($.toJSON(spec_attr))  + "&mode=" + mode, addnavigatorResponse, 'POST', 'JSON');
-			}else{
-				var actionUrl = "get_ajax_content.php?act=nav_mode";  
-				$("#navInsert").ajaxSubmit({
-					type: "POST",
-					dataType: "JSON",
-					url: actionUrl,
-					data: { "action": "TemporaryImage" },
-					success: function (result){
-						var obj = $("*[data-mode=" + mode + "]").find('[data-type="range"]');
-
-						obj.html(result.content);
-						obj.find(".spec").remove();
-						obj.append("<div class='spec' data-spec='"+$.toJSON(result.spec_attr)+"'></div>");
-						
-						visual(1);
-					},
-					async: true  
-				})
-			}
+            var spec_attr = new Object();
+            var obj = $("#navigator_dialog"),
+				navColor = '',
+				target = '',
+				align = '';
+          
+            navColor = obj.find(".navColor").val();
+            align = obj.find("select[name='align']").val();
+            spec_attr.navColor = navColor;
+            spec_attr.align = align;
+            
+            Ajax.call('get_ajax_content.php', "act=nav_mode&spec_attr=" + encodeURIComponent($.toJSON(spec_attr))  + "&mode=" + mode, addnavigatorResponse, 'POST', 'JSON');
         }
 		
 		/* 专题可视化 导航回调函数 */
 		function navigator_back_topic(mode){
-            var actionUrl = "get_ajax_content.php?act=navInsert&adminpath="+adminpath;  
+            var actionUrl = "get_ajax_content.php?act=navInsert";  
             $("#navInsert").ajaxSubmit({
                 type: "POST",
                 dataType: "JSON",
                 url: actionUrl,
                 data: { "action": "TemporaryImage" },
                 success: function (result){
-					var obj = $("*[data-mode=" + mode + "]").find('[data-type="range"]');
+					var obj = $("*[data-mode=" + result.mode + "]").find('[data-type="range"]');
 					
                     obj.html(result.content);
                    	obj.find(".spec").remove();
@@ -920,34 +732,21 @@ $(function(){
         function addnavigatorResponse(result){
 			var obj = $("*[data-mode=" + result.mode + "]").find('[data-type="range"]');
 			
-			obj.html(result.content);
+            obj.html(result.content);
             obj.find(".spec").remove();
             obj.append("<div class='spec' data-spec='"+result.spec_attr+"'></div>");
-			
-			if(section == "vis_seller_store"){
-            	obj.parents(".nav_bg").css({"background-color":result.navColor});
-				visual();
-			}else{
-				visual(1);
-			}
+			            
+			visual(1);
         }
 	},
 	dialogResponse = function(result){
 		//楼层编辑弹出窗口
 		var id = "dialog_" + result.mode;
+		
 		visual_edit_dialog(id,"内容编辑",950,result.content,function(){
 			var obj = $("#dialog_"+ result.mode),
 				required = obj.find("*[ectype='required']");
-
-			//CMS可视化文章分类必选
-			if(result.mode == 'CMS_TWO_LIE' || result.mode == 'CMS_THREE_LIE' || result.mode == 'CMS_FAST_LIE'){
-				var idssign = $("input[name='cat_idsign[]']").length;
-				if(!idssign > 0){
-					alert("请选择分类");
-					return false;
-				}
-            }
-			
+	
 			if(validation(required) == true){
 				responseInsert(result.mode,result.diff,result.hierarchy);
 				return true;
@@ -960,12 +759,7 @@ $(function(){
 		function responseInsert(mode,diff,hierarchy){
             var actionUrl = '', act = '', obj = '', t = '';
 			
-            if( mode == 'homeFloor' || mode == 'homeFloorModule' || mode == 'homeFloorThree' || mode == 'homeFloorFour' || 
-				mode == 'homeFloorFive' || mode == 'homeFloorSix' || mode == 'homeFloorSeven' || mode == 'homeFloorSeven' || 
-				mode == 'homeFloorEight' || mode == 'homeFloorNine' || mode == 'homeFloorTen' || mode == 'storeOneFloor1' || 
-				mode == 'storeTwoFloor1' || mode == 'storeTwoFloor1' || mode == 'storeThreeFloor1' || mode == 'storeFourFloor1' || 
-				mode == 'storeFiveFloor1' || mode == 'topicOneFloor' || mode == 'topicTwoFloor' || mode == 'topicThreeFloor' || mode == 'FhomeFloorModule'){
-				
+            if(mode == 'homeFloor' ||　mode == 'homeFloorModule' ||　mode == 'homeFloorThree' ||　mode == 'homeFloorFour' || mode == 'homeFloorFive' || mode == 'homeFloorSix' || mode == 'homeFloorSeven' || mode == 'homeFloorSeven'){
 				//删除楼层模板模式未选中的默认值
 				$("[ectype='floormodeItem']").each(function(){
 					if(!$(this).find("input[name='floorMode']").is(':checked')) {
@@ -976,28 +770,14 @@ $(function(){
 				act = 'homeFloor';
             }else if(mode == 'h-brand'){
                 act = "homeBrand";
-            }else if(mode == 'CMS_ADV'){
-                act = "edit_cmsIn";
-                //删除楼层模板模式未选中的默认值
-                $("[ectype='floormodeItem']").each(function(){
-					if(!$(this).find("input[name='floorMode']").is(':checked')) {
-						$(this).find("[ectype='floorModehide']").remove();
-					}
-                });
-            }
-            else if(mode == 'CMS_TWO_LIE' || mode == 'CMS_THREE_LIE' || mode == 'CMS_FAST_LIE'){
-                act = "edit_cmsarti";
-            }
-            else if(mode == 'CMS_HEAT_LIE'){
-                act = "edit_cmsgoods";
-            }
-            else if(mode == 'h-promo' || mode == 'h-sepmodule' || mode == 'h-seckill'){
+            }else if(mode == 'h-promo' || mode == 'h-sepmodule'){
                 act = "honePromo";
             }else{
 				act = "homeAdvInsert";
 			}
 			
             actionUrl = "get_ajax_content.php?act=" + act;
+			
             $("#"+mode+"Insert").ajaxSubmit({
 				type: "POST",
 				dataType: "JSON",
@@ -1007,15 +787,11 @@ $(function(){
 					if(data.error == 1){
 						alert(data.massege);
 					}else{
-						if(mode == 'CMS_ADV' || mode == 'CMS_TWO_LIE' ||  mode == 'CMS_THREE_LIE' || mode == 'CMS_FAST_LIE' || mode == 'CMS_HEAT_LIE'){
-							obj = $(".demo *[data-mode=" + mode + "]");
-						}else{
-							obj = $(".demo *[data-mode=" + mode + "][data-diff=" + diff + "]");
-						}
+						obj = $(".demo *[data-mode=" + mode + "][data-diff=" + diff + "]");
 						
 						if(mode == 'h-sepmodule'){
 							t = obj.find("*[data-hierarchy='" + hierarchy + "']");
-						}else if(mode == 'homeFloorModule' || mode == 'FhomeFloorModule'){
+						}else if(mode == 'homeFloorModule'){
 							t = obj.find("*[data-hierarchy='" + hierarchy + "']").find("[data-type='range']");
 						}else{
 							t = obj.find('[data-type="range"]');
@@ -1029,11 +805,8 @@ $(function(){
 						if(data.lift){
 							obj.find('[data-type="range"]').attr("data-lift",data.lift);
 						}
-						if(mode == 'h-seckill'){
-							t.attr('data-seckillid',$.toJSON(data.goods_ids));
-						}
 					}
-
+					
 					f_defaultBrand();
 					visual();
 				},
@@ -1060,28 +833,17 @@ $(function(){
             	pic_src = [],
             	link = [],
             	sort = [],
-            	bg_color = [],
-				title = [],
-				subtitle = [];
-                               
+            	bg_color = [];
+			
 			var obj = $(obj),
 				picHeight_val = obj.find("input[name='picHeight']").val(),
-				picWidth_val = obj.find("input[name='picWidth']:checked").val(),
 				slideType_length = obj.find("input[name='slide_type']").length,
 				target_val = obj.find("input[name='target']:checked").val(),
 				itemsLayout_val = obj.find("input[name='itemsLayout']").val(),
-				navColor_val = obj.find("input[name='navColor']").val(),
-				toptitle = obj.find("input[name='toptitle']").val(),
-				toptitle_url = obj.find("input[name='toptitle_url']").val(),
-				lift = obj.find("input[name='lift']").val(),
-				hierarchy = obj.find("input[name='hierarchy']").val();
+				navColor_val = obj.find("input[name='navColor']").val();
 				
             if(picHeight_val){
             	spec_attr.picHeight = picHeight_val;
-            }
-
-			if(picWidth_val){
-            	spec_attr.picWidth = picWidth_val;
             }
 			
 			if(slideType_length>0){
@@ -1098,32 +860,6 @@ $(function(){
 			
 			if(navColor_val){
 				spec_attr.navColor = navColor_val;
-			}
-			
-			if(lift){
-				spec_attr.lift = lift;
-			}
-			
-			if(mode == 'fh-haohuo' || mode == 'h-phb'){
-				if(toptitle){
-					spec_attr.toptitle = toptitle;
-				}
-				if(toptitle_url){
-					spec_attr.toptitle_url = toptitle_url;
-				}
-				if(hierarchy){
-					spec_attr.hierarchy = hierarchy;
-                                        if(hierarchy == 3){
-                                            var activity_goods = obj.find("input[name='activity_goods']").val(),
-                                                activity_type = obj.find("input[name='activity_type']").val();
-                                            spec_attr.activity_goods = activity_goods;
-                                            spec_attr.activity_type = activity_type;
-                                        }
-				}
-			}
-			
-			if(mode == 'fh-discount'){
-				 spec_attr.homeAdvBg = obj.find("input[name='homeAdvBg[]']").val();
 			}
 			
             //图片路径
@@ -1150,18 +886,6 @@ $(function(){
                 bg_color.push(pbg_color);
             });
 			
-			//title
-            obj.find("input[name='title[]']").each(function(){
-                var val = $(this).val();
-                title.push(val);
-            });
-			
-			//subtitle
-            obj.find("input[name='subtitle[]']").each(function(){
-                var val = $(this).val();
-                subtitle.push(val);
-            });
-			
             if($("*[data-mode=" + mode + "]").data('li')){
                 spec_attr.is_li = $("*[data-mode=" + mode + "]").data('li');
             }else{
@@ -1172,22 +896,18 @@ $(function(){
             spec_attr.pic_src = pic_src;
             spec_attr.link = encodeURIComponent(link);
             spec_attr.sort = sort;
-			spec_attr.title = title;
-			spec_attr.subtitle = subtitle;
             
             Ajax.call('get_ajax_content.php', "act=addmodule&diff=" + diff  + "&mode=" + mode + "&spec_attr=" +  $.toJSON(spec_attr), addmoduleResponse, 'POST', 'JSON');
         }
 		
 		function addmoduleResponse(data) {
             var type = '', obj = '', range = '';
+			
 			if(data.mode == "topBanner"){
 				obj = $("*[data-mode='topBanner']");
 				obj.find(".top-banner").css({"background":data.navColor});
 				range = obj.find("*[data-type='range']");
 				type = 2;
-			}else if(data.mode == "fh-haohuo" || data.mode == 'h-phb'){
-				obj = $(".demo *[data-mode=" + data.mode + "][data-diff="+data.diff+"]");
-				range = $(".demo *[data-mode=" + data.mode + "][data-diff="+data.diff+"]").find("*[data-hierarchy='" + data.hierarchy + "']");
 			}else{
 				obj = $(".demo *[data-mode=" + data.mode + "][data-diff="+data.diff+"]");
 				range = obj.find("*[data-type='range']");
@@ -1195,27 +915,16 @@ $(function(){
 
 			if(data.mode == "lunbo"){
 				range.attr("data-slide",data.slide_type);
-			}else if(data.mode == "advImg1"){
-				range.attr("data-slide",data.slide_type);
-				if(data.picWidth != undefined){
-					range.parents(".visual-item").removeClass("w1200").removeClass("w1900").addClass("w"+data.picWidth);
-				}else{
-					range.parents(".visual-item").addClass("w1200");
-				}
+			}else if(data.mode == "advImg1"){				
+				obj.find('.adv_module').removeClass("yesSlide").removeClass("noSlide").addClass(data.slide_type);
 			}else if(data.mode == "advImg2"){
 				range.removeClass().addClass("advImgtwo");
 			}else if(data.mode == "advImg3"){
 				range.removeClass().addClass(data.itemsLayout);
 			}else if(data.mode == "advImg4"){
 				range.removeClass().addClass(data.itemsLayout);
-			}else if(data.mode == "fh-discount"){
-				range.parents(".index-venue-adv").css({"background":"url("+data.homeAdvBg+") no-repeat"});
 			}
-			
-			if(data.lift) {
-				obj.find('[data-type="range"]').attr("data-lift", data.lift);
-			}
-			
+
 			range.html(data.content);
             range.siblings(".spec").remove();
             range.after("<div class='spec' data-spec='"+data.spec_attr+"'>");
@@ -1249,7 +958,7 @@ $(function(){
             spec_attr.cat_name = obj.find("input[name='cat_name']").val();
             spec_attr.is_title = obj.find("input[name='is_title']:checked").val();
 			
-			if(section != "vis_home"){
+			if(section == "vis_topic"){
 				spec_attr.cat_desc = $('input[name="cat_desc"]').val();
 				spec_attr.align = $('select[name="align"]').val();
 				spec_attr.itemsLayout = $("input[name='itemsLayout']").val();
@@ -1259,8 +968,8 @@ $(function(){
 			
 			if(section == "vis_home"){
             	Ajax.call('get_ajax_content.php?is_ajax=1&act=changedgoods', "temp=guessYouLike&spec_attr=" + $.toJSON(spec_attr) + "&diff=" + diff + "&mode=" + mode + "&lift=" + lift, replaceResponse, 'POST', 'JSON');
-			}else{
-				Ajax.call('get_ajax_content.php?is_ajax=1&act=changedgoods', "temp=replace&spec_attr=" + $.toJSON(spec_attr) + "&diff=" + diff + "&mode=" + mode, replaceResponseOther, 'POST', 'JSON');
+			}else if(section == "vis_topic"){
+				Ajax.call('get_ajax_content.php?is_ajax=1&act=changedgoods', "temp=replace&spec_attr=" + $.toJSON(spec_attr) + "&diff=" + diff + "&mode=" + mode, replaceResponseTopic, 'POST', 'JSON');
 			}
         }
     	
@@ -1292,7 +1001,7 @@ $(function(){
         }
 		
 		/* 专题可视化 商品回调 */
-		function replaceResponseOther(data) {
+		function replaceResponseTopic(data) {
 			var obj = $("*[data-mode=" + data.mode + "][data-diff="+data.diff+"]");
 			
 			//设置商品楼层是否显示标题
@@ -1310,7 +1019,6 @@ $(function(){
 			obj.find('.mc').find(".spec").remove();
 			obj.find('.mc').append("<div class='spec' data-spec='"+data.spec_attr+"'></div>");
 			obj.attr("data-goodsId",data.goods_ids);
-			
 			visual();
 		}
 	},
@@ -1373,7 +1081,7 @@ $(function(){
 		spec_attr.index_article_cat = index_article_cat;
 		spec_attr.style_icon = style_icon;
 		
-		Ajax.call('get_ajax_content.php', "act=insertVipEdit&spec_attr=" +  $.toJSON(spec_attr) + "&mode=" + mode + "&suffix=" + suffix, insertVipEditResponse, 'POST', 'JSON');
+		Ajax.call('get_ajax_content.php', "act=insertVipEdit&spec_attr=" +  $.toJSON(spec_attr) + "&mode=" + mode, insertVipEditResponse, 'POST', 'JSON');
 		
 		function insertVipEditResponse(result){
 			var obj = $(".demo *[data-mode=" + result.mode + "]");
@@ -1401,27 +1109,6 @@ $(function(){
 	/************************可视化主区域编辑 end**************************/
 	
 	/************************可视化编辑区域弹窗内 触发js start********************/
-	/*新品排行设置商品*/
-	$(document).on("click","[ectype='setup_Activity_goods']",function(){
-		var _this = $(this),
-			spec_attr = new Object(),
-			PromotionType = _this.find('input[name="activity_type"]').val(),
-			goods_ids = _this.find('input[name="activity_goods"]').val(),
-			mode = 'h-sepmodule';
-
-		spec_attr.PromotionType = PromotionType;
-		spec_attr.goods_ids = goods_ids;
-
-		Ajax.call('dialog.php', "act=home_adv&activity_dialog=1&spec_attr=" + $.toJSON(spec_attr)  + "&mode=" + mode, function(result){
-			visual_edit_dialog("setup_Activity_goods",'选择活动商品',950,result.content,function(){
-				var activity_goods = $('#setup_Activity_goods').find('input[name="goods_ids"]').val();
-				var activity_type = $('#setup_Activity_goods').find('input[name="PromotionType"]:checked').val();
-				_this.find('input[name="activity_type"]').val(activity_type);
-				_this.find('input[name="activity_goods"]').val(activity_goods);
-			});
-		}, 'POST', 'JSON');
-	});
-        
 	/* 弹窗内标签切换 */
 	$(document).on("click",".tab li",function(){
 		var index = $(this).index();
@@ -1449,85 +1136,6 @@ $(function(){
 			}else{
 				tbody.append("<tr class='notic'><td colspan='5'>点击下列图片空间图片可添加图片或点击上传图片按钮上传新图片</td></tr>")
 			}
-		}
-	});
-	
-	/* 弹窗内 店铺可视化 导航分类选择 */
-	$(document).on("change","#catagory_type",function(){
-		var val = $(this).val();
-		var fald = false;
-		if(val == 1){
-			$(this).siblings("#sys_catagory").hide();
-			$(this).siblings("input[name='custom_catagory']").show();
-			fald = true;
-		}else if(val == 2){
-			$(this).siblings("input[name='custom_catagory']").hide();
-			$(this).siblings("#sys_catagory").show();
-			fald = true;
-		}else{
-			$(this).siblings("input[name='custom_catagory']").hide();
-			$(this).siblings("#sys_catagory").hide();
-			fald = false;
-		}
-		
-		if(fald == true){
-			$(this).siblings(".btn").removeClass("btn_disabled");
-		}else{
-			$(this).siblings(".btn").addClass("btn_disabled");
-		} 
-	});
-	
-	/* 弹窗内 店铺可视化 导航分类添加 */
-	$(document).on("click","*[ectype='addCatagory'] *[ectype='store_btn']",function(){
-		var tbody = $(this).parents(".body_info").find("tbody");
-		
-		if(!$(this).hasClass("btn_disabled")){
-			var catagory_type = $("#catagory_type").val();
-			var link ='';
-			var nav_name = '';
-			
-			if(tbody.find(".notic").length>0){
-				tbody.find(".notic").remove();
-			}
-			if(catagory_type == '1'){
-				nav_name = $("input[name='custom_catagory']").val();
-			}else if(catagory_type == '2'){
-				var cat = $("#sys_catagory").val();
-				cat = cat.split("|");
-				nav_name = cat[2];
-				link = cat[3];
-			}
-			Ajax.call('get_ajax_content.php?is_ajax=1&act=add_nav', "link=" +encodeURIComponent(link) + "&nav_name=" + nav_name  , function(data){
-				if(data.error == 0){
-					alert(data.content);
-				}else{
-					tbody.append(data.content)
-				}
-			}, 'POST', 'JSON');
-			
-		}else{
-			alert("请选择添加分类类型");
-		}
-	});
-	
-	/* 弹窗内 专题可视化 导航分类添加 */
-	$(document).on("click","*[ectype='addCatagory'] *[ectype='topic_btn']",function(){
-		var tbody = $(this).parents(".body_info").find("tbody");
-		var nav_name = '';
-
-		if(tbody.find(".notic").length>0){
-			tbody.find(".notic").remove();
-		}
-		nav_name = $("input[name='custom_catagory']").val();
-		var html = '';
-		if(nav_name){
-			html += '<tr><td><input type="text" value="' +nav_name+ '" name="navname[]"></td>';
-			html += '<td><input type="text" value="" name="navurl[]"></td>';
-			html += '<td class="center"><input type="text" class="small" value="" name="navvieworder[]"></td>';
-			html += '<td class="center"><a href="javascript:void(0);" onclick="remove_topicnav(this)" class="pic_del del">删除</a></td></tr>';
-			tbody.append(html)
-		}else{
-			alert("分类名称不能为空");
 		}
 	});
 	
@@ -1559,7 +1167,8 @@ $(function(){
 			mode_this = imgValue;
 		}
 		
-		if(pic_number == 1 && showlink != 1 && uploadImage_type != "home"){
+	
+		if(pic_number == 1 && showlink != 1){
 			uploadImage = 1;
 		}
 			
@@ -1735,11 +1344,11 @@ $(function(){
 			
 			if(!_this.parent("li").hasClass("current")){
 				parent_item.siblings().find("*[ectype='iselectErji']").each(function(index, element) {
-					var val = $(element).find("input[name='cateValue[]']").val();
+					var val = $(element).find("*[ectype='cateValue']").val();
 					if(value == val){
 						alert("分类已存在，请重新选择分类！");
 						parent.find("*[ectype='tit']").html("请选择");
-						parent.find("input[name='cateValue[]']").val("");
+						parent.find("*[ectype='cateValue']").val("");
 						
 						_this.parent("li").removeClass("current");
 						parent.find("li").eq(0).addClass("current");
@@ -1798,12 +1407,13 @@ $(function(){
 	}
 	dialogFloorCate();
 	
+	
 	/* 弹窗内 楼层分类设置 颜色选择 */
 	$(document).on("click","*[ectype='colorItem']",function(){
 		var t = $(this),
 		val = t.find("input[type='hidden']").val();
 		
-		t.siblings("input[type='hidden']").val(val);
+		$("input[name='typeColor']").val(val);
 		t.addClass("selected").siblings().removeClass("selected");
 	});
 	
@@ -1813,10 +1423,7 @@ $(function(){
 		$("input[name='recommend']:checked").prop("checked", false);;
 		ajaxchangedgoods(1);
 	});
-	/* 弹窗内 活动模块 内容设置 秒杀时间段选择*/
-	$(document).on("change","*[ectype='time_bucket']",function(){
-		ajaxchangedgoods(1);
-	});
+	
 	/* 弹窗内 楼层品牌设置 品牌选择 */
 	$(document).on("click","*[ectype='cliclkBrand']",function(){
 		var _this = $(this),
@@ -1836,11 +1443,15 @@ $(function(){
 				}
 			}
 		}else{
-			var number = _this.parents("[ectype='brand_list']").data("bandnumber");
-			if(number){
-				num = number;
+			if(type == "homeBrand"){
+				num = 17;
 			}else{
-				num = 10;
+				var number = _this.parents("[ectype='brand_list']").data("bandnumber");
+				if(number){
+					num = number;
+				}else{
+					num = 10;
+				}
 			}
 			if(arr.length < num){
 				if(brand_ids){
@@ -1904,194 +1515,167 @@ $(function(){
 		$(this).parents("[ectype='iconItems']").find("input[name='style_icon[]']").val(val);
 	});
 	
+	/* 可视化模板信息编辑
+	$(document).on("click","*[ectype='information']",function(){
+        var list_code = $(this).data("code");
+		//var code = $("input[name='suffix']").val();
+		var code = suffix;
+        code = (list_code)  ?  list_code : code;
+		Ajax.call('dialog.php', 'act=template_information' + '&code=' + code, informationResponse, 'POST', 'JSON');
+	}); */
+	
+	/* 可视化模板信息编辑 弹窗
+	function informationResponse(result){
+		var content = result.content;
+		pb({
+			id: "template_information",
+			title: "模板信息",
+			width: 945,
+			content: content,
+			ok_title: "确定",
+			drag: true,
+			foot: true,
+			cl_cBtn: false,
+			onOk: function(){
+				var fald = true;
+				var name = $("#information").find("input[name='name']");
+				var ten_file = $("#information").find("input[name='ten_file_textfile']");
+				var big_file = $("#information").find("input[name='big_file_textfile']");
+				
+				if(name.val() == ""){
+					error_div("#information input[name='name']","模板名称不能为空");
+					fald = false;
+				}else if(ten_file.val() == ""){
+					error_div("#information input[name='ten_file']","请上传模板封面");
+					fald = false;
+				}else if(big_file.val() == ""){
+					error_div("#information input[name='big_file']","请上传模板大图");
+					fald = false;
+				}else{
+					var actionUrl = "visualhome.php?act=edit_information";  
+					$("#information").ajaxSubmit({
+						type: "POST",
+						dataType: "JSON",
+						url: actionUrl,
+						data: { "action": "TemporaryImage" },
+						success: function (data) {
+							if(data.error == 1){
+								alert(data.massege);
+							}else{
+								$("[ectype='templateList']").find("ul").html(data.content);
+							}
+							resetHref();
+						},
+						async: true  
+					});
+					
+					fald = true;
+				}
+				return fald;
+			}
+		});
+	}*/
 	/************************可视化编辑区域弹窗内 触发js end**********************/
 	
 	/* 生成缓存文件 */
-	function visual(temp) {
-        if (suffix) {
-            var content = $(".pc-page").html(),
-                    content_html = '',
-                    preview = '',
-                    nav_content = $("*[ectype='nav']").html(),
-                    topBanner_content = $("*[data-homehtml='topBanner']").html(),
-                    topBanner = '',
-                    navlayout = '',
-                    where = '',
-                    nav_html = '';
-
-            if (section == "vis_home") {
-                if (temp == 1) {
-                    //导航栏html
-                    navlayout = $("#head-layout");
-
-                    navlayout.html("");
-                    navlayout.append(nav_content);
-
-                    navlayout.find(".categorys").remove();
-                    navlayout.find(".setup_box").remove();
-					navlayout.find(".spec").attr("data-spec", '');
-                    content_html = navlayout.html();
-                } else if (temp == 2) {
-                    //导航栏html
-                    topBanner = $("#topBanner-layout");
-
-                    topBanner.html("");
-                    topBanner.append(topBanner_content);
-                    topBanner.find(".categorys").remove();
-                    topBanner.find(".setup_box").remove();
-                    content_html = topBanner.html();
-                } else {
-                    //全部内容页html(不包括头部和导航)
-                    preview = $("#preview-layout");
-
-                    preview.html("");
-
-                    preview.append(content);
+	function visual(temp){
+		var //suffix = $("input[name='suffix']").val(),
+			content = $(".pc-page").html(),
+			content_html = "",
+			preview = "",
+			nav_content = $("*[ectype='nav']").html(),
+			topBanner_content = $("*[data-homehtml='topBanner']").html(),
+			topBanner = '',
+			navlayout = "";
+			
+		if(section == "vis_home"){
+			if(temp == 1){
+				//导航栏html
+				navlayout = $("#head-layout");
+				
+				navlayout.html("");
+				navlayout.append(nav_content);
+				
+				navlayout.find(".categorys").remove();
+				navlayout.find(".setup_box").remove();
+				content_html = navlayout.html();
+			}else if(temp == 2){
+				//导航栏html
+				topBanner = $("#topBanner-layout");
+				
+				topBanner.html("");
+				topBanner.append(topBanner_content);
+				topBanner.find(".categorys").remove();
+				topBanner.find(".setup_box").remove();
+				content_html = topBanner.html();
+			}else{
+				//全部内容页html(不包括头部和导航)
+				preview = $("#preview-layout");
+				
+				preview.html("");
+				
+				preview.append(content);
+				
+				preview.find("*[data-html='not']").remove();
+				preview.find(".lyrow").removeClass("lyrow");
+				preview.find(".ui-draggable").removeClass("ui-draggable");
+				preview.find(".ui-box-display").removeClass("ui-box-display");
+				preview.find(".lunbotu").removeClass("lunbotu");
+				preview.find(".demo").removeClass().addClass("content");
+				preview.find(".spec").attr("data-spec",'');
+				
+				preview.find(".pageHome").remove();
+				preview.find(".nav").remove();
+				preview.find(".setup_box").remove();
+				content_html = preview.html();
+			}
 		
-                    preview.find("*[ectype='user_info']").html("<i class='icon-spin'><img src='../data/gallery_album/visualDefault/load_spin.gif' width='30' height='30'></i>");
-
-                    preview.find("*[data-html='not']").remove();
-                    preview.find(".lyrow").removeClass("lyrow");
-                    preview.find(".ui-draggable").removeClass("ui-draggable");
-                    preview.find(".ui-box-display").removeClass("ui-box-display");
-                    preview.find(".lunbotu").removeClass("lunbotu");
-					if(suffix == "backup_festival_1"){
-						preview.find(".nav-placeholder").remove();
-						preview.find(".box-bd").html("<i class='icon-spin'><img src='../data/gallery_album/visualDefault/load_spin.gif' width='30' height='30'></i>");
-					}
-                    preview.find(".demo").removeClass().addClass("content");
-                    preview.find(".spec").attr("data-spec", '');
-
-                    preview.find(".pageHome").remove();
-                    preview.find(".nav").remove();
-                    preview.find(".setup_box").remove();
-                    content_html = preview.html();
-                }
-
-                Ajax.call('visualhome.php', "act=file_put_visual&content=" + encodeURIComponent(content) + "&content_html=" + encodeURIComponent(content_html) + "&suffix=" + suffix + "&temp=" + temp, file_put_visualResponse, 'POST', 'JSON');
-            } else if (section == "vis_topic") {
-
-                preview = $("#preview-layout");
-
-                preview.html("");
-
-                preview.append(content);
-
-                preview.find("*[data-html='not']").remove();
-                preview.find(".lyrow").removeClass("lyrow");
-                preview.find(".ui-draggable").removeClass("ui-draggable");
-                preview.find(".ui-box-display").removeClass("ui-box-display");
-                preview.find(".lunbotu").removeClass("lunbotu");
-                preview.find(".demo").removeClass().addClass("content");
-                preview.find(".spec").attr("data-spec", '');
-
-                /* 导航 */
-                preview.find(".categorys").remove();
-                preview.find(".setup_box").remove();
-                nav_html = preview.find('[ectype="nav"]').html();
-
-                /* 内容 */
-                preview.find(".pageHome,.nav").remove();
-                content_html = preview.html();
-
-                Ajax.call('topic.php', "act=file_put_visual&content=" + encodeURIComponent(content) + "&content_html=" + encodeURIComponent(content_html) + "&nav_html=" + encodeURIComponent(nav_html) + "&suffix=" + suffix + "&topic_type=" + topic_type, file_put_visualResponse, 'POST', 'JSON');
-
-            } else {
-                preview = $("#preview-layout");
-                preview.html("");
-
-                preview.append(content);
-
-                preview.find("*[data-html='not']").remove();
-                preview.find(".lyrow").removeClass("lyrow");
-                preview.find(".ui-draggable").removeClass("ui-draggable");
-                preview.find(".ui-box-display").removeClass("ui-box-display");
-                preview.find(".lunbotu").removeClass("lunbotu");
-                preview.find(".demo").removeClass(".ui-sortable").addClass("content");
-                preview.find(".spec").attr("data-spec", '');
-
-                if (section == 'vis_seller_topic') {
-                    /* 导航 */
-                    preview.find(".categorys").remove();
-                    preview.find(".setup_box").remove();
-                    nav_html = preview.find('[ectype="nav"]').html();
-
-                    /* 内容 */
-                    preview.find(".pageHome,.nav").remove();
-                    content_html = preview.html();
-
-                    where = "&nav_html=" + encodeURIComponent(nav_html);
-                } else {
-                    content_html = preview.html();
-                }
-
-                //头部html
-                var head_content = $('.hd_main').html();
-                var headlayout = $("#head-layout");
-                var head_html = '';
-                var ajax_url = '';
-                headlayout.html("");
-
-                headlayout.append("<div class='hd_main store_hd_main'>"+head_content+"</div>");
-
-                headlayout.find("*[data-html='not']").remove();
-                headlayout.find(".lyrow").removeClass("lyrow");
-                headlayout.find(".ui-draggable").removeClass("ui-draggable");
-                headlayout.find(".ui-box-display").removeClass("ui-box-display");
-                headlayout.find(".lunbotu").removeClass("lunbotu");
-                headlayout.find(".demo").removeClass().addClass("content");
-				headlayout.find(".spec").attr("data-spec", '');
-				
-                head_html = headlayout.html();
-                if (adminpath == 'admin') {
-                    ajax_url = 'topic.php';
-                } else {
-                    ajax_url = 'visual_editing.php';
-                }
-                Ajax.call(ajax_url, "act=file_put_visual&content=" + encodeURIComponent(content) + "&content_html=" + encodeURIComponent(content_html) + "&head_html=" + encodeURIComponent(head_html) + "&suffix=" + suffix + "&topic_type=" + topic_type + where, file_put_visualResponse, 'POST', 'JSON');
-            }
-        }else{
-        	var content = $("[ectype='visualShell']").html(),
-				content_html = '',
-				preview = '',
-				where = '';
-				
-                preview = $("#preview-layout");
-                preview.html("");
-
-                preview.append(content);
-
-                preview.find("*[data-html='not']").remove();
-                preview.find(".lyrow").removeClass("lyrow");
-                preview.find(".ui-draggable").removeClass("ui-draggable");
-                preview.find(".demo").removeClass(".ui-sortable").addClass("content");
-                preview.find(".spec").attr("data-spec", '');
-                
-                content_html = preview.html();
-                Ajax.call('topic.php', "act=file_put_visual&content=" + encodeURIComponent(content) + "&content_html=" + encodeURIComponent(content_html) + "&new=1" , file_put_visualResponse, 'POST', 'JSON');
-        }
-        //回调函数
-            function file_put_visualResponse(result) {
-                if (result.error == 0) {
-                    suffix_obj.val(result.suffix);
-                    $("[ectype='back']").show();
-                } else {
-                    alert("该模板不存在，请重试");
-                }
-            }
-        
-    }
+			Ajax.call('visualhome.php', "act=file_put_visual&content=" + encodeURIComponent(content)+"&content_html="+encodeURIComponent(content_html)+"&suffix="+suffix + "&temp=" + temp, file_put_visualResponse, 'POST', 'JSON');
+		}else if(section == "vis_topic"){
+			var nav_html = '';
+	
+			preview = $("#preview-layout");
+			
+			preview.html("");
+			
+			preview.append(content);
+			
+			preview.find("*[data-html='not']").remove();
+			preview.find(".lyrow").removeClass("lyrow");
+			preview.find(".ui-draggable").removeClass("ui-draggable");
+			preview.find(".ui-box-display").removeClass("ui-box-display");
+			preview.find(".lunbotu").removeClass("lunbotu");
+			preview.find(".demo").removeClass("ui-sortable").addClass("content");
+			preview.find(".spec").attr("data-spec",'');
+			
+			content_html = preview.find('.demo').html();
+			preview.find(".categorys").remove();
+			preview.find(".setup_box").remove();
+			nav_html = preview.find('[ectype="nav"]').html();
+		   
+			Ajax.call('topic.php', "act=file_put_visual&content=" + encodeURIComponent(content)+"&content_html="+encodeURIComponent(content_html)+"&nav_html="+encodeURIComponent(nav_html)+"&suffix="+suffix, file_put_visualResponse, 'POST', 'JSON');
+		}
+		
+		//回调函数
+		function file_put_visualResponse(result){
+			if(result.error == 0){
+				//$("input[name='suffix']").val(result.suffix);
+				suffix_obj.val(result.suffix);
+				$("[ectype='back']").show();
+			}else{
+				alert("该模板不存在，请重试");
+			}
+		}
+	}
 		
 	/* 更新左侧缓存文件 */
 	function generate(type){
-		var bgDiv = $("[data-style="+type+"]"),
-			checkbox = bgDiv.find(".ui-checkbox"),
-			bgimg = bgDiv.find("input[name='fileimg']"),
-			bgColor = "",
-			bgshow = "",
-			bgalign = "",
-			is_show = 0;
-		
+		//var suffix = $("input[name='suffix']").val();
+		var bgDiv = $("[data-style="+type+"]");
+		var checkbox = bgDiv.find(".ui-checkbox");
+		var bgColor = "",bgshow = "",bgalign = "";
+		var bgimg = bgDiv.find("input[name='fileimg']");
+		var is_show = 0;
 		if(checkbox.prop("checked") == true){
 			bgColor = bgDiv.find(".tm-picker-trigger").val();
 			is_show = 1;
@@ -2101,17 +1685,9 @@ $(function(){
 			bgshow = bgDiv.find(".bg-show-nr a.current").data("bg-show");
 			bgalign = bgDiv.find(".bg-align-nr a.current").data("bg-align");
 		}
-                
-		if(section == "vis_home" || section == "vis_topic" || adminpath == 'admin'){
-			var hometype = '';
-			if(section == "vis_home"){
-				hometype = "&hometype=1";
-			}
-			Ajax.call('topic.php', "act=generate&suffix=" + suffix + "&bg_color=" +bgColor + "&is_show=" +is_show + "&type=" + type + "&bgshow=" + bgshow + "&bgalign=" + bgalign + hometype, generateResponse, 'POST', 'JSON');
-		}else{
-			Ajax.call('visual_editing.php', "act=generate&suffix=" + suffix + "&bg_color=" +bgColor + "&is_show=" +is_show + "&type=" + type + "&bgshow=" + bgshow + "&bgalign=" + bgalign, generateResponse, 'POST', 'JSON');
-		}
 		
+		Ajax.call('topic.php', "act=generate&suffix=" + suffix + "&bg_color=" +bgColor + "&is_show=" +is_show + "&type=" + type + "&bgshow=" + bgshow + "&bgalign=" + bgalign + "&hometype=1", generateResponse, 'POST', 'JSON');
+	
 		//回调函数
 		function generateResponse(data){
 			if(data.error == 1){
@@ -2122,6 +1698,21 @@ $(function(){
 		}
 	}
 });
+
+
+/* 可视化模板信息编辑 弹窗内 必填验证 */
+function error_div(obj,error, is_error){
+	var error_div = $(obj).parents('div.value').find('div.form_prompt');
+	$(obj).parents('div.value').find(".notic").hide();
+	
+	if(is_error != 1){
+		$(obj).addClass("error");
+	}
+	
+	$(obj).focus();
+	error_div.find("label").remove();
+	error_div.append("<label class='error'><i class='icon icon-exclamation-sign'></i>"+error+"</label>");
+}
 
 /* 可视化模板信息编辑 弹窗内 图片链接标识 */
 function resetHref(){
@@ -2134,14 +1725,7 @@ function resetHref(){
 		$(this).attr("src",src + "?&" + +Math.random());
 	});
 }
- function checked_hearder_body(){
-    var html = $(".prompt").prevAll();
-    if(html.length == 0){
-         Ajax.call('topic.php', "act=get_hearder_body", function(data){
-             $(".prompt").before(data.content);
-         }, 'POST', 'JSON');
-    }
-}
+
 //上传方法
 jQuery.upload_file = function(file,url,showImg,fn){
 	$(file).change(function(){

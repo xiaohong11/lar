@@ -9,10 +9,10 @@
         <div class="title"><a href="user_baitiao_log.php?act=list" class="s-back">{$lang.back}</a>{$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>    
-                    <li>{$lang.operation_prompt_content.0}</li>
-                    <li>{$lang.operation_prompt_content.1}</li>
+                    <li>根据使用习惯，下载相应语言的csv文件，例如中国内地用户下载简体中文语言的文件，港台用户下载繁体语言的文件；</li>
+                    <li>选择所上传商品的分类以及文件编码，上传csv文件</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -23,10 +23,10 @@
                         <div class="switch_info">
                             <form action="baitiao_batch.php?act=baitiao_add" method="post" enctype="multipart/form-data" name="theForm" id="baitiao_batch" >
                                 <div class="item">
-                                    <div class="label">{$lang.text_enco}：</div>
+                                    <div class="label">文件编码：</div>
                                     <div class="label_value">
                                         <div id="file_code" class="imitate_select select_w320">
-                                            <div class="cite"></div>
+                                            <div class="cite">国际化编码（utf8）</div>
                                             <ul>
                                                 {foreach from=$lang_list item=item key=k}
                                                 <li><a href="javascript:;" data-value="{$k}" class="ftx-01">{$item}</a></li>
@@ -48,7 +48,7 @@
                                         <div class="form_prompt"></div>
                                         <div class="notic bf100 ml0">{$lang.notice_file}</div>
                                         <div class="fl bf100">
-                                            <a href="baitiao_batch.php?act=download&charset=zh_cn" class="mr30">1、{$lang.download_file_zh_cn} </a>
+                                            <a href="baitiao_batch.php?act=download&charset=zh_cn" class="mr30">1、下载批量CSV文件（繁体中文） </a>
                                         </div>
                                     </div>
                                 </div>
@@ -81,7 +81,8 @@
 		</div>
         {if $full_page}
     </div>
-    {include file ='library/pagefooter.lbi'}
+     {include file ='library/pagefooter.lbi'}
+    <script type="text/javascript" src="js/jquery.purebox.js"></script>
     <script type="text/javascript">
         $(function(){
 			//表单验证
@@ -104,7 +105,7 @@
 				},
 				messages:{
 					file:{
-						required : '<i class="icon icon-exclamation-sign"></i>' + file_not_null
+						required : '<i class="icon icon-exclamation-sign"></i>上传文件不能为空'
 					}
 				}
             });
@@ -116,7 +117,7 @@
 		function start(page)
 		{
 			{if $smarty.get.act != 'add'}
-			Ajax.call('baitiao_batch.php?act=ajax_insert', 'page=' + page, start_response, 'POST', 'JSON');
+				Ajax.call('baitiao_batch.php?act=ajax_insert', 'page=' + page, start_response, 'POST', 'JSON');
 			{/if}
 		}
 

@@ -5,26 +5,26 @@
 <body class="iframe_body">
 	<div class="warpper">
     	<div class="title">
-            {$lang.goods_alt} - {$ur_here}
+            商品 - {$ur_here}
         </div>
         <div class="content">
         	<div class="tabs_info">
             	<ul>
-                    <li {if $menu_select.current eq '03_category_list'}class="curr"{/if}><a href="category.php?act=list">{$lang.03_category_list}</a></li>
-                    <li {if $menu_select.current eq '03_store_category_list'}class="curr"{/if}><a href="category_store.php?act=list">{$lang.03_store_category_list}</a></li>
+                    <li {if $menu_select.current eq '03_category_list'}class="curr"{/if}><a href="category.php?act=list">平台商品分类</a></li>
+                    <li {if $menu_select.current eq '03_store_category_list'}class="curr"{/if}><a href="category_store.php?act=list">店铺商品分类</a></li>
                 </ul>
             </div>		
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.list.0}</li>
-                    <li>{$lang.operation_prompt_content.list.1}</li>
-                    <li>{$lang.operation_prompt_content.list.2}</li>
-                    <li>{$lang.operation_prompt_content.list.3}</li>
-                    <li>{$lang.operation_prompt_content.list.4}</li>
+                	<li>展示了平台所有的商品分类。</li>
+                    <li>可在列表直接增加下一级分类。</li>
+                    <li>可在商品分类列表进行转移分类下的商品。</li>
+                    <li>鼠标移动“设置”位置，可新增下一级分类、查看下一级分类、转移商品等操作</li>
                 </ul>
             </div>
             <div class="flexilist">
+            	<!--商品分类列表-->
                 <div class="common-head">
                     <div class="fl">
 					{if $parent_id > 0}
@@ -38,16 +38,16 @@
                     	<table cellpadding="0" cellspacing="0" border="0">
                         	<thead>
                             	<tr>
-                                	<th width="8%"><div class="tDiv">{$lang.level_alt}({$cat_level}{$lang.level})</div></th>
-                                	<th width="20%"><div class="tDiv">{$lang.cat_name}</div></th>
-									<th width="10%"><div class="tDiv">{$lang.commission_rate}(%)</div></th>
-                                    <th width="10%"><div class="tDiv">{$lang.goods_number}</div></th>
-                                    <th width="10%"><div class="tDiv">{$lang.measure_unit}</div></th>
-                                    <!-- <th width="10%"><div class="tDiv">{$lang.nav}</div></th> -->
-                                    <th width="10%"><div class="tDiv">{$lang.is_show}</div></th>
-                                    <th width="10%"><div class="tDiv">{$lang.short_grade}</div></th>
-                                    <th width="10%"><div class="tDiv">{$lang.sort_order}</div></th>
-                                    <th width="12%" class="handle">{$lang.handler}</th>
+                                	<th width="8%"><div class="tDiv">级别({$cat_level}级)</div></th>
+                                	<th width="20%"><div class="tDiv">分类名称</div></th>
+									<th width="10%"><div class="tDiv">佣金比率(%)</div></th>
+                                    <th width="10%"><div class="tDiv">商品数量</div></th>
+                                    <th width="10%"><div class="tDiv">数量单位</div></th>
+                                    <th width="10%"><div class="tDiv">导航栏</div></th>
+                                    <th width="10%"><div class="tDiv">是否显示</div></th>
+                                    <th width="10%"><div class="tDiv">价格分级</div></th>
+                                    <th width="10%"><div class="tDiv">排序</div></th>
+                                    <th width="12%" class="handle">操作</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,13 +56,11 @@
                                 	<td>
                                     	<div class="tDiv first_setup">
                                         	<div class="setup_span">
-                                            	<em><i class="icon icon-cog"></i>{$lang.setup}<i class="arrow"></i></em>
+                                            	<em><i class="icon icon-cog"></i>设置<i class="arrow"></i></em>
                                                 <ul>
-                                                	{if $level lt 2}
-                                                	<li><a href="category.php?act=add&parent_id={$cat.cat_id}">{$lang.add_next_level}</a></li>
-                                                    <li><a href="category.php?act=list&parent_id={$cat.cat_id}&level={$level}">{$lang.view_next_level}</a></li>
-                                                    {/if}
-                                                    <li><a href="javascript:void(0);" ectype="transfer_goods" data-cid="{$cat.cat_id}">{$lang.move_goods}</a></li>
+                                                	<li><a href="category.php?act=add&parent_id={$cat.cat_id}">新增下一级</a></li>
+                                                    <li><a href="category.php?act=list&parent_id={$cat.cat_id}&level={$level}">查看下一级</a></li>
+                                                    <li><a href="javascript:void(0);" ectype="transfer_goods" data-cid="{$cat.cat_id}">转移商品</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -71,17 +69,17 @@
                                     <td><div class="tDiv"><input type="text" name="commission_rate" class="text w40" value="{$cat.commission_rate}" onkeyup="listTable.editInput(this, 'edit_commission_rate', {$cat.cat_id})"/></div></td>
                                     <td><div class="tDiv">{$cat.goods_num}</div></td>
                                     <td><div class="tDiv"><input type="text" name="measure_unit" class="text w40" value="{$cat.measure_unit}" onkeyup="listTable.editInput(this, 'edit_measure_unit', {$cat.cat_id})"/></div></td>
-                                    <!-- <td>
+                                    <td>
                                     	<div class="tDiv">
-                                        	<div class="switch {if $cat.show_in_nav}active{/if}" title="{if $cat.show_in_nav}{$lang.yes}{else}{$lang.no}{/if}" onclick="listTable.switchBt(this, 'toggle_show_in_nav', {$cat.cat_id})">
+                                        	<div class="switch {if $cat.show_in_nav}active{/if}" title="{if $cat.show_in_nav}是{else}否{/if}" onclick="listTable.switchBt(this, 'toggle_show_in_nav', {$cat.cat_id})">
                                             	<div class="circle"></div>
                                             </div>
                                             <input type="hidden" value="0" name="">
                                         </div>
-                                    </td> -->
+                                    </td>
                                     <td>
                                     	<div class="tDiv">
-                                        	<div class="switch {if $cat.is_show}active{/if}" title="{if $cat.is_show}{$lang.yes}{else}{$lang.no}{/if}" onclick="listTable.switchBt(this, 'toggle_is_show', {$cat.cat_id})">
+                                        	<div class="switch {if $cat.is_show}active{/if}" title="{if $cat.is_show}是{else}否{/if}" onclick="listTable.switchBt(this, 'toggle_is_show', {$cat.cat_id})">
                                             	<div class="circle"></div>
                                             </div>
                                             <input type="hidden" value="0" name="">
@@ -91,8 +89,8 @@
                                     <td><div class="tDiv"><input type="text" name="sort_order" class="text w40" value="{$cat.sort_order}" onkeyup="listTable.editInput(this, 'edit_sort_order', {$cat.cat_id})"/></div></td>
                                     <td class="handle">
                                         <div class="tDiv a2">
-                                            <a href="category.php?act=edit&amp;cat_id={$cat.cat_id}" class="btn_edit"><i class="icon icon-edit"></i>{$lang.edit}</a>
-                                            <a href="javascript:remove_cat({$cat.cat_id},{$cat.level});" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                            <a href="category.php?act=edit&amp;cat_id={$cat.cat_id}" class="btn_edit"><i class="icon icon-edit"></i>编辑</a>
+                                            <a href="javascript:remove_cat({$cat.cat_id},{$cat.level});" class="btn_trash"><i class="icon icon-trash"></i>删除</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -103,28 +101,26 @@
                         </table>        
                     </div>
                 </div>
+                <!--商品分类列表end-->
             </div>
 		</div>
 	</div>
-	{include file ='library/pagefooter.lbi'}
+         {include file ='library/pagefooter.lbi'}
+    <script type="text/javascript" src="js/jquery.purebox.js"></script>
     <script type="text/javascript">
 		//转移分类
 		$(document).on('click',"*[ectype='transfer_goods']",function(){
-       		if(confirm(catename_level_transfer_yes)){
+                    if(confirm('执行此操作时，当前分类所有下级分类也同时转移，确定执行吗？')){
 			var cat_id = $(this).data("cid");
 			$.jqueryAjax("category.php", "act=move&cat_id="+cat_id, function(data){
 				var content = data.content;
-				if(data.error == 1){
-					alert(data.message);
-					return false;
-				}
 				pb({
 					id:"transfer_dialog",
-					title:"{$lang.move_goods}",
+					title:"转移商品",
 					width:732,
 					content:content,
-					ok_title:"{$lang.start_move_cat}",
-					cl_title:"{$lang.button_reset_alt}",
+					ok_title:"开始转移",
+					cl_title:"重置",
 					drag:false,
 					foot:true,
 					onOk:function(){
@@ -141,7 +137,7 @@
 		});
 		
 		function remove_cat(cat_id,level){
-			if (confirm(is_delete_info)) {
+			if (confirm('确定删除吗')) {
 			   Ajax.call('category.php?is_ajax=1&act=remove', "cat_id="+cat_id+"&level="+level, remove_catResponse, "GET", "JSON");
 			}
 		}
@@ -149,12 +145,9 @@
 		function remove_catResponse(result){
 			if(result.error == 2){
 				alert(result.massege);
-			}
-			else if(result.error == 1){
-				alert(result.message);
-			}
-			else{
+			}else{
 				window.location.reload();
+				//$("#"+result.level+"_"+result.cat_id).remove();
 			}
 		}	
     </script>

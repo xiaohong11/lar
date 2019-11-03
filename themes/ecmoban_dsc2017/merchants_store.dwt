@@ -11,105 +11,53 @@
 <!-- TemplateEndEditable -->
 <link rel="shortcut icon" href="favicon.ico" />
 <!-- #BeginLibraryItem "/library/js_languages_new.lbi" --><!-- #EndLibraryItem -->
-<link rel="stylesheet" type="text/css" href="{$site_domain}themes/<?php echo $GLOBALS['_CFG']['template']; ?>/css/other/store_css.css" />
-<link rel="stylesheet" type="text/css" href="{$site_domain}themes/<?php echo $GLOBALS['_CFG']['template']; ?>/css/preview.css">
 </head>
 
 <body>
 	<!-- #BeginLibraryItem "/library/page_header_common.lbi" --><!-- #EndLibraryItem -->
     <div class="shop-header">
-    	<!-- #BeginLibraryItem "/library/merchants_store_top.lbi" --><!-- #EndLibraryItem -->
-        {if $head_temp}
-        	<div class="hd_main">
-            {$head_temp}
-            </div>
-        {else}
-            {if !$pc_page.out}
-            <div class="middle">
-                <div class="w w1200">
-                    <div class="logo-wp">
-                        <a href="" class="shop-logo"><img src="{$basic_info.shop_logo}" alt=""></a>
-                        <div class="logo-text">
-                            <a href="" class="shop-title">{$shop_name}</a>
-                            <p class="shop-intro" title="{$basic_info.street_desc}">{$basic_info.street_desc}</p>
-                        </div>
+        <div class="shop-header">
+            <!-- #BeginLibraryItem "/library/merchants_store_top.lbi" --><!-- #EndLibraryItem -->
+        </div>
+        <div class="bottom">
+            <div class="w w1200">
+                <div class="shop-head-category">
+                    <div class="all-cate"><a href="javascript:;">{$lang.all_seller_cat}<i class="iconfont icon-liebiao"></i></a></div>
+                    {if $all_cat_list}
+                    <div class="cate-tab-content">
+                    	{foreach from=$all_cat_list item=cat}
+                        <dl>
+                            <dt><a href="{$cat.url}">{$cat.cat_name}</a></dt>
+                            {foreach from=$cat.child_tree item=tree}
+                            <a href="{$tree.url}">{$tree.name}</a>
+                            {/foreach}
+                        </dl>
+                        {/foreach}
                     </div>
-                    <form method="GET" action="{$site_domain}merchants_store.php" class="shop-search" name="listform">
-                        <input type="text" id="sp-keyword" name="keyword" value="{$keyword|default:}" placeholder="{$lang.goods_keyword_store}" autocomplete="off">
-                        <button id="btnShopSearch" type="submit">{$lang.search}</button>
-                        <input type="hidden" value="{$merchant_id}" id="merchant_id" name="merchant_id">
-                        <input type="hidden" value="{$cat_id}" id="cat_id" name="cat_id">
-                    </form>
-                    <div class="shop-qrcode">
-                        <img src="{$site_domain}{$seller_qrcode_img}" alt="" class="img" width="84">
-                        <p>扫一扫，进入手机商城</p>
-                    </div>
+                    {/if}
+                </div>
+                <div class="shop-nav">
+                    <ul>
+                        <li>
+                            <a href="{$merchants_url}" {if $cat_id eq 0}class="current"{/if}>{$lang.Shop_home}</a>
+                        </li>
+                        {foreach from=$store_category item=category key=key name=no}
+                        <!-- {if $smarty.foreach.no.iteration<6}-->
+                        <li class="s_box_id">
+                            <a href="{$category.url}" {if $category.opennew eq 1} target="_blank"{/if}>{$category.cat_name}</a>
+                        </li>
+                        <!-- {/if} -->
+                        {/foreach}
+                    </ul>
                 </div>
             </div>
-            {/if}
-            <div class="bottom">
-                <div class="w w1200">
-                    <div class="shop-head-category">
-                        <div class="all-cate"><a href="javascript:;">{$lang.all_seller_cat}<i class="iconfont icon-liebiao"></i></a></div>
-                        {if $all_cat_list}
-                        <div class="cate-tab-content">
-                            {foreach from=$all_cat_list item=cat}
-                            <dl>
-                                <dt><a href="{$cat.url}">{$cat.cat_name}</a></dt>
-                                {foreach from=$cat.child_tree item=tree}
-                                <dd><a href="{$tree.url}">{$tree.name}</a></dd>
-                                {/foreach}
-                            </dl>
-                            {/foreach}
-                        </div>
-                        {/if}
-                    </div>
-                    <div class="shop-nav">
-                        <ul>
-                            <li>
-                                <a href="{$merchants_url}" {if $cat_id eq 0}class="current"{/if}>{$lang.Shop_home}</a>
-                            </li>
-                            {foreach from=$store_category item=category key=key name=no}
-                            <!-- {if $smarty.foreach.no.iteration<6}-->
-                            <li class="s_box_id">
-                                <a href="{$category.url}" {if $category.opennew eq 1} target="_blank"{/if}>{$category.cat_name}</a>
-                            </li>
-                            <!-- {/if} -->
-                            {/foreach}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        {/if}
+        </div>
     </div>
-    
-	<div class="picScroll-left">
-		<div class="hd">
-			<ul></ul>
-		</div>
-		<div class="bd">
-			{* DSC 提醒您：动态载入position_merchantsIn_users.lbi，显示首页分类小广告 *}{insert name='get_adv_child' ad_arr=$adarr id=$merchant_id}
-		</div>
-	</div>
-	
     <div class="seller-list-main">
         <div class="w w1200">
             <!--{if $cat_id > 0}-->
             <!--{if $brands.1 || $price_grade.1 || $filter_attr_list} 组合搜索 开始-->
             <div class="selector">
-            	<div class="s-line">
-                	<div class="s-l-wrap">
-                    	<div class="s-l-tit"><span>{$lang.search}：</span></div>
-                        <div class="s-l-value">
-                        	<form method="GET" action="{$site_domain}merchants_store.php" class="shop-search" name="listform">
-                                <input type="text" id="sp-keyword" name="keyword" value="{$keyword|default:}" placeholder="{$lang.goods_keyword_store}" autocomplete="off">
-                                <button id="btnShopSearch" type="submit">{$lang.search}</button>
-                                <input type="hidden" value="{$merchant_id}" id="merchant_id" name="merchant_id">
-                                <input type="hidden" value="{$cat_id}" id="cat_id" name="cat_id">
-                            </form>
-                        </div>
-                    </div>
-                </div>
                 <!--{if $brands.1}-->
                 <div class="s-line">
                     <div class="s-l-wrap">
@@ -153,6 +101,18 @@
                 </div>
                 <!--{/if}--> 
                 <!--{foreach from=$filter_attr_list item=filter_attr key=key}-->
+                <li {if $key eq 2} style="border-bottom:0;"{elseif $key > 2}class="hide"{/if}>
+                    <div class="label">{$filter_attr.filter_attr_name|escape:html}：</div>
+                    <div class="value">
+                            <!--{foreach from=$filter_attr.attr_list item=attr}--> 
+                            <!-- {if $attr.selected} -->
+                            <a href="javascript:;" class="shaixuan">{$attr.attr_value}</a>
+                            <!-- {else} -->
+                            <a href="{$attr.url}">{$attr.attr_value}</a>
+                            <!-- {/if} --> 
+                        <!--{/foreach}-->
+                    </div>
+                </li>
                 <div class="s-line">
                     <div class="s-l-wrap">
                         <div class="s-l-tit"><span>{$filter_attr.filter_attr_name|escape:html}：</span></div>
@@ -164,6 +124,7 @@
                                         <li><a  href="javascript:;" class="shaixuan">{$attr.attr_value}</a></li>
                                         <!-- {else} -->
                                         <li><a href="{$attr.url}">{$attr.attr_value}</a></li>
+                                        <a href="{$attr.url}">{$attr.attr_value}</a>
                                         <!-- {/if} --> 
                                     <!--{/foreach}-->
                                 </ul>
@@ -176,7 +137,7 @@
             </div>
             <!--{/if}-->
             <!--{/if}-->
-            <div class="clearfix mt15">
+            <div class="clearfix">
             	<!--{if $cat_store_list || $goods_hot || $basic_info.notice}-->
                 <div class="shop-list-side">
                     <!--{if $cat_store_list}-->
@@ -184,15 +145,13 @@
                         <h2>{$lang.seller_cat}</h2>
                         <div class="side-menu">
                             <!--{foreach from=$cat_store_list item=cat name=nocat}-->
-                            <dl class="j-slideToggle-wp{if $smarty.foreach.nocat.iteration eq 1} active{/if}">
-                                <dt class="menu-level-1"><a href="{$cat.url}">{$cat.cat_name}</a>{if $cat.child_tree}<i class="iconfont icon-xia j-slideToggle-handle"></i>{/if}</dt>
-                                {if $cat.child_tree}
+                            <dl class="j-slideToggle-wp active">
+                                <dt class="menu-level-1"><a href="{$cat.url}">{$cat.cat_name}</a><i class="iconfont icon-xia j-slideToggle-handle"></i></dt>
                                 <dd class="j-slideToggle-con" {if $smarty.foreach.nocat.iteration eq 1}style="display: block;"{/if}>
                                     <!--{foreach from=$cat.child_tree item=catchild name=nochildcat}-->
                                     <p><a href="{$catchild.url}">{$catchild.name}</a></p>
                                     <!--{/foreach}-->
                                 </dd>
-                                {/if}
                             </dl>
                             <!--{/foreach}-->
                         </div>
@@ -205,8 +164,8 @@
                             <ul>
                                 {foreach from=$goods_hot item=goods key=key name=sale}
                                 <li>
-                                    <div class="p-img"><a href="{$goods.url}" title="{$goods.goods_name|escape:html}" target="_blank"><img src="{$goods.goods_thumb}" alt=""></a></div>
-                                    <div class="p-name"><a href="{$goods.url}" title="{$goods.goods_name|escape:html}" target="_blank">{$goods.goods_name}</a></div>
+                                    <div class="p-img"><a href="{$goods.url}" title="{$goods.goods_name}" target="_blank"><img src="{$goods.goods_thumb}" alt=""></a></div>
+                                    <div class="p-name"><a href="{$goods.url}" title="{$goods.goods_name}" target="_blank">{$goods.goods_name}</a></div>
                                 </li>
                                 {/foreach}
                             </ul>
@@ -275,7 +234,7 @@
                                             </div>
                                             <div class="p-num">已售<em>{$goods.sales_volume}</em>{$lang.jian}</div>
                                         </div>
-                                        <div class="p-name"><a target="_blank" title="{$goods.goods_name|escape:html}" href="{$goods.url}">{$goods.goods_name}</a></div>
+                                        <div class="p-name"><a target="_blank" href="{$goods.url}">{$goods.goods_name}</a></div>
                                     </div>
                                 </li>
                                 <!--{foreachelse}-->
@@ -297,7 +256,6 @@
             </div>
         </div>
     </div>
-    <input type="hidden" value="{$merchant_id}" id="merchantId" class="merchantId" name="merchantId">  
     <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
     <!-- {if $site_domain} -->
     <script type="text/javascript" src="{$site_domain}js/jquery.SuperSlide.2.1.1.js"></script>
@@ -329,35 +287,6 @@
                 })
             }
             slideToggle();
-			
-			
-			$(document).on("mouseover", ".all_box", function () {
-				var all_cats_tcc = $(".all_cats_tcc").html();
-				all_cats_tcc = $.trim(all_cats_tcc);
-	
-				if(all_cats_tcc == ''){
-					var merchant_id = $("#merchantId").val();
-					{if $is_jsonp}
-						$.ajax({
-						   type: "GET",
-						   /*jquery Ajax跨域*/
-						   url: "{$site_domain}ajax_dialog.php",
-						   data: "act=cat_store_list&merchant_id=" + merchant_id + "&is_jsonp=" + {$is_jsonp},
-						   dataType:'jsonp',
-						   jsonp:"jsoncallback",
-						   success: function(data){
-							   $(".all_cats_tcc").html(data.content);
-						   }
-						});
-					{else}
-						Ajax.call('ajax_dialog.php?act=cat_store_list', 'merchant_id=' + merchant_id, cat_store_listResponse, 'POST', 'JSON');
-					{/if}
-				}
-			});
-			
-			function cat_store_listResponse(data){
-				$(".all_cats_tcc").html(data.content);
-			}
         })
     </script>
 </body>

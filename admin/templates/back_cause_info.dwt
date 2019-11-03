@@ -4,13 +4,13 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="order.php?act=back_cause_list" class="s-back">{$lang.back}</a>{$lang.order_word} - {$ur_here}</div>
+    	<div class="title"><a href="order.php?act=back_cause_list" class="s-back">{$lang.back}</a>订单 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content_common}</li>
-                    <li>{$lang.operation_prompt_content.return_cause_info.0}</li>
+                	<li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
+                    <li>可选择已有的顶级原因分类。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -28,13 +28,13 @@
                                 <div class="item">
 									<div class="label">{$lang.reason_cate}：</div>
 									<div id="parent_id" class="imitate_select select_w320">
-									    <div class="cite">{if $parent_cat.cause_name}{$parent_cat.cause_name}{else}{$lang.top_cate}{/if}</div>
+									    <div class="cite">{$lang.top_cate}</div>
 									    <ul>
 									    {foreach from=$cause_list item=cause}
 											<li><a href="javascript:;" data-value="{$cause.id}" class="ftx-01">{$cause.name}</a></li>
 									    {/foreach}
 									    </ul>
-										<input name="parent_id" type="hidden" value="{$parent_cat.cause_id}" id="parent_id_val">
+										<input name="parent_id" type="hidden" value="{$cause_info.parent_id}" id="parent_id_val">
 									</div>
                                 </div>
                                 <div class="item">
@@ -46,7 +46,7 @@
 								<div class="item">
                                     <div class="label">{$lang.whether_display}：</div>
                                     <div class="label_value">
-										<div class="switch switch_2 {if $cause_info.is_show}active{/if}" title="{$lang.yes}">
+										<div class="switch switch_2 {if $cause_info.is_show}active{/if}" title="是">
 											<div class="circle"></div>
 										</div>
 										<input type="hidden" name="is_show" value="{$cause_info.is_show}">
@@ -57,6 +57,7 @@
                                     <div class="label_value info_btn">
 									  <input type="hidden" name="c_id" value="{$c_id}" />
 									  <input type="submit" value="{$lang.button_submit}" class="button" id="submitBtn" />
+									  <!--<input type="reset" value="{$lang.button_reset}" class="button button_reset fl" />-->
 									  <input type="hidden" name="act" value="{$form_act}" />
                                     </div>
                                 </div>
@@ -67,7 +68,7 @@
             </div>
 		</div>
 	</div>
-	{include file ='library/pagefooter.lbi'}
+ {include file ='library/pagefooter.lbi'}
     <script type="text/javascript">
 	$(function(){
 		//表单验证
@@ -90,7 +91,7 @@
 			},
 			messages:{
 				cause_name:{
-					required : '<i class="icon icon-exclamation-sign"></i>'+not_back_cause
+					required : '<i class="icon icon-exclamation-sign"></i>请输出退换货原因'
 				}
 			}			
 		});

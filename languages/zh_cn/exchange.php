@@ -3,7 +3,7 @@
 /**
  * ECSHOP 时间JS语言文件
  * ============================================================================
- * * 版权所有 2005-2017 上海商创网络科技有限公司，并保留所有权利。
+ * * 版权所有 2005-2016 上海商创网络科技有限公司，并保留所有权利。
  * 网站地址: http://www.ecmoban.com；
  * ----------------------------------------------------------------------------
  * 这不是一个自由软件！您只能在不用于商业目的的前提下对程序代码进行修改和
@@ -80,7 +80,7 @@ $_LANG['js_languages']['data_not_complete'] = "数据格式不完整";
 $_LANG['js_languages']['understock'] = "库存不足，请选择其他商品";
 //20161214
 
-$_LANG['js_languages']['shiping_prompt'] = "暂不支持配送";
+$_LANG['js_languages']['shiping_prompt'] = "该地区暂不支持配送";
 $_LANG['js_languages']['Have_goods'] = "有货"; 
 $_LANG['js_languages']['No_goods'] = "无货";
 $_LANG['js_languages']['Deliver_back_order'] = "下单后立即发货";
@@ -88,4 +88,4 @@ $_LANG['js_languages']['goods_over'] = "此商品暂时售完";
 $_LANG['js_languages']['most_exchange'] = "您最多可积分兑换";
 $_LANG['js_languages']['Piece_goods'] = "件商品";
 $_LANG['js_languages']['exchange_error_one'] = "对不起，您现有的积分值不够兑换本商品！";
-$_LANG['is_shipping_area'] = "[ 暂不支持配送 ]";
+

@@ -4,22 +4,28 @@
  
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="category_store.php?act=list" class="s-back">{$lang.back}</a>{$lang.goods_alt} - {$ur_here}</div>
+    	<div class="title"><a href="brand.php?act=list" class="s-back">{$lang.back}</a>商品 - {$ur_here}</div>
         <div class="content">
+        	<div class="explanation" id="explanation">
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>使用说明：</h4><span id="explanationZoom" title="使用说明"></span></div>
+                <ul>
+                	<li>生成品牌的首字母，主要用于后台的品牌搜索按首字母查询</li>
+                </ul>
+            </div>
             <div class="flexilist">
                 <div class="common-content">
                     <div class="mian-info">
 						<div class="list-div">
-						{$lang.current_modification_data}{$record_count|default:0}{$lang.tiao}
+						当前需要修改的数据表有{$record_count|default:0}条
 						</div>
 						<div style=" width:100px; height:10px; clear:both; overflow:hidden;"></div>
 						<div class="list-div">
 						<table id="listTable">
 							<tr>
-                            	<th width="10%"><div class="tDiv">{$lang.record_id}<div></th>
-								<th width="10%"><div class="tDiv">{$lang.cat_name}（ID）</div></th>
-								<th width="15%"><div class="tDiv">{$lang.cat_name_parent}（ID）</div></th>
-								<th width="15%"><div class="tDiv">{$lang.current_store_cat_level}</div></th>
+                            	<th width="10%"><div class="tDiv">编号</div></th>
+								<th width="10%"><div class="tDiv">商家分类名称（ID）</div></th>
+								<th width="15%"><div class="tDiv">父级分类名称（ID）</div></th>
+								<th width="15%"><div class="tDiv">当前店铺分类级别</div></th>
 							</tr>
 						</table>
 						</div>
@@ -67,12 +73,12 @@
                     start(result.page);
                 }	
             }
-
-			if(result.is_stop == 0){
+            
+            if(result.is_stop == 0){
 				$("#title_name").addClass("red");
-                $("#title_name").html(title_name_one);
+                $("#title_name").html("已完成分离，请关闭该窗口！");
             }else{
-				$("#title_name").html(title_name_two);
+				$("#title_name").html("正在进行商家分类从平台分类中分离，请勿关闭该窗口！");
 			}
         }
     </script>

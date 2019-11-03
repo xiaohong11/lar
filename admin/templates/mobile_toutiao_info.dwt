@@ -7,9 +7,9 @@
     	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>移动应用 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content_common}</li>
+                	<li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
                     <li>此快捷菜单的图片标准宽度为：120px 标准高度为：120px</li>
                 </ul>
             </div>
@@ -45,7 +45,7 @@
                                             <input type="file" class="type-file-file" id="app_file_img" name="app_file_img" data-state="imgfile" size="30" hidefocus="true" value="" />
                                             {if $toutiao_info.image}
                                             <span class="show">
-                                                <a href="../{$toutiao_info.image}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="../{$toutiao_info.image}" ectype="tooltip" title="tooltip"></i></a>
+                                                <a href="../{$toutiao_info.image}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../{$toutiao_info.image}>')" onmouseout="toolTip()"></i></a>
                                             </span>
                                             {/if}
                                             <input type="text" name="textfile" class="type-file-text" id="textfield" autocomplete="off" readonly />
@@ -66,11 +66,11 @@
                                         <div class="checkbox_items">
                                             <div class="checkbox_item">
                                                 <input type="radio" class="ui-radio" name="status" id="sex_0" value="1" {if $toutiao_info.status eq 1} checked="true" {/if}  />
-                                                <label for="sex_0" class="ui-radio-label">{$lang.yes}</label>
+                                                <label for="sex_0" class="ui-radio-label">是</label>
                                             </div>
                                             <div class="checkbox_item">
                                                 <input type="radio" class="ui-radio" name="status" id="sex_1" value="0" {if $toutiao_info.status eq 0} checked="true" {/if}  />
-                                                <label for="sex_1" class="ui-radio-label">{$lang.no}</label>
+                                                <label for="sex_1" class="ui-radio-label">否</label>
                                             </div>
                                         </div>
                                     </div>

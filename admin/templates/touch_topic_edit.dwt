@@ -3,7 +3,7 @@
 <head>{include file ='library/admin_html_head.lbi'}</head>
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="touch_topic.php?act=list" class="s-back">{$lang.back}</a>{$lang.promotion} - {$ur_here}</div>
+    	<div class="title"><a href="touch_topic.php?act=list" class="s-back">{$lang.back}</a>促销 - {$ur_here}</div>
         <div class="content">
         	<div class="tabs_info">
                 <ul>
@@ -14,9 +14,9 @@
                 </ul>
             </div>
             <div class="explanation" id="explanation"> 
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-					<li>{$lang.operation_prompt_content_common}</li>
+					<li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
                     <li>添加专题信息：通用信息、专题商品、专题介绍、高级选项等。</li>
                     <li>点击确定即可创建一个专题页面。</li>
                     <li>在列表页点击查看即可看到前台展示的专题页面。</li>
@@ -65,7 +65,7 @@
                                         <div class="label">{$lang.lable_topic_type}：</div>
                                         <div class="label_value">
                                        		<div id="topic_type" name="topic_type" class="imitate_select select_w320">
-												<div class="cite">{$lang.please_select}</div>
+												<div class="cite">请选择</div>
 												<ul>
 													 <li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.top_img}</a></li>
 													 <li><a href="javascript:;" data-value="1" class="ftx-01">{$lang.top_flash}</a></li>
@@ -85,7 +85,7 @@
                                                 <input type="file" class="type-file-file" id="topic_img" name="topic_img" data-state="imgfile" size="30" hidefocus="true" value="">
                                                 {if $topic.topic_img}
 												<span class="show">
-                                                    <a href="../{$topic.topic_img}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="../{$topic.topic_img}" ectype="tooltip" title="tooltip"></i></a>
+                                                    <a href="../{$topic.topic_img}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../{$topic.topic_img}>')" onmouseout="toolTip()"></i></a>
                                                 </span>
 												{/if}
                                                 <input type="text" name="textfile" class="type-file-text" {if $topic.topic_img} value="../{$topic.topic_img}"{/if} id="textfield" autocomplete="off" readonly>
@@ -114,7 +114,7 @@
                                                 <input type="file" class="type-file-file" id="title_pic" name="title_pic" data-state="imgfile" size="30" hidefocus="true" value="">
                                                 {if $topic.title_pic}
 												<span class="show">
-                                                    <a href="../{$topic.title_pic}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="../{$topic.title_pic}" ectype="tooltip" title="tooltip"></i></a>
+                                                    <a href="../{$topic.title_pic}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../{$topic.title_pic}>')" onmouseout="toolTip()"></i></a>
                                                 </span>
 												{/if}
                                                 <input type="text" name="textfile" class="type-file-text" {if $topic.title_pic}value="../{$topic.title_pic}"{/if} id="textfield" autocomplete="off" readonly>
@@ -126,17 +126,17 @@
                                     <div class="item">
                                         <div class="label">{$lang.adopt_status}：</div>
                                         <div class="label_value">
-                                            <div class="checkbox_items" ectype="general_audit_status">
+                                            <div class="checkbox_items">
                                                 <div class="checkbox_item"> 
-                                                    <input name="review_status" type="radio" class="ui-radio" value="1" id="review_status_1" {if $topic.review_status eq 1}checked="checked"{/if} />
+                                                    <input name="review_status" type="radio" class="ui-radio" value="1" id="review_status_1" {if $topic.review_status eq 1}checked="checked"{/if} onclick="get_review_status(this.value)" />
                                                     <label for="review_status_1" class="ui-radio-label">{$lang.not_audited}</label>
                                                 </div>
                                                 <div class="checkbox_item"> 
-                                                    <input name="review_status" type="radio" class="ui-radio" value="2" id="review_status_2" {if $topic.review_status eq 2}checked="checked"{/if} />
+                                                    <input name="review_status" type="radio" class="ui-radio" value="2" id="review_status_2" {if $topic.review_status eq 2}checked="checked"{/if} onclick="get_review_status(this.value)" />
                                                     <label for="review_status_2" class="ui-radio-label">{$lang.audited_not_adopt}</label>
                                                 </div>
                                                 <div class="checkbox_item"> 
-                                                    <input name="review_status" type="radio" class="ui-radio" value="3" id="review_status_3" {if $topic.review_status eq 3}checked="checked"{/if} />
+                                                    <input name="review_status" type="radio" class="ui-radio" value="3" id="review_status_3" {if $topic.review_status eq 3}checked="checked"{/if} onclick="get_review_status(this.value)" />
                                                     <label for="review_status_3" class="ui-radio-label">{$lang.audited_yes_adopt}</label>
                                                 </div>
                                             </div>
@@ -163,7 +163,7 @@
                                         <div class="search_select">{$lang.topic_class}：</div>
                                         <div class="label_value">
                                             <div id="topic_list" class="imitate_select select_w320">
-                                                <div class="cite">{$lang.please_select}</div>
+                                                <div class="cite">请选择</div>
                                                 <ul>
 													{foreach from=$topic.topic_data item=data name=data key=key}
 													<li><a href="javascript:;" data-value="{$smarty.foreach.data.index}">{$key}</a></li>
@@ -176,14 +176,14 @@
                                         </div>
                                         <input type="hidden" name="ru_id" value="{$ru_id}" />
                                         <input type="text" name="new_cat_name" id="new_cat_name" class="text w150" data-filter="new_cat_name" autocomplete="off" />
-                                        <a href="javascript:void(0);" class="btn btn30 mr10" onclick="addClass()">添加</a><a href="javascript:void(0);" class="btn btn30" onclick="delectClass()" >{$lang.remove}</a>
+                                        <a href="javascript:void(0);" class="btn btn30 mr10" onclick="addClass()">添加</a><a href="javascript:void(0);" class="btn btn30" onclick="delectClass()" >移除</a>
                                     </div>
                                     <div class="goods_search_div">
                                         <div class="search_select">{$lang.screen_goods}：</div>
                                         <div class="search_select">
                                             <div class="categorySelect">
                                                 <div class="selection">
-                                                    <input type="text" name="category_name" id="category_name" class="text w250 valid" value="{$lang.select_cat}" autocomplete="off" readonly data-filter="cat_name" />
+                                                    <input type="text" name="category_name" id="category_name" class="text w250 valid" value="请选择分类" autocomplete="off" readonly data-filter="cat_name" />
                                                     <input type="hidden" name="category_id" id="category_id" value="0" data-filter="cat_id" />
                                                 </div>
                                                 <div class="select-container" style="display:none;">
@@ -194,7 +194,7 @@
                                         <div class="search_select">
                                             <div class="brandSelect">
                                                 <div class="selection">
-                                                    <input type="text" name="brand_name" id="brand_name" class="text w120 valid" {$lang.select_barnd} autocomplete="off" readonly data-filter="brand_name" />
+                                                    <input type="text" name="brand_name" id="brand_name" class="text w120 valid" value="请选择品牌" autocomplete="off" readonly data-filter="brand_name" />
                                                     <input type="hidden" name="brand_id" id="brand_id" value="0" data-filter="brand_id" />
                                                 </div>
                                                 <div class="brand-select-container" style="display:none;">
@@ -203,8 +203,8 @@
                                             </div>                            
                                         </div>
                                         <input type="hidden" name="ru_id" value="{$ru_id}" />
-                                        <input type="text" name="keyword" class="text w150" placeholder={$lang.input_keywords} data-filter="keyword" autocomplete="off" />
-                                        <a href="javascript:void(0);" class="btn btn30" onclick="searchGoods()" ><i class="icon icon-search"></i>{$lang.search_word}</a>
+                                        <input type="text" name="keyword" class="text w150" placeholder="请输入关键字" data-filter="keyword" autocomplete="off" />
+                                        <a href="javascript:void(0);" class="btn btn30" onclick="searchGoods()" ><i class="icon icon-search"></i>搜索</a>
                                     </div>
                                     <div class="move_div">
                                         <div class="move_left">
@@ -216,8 +216,8 @@
                                                 </div>
                                             </div>
                                             <div class="move_handle">
-                                                <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">{$lang.check_all}</a>
-                                                <a href="javascript:void(0);" class="btn btn25 red_btn" onclick="addGoods()">{$lang.button_submit_alt}</a>
+                                                <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">全选</a>
+                                                <a href="javascript:void(0);" class="btn btn25 red_btn" onclick="addGoods()">确定</a>
                                             </div>
                                             <input name="source_select" type="hidden" value="0" id="source_select_val">
                                         </div>
@@ -241,7 +241,7 @@
                                                 </div>
                                             </div>
                                             <div class="move_handle">
-                                                <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">{$lang.check_all}</a><a href="javascript:void(0);" class="btn btn25 btn_red" onclick="delGoods()">{$lang.remove}</a>
+                                                <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">全选</a><a href="javascript:void(0);" class="btn btn25 btn_red" onclick="delGoods()">移除</a>
                                             </div>
                                             <input name="target_select" type="hidden" value="0" id="target_select_val">
                                         </div>
@@ -291,7 +291,7 @@
     	.button-info-item0 .label,.button-info-item3 .label{ width:30%; padding-right:9px;}
     </style>
  	{include file ='library/pagefooter.lbi'}
-	{insert_scripts files="../js/spectrum-master/spectrum.js"}
+	{insert_scripts files="spectrum-master/spectrum.js"}
     
 	<script type="text/javascript">
         var myTopic = Object();
@@ -536,7 +536,14 @@
 		var sp_color2 = sp_color.substring(1,sp_color.length);
 		$('input[name="base_style"]').css("color",sp_color);
 		$('input[name="base_style"]').val(sp_color2);
-	});
+	});	
+        function get_review_status(val){
+			if(val == 2){
+				$("#review_content").show();
+			}else{
+				$("#review_content").hide();
+			}
+		}
     </script>
 </body>
 </html>

@@ -25,7 +25,7 @@
 					<div class="address-icon"><i class="iconfont icon-dingwei"></i></div>
 					<div class="flow-have-adr">
 						<p class="f-h-adr-title">
-							<label>{$order.consignee} </label><span> {$order.mobile}</span></p>
+							<label>{$order.user_name} </label><span> {$order.mobile}</span></p>
 						<p class="f-h-adr-con t-remark m-top04">{$order.detail_address}</p>
 					</div>
 				</section>
@@ -47,7 +47,7 @@
 									<div class="product-div dis-box">
 										<a class="product-div-link" href="{$order.url}"></a>
 										<div class="shop-list-width bd"><img class="product-list-img" src="{$order.title_img}" /></div>
-										<div class="product-text box-flex index-product-text">
+										<div class="product-text box-flex">
 											<h4>{$order.title}</h4>
 											<p class="col-3 f-03"><em class="col-9">已筹资金:</em><em class="color-red">￥{$order.join_money}</em><!-- 元 --><em class="fr col-9 f-03">支持人:<em class="color-red">{$order.join_num}</em>人</em>
 											</p>
@@ -130,7 +130,7 @@
 		<div class="mask-filter-div"></div>
 		<!--待付款1-->
 		{if $order.pay_status == 0 and $order.order_status != 2}
-		<section class="filter-btn f-checkout-filter-btn dis-box n-checkout-filter-btn pl">
+		<section class="filter-btn f-checkout-filter-btn dis-box n-checkout-filter-btn">
 			<span class="box-flex t-remark">实付款 <em class="t-first">¥{$order.total_fee}</em></span>
 			{$order.handler}
 			<section class="n-btn-box">{$order.pay_online}</section>

@@ -51,11 +51,11 @@ function sendSmsResponse(result){
       if(result.error == 1){
         $("#username_notice_1").html("<i></i>"+result.msg);
       }else{
-        $("#phone_notice").removeClass("error").addClass("error");
+        $("#phone_notice").removeClass().addClass("error");
         $("#phone_notice").html("<i></i>"+result.msg);
       }    
     }else{
-      $("#phone_notice").removeClass("error").addClass("error");
+      $("#phone_notice").removeClass().addClass("error");
       $("#phone_notice").html("<i></i>"+"手机验证码发送失败");
     }
   }

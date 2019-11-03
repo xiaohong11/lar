@@ -2,7 +2,7 @@
 {if $topBanner}
 {$topBanner}
 {else}
-{* DSC 提醒您：动态载入position_get_adv.lbi，显示首页分类小广告 *}{insert name='get_adv' logo_name=$top_banner}
+{* ECSHOP 提醒您：动态载入position_get_adv.lbi，显示首页分类小广告 *}{insert name='get_adv' logo_name=$top_banner}
 {/if}
 <div class="site-nav" id="site-nav">
     <div class="w w1200">
@@ -60,10 +60,10 @@
         </div>
         <div class="dsc-search">
             <div class="form">
-                <form id="searchForm" name="searchForm" method="get" action="wholesale_search.php" onSubmit="return checkSearchForm(this)" class="search-form">
+                <form id="searchForm" name="searchForm" method="get" action="wholesale_search.php" onSubmit="return checkSearchForm()" class="search-form">
                     <input autocomplete="off"  name="keywords" type="text" id="keyword" value="{if $wholesale_search_keywords}{$wholesale_search_keywords}{else}{insert name='wholesale_rand_keyword'}{/if}" class="search-text"/>
                     <button type="submit" class="button button-goods" onclick="checkstore_search_cmt(0)" >搜商品</button>
-					<a href="javascript:;" ectype="wantToBuy" class="wantToBuy"><i class="iconfont icon-book"></i>发布求购单</a>
+                    <a href="javascript:;" ectype="wantToBuy" class="wantToBuy"><i class="iconfont icon-book"></i>发布求购单</a>
 					<input type="hidden" name="user_id" value="{$user_id|default:0}">
                 </form>
                 {if $wholesale_keywords}
@@ -90,39 +90,12 @@
 <div class="nav nav-b2b{if $filename neq 'wholesale'} dsc-zoom{/if}">
     <div class="w w1200">
         <div class="b2b-categorys">
-        	<div class="b2b-categorys-all"><a href="wholesale_cat.php" target="_blank">全部批发商品</a></div>
+        	<div class="b2b-categorys-all"><a href="#" target="_blank">全部批发商品</a></div>
             <div class="b2b-categorys-content{if $filename neq 'wholesale'} hide{/if}">
             	<ul>
-                	<!--{foreach from=$wholesale_cat item=cat name=wholesale_cat}-->
-                    <!--{if $smarty.foreach.wholesale_cat.index < 10}-->
-                	<li>
-                    	<div class="b2b-cate-item">
-                        	<!--{if $cat.style_icon eq 'other'}-->
-                            {if $cat.cat_icon}<div class="icon-other"><img src="{$cat.cat_icon}" alt="分类图标"></div>{/if}
-                            <!--{else}-->
-                            <i class="iconfont icon-{$cat.style_icon}"></i>
-                            <!--{/if}-->
-                            <a href="{$cat.url}" target="_blank">{$cat.name|escape:html}</a>
-                        </div>
-                        {if $cat.cat_id}
-                    	<div class="b2b-cate-layer" ectype="cateLayer">
-                        	<div class="b2b-cate-layer-con clearfix">
-                                <div class="cate_detail">
-									<!--{foreach from=$cat.cat_id item=child name=foo2}-->
-                                	<dl>
-                                    	<dt><a href="{$child.url}" target="_blank">{$child.name|escape:html}</a></dt>
-                                        <dd>
-											<!--{foreach from=$child.cat_id item=childer}--> 
-                                        	<a href="{$childer.url}" target="_blank">{$childer.name|escape:html}</a>
-											<!--{/foreach}-->
-                                        </dd>
-                                    </dl>
-                                    <!--{/foreach}-->
-                                </div>
-                            </div>
-                        </div>
-                        {/if}
-                    </li>
+                	<!--{foreach from=$business_cate item=cat name=business_cate}-->
+                    <!--{if $smarty.foreach.business_cate.index < 10}-->
+                    <li><i class="iconfont icon-{$cat.style_icon}"></i><a href="{$cat.url}" target="_blank">{$cat.name|escape:html}</a></li>
                     <!-- {/if} -->
                     <!--{/foreach}-->
                 </ul>
@@ -132,9 +105,6 @@
         	<ul class="navitems">
             	<li><a href="../wholesale.php" {if $index eq 'index'}class="curr"{/if}>批发首页</a></li>
                 <li><a href="wholesale_purchase.php?act=list" {if $buy eq 'list'}class="curr"{/if}>求购信息</a></li>
-				{foreach from=$get_wholsale_navigator item=get_wholsale_navigator}
-				<li><a href="{$get_wholsale_navigator.url}" {if $get_wholsale_navigator.cat_id eq $get_wholsale_navigator.active}class="curr"{/if}>{$get_wholsale_navigator.cat_name}</a></li>
-				{/foreach}
             </ul>
         </div>
     </div>

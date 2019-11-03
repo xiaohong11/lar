@@ -69,7 +69,7 @@
         <div class="w1200 w">
             <!-- under banner ad -->
             <div class="under-banner">
-            	{* DSC 提醒您：动态载入merchants_index.lbi，显示首页分类小广告 *}{insert name='get_adv_child' ad_arr=$merchants_index}
+            	{* ECSHOP 提醒您：动态载入merchants_index.lbi，显示首页分类小广告 *}{insert name='get_adv_child' ad_arr=$merchants_index}
             </div>
             <!-- floor -->
             <div class="shop-floor-wp">
@@ -79,11 +79,11 @@
                     <div class="f-hd"><h2>{$top_goods.cat_name}</h2></div>
                     <div class="f-bd">
                         <ul class="list clearfix">
-                            <li class="first">{* DSC 提醒您：动态载merchants_index_flow.lbi，显示首页分类小广告 *}{insert name='get_adv_child' ad_arr=$merchants_index_flow id=$top_goods.cat_id}</li>
+                            <li class="first">{* ECSHOP 提醒您：动态载merchants_index_flow.lbi，显示首页分类小广告 *}{insert name='get_adv_child' ad_arr=$merchants_index_flow id=$top_goods.cat_id}</li>
                             <!--{foreach from=$top_goods.goods item=goods name=child_no}--> 
                             <li class="goods-item">
-                                <div class="p-img"><a href="{$goods.url}" target="_blank"><img src="{$goods.thumb}" alt=""></a></div>
-                                <div class="p-name"><a href="{$goods.url}" title="{$goods.short_name|escape:html}" target="_blank">{$goods.short_name}</a></div>
+                                <div class="p-img"><a href="{$goods.url}"><img src="{$goods.thumb}" alt=""></a></div>
+                                <div class="p-name"><a href="{$goods.url}">{$goods.short_name}</a></div>
                                 <div class="p-price">
                                 {if $goods.promote_price}
                                 	{$goods.promote_price}
@@ -115,8 +115,8 @@
                             {foreach from=$goods_hot item=goods key=key name=sale}
                             <!-- {if $smarty.foreach.sale.iteration<9}-->
                             <li class="goods-item">
-                                <div class="p-img"><a href="{$goods.url}" title="{$goods.goods_name|escape:html}" target="_blank"><img src="{$goods.goods_thumb}" alt=""></a></div>
-                                <div class="p-name"><a href="{$goods.url}" title="{$goods.goods_name|escape:html}" target="_blank">{$goods.goods_name}</a></div>
+                                <div class="p-img"><a href="{$goods.url}" title="{$goods.goods_name}"><img src="{$goods.goods_thumb}" alt=""></a></div>
+                                <div class="p-name"><a href="{$goods.url}" title="{$goods.goods_name}">{$goods.goods_name}</a></div>
                                 <div class="p-price">
                                 	{if $goods.promote_price}
                                 		{$goods.promote_price}
@@ -141,8 +141,8 @@
                             {foreach from=$promotion_goods item=promotion_goods name=pro}
                             <!-- {if $smarty.foreach.pro.iteration<9}-->
                             <li class="goods-item">
-                                <div class="p-img"><a href="{$promotion_goods.url}" title="{$promotion_goods.name|escape:html}" target="_blank"><img src="{$promotion_goods.thumb}" alt=""></a></div>
-                                <div class="p-name"><a href="{$promotion_goods.url}" title="{$promotion_goods.name|escape:html}" target="_blank">{$promotion_goods.name}</a></div>
+                                <div class="p-img"><a href="{$promotion_goods.url}" title="{$promotion_goods.name}"><img src="{$promotion_goods.thumb}" alt=""></a></div>
+                                <div class="p-name"><a href="{$promotion_goods.url}" title="{$promotion_goods.name}">{$promotion_goods.name}</a></div>
                                 <div class="p-price">
                                 	{if $promotion_goods.promote_price}
                                     	{$promotion_goods.promote_price}

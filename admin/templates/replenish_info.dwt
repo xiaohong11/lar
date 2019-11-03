@@ -4,13 +4,13 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$lang.goods_alt} - {$lang.virtual_card_list} - {$ur_here}</div>
+    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>商品 - 虚拟商品列表 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content.replenish.0}</li>
-                    <li>{$lang.operation_prompt_content_common}</li>
+                	<li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
+                    <li>虚拟卡补货请认真谨慎填写补货信息。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -42,9 +42,9 @@
                                     <div class="label">{$lang.lab_end_date}：</div>
                                     <div class="label_value">
 										<div id="" class="imitate_select select_w85">
-											<div class="cite">{$lang.please_select}</div>
+											<div class="cite">请选择</div>
 											<ul>
-												<li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.please_select}</a></li>
+												<li><a href="javascript:;" data-value="0" class="ftx-01">请选择</a></li>
 												{foreach from=$data_year item=data key=key}
 												<li><a href="javascript:;" data-value="{$data}" class="ftx-01">{$data}</a></li>
 												{/foreach}
@@ -52,9 +52,9 @@
 											<input name="end_dateYear" type="hidden" value="{$data_time.year}" id="">
 										</div>
 										<div id="" class="imitate_select select_w85">
-											<div class="cite">{$lang.please_select}</div>
+											<div class="cite">请选择</div>
 											<ul>
-												<li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.please_select}</a></li>
+												<li><a href="javascript:;" data-value="0" class="ftx-01">请选择</a></li>
 												{foreach from=$data_month item=data key=key}
 												<li><a href="javascript:;" data-value="{$data}" class="ftx-01">{$data}</a></li>
 												{/foreach}
@@ -62,9 +62,9 @@
 											<input name="end_dateMonth" type="hidden" value="{$data_time.month}" id="">
 										</div>
 										<div id="" class="imitate_select select_w85">
-											<div class="cite">{$lang.please_select}</div>
+											<div class="cite">请选择</div>
 											<ul>
-												<li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.please_select}</a></li>
+												<li><a href="javascript:;" data-value="0" class="ftx-01">请选择</a></li>
 												{foreach from=$data_day item=data key=key}
 												<li><a href="javascript:;" data-value="{$data}" class="ftx-01">{$data}</a></li>
 												{/foreach}
@@ -117,10 +117,10 @@
 			},
 			messages:{
 				card_sn:{
-					 required : '<i class="icon icon-exclamation-sign"></i>'+card_sn_null
+					 required : '<i class="icon icon-exclamation-sign"></i>请输入卡号序号'
 				},
 				card_password:{
-					 required : '<i class="icon icon-exclamation-sign"></i>'+card_password_null
+					 required : '<i class="icon icon-exclamation-sign"></i>请输入卡号密码'
 				}
 			}			
 		});

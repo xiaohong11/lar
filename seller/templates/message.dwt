@@ -35,6 +35,10 @@ var defaultUrl = "{$default_url}";
 
 {literal}
 $(function(){
+	{if $is_ajax}
+	ajaxSellerShippingArea();
+	{/if}
+	
 	if (document.getElementById('redirectionMsg') && defaultUrl == 'javascript:history.go(-1)' && window.history.length == 0)
 	{
 		document.getElementById('redirectionMsg').innerHTML = '';
@@ -43,6 +47,16 @@ $(function(){
 	
 	window.setInterval(redirection, 1000);
 });
+
+/* *
+ * 检测配送地区缓存文件是否存在；
+ */
+function ajaxSellerShippingArea(){
+	Ajax.call('shipping_area.php?is_ajax=1&act=seller_shipping_area','', ajaxShippingAreaResponse, 'GET', 'JSON');
+}
+
+function ajaxShippingAreaResponse(result){
+}
 
 function redirection()
 {

@@ -59,7 +59,7 @@
         </div>
         <div class="dsc-search">
             <div class="form">
-                <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm(this)" class="search-form">
+                <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()" class="search-form">
                     <input autocomplete="off" onKeyUp="lookup(this.value);" name="keywords" type="text" id="keyword" value="{if $search_keywords}{$search_keywords}{else}{insert name='rand_keyword'}{/if}" class="search-text"/>
                     <input type="hidden" name="store_search_cmt" value="{$search_type|default:0}">
                     <button type="submit" class="button button-goods" onclick="checkstore_search_cmt(0)" >搜商品</button>

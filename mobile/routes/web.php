@@ -60,7 +60,7 @@ return [
     '/^location$/' => 'location/index/index',
 
     // oauth
-    'oauth/bindregister' => 'oauth/index/bindregister',
+    // 'oauth/bind/:type' => 'oauth/index/bind',
     '/^oauth$/' => 'oauth/index/index',
 
     // offline store

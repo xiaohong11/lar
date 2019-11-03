@@ -37,12 +37,12 @@
         <a href="javascript:;" ectype="add_attr_img" class="up_img" class="button" data-goodsattrid="{$val.goods_attr_id|default:0}" data-attrid="{$val.attr_id|default:0}">上传图片</a>
 		{/if}
         
-        {if $val.attr_gallery_flie}
-        <a href="../{$val.attr_gallery_flie}" class="nyroModal"><i class="icon icon-picture"></i></a>
-        {/if}
-        
         {if $val.attr_checked}
         <div class="img" data-type="img"><img src="images/yes.png" /></div>
+        {/if}
+        
+        {if $val.attr_img_flie}
+        <a href="../{$val.attr_gallery_flie}" class="nyroModal" style="cursor:pointer; font-size:14px; margin:5px 0px 0px 5px;"><i class="icon icon-picture"></i></a>
         {/if}
         
         <input name="attr_id" type="hidden" value="{$spec.attr_id}" id="attrId" autocomplete="off"/>

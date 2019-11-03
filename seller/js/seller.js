@@ -80,12 +80,6 @@ $(function() {
 		if(e.target.id !='category_name' && !$(e.target).parents("div").is(".select-container")){
 			$('.categorySelect .select-container').hide();
 		}
-
-		if($(e.target).parents("div").is(".selection")){
-			$('.select-container').hide();
-			$(e.target).parents(".categorySelect").find('.select-container').show();
-		}
-
 		//仿select
 		if(e.target.className !='cite' && !$(e.target).parents("div").is(".imitate_select")){
 			$('.imitate_select ul').hide();
@@ -120,7 +114,7 @@ $(function() {
     });
 	
     // 选择品牌
-	$(document).on('click','input[name="brand_name"]',function(){
+	$('input[name="brand_name"]').click(function(){
 		$(".brand-select-container").hide();
 		$(this).parents(".selection").next(".brand-select-container").show();
 		$(".brand-list").perfectScrollbar("destroy");
@@ -128,7 +122,7 @@ $(function() {
     });
 	
     // 选择品牌（关联品牌）
-	$(document).on('click','input[data-filter="brand_name"]',function(){
+	$('input[data-filter="brand_name"]').click(function(){
 		$(".brand-select-container").hide();
 		$(this).parents(".selection").next(".brand-select-container").show();
 		$(".brand-list").perfectScrollbar("destroy");
@@ -137,7 +131,7 @@ $(function() {
 	
 	/* AJAX选择品牌 */
     // 根据首字母查询
-    $(document).on('click','.letter a[data-letter]',function(){
+    $('.letter').find('a[data-letter]').click(function(){
 		var goods_id = $("input[name=goods_id]").val();
 		var ru_id = $("input[name=ru_id]").val();
 		var letter = $(this).attr('data-letter');	
@@ -155,7 +149,7 @@ $(function() {
 		})
     });
     // 根据关键字查询
-    $(document).on('click','.b_search a',function(){
+    $('.b_search').find('a').click(function(){
 		var goods_id = $("input[name=goods_id]").val();
 		var ru_id = $("input[name=ru_id]").val();
 		var keyword = $(this).prev().val();
@@ -173,7 +167,7 @@ $(function() {
 		})		
     });
     // 选择品牌
-    $(document).on('click','.brand-list li', function(){
+    $('.brand-list').on('click', 'li', function(){
         $(this).parents('.brand-select-container').prev().find('input[data-filter=brand_id]').val($(this).data('id'));
         $(this).parents('.brand-select-container').prev().find('input[data-filter=brand_name]').val($(this).data('name'));
         $('.brand-select-container').hide();
@@ -481,7 +475,6 @@ jQuery.category = function(){
 		var cat_type_show = obj.data('show');
 		var user_id = obj.data('seller');
 		var url = obj.data('url');
-		var table = obj.data('table');
 		
 		/* 自定义导航 start */
 		if(document.getElementById('item_name')){
@@ -497,7 +490,7 @@ jQuery.category = function(){
 		}
 		/* 自定义导航 end */
 		
-		$.jqueryAjax('get_ajax_content.php', 'act=filter_category&cat_id='+cat_id+"&cat_type_show=" + cat_type_show + "&user_id=" + user_id + "&table=" + table, function(data){
+		$.jqueryAjax('get_ajax_content.php', 'act=filter_category&cat_id='+cat_id+"&cat_type_show=" + cat_type_show + "&user_id=" + user_id, function(data){
 			if(data.content){
 				obj.parents(".categorySelect").find("input[data-filter=cat_name]").val(data.cat_nav); //修改cat_name
                                 if(data.type != 1){
@@ -525,7 +518,6 @@ jQuery.category = function(){
 		var cat_type_show = obj.data('show');
 		var user_id = obj.data('seller');
 		var url = obj.data('url');
-		var table = obj.data('table');
 		
 		/* 自定义导航 start */
 		if(document.getElementById('item_name')){
@@ -541,7 +533,7 @@ jQuery.category = function(){
 		}
 		/* 自定义导航 end */
 
-		$.jqueryAjax('get_ajax_content.php', 'act=filter_category&cat_id='+cat_id+"&cat_type_show=" + cat_type_show+"&user_id=" + user_id + "&table=" + table, function(data){
+		$.jqueryAjax('get_ajax_content.php', 'act=filter_category&cat_id='+cat_id+"&cat_type_show=" + cat_type_show+"&user_id=" + user_id, function(data){
 			if(data.content){
 				obj.parents(".categorySelect").find("input[data-filter=cat_name]").val(data.cat_nav); //修改cat_name
 				obj.parents(".select-container").html(data.content);
@@ -572,7 +564,7 @@ jQuery.gjSearch = function(right){
 // 高级搜索边栏动画end
 
 //jq仿select -- 带返回函数的
-/*jQuery.divselect = function(divselectid,inputselectid,fn) {
+jQuery.divselect = function(divselectid,inputselectid,fn) {
 	var inputselect = $(inputselectid);
 	$(document).on('click',divselectid+" .cite",function(event){
 		$(".imitate_select").find("ul").hide();
@@ -600,7 +592,7 @@ jQuery.gjSearch = function(right){
 	$(document).on("click",function(){
 		$(divselectid+" ul").hide();
 	});
-};*/
+};
 
 //新版商家后台js
 $(function(){
@@ -632,19 +624,10 @@ $(function(){
 		var goods_id = $("input[name='goods_id']").val();
 		set_attribute_table(goods_id);		
 	});
-	
-	if($("#attribute_city_region").length > 0){
-		$(document).on("click","#attribute_city_region input",function(){
-			var goods_id = $("input[name='goods_id']").val();
-			set_attribute_table(goods_id, 3);		
-		});	
-	}else{
-		$(document).on("click","#attribute_region input",function(){
-			var goods_id = $("input[name='goods_id']").val();
-			set_attribute_table(goods_id, 3);		
-		});	
-	}
-	
+	$(document).on("click","#attribute_region input",function(){
+		var goods_id = $("input[name='goods_id']").val();
+		set_attribute_table(goods_id);		
+	});	
 	/* 属性模式设置 by wu end */
 	
 	//属性选中效果 by wu start
@@ -675,14 +658,6 @@ $(function(){
 			var cat_id = search_div.find("input[data-filter=cat_id]").val();
 			var brand_id = search_div.find("input[data-filter=brand_id]").val();
 			var keyword = search_div.find("input[data-filter=keyword]").val();
-            var limit_start = search_div.find("input[data-filter=limit_start]").val();
-            var limit_number = search_div.find("input[data-filter=limit_number]").val();
-            if(limit_start != null && typeof limit_start != "undefined"){
-                search_data += "&limit_start="+limit_start;
-            }
-            if(limit_number != null && typeof limit_number != "undefined"){
-                search_data += "&limit_number="+limit_number;
-            }
 			if(cat_id){
 				search_data += "&cat_id="+cat_id;
 			}
@@ -965,80 +940,80 @@ $(function(){
 		$(this).removeClass("hover");
 	});
 	
-	//listTable span eidt 点击修改
-	$(document).on("click","*[ectype='editSpanInput'] .icon-edit",function(){
-		$(this).siblings("span").click();
-	});
-	
 	/****************************************其他end********************************************/
         
-	/*点击充值后清空页面错误提示*/
-	$("input[type='reset']").on("click",function(){
-		$(this).parents("form").find(".text").removeClass('error');
-		$(this).parents("form").find(".form_prompt").html('');
-	});
+        /*点击充值后清空页面错误提示*/
+        $("input[type='reset']").on("click",function(){
+            $(this).parents("form").find(".text").removeClass('error');
+            $(this).parents("form").find(".form_prompt").html('');
+        });
 });
 
-//添加阶梯价格 有删除
+//添加阶梯价格
 function add_clonetd(obj,type){
     var obj = $(obj);
-	var table = obj.parents(".table_div");
     var number_td = obj.parent().prev();
     var price_tr = obj.parents("tr").next();
     var price_td = price_tr.find("td:last-child");
-    var handle_tr = obj.parents("tr").siblings().last();
-	var handle_td = handle_tr.find("td:last-child");
-	
+    
     var copy_number_td = number_td.clone();
     var copy_price_td = price_td.clone();
-	var copy_handle_td = handle_td.clone();
-    var td_num = table.find(".td_num").length;
-	
-	var number = 3;
-	
-	if( obj.parents("*[ectype='volumeNumber']").length > 0){
-		number = obj.parents("*[ectype='volumeNumber']").data("number");
-	}
-	
-    if(td_num < number && td_num != 0){
-        copy_number_td.find(".text").val("");
+    var td_num = $(".td_num").length;
+    if(td_num < 3){
+       copy_number_td.find(".text").val("");
         copy_price_td.find(".text").val("");
         number_td.after(copy_number_td);
-        price_tr.append(copy_price_td);	
-		handle_tr.append(copy_handle_td);
-    }else if(td_num == 0){
-		if(type == "mj"){
-			number_td.after("<td><input type='text' name='cfull[]' value='' class='text w50 td_num'><input type='hidden' name='c_id[]' value='0' autocomplete='off'></td>");
-			price_tr.append("<td><input type='text' name='creduce[]' value='' class='text w50'></td>");
-		}else{
-			number_td.after("<td><input type='text' name='volume_number[]' value='' class='text w50 td_num'><input type='hidden' name='id[]' value='0' autocomplete='off'></td>");
-			price_tr.append("<td><input type='text' name='volume_price[]' value='' class='text w50'></td>")
-		}
-		handle_tr.append("<td><a href='javascript:;' class='sc-btn btn25 sc-blueBg-btn' data-id='0' ectype='remove_volume'>删除</a></td>");
-	}else{
-		pbDialog("阶梯价格设置不能超过"+number+"个","",0);
+        price_tr.append(copy_price_td);
+        if(type == null){
+            var handle_tr = obj.parents("tr").siblings().last();
+            var handle_td = handle_tr.find("td:last-child");
+            var copy_handle_td = handle_td.clone();
+            handle_tr.append(copy_handle_td);
+        }
+    }else{
+        msgTit = "<h3 class='ftx-04'>" + "阶梯价格设置不能超过3个" + "</h3>";
+        left = 100;
+        icon = "m-icon";
+        width = 450;
+        height = 80;
+        foot = false;
+        content = '<div class="tip-box icon-box" style="height:'+ height +'px; padding-left:'+ left +'px;"><span class="warn-icon '+ icon +'"></span><div class="item-fore">'+ msgTit +'</div></div>';
+		
+	pb({
+		id:"pbDialog",
+                title:"提示",
+		width:width,
+		height:height,
+		content:content,
+		drag:false,
+		foot:foot
+	});
     }
+    
 }
 
-//添加阶梯价格 无删除
-function add_clonetd_two(obj,type){
-	var obj = $(obj);
-	var number_td = obj.parent().prev();
-	var price_tr = obj.parents("tr").next();
-	var price_td = price_tr.find("td:last-child");
-
-	var copy_number_td = number_td.clone();
-	var copy_price_td = price_td.clone();
-
-	
-	copy_number_td.find(".text").val("");
-	copy_price_td.find(".text").val("");
-	number_td.after(copy_number_td);
-	price_tr.append(copy_price_td);
-	if(type == null){
-		var handle_tr = obj.parents("tr").siblings().last();
-		var handle_td = handle_tr.find("td:last-child");
-		var copy_handle_td = handle_td.clone();
-		handle_tr.append(copy_handle_td);
-	}
+function get_childcat(obj,type,cat){
+            var val = obj.attr("data-value");
+            var level = obj.attr("data-level");
+            if(level == 1){
+                $("#parent_id2").remove();
+                $("#parent_id3").remove();
+            }else if(level == 2){
+                $("#parent_id3").remove();
+            }
+            $("input[name='parent_id']").val(val);
+             if(val > 0 && cat != 1){
+                Ajax.call('goods_type.php?is_ajax=1&act=get_childcat', 'cat_id=' + val + "&level=" + level + "&type=" + type, function(data){
+                    if(data.error == 0){
+                        $("*[ectype='type_cat']").append(data.content);
+                    }
+                }, 'GET', 'JSON');
+            }
+            if(type == 2){
+                 Ajax.call('goods_type.php?is_ajax=1&act=get_childtype', 'cat_id=' + val, function(data){
+                    if(data.error == 0){
+                        $("#attr_select ul").html(data.content);
+                    }
+                }, 'GET', 'JSON');
+            }
 }

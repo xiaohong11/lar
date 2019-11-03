@@ -5,13 +5,13 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="{$action_link2.href}" class="s-back">{$lang.back}</a>{$lang.promotion} - {$ur_here}</div>
+    	<div class="title"><a href="{$action_link2.href}" class="s-back">{$lang.back}</a>促销 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content.time.0}</li>
-					<li>{$lang.operation_prompt_content.time.1}</li>
+                    <li>秒杀时段列表可对时间段进行新增/编辑/删除操作。</li>
+					<li>建议设置四至五个时间段（前台显示）。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -44,7 +44,7 @@
                                     <td class="handle">
 										<div class="tDiv a1">
 											<a href="seckill.php?act=time_edit&tb_id={$tb.id}" title="{$lang.edit}" class="btn_edit"><i class="icon icon-edit"></i>{$lang.edit}</a>
-											<a href="javascript:;" onclick="listTable.remove({$tb.id}, '{$lang.drop_confirm_pro}', 'tb_remove')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>									
+											<a href="javascript:;" onclick="listTable.remove({$tb.id}, '{$lang.drop_confirm_pro}', 'tb_remove')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>									
 										</div>
 									</td>
                                 </tr>
@@ -60,7 +60,8 @@
             </div>
         </div>
     </div>
-	{include file ='library/pagefooter.lbi'}
+{include file ='library/pagefooter.lbi'}
+<script type="text/javascript"></script>
 </body>
 </html>
 {/if}

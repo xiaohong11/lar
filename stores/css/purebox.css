@@ -50,26 +50,3 @@
 #dialogHandle .failure_ft .pb-cl{ border:0; border-radius:none; color:#333}
 
 /*订单操作弹框end*/
-.tip-box{ width: 300px;*width: 330px;margin: 0 auto;overflow:hidden;}
-.icon-box{ position: relative;_height: 48px;_overflow: visible;}
-.icon-box .m-icon{ display:block;float:left;width: 48px;height: 48px;background: url(../images/purebox/icon48.png) no-repeat;}
-.icon-box .warn-icon{ background-position: -94px 2px;}
-.icon-box .warn-icon-ok{ background-position: 0px 2px;}
-.icon-box .warn-icon-wen{ background-position: -145px 2px;}
-.icon-box .warn-icon-error{ background-position: -53px 2px;}
-.tip-box .item-fore{ overflow: hidden;}
-.icon-box .item-fore{ margin-left: 58px;}
-.tip-box h1{ font-family: 'microsoft yahei';font-size:18px;height: 48px;line-height: 48px;}
-.tip-box h3{ font-family: 'microsoft yahei';font-size: 16px;line-height: 30px;padding:0;}
-.tip-box h3.rem{ line-height:48px;}
-.tip-box .op-btns{ margin-top: 20px;}
-.ftx-01{ color:#f42424;}
-.ftx-04{ color:#f68a00;}
-.ftx-16{ color:#7abd54;}
-#pbDialog .pb-hd{ position: relative;padding: 0 16px;height: 35px;line-height: 35px;background: #f3f3f3; text-align: left;}
-#pbDialog .pb-hd .pb-title{ font-weight: normal;font-size: 14px;color: #666;font-family: "Microsoft YaHei"; width: auto; height: auto; background: none; margin: 0;}
-#pbDialog .pb-hd .pb-x{ cursor: pointer;display: block;position: absolute;z-index: 100000;top: 10px;right: 16px;overflow: hidden;width: 13px;height: 13px;background: url(../images/purebox/dialog.png) no-repeat;font-size: 0;text-indent:-99999px;}
-#pbDialog .pb-bd{ padding:20px 10px;overflow: auto;position: relative;}
-#pbDialog .pb-ct{ position:relative;}
-#pbDialog .tip-box{ width:auto; height:auto; display:table-cell; vertical-align:middle;}
-#pbDialog .tip-box .pb-ct{ height:80px;}

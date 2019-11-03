@@ -1,3 +1,4 @@
+
 @font-face {font-family: "iconfont";
   src: url('../font/iconfont.eot?t=1486452679920'); /* IE9*/
   src: url('../font/iconfont.eot?t=1486452679920#iefix') format('embedded-opentype'), /* IE6-IE8 */
@@ -5,7 +6,6 @@
   url('../font/iconfont.ttf?t=1486452679920') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
   url('../font/iconfont.svg?t=1486452679920#iconfont') format('svg'); /* iOS 4.1- */
 }
-
 .iconfont {
   font-family:"iconfont" !important;
   font-size:16px;
@@ -99,8 +99,6 @@
 .icon-comment:before { content: "\e642"; }
 
 .icon-rotate:before { content: "\e627"; }
-
-.icon-list:before { content: "\e67e"; }
 
 .icon-order:before { content: "\e611"; }
 
@@ -224,8 +222,6 @@
 
 .icon-thumb:before { content: "\e649"; }
 
-.icon-dayin:before { content: "\e8b9"; }
-
 .icon-email-alt:before { content: "\e600"; }
 
 .icon-file:before { content: "\e60d"; }
@@ -233,8 +229,6 @@
 .icon-alipay:before { content: "\e72f"; }
 
 .icon-csu:before { content: "\e69f"; }
-
-.icon-sort:before { content: "\e68c"; }
 
 .icon-qi:before { content: "\e626"; }
 
@@ -329,6 +323,4 @@
 .icon-email-alts:before { content: "\e675"; }
 
 .icon-rotate-right:before { content: "\e677"; }
-
-.icon-top-alt:before { content: "\e67d"; }
 

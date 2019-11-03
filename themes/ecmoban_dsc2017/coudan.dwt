@@ -13,7 +13,7 @@
 <!-- #BeginLibraryItem "/library/js_languages_new.lbi" --><!-- #EndLibraryItem -->
 </head>
 
-<body class="coudan">
+<body>
 	<!-- #BeginLibraryItem "/library/page_header_category.lbi" --><!-- #EndLibraryItem -->
     <div class="container">
     	<div class="w w1390">
@@ -21,9 +21,9 @@
             <div class="filter">
             	<div class="filter-wrap">
                     <div class="filter-sort">
-						<a href="coudan.php?id={$active_id}&sort=goods_id&order=<!-- {if $pager.search.sort == 'goods_id' && $pager.search.order == 'DESC'} -->ASC<!-- {else} -->DESC<!-- {/if} -->" class="button-strip-item <!-- {if $pager.search.sort == 'goods_id'}-->curr<!-- {/if} -->">默认<i class="iconfont <!-- {if $pager.search.sort == 'goods_id' && $pager.search.order == 'DESC'} -->icon-arrow-down<!-- {else} -->icon-arrow-up<!-- {/if} -->"></i></a>
-						<a href="coudan.php?id={$active_id}&sort=shop_price&order=<!-- {if $pager.search.sort == 'shop_price' && $pager.search.order == 'DESC'} -->ASC<!-- {else} -->DESC<!-- {/if} -->" class="button-strip-item <!-- {if $pager.search.sort == 'shop_price'}-->curr<!-- {/if} -->">价格<i class="iconfont <!-- {if $pager.search.sort == 'shop_price' && $pager.search.order == 'DESC'} -->icon-arrow-down<!-- {else} -->icon-arrow-up<!-- {/if} -->"></i></a>
-						<a href="coudan.php?id={$active_id}&sort=sales_volume&order=<!-- {if $pager.search.sort == 'sales_volume' && $pager.search.order == 'DESC'} -->ASC<!-- {else} -->DESC<!-- {/if} -->" class="button-strip-item <!-- {if $pager.search.sort == 'sales_volume'}-->curr<!-- {/if} -->">销量<i class="iconfont <!-- {if $pager.search.sort == 'sales_volume' && $pager.search.order == 'DESC'} -->icon-arrow-down<!-- {else} -->icon-arrow-up<!-- {/if} -->"></i></a>
+						<a href="coudan.php?id={$active_id}&sort=goods_id&order=<!-- {if $pager.search.sort == 'goods_id' && $pager.search.order == 'DESC'} -->ASC<!-- {else} -->DESC<!-- {/if} -->" class="button-strip-item <!-- {if $pager.search.sort == 'goods_id'}-->current<!-- {/if} -->">默认</a>
+						<a href="coudan.php?id={$active_id}&sort=shop_price&order=<!-- {if $pager.search.sort == 'shop_price' && $pager.search.order == 'DESC'} -->ASC<!-- {else} -->DESC<!-- {/if} -->" class="button-strip-item <!-- {if $pager.search.sort == 'shop_price'}-->current<!-- {/if} -->">价格</a>
+						<a href="coudan.php?id={$active_id}&sort=sales_volume&order=<!-- {if $pager.search.sort == 'sales_volume' && $pager.search.order == 'DESC'} -->ASC<!-- {else} -->DESC<!-- {/if} -->" class="button-strip-item <!-- {if $pager.search.sort == 'sales_volume'}-->current<!-- {/if} -->">销量</a>
 					</div>
                     <div class="filter-right">
                     	<div class="button-page">
@@ -44,7 +44,7 @@
                                 <div class="p-lie">
                                 	<div class="p-price">{$goods.format_shop_price}</div>
                                 </div>
-                                <div class="p-name"><a href="{$goods.url}" title="{$goods.goods_name|escape:html}" target="_blank">{$goods.goods_name}</a></div>
+                                <div class="p-name"><a href="{$goods.url}" target="_blank">{$goods.goods_name}</a></div>
                             	<div class="p-operate">
                                 	<a href="javascript:void(0);" id="{$goods.goods_id}" onclick="add_cart({$goods.goods_id},{$active_id})" class="addcart"><i class="iconfont icon-carts"></i>{$lang.btn_add_to_cart}</a>
                                 </div>
@@ -74,7 +74,7 @@
                                     {$goods.shop_price}
                                 {/if}
                             </div>
-                            <div class="p-name"><a href="{$goods.url}" title="{$goods.goods_name|escape:html}" target="_blank">{$goods.goods_name}</a></div>
+                            <div class="p-name"><a href="{$goods.url}" target="_blank">{$goods.goods_name}</a></div>
                         	<div class="p-num">{$lang.Sold}<em>{$goods.sales_volume}</em>{$lang.jian}</div>
                         </li>
                         <!--{/foreach}-->
@@ -84,7 +84,6 @@
         </div>
     </div>
 	<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
-	{insert_scripts files='common.js'}
     <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/jquery.purebox.js"></script>
     <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/dsc-common.js"></script>
     <script type="text/javascript">
@@ -132,11 +131,13 @@
     
           Ajax.call('coudan.php?act=ajax_update_cart', 'goods=' + $.toJSON(goods), add_cart_response, 'POST', 'JSON');
         }
-		
-        function add_cart_response(result){
-			if(result.error > 0){
+        function add_cart_response(result)
+        {
+            if (result.error > 0)
+              {
                 // 如果需要缺货登记，跳转
-                if(result.error == 2){
+                if (result.error == 2)
+                {
                     var add_cart_divId = 'flow_add_cart';
                     var content = '<div id="flow_add_cart">' + 
                                         '<div class="tip-box icon-box">' +
@@ -172,21 +173,27 @@
                     });
                     
                     $('#' + add_cart_divId + ' .pb-ft .pb-ok').addClass('color_df3134');
-                }else if (result.error == 6){
-					// 没选规格，弹出属性选择框
-                	openCoudanSpeDiv(result.message, result.goods_id, result.parent, result.warehouse_id, result.area_id, result.active_id);
-                }else{
-                	alert(result.message);
                 }
-			}else{
-				// 更新加入购物车的活动商品
-				var cartInfo = document.getElementById('coudan-top-list');
-				if(cartInfo){
-					cartInfo.innerHTML = result.content;
-				}
-				
-				pbDialog("商品已加入购物车","",1,"","","",false,function(){});
-			}
+                // 没选规格，弹出属性选择框
+                else if (result.error == 6)
+                {
+                  openCoudanSpeDiv(result.message, result.goods_id, result.parent, result.warehouse_id, result.area_id, result.active_id);
+                }
+                else
+                {
+                  alert(result.message);
+                }
+              }
+              else
+              {
+                // 更新加入购物车的活动商品
+    
+                var cartInfo = document.getElementById('coudan-top-list');
+                if (cartInfo)
+                {
+                  cartInfo.innerHTML = result.content;
+                }
+              }
         }
         
         //生成属性选择层

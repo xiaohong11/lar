@@ -19,7 +19,7 @@ $_LANG['starting_price'] = "起拍价：";
 $_LANG['current_price_snatch'] = "当前价";
 $_LANG['ci'] = "次";
 
-$_LANG['buy_error'] = "很抱歉，您拍卖的商品暂时缺货，请及时联系客服！";
+
 
 
 //js语言项

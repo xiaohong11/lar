@@ -30,7 +30,6 @@
                                             <li><a href='javascript:;' data-value='2' class='ftx-01'>{$lang.coupons_type_02}</a></li>
                                             <li><a href='javascript:;' data-value='3' class='ftx-01'>{$lang.coupons_type_03}</a></li>
                                             <li><a href='javascript:;' data-value='4' class='ftx-01'>{$lang.coupons_type_04}</a></li>
-                                            <li><a href='javascript:;' data-value='5' class='ftx-01'>{$lang.coupons_type_05}</a></li>
                                         </ul>
                                         <input name="cou_type" type="hidden" value="{$cou_type|default:1}" id="coupons_type_val">
                                     </div>
@@ -59,7 +58,7 @@
                                     <div class="form_prompt"></div>
                                 </dd>
                             </dl>
-                            <dl ectype='cou_money'>
+                            <dl>
                             	<dt>{$lang.require_field}{$lang.coupons_money}：</dt>
                                 <dd>
                                 	<input type="text" name="cou_money" id="cou_money" class="text w50" value="{$cou.cou_money}" autocomplete="off" />
@@ -72,7 +71,7 @@
                                 <dd>
                                 	<span class="fl lh mr10">{$lang.full_shopping}</span>
                                     <input type="text" name="cou_man" id="cou_man" class="text w50 mr10" value="{$cou.cou_man}" autocomplete="off" />
-                                    <div class="fl lh">{$lang.yuan}{$lang.cou_man_desc}</div>
+                                    <div class="fl lh">{$lang.yuan}</div>
                                     <div class="form_prompt"></div>
                                 </dd>
                             </dl>
@@ -103,10 +102,9 @@
                                             <input type="radio" class="ui-radio" name="usableCouponGoods" value="3" id="usableCouponGoods_3" {if !$cou.cou_goods && $cou.spec_cat}checked="checked"{/if}/>
                                             <label class="ui-radio-label" for="usableCouponGoods_3">{$lang.spec_cat}</label>
                                         </div>
-                                        <div class="form_prompt"></div>
                                     </div>
                                     <div class="notic bf100">{$lang.buy_goods_deduction}</div>
-                                    <div class="rank_list" id="range-div" data-goodsIds="{$cou.cou_goods}">
+                                    <div class="rank_list" id="range-div">
                                         {if $cou.goods}
                                         {foreach from=$cou.goods item=goods key=key}
                                         <div class="checkbox_item">
@@ -116,7 +114,6 @@
                                         {/foreach}
                                         {/if}
                                     </div>
-                                    <input type="hidden" name="setgoodsid" value="{$cou.cou_goods}" class="ignore" />
                                     <div class="rank_list" id="cat_range_div">
                                         {if $cou.cats}
                                         {foreach from=$cou.cats item=cat key=key}
@@ -132,8 +129,7 @@
                             <dl class="hide" id="range_search">
                             	<dt>{$lang.add_goods}：</dt>
                                 <dd>
-                                    <input type="button" class="sc-btn btn30 sc-blueBg-btn" value="设置商品" ectype="setupGroupGoods" data-diffeseller="1" data-pbmode="setgoods_content" data-pbtype="coupons"/>
-                                	<!--<input name="keyword1" type="text" id="keyword1" class="text text_2 mr10 mb10" autocomplete="off" />
+                                	<input name="keyword1" type="text" id="keyword1" class="text text_2 mr10 mb10" autocomplete="off" />
                                     <input name="search1" type="button" id="search1" value="{$lang.button_search}" class="sc-btn btn30 sc-blueBg-btn" onclick="searchItem1()" />
                                     <div id="result1" class="imitate_select select_w320">
                                         <div class="cite">请选择</div>
@@ -142,8 +138,7 @@
                                         </ul>
                                         <input name="result1" type="hidden" value="0" id="result1_val">
                                     </div>
-                                    <input name="add_gift" type="button" class="sc-btn btn30 sc-blueBg-btn" id="add_gift" onclick="addGift()" value="+" />-->
-                                        
+                                    <input name="add_gift" type="button" class="sc-btn btn30 sc-blueBg-btn" id="add_gift" onclick="addGift()" value="+" />
                                 </dd>
                             </dl>
                             
@@ -177,20 +172,11 @@
                                     <div class="text_time" id="text_time2">
                                     	<input type="text" name="cou_end_time" value="{$cou.cou_end_time}" id="cou_end_time" class="text" autocomplete="off" readonly />
                                     </div>
-                                    <div class="form_prompt"></div>
                                 </dd>
                             </dl>
                             <dl>
                             	<dt>{$lang.activity_rule}：</dt>
-                                <dd><div class="fl lh red" id="cou_type">{if $cou_type eq 1}{$lang.coupons_type_01}{elseif $cou_type eq 2}{$lang.coupons_type_02}{elseif $cou_type eq 3}{$lang.coupons_type_03}{elseif $cou_type eq 4}{$lang.coupons_type_04}{elseif $cou_type eq 5}{$lang.coupons_type_05}{else}{$lang.coupons_type_01}{/if}</div></dd>
-                            </dl>
-                            <dl class="item{if $cou_type neq 5} hide{/if}" id="not_free_shipping">
-                            	<dt>{$lang.not_free_shipping}：</dt>
-                                <dd>
-                                    <input type="button" class="sc-btn btn30 sc-blueBg-btn" value="{$lang.set_free_shipping}" ectype="set_free_shipping"/>
-                                    <span class="bf100 fl mt10" ectype="not_free_value">{$cou.free_value_name}</span>
-                                    <input type='hidden' name='free_value' value='{$cou.free_value}'>
-                                </dd>
+                                <dd><div class="fl lh red" id="cou_type">{if $cou_type eq 1}{$lang.coupons_type_01}{elseif $cou_type eq 2}{$lang.coupons_type_02}{elseif $cou_type eq 3}{$lang.coupons_type_03}{elseif $cou_type eq 4}{$lang.coupons_type_04}{else}{$lang.coupons_type_01}{/if}</div></dd>
                             </dl>
                             <div id="buy"{if $cou_type neq 2} style="display:none;"{/if}>
                                 <dl>
@@ -219,10 +205,9 @@
                                                 <input type="radio" class="ui-radio" name="buyableCouponGoods" value="3" id="buyableCouponGoods3" {if !$cou.cou_ok_goods && $cou.cou_ok_cat}checked="checked"{/if}/>
                                                 <label class="ui-radio-label" for="buyableCouponGoods3">{$lang.spec_cat}</label>
                                             </div>
-                                            <div class="form_prompt"></div>
                                         </div>
 										<div class="notic">{$lang.buy_has_coupon}</div>
-										<div id="range-div2" class="rank_list" ata-goodsIds="{$cou.cou_ok_goods}">
+										<div id="range-div2" class="rank_list">
                                             {if $cou.ok_goods}
                                             {foreach from=$cou.ok_goods item=goods key=key}
                                                 <div class="checkbox_item">
@@ -232,7 +217,6 @@
                                             {/foreach}
                                             {/if}
                                         </div>
-                                        <input type="hidden" name="setcougoodsid" value="{$cou.cou_ok_goods}" class="ignore" />
                                         <div class="rank_list" id="cat_range_div2">
                                             {if $cou.ok_cat}
                                             {foreach from=$cou.ok_cat item=cat key=key}
@@ -248,8 +232,7 @@
                                 <dl class="hide" id="range_search2">
                                     <dt>{$lang.add_goods}：</dt>
                                     <dd>
-                                        <input type="button" class="sc-btn btn30 sc-blueBg-btn" value="设置商品" ectype="setupGroupGoods" data-diffeseller="1" data-pbmode="setgoods_appoint" data-pbtype="coupons_appoint"/>
-<!--                                    	<input name="keyword2" type="text" id="keyword2" class="text text_2 mr10 mb10" autocomplete="off" />
+                                    	<input name="keyword2" type="text" id="keyword2" class="text text_2 mr10 mb10" autocomplete="off" />
 										<input name="search2" type="button" id="search2" value="{$lang.button_search}" class="sc-btn btn30 sc-blueBg-btn" onclick="searchItem2()" />
 										<div id="result2" class="imitate_select select_w320">
 											<div class="cite">请选择</div>
@@ -257,7 +240,7 @@
 											</ul>
 											<input name="result2" type="hidden" value="0" id="result2_val">
 										</div>											
-										<input name="add_gift2" type="button" class="sc-btn btn30 sc-blueBg-btn" id="add_gift2" onclick="addGift2()" value="+" />-->
+										<input name="add_gift2" type="button" class="sc-btn btn30 sc-blueBg-btn" id="add_gift2" onclick="addGift2()" value="+" />
                                     </dd>
                                 </dl>
                                 
@@ -356,7 +339,6 @@
                                 	<input type="submit" value="{$lang.button_submit}" class="sc-btn sc-blueBg-btn btn35" id="submitBtn" />
                                     <input type="hidden" name="act" value="{$form_act}" />
                                     <input type="hidden" name="cou_id" value="{$cou.cou_id}" />
-                                    <input type="hidden" name="ru_id" value="{$cou.ru_id}" />
                                 </dd>
                             </dl>
 						</div>
@@ -367,7 +349,6 @@
     </div>
 </div>
 {include file ='library/seller_footer.lbi'}
-{insert_scripts files="jquery.purebox.js"}
 <script type="text/javascript">
 $(function(){
 	$(window).load(function(){
@@ -414,32 +395,15 @@ $(function(){
 	$.divselect("#coupons_type","#coupons_type_val",function(){
 		$("#buy").hide();
 		$("#member").hide();
-		$("input[name='cou_ok_user[]']").addClass("ignore");
-		$("input[name='cou_user_four[]']").addClass("ignore");
 		$("#cou_type").html($("#coupons_type .cite").text());
 		var value = $("#coupons_type_val").val();
-		if(value == 2 || value == 5){
+		if(value == 2){
 			$("#buy").show();
-			$("input[name='cou_ok_user[]']").removeClass("ignore");
-			if(value == 5){
-				$("#buy").find('input[name="buyableCouponGoods"]').parents('dl').hide();
-				$("#buy").find('input[name="cou_get_man"]').parents('dl').hide();
-			}else{
-				$("#buy").find('input[name="buyableCouponGoods"]').parents('dl').show();
-				$("#buy").find('input[name="cou_get_man"]').parents('dl').show();
-			}
-			if(value == 2){
-				$("#member").hide();
-				
-				$("input[name='cou_user_four[]']").addClass("ignore");
-			}
+			$("#member").hide();
 		}
 		if(value == 4){
 			$("#buy").hide();
 			$("#member").show();
-			
-			$("input[name='cou_ok_user[]']").addClass("ignore");
-					$("input[name='cou_user_four[]']").removeClass("ignore");
 		}
 		
 		if(value == 1 || value == 2){
@@ -449,49 +413,8 @@ $(function(){
 			$("#comm").show();
 			$("#not_comm").hide();
 		}
-		if(value == 5){
-			$("#not_free_shipping").show();
-			$('[ectype="cou_money"]').hide();
-			$("input[name='cou_money']").addClass("ignore");
-		}else{
-			$("#not_free_shipping").hide();
-			$('[ectype="cou_money"]').show();
-			$("input[name='cou_money']").removeClass("ignore");
-		}
 	});
-	
-	$("*[ectype='set_free_shipping']").click(function(){
-		var region_ids = $("input[name='free_value']").val();
-		Ajax.call('dialog.php', "act=set_free_shipping&region_ids=" + region_ids, function(result){
-			goods_visual_desc("地区选择",915,result.content,function(){
-				var region_list = '';
-				var region_name = '';
-				$("input[name='region_id[]']:checked").each(function(){
-					var region_id = $(this).val();
-					var name = $(this).parent('.checkbox_item').find('label').html();
-					if(region_id > 0){
-						if(region_list){
-							region_list = region_list + "," + region_id;
-						}else{
-							region_list = region_id;
-						}
-					}
-					if(name){
-						if(region_name){
-							region_name = region_name + "," + name;
-						}else{
-							region_name = name;
-						}
-					}
-				});
-				$('[ectype="not_free_value"]').html(region_name);
-				$("input[name='free_value']").val(region_list);
-			});
-			$(".free_shipping_info").perfectScrollbar("destroy");
-			$(".free_shipping_info").perfectScrollbar();
-		}, 'POST', 'JSON');
-	});
-	
+		
 	//表单验证
 	$("#submitBtn").click(function(){
 		if($("#myForm").valid()){
@@ -502,10 +425,9 @@ $(function(){
 	$('#myForm').validate({
 		errorPlacement:function(error, element){
 			var error_div = element.parents('dl').find('div.form_prompt');
-			element.parents('dl').find(".notic").hide();
+			//element.parents('dl').find(".notic").hide();
 			error_div.append(error);
 		},
-        ignore:".ignore",
 		rules:{
 			cou_name :{
 				required : true
@@ -524,25 +446,6 @@ $(function(){
 			cou_man:{
 				required : true,
 				number:true
-			},
-			cou_start_time : {
-				required : true
-			},
-			cou_end_time : {
-				required : true,
-				compareDate:"#cou_start_time",
-			},
-			setgoodsid :{
-				required : true
-			},
-			setcougoodsid :{
-				required : true
-			},
-			'cou_ok_user[]' :{
-				required : true
-			},
-			'cou_user_four[]' :{
-				required : true
 			}
 		},
 		messages:{
@@ -550,57 +453,21 @@ $(function(){
 				 required : '<i class="icon icon-exclamation-sign"></i>'+type_name_empty
 			},
 			cou_title:{
-				required : '<i class="icon icon-exclamation-sign"></i>'+coupons_title_empty
+				required : '<i class="icon icon-exclamation-sign"></i>请输入优惠券标题'
 			},
 			cou_total:{
-				required : '<i class="icon icon-exclamation-sign"></i>'+coupons_zhang_empty,
+				required : '<i class="icon icon-exclamation-sign"></i>请输入优惠券张数',
 				digits : '<i class="icon icon-exclamation-sign"></i>'+coupons_sum_number
 			},
 			cou_money:{
-				required : '<i class="icon icon-exclamation-sign"></i>'+coupons_face_empty,
-				number : '<i class="icon icon-exclamation-sign"></i>'+coupons_total_isnumber
+				required : '<i class="icon icon-exclamation-sign"></i>请输入优惠券面值',
+				number : '<i class="icon icon-exclamation-sign"></i>金额必须是数字格式'
 			},
 			cou_man:{
-				required : '<i class="icon icon-exclamation-sign"></i>'+coupons_threshold_empty,
-				number : '<i class="icon icon-exclamation-sign"></i>'+coupons_total_isnumber
-			},
-			cou_start_time : {
-				required : '<i class="icon icon-exclamation-sign"></i>'+coupons_data_empty,
-			},
-			cou_end_time : {
-				required :'<i class="icon icon-exclamation-sign"></i>'+coupons_data_empty,
-				compareDate:'<i class="icon icon-exclamation-sign"></i>'+coupons_data_invalid_gt
-			},
-			setgoodsid :{
-				required : '<i class="icon icon-exclamation-sign"></i>'+coupons_set_goods,
-			},
-			setcougoodsid:{
-				required : '<i class="icon icon-exclamation-sign"></i>'+coupons_set_goods,
-			},
-			'cou_ok_user[]' :{
-				required : '<i class="icon icon-exclamation-sign"></i>'+user_rank_empty,
-			},
-			'cou_user_four[]' :{
-				required : '<i class="icon icon-exclamation-sign"></i>'+user_rank_empty,
+				required : '<i class="icon icon-exclamation-sign"></i>请输入优惠券使用门槛',
+				number : '<i class="icon icon-exclamation-sign"></i>金额必须是数字格式'
 			}
-		},
-		onfocusout:function(element,event){
-			//实时去除结束时间是否大于开始时间验证
-			var name = $(element).attr("name");
-			
-			if(name == "cou_end_time"){
-				var endDate = $(element).val();
-				var startDate = $(element).parents("dd").find("input[name='cou_start_time']").val();
-				
-				var date1 = new Date(Date.parse(startDate.replace(/-/g, "/")));
-				var date2 = new Date(Date.parse(endDate.replace(/-/g, "/")));
-				
-				if(date1 > date2){
-					$(element).removeClass("error");
-					$(element).parents("dd").find(".form_prompt").html("");
-				}
-			}
-		}
+		}			
 	});
 });
 
@@ -855,24 +722,18 @@ $(function(){
 			
 			$("#range_search_cat").hide();
 			$("#cat_range_div").hide();
-			
-			$("#range-div").siblings("input[name='setgoodsid']").addClass("ignore");
 		}else if(val == 2){
 			$("#range_search").show();
 			$("#range-div").show();
 			
 			$("#range_search_cat").hide();
 			$("#cat_range_div").hide();
-			
-			$("#range-div").siblings("input[name='setgoodsid']").removeClass("ignore");
 		}else if(val == 3){
 			$("#range_search").hide();
 			$("#range-div").hide();
 			
 			$("#range_search_cat").show();
 			$("#cat_range_div").show();
-			
-			$("#range-div").siblings("input[name='setgoodsid']").addClass("ignore");
 		}
 	});	
 
@@ -884,24 +745,18 @@ $(function(){
 		  
 		  $("#range_search_cat2").hide();
 	      $("#cat_range_div2").hide();
-		  
-		  $("#range-div2").siblings("input[name='setcougoodsid']").addClass("ignore");
 	  }else if(val == 2){
 		  $("#range_search2").show();
 		  $("#range-div2").show();
 		  
 		  $("#range_search_cat2").hide();
 	      $("#cat_range_div2").hide();
-		  
-		  $("#range-div2").siblings("input[name='setcougoodsid']").removeClass("ignore");
 	  }else if(val == 3){  
 		  $("#range_search2").hide();
 		  $("#range-div2").hide();
 		  
 		  $("#range_search_cat2").show();
 	      $("#cat_range_div2").show();
-		  
-		  $("#range-div2").siblings("input[name='setcougoodsid']").addClass("ignore");
 	  }
 	});
 

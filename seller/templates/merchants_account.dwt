@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 {include file ='library/seller_html_head.lbi'}
+{insert_scripts files='./sms/sms.js'}
 </head>
 
 <body>
@@ -16,80 +17,41 @@
                 {include file ='library/seller_menu_tab.lbi'}
                 {/if}
                 <div class="ecsc-form-goods">
-                <form method="post" action="merchants_account.php" name="listForm" id="merchants_account_form" enctype="multipart/form-data">
+                <form method="post" action="merchants_account.php" name="listForm" onsubmit="return accountCheck();">
                 <div class="wrapper-list">
                 	<dl>
-                    	<dt>{$lang.require_field}&nbsp;{$lang.label_real_name}</dt>
+                    	<dt>{$lang.label_real_name}</dt>
                         <dd>
                         	<input name="real_name" value="{$real.real_name}" type="text" id="real_name" class="text">
-                            <div class="form_prompt"></div>
                             <div class="notic">{$lang.real_name_title}</div>
                         </dd>
                     </dl>
                     <dl>
-                    	<dt>{$lang.require_field}&nbsp;{$lang.label_self_num}</dt>
-                        <dd><input name="self_num" value="{$real.self_num}" type="text" id="self_num" class="text"><div class="form_prompt"></div></dd>
+                    	<dt>{$lang.label_self_num}</dt>
+                        <dd><input name="self_num" value="{$real.self_num}" type="text" id="self_num" class="text"></dd>
                     </dl>
                     <dl>
-                        <dt>{$lang.require_field}&nbsp;{$lang.front_of_id_card}：</dt>
-                        <dd>
-                             <div class="type-file-box">
-                                <div class="input">
-                                    <input type="text" name="textfile" class="type-file-text" {if $real.front_of_id_card}value="{$real.front_of_id_card}"{/if} id="textfield" readonly>
-                                    <input type="button" name="button" id="button" class="type-file-button" value="上传...">
-                                    <input type="file" class="type-file-file" name="front_of_id_card" size="30" hidefocus="true">
-                                </div>
-                                {if $real.front_of_id_card}
-                                <span class="show">
-                                <a href="{$real.front_of_id_card}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$real.front_of_id_card}>')" onmouseout="toolTip()"></i></a>
-                                </span>
-                                {/if}
-                            </div>
-                            <div class="form_prompt"></div>
-                        </dd>
+                    	<dt>{$lang.label_bank_name}</dt>
+                        <dd><input name="bank_name" value="{$real.bank_name}" type="text" id="bank_name" class="text"></dd>
                     </dl>
                     <dl>
-                        <dt>{$lang.require_field}&nbsp;{$lang.reverse_of_id_card}：</dt>
-                        <dd>
-                             <div class="type-file-box">
-                                <div class="input">
-                                    <input type="text" name="textfile" class="type-file-text" {if $real.reverse_of_id_card}value="{$real.reverse_of_id_card}"{/if} id="textfield" readonly>
-                                    <input type="button" name="button" id="button" class="type-file-button" value="上传...">
-                                    <input type="file" class="type-file-file" name="reverse_of_id_card" size="30" hidefocus="true">
-                                </div>
-                                {if $real.reverse_of_id_card}
-                                <span class="show">
-                                <a href="{$real.reverse_of_id_card}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$real.reverse_of_id_card}>')" onmouseout="toolTip()"></i></a>
-                                </span>
-                                {/if}
-                            </div>
-                            <div class="form_prompt"></div>
-                        </dd>
+                    	<dt>{$lang.label_bank_card}</dt>
+                        <dd><input name="bank_card" value="{$real.bank_card}" type="text" id="bank_card" class="text"></dd>
                     </dl>
                     <dl>
-                    	<dt>{$lang.require_field}&nbsp;{$lang.label_bank_name}</dt>
-                        <dd><input name="bank_name" value="{$real.bank_name}" type="text" id="bank_name" class="text"><div class="form_prompt"></div></dd>
-                    </dl>
-                    <dl>
-                    	<dt>{$lang.require_field}&nbsp;{$lang.label_bank_card}</dt>
-                        <dd><input name="bank_card" value="{$real.bank_card}" type="text" id="bank_card" class="text"><div class="form_prompt"></div></dd>
-                    </dl>
-                    <dl>
-                    	<dt>{$lang.require_field}&nbsp;{$lang.label_bank_mobile}</dt>
+                    	<dt>{$lang.label_bank_mobile}</dt>
                         <dd>
                         	<input name="mobile_phone" value="{$real.bank_mobile}" type="text" id="mobile_phone" class="text">
-                            <div class="form_prompt" id="phone_notice"></div>
                             <div class="notic">{$lang.bank_mobile_title}</div>
                         </dd>
                     </dl>
                     <!-- {if $enabled_sms_signin} -->
                     <dl>
-                    	<dt>{$lang.require_field}&nbsp;{$lang.label_mobile_code}</dt>
+                    	<dt>{$lang.label_mobile_code}</dt>
                         <dd>
                         	<input name="sms_value" id="sms_value" type="hidden" value="sms_code" />
                             <input name="mobile_code" type="text" id="mobile_code" class="text text_4 mr10">
-                            <a href="javascript:sendSms();" id="zphone" class="yzm-btn lh">获取验证码</a>
-                            <div class="form_prompt"></div>
+                            <a href="javascript:;" id="zphone" class="yzm-btn lh"><span class="yzm-countdown"></span><span class="yzm-text">获取验证码</span></a>
                         </dd>
                     </dl>
                     <!-- {/if} -->
@@ -102,7 +64,7 @@
                     <dl class="button_info">
                     	<dt>&nbsp;</dt>
                         <dd>
-                        	<input name="query" type="submit" class="sc-btn sc-blueBg-btn btn35" id="query" value="{$lang.button_submit}" ectype="submitBtn" />
+                        	<input name="query" type="submit" class="sc-btn sc-blueBg-btn btn35" id="query" value="{$lang.button_submit}" />
                             <input name="reset" type="reset" class='sc-btn btn35 sc-blue-btn' value='{$lang.button_reset}' />
                             <input type="hidden" name="flag"  id="flag" value="change_password_f">
                             <input type="hidden" name="seccode" id="seccode" value="" />
@@ -128,76 +90,48 @@ $(function(){
 	}
 	
 	$("#seccode").val(code);
-	
-	//表单验证
-	$("*[ectype='submitBtn']").click(function(){
-		if($("#merchants_account_form").valid()){
-			$("#merchants_account_form").submit();
-		}
-	});
-	
-	$('#merchants_account_form').validate({
-		errorPlacement:function(error, element){
-			var error_div = element.parents('dl').find('div.form_prompt');
-			//element.parents('div.label_value').find(".notic").hide();
-			error_div.append(error);
-		},
-		rules:{
-			real_name :{
-				required : true
-			},
-			front_of_id_card : {
-				required : true
-			},
-			reverse_of_id_card : {
-				required : true
-			},
-			self_num :{
-				required : true
-			},
-			bank_name :{
-				required : true
-			},
-			bank_card :{
-				required : true
-			},
-			mobile_phone :{
-				required : true,
-				isMobile : true
-			},
-			mobile_code:{
-				required : true
-			}
-		},
-		messages:{
-			real_name:{
-				required : '<i class="icon icon-exclamation-sign"></i>'+label_real_name_not_null
-			},
-			front_of_id_card : {
-				required : '<i class="icon icon-exclamation-sign"></i>'+file_front_of_id_card
-			},
-			reverse_of_id_card : {
-				required : '<i class="icon icon-exclamation-sign"></i>'+file_reverse_of_id_card
-			},
-			self_num:{
-				 required : '<i class="icon icon-exclamation-sign"></i>'+label_self_num_not_null
-			},
-			bank_name:{
-				 required : '<i class="icon icon-exclamation-sign"></i>'+label_bank_name_not_null
-			},
-			bank_card:{
-				 required : '<i class="icon icon-exclamation-sign"></i>'+label_bank_card_not_null
-			},
-			mobile_phone:{
-				 required : '<i class="icon icon-exclamation-sign"></i>'+label_bank_mobile_not_null,
-				 isMobile : '<i class="icon icon-exclamation-sign"></i>'+mobile_incorrect
-			},
-			mobile_code:{
-				required : '<i class="icon icon-exclamation-sign"></i>'+mobile_code_not_null 
-			}
-		}			
-	});
 });
+$("#mobile_phone").focus(function(){
+	$("#mobile_code").parents(".item").removeClass("mobile_code");
+	$("#zphone").html('立即验证');
+	$("#zphone").attr("onclick","sendSms();");
+});
+
+function accountCheck(){
+	var real_name = $("#real_name").val();
+	var self_num = $("#self_num").val();
+	var bank_name = $("#bank_name").val();
+	var bank_card = $("#bank_card").val();
+	var mobile_phone = $("#mobile_phone").val();
+	
+	if(real_name == ''){
+		alert("真实姓名不能为空");
+		return false;
+	}else if(self_num == ''){
+		alert("身份证号不能为空");
+		return false;
+	}else if(bank_name == ''){
+		alert("银行不能为空");
+		return false;
+	}else if(bank_card == ''){
+		alert("银行卡号不能为空");
+		return false;
+	}else if(mobile_phone == ''){
+		alert("手机号码不能为空");
+		return false;
+	}
+	
+	if(document.getElementById('mobile_code')){
+		var mobile_code = $("#mobile_code").val();
+		
+		if(mobile_code == ''){
+			alert("验证码不能为空");
+			return false;
+		}
+	}
+	
+	return true;
+}
 </script>
 {include file ='library/seller_footer.lbi'}
 </body>

@@ -2,136 +2,131 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-    <meta name="format-detection" content="telephone=no"/>
-    <meta name="description" content="{$description}"/>
-    <meta name="keywords" content="{$keywords}"/>
+    <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
     <title>{$page_title}</title>
     <link rel=stylesheet href="//at.alicdn.com/t/font_u366719ytlat6gvi.css" media="screen" title="no title">
     <link rel=stylesheet href="//at.alicdn.com/t/font_lkv63qpdlo8khuxr.css" media="screen" title="no title">
     <link href="__ROOT__/public/css/app.css?v=<?=date('Ymd')?>" rel=stylesheet>
+    <style>
+		.picture-tile ul li{
+			padding-bottom:0 !important;
+			padding-right:0 !important;
+			padding-left:0 !important;
+		}
+		.picture-tile ul{
+			padding-top:0;
+			padding:0;
+		}
+		.picture-tile ul li img{
+			display:block;
+		}
+		.product-list figure h4 {
+		    height:3.8rem;
+		    line-height: 1.9rem;
+		}
+		.mod-nav nav ul li img {
+		    width: 100%;
+		}
+
+    </style>
     <script>
         window.ROOT_URL = '__ROOT__/';
-        window.PC_URL = '__PC__/';
+        window.PC_URL = '__STATIC__/';
         //首页app下载连接
         window.APP_DOWNLOAD_URL = '';
-        window.shopInfo = {ruid: 0, authority: 1};
+         window.shopInfo = {ru_id :0,authority:1};
     </script>
-    <style>
-        /*首页广告*/
-        .index-bg {
-            background: rgba(0, 0, 0, 0.6);
-            position: fixed;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            z-index: 1000;
-        }
-
-        .index-img {
-            position: fixed;
-            left: 10%;
-            right: 10%;
-            top: 50%;
-            z-index: 1001;
-        }
-
-        .index-img img {
-            width: 100%;
-        }
-
-        .index-bg span {
-            position: absolute;
-            bottom: 1.6rem;
-            left: 50%;
-            margin-left: -1rem;
-            color: #fff;
-            background: rgba(255, 255, 255, 0.3);
-            width: 2rem;
-            height: 2rem;
-            line-height: 2rem;
-            font-size: 1.8rem;
-            display: block;
-            text-align: center;
-            border-radius: 100%;
-            z-index: 1002;
-        }
-    </style>
 </head>
 <body>
 <div id="app"></div>
-<script src="https://cdn.bootcss.com/babel-polyfill/6.23.0/polyfill.min.js"></script>
 <script src="//3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
 <script type="text/javascript" src="__ROOT__/public/js/manifest.js?v=<?=date('Ymd')?>"></script>
 <script type="text/javascript" src="__ROOT__/public/js/vendor.js?v=<?=date('Ymd')?>"></script>
 <script type="text/javascript" src="__ROOT__/public/js/app.js?v=<?=date('Ymd')?>"></script>
-<script type="text/javascript" src="__STATIC__/js/jquery-1.9.1.min.js"></script>
-
-{include file="jssdk"}
-
-<!--广告-->
-{if $popup_ads !=1}
-<div class="index-bg">
-    <span class="j-icon">×</span>
-    <a href="{$ad_link}">
-    <div class="index-img">
-        <img src="{$popup_ads}" id="index-img">
-    </div>
-    </a>
-</div>
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+{if $is_wechat}
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script type="text/javascript">
+    // 分享内容
+    var shareContent = {
+        title: '{$share_data.title}',
+        desc: '{$share_data.desc}',
+        link: '{$share_data.link}',
+        imgUrl: '{$share_data.img}'
+    };
+    $(function(){
+        var url = window.location.href;
+        var jsConfig = {
+            debug: false,
+            jsApiList: [
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage',
+                'onMenuShareQQ',
+                'onMenuShareWeibo',
+                'onMenuShareQZone'
+            ]
+        };
+        $.post('{url("wechat/jssdk/index")}', {url: url}, function (res) {
+            if(res.status == 200){
+                jsConfig.appId = res.data.appId;
+                jsConfig.timestamp = res.data.timestamp;
+                jsConfig.nonceStr = res.data.nonceStr;
+                jsConfig.signature = res.data.signature;
+                // 配置注入
+                wx.config(jsConfig);
+                // 事件注入
+                wx.ready(function () {
+                    wx.onMenuShareTimeline(shareContent);
+                    wx.onMenuShareAppMessage(shareContent);
+                    wx.onMenuShareQQ(shareContent);
+                    wx.onMenuShareWeibo(shareContent);
+                    wx.onMenuShareQZone(shareContent);
+                });
+            }
+        }, 'json');
+    })
+</script>
 {/if}
 </body>
 <script>
-    window.onload = function () {
-        /*页面向上滚动js*/
-        $(".filter-top").click(function () {
-            $("html,body").animate({
-                scrollTop: 0
-            }, 200);
-        });
+window.onload=function(){
+		//头部导航
+		$(window).scroll(function() {
+			if($(window).scrollTop() > 100) {
+				$("header.search-fixed,header.search-fixed .search-mask,header.search-fixed .search-center,.mod-search .search-left,.mod-search .search-right,.ect-header-banner").addClass("active");
+			} else {
+				$("header.search-fixed,header.search-fixed .search-mask,header.search-fixed .search-center,.mod-search .search-left,.mod-search .search-right,.ect-header-banner").removeClass("active");
+			}
+		});
 
-        $(window).scroll(function () {
-            var prevTop = 0,
-                currTop = 0;
-            currTop = $(window).scrollTop();
-            win_height = $(window).height() * 2;
-            if (currTop >= win_height) {
-                $(".filter-top").stop(true, true).fadeIn(200);
-            } else {
-                $(".filter-top").stop(true, true).fadeOut(200);
-            }
-            //prevTop = currTop; //IE下有BUG，所以用以下方式
-            setTimeout(function () {
-                prevTop = currTop
-            }, 0);
-        });
+		/*页面向上滚动js*/
+		$(".filter-top").click(function() {
+			$("html,body").animate({
+				scrollTop: 0
+			}, 200);
+		});
 
-        /*点击关闭顶部层*/
-        $(".ect-header-banner i.icon-guanbi").click(function () {
-            $(".app-down").hide();
-        });
-    }
+		$(window).scroll(function() {
+			var prevTop = 0,
+				currTop = 0;
+			currTop = $(window).scrollTop();
+			win_height = $(window).height() * 2;
+			if(currTop >= win_height) {
+				$(".filter-top").stop().fadeIn(200);
+			} else {
+				$(".filter-top").stop().fadeOut(200);
+			}
+			//prevTop = currTop; //IE下有BUG，所以用以下方式
+			setTimeout(function() {
+				prevTop = currTop
+			}, 0);
+		});
 
-    //点击后关闭
-    $(".j-icon,.index-bg").click(function () {
-        $(".index-bg").hide();
-    })
-
-    function index_top() {
-        var top = $("#index-img").outerHeight(true) / 2;
-        $(".index-img").css("marginTop", -top);
-    }
-
-    index_top();
-    $(window).resize(function () {
-        index_top()
+    /*点击关闭顶部层*/
+    $(".ect-header-banner i.icon-guanbi").click(function () {
+        $(".app-down").hide();
     });
-    setTimeout(function () {
-        $(".index-bg").hide();
-    }, 10000);
+}
 </script>
 </body>
 </html>

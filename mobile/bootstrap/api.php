@@ -1,28 +1,19 @@
 <?php
 
-require_once dirname(__DIR__) . '/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 try {
     (new Dotenv\Dotenv(__DIR__ . '/../'))->load();
 } catch (Dotenv\Exception\InvalidPathException $e) {
-    //
+    // setting environment
+    if (in_array(@$_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1', '192.168.10.1'])) {
+        putenv("APP_ENV=local");
+        putenv("APP_DEBUG=true");
+    } else {
+        putenv("APP_ENV=production");
+        putenv("APP_DEBUG=false");
+    }
 }
-
-/*
-|--------------------------------------------------------------------------
-| Setting Environment
-|--------------------------------------------------------------------------
-|
-*/
-
-if (in_array(@$_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1', '192.168.10.1'])) {
-    putenv("APP_ENV=local");
-    putenv("APP_DEBUG=true");
-} else {
-    putenv("APP_ENV=production");
-    putenv("APP_DEBUG=false");
-}
-putenv("APP_TIMEZONE=Asia/Shanghai");
 
 /*
 |--------------------------------------------------------------------------
@@ -97,11 +88,6 @@ $app->singleton(
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
-$app->register(Dingo\Api\Provider\LumenServiceProvider::class);
-
-app('Dingo\Api\Transformer\Factory')->setAdapter(function ($app) {
-    return new Dingo\Api\Transformer\Adapter\Fractal(new League\Fractal\Manager, 'include', ',');
-});
 
 /*
 |--------------------------------------------------------------------------
@@ -114,25 +100,8 @@ app('Dingo\Api\Transformer\Factory')->setAdapter(function ($app) {
 |
 */
 
-$app->group(['namespace' => 'App\Api\Controllers'], function ($app) {
+$app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
     require __DIR__ . '/../routes/api.php';
 });
-
-/*
-|--------------------------------------------------------------------------
-| 加载全局常量
-|--------------------------------------------------------------------------
-*/
-
-require __DIR__ . '/../app/Support/constant.php';
-
-/*
-|--------------------------------------------------------------------------
-| Load The Application Helpers
-|--------------------------------------------------------------------------
-|
-*/
-
-require __DIR__ . '/../app/Api/Support/helpers.php';
 
 return $app;

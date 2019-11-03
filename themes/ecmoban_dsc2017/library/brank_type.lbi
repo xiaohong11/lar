@@ -2,7 +2,7 @@
 <!--申请品牌信息-->
 {if $brandView eq '' && $brandView neq 'add_brand' && $brandView neq 'brandView'}
 <div class="panel-body mt40">
-    <div class="panel-tit"><span><em class="red">*</em>添加品牌信息</span></div>
+    <div class="panel-tit"><span><em style="color:red">*</em>添加品牌信息</span></div>
     <div class="cue">{$title.titles_annotation}</div>
     <div class="list">
     	<div class="item">
@@ -43,8 +43,9 @@
                      </tbody>
                 </table>
             </div>
-           	<a id="saveBrandQualificationBtn" class="sc-btn sc-orgBg-btn btn30 mr0" href="merchants_steps.php?step={$step}&pid_key={$brandKey|default:2}&brandView=add_brand">{$lang.07_brand_add}</a>
-            <input type="hidden" name="title_brand_list" id="title_brand_list" value="{if $title.brand_list}1{else}0{/if}">
+           	<a id="saveBrandQualificationBtn" class="sc-btn sc-orgBg-btn btn30" href="merchants_steps.php?step={$step}&pid_key={$brandKey|default:2}&brandView=add_brand">{$lang.07_brand_add}</a>
+            <font id="title_brand_listHTML" style="color:#F00 ;"></font>
+            <input type="hidden" id="title_brand_list"  {if $title.brand_list} value="1" {else}value="0" {/if}>
 		</div>
     </div>
 </div>   
@@ -52,20 +53,24 @@
 <div class="panel-body mt40">
 	<div class="list addBrank">
     	<div class="item">
-        	<div class="label"><em>*</em> {$lang.input_brand_zh}：</div>
+        	<div class="label">{$lang.input_brand_zh}：</div>
             <div class="value">
-            	<div class="bsDiv">
-                    <input type="text" value="" class="text text-4" name="searchBrandZhInput" id="searchBrandZhInput" ectype="bsKeyup" data-type="0" autoComplete="off">
-                    <div class="bsBox" id="searchBrand_name"></div>
+            	<div style="position:relative;">
+                    <input type="text" value="" class="text text-4" name="searchBrandZhInput" id="searchBrandZhInput" onKeyUp="brandSearch(this.value, 0)" autoComplete="off">
+                    <div style="position:absolute; top:29px; left:0px; display:none; z-index:1;" id="searchBrand_name">
+                        
+                    </div>
                 </div>
             </div>
         </div>
         <div class="item">
         	<div class="label">{$lang.brand_us_input}：</div>
             <div class="value">
-            	<div class="bsDiv">
-                    <input type="text" value="" name="searchBrandEnInput" class="text text-4" id="searchBrandEnInput" ectype="bsKeyup" data-type="1" autoComplete="off">
-                    <div class="bsBox" id="searchBrand_letter"></div>
+            	<div style="position:relative;">
+                    <input type="text" value="" name="searchBrandEnInput" class="text text-4" id="searchBrandEnInput" onKeyUp="brandSearch(this.value, 1)" autoComplete="off">
+                    <div style="position:absolute; top:29px; left:0px; display:none; z-index:2;" id="searchBrand_letter">
+                        
+                    </div>
                 </div>
             </div>
         </div>
@@ -80,6 +85,22 @@
     <input type="hidden" name="brandId" value="" />
     <input type="hidden" name="btype" value="" />
 </div>
+
+
+<div id="divSCA">
+	<div class="divTitle">
+        <div class="tit">{$lang.search_result}</div>
+        <a onClick="closeDiv()" class="setps_closeDivA"></a>
+    </div>
+    <div class="mod">
+        <div class="mod_list">{$lang.Apply_brand}<em style="color:#F00;" id="div_brandName"></em><i id="div_brandNot"></i>{$lang.Apply_brand_one}</div>
+    	<div class="mod_list_btn">
+            <input type="submit" value="{$lang.submit_Qual_brand}" class="sub">
+            <input type="button" value="{$lang.search_again}" class="button" onClick="closeDiv();clear_searchBrandInput();">
+        </div>
+    </div>  
+</div>
+
 {elseif $brandView eq 'brandView'}
 <div class="panel-body mt30">
     <div class="panel-tit"><span>{if $ec_shop_bid eq 0}{$title.fields_titles}{else if}{$lang.edit_brand}{/if}</span></div>
@@ -90,19 +111,19 @@
                 	<em>*</em>
                 	<span>{$lang.brand_name}：</span>
                 </div>
-                <div class="value {$brandId}">
-                	<input type="text" name="ec_brandName" id="brandName" size="20" value="{if $title.parentType.brandName}{$title.parentType.brandName}{else}{$brand_name}{/if}" class="text" {if $brandId}readonly{/if}>
-                	<label class="error" id="brandNameHTML"></label>
+                <div class="value">
+                	<input type="text" name="ec_brandName" id="brandName" size="20" value="{$title.parentType.brandName}" class="text" readonly>
+                	<font style="color:#F00" id="brandNameHTML"></font>
                 </div>
             </div>
             <div class="item">
                 <div class="label">
-                	<em>*</em>
+                	<!--<em>*</em>-->
                 	<span>{$lang.Letter_name}：</span>
                 </div>
                 <div class="value">
-                	<input type="text" name="ec_bank_name_letter" id="bank_name_letter" size="20" value="{if $title.parentType.bank_name_letter}{$$title.parentType.bank_name_letter}{else}{$brand_letter}{/if}" class="text">
-                	<label class="error" id="letterHTML"></label>
+                	<input type="text" name="ec_bank_name_letter" id="bank_name_letter" size="20" value="{$title.parentType.bank_name_letter}" class="text">
+                	<font style="color:#F00" id="letterHTML"></font>          
                 </div>
             </div>
             <div class="item">
@@ -111,8 +132,8 @@
                 	<span>{$lang.brand_letter}：</span>
                 </div>
                 <div class="value">
-                	<input type="text" name="ec_brandFirstChar" id="brandFirstChar" size="1" value="{if $title.parentType.brandFirstChar}{$title.parentType.brandFirstChar}{else}{$ec_brandFirstChar}{/if}" class="text required">
-                	<label class="error" id="brandFirstCharHTML"></label>
+                	<input type="text" name="ec_brandFirstChar" id="brandFirstChar" size="20" value="{$title.parentType.brandFirstChar}" class="text">
+                	<font style="color:#F00" id="brandFirstCharHTML"></font>
                 </div>
             </div>
             <div class="item">
@@ -121,12 +142,9 @@
                 	<span>{$lang.brand_logo}：</span>
                 </div>
                 <div class="value">
-                	<div class="type-file-box">
-                        <input type="button" name="button" class="type-file-button" id="button" value="" />
-                        <input type="file" name="ec_brandLogo" class="type-file-file" value="{$title.parentType.brandLogo}" data-state="img" hidefocus="true" />
-                        {if $title.parentType.brandLogo}<a href="{$title.parentType.brandLogo}" class="chakan" target="_blank">{$lang.view}</a>{/if}
-                        <input type="text" name="textfile" class="type-file-text" style="width:150px;" value="{$title.parentType.brandLogo}" readonly />
-                    </div>
+                	<input type="file" name="ec_brandLogo" id="brandLogo" style="margin-top:5px;"><input type="hidden" value="{$title.parentType.brandLogo}" name="text_brandLogo" id="textBrandLogo">
+                    {if $title.parentType.brandLogo}&nbsp;&nbsp;<a href="{$title.parentType.brandLogo}" target="_blank">{$lang.view}</a>{/if}
+                    <font style="color:#F00" id="textBrandLogoHTML"></font> 
                 </div>
             </div>
             <div class="item">
@@ -135,16 +153,12 @@
                 	<span>{$lang.brand_type}：</span>
                 </div>
                 <div class="value">
-                	<div class="imitate_select w120 shop_categoryMain" id="brandType">
-                        <div class="cite"><span>{$lang.Please_select}</span><i class="iconfont icon-down"></i></div>
-                        <ul>
-                            <li><a href="javascript:void(0);" data-value="0">{$lang.Please_select}</a></li>
-                            <li><a href="javascript:void(0);" data-value="1">{$lang.brand_domestic}</a></li>
-                            <li><a href="javascript:void(0);" data-value="2">{$lang.brand_international}</a></li>
-                        </ul>
-                        <input type="hidden" name="ec_brandType" value="{if $title.parentType.brandType eq 0}0{elseif $title.parentType.brandType eq 1}1{else}2{/if}" id="brandType_val" />
-                    </div>
-                    <label class="error" id="brandTypeHTML"></label>
+                	<select name="ec_brandType" id="brandType">
+                        <option {if $title.parentType.brandType eq 0}selected="selected"{/if} value="0">{$lang.Please_select}</option>
+                        <option {if $title.parentType.brandType eq 1}selected="selected"{/if} value="1">{$lang.brand_domestic}</option>
+                        <option {if $title.parentType.brandType eq 2}selected="selected"{/if} value="2">{$lang.brand_international}</option>
+                    </select>  
+                    <font style="color:#F00" id="brandTypeHTML"></font> 
                 </div>
             </div>
             <div class="item">
@@ -153,16 +167,12 @@
                 	<span>{$lang.Management_type}：</span>
                 </div>
                 <div class="value">
-                	<div class="imitate_select w120 shop_categoryMain" id="brand_operateType">
-                        <div class="cite"><span>{$lang.Please_select}</span><i class="iconfont icon-down"></i></div>
-                        <ul>
-                            <li><a href="javascript:void(0);" data-value="0">{$lang.Please_select}</a></li>
-                            <li><a href="javascript:void(0);" data-value="1">{$lang.brand_self}</a></li>
-                            <li><a href="javascript:void(0);" data-value="2">{$lang.brand_agent}</a></li>
-                        </ul>
-                        <input type="hidden" name="ec_brand_operateType" value="{if $title.parentType.brand_operateType eq 0}0{elseif $title.parentType.brand_operateType eq 1}1{else}2{/if}" id="brand_operateType_val" />
-                    </div>
-                    <label class="error" id="operateTypeHTML"></label>
+                	<select name="ec_brand_operateType" id="brand_operateType">
+                        <option {if $title.parentType.brand_operateType eq 0}selected="selected"{/if} value="0">{$lang.Please_select}</option>
+                        <option {if $title.parentType.brand_operateType eq 1}selected="selected"{/if} value="1">{$lang.brand_self}</option>
+                        <option {if $title.parentType.brand_operateType eq 2}selected="selected"{/if} value="2">{$lang.brand_agent}</option>
+                    </select>
+                    <font style="color:#F00" id="operateTypeHTML"></font>    
                 </div>
             </div>
             <div class="item">
@@ -173,14 +183,111 @@
                 <div class="value">
                 	<input type="text" name="ec_brandEndTime" value="{$title.parentType.brandEndTime}" readonly size="20" class="text text-2 jdate narrow fl" style=" float:left;" id="ec_brandEndTime">
                     <div class="cart-checkbox fl ml10">
-                 		<input type="checkbox" class="ui-checkbox CheckBoxShop" onclick="get_shopTime_term(this)" name="ec_brandEndTime_permanent" value="1" id="brandEndTime_permanent" {if $title.parentType.brandEndTime_permanent}checked{/if}>
+                 		<input type="checkbox" class="ui-checkbox CheckBoxShop" onclick="get_brandEndTime_permanent(this, '{$title.parentType.brandEndTime}')" name="ec_brandEndTime_permanent" value="1" id="brandEndTime_permanent" {if $title.parentType.brandEndTime_permanent}checked{/if}>
                         <label for="brandEndTime_permanent">{$lang.permanent}</label> 
                     </div>
                     <input name="ec_shop_bid" type="hidden" value="{$ec_shop_bid}">
-                    <label class="error" id="brandEndTimeHTML"></label>
+                    <font style="color:#F00" id="brandEndTimeHTML"></font>
                 </div>
             </div>
-        	{include file='library/cententFields.lbi'}  
+        	{foreach from=$title.cententFields item=fields}
+            <div class="item">	
+                <div class="label">
+                    <em>{if $fields.will_choose eq 1 && $choose_process eq 1}*{/if}</em>
+                    <span>{$fields.fieldsFormName}：</span>
+                </div>
+                <div class="value">
+                    {if $fields.chooseForm eq 'input'}
+                        <input class="text" type="text" value="{$fields.titles_centents}" size="{$fields.inputForm}" name="{$fields.textFields}">
+                        <div class="verify" id="{$fields.textFields}"></div>
+                    {elseif $fields.chooseForm eq 'other'}
+                        {if $fields.otherForm eq 'textArea'}
+                            <select name="{$fields.textFields}[]" class="catselectB" id="selCountries_{$fields.textFields}_{$sn}" onchange="region.changed(this, 1, 'selProvinces_{$fields.textFields}_{$sn}')">
+                              <option value="0">{$lang.please_select}{$lang.country}</option>
+                              <!-- {foreach from=$country_list item=country} -->
+                              <option value="{$country.region_id}" {if $fields.textAreaForm.country eq $country.region_id}selected{/if}>{$country.region_name}</option>
+                              <!-- {/foreach} -->
+                            </select>
+                            <select name="{$fields.textFields}[]" class="catselectB" id="selProvinces_{$fields.textFields}_{$sn}" onchange="region.changed(this, 2, 'selCities_{$fields.textFields}_{$sn}')">
+                              <option value="0">{$lang.please_select}{$lang.province}</option>
+                              {if $fields.province_list}
+                              <!-- {foreach from=$fields.province_list item=province} -->
+                              <option value="{$province.region_id}" {if $fields.textAreaForm.province eq $province.region_id}selected{/if}>{$province.region_name}</option>
+                              <!-- {/foreach} -->
+                              {else}
+                              <!-- {foreach from=$province_list item=province} -->
+                              <option value="{$province.region_id}">{$province.region_name}</option>
+                              <!-- {/foreach} -->
+                              {/if}
+                            </select>
+                            <select name="{$fields.textFields}[]" class="catselectB" id="selCities_{$fields.textFields}_{$sn}" onchange="region.changed(this, 3, 'selDistricts_{$fields.textFields}_{$sn}')">
+                              <option value="0">{$lang.please_select}{$lang.city}</option>
+                              {if $fields.city_list}
+                              <!-- {foreach from=$fields.city_list item=city} -->
+                              <option value="{$city.region_id}" {if $fields.textAreaForm.city eq $city.region_id}selected{/if}>{$city.region_name}</option>
+                              <!-- {/foreach} -->
+                              {else}
+                              <!-- {foreach from=$city_list item=city} -->
+                              <option value="{$city.region_id}">{$city.region_name}</option>
+                              <!-- {/foreach} -->
+                              {/if}
+                            </select>
+                            <select name="{$fields.textFields}[]" class="catselectB" id="selDistricts_{$fields.textFields}_{$sn}" {if $fields.textAreaForm.district eq 0}style="display:none"{/if}>
+                              <option value="0">{$lang.please_select}{$lang.area}</option>
+                              {if $fields.district_list}
+                              <!-- {foreach from=$fields.district_list item=district} -->
+                              <option value="{$district.region_id}" {if $fields.textAreaForm.district eq $district.region_id}selected{/if}>{$district.region_name}</option>
+                              <!-- {/foreach} -->
+                              {else}
+                              <!-- {foreach from=$district_list item=district} -->
+                              <option value="{$district.region_id}">{$district.region_name}</option>
+                              <!-- {/foreach} -->
+                              {/if}
+                            </select>
+                        {elseif $fields.otherForm eq 'dateFile'}
+                            <input name="{$fields.textFields}" type="file" /><input name="text_{$fields.textFields}" type="hidden" value="{$fields.titles_centents}" />{if $fields.titles_centents neq ''}&nbsp;&nbsp;<a href="{$fields.titles_centents}" target="_blank">{$lang.view}</a>{/if}
+                        {elseif $fields.otherForm eq 'dateTime'} 
+                            {foreach from=$fields.dateTimeForm item=date key=dk}
+                                {if $dk eq 0}  
+                                <input id="{$fields.textFields}_{$dk}" class="input jdate narrow" type="text" size="{$date.dateSize}" readonly value="{$date.dateCentent}" name="{$fields.textFields}[]"> 
+                                {else}
+                                —&nbsp;<input id="{$fields.textFields}_{$dk}" class="input jdate narrow" type="text" size="{$date.dateSize}" readonly value="{$date.dateCentent}" name="{$fields.textFields}[]"> 
+                                {/if}
+                                <script type="text/javascript">
+									var opts_{$dk} = {
+										'targetId':'{$fields.textFields}_{$dk}',
+										'triggerId':['{$fields.textFields}_{$dk}'],
+										'alignId':'{$fields.textFields}_{$dk}',
+										'hms':'off',
+										'format':'-'
+									}
+									xvDate(opts_{$dk});
+								</script>
+                            {/foreach}
+                        {/if}
+                    {elseif $fields.chooseForm eq 'textarea'}
+                        <textarea name="{$fields.textFields}" cols="{$fields.cols}" rows="{$fields.rows}">{$fields.titles_centents}</textarea>  
+                    {elseif $fields.chooseForm eq 'select'}  
+                        <select name="{$fields.textFields}">
+                            <option value="0" selected="selected">{$lang.Please_select}</option>
+                        {foreach from=$fields.selectList item=selectList}
+                            <option value="{$selectList}" {if $fields.titles_centents eq $selectList}selected="selected"{/if}>{$selectList}</option>
+                        {/foreach}
+                        </select>    
+                    {elseif $fields.chooseForm eq 'radio'}   
+                        {foreach from=$fields.radioCheckboxForm item=radio key=rc_k}
+                        <label><input name="{$fields.textFields}" type="radio" value="{$radio.radioCheckbox}" {if $fields.titles_centents eq $radio.radioCheckbox}checked="checked"{else}{if $rc_k eq 0}checked="checked"{/if}{/if} />&nbsp;{$radio.radioCheckbox}</label>
+                        {/foreach}
+                    {elseif $fields.chooseForm eq 'checkbox'}   
+                        {foreach from=$fields.radioCheckboxForm item=checkbox key=rc_k}
+                        <label><input name="{$fields.textFields}" type="checkbox" value="{$radio.radioCheckbox}"  {if $fields.titles_centents eq $checkbox.radioCheckbox}checked="checked"{else}{if $rc_k eq 0}checked="checked"{/if}{/if} />&nbsp;{$checkbox.radioCheckbox}</label>
+                        {/foreach}    
+                    {/if}
+                    <div class="org">{$fields.formSpecial}</div>
+                    <div class="verify" id="{$fields.textFields}"></div>
+                </div>
+            </div>
+         	{/foreach}   
         </div>
         <div class="view-sample" style="display:none">
             <div class="img-wrap">
@@ -208,17 +315,11 @@
             <tbody>
                 <tr class="qualTemplet">
                     <td><input type="text" name="ec_qualificationNameInput[]" size="35" value="" class="text"></td>
-                    <td>
-                        <div class="type-file-box">
-                            <input type="button" name="button" class="type-file-button" id="button" value="" />
-                            <input type="file" name="ec_qualificationImg[]" class="type-file-file" value="" data-state="" hidefocus="true" />
-                            <input type="text" name="textfile" class="type-file-text" style="width:150px;" value="" readonly />
-                        </div>
-                    </td>
+                    <td><input type="file" name="ec_qualificationImg[]"></td>
                     <td>
                         <input type="text" name="ec_expiredDateInput[]" value="" readonly size="20" class="text text-2 jdate narrow dateTime fl" id="expiredDateInput"> 
                         <div class="cart-checkbox fl" style=" margin-top:5px;">
-                            <input type="checkbox" class="ui-checkbox CheckBoxShop" onclick="get_shopTime_term(this)" name="ec_expiredDate_permanent[]" value="1" id="expiredDate_permanent">
+                            <input type="checkbox" class="ui-checkbox CheckBoxShop" onclick="get_expiredDate_permanent(this, '', 0)" name="ec_expiredDate_permanent[]" value="1" id="expiredDate_permanent">
                             <label for="expiredDate_permanent">{$lang.permanent}</label>
                         </div>
                         <input name="b_fid[]" type="hidden" value="">
@@ -230,18 +331,11 @@
                 {foreach from=$title.brandfile_list item=brandfile key=key}
                 <tr>
                     <td><input type="text" name="ec_qualificationNameInput[]" size="35" value="{$brandfile.qualificationNameInput}" class="text"></td>
-                    <td>
-                    <div class="type-file-box">
-                        <input type="button" name="button" class="type-file-button" id="button" value="" />
-                        <input type="file" name="ec_qualificationImg[]" class="type-file-file" value="{$brandfile.qualificationImg}" data-state="" hidefocus="true" />
-                        {if $brandfile.qualificationImg}<a href="{$brandfile.qualificationImg}" class="chakan" target="_blank">{$lang.view}</a>{/if}
-                        <input type="text" name="textfile" class="type-file-text" style="width:150px;" value="{$brandfile.qualificationImg}" readonly />
-                    </div>
-                    </td>
+                    <td><input type="file" name="ec_qualificationImg[]">{if $brandfile.qualificationImg}&nbsp;&nbsp;<a href="{$brandfile.qualificationImg}" target="_blank">{$lang.view}</a>{/if}</td>
                     <td>
                     	<input type="text" name="ec_expiredDateInput[]" value="{$brandfile.expiredDateInput}" readonly size="20" class="text text-2 jdate narrow dateTime fl" id="expiredDateInput_{$brandfile.b_fid}"> 
                         <div class="cart-checkbox fl" style=" margin-top:5px;">
-                            <input type="checkbox" class="ui-checkbox CheckBoxShop" onclick="get_shopTime_term(this)" name="ec_expiredDate_permanent[]" value="1" id="expiredDate_permanent_{$brandfile.b_fid}" {if $brandfile.expiredDate_permanent eq 1}checked{/if}>
+                            <input type="checkbox" class="ui-checkbox CheckBoxShop" onclick="get_expiredDate_permanent(this, '{$brandfile.expiredDateInput}', {$brandfile.b_fid})" name="ec_expiredDate_permanent[]" value="1" id="expiredDate_permanent_{$brandfile.b_fid}" {if $brandfile.expiredDate_permanent eq 1}checked{/if}>
                             <label for="expiredDate_permanent_{$brandfile.b_fid}">{$lang.permanent}</label>
                         </div>
                         <input name="b_fid[]" type="hidden" value="{$brandfile.b_fid}">
@@ -265,6 +359,7 @@
         </table>
     </div>
 </div>
+
 <div class="prompt">
 	<div class="yel-tip">
         {$lang.brand_zizhi_require}
@@ -272,56 +367,49 @@
 </div>
 {/if}
 <script type="text/javascript">
+
 $(function(){
-	//搜索中英文品牌keyup
-	$("*[ectype='bsKeyup']").keyup(function(){
-		var val = $(this).val(),
-			type = $(this).data('type');
-		
-		Ajax.call('merchants_steps.php', 'step=brandSearch_cn_en&value=' + val + '&type=' + type,function(res){
-			if(res.err_no){
-				if(res.type == 1){
-					$('#searchBrand_letter').show().html(res.content);
-				}else{
-					$('#searchBrand_name').show().html(res.content);
-				}
-			}else{
-				$("input[name='search_brandType']").val('');
-				$("input[name='brandId']").val('');
-			}
-			
-			$("input[name='btype']").val(res.type);
-		}, 'POST', 'JSON');	
-	});
-	
-	//点击空白处模糊搜索层隐藏
 	$(document).click(function(){
 		$('#searchBrand_name').hide();
 		$('#searchBrand_letter').hide();
 	});
-	
-	//中英文品牌模糊搜索层点击
-	$(document).on("click","li.brandId",function(ev){
-		var brand_id = $(this).attr('id');
-		var rev = $(this).attr('rev');
-		
-		Ajax.call('merchants_steps.php', 'step=brandSearch_info&brand_id=' + brand_id + '&brand_type=' + rev,function(res){
-			$('#searchBrandZhInput').val(res.brand_name);
-			$('#searchBrandEnInput').val(res.brand_letter);
-			$("input[name='brandId']").val(res.brand_id);
-			$("input[name='search_brandType']").val(res.brand_type);
-		}, 'POST', 'JSON');
-	});
-	
-	$('#brandFirstChar').keyup(function(){
-		if($(this).val().length > 1){
-			$(this).val($(this).val().substring(0,$(this).val().length-1));
-		}
-	});
 });
 
-//提交搜索品牌
+function clear_searchBrandInput(){
+	$('#searchBrandZhInput').val('');
+	$('#searchBrandEnInput').val('');
+}
+
+/**
+ * 搜索品牌中文名称
+ */
+function brandSearch(val, type){
+  Ajax.call('merchants_steps.php', 'step=brandSearch_cn_en&value=' + val + '&type=' + type, brandSearchResponse, 'POST', 'JSON');
+}
+
+/**
+ * 接收返回的信息
+ */
+function brandSearchResponse(res)
+{
+	if(res.err_no){
+		if(res.type == 1){
+			$('#searchBrand_letter').show();
+			$('#searchBrand_letter').html(res.content);
+		}else{
+			$('#searchBrand_name').show();
+			$('#searchBrand_name').html(res.content);
+		}
+	}else{
+		$("input[name='search_brandType']").val('');
+	    $("input[name='brandId']").val('');
+	}
+	
+	$("input[name='btype']").val(res.type);
+}
+
 function searchBrand_submit(){
+	
 	var searchBrandZhInput = $("input[name='searchBrandZhInput']").val();
 	var searchBrandEnInput = $("input[name='searchBrandEnInput']").val();
 
@@ -330,37 +418,72 @@ function searchBrand_submit(){
 	var brand_submit = 'submit';
 	
 	if(searchBrandZhInput != ''){
-		Ajax.call('merchants_steps.php', 'step=brandSearch_info&brand_id=' + brand_id + '&brand_type=' + rev + '&submit=' + brand_submit + '&searchBrandZhInput=' + searchBrandZhInput + '&searchBrandEnInput=' + searchBrandEnInput, function(res){
-			var str = "",
-				state = 0,
-				cBtn = true;
-				
-			if(res.err_no){
-				str = "您申请的品牌"+res.brand_name+"(" + res.brand_letter + ")已存在";
-				state = 1;
-				cBtn = false;
-			}else{
-				var zhInput = $("input[name='searchBrandZhInput']").val();
-				var enInput = $("input[name='searchBrandEnInput']").val();
-				
-				if(enInput != ''){
-					enInput = "(" + enInput + ")";
-				}
-				str = "您申请的品牌<em class='red'> "+ zhInput + enInput + "</em> 不存在，请点击“提交品牌资质”";
-			}
-			
-			pbDialog(str,"",state,'','',50,cBtn,function(){
-				$("form[name='stepForm']").submit();
-			},"提交品牌资质","重新搜索");
-			
-		}, 'POST', 'JSON');
+		Ajax.call('merchants_steps.php', 'step=brandSearch_info&brand_id=' + brand_id + '&brand_type=' + rev + '&submit=' + brand_submit + '&searchBrandZhInput=' + searchBrandZhInput + '&searchBrandEnInput=' + searchBrandEnInput, searchBrand_submitResponse, 'POST', 'JSON');
 	}else{
-		pbDialog(json_languages.brand_zh_null,"",0);
+		var add_cart_divId = 'flow_add_cart';
+		var content = '<div id="flow_add_cart">' + 
+						'<div class="tip-box icon-box">' +
+							'<span class="warn-icon m-icon"></span>' + 
+							'<div class="item-fore">' +
+								'<h3 class="rem ftx-04">'+json_languages.brand_zh_null+'</h3>' +
+							'</div>' +
+						'</div>' +
+					'</div>';
+		pb({
+			id:add_cart_divId,
+			title:json_languages.title,
+			width:455,
+			height:58,
+			content:content, 	//调取内容
+			drag:false,
+			foot:false
+		});
+		
+		$('#' + add_cart_divId + ' .item-fore').css({
+			'padding-top' : '12px'
+		});
+		
 		return false;
 	}
 }
 
-{if $brandView eq 'brandView'}
+/**
+ * 接收返回的信息
+ */
+function searchBrand_submitResponse(res)
+{
+	if(res.err_no){
+		$('#div_brandName').html(res.brand_name + "(" + res.brand_letter + ")");
+	}else{
+		var searchBrandZhInput = $("input[name='searchBrandZhInput']").val();
+		var searchBrandEnInput = $("input[name='searchBrandEnInput']").val();
+		
+		if(searchBrandEnInput != ''){
+			searchBrandEnInput = "(" + searchBrandEnInput + ")";
+		}
+		
+		$('#div_brandName').html(searchBrandZhInput + searchBrandEnInput);
+	}
+	
+	$('#div_brandNot').html(res.brand_not);
+	openDiv();
+}
+
+if(document.getElementById('brandFirstChar')){	
+	$(function(){
+		
+		if($('#brandFirstChar').val() != '' && $('#brandFirstChar').val().length > 1){
+			$("input[name='ec_brandFirstChar']").attr('readonly','readonly');
+		}
+		
+		$('#brandFirstChar').keyup(function(){
+			if($(this).val().length > 1){
+				$(this).val($(this).val().substring(0,$(this).val().length-1));
+			}
+		});
+	});
+}
+
 //日期选择
 var opts5 = {
 	'targetId':'ec_brandEndTime',
@@ -377,5 +500,4 @@ var opts5 = {
 }
 xvDate(opts5);
 xvDate(opts6);
-{/if}
 </script>

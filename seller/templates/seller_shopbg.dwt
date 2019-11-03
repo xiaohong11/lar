@@ -102,8 +102,9 @@
     </div>    
 </div>
 {include file ='library/seller_footer.lbi'}
-{insert_scripts files="../js/spectrum-master/spectrum.js"}
-<script type="text/javascript" src="../js/jquery.picTip.js"></script>
+{insert_scripts files="spectrum-master/spectrum.js"}
+<link rel="stylesheet" type="text/css" href="js/spectrum-master/spectrum.css">
+<script type="text/javascript" src="js/jquery.picTip.js"></script>
 <script type="text/javascript">
 //选色 start
 $(function(){

@@ -244,7 +244,7 @@
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="../js/jquery.picTip.js"></script>
+        <script type="text/javascript" src="js/jquery.picTip.js"></script>
         <script type="text/javascript" src="../js/plupload.full.min.js"></script>
         {include file ='library/seller_footer.lbi'}
         <script type="text/javascript">

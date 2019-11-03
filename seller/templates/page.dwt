@@ -1,3 +1,5 @@
+<!-- $Id: page.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+
 <!--{if $page_count gt 1}-->
 <div id="turn-page">
     <div class="pagination">
@@ -11,9 +13,9 @@
                 <li><a href="javascript:listTable.gotoPage({$page_count})"><span>{$page_count}</span></a></li>
             {/if}
             {/foreach}
-            <!-- <input type="text" name="" value="{$filter.page}" class="text text40" onblur="listTable.gotoPage($(this).val())"></a> -->
             <li{if $filter.page eq $filter.page_count} class="curr"{/if}>{literal}{if $filter.page neq $filter.page_count}<a href="javascript:listTable.gotoPageNext()">{/if}{/literal}<span class="next">1</span>{if $filter.page neq $filter.page_count}</a>{/if}</li>
             <!--<li>{literal}{if $filter.page neq $filter.page_count}<a href="javascript:listTable.gotoPageLast()" class="last">{/if}{/literal}<span>末页</span>{if $filter.page neq $filter.page_count}</a>{/if}</li>-->
+            
         </ul>
     </div>    
 </div>

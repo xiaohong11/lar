@@ -5,11 +5,20 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.11_system} - {$ur_here}</div>
+    	<div class="title">系统设置 - {$ur_here}</div>
         <div class="content">
-        	{include file ='library/shipping_menu_tab.lbi'}			
+        	<div class="tabs_info">
+            	<ul>
+                    <li {if $menu_select.current eq '03_shipping_list'}class="curr"{/if}><a href="shipping.php?act=list">配送方式</a></li>
+                    <li {if $menu_select.current eq '05_area_list'}class="curr"{/if}><a href="area_manage.php?act=list">地区列表</a></li>
+                    <li {if $menu_select.current eq '09_region_area_management'}class="curr"{/if}><a href="region_area.php?act=list">区域管理</a></li>
+                    <li {if $menu_select.current eq '09_warehouse_management'}class="curr"{/if}><a href="warehouse.php?act=list">仓库管理</a></li>
+					<li {if $menu_select.current eq 'warehouse_ship_list'}class="curr"{/if}><a href="warehouse.php?act=ship_list">仓库运费模板</a></li>
+                    <li {if $menu_select.current eq 'shipping_date_list'}class="curr"{/if}><a href="shipping.php?act=date_list">自提时间段</a></li>
+                </ul>
+            </div>		
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                 	<li>在新增一级地区点击管理进入下一级地区，可进行删除和编辑。</li>
                     <li>地区用于商城定位，请根据商城实际情况谨慎设置。</li>
@@ -23,12 +32,12 @@
                     	<a href="{$action_link.href}"><div class="fbutton"><div class="add_region" title="{$action_link.text}"><span>{if $action_link.type eq 1}<i class="icon icon-reply"></i>{else}<i class="icon icon-plus">{/if}</i>{$action_link.text}</span></div></div></a>
                         <a href="javascript:void(0);" class="restore_btn"><div class="fbutton"><div class="cog" title="恢复默认设置"><span><i class="icon icon-cog"></i>恢复默认设置</span></div></div></a>
                     </div>
-                    <div class="add_area fr">
-                        <form method="post" action="area_manage.php" name="theForm">
-                           <input type="hidden" name="region_type" value="{$region_type}" />
+                    <div class="fr">
+                         <form method="post" action="area_manage.php" name="theForm">
+                            <input type="hidden" name="region_type" value="{$region_type}" />
                            <input type="hidden" name="parent_id" value="{$parent_id}" />
-                           <input type="text" name="region_name" class="text" placeholder="请输入地区名称" autocomplete="off" />
-                           <a href="javascript:void(0);" onclick="return add_area();" class="btn btn30 red_btn">新增地区</a>
+                           <input type="text" name="region_name" class="text" style="margin-top:1px;" placeholder="请输入地区名称" autocomplete="off" />
+                           <a href="javascript:void(0);" onclick="return add_area();" class="btn btn30 red_btn"><i class="icon icon-plus"></i>新增地区</a>
                         </form>
                     </div>
                 </div>

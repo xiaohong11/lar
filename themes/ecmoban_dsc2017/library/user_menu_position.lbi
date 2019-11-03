@@ -112,7 +112,6 @@
         <div class="email_sub_btn">
             <input type="input" id="user_email" name="user_email" autocomplete="off" placeholder="{$lang.email_posi}">
             <a href="javascript:void(0);" onClick="add_email_list();" class="emp_btn">{$lang.email_list_ok}</a>
-            <a href="javascript:void(0);" onClick="cancel_email_list();" class="emp_btn emp_cancel_btn">{$lang.email_list_cancel}</a>
         </div>
     </div>
 </div>

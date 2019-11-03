@@ -108,5 +108,8 @@ $(function(){
 	
 	/* 检查出账单 */
   	outCheckBill();
+	
+	/* 检测配送地区缓存文件是否存在 */
+	sellerShippingArea();
 })
 </script>

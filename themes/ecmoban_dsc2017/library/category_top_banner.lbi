@@ -8,11 +8,9 @@
 		{/foreach}
 	</ul>
 </div>
-<div class="hd">
-    <ul>
-        {foreach from=$ad_child item=ad name=noad}
-        <li></li>
-        {/foreach}
-    </ul>
-</div>
+<ul class="hd">
+	{foreach from=$ad_child item=ad name=noad}
+	<li></li>
+	{/foreach}
+</ul>
 {/if}

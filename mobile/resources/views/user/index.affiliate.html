@@ -13,6 +13,35 @@
 		{if $share.on == 1}
 		{if $goodsid == 0}
 		{if $share.config.separate_by == 0}
+		<section class="affiliate-cont padding-all">
+		  <div class="b-color-f padding-all br-5">
+			   <h4 class="f-06 m-top04">推荐注册分成说明</h4>
+			   <ul class="m-top06">
+			   		<li>1、将上面二维码进行分享（微信好友、社群等）</li>
+			   		<li>2、访问者长按二维码识别访问本站</li>
+			   		<li>3、访问者在本站{$expire}{$expire_unit}注册，即认定该用户是您推荐的，您做为推荐者将获得奖励。</li>
+			   		<li>4、该用户今后在本站的一切消费，您均能获得一定比例的提成。目前实行的提成总额为订单金额的{$level_money_all}、积分的{$level_point_all}，分配给您、推荐您的人等，具体分配规则请参阅 我推荐的会员。</li>
+			   </ul>
+		   </div>
+		</section>
+		{else}
+		<section class="affiliate-cont padding-all">
+		  <div class="b-color-f padding-all br-5">
+			   <h4 class="f-06 m-top04">推荐订单分成说明</h4>
+			   <ul class="m-top06">
+			   		<li>1、将上面二维码进行分享（微信好友、社群等）</li>
+			   		<li>2、访问者长按二维码识别访问本站</li>
+			   		<li>3、访问者在本站浏览商品，并购买下单后，即认定该订单是您推荐的，您做为推荐者将获得奖励。您将获得该订单金额的 {$level_money_all} 、积分的{$level_point_all}的奖励，具体您可以通过分成明细来查看您的介绍、分成情况。</li>
+			   </ul>
+		   </div>
+		</section>
+		{/if}
+		{/if}
+		{/if}
+
+		{if $share.on == 1}
+		{if $goodsid == 0}
+		{if $share.config.separate_by == 0}
 		<!-- 下线人数、分成 -->
 		<section class="affiliate-cont padding-all">
 		  <div class="b-color-f padding-all br-5">
@@ -38,45 +67,43 @@
 		<!-- 下线人数、分成 -->
 		{/if}
 		<!-- 我的推荐清单 -->
-        <section class="affiliate-cont padding-all affiliate-ajax">
-        <script id="j-product" type="text/html">
-            <%if totalPage > 0%>
-                <div class="b-color-f padding-all br-5">
-                    <h4 class="f-06 m-top04 text-c">分成明细</h4>
-                    <div class="">
-                        <%if logdb != ''%>
-                        <%each logdb as val%>
-                        <table class="rule-table-box ">
-                            <tr class="share-top">
-                                <th colspan="4">{$lang.order_number}：<%val.order_sn%></th>
-                            </tr>
-                            <tr class="rule-title">
-                                <td>{$lang.affiliate_money}</td>
-                                <td>{$lang.affiliate_point}</td>
-                                <td>{$lang.affiliate_mode}</td>
-                                <td>{$lang.affiliate_status}</td>
-                            </tr>
-                            <tr>
-                                <td><%#val.money%></td>
-                                <td><%val.point%></td>
-                                <td><%if val.affiliate_type == 0%>推荐注册分成<%else%>订单分成<%/if%></td>
-                                <td><%if val.is_separate == 1%>已分成<%else%>等待处理<%/if%></td>
-                            </tr>
-                        </table>
-                        <%/each%>
-                        <%else%>
-                        <div class="no-div-message">
-                            <i class="iconfont icon-biaoqingleiben"></i>
-                            <p>亲，此处没有内容～！</p>
-                        </div>
-                        <%/if%>
-                    </div>
-                </div>
-            <%/if%>
-        </script>
-        </section>
-        {/if}
-        {/if}
+		<section class="affiliate-cont padding-all">
+		<div class="b-color-f padding-all br-5">
+			<h4 class="f-06 m-top04 text-c">分成明细</h4>
+			<div class="affiliate-ajax">
+			<script id="j-product" type="text/html">
+				<%if totalPage > 0%>
+					<%each logdb as val%>
+						<table class="rule-table-box ">
+							<tr class="share-top">
+								<th colspan="4">{$lang.order_number}：<%val.order_sn%></th>
+							</tr>
+							<tr class="rule-title">
+								<td>{$lang.affiliate_money}</td>
+								<td>{$lang.affiliate_point}</td>
+								<td>{$lang.affiliate_mode}</td>
+								<td>{$lang.affiliate_status}</td>
+							</tr>
+							<tr>
+								<td><%#val.money%></td>
+								<td><%val.point%></td>
+								<td><%if val.separate_type == 1 || val.separate_type == 0%>推荐注册分成<%else%>订单分成<%/if%></td>
+								<td><%if val.is_separate == 1%>已分成<%else%>等待处理<%/if%></td>
+							</tr>
+						</table>
+					<%/each%>
+				<%else%>
+					<div class="no-div-message">
+                    <i class="iconfont icon-biaoqingleiben"></i>
+                    <p>亲，此处没有内容～！</p>
+                	</div>
+				<%/if%>
+			</script>
+			</div>
+		</div>
+		</section>
+		{/if}
+		{/if}
 	</div>
 </div>
 

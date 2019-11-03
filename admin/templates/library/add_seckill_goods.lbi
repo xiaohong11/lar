@@ -21,20 +21,9 @@
                     </div>
                 </div>
             </div>
-            <div class="select_box mr10">
-                <div class="categorySelect fl">
-                    <div class="selection">
-                        <input type="text" name="brand_name" id="brand_name" class="text w120 mr0 valid" value="{$lang.select_barnd}" autocomplete="off" readonly data-filter="brand_name" />
-                        <input type="hidden" name="brand_id" id="brand_id" value="{$brand_id|default:0}" data-filter="brand_id" />
-                    </div>
-                    <div class="brand-select-container" style="display:none;">
-                        {include file="library/filter_brand.lbi"}
-                    </div>
-                </div>  
-            </div>
 
             <div class="search_con mr10"><input width="20" name="keyword_brand" type="text" id="keyword_brand" class="text text_6 mr0"></div>
-            <a href="javascript:void(0);" class="sc-btn fl" ectype="changedgoods">{$lang.button_submit_alt}</a>
+            <a href="javascript:void(0);" class="sc-btn fl" ectype="changedgoods">确定</a>
             <div class="checkobx-item">
                 <input type="checkbox" name="is_selected" id="is_selected" class="ui-checkbox" onclick="checkd_selected(this)"/>
                 <label class="ui-label" for="is_selected">已选择商品</label>
@@ -51,7 +40,7 @@
                         <div class="choose"><a href="javascript:void(0);" class="on" onclick="selected_goods(this,'{$goods.goods_id}')"><i class="iconfont icon-gou"></i>已选择</a></div>
                     </li>
                     {foreachelse}
-                    <li class="notic">{$lang.please_search_goods}</li>
+                    <li class="notic">请先搜索商品</li>
                     {/foreach}
                 </ul>
             </div>
@@ -59,8 +48,7 @@
     </div>
     <input type="hidden" name="goods_ids" value="{$arr.goods_ids}"/>
 </div>
-<script type="text/javascript" src="js/dsc_admin2.0.js"></script>
-<script type="text/javascript">
+<script language="JavaScript">
     ajaxchangedgoods(1);
     function checkd_selected(obj){
 		var obj = $(obj);
@@ -77,7 +65,7 @@
 			}
             type = 0;
         }else{
-            $(".icon-gou,.icon-dsc-plus").parents('li').show();
+            $(".icon-gou,.icon-plus").parents('li').show();
 			$("*[ectype='goods_list']").perfectScrollbar();
         }
         ajaxchangedgoods(type);
@@ -85,14 +73,13 @@
     
     function ajaxchangedgoods(type){
         var cat_id = $("input[name='cat_id']").val();
-		var brand_id = $("input[name='brand_id']").val();
         var keyword = $("input[name='keyword_brand']").val();
         var goods_ids = $("input[name='goods_ids']").val();
 		
 		$("[ectype='goods_list']").html("<i class='icon-spin'><img src='images/visual/load.gif' width='30' height='30'></i>");
 		
 		function ajax(){
-			Ajax.call('seckill.php?is_ajax=1&act=changedgoods', "cat_id="+cat_id+"&keyword="+keyword+"&goods_ids="+goods_ids+"&type="+type + "&resetRrl=1"+"&brand_id="+brand_id, function(data){
+			Ajax.call('seckill.php?is_ajax=1&act=changedgoods', "cat_id="+cat_id+"&keyword="+keyword+"&goods_ids="+goods_ids+"&type="+type + "&resetRrl=1", function(data){
 				$("[ectype='goods_list']").html(data.content);
 				
 				$("*[ectype='goods_list']").perfectScrollbar("destroy");
@@ -111,7 +98,7 @@
 	   
 		if(obj.hasClass("on")){
 			obj.removeClass("on");
-			obj.html('<i class="iconfont icon-dsc-plus"></i>选择');
+			obj.html('<i class="iconfont icon-plus"></i>选择');
 			arr = goods_ids.split(',');
 			for(var i =0;i<arr.length;i++){
 				if(arr[i] == goods_id){

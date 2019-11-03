@@ -35,7 +35,7 @@
                             </div>
                             <div class="step_value fl mb0">
                                 <div class="selection">
-                                    <input type="text" name="brand_name" id="brand_name" class="text w140 valid" data-filter="brand_name" ectype="require" autocomplete="off" value="{if $brand_name}{$brand_name}{else}{$lang.please_select}{/if}" readonly />
+                                    <input type="text" name="brand_name" id="brand_name" class="text w140 valid" data-filter="brand_name" ectype="require" autocomplete="off" value="{if $brand_name}{$brand_name}{else}请选择{/if}" readonly />
                                     <input type="hidden" name="brand_id" id="brand_id" value="{$goods.brand_id}" data-filter="brand_id" />
                                     <div class="form_prompt"></div>
                                 </div>    

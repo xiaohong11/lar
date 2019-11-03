@@ -49,7 +49,7 @@
                     <div class="goods-msg">
                     	<div class="p-name">
                         	<em class="s-ico">{$lang.largess}</em>
-                            <a href="{$goods.url}" target="_blank" title="{$goods.goods_name|escape:html}">{$goods.goods_name}</a>
+                            <a href="{$goods.url}" target="_blank">{$goods.goods_name}</a>
                         </div>
                     </div>
                     <div class="p-stock">
@@ -67,7 +67,8 @@
                     <div class="p-img"><a href="{$goods.url}" target="_blank"><img src="{$goods.goods_thumb}" width="80" height="80"></a></div>
                     <div class="goods-msg">
                     	<div class="p-name">
-                            <a href="{$goods.url}" target="_blank" title="{$goods.goods_name|escape:html}">{$goods.goods_name}</a>
+                        	<em class="s-ico">{$lang.largess}</em>
+                            <a href="{$goods.url}" target="_blank">{$goods.goods_name}</a>
                         </div>
                     </div>
                     <div class="p-stock">
@@ -86,7 +87,8 @@
                     <div class="p-img"><a href="{$goods.url}" target="_blank"><img src="{$goods.goods_thumb}" width="80" height="80"></a></div>
                     <div class="goods-msg">
                     	<div class="p-name">
-                            <a href="{$goods.url}" target="_blank" title="{$goods.goods_name|escape:html}">{$goods.goods_name}</a>
+                        	<em class="s-ico">{$lang.largess}</em>
+                            <a href="{$goods.url}" target="_blank">{$goods.goods_name}</a>
                         </div>
                     </div>
                     <div class="p-stock">

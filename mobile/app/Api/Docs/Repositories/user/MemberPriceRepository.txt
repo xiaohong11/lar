@@ -1,5 +1,0 @@
-getMemberPriceByUid($rank, $goods_id)
-
-$rank = 用户等级
-
-根据用户等级获取会员价格

@@ -103,7 +103,7 @@
     </div>
 </div>
 {include file ='library/seller_footer.lbi'}
-<script type="text/javascript" src="../js/jquery.picTip.js"></script>
+<script type="text/javascript" src="js/jquery.picTip.js"></script>
 <script type="text/javascript" language="JavaScript">
 <!--
   listTable.recordCount = {$record_count};

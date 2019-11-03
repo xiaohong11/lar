@@ -4,15 +4,15 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$lang.promotion} - {$ur_here}</div>
+    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>促销 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content.time_info.0}</li>
-					<li>{$lang.operation_prompt_content.time_info.1}</li>
-					<li>{$lang.operation_prompt_content.time_info.2}</li>
-                    <li>{$lang.operation_prompt_content_common}</li>
+                	<li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
+                    <li>第一次新增秒杀时间段可对开始时间进行修改，以后默认为上一时段结束时间的后一秒。</li>
+					<li>秒杀时段名称将会显示在秒杀列表页的时间段内。</li>
+					<li>编辑秒杀结束时段时不会影响到下一秒杀时段开始时间，结束时间不得小于当前时段开始时间&不得大于下一时段结束时间。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -53,6 +53,7 @@
                                         <div class="label">&nbsp;</div>
                                         <div class="label_value info_btn">
 											<input type="submit" value="{$lang.button_submit}" class="button" id="submitBtn" />
+											<!--<input type="reset" value="{$lang.button_reset}" class="button button_reset" />-->
 											<input type="hidden" name="act" value="{$form_act}" />
 											<input type="hidden" name="tb_id" value="{$tb.id}" />
                                         </div>
@@ -65,108 +66,108 @@
             </div>
 		</div>
 	</div>
-	{include file ='library/pagefooter.lbi'}
-    {literal}	
-    <script type="text/javascript">
-        $(function(){
-            //表单验证
-            $("#submitBtn").click(function(){
-                if($("#myForm").valid()){
-                    $("#myForm").submit();
-                }
-            });
-        
-            $('#myForm').validate({
-                errorPlacement:function(error, element){
-                    var error_div = element.parents('div.label_value').find('div.form_prompt');
-                    element.parents('div.label_value').find(".notic").hide();
-                    error_div.append(error);
-                },
-                rules:{
-                    title :{
-                        required : true
-                    },
-                    begin_hour:{
-                        required : true,
-                        digits :true,
-                        min : 0,
-                        max : 23
-                    },
-                    begin_minute:{
-                        required : true,
-                        digits :true,
-                        min : 0,
-                        max : 59
-                    },
-                    begin_second:{
-                        required : true,
-                        digits :true,
-                        min : 0,
-                        max : 59
-                    },
-                    end_hour:{
-                        required : true,
-                        digits :true,
-                        min : 0,
-                        max : 23
-                    },
-                    end_minute:{
-                        required : true,
-                        digits :true,
-                        min : 0,
-                        max : 59
-                    },
-                    end_second:{
-                        required : true,
-                        digits :true,
-                        min : 0,
-                        max : 59
-                    }
-                },
-                messages:{
-                    title:{
-                         required : '<i class="icon icon-exclamation-sign"></i>'+time_title_not_null
-                    },
-                    begin_hour:{
-                        required : '<i class="icon icon-exclamation-sign"></i>'+begin_hour_required,
-                        digits :  '<i class="icon icon-exclamation-sign"></i>'+digits_prompt,
-                        min : '<i class="icon icon-exclamation-sign"></i>'+is_min_0,
-                        max : '<i class="icon icon-exclamation-sign"></i>'+is_max_23
-                    },
-                    begin_minute:{
-                        required : '<i class="icon icon-exclamation-sign"></i>'+begin_minute_required,
-                        digits :  '<i class="icon icon-exclamation-sign"></i>'+digits_prompt,
-                        min : '<i class="icon icon-exclamation-sign"></i>'+is_min_0,
-                        max : '<i class="icon icon-exclamation-sign"></i>'+is_max_59
-                    },
-                    begin_second:{
-                        required : '<i class="icon icon-exclamation-sign"></i>'+begin_second_required,
-                        digits :  '<i class="icon icon-exclamation-sign"></i>'+digits_prompt,
-                        min : '<i class="icon icon-exclamation-sign"></i>'+is_min_0,
-                        max : '<i class="icon icon-exclamation-sign"></i>'+is_max_59
-                    },
-                    end_hour:{
-                        required : '<i class="icon icon-exclamation-sign"></i>'+end_hour_required,
-                        digits :  '<i class="icon icon-exclamation-sign"></i>'+digits_prompt,
-                        min : '<i class="icon icon-exclamation-sign"></i>'+is_min_0,
-                        max : '<i class="icon icon-exclamation-sign"></i>'+is_max_23
-                    },
-                    end_minute:{
-                        required : '<i class="icon icon-exclamation-sign"></i>'+end_minute_required,
-                        digits :  '<i class="icon icon-exclamation-sign"></i>'+digits_prompt,
-                        min : '<i class="icon icon-exclamation-sign"></i>'+is_min_0,
-                        max : '<i class="icon icon-exclamation-sign"></i>'+is_max_59
-                    },
-                    end_second:{
-                        required : '<i class="icon icon-exclamation-sign"></i>'+end_second_required,
-                        digits :  '<i class="icon icon-exclamation-sign"></i>'+digits_prompt,
-                        min : '<i class="icon icon-exclamation-sign"></i>'+is_min_0,
-                        max : '<i class="icon icon-exclamation-sign"></i>'+is_max_59
-                    }
-                }			
-            });
-        });
-    </script>
-    {/literal}	
+ {include file ='library/pagefooter.lbi'}
+{literal}	
+<script type="text/javascript">
+	$(function(){
+		//表单验证
+		$("#submitBtn").click(function(){
+			if($("#myForm").valid()){
+				$("#myForm").submit();
+			}
+		});
+	
+		$('#myForm').validate({
+			errorPlacement:function(error, element){
+				var error_div = element.parents('div.label_value').find('div.form_prompt');
+				element.parents('div.label_value').find(".notic").hide();
+				error_div.append(error);
+			},
+			rules:{
+				title :{
+					required : true
+				},
+				begin_hour:{
+					required : true,
+					digits :true,
+					min : 0,
+					max : 23
+				},
+				begin_minute:{
+					required : true,
+					digits :true,
+					min : 0,
+					max : 59
+				},
+				begin_second:{
+					required : true,
+					digits :true,
+					min : 0,
+					max : 59
+				},
+				end_hour:{
+					required : true,
+					digits :true,
+					min : 0,
+					max : 23
+				},
+				end_minute:{
+					required : true,
+					digits :true,
+					min : 0,
+					max : 59
+				},
+				end_second:{
+					required : true,
+					digits :true,
+					min : 0,
+					max : 59
+				}
+			},
+			messages:{
+				title:{
+					 required : '<i class="icon icon-exclamation-sign"></i>时段名称不能为空'
+				},
+				begin_hour:{
+					required : '<i class="icon icon-exclamation-sign"></i>每日开始时间（时）不能为空',
+					digits :  '<i class="icon icon-exclamation-sign"></i>必须为数字',
+					min : '<i class="icon icon-exclamation-sign"></i>不能小于0',
+					max : '<i class="icon icon-exclamation-sign"></i>不能大于23'
+				},
+				begin_minute:{
+					required : '<i class="icon icon-exclamation-sign"></i>每日开始时间（分）不能为空',
+					digits :  '<i class="icon icon-exclamation-sign"></i>必须为数字',
+					min : '<i class="icon icon-exclamation-sign"></i>不能小于0',
+					max : '<i class="icon icon-exclamation-sign"></i>不能大于59'
+				},
+				begin_second:{
+					required : '<i class="icon icon-exclamation-sign"></i>每日开始时间（秒）不能为空',
+					digits :  '<i class="icon icon-exclamation-sign"></i>必须为数字',
+					min : '<i class="icon icon-exclamation-sign"></i>不能小于0',
+					max : '<i class="icon icon-exclamation-sign"></i>不能大于59'
+				},
+				end_hour:{
+					required : '<i class="icon icon-exclamation-sign"></i>每日结束时间（时）不能为空',
+					digits :  '<i class="icon icon-exclamation-sign"></i>必须为数字',
+					min : '<i class="icon icon-exclamation-sign"></i>不能小于0',
+					max : '<i class="icon icon-exclamation-sign"></i>不能大于23'
+				},
+				end_minute:{
+					required : '<i class="icon icon-exclamation-sign"></i>每日结束时间（分）不能为空',
+					digits :  '<i class="icon icon-exclamation-sign"></i>必须为数字',
+					min : '<i class="icon icon-exclamation-sign"></i>不能小于0',
+					max : '<i class="icon icon-exclamation-sign"></i>不能大于59'
+				},
+				end_second:{
+					required : '<i class="icon icon-exclamation-sign"></i>每日结束时间（秒）不能为空',
+					digits :  '<i class="icon icon-exclamation-sign"></i>必须为数字',
+					min : '<i class="icon icon-exclamation-sign"></i>不能小于0',
+					max : '<i class="icon icon-exclamation-sign"></i>不能大于59'
+				}
+			}			
+		});
+	});
+</script>
+{/literal}	
 </body>
 </html>

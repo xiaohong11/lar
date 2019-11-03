@@ -3,7 +3,7 @@
 /**
  * ECSHOP 时间JS语言文件
  * ============================================================================
- * * 版权所有 2005-2017 上海商创网络科技有限公司，并保留所有权利。
+ * * 版权所有 2005-2016 上海商创网络科技有限公司，并保留所有权利。
  * 网站地址: http://www.ecmoban.com；
  * ----------------------------------------------------------------------------
  * 这不是一个自由软件！您只能在不用于商业目的的前提下对程序代码进行修改和
@@ -29,7 +29,7 @@ $_LANG['hour_two'] = '时';
 $_LANG['minutes'] = '分';
 $_LANG['seconds'] = '秒';
 $_LANG['Pre_sale_rules'] = "预售规则";
-$_LANG['presell_desc'] = '<li><b>1.</b>定金下单后，请尽快付款，超时将管理员会根据情况关闭订单。</li>
+$_LANG['presell_desc'] = '<li><b>1.</b>定金下单后，请在30分钟内付款，超时将自动关闭订单。用户可选择先付定金或一次性支付全款；</li>
                                                     <li><b>2.</b>定金付款后，若非';
 $_LANG['presell_desc_one'] = '或商家责任（根据《售后政策》和客服判断为准），定金恕不退还；</li>
                                                     <li><b>3.</b>预售结束时，由系统自动更新确认尾款价格，无论下单顺序先后均可享受相同的预售价格；</li>
@@ -40,11 +40,8 @@ $_LANG['presell_desc_two'] = '“我的订单”内付尾款；</li>
                                                     <li><b>7.</b>发货时间请以预售商品详情页中的“发货时间”描述为准；</li>';
 $_LANG['Advance_sale_price'] = "预 售 价";
 $_LANG['Deposit'] = "定　　金";
-$_LANG['Deposit_new'] = "定 金";
 $_LANG['Retainage'] = "尾　　款";
-$_LANG['Retainage_new'] = "尾 款";
 $_LANG['Distribution'] = "配　　送";
-$_LANG['Distribution_new'] = "配送";
 $_LANG['Service'] = "服　　务";
 $_LANG['you'] = "由";
 $_LANG['After_sale_service'] = '发货并提供售后服务。';
@@ -92,12 +89,9 @@ $_LANG['Already_buy'] = '已购买';
 /*haojialeju*/
 
 
-$_LANG['js_languages']['shiping_prompt'] = "暂不支持配送";
+$_LANG['js_languages']['shiping_prompt'] = "该地区暂不支持配送";
 $_LANG['js_languages']['Have_goods'] = "有货"; 
 $_LANG['js_languages']['No_goods'] = "无货";
 $_LANG['js_languages']['Deliver_back_order'] = "下单后立即发货";
 $_LANG['js_languages']['Time_delivery'] = " 时发货";
 $_LANG['js_languages']['goods_over'] = "此商品暂时售完";
-$_LANG['is_shipping_area'] = "[ 暂不支持配送 ]";
-
-$_LANG['buy_error'] = "很抱歉，您预售的商品暂时缺货，请及时联系客服！";

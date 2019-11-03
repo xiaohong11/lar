@@ -109,7 +109,7 @@
                     		<iframe src="templates/editor/editor.html?id=content" frameborder="0" scrolling="no" width="693" height="320"></iframe>
                         </dd>
                     </dl>
-                    <!--{if $act eq 'update'}
+                    {if $act eq 'update'}
                     <dl>
                     	<dt>{$lang.img_list}:</dt>
                         <dd>
@@ -145,7 +145,7 @@
                             </table>
                         </dd>
                     </dl>
-                    {/if}-->
+                    {/if}
                     <dl class="button_info">
                     	<dt>&nbsp;</dt>
                         <dd>

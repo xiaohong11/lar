@@ -5,14 +5,14 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="{$action_link2.href}" class="s-back">{$lang.back}</a>{$lang.seller} - {$ur_here}</div>
+    	<div class="title"><a href="{$action_link2.href}" class="s-back">{$lang.back}</a>商家 - {$ur_here}</div>
         <div class="content">
         	{include file="library/commission_tab.lbi"}
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.list.0}</li>
-                    <li>{$lang.operation_prompt_content.list.1}</li>
+                	<li>佣金比例列表信息管理。</li>
+                    <li>可自定义添加合适的佣金比例。</li>
                </ul>
             </div>
             <div class="flexilist">
@@ -45,7 +45,7 @@
                                     <td class="handle">
                                         <div class="tDiv a2">
                                             <a href="merchants_percent.php?act=edit&id={$percent.percent_id}" title="{$lang.edit}" class="btn_edit"><i class="icon icon-edit"></i>{$lang.edit}</a>
-                                            <a href="javascript:;" onclick="listTable.remove({$percent.percent_id}, '{$lang.drop_confirm}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                            <a href="javascript:;" onclick="listTable.remove({$percent.percent_id}, '{$lang.drop_confirm}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>
                                         </div>
                                     </td>
 								</tr>
@@ -70,20 +70,7 @@
             </div>
         </div>
     </div>
-    <input name="bill_seller" type="hidden" value="{$user_id|default:0}" />
- 	{include file ='library/pagefooter.lbi'}
+ {include file ='library/pagefooter.lbi'}
 </body>
 </html>
-<script type="text/javascript">
-//检查结算账单
-checkBill();
-
-//分页传值
-listTable.recordCount = {$record_count|default:0};
-listTable.pageCount = {$page_count|default:1};
-
-{foreach from=$filter item=item key=key}
-listTable.filter.{$key} = '{$item}';
-{/foreach}
-</script>
 {/if}

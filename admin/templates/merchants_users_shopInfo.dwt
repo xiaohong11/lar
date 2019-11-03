@@ -4,14 +4,14 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$lang.19_merchants_store} - {$lang.02_merchants_users_list}</div>
+    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>店铺 - {$lang.02_merchants_users_list}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content_common}</li>
-                    <li>{$lang.operation_prompt_content.info.0}</li>
-                    <li>{$lang.operation_prompt_content.info.1}</li>
+                	<li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
+                    <li>请先选择商城已注册会员进行添加店铺操作。</li>
+                    <li>请根据提示信息准确无误填写店铺信息。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -59,7 +59,7 @@
 									{elseif $title.steps_style eq 2}
 										{include file="merchants_steps_cateType.dwt"}
 									{elseif $title.steps_style eq 3 && $title.fields_titles neq '$lang.search_wap_brand'}
-										<div id="brandList">{include file="merchants_steps_brankType.dwt"}</div>
+										{include file="merchants_steps_brankType.dwt"} 
 									{elseif $title.steps_style eq 4}
 										{include file="merchants_steps_shopInfo.dwt"}
 									{/if}
@@ -117,16 +117,16 @@
 									</div>
 									
 									<div class="item">
-										<div class="label">{$lang.is_close_store}：</div>
+										<div class="label">暂时关闭店铺：</div>
 										<div class="value">
                                         	<div class="checkbox_items">
-                                            	<div class="checkbox_item">
-                                                    <input name="shop_close" type="radio" value="0" class="ui-radio" id="shop_close_yes" {if $merchants.shop_close eq 0}checked="checked"{/if}/>
-                                                    <label for="shop_close_yes" class="ui-radio-label">{$lang.close}</label>
+                                                <div class="checkbox_item">
+                                                    <input name="shop_close" type="radio" value="1" class="ui-radio" id="shop_close_no"  {if $status eq 1}checked="checked"{/if} />
+                                                    <label for="shop_close_no" class="ui-radio-label">{$lang.no}</label>
                                                 </div>
                                                 <div class="checkbox_item">
-                                                    <input name="shop_close" type="radio" value="1" class="ui-radio" id="shop_close_no"  {if $merchants.shop_close eq 1}checked="checked"{/if} />
-                                                    <label for="shop_close_no" class="ui-radio-label">{$lang.open}</label>
+                                                    <input name="shop_close" type="radio" value="0" class="ui-radio" id="shop_close_yes" {if $status eq 0}checked="checked"{/if}/>
+                                                    <label for="shop_close_yes" class="ui-radio-label">{$lang.yes}</label>
                                                 </div>
                                             </div>
 										</div>
@@ -195,11 +195,11 @@
 												{/if}
 											 {else}
                                              	<div class="checkbox_item">
-                                                    <input type="radio" name="merchants_audit" value="0" id="merchants_audit_0" class="ui-radio"  checked="checked" onclick="get_merchants_audit(this.value)" />
+                                                    <input type="radio" name="merchants_audit" value="0" id="merchants_audit_0" class="ui-radio" onclick="get_merchants_audit(this.value)" />
                                                     <label for="merchants_audit_0" class="ui-radio-label">{$lang.not_audited}</label>
                                                 </div>
                                                 <div class="checkbox_item">
-                                                    <input type="radio" name="merchants_audit" value="1" id="merchants_audit_1" class="ui-radio" onclick="get_merchants_audit(this.value)" />
+                                                    <input type="radio" name="merchants_audit" value="1" id="merchants_audit_1" class="ui-radio" checked="checked" onclick="get_merchants_audit(this.value)" />
                                                     <label for="merchants_audit_1" class="ui-radio-label">{$lang.yes_through}</label>
                                                 </div>
                                                 <div class="checkbox_item">
@@ -213,7 +213,7 @@
 									
 									<div class="item" {if $merchants.merchants_audit neq 1}style="display:none" {/if} id="grade_id">
 										<div class="clearfix mb10">
-                                            <div class="label">{$lang.store_grade}：</div>
+                                            <div class="label">店铺等级：</div>
                                             <div class="value">
                                                 <div id="grade_id" class="imitate_select select_w320">
                                                     <div class="cite">{$lang.select_please}</div>
@@ -227,7 +227,7 @@
                                             </div>
                                         </div>
                                         <div class="clearfix mb5">
-                                            <div class="label">{$lang.grade_life}：</div>
+                                            <div class="label">等级年限：</div>
                                             <div class="value">
                                                 <input name="year_num" class="text w120" type="text" value="{$grade.year_num|default:1}"/>
                                             </div>
@@ -253,8 +253,6 @@
                                         <input type="submit" value="{$lang.button_submit}" class="button" id="submitBtn" />
                                         <input type="reset" value="{$lang.button_reset}" class="button button_reset" />
                                         <input type="hidden" name="act" value="{$form_action}" />
-                                        <input type="hidden" name="copy_action" value="{$copy_action}" />
-                                        
                                         {if $user_id > 0}
                                         <input type="hidden" name="user_id" value="{$user_id}" id="user_id" /> 
                                         {/if}
@@ -276,7 +274,13 @@
     </div>
  	{include file ='library/pagefooter.lbi'}
     <script type="text/javascript" src="js/region.js"></script>
+    
+	<script type="text/javascript" src="js/jquery.purebox.js"></script>
 	<script type="text/javascript">
+		if($('.ui-dropdown input').val() == $('ul[ectype=region] li').data('index')){
+			
+		}
+	
 		$(function(){
 			//点击查看图片
 			$('.nyroModal').nyroModal();
@@ -293,11 +297,7 @@
 					var error_div = element.parents('div.nt_value').find('div.form_prompt');
 					element.parents('div.nt_value').find(".notic").hide();
 					error_div.append(error);
-                                        var error_div = element.parents('div.label_value').find('div.form_prompt');
-					element.parents('div.label_value').find(".notic").hide();
-					error_div.append(error);
 				},
-                                ignore:"",
 				rules:{
 					user_name :{
 						required : true
@@ -307,23 +307,17 @@
 					},
 					ec_hopeLoginName:{
 						required : true
-					},
-					ec_shoprz_type:{
-						min:1
 					}
 				},
 				messages:{
 					user_name:{
-						 required : '<i class="icon icon-exclamation-sign"></i>'+error_expect_user_name
+						 required : '<i class="icon icon-exclamation-sign"></i>请选择会员'
 					},
 					ec_rz_shopName:{
-						required : '<i class="icon icon-exclamation-sign"></i>'+error_expect_shop_name
+						required : '<i class="icon icon-exclamation-sign"></i>请填写期望店铺名称'
 					},
 					ec_hopeLoginName:{
-						required : '<i class="icon icon-exclamation-sign"></i>'+error_expect_shop_login
-					},
-				    ec_shoprz_type:{
-						min : '<i class="icon icon-exclamation-sign"></i>'+error_expect_shop_cate
+						required : '<i class="icon icon-exclamation-sign"></i>请填写期望店铺登陆用户名'
 					}
 				}			
 			});
@@ -356,16 +350,12 @@
 					id:"addBrand_dialog",
 					title:title,
 					content:result.content,
-					ok_title:"{$lang.button_submit_alt}",
-					cl_title:"{$lang.cancel}",
+					ok_title:"确定",
+					cl_title:"取消",
 					width:1200,
 					drag:false,
 					onOk:function(){
-                        if(addBrand()== false){
-                            return false;
-                        }else{
-                            return true;
-                        };
+						addBrand();
 					}
 				});
 			}
@@ -377,12 +367,11 @@
 			filter.ct_id  = ct_id;
 			filter.user_id  = '{$user_id}';
 			
-			if (confirm(confirm_delect_brand_qua)){
+			if (confirm('确实删除这条品牌资质信息吗')){
 				Ajax.call('merchants_users_list.php?is_ajax=1&act=deleteBrand', filter, responseDeleteBrand, 'GET', 'JSON');
 			}
 		}
 		function responseDeleteBrand(result){
-            console.log(result);
 			if(result.error == 0){
 				document.getElementById('brandList').innerHTML = result.content;
 			}
@@ -392,21 +381,22 @@
 			var ec_bank_name_letter = $("#ec_bank_name_letter").val();
 			var ec_brandName=$("#ec_brandName").val();
 			var ec_brandFirstChar=$("#ec_brandFirstChar").val();
-			var ec_brandLogo =$("#ec_brandLogo_text").val();
-            var fald = true;
-			
+			var ec_brandLogo =$("#ec_brandLogo").val();
+			if(ec_brandLogo.length >0){
+					type=ec_brandLogo.match(/^(.*)(\.)(.{1,8})$/)[3];
+					type=type.toUpperCase();
+					if(type!="JPEG"   &&   type!="PNG"   &&   type!="JPG"   &&   type!="GIF"){
+						alert("上传图片类型错误"); 
+						return false;
+					}
+				}
 			if(ec_brandName.length == 0){
-				alert(error_brand_china_name);
-                fald = false;
-			/*}else if(ec_bank_name_letter.length == 0){
-				alert(error_brand_english_name);*/
+				alert("品牌中文名称不能为空");
+			}else if(ec_bank_name_letter.length == 0){
+				alert("品牌英文名称不能为空");
 			}else if(ec_brandFirstChar.length == 0){
-				alert(error_brand_letter);
-                fald = false;
-			}else if(ec_brandLogo.length == 0){
-                alert(error_file_img_type); 
-                fald = false;
-            }else{
+				alert("品牌首字母不能为空");
+			}else{
 				var actionUrl = "merchants_users_list.php?is_ajax=1&act=addImg&user_id={$user_id}";  
 				$("#addBatchImg_from").ajaxSubmit({
 					type: "POST",
@@ -417,14 +407,12 @@
 						if (data.error == "1") {
 						  alert(data.massege);
 						} else if (data.error == "2") {
-						   $("*[ectype='barend_content']").html(data.content);
+						   $("#brandList").html(data.content);
 						}
-                        fald = true;
 					},
 					async: true  
 				});
 			}
-            return fald;
 		}
 		
 		function addBrandTable(obj)
@@ -441,7 +429,7 @@
 				num++;
 				$('#numAdd').val(num);
 			}else{
-				alert('{$lang.batch_add}' + add_num +'{$lang.ci}');
+				alert('批量添加' + add_num +'次');
 			}
 			
 			for(i=0;i<num;i++){
@@ -453,7 +441,7 @@
 		{
 			var num = $('#numAdd').val();
 			if(b_fid > 0){
-			   if (confirm(confirm_delect_brand_qua)){
+			   if (confirm('确定删除这条品牌资质信息吗')){
 				   location.href = 'merchants_users_list.php?is_ajax=1&act=brand_edit&ec_shop_bid={$ec_shop_bid}&del_bFid=' + b_fid + '&user_id={$user_id}&brandView=brandView#brandId_edit';
 			   }
 			}else{
@@ -470,17 +458,17 @@
 		}
 	
 		function get_merchants_audit(val){
-			var audit = $('#tr_merchantsAudit');
-			var grade_id = $('#grade_id');
+			var audit = document.getElementById('tr_merchantsAudit');
+			var grade_id = document.getElementById('grade_id');
 			if(val == 2){
-				audit.show();
+				audit.style.display = 'block';
 			}else{
-				audit.hide();
+				audit.style.display = 'none';
 			}
 			if(val == 1){
-				 grade_id.show();
+				 grade_id.style.display = 'block';
 			}else{
-				grade_id.hide();
+				grade_id.style.display = 'none';
 			}
 		}
 		

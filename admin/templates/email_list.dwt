@@ -5,22 +5,23 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.mail} - {$ur_here}</div>
+    	<div class="title">邮箱 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.list.0}</li>
+                	<li>前台用户点击邮箱订阅输入邮箱地址，后台即可管理邮箱地址。</li>
                 </ul>
             </div>
             <div class="flexilist">
+            	<!--数据列表-->
                 <div class="common-head">
                     <div class="fl">
                     	<a href="{$action_link.href}"><div class="fbutton"><div class="csv" title="{$action_link.text}"><span><i class="icon icon-download-alt"></i>{$action_link.text}</span></div></div></a>
                     </div>
                     <div class="refresh">
-                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    	<div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>					
                 </div>
                 <div class="common-content">
@@ -77,13 +78,15 @@
                     </div>
 					</form>
                 </div>
+                <!--数据列表end-->
             </div>
 		</div>
 	</div>
  	{include file ='library/pagefooter.lbi'}
+    
 	<script type="text/javascript">
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
+	listTable.recordCount = '{$record_count}';
+	listTable.pageCount = '{$page_count}';
 	{foreach from=$filter item=item key=key}
 	listTable.filter.{$key} = '{$item}';
 	{/foreach}

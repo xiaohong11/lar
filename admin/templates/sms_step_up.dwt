@@ -3,7 +3,7 @@
 <head>{include file ='library/admin_html_head.lbi'}</head>
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.14_sms} - {$ur_here}</div>
+    	<div class="title">短信管理 - {$ur_here}</div>
         <div class="content">
         	{include file ='library/sms_tab.lbi'}	
             
@@ -45,36 +45,18 @@
 					
 					$(".access_key_id").hide();
 					$(".access_key_secret").hide();
-					
-					$(".dsc_appkey").hide();
-					$(".dsc_appsecret").hide();
 				}else if($(element).val() == 1){
 					$(".sms_ecmoban_password").hide();
 					$(".sms_ecmoban_user").hide();
 					
 					$(".access_key_id").hide();
 					$(".access_key_secret").hide();
-					
-					$(".dsc_appkey").hide();
-					$(".dsc_appsecret").hide();
 				}else if($(element).val() == 2){
 					$(".ali_appkey").hide();
 					$(".ali_secretkey").hide();
 					
 					$(".sms_ecmoban_password").hide();
 					$(".sms_ecmoban_user").hide();
-					
-					$(".dsc_appkey").hide();
-					$(".dsc_appsecret").hide();
-				}else if($(element).val() == 3){
-					$(".ali_appkey").hide();
-					$(".ali_secretkey").hide();
-					
-					$(".sms_ecmoban_password").hide();
-					$(".sms_ecmoban_user").hide();
-					
-					$(".access_key_id").hide();
-					$(".access_key_secret").hide();
 				}
 			}
 		});
@@ -87,9 +69,7 @@
 				$(".sms_ecmoban_user").hide();
 				$(".access_key_id").hide();
 				$(".access_key_secret").hide();
-				$(".dsc_appkey").hide();
-				$(".dsc_appsecret").hide();
-				
+					
 				$(".ali_appkey").show();
 				$(".ali_secretkey").show();
 			}else if(val == 2){
@@ -97,28 +77,15 @@
 				$(".sms_ecmoban_user").hide();
 				$(".ali_appkey").hide();
 				$(".ali_secretkey").hide();
-				$(".dsc_appkey").hide();
-				$(".dsc_appsecret").hide();
 				
 				$(".access_key_id").show();
 				$(".access_key_secret").show();
-			}else if(val == 3){
-				$(".sms_ecmoban_password").hide();
-				$(".sms_ecmoban_user").hide();
-				$(".ali_appkey").hide();
-				$(".ali_secretkey").hide();
-				$(".access_key_id").hide();
-				$(".access_key_secret").hide();
-				
-				$(".dsc_appkey").show();
-				$(".dsc_appsecret").show();
 			}else{
+				
 				$(".ali_appkey").hide();
 				$(".ali_secretkey").hide();
 				$(".access_key_id").hide();
 				$(".access_key_secret").hide();
-				$(".dsc_appkey").hide();
-				$(".dsc_appsecret").hide();
 				
 				$(".sms_ecmoban_password").show();
 				$(".sms_ecmoban_user").show();

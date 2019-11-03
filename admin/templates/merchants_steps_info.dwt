@@ -4,13 +4,13 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="merchants_steps.php?act=title_list&id={$fields_steps}" class="s-back">{$lang.back}</a>{$lang.seller} - {$ur_here}</div>
+    	<div class="title"><a href="merchants_steps.php?act=title_list&id={$fields_steps}" class="s-back">{$lang.back}</a>商家 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content_common}</li>
-                    <li>{$lang.operation_prompt_content.info.0}</li>
+                	<li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
+                    <li>请谨慎填写表单创建相关数据。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -23,7 +23,7 @@
                                 	<div class="label">{$lang.require_field}{$lang.fields_steps}：</div>
                                     <div class="label_value">
                                     	<div id="fields_steps" class="imitate_select select_w140">
-                                            <div class="cite">{if $title_info.fields_steps}{$title_info.process_title}{else}{$lang.please_select}{/if}</div>
+                                            <div class="cite">{if $title_info.fields_steps}{$title_info.process_title}{else}请选择{/if}</div>
                                             <ul>
 											{foreach from=$process_list item=process}
                                                 <li><a href="javascript:;" data-value="{$process.id}" class="ftx-01">{$process.process_title}</a></li>
@@ -46,7 +46,7 @@
                                 	<div class="label">{$lang.steps_style}：</div>
                                     <div class="label_value">
                                     	<div id="steps_style" class="imitate_select select_w140">
-                                            <div class="cite">{$lang.please_select}</div>
+                                            <div class="cite">请选择</div>
                                             <ul>
                                                 <li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.basic_info}</a></li>
                                                 <li><a href="javascript:;" data-value="1" class="ftx-01">{$lang.steps_shop_type}</a></li>
@@ -177,7 +177,7 @@
                                                     <input type="text" name="radio_checkbox_0[]" class="text w150" autocomplete="off" />
                                                     <strong class="fl">{$lang.display_sort}：</strong>
                                                     <input type="text" name="rc_sort_0[]" class="text w50" autocomplete="off" />
-                                                    <a href="javascript:;" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                                    <a href="javascript:;" class="btn_trash"><i class="icon icon-trash"></i>删除</a>
                                                 </div>
                                             </span>
                                             <span class="ipt_text merchantsForm relative" ectype="merchantsForm_select_opt">
@@ -185,12 +185,12 @@
                                                 <div class="item-item">
                                                     <strong class="fl">{$lang.select_value}：</strong>
                                                     <input type="text" name="select_0[]" class="text w150" autocomplete="off" />
-                                                    <a href="javascript:;" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                                    <a href="javascript:;" class="btn_trash"><i class="icon icon-trash"></i>删除</a>
                                                 </div>
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="m-btn-trash"><a href="javascript:;" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a></div>
+                                    <div class="m-btn-trash"><a href="javascript:;" class="btn_trash"><i class="icon icon-trash"></i>删除</a></div>
                                 </div>
 								{foreach from=$cententFields item=fields key=key name=field} 
 									<div class="m-item">
@@ -215,7 +215,7 @@
 															<li><a href="javascript:;" data-value="TEXT" class="ftx-01">TEXT</a></li>
 															<li><a href="javascript:;" data-value="DECIMAL" class="ftx-01">DECIMAL</a></li>
 														</ul>
-														<input name="merchants_dateType[]" type="hidden" value="{$fields.fieldsDateType|default:VARCHAR}" id="merchants_dateType_val" />
+														<input name="merchants_dateType[]" type="hidden" value="{$fields.fieldsDateType}" id="merchants_dateType_val" />
 													</div>
 												</span>
 												<span class="ipt_text">
@@ -311,7 +311,7 @@
 														<input type="text" name="radio_checkbox_{$key}[]" class="text w150" autocomplete="off" />
 														<strong class="fl">{$lang.display_sort}：</strong>
 														<input type="text" name="rc_sort_{$key}[]" class="text w50" autocomplete="off" />
-														<a href="javascript:;" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+														<a href="javascript:;" class="btn_trash"><i class="icon icon-trash"></i>删除</a>
 													</div>
 												{if $fields.radioCheckboxForm}
 												{foreach from=$fields.radioCheckboxForm item=rc k=key} 
@@ -320,7 +320,7 @@
 														<input type="text" name="radio_checkbox_{$key}[]" value="{$rc.radioCheckbox}" class="text w150" autocomplete="off" />
 														<strong class="fl">{$lang.display_sort}：</strong>
 														<input type="text" name="rc_sort_{$key}[]" value="{$rc.rc_sort|default:0}" class="text w50" autocomplete="off" />
-														<a href="javascript:;" class="btn_trash" style="display:inline;"><i class="icon icon-trash"></i>{$lang.drop}</a>
+														<a href="javascript:;" class="btn_trash" style="display:inline;"><i class="icon icon-trash"></i>删除</a>
 													</div>
 												{/foreach}
 												{/if}
@@ -333,7 +333,7 @@
 														<div class="item-item">
 															<strong class="fl">{$lang.select_value}：</strong>
 															<input type="text" name="select_{$key}[]" class="text w150" value="{$select}" autocomplete="off"  />
-															<a href="javascript:;" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+															<a href="javascript:;" class="btn_trash"><i class="icon icon-trash"></i>删除</a>
 														</div>
 													{/foreach}
 													{/if}
@@ -341,7 +341,7 @@
 												
 											</div>
 										</div>
-										<div class="m-btn-trash" style="display:block;"><a href="javascript:;" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a></div>
+										<div class="m-btn-trash" style="display:block;"><a href="javascript:;" class="btn_trash"><i class="icon icon-trash"></i>删除</a></div>
 									</div>
 								{/foreach}
 							</div>
@@ -388,7 +388,7 @@
             </div>
         </div>
     </div>
-    {include file ='library/pagefooter.lbi'}
+     {include file ='library/pagefooter.lbi'}
     <script type="text/javascript">
     	$(function(){
 			//表单验证
@@ -414,10 +414,10 @@
 				},
 				messages:{
 					fields_steps :{
-						required : '<i class="icon icon-exclamation-sign"></i>'+select_step_curr
+						required : '<i class="icon icon-exclamation-sign"></i>请选择所属流程'
 					},
 					fields_titles:{
-						required : '<i class="icon icon-exclamation-sign"></i>'+content_title_not_null
+						required : '<i class="icon icon-exclamation-sign"></i>内容标题不能为空'
 					}
 				}			
 			});

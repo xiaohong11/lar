@@ -2,12 +2,12 @@
 	<div class="banner-ad">
 		<div class="w w1200">
 			<ul class="list">
-				{* DSC 提醒您：动态载入cate_layer_right.lbi，轮播右侧广告 *}{insert name='get_adv_child' ad_arr=$top_style_right_banne id=$cate_info.cat_id}
+				{* ECSHOP 提醒您：动态载入cate_layer_right.lbi，轮播右侧广告 *}{insert name='get_adv_child' ad_arr=$top_style_right_banne id=$cate_info.cat_id}
 			</ul>
 		</div>
 	</div>
 	<div class="bd">
-		{* DSC 提醒您：动态载入cat_top_ad.lbi，显示首页分类小广告 *}{insert name='get_adv_child' ad_arr=$top_style_food_banner id=$cate_info.cat_id}
+		{* ECSHOP 提醒您：动态载入cat_top_ad.lbi，显示首页分类小广告 *}{insert name='get_adv_child' ad_arr=$top_style_food_banner id=$cate_info.cat_id}
 	</div>
     <div class="food-hd"><ul></ul></div>
 </div>
@@ -17,7 +17,7 @@
 	<div class="bestad" id="bestad">
 		<div class="hd"><h2>精品推荐</h2></div>
 		<div class="bd clearfix">
-        	{* DSC 提醒您：动态载入top_style_food_hot.lbi，显示顶级分类页热门广告 *}{insert name='get_adv_child' ad_arr=$top_style_food_hot id=$cate_info.cat_id}
+        	{* ECSHOP 提醒您：动态载入top_style_food_hot.lbi，显示顶级分类页热门广告 *}{insert name='get_adv_child' ad_arr=$top_style_food_hot id=$cate_info.cat_id}
 		</div>
 	</div>
 	
@@ -50,7 +50,7 @@
                                 {/if}
                             </div>
                             <div class="p-name"><a href="{$look.url}" target="_blank" title="{$look.name}">{$look.name}</a></div>
-                            <div class="p-btn"><a href="{$look.url}" target="_blank">查看详情</a></div>
+                            <div class="p-btn"><a href="{$look.url}" target="_blank">{$lang.add_to_cart}</a></div>
                         </li>
                         <!--{/foreach}-->
                     </ul>

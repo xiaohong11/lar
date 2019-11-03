@@ -4,6 +4,7 @@
         <div class="g-d-store-info">
             <div class="item">
                 <a href="{$merchants_url}" class="s-name" target="_blank">{$shop_name}</a>
+                
                 {if $shop_information.is_IM eq 1 || $shop_information.is_dsc}
                 <a id="IM" onclick="openWin(this)" href="javascript:;" ru_id="{$merchant_id}" class="s-a-kefu">
                 <i class="icon i-kefu"></i>
@@ -48,7 +49,7 @@
 						{if $basic_info.license_fileImg}
 						<div class="lie">
 							<div class="label">证照信息：</div>
-							<div class="value"><a href="merchants_store.php?merchant_id={$merchant_id}&act=merchants_licence"><img src="../images/licence.png" alt="证照" class="licence"></a></div>
+							<div class="value"><a href="{$basic_info.license_fileImg}" class="nyroModal"><img src="{if $basic_info.license_fileImg}{$basic_info.license_fileImg}{else}../images/licence.png{/if}" alt="证照" class="licence"></a></div>
 						</div>
 						{/if}
 						<div class="lie">
@@ -62,14 +63,31 @@
                 </div>
             </div>
             <div class="item">
-                <a href="javascript:void(0);" ectype="collect_store" data-type="store" data-value='{"userid":{$user_id},"storeid":{$merchant_id}}' data-url="merchants_store.php?merchant_id={$merchant_id}" class="s-follow{if $collect_store gt 0} selected{/if}"><span>{if $collect_store gt 0}已关注{else}关注店铺{/if}</span><i class="iconfont{if $collect_store gt 0} icon-zan-alts{else} icon-zan-alt{/if}"></i></a>
-            </div>
-            <div class="item gd-shop-qrcode">
-            	<div class="mobile_txt">手机商城</div>
-                <div class="mobile_pop">
-                	<div class="mobile_pop_item"><img src="{$site_domain}{$seller_qrcode_img}" alt="" class="img"></div>
-                </div>	
+                <a href="javascript:void(0);" ectype="collect_store" data-value='{"userid":{$user_id},"storeid":{$merchant_id}}' data-url="merchants_store.php?merchant_id={$merchant_id}" class="s-follow{if $collect_store gt 0} selected{/if}"><span>关注店铺</span><i class="iconfont{if $collect_store gt 0} icon-zan-alts{else} icon-zan-alt{/if}"></i></a>
             </div>
         </div>
     </div>
-</div>
+    </div>
+{if !$pc_page.out}
+    <div class="middle">
+        <div class="w w1200">
+            <div class="logo-wp">
+                <a href="" class="shop-logo"><img src="{$basic_info.shop_logo}" alt=""></a>
+                <div class="logo-text">
+                    <a href="" class="shop-title">{$shop_name}</a>
+                    <p class="shop-intro">{$basic_info.street_desc}</p>
+                </div>
+            </div>
+            <form method="GET" action="{$site_domain}merchants_store.php" class="shop-search" name="listform">
+                <input type="text" id="sp-keyword" name="keyword" value="{$keyword|default:}" placeholder="{$lang.goods_keyword_store}" autocomplete="off">
+                <button id="btnShopSearch" type="submit">{$lang.search}</button>
+                <input type="hidden" value="{$merchant_id}" id="merchant_id" name="merchant_id">
+                <input type="hidden" value="{$cat_id}" id="cat_id" name="cat_id">
+            </form>
+            <div class="shop-qrcode">
+                <img src="{$site_domain}{$seller_qrcode_img}" alt="" class="img" width="84">
+                <p>扫一扫，进入手机商城</p>
+            </div>
+        </div>
+    </div>
+{/if}

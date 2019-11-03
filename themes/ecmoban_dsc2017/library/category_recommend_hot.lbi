@@ -11,7 +11,7 @@
                 <li{if $smarty.foreach.hot_goods.iteration eq 4} class="last"{/if}>
                     <div class="item">
                         <div class="p-img"><a href="{$goods.url}" target="_blank"><img src="{$goods.thumb}" /></a></div>
-                        <div class="p-name"><a href="{$goods.url}" title="{$goods.short_style_name|escape:html}" target="_blank">{$goods.short_style_name}</a></div>
+                        <div class="p-name"><a href="{$goods.url}" title='{$goods.short_style_name}' target="_blank">{$goods.short_style_name}</a></div>
                         <div class="p-price">
                         	{if $goods.promote_price neq ''}
                                 {$goods.promote_price}
@@ -31,3 +31,11 @@
     </div>
 </div>
 <!-- {/if} -->
+<script>
+$(function(){
+	var title = $(".p-name a").attr('title');
+	var newTitle = title.replace(/<\/?[^>]*>/g,''); 
+	$(".p-name a").attr('title',newTitle);
+})
+
+</script>

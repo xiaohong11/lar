@@ -77,7 +77,15 @@ $_LANG['brand_zizhi_require'] = '品牌资质要求：
         <br>
         5、其他特殊品类请上传相应的专业资质证明文件，详细资质要求详见
         <a href="#" target="_blank"><<行业资质标准>></a>
-        ';
+        <br>
+        6、纸质资质请寄回如下地址：
+        <br>
+               地址：上海市中山北路3553号伸大厦3层 （近地铁 三、四 号线金沙江路站）
+        <br>
+               收件人：模板堂
+        <br>
+               邮编：200060
+        <br>';
 
 
 $_LANG['js_languages']['merchants_step_error_one'] = "请选择期望店铺类型";
@@ -117,7 +125,7 @@ $_LANG['zizhi_name'] = "资质名称";
 $_LANG['Electronic'] = "电子版";
 $_LANG['Expected_store_type'] = "期望店铺类型";
 $_LANG['Flagship_store_name'] = "旗舰店命名规范";
-$_LANG['Flagship_store_name_one'] = "店铺名称：品牌名|类目描述|旗舰店/官方旗舰店&nbsp;&nbsp;<strong>(也可自定义,如：***官方旗舰店)</strong>";
+$_LANG['Flagship_store_name_one'] = "店铺名称：品牌名|类目描述|旗舰店/官方旗舰店&nbsp;&nbsp;<strong>(也可自定义,如：模板堂官方旗舰店)</strong>";
 $_LANG['select_brand_name'] = "选择品牌名";
 $_LANG['select_brand_name_two'] = '请选择品牌名称';
 $_LANG['category_desc_key'] = '类目描述关键词';
@@ -135,6 +143,3 @@ $_LANG['ec_shop_hypermarketFile'] = "申请卖场类旗舰店，提供服务类�
 $_LANG['parentType_shoprz_type'] = "专卖店默认仅可上传一个品牌，如经营多品牌时，请在申请品牌时提供多品牌同属唯一实际控制人/公司的证明材料。";
 $_LANG['parentType_shoprz_type_one'] = "专营店可经营同一招商一级类目下的两个及以上品牌，同一公司在同一一级类目下仅可申请一家相同模式专营店。";
 /*20161214  end*/
-
-//卖场-入驻地区
-$_LANG['belong_region'] = "入驻地区";

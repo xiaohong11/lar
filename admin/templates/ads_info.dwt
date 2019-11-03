@@ -7,9 +7,9 @@
     	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{if $ads_type eq 1}手机{else}广告{/if} - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content_common}</li>
+                	<li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
                     <li>上传广告图片时请注意图片尺寸问题。</li>
                 </ul>
             </div>
@@ -54,7 +54,7 @@
 												<input type='text' class="text text_2 cat_id" value="" class="cat_id" placeholder="请输入分类ID" name="cat_id">
                                                 <div class="categorySelect fl">
                                                     <div class="selection">
-                                                        <input type="text" name="category_name" id="category_name" class="text w250 valid" value="{$lang.select_cat}" autocomplete="off" readonly data-filter="cat_name" />
+                                                        <input type="text" name="category_name" id="category_name" class="text w250 valid" value="请选择分类" autocomplete="off" readonly data-filter="cat_name" />
                                                         <input type="hidden" name="category_id" id="category_id" value="0" data-filter="cat_id" />
                                                     </div>
                                                     <div class="select-container" style="display:none;">
@@ -72,8 +72,7 @@
                                     </div>
                                 </div>
                                 {if $action eq "add"}
-                                <!--暂时注释 广告媒介类型选择
-                                <div class="item">
+                                <!-- 占时注释<div class="item">
                                     <div class="label">{$lang.media_type}：</div>
                                     <div class="label_value">
                                         <div class="date-item year">
@@ -92,7 +91,7 @@
                                 </div>-->
                                 <input type="hidden" name="media_type" value="0" />
                                 {else}
-                                <input type="hidden" name="media_type" value="{$ads.media_type}" />
+                                      <input type="hidden" name="media_type" value="{$ads.media_type}" />
                                 {/if}
                                 <div class="item">
                                     <div class="label">{$lang.require_field}{$lang.position_id}：</div>
@@ -102,7 +101,7 @@
                                               <div class="cite">{if $position_list.$ads.position_id}{$position_list.$ads.position_id}{else}{$lang.select_please}{/if}</div>
                                               <ul>
                                                  {foreach from=$position_list item=item key=k}
-                                                 <li><a href="javascript:get_position({$k});" data-value="{$k}" class="ftx-01">{$item}</a></li>
+                                                 <li><a href="javascript:;" data-value="{$k}" class="ftx-01">{$item}</a></li>
                                                  {/foreach}
                                               </ul>
                                               <input name="position_id" type="hidden" value="{$ads.position_id}" id="position_idval">
@@ -138,7 +137,7 @@
                                                 <input type="file" class="type-file-file" id="ad_img" name="ad_img" data-state="imgfile" size="30" hidefocus="true" value="" />
                                                 {if $ads.ad_code}
                                                 <span class="show">
-                                                    <a href="{$ads.ad_code}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="{$ads.ad_code}" ectype="tooltip" title="tooltip"></i></a>
+                                                    <a href="../data/afficheimg/{$ads.ad_code}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../data/afficheimg/{$ads.ad_code}>')" onmouseout="toolTip()"></i></a>
                                                 </span>
                                                 {/if}
                                                 <input type="text" name="textfile" class="type-file-text" id="textfield" autocomplete="off" readonly />
@@ -162,7 +161,7 @@
                                                 <input type="file" class="type-file-file" id="ad_bg_img" name="ad_bg_img" data-state="imgfile" size="30" hidefocus="true" value="" />
                                                 {if $ads.ad_bg_code}
                                                 <span class="show">
-                                                    <a href="{$ads.ad_bg_code}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="{$ads.ad_bg_code}" ectype="tooltip" title="tooltip"></i></a>
+                                                    <a href="../data/afficheimg/{$ads.ad_bg_code}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../data/afficheimg/{$ads.ad_bg_code}>')" onmouseout="toolTip()"></i></a>
                                                 </span>
                                                 {/if}
                                                 <input type="text" name="textfile" class="type-file-text" id="textfield" autocomplete="off" readonly />
@@ -172,6 +171,7 @@
                                         </div>
                                     </div>
 									{/if}
+									
 									<div class="item">
 										<div class="label">{$lang.b_title}：</div>
 										<div class="label_value">
@@ -197,7 +197,7 @@
                                                 <input type="file" class="type-file-file" id="upfile_flash" name="upfile_flash" data-state="imgfile" size="30" hidefocus="true" value="" />
                                                 {if $ads.ad_code}
                                                 <span class="show">
-                                                    <a href="{$ads.ad_code}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="{$ads.ad_code}" ectype="tooltip" title="tooltip"></i></a>
+                                                    <a href="../data/afficheimg/{$ads.ad_code}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../data/afficheimg/{$ads.ad_code}>')" onmouseout="toolTip()"></i></a>
                                                 </span>
                                                 {/if}
                                                 <input type="text" name="textfile" class="type-file-text" id="textfield" autocomplete="off" readonly />
@@ -361,8 +361,7 @@
 				}			
 			});
 		});
-        
-		{if $ad_model}
+                {if $ad_model}
 		var ad_model=jQuery.parseJSON('{$ad_model}');
 		var action='{$action}';
 
@@ -430,7 +429,7 @@
 			})
 			/* 设置分类 ID */
 		}
-        {/if}
+                {/if}
 		function changeSet()
 		{
 			ad_name.val(ad_model.ad_model_init.replace('[num_id]',numId.val()));
@@ -474,17 +473,6 @@
 		}
 		xvDate(opts1);
 		xvDate(opts2);
-		
-		//获取广告位结构
-		function get_position(position_id){
-			Ajax.call('ads.php?act=get_position', 'position_id=' + position_id, setPositionList, "GET", "JSON");
-		}
-		function setPositionList(result){
-			var ad_name=$("input[name=ad_name]");
-			var ad_num = parseInt(result.position_num) + 1;
-			var res = result.ad_name + ad_num;
-			ad_name.val(res);
-		}
     </script>     
 </body>
 </html>

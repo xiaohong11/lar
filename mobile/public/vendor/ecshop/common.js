@@ -8,58 +8,45 @@ function get_asynclist(url, src) {
         }
     });
 }
-
 /* *
  * 添加商品到购物车
  */
-function addToCart(goodsId, parentId, storeId, cart_type) {
+function addToCart(goodsId, parentId) {
     var goods = new Object();
     var spec_arr = new Array();
     var fittings_arr = new Array();
     var number = 1;
     var formBuy = document.forms['ECS_FORMBUY'];
     var quick = 0;
-    // var storeId = 0;
+    var storeId = 0;
 
     // 检查是否有商品规格
     if (formBuy) {
-        if (storeId > 0) {
-            str = getSelectedAttributes(formBuy,'store');
-            spec_arr = str.split(',');
-            if (formBuy.elements['number_store']) {
-                number = formBuy.elements['number_store'].value;
-            }
-        } else {
-            str = getSelectedAttributes(formBuy);
-            spec_arr = str.split(',');
-            if (formBuy.elements['number']) {
-                number = formBuy.elements['number'].value;
-            }
+        str = getSelectedAttributes(formBuy);
+        spec_arr = str.split(',');
+        if (formBuy.elements['number']) {
+            number = formBuy.elements['number'].value;
         }
+
         quick = 1;
     }
     //ecmoban模板堂 --zhuo 仓库ID start
-    if (document.getElementById('region_id')) {
+    if(document.getElementById('region_id')){
         var warehouse_id = document.getElementById('region_id').value;
         goods.warehouse_id   = warehouse_id;
     }
 
     //地区ID
-    if (document.getElementById('area_id')) {
+    if(document.getElementById('area_id')){
         var area_id = document.getElementById('area_id').value;
         goods.area_id = area_id;
     }
     //ecmoban模板堂 --zhuo 仓库ID end
-    if (storeId > 0) {
-        var take_time = document.getElementById('take_time').value;
-        var store_mobile = document.getElementById('store_mobile').value;
-        if (take_time) {
-            goods.take_time = take_time;
-        }
-        if (store_mobile) {
-            goods.store_mobile = store_mobile;
-        }
+    //门店
+    if(document.getElementsByName('store_id').length > 0){
+        storeId = document.getElementsByName('store_id')[0].value;
     }
+    //门店end
 
     goods.quick = quick;
     goods.spec = spec_arr;
@@ -67,40 +54,31 @@ function addToCart(goodsId, parentId, storeId, cart_type) {
     goods.store_id = parseInt(storeId);
     goods.number = number;
     goods.parent = (typeof (parentId) == "undefined") ? 0 : parseInt(parentId);
-    goods.cart_type = (typeof (cart_type) == "undefined") ? 0 : cart_type; // 加入购物车类型 默认 0 、立即购买 2
 
     $.post(ROOT_URL + 'index.php?m=cart&a=add_to_cart', {
         goods: $.toJSON(goods)
     }, function(data) {
         addToCartResponse(data);
     }, 'json');
+    //Ajax.call('flow.php?step=add_to_cart', 'goods=' + goods.toJSONString(), addToCartResponse, 'POST', 'JSON');
 }
 
 /**
  * 获得选定的商品属性
  */
-function getSelectedAttributes(formBuy, type) {
+function getSelectedAttributes(formBuy) {
     var spec_arr = new Array();
     var j = 0;
 
-    if (type == 'store') {
-        for (i = 0; i < formBuy.elements.length; i++) {
-            var prefix = formBuy.elements[i].name.substr(0, 11);
-            if (prefix == 'store_spec_' && (((formBuy.elements[i].type == 'radio' || formBuy.elements[i].type == 'checkbox') && formBuy.elements[i].checked) || formBuy.elements[i].tagName == 'SELECT')) {
-                spec_arr[j] = formBuy.elements[i].value;
-                j++;
-            }
-        }
-    } else {
-        for (i = 0; i < formBuy.elements.length; i++) {
-            var prefix = formBuy.elements[i].name.substr(0, 5);
-            if (prefix == 'spec_' && (((formBuy.elements[i].type == 'radio' || formBuy.elements[i].type == 'checkbox') && formBuy.elements[i].checked) || formBuy.elements[i].tagName == 'SELECT')) {
-                spec_arr[j] = formBuy.elements[i].value;
-                j++;
-            }
+    for (i = 0; i < formBuy.elements.length; i++) {
+        var prefix = formBuy.elements[i].name.substr(0, 5);
+
+        if (prefix == 'spec_'
+                && (((formBuy.elements[i].type == 'radio' || formBuy.elements[i].type == 'checkbox') && formBuy.elements[i].checked) || formBuy.elements[i].tagName == 'SELECT')) {
+            spec_arr[j] = formBuy.elements[i].value;
+            j++;
         }
     }
-
     spec_arr = spec_arr.join(",");
     return spec_arr;
 }
@@ -132,19 +110,21 @@ function addToCartResponse(result) {
             d_messages(result.message);
         }
     } else {
-        if(result.store_id > 0){
+        if(result.store_id>0){
             window.location.href = ROOT_URL + 'index.php?m=flow&store_id='+result.store_id+'&cart_value=' + result.cart_value;
             return ;
         }
         // 更新购物车数量
         $(".cart-num").html(result.goods_number);
         var cart_url = ROOT_URL + 'index.php?m=cart';
-
-        if (result.cart_type == 2) {
-            location.href = ROOT_URL + 'index.php?m=flow';
-        } else {
+        location.href = cart_url;
+        /*if (result.one_step_buy == '1')
+        {
             location.href = cart_url;
-            /*switch (result.confirm_type)
+        }
+        else
+        {
+            switch (result.confirm_type)
             {
                 case '1' :
                     if (confirm(result.message))
@@ -159,8 +139,8 @@ function addToCartResponse(result) {
                     break;
                 default :
                     break;
-            }*/
-        }
+            }
+        }*/
     }
 }
 
@@ -1074,6 +1054,7 @@ function addToCart_quick(goodsId, parentId) {
         if (formBuy.elements['number']) {
             number = formBuy.elements['number'].value;
         }
+
         quick = 1;
     }
     //ecmoban模板堂 --zhuo 仓库ID start
@@ -1089,10 +1070,16 @@ function addToCart_quick(goodsId, parentId) {
     }
     //ecmoban模板堂 --zhuo 仓库ID end
 
+    //门店
+    if(document.getElementsByName('store_id').length > 0){
+        storeId = document.getElementsByName('store_id')[0].value;
+    }
+    //门店end
+
     goods.quick = quick;
     goods.spec = spec_arr;
     goods.goods_id = goodsId;
-    goods.store_id = 0;
+    goods.store_id = parseInt(storeId);
     goods.number = number;
     goods.parent = (typeof (parentId) == "undefined") ? 0 : parseInt(parentId);
     $.post(ROOT_URL + 'index.php?m=cart&a=add_to_cart', {
@@ -1133,12 +1120,12 @@ function addToCartResponse_quick(result) {
             d_messages(result.message, 1);
         }
     } else {
-        // 更新购物车数量
-        d_messages("商品已加入购物车", 2);
-        $(".cart-num").html(result.goods_number);
-        if(result.parent > 0){
-            location.href = ROOT_URL + 'index.php?m=cart'; //配件加入购物车跳转
+        if(result.store_id>0){
+            window.location.href = ROOT_URL + 'index.php?m=flow&store_id='+result.store_id+'&cart_value=' + result.cart_value;
         }
+        // 更新购物车数量
+        d_messages("商品已加入购物", 2);
+        $(".cart-num").html(result.goods_number);
         if($(".j-filter-show-div").hasClass("show")){
             $(".j-filter-show-div").removeClass("show");
             $(".mask-filter-div").removeClass("show");

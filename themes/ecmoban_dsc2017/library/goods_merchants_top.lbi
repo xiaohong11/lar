@@ -50,13 +50,7 @@
 		</div>
 	</div>
 	<div class="item">
-		<a href="javascript:void(0);" ectype="collect_store" data-type='store' data-value='{"userid":{$user_id},"storeid":{$goods.user_id}}' data-url="http://{$smarty.server.SERVER_NAME}{$smarty.server.PHP_SELF}?{$smarty.server.QUERY_STRING}" class="gz-store-top s-follow"></a>
+		<a href="javascript:void(0);" ectype="collect_store" data-type='goods' data-value='{"userid":{$user_id},"storeid":{$goods.user_id}}' data-url="http://{$smarty.server.SERVER_NAME}{$smarty.server.PHP_SELF}?{$smarty.server.QUERY_STRING}" class="s-follow{if $goods.error eq 1} selected{/if}"><span>关注店铺</span><i class="iconfont{if $goods.error eq 1} icon-zan-alts{else} icon-zan-alt{/if}"></i></a>
 	</div>
 </div>
 <!-- {/if} -->
-
-<script type="text/javascript">
-$(function(){
-	goods_collect_store({$goods.user_id|default:0});
-});
-</script>

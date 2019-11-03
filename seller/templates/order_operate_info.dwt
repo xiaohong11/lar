@@ -49,7 +49,7 @@
     </div>
 </div>
 {include file ='library/seller_footer.lbi'}
-{insert_scripts files="../js/jquery.picTip.js"}
+{insert_scripts files="ToolTip.js"}
 <script type="text/javascript">
 function check()
     {

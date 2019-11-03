@@ -16,7 +16,7 @@
 				{/if}
 			</div>
 			<div class="choose">
-				<a href="javascript:void(0);" {if $goods.is_selected eq 1}class="on"{/if} onclick="selected_goods(this,'{$goods.goods_id}')"><i class="iconfont {if $goods.is_selected eq 1}icon-gou{else}icon-dsc-plus{/if}"></i>{if $goods.is_selected eq 1}已选择{else}选择{/if}</a>
+				<a href="javascript:void(0);" {if $goods.is_selected eq 1}class="on"{/if} onclick="selected_goods(this,'{$goods.goods_id}')"><i class="iconfont {if $goods.is_selected eq 1}icon-gou{else}icon-plus{/if}"></i>{if $goods.is_selected eq 1}已选择{else}选择{/if}</a>
 				{if $PromotionType}
 				<div class="checkbox_item"> 
 					<input name="recommend" type="radio" class="ui-radio" value="{$goods.goods_id}" id="recommend{$goods.goods_id}"{if $goods.goods_id eq $recommend} checked="checked"{/if}>

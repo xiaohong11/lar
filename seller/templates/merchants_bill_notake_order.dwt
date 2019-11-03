@@ -18,7 +18,11 @@
                   <table class="ecsc-default-table mt20">	
                     <thead>
                     <tr>
-                      <th width="6%">{$lang.record_id}</th>
+                      <th width="6%">
+                        <div class="first_all">
+                            <input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox" id="all" class="ui-checkbox" /><label class="ui-label" for="all">{$lang.record_id}</label>
+                        </div>
+                      </th>
                       <th>订单编号</th>
                       <th>订单总金额</th>
                       <th>运费金额</th>
@@ -43,7 +47,8 @@
                     <tr>
                       <td class="first_td_checkbox">
                         <div class="first_all">
-                            {$order.order_id}
+                            <input type="checkbox" name="checkboxes[]" value="{$order.order_id}order" id="checkbox_{$order.order_id}" class="ui-checkbox" />
+                            <label class="ui-label" for="checkbox_{$order.order_id}">{$order.order_id}</label>
                         </div>
                       </td>
                       <td>{$order.order_sn}</td>
@@ -88,21 +93,27 @@
                   {include file="page.dwt"}
                 {if $full_page}
                 </div>
-                </form>
+                </form>					
+                <!--end-->
+                
             </div>
         </div>
     </div>
 </div>
 {include file ='library/seller_footer.lbi'}
+<!--start-->
 <script type="text/javascript">
-	listTable.recordCount = {$record_count};
-	listTable.pageCount = {$page_count};
-	listTable.query = "bill_notake_order_query";
-	
-	{foreach from=$filter item=item key=key}
-	listTable.filter.{$key} = '{$item}';
-	{/foreach}
+  <!--
+  listTable.recordCount = {$record_count};
+  listTable.pageCount = {$page_count};
+  listTable.query = "bill_notake_order_query";
+  
+  {foreach from=$filter item=item key=key}
+  listTable.filter.{$key} = '{$item}';
+  {/foreach}
+  //-->
 </script>
+<!--end-->
 </body>
 </html>
 {/if}

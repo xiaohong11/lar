@@ -384,11 +384,14 @@ function changeIntegral(val)
       arr2.push(shipping[i].value);
       arr[i] = arr2;
   }
-
-  if (selectedIntegral == val)
-  {
+ /* if (selectedIntegral == val)
+ {
     return;
-  }
+ }
+ else
+ {
+    selectedIntegral = val;
+ }*/
 
   $.get(ROOT_URL + 'index.php?m=flow&a=change_integral', {points: val,shipping_id:arr}, function(data){
     changeIntegralResponse(data);
@@ -408,7 +411,6 @@ function changeIntegralResponse(obj)
       //document.getElementById('ECS_INTEGRAL_NOTICE').innerHTML = obj.error;
       d_messages(obj.error);
       document.getElementById('ECS_INTEGRAL').value = '0';
-      $(".j-radio-switching-integral").removeClass('active');
       //document.getElementById('ECS_INTEGRAL').focus();
     }
     catch (ex) { }
@@ -423,7 +425,6 @@ function changeIntegralResponse(obj)
           $(".show-paypwd").css('display','block');
       }else{
           $("#ECS_INTEGRAL").val(0);
-          $(".j-radio-switching-integral").removeClass('active');
           // 隐藏支付密码
           $(".show-paypwd").css('display','none');
       }
@@ -572,16 +573,10 @@ function changeOOS(obj)
  */
 function checkOrderForm(frm)
 {
-    //避免重复提交
-    var submitObj = $('button[name="submit"]');
-    var submitObjText = submitObj.text();
-    submitObj.attr("disabled", true).text('提交中...').css('background', '#ff9b9b');
-    setTimeout(function () {
-        submitObj.attr("disabled", false).text(submitObjText).css('background', '#EC5151');
-    }, 5000);
-
     var paymentSelected = false;
     var shippingSelected = false;
+
+    var IS_TRUE = false;
 
     // 检查是否选择了支付配送方式
     var shipping = $("form#theForm input[name='shipping[]']");
@@ -591,7 +586,9 @@ function checkOrderForm(frm)
         if(shipping[i].value == 0){
             var content = ru_name[i].value + '暂不支持该地区配送';
             d_messages(content);
-            return false;
+            return IS_TRUE;
+        }else{
+            IS_TRUE = true;
         }
     }
 
@@ -618,11 +615,103 @@ function checkOrderForm(frm)
     {
         //d_messages(flow_no_payment);
         d_messages("请选择支付方式");
-        return false;
+        return IS_TRUE;
+    }else{
+        IS_TRUE = true;
     }
 
+    var ECS_SURPLUS = '';
+    var ECS_INTEGRAL = '';
+    // 检查用户输入的余额
+    if (document.getElementById("ECS_SURPLUS"))
+    {
+        var surplus = document.getElementById("ECS_SURPLUS").value;
+        if(surplus > 0){
+            $.ajax({
+                type : 'POST',
+                url : ROOT_URL + 'index.php?m=flow&c=ajax&a=check_surplus',
+                async : false,
+                data: {surplus:surplus},
+                success: function(data){
+                    if(data.error == 1){
+                        d_messages(data.msg);
+                        IS_TRUE = false;
+                    }else{
+                        IS_TRUE = true;
+                    }
+                },
+                dataType: 'json'
+            });
+        }
+
+        if (IS_TRUE)
+        {
+            try{
+                // document.getElementById("ECS_SURPLUS_NOTICE").innerHTML = ECS_SURPLUS;
+            } catch (ex){}
+        }
+    }
+
+    // 检查用户输入的积分
+    if (document.getElementById("ECS_INTEGRAL"))
+    {
+        var integral = document.getElementById("ECS_INTEGRAL").value;
+        if(integral > 0){
+            $.ajax({
+                type : 'POST',
+                url : ROOT_URL + 'index.php?m=flow&c=ajax&a=check_integral',
+                async : false,
+                data: {integral:integral},
+                success: function(data){
+                    if(data.error == 1){
+                        d_messages(data.msg);
+                        IS_TRUE = false;
+                    }else{
+                        IS_TRUE = true;
+                    }
+                },
+                dataType: 'json'
+            });
+        }
+    }
+    // 检查用户输入的积分
+    if (document.getElementById("ECS_INTEGRAL"))
+    {
+        // 如果使用积分 则检查用户的支付密码
+        if (document.getElementById("pay_paypwd") && document.getElementById("ECS_INTEGRAL").value > 0) {
+            var pay_paypwd = document.getElementById("pay_paypwd").value;
+
+            $.ajax({
+                type : 'POST',
+                url : ROOT_URL + 'index.php?m=flow&c=ajax&a=check_pay_paypwd',
+                async : false,
+                data: {pay_paypwd:pay_paypwd},
+                success: function(data){
+                    // ECS_SURPLUS = data;
+                    console.log(2);
+                    if(data.error == 1){
+                        console.log(3);
+                        d_messages(data.msg);
+                        IS_TRUE = false;
+                    }else{
+                        IS_TRUE = true;
+                    }
+                },
+                dataType: 'json'
+            });
+        }
+    }
+
+
+    //避免重复提交
+    $("a.btn-submit").attr("disabled",true);
+    setTimeout(function (){$("a.btn-submit").attr("disabled",false);},5000);
+
     //frm.action = frm.action + '&step=done';
-    return true;
+    console.log(10);
+    console.log(IS_TRUE);
+    return IS_TRUE;
+    // return true;
 }
 
 /* *

@@ -24,7 +24,7 @@
 	<!--{else}-->
 	<!-- #BeginLibraryItem "/library/top_style_tpl_0.lbi" --><!-- #EndLibraryItem -->
 	<!--{/if}-->
-    {* DSC 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
+    {* ECSHOP 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
 
     <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
     
@@ -39,6 +39,7 @@
 		//tpl==0 默认模板、tpl==1 女装模板、tpl==2 家电模板、tpl==3 食品模板
 		var tpl = $("input[name='tpl']").val();
 		var length = $(".catetop-banner .bd").find("li").length;
+		
 		//轮播图
 		if(length>1){
 			if(tpl == 1){

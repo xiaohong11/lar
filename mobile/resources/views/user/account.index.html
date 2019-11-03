@@ -22,14 +22,14 @@
 					<h4 class="ellipsis-one">{$record_count}</h4>
 					<div class="purse-ts-box" style="display:none"></div>
 				</a>
-                               {if C('shop.use_value_card')}
+                               {if config('shop.use_value_card')}
                                 <a href="{url('user/account/value_card')}" class="box-flex text-center">
 					<p class="t-remark3">储值卡 </p>
 					<h4 class="ellipsis-one">{$value_card.num}</h4>
 					<div class="purse-ts-box" style="display:none"></div>
 				</a>
                                {/if}
-				<a href="{url('user/account/pay_points')}" class="box-flex text-center">
+				<a href="#" class="box-flex text-center">
 					<p class="t-remark3">当前积分</p>
 					<h4 class="ellipsis-one">{$pay_points}</h4>
 					<div class="purse-ts-box" style="display:none"></div>
@@ -46,12 +46,6 @@
 			<a href="{url('user/account/log')}">
 				<div class="dis-box padding-all my-bottom">
 					<h3 class="box-flex text-all-span my-u-title-size">提现记录</h3>
-					<div class="f-04"><span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span></div>
-				</div>
-			</a>
-                    	<a href="{url('user/index/inv_info')}">
-				<div class="dis-box padding-all my-bottom">
-					<h3 class="box-flex text-all-span my-u-title-size">增值发票</h3>
 					<div class="f-04"><span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span></div>
 				</div>
 			</a>

@@ -29,7 +29,7 @@
             <!-- #BeginLibraryItem "/library/goods_list.lbi" --><!-- #EndLibraryItem -->
         </div>
     </div>
-    {* DSC 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
+    {* ECSHOP 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
     <!-- @authro guan start	添加对比文件 start -->	 
 	<!-- #BeginLibraryItem "/library/duibi.lbi" --><!-- #EndLibraryItem -->
     <!-- @authro guan start	添加对比文件 end -->
@@ -38,18 +38,12 @@
     {insert_scripts files='jquery.SuperSlide.2.1.1.js,common.js,compare.js,cart_common.js,parabola.js,shopping_flow.js,cart_quick_links.js,jd_choose.js'}
 	<script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/dsc-common.js"></script>
     <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/jquery.purebox.js"></script>
-	<!-- {if $category_load_type}--><script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/asyLoadfloor.js"></script><!--{/if}-->
 	<script type="text/javascript">
 	$(function(){
 		$(".gl-i-wrap").slide({mainCell:".sider ul",effect:"left",pnLoop:false,autoPlay:false,autoPage:true,prevCell:".sider-prev",nextCell:".sider-next",vis:5});
 		
 		//对比
 		Compare.init();
-		
-		<!-- {if $category_load_type} 异步加载更多商品 by wu start-->
-		var query_string = '{$query_string}';
-		$.itemLoad('.gl-warp-large .goods-list-warp','.gl-item','.goods-spread',query_string,0);
-		<!-- {/if} 异步加载更多商品 by wu end-->
 	});
 	
 	//删除历史记录

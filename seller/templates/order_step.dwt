@@ -381,17 +381,42 @@
                 <div class="list-div table_list2" id="listDiv">
                 <table class="ecsc-default-table ecsc-table-seller mt20" width="100%">
                   <tr>
-                    <th width="25%"><div class="th">{$lang.name}</div></th>
+                    <th width="10%"><div class="th">{$lang.name}</div></th>
                     <th width="45%"><div class="th">{$lang.desc}</div></th>
-                    <th width="30%"><div class="th">{$lang.shipping_fee}</div></th>
+                    <th width="10%"><div class="th">{$lang.region}</div></th>
+                    <th width="12%"><div class="th">{$lang.shipping_fee}</div></th>
+                    <th width="13%"><div class="th">{$lang.free_money}</div></th>
+                    <th width="10%"><div class="th">{$lang.insure}</div></th>
                   </tr>
                   {foreach from=$shipping_list item=shipping}
                   <tr>
                     <td align="center"><input name="shipping" type="radio" class="ui-radio" value="{$shipping.shipping_id}" id="shipping_{$shipping.shipping_id}" {if $order.shipping_id eq $shipping.shipping_id}checked{/if} /><label for="shipping_{$shipping.shipping_id}" class="ui-radio-label">{$shipping.shipping_name}</label></td>
                     <td align="left">{$shipping.shipping_desc}</td>
+                    <td align="center">{$shipping.parent_name}&nbsp;&nbsp;{$shipping.region_name}</td>
                     <td align="center">
                         {$shipping.format_shipping_fee}
+                        {if $shipping.freight_model}
+                            {if $shipping.ru_count > 1}
+                                <br/><em style="color:#CA0000">其中：
+                                {foreach from=$shipping.ru_list item=list}
+                                （{$list.warehouse_name}：{$list.shipping.configure_price}）<br/>
+                                {/foreach}
+                            {/if}
+                        {/if}
+                        </em>
                     </td>
+                    <td align="center">
+                    {if $shipping.freight_model}
+                        <em style="color:#CA0000">
+                        {foreach from=$shipping.ru_list item=list}
+                        （{$list.warehouse_name}：{$list.shipping.free_money}）<br/>
+                        {/foreach}
+                        </em>
+                    {else}
+                        {$shipping.free_money}
+                    {/if}
+                    </td>
+                    <td align="center">{$shipping.insure}</td>
                   </tr>
                   {/foreach}
                   <tr><td colspan="6" align="center"><label for="baojia"><input name="insure" type="checkbox" class="checkbox" id="baojia" value="1" {if $order.insure_fee > 0}checked{/if} />&nbsp;{$lang.want_insure}</label></td></tr>
@@ -518,7 +543,7 @@
 							<dd><input name="inv_type" type="text" class="text" id="inv_type" value="{if $order.invoice_type eq 0}普通发票{else}增值税发票{/if}" size="40" disabled="true" /></dd>
 						</dl>
 						<dl>
-							<dt>审核状态：</dt>
+							<dt>审核状态</dt>
 							<dd><input name="inv_type" type="text" class="text" id="inv_type" value="{if $vat_info.audit_status eq 0}未审核{elseif $vat_info.audit_status eq 1}审核通过{elseif $vat_info.audit_status eq 2}审核未通过{/if}" size="40" disabled="true" /></dd>
 						</dl>
 						<dl>
@@ -526,25 +551,9 @@
 							<dd><input name="inv_type" type="text" class="text" id="inv_type" value="{$vat_info.company_name}" size="40" disabled="true" /></dd>
 						</dl>
 						<dl>
-							<dt>识别码：</dt>
+							<dt>识别码</dt>
 							<dd><input name="inv_type" type="text" class="text" id="inv_type" value="{$vat_info.tax_id}" size="40" disabled="true" /></dd>
 						</dl>
-						<dl>
-							<dt>注册地址：</dt>
-							<dd><input name="company_address" type="text" class="text" id="company_address" value="{$vat_info.company_address}" size="40" disabled="true" /></dd>
-						</dl>
-						<dl>
-							<dt>注册电话：</dt>
-							<dd><input name="company_telephone" type="text" class="text" id="company_telephone" value="{$vat_info.company_telephone}" size="40" disabled="true" /></dd>
-						</dl>
-						<dl>
-							<dt>开户银行：</dt>
-							<dd><input name="bank_of_deposit" type="text" class="text" id="bank_of_deposit" value="{$vat_info.bank_of_deposit}" size="40" disabled="true" /></dd>
-						</dl>
-						<dl>
-							<dt>银行账号：</dt>
-							<dd><input name="bank_account" type="text" class="text" id="bank_account" value="{$vat_info.bank_account}" size="40" disabled="true" /></dd>
-						</dl>                       
 						{/if}	
                     {/if}
                     <dl>
@@ -574,76 +583,76 @@
                 <table class="ecsc-default-table ecsc-table-seller mt20">
                   <tr>
                     <th width="120">{$lang.label_goods_amount}</th>
-                    <td width="150" class="tl">
-                        {$order.formated_goods_amount}
-                        <input name="goods_amount" type="hidden" value="{$order.goods_amount}" autocomplete="off" />
-                    </td>
-                    <th width="120">(-){$lang.label_bonus}</th>
-                    <td class="tl">
-                     {$order.bonus|default:0.00}  
-                    </td>
+                    <td width="150" class="tl">{$order.formated_goods_amount}</td>
+                    <th width="120">(-){$lang.label_discount}</th>
+                    <td class="tl"><input name="discount" type="text" id="discount" value="{$order.discount}" size="15"  class="text text_2"/></td>
                   </tr>
                   <tr>
                     <th>(+){$lang.label_tax}</th>
                     <td class="tl"><input name="tax" type="text" id="tax" value="{$order.tax}" size="15" class="text text_2" /></td>
-                    <th width="120">(-){$lang.label_money_paid}</th>
-                    <td class="tl">
-                        {$order.formated_money_paid} 
-                        <input name="money_paid" type="hidden" value="{$order.money_paid}" autocomplete="off" />
-                    </td>
+                    <th>{$lang.label_order_amount}</th>
+                    <td class="tl">{$order.formated_total_fee}</td>
                   </tr>
                   <tr>
                     <th>(+){$lang.label_shipping_fee}</th>
-                    <td class="tl">
-                    {if $exist_real_goods}
-                    	<input name="shipping_fee" type="text" value="{$order.shipping_fee}" size="15" class="text text_2">
-                    {else}
-                    	0<input name="shipping_fee" type="hidden" value="0" autocomplete="off" />
-                    {/if}
-                    </td>
-					<th>(-){$lang.label_surplus}</th>
-                    <td class="tl">{$order.surplus|default:0.00}</td>
+                    <td class="tl">{if $exist_real_goods}<input name="shipping_fee" type="text" value="{$order.shipping_fee}" size="15" class="text text_2">{else}0{/if}</td>
+					<th width="120">(-){$lang.label_money_paid}</th>
+                    <td class="tl">{$order.formated_money_paid} </td>
                   </tr>
                   <tr>
                     <th>(+){$lang.label_insure_fee}</th>
                     <td class="tl">{if $exist_real_goods}<input name="insure_fee" type="text" value="{$order.insure_fee}" size="15" class="text text_2">{else}0{/if}</td>
-                    <th>(-){$lang.label_integral}</th>
-                    <td class="tl">{$order.integral|default:0.00}</td>
+                    <th>(-){$lang.label_surplus}</th>
+                    <td class="tl">{if $order.user_id >0}<input name="surplus" type="text" class="mr10 text text_2" value="{$order.surplus}" size="15">{/if}{$lang.available_surplus}{$available_user_money|default:0}</td>
                   </tr>
                   <tr>
                     <th>(+){$lang.label_pay_fee}</th>
                     <td class="tl"><input name="pay_fee" type="text" value="{$order.pay_fee}" size="15" class="text text_2"></td>
-                    <th>(-){$lang.label_coupons}</th>
-                    <td class="tl">{$order.coupons|default:0.00}</td>
+                    <th>(-){$lang.label_integral}</th>
+                    <td class="tl">{if $order.user_id > 0}<input name="integral" type="text" class="mr10 text text_2" value="{$order.integral}" size="15">{/if}{$lang.available_integral}{$available_pay_points|default:0}</td>
                   </tr>
                   <tr>
-                    <th>(-){$lang.label_discount}</th>
-                    <td class="tl"><input name="discount" type="text" id="discount" value="{$order.discount}" size="15"  class="text text_2"/></td>
-                    <th>(-){$lang.label_value_card}</th>
+                    <th>(+){$lang.label_pack_fee}</th>
+                    <td class="tl">{if $exist_real_goods}<input name="pack_fee" type="text" value="{$order.pack_fee}" size="15" class="text text_2">{else}0{/if}</td>
+                    <th>(-){$lang.label_bonus}</th>
                     <td class="tl">
-                    	{$order.formated_value_card}
-                        <input name="value_card" type="hidden" value="{$order.use_val}" autocomplete="off" />
+                     {if $order.bonus_id > 0}
+                    	- <input name="bonus" type="text" class="text w80 fn" value="{$order.bonus}" autocomplete="off" />
+                          <input name="bonus_id" type="hidden" value="{$order.bonus_id}" />
+                     {else}           
+                        <div  class="imitate_select select_w145">
+                            <div class="cite"></div>
+                            <ul>
+                                <li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.select_please}</a></li>
+                                {foreach from=$available_bonus item=bonus}
+                                <li><a href="javascript:;" data-value="{$bonus.bonus_id}" class="ftx-01" money="{$bonus.type_money}">{$bonus.type_name} - {$bonus.type_money}</a></li>
+                                {/foreach}
+                            </ul>
+                            <input name="bonus_id" type="hidden" value="{$order.bonus_id}" />
+                        </div>
+                     {/if}   
                     </td>
                   </tr>
                   <tr>
-                    <th>{$lang.label_order_amount}</th>
+                  	<th>(+){$lang.label_card_fee}</th>
                     <td class="tl">
-                        {$order.formated_total_fee}
-                        <input name="total_fee" type="hidden" value="{$order.total_fee}" autocomplete="off" />
+                    	{if $exist_real_goods}<input name="card_fee" type="text" value="{$order.card_fee}" size="15" class="text text_3">{else}0{/if}
                     </td>
+                    <th>(-)优惠券</th>
+                    <td class="tl"><input name="coupons" type="text" class="text w80 fn" value="{$order.coupons}" autocomplete="off" /></td>
+                  </tr>
+                  <tr>
                     <th>{if $order.order_amount >= 0} {$lang.label_money_dues} {else} {$lang.label_money_refund} {/if}</th>
-                    <td class="tl">
-                        {$order.formated_order_amount}
-                        <input name="order_amount" type="hidden" value="{$order.order_amount}" autocomplete="off" />
-                    </td>
+                    <td class="tl">{$order.formated_order_amount}</td>
+                    <th></th>
+                    <td class="tl"></td>
                   </tr>
                 </table>
                 </div>
                 <div class="goods_btn">
+                	<input type="button" value="{$lang.button_cancel}" class="sc-btn sc-blue-btn btn35" onclick="location.href='order.php?act=process&func=cancel_order&order_id={$order_id}&step_act={$step_act}'" />
                     {if $step_act eq "add"}<input type="button" value="{$lang.button_prev}" class="sc-btn sc-blueBg-btn btn35" onclick="history.back()" />{/if}
-                    <input name="button" type="button" onClick="get_order_amount();" class="sc-btn sc-blueBg-btn btn35" value="{$lang.button_finish}" />
-                    <input name="finish" type="hidden" value="{$lang.button_finish}" />
-                    <input type="button" value="{$lang.button_cancel}" class="sc-btn sc-blue-btn btn35" onclick="location.href='order.php?act=process&func=cancel_order&order_id={$order_id}&step_act={$step_act}'" />
+                    <input name="finish" type="submit" class="sc-btn sc-blueBg-btn btn35" value="{$lang.button_finish}" />
                 </div>
                 </form>
 
@@ -1103,11 +1112,6 @@ function checkUser()
       	return false;
 	}
 	
-    if(goods_storage == 0){
-        alert('{$lang.order_step_js_notic_09}');
-        return false;
-    }
-    
 	if(add_number > goods_storage){
 		alert('商品库存不足');
 		return false;
@@ -1129,50 +1133,6 @@ function checkUser()
 		var value = obj.data("value");
 		loadAddress(value);
 	});
-	
-	$.divselect("#bonus_id","#bonus_id_val",function(obj){
-		var money = obj.data("money");
-		obj.parents(".imitate_select").find("input[name='bonus']").val(money);
-	});
-	
-  	/* 运算订单总金额不能为负数 */
-	function get_order_amount(){
-		
-		var goods_amount = $(":input[name='goods_amount']").val();
-		var tax = $(":input[name='tax']").val();
-		var shipping_fee = $(":input[name='shipping_fee']").val();
-		var pay_fee = $(":input[name='pay_fee']").val();
-		var discount = $(":input[name='discount']").val();
-	
-		var bonus = $(":input[name='bonus']").val();
-		var money_paid = $(":input[name='money_paid']").val();
-		var surplus = $(":input[name='surplus']").val();
-		var integral = $(":input[name='integral']").val();
-		var coupons = $(":input[name='coupons']").val();
-		var value_card = $(":input[name='value_card']").val();
-
-		var total_fee = Number(goods_amount) + Number(tax) + Number(shipping_fee) + Number(pay_fee) - Number(discount);
-		var concessionary = Number(bonus) + Number(money_paid) + Number(surplus) + Number(integral) + Number(coupons) + Number(value_card);
-		var order_amount = Number(total_fee) - Number(concessionary);
-		
-		if(total_fee < 0){
-			alert("您修改的费用信息折扣不能大于实际订单总金额");
-			return false;
-		}
-		
-		var str = '';
-		{if $order.ru_id neq 0}
-		str = "，会产生退款，一旦退款则将扣除您账户里面的资金";
-		{/if}
-	
-		if(order_amount < 0){
-			if(confirm("您修改的费用信息产生了负数（" + order_amount.toFixed(2) + "）" + str + "，是否继续？")){
-				$("form[name='theForm']").submit();
-			}
-		}else{
-			$("form[name='theForm']").submit();
-		}
-	}
 </script>
 </body>
 </html>

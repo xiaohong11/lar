@@ -10,6 +10,7 @@
         	<div class="tabs_info">
             	<ul>
                     <li class="curr"><a href="wholesale.php?act=list">批发商品列表</a></li>
+                    <li><a href="wholesale_cat.php?act=list">批发分类列表</a></li>
 		</ul>
             </div>	
         	<div class="explanation" id="explanation">
@@ -69,10 +70,10 @@
                                     <th width="5%"><div class="tDiv">{$lang.record_id}</div></th>
                                     <th width="30%"><div class="tDiv">{$lang.goods_name}</div></th>
                                     <th width="15%"><div class="tDiv">{$lang.goods_steps_name}</div></th>
-                                    <th width="16%"><div class="tDiv">最小起订量</div></th>
+                                    <th width="19%"><div class="tDiv">最小起订量</div></th>
                                     <th width="8%"><div class="tDiv">{$lang.enabled}</div></th>
                                     <th width="8%"><div class="tDiv">{$lang.adopt_status}</div></th>
-                                    <th width="15%" class="handle">{$lang.handler}</th>
+                                    <th width="12%" class="handle">{$lang.handler}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -148,8 +149,8 @@
  {include file ='library/pagefooter.lbi'}
 	<script type="text/javascript">
         //分页传值
-        listTable.recordCount = {$record_count|default:0};
-        listTable.pageCount = {$page_count|default:1};
+        listTable.recordCount = '{$record_count}';
+        listTable.pageCount = '{$page_count}';
     
         {foreach from=$filter item=item key=key}
         listTable.filter.{$key} = '{$item}';

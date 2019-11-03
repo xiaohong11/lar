@@ -4,13 +4,13 @@
 
 <body class="iframe_body">
 <div class="warpper">
-    <div class="title">{$lang.order_word} - {$ur_here}</div>
+    <div class="title">订单 - {$ur_here}</div>
     <div class="content">
         <div class="explanation" id="explanation">
-            <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
             <ul>
-                <li>{$lang.operation_prompt_content_common}</li>
-                <li>{$lang.operation_prompt_content.step.0}</li>
+                <li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
+                <li>添加订单流程为：选择商城已有会员-选择商品加入订单-确认订单金额-填写收货信息-添加配送方式-选择支付方式-添加发票-查看费用信息-完成。</li>
             </ul>
         </div>
         <div class="flexilist mt30">
@@ -20,9 +20,9 @@
                     <div class="common-content">
                         <div class="step">
                             <div class="step_title">
-                                <i class="ui-step"></i><h3>{$lang.fill_user}</h3>
+                                <i class="ui-step"></i><h3>填写用户</h3>
                                 <div class="fr">
-                                    <div class="fbutton mt5 mr0"><div class="piliang" title="{$lang.batch_add_order}"><span><i class="icon icon-copy"></i><a href="mc_order.php">{$lang.batch_add_order}</a></span></div></div>
+                                    <div class="fbutton mt5 mr0"><div class="piliang" title="批量添加订单"><span><i class="icon icon-copy"></i><a href="mc_order.php">批量添加订单</a></span></div></div>
                                 </div>
                             </div>
                             <div class="step_info">
@@ -40,19 +40,19 @@
                                         </div>
                                         <div class="register_user_warp">
                                             <div class="search">
-                                                <input type="text" name="keyword" class="text mr0" placeholder="{$lang.search_user_placeholder}" autocomplete="off" readonly />
+                                                <input type="text" name="keyword" class="text mr0" placeholder="会员名称/编号" autocomplete="off" readonly />
                                                 <input type="button" class="select_btn" name="search" onclick="searchUser();" />
                                                 <div id="user" class="imitate_select select_w260">
-                                                    <div class="cite">{$lang.username}</div>
+                                                    <div class="cite">会员名称</div>
                                                     <ul style="display: none;">
-                                                        <li class="li_not">{$lang.search_user_name_notic}</li>
+                                                        <li class="li_not">请先搜索会员名称</li>
                                                     </ul>
                                                     <input name="user" type="hidden" value="" id="user_val">
                                                 </div>
                                                 <div class="div_readonly"></div>
                                             </div>
                                             <div class="notic">
-                                                <strong>注意：</strong>搜索结果只显示前20{$lang.record}，如果没有找到相应会员，请更精确地查找。<br>
+                                                <strong>注意：</strong>搜索结果只显示前20条记录，如果没有找到相应会员，请更精确地查找。<br>
                                                 另外，如果该会员是从论坛注册的且没有在商城登录过，也无法找到，需要先在商城登录。
                                             </div>
                                         </div>
@@ -112,7 +112,7 @@
                     <form name="goodsForm" action="order.php?act=step_post&step=add_goods&order_id={$order_id}&step_act={$step_act}" method="post" onsubmit="return addToOrder()">
                         <div class="goods_search_filer">
                             <strong>{$lang.search_goods}</strong>
-                            <input type="text" name="keyword" class="text w120" autocomplete="off" placeholder="{$lang.search_number_placeholder}" />
+                            <input type="text" name="keyword" class="text w120" autocomplete="off" placeholder="编号/名称/货号" />
                             {if $warehouse_list}
                                 <strong>{$lang.warehouse}</strong>
                                 <div class="select">
@@ -131,7 +131,7 @@
                                     <div id="area_id" class="imitate_select select_w170">
                                         <div class="cite">{$lang.please_select}</div>
                                         <ul style="display: none;" >
-                                            <li class="li_not">{$lang.select_warehouse}</li>
+                                            <li class="li_not">请先选择仓库</li>
                                         </ul>
                                         <input name="area_id" type="hidden" value="" id="area_id_val">
                                     </div>
@@ -143,7 +143,7 @@
                                 <div id="goodslist" class="imitate_select select_w500">
                                     <div class="cite">{$lang.please_select}</div>
                                     <ul style="display:none;">
-                                        <li class="li_not">{$lang.please_search_goods}</li>
+                                        <li class="li_not">请先搜索商品</li>
                                     </ul>
                                     <input name="goodslist" type="hidden" value="" id="goodslist_val">
                                 </div>
@@ -185,7 +185,7 @@
                                         <td class="goods_info_right"><input name="add_number" class="text w80" type="text" autocomplete="off" value="1"></td>
                                     </tr>
                                     <tr>
-                                        <td class="goods_info_left">{$lang.join_order}</td>
+                                        <td class="goods_info_left">加入订单</td>
                                         <td class="goods_info_right last">
                                             <input name="add_goods" type="submit" value="{$lang.add_to_order}" class="btn btn30 red_btn" />
                                             <input name="model_attr" value="0" type="hidden" />
@@ -196,7 +196,7 @@
                             </div>                           
                         </div>
                     </form>
-                    <form action="order.php?act=step_post&step=goods&order_id={$order_id}&step_act={$step_act}" method="post" name="theFormNext" onSubmit="return subOrderAdd()">
+                    <form action="order.php?act=step_post&step=goods&order_id={$order_id}&step_act={$step_act}" method="post">
                         <div class="goods_btn" id="button-info">
                             <input type="button" value="{$lang.button_cancel}" class="btn btn35 btn_blue" onclick="location.href='order.php?act=process&func=cancel_order&order_id={$order_id}&step_act={$step_act}'" />
                             <input type="button" class="btn btn35 btn_blue" onclick="history.back()" value="上一步">
@@ -205,11 +205,11 @@
                     </form>
                 </div>
                 {elseif $step eq "consignee"}
-                <form name="theForm" action="order.php?act=step_post&step={$step}&order_id={$order_id}&step_act={$step_act}" method="post" id="consignee">
+                <form name="theForm" action="order.php?act=step_post&step={$step}&order_id={$order_id}&step_act={$step_act}" method="post" onsubmit="return checkConsignee()">
                     <div class="step">
                     	<div class="step_title pb5">
                             <i class="ui-step"></i>
-                            <h3 class="fl">{$lang.receipt_info}</h3>
+                            <h3 class="fl">请填写收货信息</h3>
                         </div>
                         <div class="step_content step_content_items">
                             {if $address_list}
@@ -217,7 +217,7 @@
                                 <div class="step_label">{$lang.address_list}</div>
                                 <div class="step_value">
                                     <div id="addresslist" class="imitate_select select_w320">
-                                        <div class="cite">{if $order.consignee || $order.email || $order.address}{$order.consignee}{$order.email}{$order.address}{else}{$lang.please_select}{/if}</div>
+                                        <div class="cite">{$order.consignee}{$order.email}{$order.address}</div>
                                         <ul style="display: none;">
                                             {foreach from=$address_list item=address}
                                                 <li><a href='javascript:;' data-value='{$address.address_id}' class='ftx-01'>{$address.consignee|escape}{$address.email}{$address.address|escape}{$address.tel|escape}</a></li>
@@ -230,10 +230,7 @@
                             {/if}
                             <div class="item">
                                 <div class="step_label">{$lang.require_field}{$lang.label_consignee}</div>
-                                <div class="step_value">
-                                	<input type="text" name="consignee" value="{$order.consignee}" id="consignee" class="text" autocomplete="off" />
-                                    <div class="form_prompt"></div>
-                                </div>
+                                <div class="step_value"><input type="text" name="consignee" value="{$order.consignee}" id="consignee" class="text" autocomplete="off" /></div>
                             </div>
                             {if $exist_real_goods}
                             <div class="item">
@@ -242,7 +239,7 @@
                                     <div class="level_linkage">
                                         <div id="dlcountry" class="ui-dropdown smartdropdown alien">
                                             <input type="hidden" value="{$order.country}" name="country" id="selcountry">
-                                            <div class="txt">{$lang.country}</div>
+                                            <div class="txt">国家</div>
                                             <i class="down u-dropdown-icon"></i>
                                             <div class="options clearfix" style="max-height:300px;">
                                                 {foreach from=$country_list item=list}
@@ -252,7 +249,7 @@
                                         </div>
                                         <div id="dlProvinces" class="ui-dropdown smartdropdown alien">
                                             <input type="hidden" value="{$order.province}" name="province" id="selProvinces">
-                                            <div class="txt">{$lang.province_alt}</div>
+                                            <div class="txt">省/直辖市</div>
                                             <i class="down u-dropdown-icon"></i>
                                             <div class="options clearfix" style="max-height:300px;">
                                                 {foreach from=$province_list item=list}
@@ -262,7 +259,7 @@
                                         </div>
                                         <div id="dlCity" class="ui-dropdown smartdropdown alien">
                                             <input type="hidden" value="{$order.city}" name="city" id="selCities">
-                                            <div class="txt">{$lang.city}</div>
+                                            <div class="txt">市</div>
                                             <i class="down u-dropdown-icon"></i>
                                             <div class="options clearfix" style="max-height:300px;">
                                                 {foreach from=$city_list item=list}
@@ -272,7 +269,7 @@
                                         </div>
                                         <div id="dlRegion" class="ui-dropdown smartdropdown alien">
                                             <input type="hidden" value="{$order.district}" name="district" id="selDistricts">
-                                            <div class="txt">{$lang.area_alt}</div>
+                                            <div class="txt">区/县</div>
                                             <i class="down u-dropdown-icon"></i>
                                             <div class="options clearfix" style="max-height:300px;">
                                                 {foreach from=$district_list item=list}
@@ -281,21 +278,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form_prompt"></div>
                                 </div>
                             </div>
                             {/if}
                             <div class="item">
-                                <div class="step_label">{$lang.label_email}</div>
+                                <div class="step_label">{$lang.require_field}{$lang.label_email}</div>
                                 <div class="step_value"><input type="text" name="email" id="email" value="{$order.email}" class="text" autocomplete="off" /></div>
                             </div>
                             {if $exist_real_goods}
                             <div class="item">
                                 <div class="step_label">{$lang.require_field}{$lang.label_address}</div>
-                                <div class="step_value">
-                                	<input type="text" name="address" id="address"  value="{$order.address}" class="text" autocomplete="off" />
-                                    <div class="form_prompt"></div>
-                                </div>
+                                <div class="step_value"><input type="text" name="address" id="address"  value="{$order.address}" class="text" autocomplete="off" /></div>
                             </div>
                             <div class="item">
                                 <div class="step_label">{$lang.label_zipcode}</div>
@@ -307,11 +300,8 @@
                                 <div class="step_value"><input type="text" name="tel" id="tel" value="{$order.tel}" class="text" autocomplete="off" /></div>
                             </div>
                             <div class="item">
-                                <div class="step_label">{$lang.require_field}{$lang.label_mobile}</div>
-                                <div class="step_value">
-                                	<input type="text" name="mobile" id="mobile" value="{$order.mobile}" class="text" autocomplete="off" />
-                                    <div class="form_prompt"></div>
-                                </div>
+                                <div class="step_label">{$lang.label_mobile}</div>
+                                <div class="step_value"><input type="text" name="mobile" id="mobile" value="{$order.mobile}" class="text" autocomplete="off" /></div>
                             </div>
                             {if $exist_real_goods}
                             <div class="item">
@@ -328,7 +318,7 @@
                     <div class="goods_btn">
                         <input type="button" value="{$lang.button_cancel}" class="btn btn35 btn_blue" onclick="location.href='order.php?act=process&func=cancel_order&order_id={$order_id}&step_act={$step_act}'" />
                         {if $step_act eq "add"}{if $step_act eq "add"}<input type="button" value="{$lang.button_prev}" class="btn btn35 btn_blue" onclick="history.back()" />{/if}{/if}
-                        <input name="{if $step_act eq 'add'}next{else}finish{/if}" type="submit" class="btn btn35 blue_btn" value="{if $step_act eq 'add'}{$lang.button_next}{else}{$lang.button_submit}{/if}" id="submitBtn" />
+                        <input name="{if $step_act eq 'add'}next{else}finish{/if}" type="submit" class="btn btn35 blue_btn" value="{if $step_act eq 'add'}{$lang.button_next}{else}{$lang.button_submit}{/if}" />
                     </div>
                 </form>
                 {elseif $step eq "shipping"}
@@ -336,32 +326,59 @@
                     <div class="step">
                         <div class="step_title pb5">
                             <i class="ui-step"></i>
-                            <h3 class="fl">{$lang.add_distribution_mode}</h3>
+                            <h3 class="fl">添加配送方式</h3>
                         </div>
                         <div class="step_info">
                             <div class="list-div" id="list-div">
-                                <table class="table_layout">
+                                <table cellpadding="0" cellspacing="0" border="0">
                                     <thead>
                                         <tr>
-                                            <th width="25%"><div class="tDiv">{$lang.name}</div></th>
+                                            <th width="10%"><div class="tDiv">{$lang.name}</div></th>
                                             <th width="45%"><div class="tDiv">{$lang.desc}</div></th>
-                                            <th width="30%"><div class="tDiv tc">{$lang.shipping_fee}</div></th>
+                                            <th width="10%"><div class="tDiv">{$lang.region}</div></th>
+                                            <th width="10%"><div class="tDiv">{$lang.shipping_fee}</div></th>
+                                            <th width="10%"><div class="tDiv">{$lang.free_money}</div></th>
+                                            <th width="10%"><div class="tDiv">{$lang.insure}</div></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                       {foreach from=$shipping_list item=shipping}
                                         <tr>
-                                            <td><div class="tDiv"><div class="checkbox_item"><input name="shipping" type="radio" class="ui-radio" value="{$shipping.shipping_id}" id="shipping_{$shipping.shipping_id}" {if $order.shipping_id eq $shipping.shipping_id}checked{/if} autocomplete="off" /><label for="shipping_{$shipping.shipping_id}" class="ui-radio-label">{$shipping.shipping_name}</label></div></td>
-                                            <td><div class="tDiv"><span>{$shipping.shipping_desc}</span></div></td>
+                                            <td><div class="tDiv"><div class="checkbox_item"><input name="shipping" type="radio" class="ui-radio" value="{$shipping.shipping_id}" id="shipping_{$shipping.shipping_id}" {if $order.shipping_id eq $shipping.shipping_id}checked{/if} onclick="" /><label for="shipping_{$shipping.shipping_id}" class="ui-radio-label">{$shipping.shipping_name}</label></div></td>
+                                            <td><div class="tDiv">{$shipping.shipping_desc}</div></td>
+                                            <td><div class="tDiv">{$shipping.parent_name}&nbsp;&nbsp;{$shipping.region_name}</div></td>
                                             <td>
-                                                <div class="tDiv tc">
+                                                <div class="tDiv">
                                                     {$shipping.format_shipping_fee}
+                                                    {if $shipping.freight_model}
+                                                        {if $shipping.ru_count > 1}
+                                                            <br/><em style="color:#CA0000">其中：
+                                                            {foreach from=$shipping.ru_list item=list}
+                                                            （{$list.warehouse_name}：{$list.shipping.configure_price}）<br/>
+                                                            {/foreach}
+                                                            </em>
+                                                        {/if}
+                                                    {/if}
                                                 </div>
                                             </td>
+                                            <td>
+                                                <div class="tDiv">
+                                                    {if $shipping.freight_model}
+                                                        <em style="color:#CA0000">
+                                                        {foreach from=$shipping.ru_list item=list}
+                                                        （{$list.warehouse_name}：{$list.shipping.free_money}）<br/>
+                                                        {/foreach}
+                                                        </em>
+                                                    {else}
+                                                        {$shipping.free_money}
+                                                    {/if}
+                                                </div>
+                                            </td>
+                                            <td><div class="tDiv">{$shipping.insure}</div></td>
                                         </tr>
                                       {foreachelse}
                                         <tr>
-                                            <td colspan="12" align="center"><div class="tDiv">{$lang.order_step_notic_01}</div></td>
+                                            <td colspan="12" align="center"><div class="tDiv">请查看地区信息是否输入正确或改地区不支持配送</div></td>
                                         </tr>
                                       {/foreach}
                                     </tbody>
@@ -386,11 +403,11 @@
                     </div>
                 </form>	
                 {elseif $step eq "payment"}					
-                <form name="theForm" action="order.php?act=step_post&step={$step}&order_id={$order_id}&step_act={$step_act}" method="post" onsubmit="return checkPayment();">
+                <form name="theForm" action="order.php?act=step_post&step={$step}&order_id={$order_id}&step_act={$step_act}" method="post">
                     <div class="step">
                         <div class="step_title pb5">
                             <i class="ui-step"></i>
-                            <h3 class="fl">{$lang.select_payment_method}</h3>
+                            <h3 class="fl">选择支付方式</h3>
                         </div>
                         <div class="step_info">
                             <div class="list-div" id="list-div">
@@ -404,13 +421,11 @@
                                     </thead>
                                     <tbody>
                                         {foreach from=$payment_list item=payment}
-                                        {if $payment.pay_code neq 'onlinepay'}
                                         <tr>
                                             <td><div class="tDiv"><div class="checkbox_item"><input type="radio" class="ui-radio" name="payment" value="{$payment.pay_id}" id="payment_{$payment.pay_id}" {if $order.pay_id eq $payment.pay_id}checked{/if} /><label class="ui-radio-label" for="payment_{$payment.pay_id}">{$payment.pay_name}</label></div></td>
                                             <td><div class="tDiv">{$payment.pay_desc}</div></td>
                                             <td><div class="tDiv">{$payment.pay_fee}</div></td>
                                         </tr>
-                                        {/if}
                                         {/foreach}
                                     </tbody>
                                 </table>
@@ -428,9 +443,9 @@
                     <div class="step">
                         <div class="step_title">
                             <i class="ui-step"></i>
-                            <h3 class="fl">{$lang.add_invoice}</h3>
+                            <h3 class="fl">添加发票</h3>
                         </div>
-                    	<div class="step_content step_content_items">
+                    <div class="step_content step_content_items">
                             {if $exist_real_goods}
                                 {if $card_list}
                                 <div class="item">
@@ -476,96 +491,72 @@
                     <div class="step order_total">
                         <div class="step_title pb5">
                             <i class="ui-step"></i>
-                            <h3 class="fl">{$lang.fee_info}</h3>
+                            <h3 class="fl">费用信息</h3>
                         </div>
-                        <div class="section" style="overflow:inherit">
+                        <div class="section">
                             <dl>
                                 <dt>{$lang.label_goods_amount}</dt>
-                                <dd>
-                                	&nbsp;&nbsp;{$order.formated_goods_amount}
-                                    <input name="goods_amount" type="hidden" value="{$order.goods_amount}" autocomplete="off" />
-                                </dd>
+                                <dd>&nbsp;&nbsp;{$order.formated_goods_amount}</dd>
+                                <dt>{$lang.label_discount}</dt>
+                                <dd>- <input name="discount" type="text" class="text w80 fn" id="discount" value="{$order.discount}" size="15" autocomplete="off" /></dd>
+                            </dl>
+                            <dl>
+                                <dt>{$lang.label_tax}</dt>
+                                <dd>&nbsp;&nbsp;<input name="tax" type="text" id="tax" class="text w80 fn" value="{$order.tax}" size="15" autocomplete="off" /></dd>
+                                <dt>{$lang.label_order_amount}</dt>
+                                <dd class="red">{$order.formated_total_fee}</dd>
+                            </dl>
+                            <dl>
+                                <dt>{$lang.label_shipping_fee}</dt>
+                                <dd>{if $exist_real_goods}<input name="shipping_fee" class="text w80 fn" type="text" value="{$order.shipping_fee}" autocomplete="off" size="15">{else}0{/if}</dd>
+                                <dt>{$lang.label_money_paid}</dt>
+                                <dd>- {$order.formated_money_paid}</dd>
+                            </dl>
+                            <dl>
+                                <dt>{$lang.label_insure_fee}</dt>
+                                <dd>&nbsp;&nbsp;{if $exist_real_goods}<input name="insure_fee" class="text w80 fn" type="text" value="{$order.insure_fee}" size="15" autocomplete="off" />{else}0{/if}</dd>
+                                <dt>{$lang.label_surplus}({$lang.available_surplus}{$available_user_money|default:0})</dt>
+                                <dd title="{$lang.available_surplus}{$available_user_money|default:0}">- {if $order.user_id >0}<input name="surplus" class="text w80 fn" type="text" class="mr10" value="{$order.surplus}" size="15" autocomplete="off" />{/if}</dd>
+                            </dl>
+                            <dl>
+                                <dt>{$lang.label_pay_fee}</dt>
+                                <dd>&nbsp;&nbsp;<input name="pay_fee" type="text" class="text w80 fn" value="{$order.pay_fee}" size="15" autocomplete="off" /></dd>
+                                <dt>{$lang.label_integral}({$lang.available_integral}{$available_pay_points|default:0})</dt>
+                                <dd title="{$lang.available_integral}{$available_pay_points|default:0}">- {if $order.user_id > 0}<input name="integral" class="text w80 fn" type="text" class="mr10" value="{$order.integral}" size="15" autocomplete="off" />{/if}</dd>
+                            </dl>
+                            <dl>
                                 <dt>{$lang.label_bonus}</dt>
                                 <dd style="overflow:inherit;">
                                     {if $order.bonus_id > 0}
                                         - <input name="bonus" type="text" class="text w80 fn" value="{$order.bonus}" autocomplete="off" />
                                         <input name="bonus_id" type="hidden" value="{$order.bonus_id}" />
                                     {else}
-                                        <div  class="imitate_select select_w145" id="bonus_id" style="position:relative; top:2px;">
+                                        <div  class="imitate_select select_w145" style="position:relative; top:2px;">
                                             <div class="cite"></div>
                                             <ul>
                                                 <li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.select_please}</a></li>
                                                 {foreach from=$available_bonus item=bonus}
-                                                <li><a href="javascript:;" data-value="{$bonus.bonus_id}" class="ftx-01" data-money="{$bonus.type_money}">{$bonus.type_name} - {$bonus.type_money}</a></li>
+                                                <li><a href="javascript:;" data-value="{$bonus.bonus_id}" class="ftx-01" money="{$bonus.type_money}">{$bonus.type_name} - {$bonus.type_money}</a></li>
                                                 {/foreach}
                                             </ul>
-                                            <input name="bonus_id" type="hidden" value="0" id="bonus_id_val" autocomplete="off" />
-                                            <input name="bonus_val" type="hidden" value="0" autocomplete="off" />
+                                            <input name="bonus_id" type="hidden" value="{$order.bonus_id}" />
                                         </div>
                                     {/if}
                                 </dd>
-                            </dl>
-                            <dl>
-                                <dt>{$lang.label_tax}</dt>
-                                <dd>&nbsp;&nbsp;<input name="tax" type="text" id="tax" class="text w80 fn" value="{$order.tax}" size="15" autocomplete="off" /></dd>
-                                <dt>{$lang.label_money_paid}</dt>
-                                <dd>
-                                	- {$order.formated_money_paid}
-                                    <input name="money_paid" type="hidden" value="{$order.money_paid}" autocomplete="off" />
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt>{$lang.label_shipping_fee}</dt>
-                                <dd>
-                                {if $exist_real_goods}
-                                	<input name="shipping_fee" class="text w80 fn" type="text" value="{$order.shipping_fee}" autocomplete="off" size="15">
-                                {else}
-                                	0<input name="shipping_fee" type="hidden" value="0" autocomplete="off" />
-                                {/if}
-                                </dd>
-                                <dt>{$lang.label_surplus}({$lang.available_surplus}{$available_user_money|default:0})</dt>
-                                <dd title="{$lang.available_surplus}{$available_user_money|default:0}">- {if $order.user_id >0}<input name="surplus" class="text w80 fn" type="text" class="mr10" value="{$order.surplus}" size="15" autocomplete="off" />{/if}</dd>
-                            </dl>
-                            <dl>
-                                <dt>{$lang.label_insure_fee}</dt>
-                                <dd>&nbsp;&nbsp;{if $exist_real_goods}<input name="insure_fee" class="text w80 fn" type="text" value="{$order.insure_fee}" size="15" autocomplete="off" />{else}0{/if}</dd>
-                                <dt>{$lang.label_integral}({$lang.available_integral}{$available_pay_points|default:0})</dt>
-                                <dd title="{$lang.available_integral}{$available_pay_points|default:0}">- {if $order.user_id > 0}<input name="integral" class="text w80 fn" type="text" class="mr10" value="{$order.integral}" size="15" autocomplete="off" />{/if}</dd>
-                            </dl>
-                            <dl>
-                                <dt>{$lang.label_pay_fee}</dt>
-                                <dd>&nbsp;&nbsp;<input name="pay_fee" type="text" class="text w80 fn" value="{$order.pay_fee}" size="15" autocomplete="off" /></dd>
-                                <dt>{$lang.label_coupons}</dt>
+                                <dt>优惠券</dt>
                                 <dd>- <input name="coupons" type="text" class="text w80 fn" value="{$order.coupons}" autocomplete="off" /></dd>
                             </dl>
                             <dl>
-                                
-                                <dt>{$lang.label_discount}</dt>
-                                <dd>- <input name="discount" type="text" class="text w80 fn" id="discount" value="{$order.discount}" size="15" autocomplete="off" /></dd>
-                                <dt>{$lang.label_value_card}</dt>
-                                <dd>
-                                	- {$order.formated_value_card}
-                                    <input name="value_card" type="hidden" value="{$order.use_val}" autocomplete="off" />
-                                </dd>
-                            </dl>
-                            <dl>
-                            	<dt>{$lang.label_order_amount}</dt>
-                                <dd class="red">
-                                	{$order.formated_total_fee}
-                                    <input name="total_fee" type="hidden" value="{$order.total_fee}" autocomplete="off" />
-                                </dd>
+                                <dt>&nbsp;</dt>
+                                <dd>&nbsp;</dd>
                                 <dt>{if $order.order_amount >= 0} {$lang.label_money_dues} {else} {$lang.label_money_refund} {/if}</dt>
-                                <dd class="red">
-                                	= {$order.formated_order_amount}
-                                    <input name="order_amount" type="hidden" value="{$order.order_amount}" autocomplete="off" />
-                                </dd>
+                                <dd class="red">= {$order.formated_order_amount}</dd>
                             </dl>
                         </div>
                     </div>
                     <div class="goods_btn">
                         {if $step_act eq "add"}<input type="button" value="{$lang.button_prev}" class="btn btn35 btn_blue" onclick="history.back()" />{/if}
-                        <input name="button" type="button" onClick="get_order_amount();" class="btn btn35 blue_btn" value="{$lang.button_finish}" />
-                        <input name="finish" type="hidden" value="{$lang.button_finish}" />
+                        <input name="finish" type="submit" class="btn btn35 blue_btn" value="{$lang.button_finish}" />
                         <input type="button" value="{$lang.button_cancel}" class="btn btn35 btn_blue" onclick="location.href='order.php?act=process&func=cancel_order&order_id={$order_id}&step_act={$step_act}'" />
                     </div>
                 </form>
@@ -617,6 +608,7 @@
                                 <td align="left">{$shipping.shipping_desc}</td>
                             </tr>
                             {/foreach}
+                           
                             <tr>
                                 <td colspan="3"><strong class="fl lh ml20">{$lang.label_invoice_no}</strong><input name="invoice_no" type="text" value="{$return.out_invoice_no}" class="text text_2" size="30"/><!--<label class="blue_label">{$lang.invoice_no_mall}</label>--></td>
                             </tr>
@@ -667,71 +659,6 @@ $(function(){
             $("#custom_price_value").hide();
         }
     });
-	
-	//收货地址
-	$("#submitBtn").click(function(){
-		if($("#consignee").valid()){
-			$("#consignee").submit();
-		}
-	});
-	
-	$('#consignee').validate({
-		errorPlacement:function(error, element){
-			var error_div = element.parents('div.step_value').find('div.form_prompt');
-			element.parents('div.step_value').find(".notic").hide();
-			error_div.find("label").remove();
-			error_div.append(error);
-		},
-		ignore:"",
-		rules:{
-			consignee :{
-				required : true
-			},
-			country :{
-				min : 1
-			},
-			province :{
-				min : 1
-			},
-			city :{
-				min : 1
-			},
-			district :{
-				min : 1
-			},
-			address : {
-				required : true
-			},
-			mobile : {
-				required : true,
-				isTel : true
-			}
-		},
-		messages:{
-			consignee:{
-				 required : '<i class="icon icon-exclamation-sign"></i>{$lang.order_step_js_notic_01}'
-			},
-			country :{
-				min : '<i class="icon icon-exclamation-sign"></i>{$lang.order_step_js_notic_02}'
-			},
-			province :{
-				min : '<i class="icon icon-exclamation-sign"></i>{$lang.order_step_js_notic_03}'
-			},
-			city :{
-				min : '<i class="icon icon-exclamation-sign"></i>{$lang.order_step_js_notic_04}'
-			},
-			district :{
-				min : '<i class="icon icon-exclamation-sign"></i>{$lang.order_step_js_notic_05}'
-			},
-			address : {
-				required : '<i class="icon icon-exclamation-sign"></i>{$lang.order_step_js_notic_06}'
-			},
-			mobile : {
-				required : '<i class="icon icon-exclamation-sign"></i>{$lang.order_step_js_notic_07}',
-				isTel : '<i class="icon icon-exclamation-sign"></i>{$lang.order_step_js_notic_08}',
-			}
-		}			
-	});
 });
 	
 function checkUser()
@@ -872,8 +799,8 @@ function getGoodsInfoResponse(result)
     eles['attr_price'].value = result.attr_price;
 
     //显示价格：包括市场价、本店价（促销价）、会员价
-    var priceHtml = '<div class="checkbox_item"><input type="radio" name="add_price" class="ui-radio" id="market_price" value="' + result.market_price + '" /><label for="market_price" class="ui-radio-label">{$lang.lab_bar_market_price} [' + result.market_price + ']</label></div>' +
-      '<div class="checkbox_item"><input type="radio" name="add_price" class="ui-radio" id="shop_price" value="' + result.goods_price + '" checked /><label for="shop_price" class="ui-radio-label">{$lang.lab_bar_shop_price} [' + result.goods_price + ']</label></div>';
+    var priceHtml = '<div class="checkbox_item"><input type="radio" name="add_price" class="ui-radio" id="market_price" value="' + result.market_price + '" /><label for="market_price" class="ui-radio-label">市场价 [' + result.market_price + ']</label></div>' +
+      '<div class="checkbox_item"><input type="radio" name="add_price" class="ui-radio" id="shop_price" value="' + result.goods_price + '" checked /><label for="shop_price" class="ui-radio-label">本店价 [' + result.goods_price + ']</label></div>';
     for (var i = 0; i < result.user_price.length; i++)
     {
         priceHtml += '<div class="checkbox_item"><input type="radio" name="add_price" class="ui-radio" id="shop_price_'+i+'" value="' + result.user_price[i].user_price + '" /><label for="shop_price_'+i+'" class="ui-radio-label">' + result.user_price[i].rank_name + ' [' + result.user_price[i].user_price + ']</label></div>';
@@ -1077,36 +1004,20 @@ function addToOrder()
     {
         alert(pls_search_goods);
         return false; 
-    }/*else if(warehouse_id == 0){
+    }else if(warehouse_id == 0){
         alert('请选择仓库');
         return false;
     }else if(area_id == 0){
         alert('请选择地区');
         return false;
-    }*/
-	
-	if(goods_storage == 0){
-        alert('{$lang.order_step_js_notic_09}');
-		return false;
-	}
-	
+    }
+
     if(add_number > goods_storage){
-        alert('{$lang.order_step_js_notic_09}');
+        alert('商品库存不足');
         return false;
     }
 
     return true;
-}
-
-function subOrderAdd(){
-	var form = $("form[name='theFormNext']");
-	
-	if($(".goods_info").length > 0){
-		return true;
-	}else{
-		alert("{$lang.order_step_js_notic_10}");
-		return false;
-	}
 }
   
 /**
@@ -1122,55 +1033,6 @@ $.divselect("#addresslist","#addresslist_val",function(obj){
     var value = obj.data("value");
     loadAddress(value);
 });
-
-$.divselect("#bonus_id","#bonus_id_val",function(obj){
-    var money = obj.data("money");
-    obj.parents(".imitate_select").find("input[name='bonus_val']").val(money);
-});
-
-/* 运算订单总金额不能为负数 */
-function get_order_amount(){
-	
-	var goods_amount = $(":input[name='goods_amount']").val();
-	var tax = $(":input[name='tax']").val();
-	var shipping_fee = $(":input[name='shipping_fee']").val();
-	var pay_fee = $(":input[name='pay_fee']").val();
-	var discount = $(":input[name='discount']").val();
-
-	var bonus = $(":input[name='bonus_val']").val();
-	var money_paid = $(":input[name='money_paid']").val();
-	var surplus = $(":input[name='surplus']").val();
-	var integral = $(":input[name='integral']").val();
-	var coupons = $(":input[name='coupons']").val();
-	var value_card = $(":input[name='value_card']").val();
-	
-	var total_fee = Number(goods_amount) + Number(tax) + Number(shipping_fee) + Number(pay_fee) - Number(discount);
-	
-	if(total_fee < 0){
-		alert("{$lang.order_step_js_notic_11}");
-		return false;
-	}
-	
-	if(total_fee == 0){
-		var concessionary = Number(money_paid) + Number(surplus) - Number(coupons) - Number(integral) - Number(value_card) - Number(bonus);
-		var order_amount = Number(total_fee) - Number(concessionary);
-	}else{
-		var order_amount = (Number(money_paid) + Number(surplus) + Number(coupons) + Number(integral) + Number(value_card) + Number(bonus) - total_fee) * -1;
-	}
-	
-	var str = '';
-	{if $order.ru_id neq 0}
-	str = "{$lang.order_step_js_notic_12}";
-	{/if}
-	
-	if(order_amount < 0){
-		if(confirm("{$lang.order_step_js_notic_13}" + order_amount.toFixed(2) + "）" + str + "{$lang.order_step_js_notic_14}")){
-			$("form[name='theForm']").submit();
-		}
-	}else{
-		$("form[name='theForm']").submit();
-	}
-}
 </script>
 </body>
 </html>

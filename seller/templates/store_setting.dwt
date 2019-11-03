@@ -13,7 +13,6 @@
 				<div class="tabmenu">
 					<ul class="tab" ectype="set_tab">
 						<li data-type="base" class="active"><a href="javascript:;">基本信息</a></li>
-                        <li data-type="contact"><a href="javascript:;">联系我们</a></li>
 						<li data-type="picture"><a href="javascript:;">图片设置</a></li>
 						<li data-type="other"><a href="javascript:;">客服第三方设置</a></li>
 					</ul>
@@ -56,6 +55,21 @@
                             </dd>
                         </dl>
                         {/if}
+                        <dl class="hide">
+                            <dt>{$lang.02_template_select}：</dt>
+                            <dd>
+                                <div class="checkbox_items">
+                                	<div class="checkbox_item">
+                                        <input name="templates_mode" type="radio" value="0" class="ui-radio" id="templates_mode_0" {if $shop_info.templates_mode eq 0}checked="checked"{/if} />
+                                        <label class="ui-radio-label" for="templates_mode_0">默认模板</label>
+                                    </div>
+                                    <div class="checkbox_item">
+                                        <input name="templates_mode" type="radio" value="1" class="ui-radio" id="templates_mode_1" {if $shop_info.templates_mode eq 1}checked="checked"{/if} />
+                                        <label class="ui-radio-label" for="templates_mode_1">可视化编辑模板</label>
+                                    </div>
+                                </div>
+                            </dd>
+                        </dl>
                         <dl>
                             <dt>{$lang.shop_title}：</dt>
                             <dd><input type="text" name="shop_title" value="{$shop_info.shop_title}" class="text" /></dd>
@@ -67,59 +81,19 @@
                         <dl>
                             <dt>{$lang.lab_seller_site}：</dt>
                             <dd><input type="text" size="40" value="{$shop_info.domain_name}" name="domain_name" class="text" /></dd>
-                        </dl>				
-                        <dl>
-                            <dt>{$lang.require_field}&nbsp;{$lang.03_shipping_list}：</dt>
-                            <dd>
-                                <div class="imitate_select select_w190">
-                                  <div class="cite">{$lang.select_please}</div>
-                                  <ul id="brand_id">
-                                      <li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.select_please}</a></li>
-                                      {foreach from=$shipping_list item=list}
-                                      {if $priv_ru eq 0 || ($priv_ru neq 1 && $list.shipping_code != 'cac')}
-                                      <li><a href="javascript:;" data-value="{$list.shipping_id}" class="ftx-01">{$list.shipping_name}</a></li>
-                                      {/if}
-                                      {/foreach}
-                                  </ul>
-                                  <input name='shipping_id' type="hidden" value="{$shop_info.shipping_id}" id="shipping_id"/>
-                                  <div class="form_prompt"></div>
-                                </div>
-                            </dd>
-                        </dl>	
-                        <dl>
-                            <dt>{$lang.shop_notice}：</dt>
-                            <dd><textarea name="notice" rows="10" cols="60" class="textarea">{$shop_info.notice}</textarea></dd>
                         </dl>
                         <dl>
-                            <dt>{$lang.shop_street_desc}：</dt>
-                            <dd><textarea name="street_desc" class="textarea">{$shop_info.street_desc}</textarea><div class="notic">{$lang.street_desc}</div></dd>
-                        </dl>
-                        <dl>
-                            <dt>审核状态：</dt>
-                            <dd style="line-height:30px">
-							{if $shop_info.review_status eq 2}
-							<span class="red">审核未通过{if $shop_info.review_content}：{$shop_info.review_content}{/if}</span>
-							{elseif $shop_info.review_status eq 1}
-							<span class="red">未审核</span>
-							{else}
-							<span class="green">审核通过</span>
-							{/if}	                                
-                            </dd>
-                        </dl>						
-                    </div>
-                    <div class="wrapper-list hide" data-type="contact">
-                    	<dl>
                             <dt>{$lang.shop_country}：</dt>
                             <dd>
                                 <div id="dlcountry" class="ui-dropdown smartdropdown alien">
                                     <input type="hidden" value="{$shop_info.country}" name="shop_country" id="selcountry">
-                                    <div class="txt">{$lang.country}</div>
-                                    <i class="down u-dropdown-icon"></i>
-                                    <div class="options clearfix" style="max-height:300px;">
-                                        {foreach from=$countries item=list}
-                                        <span class="liv" data-text="{$list.region_name}" data-type="1"  data-value="{$list.region_id}">{$list.region_name}</span>
-                                        {/foreach}
-                                    </div>
+                                        <div class="txt">国家</div>
+                                        <i class="down u-dropdown-icon"></i>
+                                        <div class="options clearfix" style="max-height:300px;">
+                                            {foreach from=$countries item=list}
+                                            <span class="liv" data-text="{$list.region_name}" data-type="1"  data-value="{$list.region_id}">{$list.region_name}</span>
+                                            {/foreach}
+                                        </div>
                                 </div>
                             </dd>
                         </dl>
@@ -159,13 +133,13 @@
                             <dd>
                                 <div id="dlRegion" class="ui-dropdown smartdropdown alien">
                                     <input type="hidden" value="{$shop_info.district}" name="shop_district" id="selDistricts">
-                                    <div class="txt">区/县</div>
-                                    <i class="down u-dropdown-icon"></i>
-                                    <div class="options clearfix" style="max-height:300px;">
-                                        {foreach from=$districts item=list}
-                                        <span class="liv" data-text="{$list.region_name}" data-type="4"  data-value="{$list.region_id}">{$list.region_name}</span>
-                                        {/foreach}
-                                    </div>
+                                        <div class="txt">区/县</div>
+                                        <i class="down u-dropdown-icon"></i>
+                                        <div class="options clearfix" style="max-height:300px;">
+                                            {foreach from=$districts item=list}
+                                            <span class="liv" data-text="{$list.region_name}" data-type="4"  data-value="{$list.region_id}">{$list.region_name}</span>
+                                            {/foreach}
+                                        </div>
                                 </div>
                             </dd>
                         </dl>
@@ -197,33 +171,40 @@
                             	<input type="text" name="latitude" value="{$shop_info.latitude}" class="text" />
                                 <div class="notic">{$lang.latitude_desc}</div>
                             </dd>
-                        </dl>
+                        </dl>						
                         <dl>
-                            <dt>{$lang.customer_service_mobile}：</dt>
+                            <dt>{$lang.03_shipping_list}：</dt>
                             <dd>
-                            	<input type="text" size="40" value="{$shop_info.mobile}" name="mobile" class="text text_2">
-                            	<div class="notic">{$lang.mobile_prompt}</div>
+                                <div  class="imitate_select select_w190">
+                                  <div class="cite">{$lang.select_please}</div>
+                                  <ul id="brand_id">
+                                      <li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.select_please}</a></li>
+                                      {foreach from=$shipping_list item=list}
+                                      {if $priv_ru eq 0 || ($priv_ru neq 1 && $list.shipping_code != 'cac')}
+                                      <li><a href="javascript:;" data-value="{$list.shipping_id}" class="ftx-01">{$list.shipping_name}</a></li>
+                                      {/if}
+                                      {/foreach}
+                                  </ul>
+                                  <input name='shipping_id' type="hidden" value="{$shop_info.shipping_id}" id="shipping_id"/>
+                                </div>
                             </dd>
                         </dl>	
                         <dl>
+                            <dt>{$lang.customer_service_mobile}：</dt>
+                            <dd><input type="text" size="40" value="{$shop_info.mobile}" name="mobile" class="text text_2"></dd>
+                        </dl>	
+                        <dl>
                             <dt>{$lang.customer_service_address}：</dt>
-                            <dd>
-                            	<input type="text" size="40" value="{$shop_info.seller_email}" name="seller_email" class="text text_2">
-                                <div class="notic">{$lang.seller_email_prompt}</div>
-                            </dd>
+                            <dd><input type="text" size="40" value="{$shop_info.seller_email}" name="seller_email" class="text text_2"></dd>
                         </dl>
                         <dl>
-                            <dt>审核状态：</dt>
-                            <dd style="line-height:30px">
-							{if $shop_info.review_status eq 2}
-							<span class="red">审核不通过：{$shop_info.review_content}</span>
-							{elseif $shop_info.review_status eq 1}
-							<span class="red">未审核</span>
-							{else}
-							<span class="green">审核通过</span>
-							{/if}	                                
-                            </dd>
-                        </dl>						
+                            <dt>{$lang.shop_notice}：</dt>
+                            <dd><textarea name="notice" rows="10" cols="60" class="textarea">{$shop_info.notice}</textarea></dd>
+                        </dl>
+                        <dl>
+                            <dt>{$lang.shop_street_desc}：</dt>
+                            <dd><textarea name="street_desc" class="textarea">{$shop_info.street_desc}</textarea></dd>
+                        </dl>
                     </div>
 					<div class="wrapper-list hide" data-type="picture">
                         {if $priv_ru neq 1}
@@ -243,7 +224,7 @@
                                     {/if}
                                 </div>
                                 <div class="form_prompt"></div>
-                                <div class="notic" id="warn_brandlogo">{$lang.shop_logo_prompt}</div>
+                                <div class="notic" id="warn_brandlogo">(无限制*128像素)</div>
                             </dd>
                         </dl>
                         
@@ -263,7 +244,7 @@
                                     {/if}
                                 </div>
                                 <div class="form_prompt"></div>
-                                <div class="notic" id="warn_brandlogo">{$lang.logo_thumb_prompt}</div>
+                                <div class="notic" id="warn_brandlogo">(80*80像素)</div>
                             </dd>
                         </dl>
                         
@@ -278,12 +259,12 @@
                                     </div>
                                     {if $shop_info.street_thumb}
                                     <span class="show">
-                                    <a href="{$shop_info.street_thumb}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$shop_info.street_thumb}>')" onmouseout="toolTip()"></i></a>
+                                    <a href="../{$shop_info.street_thumb}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../{$shop_info.street_thumb}>')" onmouseout="toolTip()"></i></a>
                                     </span>
                                     {/if}
                                 </div>
                                 <div class="form_prompt"></div>
-                                <div class="notic" id="warn_brandlogo">{$lang.street_thumb_prompt}</div>
+                                <div class="notic" id="warn_brandlogo">(278*无限制)像素</div>
                             </dd>
                         </dl>
                         <dl>
@@ -297,12 +278,12 @@
                                     </div>
                                     {if $shop_info.brand_thumb}
                                     <span class="show">
-                                    <a href="{$shop_info.brand_thumb}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$shop_info.brand_thumb}>')" onmouseout="toolTip()"></i></a>
+                                    <a href="../{$shop_info.brand_thumb}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../{$shop_info.brand_thumb}>')" onmouseout="toolTip()"></i></a>
                                     </span>
                                     {/if}
                                 </div>
                                 <div class="form_prompt"></div>
-                                <div class="notic" id="warn_brandlogo">{$lang.brand_thumb_prompt}</div>
+                                <div class="notic" id="warn_brandlogo">(180*60像素)</div>
                             </dd>
                         </dl>
                         <dl>
@@ -321,22 +302,10 @@
                                     {/if}
                                 </div>
                                 <div class="form_prompt"></div>
-                                <div class="notic" id="warn_brandlogo">{$lang.qrcode_thumb_prompt}</div>
+                                <div class="notic" id="warn_brandlogo">(80*80像素)</div>
                             </dd>
                         </dl>  
-                        {/if}
-                        <dl>
-                            <dt>审核状态：</dt>
-                            <dd style="line-height:30px">
-							{if $shop_info.review_status eq 2}
-							<span class="red">审核不通过：{$shop_info.review_content}</span>
-							{elseif $shop_info.review_status eq 1}
-							<span class="red">未审核</span>
-							{else}
-							<span class="green">审核通过</span>
-							{/if}	                                
-                            </dd>
-                        </dl>						
+                        {/if}					
 					</div>					
 					<div class="wrapper-list hide" data-type="other">
                         <dl>
@@ -391,7 +360,7 @@
                         </dl>
                         {/if}
                         <dl>
-                            <dt>美洽客服：</dt>
+                            <dt>美恰客服：</dt>
                             <dd>
                                 <input type="text" size="40" value="{$shop_info.meiqia}" name="meiqia" class="text text_2">
                                 <div class="notic">&nbsp;&nbsp;此功能仅手机端（wap）使用</div>
@@ -399,10 +368,7 @@
                         </dl>	
                         <dl>
                             <dt>{$lang.customer_service_tel}：</dt>
-                            <dd>
-                            	<input type="text" size="40" value="{$shop_info.kf_tel}" name="kf_tel" class="text text_2">
-                                <div class="notic">{$lang.kf_tel_prompt}</div>
-                            </dd>
+                            <dd><input type="text" size="40" value="{$shop_info.kf_tel}" name="kf_tel" class="text text_2"></dd>
                         </dl>
                         <dl>
                             <dt>{$lang.customer_service_css}：</dt>
@@ -431,52 +397,21 @@
                             <dd>
                                 <input type="text" size="40" value="{$shop_info.js_appsecret}" name="js_appsecret" class="text text_1" autocomplete="off" />
                             </dd>
-                        </dl>	
-						<!--快递鸟设置 start-->	
-                        <dl>
-                            <dt>快递单打印方式：</dt>
-                            <dd>
-                                <div class="checkbox_items">
-                                	<div class="checkbox_item">
-                                        <input name="print_type" type="radio" value="0" class="ui-radio" id="print_type_0" {if $shop_info.print_type eq 0}checked="checked"{/if} />
-                                        <label class="ui-radio-label" for="print_type_0">系统默认</label>
-                                    </div>
-                                    <div class="checkbox_item">
-                                        <input name="print_type" type="radio" value="1" class="ui-radio" id="print_type_1" {if $shop_info.print_type eq 1}checked="checked"{/if} />
-                                        <label class="ui-radio-label" for="print_type_1">快递鸟</label>
-                                    </div>
-                                </div>
-                            </dd>
-                        </dl>						
-                        <dl>
-                            <dt>快递单打印机（快递鸟）：</dt>
-                            <dd>
-                                <input type="text" size="40" value="{$shop_info.kdniao_printer}" name="kdniao_printer" class="text text_1" autocomplete="off" />
-                            </dd>
-                        </dl>						
-						<!--快递鸟设置 end-->
-                        <dl>
-                            <dt>审核状态：</dt>
-                            <dd style="line-height:30px">
-							{if $shop_info.review_status eq 2}
-							<span class="red">审核不通过：{$shop_info.review_content}</span>
-							{elseif $shop_info.review_status eq 1}
-							<span class="red">未审核</span>
-							{else}
-							<span class="green">审核通过</span>
-							{/if}	                                
-                            </dd>
-                        </dl>						
+                        </dl>							
 					</div>
 					<div class="wrapper-list" data-type="button">
                         <dl class="button_info">
                         	<dt>&nbsp;</dt>
                             <dd>
-								<input type="submit" class="sc-btn sc-blueBg-btn btn35" value="提交" id="submitBtn" />
+								<input type="submit" class="sc-btn sc-blueBg-btn btn35" value="提交">
+								{if $shop_info.review_status eq 2}
+								<span class="red">审核不通过：{$shop_info.review_content}</span>
+								{elseif $shop_info.review_status eq 1}
+								<span class="red">未审核</span>
+								{/if}
                                 <input type="hidden" name="data_op" value="{$data_op}"/>
                                 <input name="lngX" type="hidden" value="0" />
                                 <input name="latY" type="hidden" value="0" />
-                                <input name="templates_mode" type="hidden" value="1" />
                             </dd>
                         </dl>					
 					</div>
@@ -489,48 +424,40 @@
 
 {include file="library/seller_footer.lbi"}
 <script type="text/javascript" src="js/region.js"></script>
-<script type="text/javascript" src="../js/jquery.picTip.js"></script>
+<script type="text/javascript" src="js/jquery.picTip.js"></script>
 <script type="text/javascript" src="js/jquery.purebox.js"></script>
 <script type="text/javascript"src="{$http}webapi.amap.com/maps?v=1.3&key=2761558037cb710a1cebefe5ec5faacd&plugin=AMap.Autocomplete"></script>
 <script type="text/javascript">
 <!--
 {literal}
+region.isAdmin = true;
 /*地区三级联动*/
 $(function(){
 	$.levelLink();
 	
 	//加载获取地区坐标值
 	get_lngxlaty();
-	
-	$("#submitBtn").click(function(){
-		if($("#my_store_form").valid()){
-			$("#my_store_form").submit();
-		}
-	});
-
-	$('#my_store_form').validate({
-		errorPlacement:function(error, element){
-			var error_div = element.parents('dl').find('div.form_prompt');
-			error_div.append(error);
-		},
-		ignore: ".ignore",
-		rules : {
-			shipping_id : {
-				min : 1
-			}
-		},
-		messages : {
-			shipping_id : {
-				min : '<i class="icon icon-exclamation-sign"></i>请选择配送方式'
-			}
-		}
-	});
 })
 onload = function()
 {
 	if(document.getElementById('paynon')){
 		document.getElementById('paynon').style.display = 'none';
 	}
+}
+
+function validator()
+{
+  var validator = new Validator('theForm');
+  validator.required('shop_name', shop_name_not_null);
+  
+  var shipping_id = document.getElementById('shipping_id').value;
+  
+  if(shipping_id == 0){
+	  alert("请选择配送方式");
+	  return false;
+  }
+  
+  return validator.passed();
 }
 
 function show_shipping_area()
@@ -561,14 +488,15 @@ function shippingResponse(result)
 
 /* 点击弹出地图 获取坐标 by kong start*/
 function get_coordinate(){
+	
 	var lngX;
 	var latY;
 	
 	get_lngxlaty(); 
 	
 	$.jqueryAjax('dialog.php', 'is_ajax=1&act=getmap_html', function(data){
-		var content = data.content;
-		pb({
+	var content = data.content;
+			 pb({
 			id: "getlnglat",
 			title: "获取经纬度",
 			width: 1050,

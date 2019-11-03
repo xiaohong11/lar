@@ -1,12 +1,12 @@
 /* $Id: listtable.js 14980 2008-10-22 05:01:19Z testyang $ */
 if (typeof Ajax != 'object')
 {
-  pbDialog('Ajax object doesn\'t exists.','',0);
+  alert('Ajax object doesn\'t exists.');
 }
 
 if (typeof Utils != 'object')
 {
-  pbDialog('Utils object doesn\'t exists.','',0);
+  alert('Utils object doesn\'t exists.');
 }
 var is_tipe;
 var listTable = new Object;
@@ -77,7 +77,7 @@ listTable.edit = function(obj, act, id)
 
       if (res.message)
       {
-        pbDialog(res.message,'',0);
+        alert(res.message);
       }
 
       if(res.id && (res.act == 'goods_auto' || res.act == 'article_auto'))
@@ -106,33 +106,19 @@ listTable.editInput = function(obj, act, id, val, str)
 	var type = '';
 	var org = obj.innerHTML;
 	if(val && str){
+		if(str == 'goods_model'){
+		}
 		type += "&goods_model=" + val;
 	}
 	
 	var value = obj.value
-        
-	//获取属性是否是临时表数据
-	var changelog = $(obj).parents('tr').data('changelog');
-	if(changelog == 1){
-		type += "&changelog=1";
-	}
-	
-	if($(":input[name='warehouse']").length > 0){
-	  if($("#attribute_model").attr("style") != 'display:none;'){
-		  var warehouse_id = $("#attribute_model :input[name='warehouse']:checked").val();
-		  type += "&warehouse_id=" + warehouse_id;
-		  
-		  var area_id = $("#attribute_region :input[name='region']:checked").val();
-		  type += "&area_id=" + area_id;
-	  }
-	}
-  
     if (Utils.trim(value).length > 0)
     {
       res = Ajax.call(listTable.url, "act="+act+"&val=" + encodeURIComponent(Utils.trim(value)) + "&id=" +id + type, null, "POST", "JSON", false);
+
       if (res.message)
       {
-        pbDialog(res.message,"",0);
+        alert(res.message);
       }
 
     }
@@ -153,7 +139,7 @@ listTable.toggle = function(obj, act, id)
 
   if (res.message)
   {
-    pbDialog(res.message,"",0);
+    alert(res.message);
   }
 
   if (res.error == 0)
@@ -165,16 +151,13 @@ listTable.toggle = function(obj, act, id)
 /* 按钮切换 by wu */
 listTable.switchBt = function(obj, act, id)
 {
-  var obj = $(obj);
+  var obj = $(obj)
   var val = (obj.attr('class').match(/active/i)) ? 0 : 1;
   var res = Ajax.call(this.url, "act="+act+"&val=" + val + "&id=" +id, null, "POST", "JSON", false);
-  
-  /* 判断是否唯一 */
-  var type = obj.data("type");
-  
+
   if (res.message)
   {
-    pbDialog(res.message,"",0);
+    alert(res.message);
   }
 
   if (res.error == 0)
@@ -191,10 +174,6 @@ listTable.switchBt = function(obj, act, id)
                 obj.attr("title", "是");
             }
         }
-  }
-  if(type == "only"){
-	 obj.parents("tr").siblings().find(".switch").removeClass("active").attr("title","否");
-	 obj.parents("tr").siblings().find(".switch").next("input[type='hidden']").val(0);
   }
 }
 
@@ -247,11 +226,9 @@ listTable.gotoPage = function(page)
  */
 listTable.loadList = function()
 {
-	if(this.query == "user_query_coupons"){
-		var args = "act="+this.query+"" + this.compileFilter() + "&cou_id=" + this.cou_id;
-	}else{
-		var args = "act="+this.query+"" + this.compileFilter();
-	}
+	
+  var args = "act="+this.query+"" + this.compileFilter();
+  
   $(".refresh_tit").addClass("loading");
   
   Ajax.call(this.url, args, this.listCallback, "POST", "JSON");
@@ -270,6 +247,7 @@ listTable.remove = function(id, cfm, opt)
   if (confirm(cfm))
   {
     var args = "act=" + opt + "&id=" + id + this.compileFilter();
+
     Ajax.call(this.url, args, this.listCallback, "GET", "JSON");
   }
 }
@@ -320,7 +298,7 @@ listTable.listCallback = function(result, txt)
 {
   if (result.error > 0)
   {
-    pbDialog(result.message,' ',0,'','',10);
+    alert(result.message);
   }
   else
   {
@@ -328,12 +306,13 @@ listTable.listCallback = function(result, txt)
     {
 		
 	  var ById = "listDiv";
+		
 	  if(result.class){
 		ById = result.class;
 	  }
 	  
       document.getElementById(ById).innerHTML = result.content;
-	  
+
       if (typeof result.filter == "object")
       {
         listTable.filter = result.filter;
@@ -341,33 +320,29 @@ listTable.listCallback = function(result, txt)
 	  if($('.nyroModal').length >0){
 	  	$('.nyroModal').nyroModal();
 	  }
-
 	  //提示插件方法调用
 	  if($("*[data-toggle='tooltip']").length>1){
 		 $("*[data-toggle='tooltip']").tooltip();
 	  }
-
-    if($("*[ectype='tooltip']").length>1){
-      $.tooltipimg();
-    }
           
 	  if(typeof(opts_time)=="function"){
 		  opts_time();
 	  };
-
+	  
+	  if(document.getElementById('step_item_table2')){
+		$(".step_item_table2").perfectScrollbar("destroy");
+		$(".step_item_table2").perfectScrollbar();
+	  }
+	  
       listTable.pageCount = result.page_count;
 	  if($(".refresh_span").length > 0){
 		$(".refresh_span").html($(".refresh_span").html().replace(/\d+/g, result.filter['record_count'])); //刷新数量 by wu
 	  	$(".refresh_tit").removeClass("loading");
 	  }
-	 
-	  if(typeof(commission_amount)=="function"){
-		  commission_amount();
-	  };
     }
     catch (e)
     {
-      pbDialog(e.message,' ',0,'','',10);
+      alert(e.message);
     }
   }
 }
@@ -473,7 +448,7 @@ listTable.addRow = function(checkFunc)
         res = Ajax.call(listTable.url, str, null, "POST", "JSON", false);
         if (res.error)
         {
-          pbDialog(res.message,'',0);
+          alert(res.message);
           table.deleteRow(table.rows.length-1);
           items = null;
         }

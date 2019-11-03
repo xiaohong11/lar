@@ -5,13 +5,13 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-		<div class="title">{$lang.12_template} - {$lang.mail_template}</div>
+		<div class="title">模板 - 邮件模板</div>
 		<div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.list.0}</li>
-                	<li>{$lang.operation_prompt_content.list.1}</li>
+                	<li>请先选择邮件模板分类。</li>
+                    <li>请按照模板内提供的变量进行修改，以免出错。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -25,10 +25,10 @@
                                 	<div class="label">{$lang.select_template}</div>
                                     <div class="label_value">
                                         <div id="selTemplate" class="imitate_select select_w320" rank="1">
-                                        	<div class="cite">{$lang.select_cat}</div>
+                                        	<div class="cite">请选择分类</div>
                                             <ul>
                                                 {foreach from=$templates item=vo key=key}
-                                                <li><a href="javascript:;" data-value="{$key}" class="ftx-01">{$vo}</a></li>
+                                                    <li><a href="javascript:;" data-value="{$key}" class="ftx-01">{$vo}</a></li>
                                                 {/foreach}
                                             </ul>
                                         	<input name="catFirst" type="hidden" value="{$cur}" id="selTemplate_val">
@@ -75,6 +75,7 @@
                             {if $full_page}
                         </div>
                     	</form>
+                        
                     </div>
                 </div>
     		</div>

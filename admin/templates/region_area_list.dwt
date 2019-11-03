@@ -5,18 +5,28 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.11_system} - {$ur_here}</div>
+    	<div class="title">系统设置 - {$ur_here}</div>
         <div class="content">
-        	{include file ='library/shipping_menu_tab.lbi'}		
+        	<div class="tabs_info">
+            	<ul>
+                    <li {if $menu_select.current eq '03_shipping_list'}class="curr"{/if}><a href="shipping.php?act=list">配送方式</a></li>
+                    <li {if $menu_select.current eq '05_area_list'}class="curr"{/if}><a href="area_manage.php?act=list">地区列表</a></li>
+                    <li {if $menu_select.current eq '09_region_area_management'}class="curr"{/if}><a href="region_area.php?act=list">区域管理</a></li>
+                    <li {if $menu_select.current eq '09_warehouse_management'}class="curr"{/if}><a href="warehouse.php?act=list">仓库管理</a></li>
+					<li {if $menu_select.current eq 'warehouse_ship_list'}class="curr"{/if}><a href="warehouse.php?act=ship_list">仓库运费模板</a></li>
+                    <li {if $menu_select.current eq 'shipping_date_list'}class="curr"{/if}><a href="shipping.php?act=date_list">自提时间段</a></li>
+                </ul>
+            </div>		
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.list.0}</li>
-                    <li>{$lang.operation_prompt_content.list.1}</li>
-                    <li>{$lang.operation_prompt_content.list.2}</li>
+                	<li>该页面展示了所有区域信息的列表。</li>
+                    <li>可进行编辑和删除操作。</li>
+                    <li>主要用途：添加/编辑商品时，选择关联地区使用.</li>
                 </ul>
             </div>
             <div class="flexilist">
+            	<!--商品分类列表-->
                 <div class="common-head">
                     {if $action_link}
                     <div class="fl">
@@ -24,8 +34,8 @@
                     </div>
                     {/if}
                     <div class="refresh">
-                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    	<div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>
                 </div>
                 <div class="common-content">
@@ -56,7 +66,7 @@
                                     <td class="handle">
                                         <div class="tDiv a2">
                                             <a href="region_area.php?act=edit&id={$region.ra_id}" title="{$lang.edit}" class="btn_edit"><i class="icon icon-edit"></i>{$lang.edit}</a>
-                                            <a href="javascript:confirm_redirect('{$lang.remove_confirm}', 'region_area.php?act=remove&id={$region.ra_id}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                            <a href="javascript:confirm_redirect('{$lang.remove_confirm}', 'region_area.php?act=remove&id={$region.ra_id}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -85,21 +95,23 @@
                     </form>
                 </div>
             </div>
-		</div>
 	</div>
-    {include file ='library/pagefooter.lbi'}
-    <script type="text/javascript">
-    listTable.recordCount = {$record_count|default:0};
-    listTable.pageCount = {$page_count|default:1};
+	</div>
+ {include file ='library/pagefooter.lbi'}
+<script type="text/javascript">
+
+listTable.recordCount = '{$record_count}';
+listTable.pageCount = '{$page_count}';
+
+{foreach from=$filter item=item key=key}
+listTable.filter.{$key} = '{$item}';
+{/foreach}
     
-    {foreach from=$filter item=item key=key}
-    listTable.filter.{$key} = '{$item}';
-    {/foreach}
-    
-    function confirm_bath(){
-    	return confirm('{$lang.list_still_accounts}' + '{$lang.list_remove_confirm}');
-    }
-    </script>     
+ function confirm_bath()
+{
+    return confirm('{$lang.list_still_accounts}' + '{$lang.list_remove_confirm}');
+}
+</script>     
 </body>
 </html>
 {/if}

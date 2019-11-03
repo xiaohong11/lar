@@ -11,7 +11,7 @@
 			<div class="setup_box" data-html="not">
 				<div class="barbg">
 				</div>
-				<a href="javascript:void(0);" class="move-edit" ectype="model_edit"><i class="iconfont icon-edit1"></i>编辑</a>
+				<a href="javascript:void(0);" class="move-edit" ectype="model_edit"><i class="icon icon-edit"></i>编辑</a>
 			</div>
 		</div>
 	</div>
@@ -37,7 +37,7 @@
 			<div class="setup_box" data-html="not">
 				<div class="barbg">
 				</div>
-				<a href="javascript:void(0);" class="move-edit" ectype="model_edit"><i class="iconfont icon-edit1"></i>编辑</a>
+				<a href="javascript:void(0);" class="move-edit" ectype="model_edit"><i class="icon icon-edit"></i>编辑</a>
 			</div>
 		</div>
 	</div>
@@ -46,7 +46,7 @@
 	以上为页头区域
 </div>
 <div class="demo ui-sortable" style="min-height: 891px; background-image: none; background-color: transparent; background-position: 100% 50%; background-repeat: repeat;">
-	<div class="visual-item lyrow lunbotu ui-draggable" data-mode="lunbo" data-purebox="adv" data-li="1" data-length="5" data-diff="0" style="display: block;">
+	<div class="item lyrow lunbotu ui-draggable" data-mode="lunbo" data-purebox="adv" data-li="1" data-length="5" data-diff="0" style="display: block;">
 		<div class="drag" data-html="not">
 			<div class="navLeft">
 				<span class="pic"><img src="images/visual/navLeft_01.png"></span>
@@ -55,10 +55,10 @@
 			<div class="setup_box">
 				<div class="barbg">
 				</div>
-				<a href="javascript:void(0);" class="move-up iconfont icon-up1 disabled"></a>
-				<a href="javascript:void(0);" class="move-down iconfont icon-down1"></a>
-				<a href="javascript:void(0);" class="move-edit" ectype="model_edit"><i class="iconfont icon-edit1"></i>编辑</a>
-				<a href="javascript:void(0);" class="move-remove"><i class="iconfont icon-remove-alt"></i>删除</a>
+				<a href="javascript:void(0);" class="move-up icon-arrow-up disabled"></a>
+				<a href="javascript:void(0);" class="move-down icon-arrow-down"></a>
+				<a href="javascript:void(0);" class="move-edit" ectype="model_edit"><i class="icon icon-edit"></i>编辑</a>
+				<a href="javascript:void(0);" class="move-remove"><i class="icon icon-remove"></i>删除</a>
 			</div>
 		</div>
 		<div class="view">
@@ -83,7 +83,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="visual-item lyrow w1200 ui-draggable" data-mode="floor" data-purebox="goods" data-diff="0" style="display: block;">
+	<div class="item lyrow w1200 ui-draggable" data-mode="floor" data-purebox="goods" data-diff="0" style="display: block;">
 		<div class="drag" data-html="not">
 			<div class="navLeft">
 				<span class="pic"><img src="images/visual/navLeft_03.png"></span>
@@ -92,10 +92,10 @@
 			<div class="setup_box">
 				<div class="barbg">
 				</div>
-				<a href="javascript:void(0);" class="move-up iconfont icon-up1"></a>
-				<a href="javascript:void(0);" class="move-down iconfont icon-down1"></a>
-				<a href="javascript:void(0);" class="move-edit" ectype="model_edit"><i class="iconfont icon-edit1"></i>编辑</a>
-				<a href="javascript:void(0);" class="move-remove"><i class="iconfont icon-remove-alt"></i>删除</a>
+				<a href="javascript:void(0);" class="move-up icon-arrow-up"></a>
+				<a href="javascript:void(0);" class="move-down icon-arrow-down"></a>
+				<a href="javascript:void(0);" class="move-edit" ectype="model_edit"><i class="icon icon-edit"></i>编辑</a>
+				<a href="javascript:void(0);" class="move-remove"><i class="icon icon-remove"></i>删除</a>
 			</div>
 		</div>
 		<div class="view">
@@ -166,7 +166,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="visual-item lyrow w1200 ui-draggable" data-mode="advImg4" data-purebox="adv" data-li="1" data-diff="0" style="display: block;">
+	<div class="item lyrow w1200 ui-draggable" data-mode="advImg4" data-purebox="adv" data-li="1" data-diff="0" style="display: block;">
 		<div class="drag" data-html="not">
 			<div class="navLeft">
 				<span class="pic"><img src="images/visual/navLeft_02.png"></span>
@@ -175,10 +175,10 @@
 			<div class="setup_box">
 				<div class="barbg">
 				</div>
-				<a href="javascript:void(0);" class="move-up iconfont icon-up1"></a>
-				<a href="javascript:void(0);" class="move-down iconfont icon-down1"></a>
-				<a href="javascript:void(0);" class="move-edit" ectype="model_edit"><i class="iconfont icon-edit1"></i>编辑</a>
-				<a href="javascript:void(0);" class="move-remove"><i class="iconfont icon-remove-alt"></i>删除</a>
+				<a href="javascript:void(0);" class="move-up icon-arrow-up"></a>
+				<a href="javascript:void(0);" class="move-down icon-arrow-down"></a>
+				<a href="javascript:void(0);" class="move-edit" ectype="model_edit"><i class="icon icon-edit"></i>编辑</a>
+				<a href="javascript:void(0);" class="move-remove"><i class="icon icon-remove"></i>删除</a>
 			</div>
 		</div>
 		<div class="view">
@@ -193,7 +193,7 @@
 		</div>
 	</div>
 	
-	<div class="visual-item lyrow w1200 ui-draggable" data-mode="advImg1" data-purebox="adv" data-li="1" data-length="3" data-json="{}" data-diff="0" style="display: block;">
+	<div class="item lyrow w1200 ui-draggable" data-mode="advImg1" data-purebox="adv" data-li="1" data-length="3" data-json="{}" data-diff="0" style="display: block;">
 		<div class="drag" data-html="not">
 			<div class="navLeft">
 				<span class="pic"><img src="images/visual/navLeft_02.png"></span>
@@ -202,10 +202,10 @@
 			<div class="setup_box">
 				<div class="barbg">
 				</div>
-				<a href="javascript:void(0);" class="move-up iconfont icon-up1"></a>
-				<a href="javascript:void(0);" class="move-down iconfont icon-down1"></a>
-				<a href="javascript:void(0);" class="move-edit" ectype="model_edit"><i class="iconfont icon-edit1"></i>编辑</a>
-				<a href="javascript:void(0);" class="move-remove"><i class="iconfont icon-remove-alt"></i>删除</a>
+				<a href="javascript:void(0);" class="move-up icon-arrow-up"></a>
+				<a href="javascript:void(0);" class="move-down icon-arrow-down"></a>
+				<a href="javascript:void(0);" class="move-edit" ectype="model_edit"><i class="icon icon-edit"></i>编辑</a>
+				<a href="javascript:void(0);" class="move-remove"><i class="icon icon-remove"></i>删除</a>
 			</div>
 		</div>
 		<div class="view">
@@ -225,7 +225,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="visual-item lyrow w1200 ui-draggable" data-mode="floor" data-purebox="goods" data-diff="2" style="display: block;">
+	<div class="item lyrow w1200 ui-draggable" data-mode="floor" data-purebox="goods" data-diff="2" style="display: block;">
 		<div class="drag" data-html="not">
 			<div class="navLeft">
 				<span class="pic"><img src="images/visual/navLeft_03.png"></span>
@@ -234,10 +234,10 @@
 			<div class="setup_box">
 				<div class="barbg">
 				</div>
-				<a href="javascript:void(0);" class="move-up iconfont icon-up1"></a>
-				<a href="javascript:void(0);" class="move-down iconfont icon-down1 disabled"></a>
-				<a href="javascript:void(0);" class="move-edit" ectype="model_edit"><i class="iconfont icon-edit1"></i>编辑</a>
-				<a href="javascript:void(0);" class="move-remove"><i class="iconfont icon-remove-alt"></i>删除</a>
+				<a href="javascript:void(0);" class="move-up icon-arrow-up"></a>
+				<a href="javascript:void(0);" class="move-down icon-arrow-down disabled"></a>
+				<a href="javascript:void(0);" class="move-edit" ectype="model_edit"><i class="icon icon-edit"></i>编辑</a>
+				<a href="javascript:void(0);" class="move-remove"><i class="icon icon-remove"></i>删除</a>
 			</div>
 		</div>
 		<div class="view">

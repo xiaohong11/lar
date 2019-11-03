@@ -8,20 +8,21 @@
     	<div class="title"><a href="javascript:;" ectype="goback" class="s-back">{$lang.back}</a>{$ur_here}</div>
         <div class="content">		
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.0}</li>
-                    <li>{$lang.operation_prompt_content.1}</li>
+                	<li>展示了一个商品类型下的商品属性列表。</li>
+                    <li>可新增商品属性。</li>
                 </ul>
             </div>
             <div class="flexilist">
+            	<!--商品列表-->
                 <div class="common-head">
                     <div class="fl">
-                    	<a href="attribute.php?act=add&goods_type={$goods_type}"><div class="fbutton"><div class="add" title="{$lang.10_attribute_add}"><span><i class="icon icon-plus"></i>{$lang.10_attribute_add}</span></div></div></a>
+                    	<a href="attribute.php?act=add&goods_type={$goods_type}"><div class="fbutton"><div class="add" title="添加属性"><span><i class="icon icon-plus"></i>添加属性</span></div></div></a>
                     </div>				
                     <div class="refresh">
-                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    	<div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>
                 </div>
                 <div class="common-content">
@@ -32,13 +33,13 @@
                         	<thead>
                             	<tr>
                                 	<th width="3%" class="sign"><div class="tDiv"><input type="checkbox" name="all_list" class="checkbox" id="all_list" /><label for="all_list" class="checkbox_stars"></label></div></th>
-                                	<th width="5%"><div class="tDiv"><a href="javascript:listTable.sort('attr_id');">{$lang.record_id}</a>{$sort_attr_id}</div></th>
-                                    <th width="12%"><div class="tDiv"><a href="javascript:listTable.sort('attr_name'); ">{$lang.attr_name}</a>{$sort_attr_name}</div></th>
-                                    <th width="10%"><div class="tDiv"><a href="javascript:listTable.sort('cat_id'); ">{$lang.cat_id}</a>{$sort_cat_id}</div></th>
+                                	<th width="5%"><div class="tDiv">{$lang.record_id}</div></th>
+                                    <th width="12%"><div class="tDiv">{$lang.attr_name}</div></th>
+                                    <th width="10%"><div class="tDiv">{$lang.cat_id}</div></th>
                                     <th width="10%"><div class="tDiv">{$lang.label_attr_type}</div></th>
-                                    <th width="12%"><div class="tDiv"><a href="javascript:listTable.sort('attr_input_type');">{$lang.attr_input_type}</a></div></th>
+                                    <th width="12%"><div class="tDiv">{$lang.attr_input_type}</div></th>
                                     <th width="30%"><div class="tDiv">{$lang.attr_values}</div></th>
-                                    <th width="8%"><div class="tDiv"><a href="javascript:listTable.sort('attr_id');">{$lang.sort_order}</a>{$sort_sort_order}</div></th>
+                                    <th width="8%"><div class="tDiv">{$lang.sort_order}</div></th>
 									{if $attr_set_up eq 1}
                                     <th width="10%" class="handle">{$lang.handler}</th>
 									{/if}
@@ -86,12 +87,12 @@
                                     </td>
 									{if $attr_set_up eq 1}
                                     <td class="handle">
-                                        <div class="tDiv a2 tl">
+                                        <div class="tDiv a2">
                                         	{if $attr.attr_cat_type eq 1}
-                                        	<a href="attribute.php?act=set_gcolor&attr_id={$attr.attr_id}" class="btn_edit mr0"><i class="icon icon-edit"></i>{$lang.add_attribute_color}</a>
+                                        	<a href="attribute.php?act=set_gcolor&attr_id={$attr.attr_id}" class="btn_edit"><i class="icon icon-edit"></i>{$lang.add_attribute_color}</a>
                                             {/if}
-                                            <a href="attribute.php?act=edit&amp;attr_id={$attr.attr_id}" class="btn_edit"><i class="icon icon-edit"></i>{$lang.edit}</a>
-                                            <a href="javascript:;" onclick="removeRow({$attr.attr_id})" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>										
+                                            <a href="attribute.php?act=edit&amp;attr_id={$attr.attr_id}" class="btn_edit"><i class="icon icon-edit"></i>编辑</a>
+                                            <a href="javascript:;" onclick="removeRow({$attr.attr_id})" class="btn_trash"><i class="icon icon-trash"></i>删除</a>										
                                         </div>
                                     </td>
 									{/if}
@@ -123,13 +124,14 @@
                     </div>
 					</form>
                 </div>
+                <!--商品列表end-->
             </div>
 		</div>
 	</div>
-	{include file ='library/pagefooter.lbi'}
-	<script type="text/javascript">
-	  listTable.recordCount = {$record_count|default:0};
-	  listTable.pageCount = {$page_count|default:1};
+ {include file ='library/pagefooter.lbi'}
+	<script language="JavaScript">
+	  listTable.recordCount = '{$record_count}';
+	  listTable.pageCount = '{$page_count}';
 
 	  {foreach from=$filter item=item key=key}
 	  listTable.filter.{$key} = '{$item}';

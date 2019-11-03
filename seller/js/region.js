@@ -65,46 +65,31 @@ jQuery.levelLink = function (){
 			var length = t.parents(".ui-dropdown").nextAll(".ui-dropdown").length;
 			
 			t.parents(".ui-dropdown").nextAll(".ui-dropdown").each(function(k,v){
-				var name = $(this).find(input).attr("name");
-				if(name == "province"){
-					$(this).find(txt).html("省/直辖市");
-				}else if(name == "city"){
-					$(this).find(txt).html("市");
-				}else if(name == "district"){
-					$(this).find(txt).html("区/县");
-					//$(this).hide();
-				}else if(name == "street"){
-					$(this).find(txt).html("街道");
-					//$(this).hide();
+				if(length == 2){
+					if(k == 0){
+						$(this).find(".txt").html("市");
+					}else{
+						$(this).find(".txt").html("区/县");
+					}
+				}
+				if(length == 1){
+					if(k == 0){
+						$(this).find(".txt").html("区/县");
+					}
 				}
 			});
 		}
-		
 		$.jqueryAjax('region.php', 'type='+type+'&parent='+value, function(data){
-			if(data.content){
-				t.parents(dropdown).next().find(opt).html(data.content);
-				t.parents(dropdown).next().addClass("visible");
-				
-				if(value > -1){
-					t.parents(dropdown).nextAll(".ui-dropdown").show();
-					t.parents(dropdown).next().find(opt).show();
-				}
-			}else{
-				t.parents(dropdown).next(".ui-dropdown").hide();
-			}
+			t.parents(dropdown).next().find(opt).html(data.content);
+			t.parents(dropdown).next().addClass("visible");
+			t.parents(dropdown).next().find(opt).show();
+			//t.parents(dropdown).next().find(dropdown).addClass("visible");
 		});
 
 		t.parents(opt).prevAll(input).val(value);
 		t.parents(opt).prevAll(txt).html(text);
 		t.parents(opt).hide();
 		t.parents(dropdown).removeClass("visible");	
-		
-		if(value == -1){
-			var tid = $("#tab_tid").val();
-			var shipping_id = $("#tab_shipping_id").val();
-			the_national(tid, shipping_id);
-			t.parents(dropdown).nextAll(".ui-dropdown").hide();
-		}
 	});
 
 	$(document).click(function(e){
@@ -117,18 +102,4 @@ jQuery.levelLink = function (){
 	$(".smartdropdown").each(function(index, element) {
         $(this).css({"z-index":i--});
     });
-}
-
-/* 全国地区 */
-function the_national(tid, shipping_id){
-	$.ajax({
-		type:"get",
-		url:"goods_transport.php?act=the_national",
-		data:'tid=' + tid + "&shipping_id=" + shipping_id,
-		dataType: 'json',
-		async : false, //设置为同步操作就可以给全局变量赋值成功
-		success:function(result){
-			$('#regionCell').html(result.content);
-		}
-	});
 }

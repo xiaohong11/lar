@@ -63,7 +63,7 @@
     </div>    
 </div>
 {include file ='library/seller_footer.lbi'}
-<script type="text/javascript" src="../js/jquery.picTip.js"></script>
+<script type="text/javascript" src="js/jquery.picTip.js"></script>
 <script type="text/javascript">
   <!--
   listTable.recordCount = {if $record_count}{$record_count}{else}1{/if};

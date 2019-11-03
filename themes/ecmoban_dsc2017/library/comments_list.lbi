@@ -18,7 +18,7 @@
 			<div class="ciw-actor-info">
 				<!-- {foreach from=$comment.goods_tag item=tag name=no} -->
                 <!-- {if $tag.txt} -->			
-				<span><e>{$tag.txt}</e></span>
+				<span>{$tag.txt}</span>
                 <!-- {/if} -->			
 				<!-- {/foreach} -->			
 			</div>
@@ -51,7 +51,7 @@
 						<div class="p-thumb-img">
 							<ul>
 								{foreach from=$comment.img_list item=img key=key name=img}
-								<li data-src="{$img.comment_img}" data-count="{$smarty.foreach.img.iteration}"><a href="javascript:void(0);"><img src="{$img.comment_img}"></a></li>
+								<li data-src="{$img.comment_img}" data-count="{$smarty.foreach.img.iteration}"><img src="{$img.comment_img}" width="54" height="54"></li>
 								{/foreach}
 							</ul>
 						</div>
@@ -63,7 +63,6 @@
 					</div>
 				</div>
 				{/if}
-        <div class="com_goods_attr fl">{if $comment.goods_attr} [{$comment.goods_attr}]{/if}</div>
 			</div>
 			{if $comment.re_content}
 			<div class="reply_info">

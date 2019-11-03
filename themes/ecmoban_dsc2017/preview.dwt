@@ -15,7 +15,7 @@
 <link rel="stylesheet" type="text/css" href="{$site_domain}themes/<?php echo $GLOBALS['_CFG']['template']; ?>/css/preview.css">
 </head>
 
-<body class="store_visual_body">
+<body>
    <!-- #BeginLibraryItem "/library/page_header_common.lbi" --><!-- #EndLibraryItem -->
 
     <div class="shop-header">
@@ -27,7 +27,7 @@
     <input type="hidden" value="{$merchant_id}" id="merchantId" class="merchantId" name="merchantId">  
     <input type="hidden" value="{$user_id}" id="user_id" name="user_id">  
     
-    {* DSC 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
+    {* ECSHOP 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
     
     <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
     <input name="warehouse_id" type="hidden" value="{$warehouse_id}">
@@ -60,27 +60,24 @@
 			$(".shop_banner .hd").hide();
 		}
 		
-		$(".adv_module").each(function(){
-			var adv_length = $(this).find(".bd li").length;
-			var adv_slideType = $("*[data-mode='advImg1']").find("*[data-type='range']").data("slide");
-			
-			if(adv_slideType == "roll"){
-				adv_slideType = "left";
-				$(this).find(".bd li").show();
-			}
-			if(adv_length>1){
-				$(this).slide({titCell:".hd ul",mainCell:".bd ul",effect:adv_slideType,interTime:5000,delayTime:500,autoPlay:true,autoPage:true,trigger:"click"});
-			}else{
-				$(this).find(".hd").hide();
-			}
-		});
-	
+		var adv_slideType = $("*[data-mode='advImg1']").find("*[data-type='range']").data("slide");
+		var adv_length = $(".adv_module .bd").find("li").length;
+		
+		if(adv_slideType == "roll"){
+			adv_slideType = "left";
+			$(".adv_module .bd").find("li").show();
+		}
+		
+		if(adv_length>1){
+			$(".adv_module").slide({titCell:".hd ul",mainCell:".bd ul",effect:adv_slideType,interTime:5000,delayTime:500,autoPlay:true,autoPage:true,trigger:"click"});
+		}else{
+			$(".adv_module .hd").hide();
+		}
+
         //楼层二级分类商品切换
 		$("*[ectype='floorItem']").slide({titCell:".hd-tags li",mainCell:".floor-tabs-content",titOnClassName:"current"});
 		
 		$("*[ectype='floorItem']").slide({titCell:".floor-nav li",mainCell:".floor-tabs-content",titOnClassName:"current"});
-		
-		$("*[ectype='floorItem']").slide({titCell:".tab li",mainCell:".floor-tabs-content",titOnClassName:"current"});
 		
 		//第五套楼层模板
 		$(".floor-fd-slide").slide({mainCell:".bd ul",effect:"left",autoPlay:false,autoPage:true,vis:4,scroll:1,prevCell:".ff-prev",nextCell:".ff-next"});
@@ -97,9 +94,6 @@
 				$(element).find(".floor-left-slide .hd").hide();
 			}
         });
-		
-		//店铺模板一
-		$(".st_item_slide").slide({titCell:".hd ul",mainCell:".bd ul",effect:"left",interTime:3500,delayTime:500,autoPlay:true,autoPage:true});
 		
         $(document).on("mouseover", ".all_box", function () {
             var all_cats_tcc = $(".all_cats_tcc").html();

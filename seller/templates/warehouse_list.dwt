@@ -45,6 +45,9 @@
                         {else}
                         <span class="mr0"><a href="javascript:;" class="btn-orange"><i class="icon sc_icon_see"></i><p>无</p></a></span>    
                         {/if}
+                        {if $list.regionId > 0 && $freight_model eq 1}
+                        	<span><a href="warehouse.php?act=freight&id={$list.region_id}" title="{$lang.freight_guanli}" class="btn-green"><i class="icon sc_icon_rmb"></i><p>{$lang.freight}</p></a></span>
+                        {/if}
 					  </td>
 				  </tr>
 				  {/foreach}

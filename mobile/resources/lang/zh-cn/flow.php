@@ -140,8 +140,8 @@ $_LANG['select_shipping'] = '您选定的配送方式为';
 $_LANG['select_payment'] = '您选定的支付方式为';
 $_LANG['order_amount'] = '您的应付款金额为';
 $_LANG['remember_order_number'] = '感谢您在本店购物！您的订单已提交成功，请记住您的订单号';
-$_LANG['back_home'] = '返回首页';
-$_LANG['goto_user_center'] = '用户中心';
+$_LANG['back_home'] = '<a href="index.php">返回首页</a>';
+$_LANG['goto_user_center'] = '<a href="user.php">用户中心</a>';
 $_LANG['order_submit_back'] = '您可以 %s 或去 %s';
 
 $_LANG['order_placed_sms'] = '您有新订单，收货人：%s 电话：%s'; //互亿短信
@@ -172,7 +172,7 @@ $_LANG['msg_contact_way_notnull'] = '收货联系方式不能为空';
 $_LANG['msg_mobile_format_error'] = '手机号码格式不正确';
 $_LANG['msg_area_notnull'] = '所在地区不能为空';
 $_LANG['msg_address_notnull'] = '详细地址不能为空';
-$_LANG['msg_save_address'] = '最多只能保存 %s 个收货地址';
+$_LANG['msg_save_address'] = '最多只能保存5个收货地址';
 $_LANG['add_address'] = '新增收货地址';
 $_LANG['not_exist_address'] = '您没有此收货地址';
 $_LANG['edit_address'] = '修改收货地址';

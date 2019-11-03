@@ -21,8 +21,8 @@
 			<input type="text" name="sprice[{$area.id}]" class="text w80 tc fn" onblur="insertfee(this.value,{$area.id});" autocomplete="off" value="{$area.sprice}" />
 		</td>
 		<td width="30%" align="center">
-			<input type="button" value="编辑" class="sc-btn btn30 sc-blueBg-btn fn mr10" data-role="edit_area" ectype="edit_area">
-			<input type="button" value="删除" class="sc-btn btn30 sc-blueBg-btn fn mr0" data-role="drop_area" ectype="drop_area">
+			<input type="button" value="编辑" class="sc-btn btn30 sc-blueBg-btn fn mr10" data-role="edit_area">
+			<input type="button" value="删除" class="sc-btn btn30 sc-blueBg-btn fn mr0" data-role="drop_area">
 		</td>
 	</tr>
 	{/foreach}

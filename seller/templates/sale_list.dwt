@@ -38,19 +38,6 @@
                                 </div>
                             </div>
                             <div class="screeItme mt10">
-                                <strong class="fl lh mr10">订单来源：</strong>
-                                <div  class="imitate_select select_w145">
-                                    <div class="cite">请选择</div>
-                                    <ul>
-                                        <li><a href="javascript:;" data-value="pc" class="ftx-01">PC</a></li>
-                                        <li><a href="javascript:;" data-value="touch" class="ftx-01">WAP</a></li>
-                                        <li><a href="javascript:;" data-value="mobile" class="ftx-01">APP</a></li>
-                                        <li><a href="javascript:;" data-value="ecjia-cashdesk" class="ftx-01">收银台</a></li>
-                                    </ul>
-                                    <input name="order_referer" type="hidden" value="" id="order_referer_val">
-                                </div>
-                            </div>                            
-                            <div class="screeItme mt10">
                                 <div class="bf100 fl">
                                     <strong class="fl lh mr10">订单状态：</strong>
                                     {foreach from=$os_list item=os key=key}
@@ -170,7 +157,6 @@
 		listTable.filter['end_date'] = frm.elements['end_date'].value;
 		listTable.filter['goods_sn'] = frm.elements['goods_sn'].value;
 		listTable.filter['time_type'] = frm.elements['time_type'].value;
-        listTable.filter['order_referer'] = frm.elements['order_referer'].value;
 		listTable.filter['page'] = 1;
 		listTable.loadList();
 		getDownUrl(frm.elements['goods_sn'].value, order_arr, shipping_arr);
@@ -210,12 +196,9 @@
 				}
 				
 				/* 时间类型 by wu */
-				var where_time = '&time_type=' + listTable.filter['time_type'];	
-
-                /* 订单来源 */
-                var where_referer = '&order_referer=' + listTable.filter['order_referer'];
+				var where_time = '&time_type=' + listTable.filter['time_type'];					
 	
-				aTags[i].href = "sale_list.php?act=download&start_date=" + listTable.filter['start_date'] + "&end_date=" + listTable.filter['end_date'] + where_sn + where_order + where_shipping + where_time + where_referer;
+				aTags[i].href = "sale_list.php?act=download&start_date=" + listTable.filter['start_date'] + "&end_date=" + listTable.filter['end_date'] + where_sn + where_order + where_shipping + where_time;
 			}
 		}
 	}

@@ -71,37 +71,35 @@
                 <div class="snatch-index-goods">
                     <div class="snatch-t"><h2>{$lang.snatch}</h2></div>
                     <div class="snatch-b">
-                    	<div class="snatch-list">
-                            <ul class="clearfix" ectype="items">
-                                <!-- {foreach from=$snatch_list item=list} 循环拍卖活动开始 -->
-                                <li class="mod-shadow-card">
-                                    <a href="{$list.url}" class="img"><img src="{$list.goods_thumb}" alt="{$list.snatch_name|escape:html}"></a>
-                                    <a href="{$list.url}" class="name">{$list.snatch_name|escape:html}</a>
-                                    <div class="info">
-                                        <p><em>{$lang.current_price}：</em><span class="price">{$list.formated_shop_price}</span></p>
-                                        <p class="lefttime" data-time="{$list.snatch.end_time_date}">
-                                            <span>{$lang.residual_time}：</span>
-                                            <span class="days">00</span>
-                                            <em>:</em>
-                                            <span class="hours">15</span>
-                                            <em>:</em>
-                                            <span class="minutes">40</span>
-                                            <em>:</em>
-                                            <span class="seconds">10</span>
-                                        </p>
-                                        <p><em>出价次数：</em><span>{$list.price_list_count}</span></p>
-                                    </div>
-                                    <!-- {if $list.current_time lt $list.end_time and $list.current_time gt $list.start_time } -->
-                                    <a href="{$list.url}" target="_blank" class="sn-btn"><em></em>{$lang.me_bid}<s></s></a>
-                                    <!-- {elseif $list.current_time gte $list.end_time } -->
-                                    <a href="{$list.url}" target="_blank" class="sn-btn bid_end"><em></em>{$lang.au_end}<s></s></a>
-                                    <!-- {else} -->
-                                    <a href="{$list.url}" target="_blank" class="sn-btn bid_wait"><em></em>{$lang.Wait_au}<s></s></a>
-                                    <!-- {/if} -->
-                                </li>
-                                <!--{/foreach}-->
-                            </ul>
-                        </div>
+                        <ul class="snatch-list clearfix">
+                            <!-- {foreach from=$snatch_list item=list} 循环拍卖活动开始 -->
+                            <li class="mod-shadow-card">
+                                <a href="{$list.url}" class="img"><img src="{$list.goods_thumb}" alt="{$list.snatch_name|escape:html}"></a>
+                                <a href="{$list.url}" class="name">{$list.snatch_name|escape:html}</a>
+                                <div class="info">
+                                    <p><em>{$lang.current_price}：</em><span class="price">{$list.formated_shop_price}</span></p>
+                                    <p class="lefttime" data-time="{$list.snatch.end_time_date}">
+                                        <span>{$lang.residual_time}：</span>
+                                        <span class="days">00</span>
+                                        <em>:</em>
+                                        <span class="hours">15</span>
+                                        <em>:</em>
+                                        <span class="minutes">40</span>
+                                        <em>:</em>
+                                        <span class="seconds">10</span>
+                                    </p>
+                                    <p><em>出价次数：</em><span>{$list.price_list_count}</span></p>
+                                </div>
+                                <!-- {if $list.current_time lt $list.end_time and $list.current_time gt $list.start_time } -->
+                                <a href="{$list.url}" target="_blank" class="sn-btn"><em></em>{$lang.me_bid}<s></s></a>
+                                <!-- {elseif $list.current_time gte $list.end_time } -->
+                                <a href="{$list.url}" target="_blank" class="sn-btn bid_end"><em></em>{$lang.au_end}<s></s></a>
+                                <!-- {else} -->
+                                <a href="{$list.url}" target="_blank" class="sn-btn bid_wait"><em></em>{$lang.Wait_au}<s></s></a>
+                                <!-- {/if} -->
+                            </li>
+                            <!--{/foreach}-->
+                        </ul>
                         <a href="snatch.php?act=list" class="gb-btn-all">全部夺宝</a>
                     </div>
                 </div>
@@ -109,7 +107,7 @@
         </div>
     </div>
     
-    {* DSC 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
+    {* ECSHOP 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
     <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
     
     {insert_scripts files='jquery.SuperSlide.2.1.1.js,common.js,jquery.yomi.js,cart_common.js,cart_quick_links.js'}

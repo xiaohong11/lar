@@ -54,11 +54,10 @@
                 {elseif $goods.model_attr eq 2}
                 <th width="12%">仓库名称</th>
                 <th width="12%">地区名称</th>
-                <th width="12%">城市名称</th>
                 <th width="16%">地区商品货号</th>
-                <th width="16%">地区价格</th>
-                <th width="16%">地区促销价格</th>
-                <th width="16%">地区库存</th>
+                <th width="20%">地区价格</th>
+                <th width="20%">地区促销价格</th>
+                <th width="20%">地区库存</th>
                 {/if}
             </thead>
             <tbody>
@@ -79,7 +78,6 @@
                 <tr>
                 	<td>{$list.warehouse_name}</td>
                     <td>{$list.region_name}</td>
-                    <td>{$list.city_name}</td>
                     <td><input class="text w80 tc fn" style="margin-right:0px;" name="region_sn[]" onblur="listTable.editInput(this, 'edit_region_sn', {$list.a_id});" autocomplete="off" value="{$list.region_sn|default:$lang.n_a}" type="text"></td>
                     <td><input class="text w60 tc fn" style="margin-right:0px;" name="region_price[]" onblur="listTable.editInput(this, 'edit_region_price', {$list.a_id});" autocomplete="off" value="{$list.region_price|default:0.00}" type="text"></td>
                     <td><input class="text w60 tc fn" style="margin-right:0px;" name="region_promote_price[]" onblur="listTable.editInput(this, 'edit_region_promote_price', {$list.a_id});" autocomplete="off" value="{$list.region_promote_price|default:0.00}" type="text"></td>
@@ -107,7 +105,7 @@
 </div>
 <script type="text/javascript">
 
-listTable_pb.recordCount = '{$warehouse_area_record_count}';
+listTable_pb.recordCount = '{$warehouse_area_list}';
 listTable_pb.pageCount = '{$warehouse_area_page_count}';
 listTable_pb.url = "dialog.php?is_ajax=1";
 listTable_pb.query = '{$query}';
@@ -144,7 +142,7 @@ $(function(){
 		listTable_pb.loadList();
 	});
 	
-	$("[data-toggle='tooltip']").tooltip();
+	$("[data-toggle='tooltip']").tooltip({});
 });
 </script>
 {/if}

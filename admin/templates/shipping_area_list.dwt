@@ -5,13 +5,13 @@
 
 <body class="iframe_body">
 <div class="warpper">
-    <div class="title"><a href="{$action_link1.href}" class="s-back">{$lang.back}</a>{$lang.11_system} - {$ur_here}</div>
+    <div class="title"><a href="{$action_link1.href}" class="s-back">{$lang.back}</a>系统设置 - {$ur_here}</div>
     <div class="content">
         <div class="explanation" id="explanation">
-            <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
             <ul>
-                <li>{$lang.operation_prompt_content.list.0}</li>
-                <li>{$lang.operation_prompt_content.list.1}</li>
+                <li>配送区域列表是展示所有配送区域的范围和所在地区。</li>
+                <li>其中上门自提是展示某范围区域的自提点。</li>
             </ul>
         </div>
         <div class="flexilist">
@@ -35,7 +35,7 @@
                                 {if $shipping_code == "cac"}
                                 <th width="30%"><div class="tDiv">{$lang.shipping_area_point}</div></th>
                                 {/if}
-                                <th {if $shipping_code neq "cac"}width="15%"{/if} class="handle">{$lang.handle}</th>
+                                <th {if $shipping_code neq "cac"}width="15%"{/if} class="handle">操作</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,7 +57,7 @@
                                 <td class="handle">
                                     <div class="tDiv a2">
                                         <a href="shipping_area.php?act=edit&id={$area.shipping_area_id}" class="btn_edit"><i class="icon icon-edit"></i>{$lang.edit}</a>
-                                        <a href="javascript:;" onclick="listTable.remove({$area.shipping_area_id}, '{$lang.remove_confirm}', 'remove_area')" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                        <a href="javascript:;" onclick="listTable.remove({$area.shipping_area_id}, '{$lang.remove_confirm}', 'remove_area')" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>
                                     </div>
                                 </td>
                             </tr>
@@ -87,6 +87,22 @@
     </div>
 </div>
 {include file ='library/pagefooter.lbi'}
+
+<script type="text/javascript">
+$(function(){
+    ajaxSellerShippingArea();
+});
+
+/* *
+ * 检测配送地区缓存文件是否存在；
+ */
+function ajaxSellerShippingArea(){
+    Ajax.call('shipping_area.php?is_ajax=1&act=seller_shipping_area','', ajaxShippingAreaResponse, 'GET', 'JSON');
+}
+
+function ajaxShippingAreaResponse(result){
+}
+</script>
 </body>
 </html>
 {/if}

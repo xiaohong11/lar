@@ -4,14 +4,14 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="package.php?act=list" class="s-back">{$lang.back}</a>{$lang.promotion} - {$ur_here}</div>
+    	<div class="title"><a href="package.php?act=list" class="s-back">{$lang.back}</a>促销 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content_common}</li>
-                    <li>{$lang.operation_prompt_content.info.0}</li>
-                    <li>{$lang.operation_prompt_content.info.1}</li>
+                	<li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
+                    <li>该活动可将多个商品组成一个礼包，整体购买单价将低于单件购买的价格。</li>
+                    <li>添加后的超值礼包活动详情可在前台促销活动中的超值礼包页面查看活动。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -30,11 +30,14 @@
                                     </div>
                                     <div class="item">
                                         <div class="label">{$lang.require_field}{$lang.start_end_time}：</div>
-                                        <div class="label_value text_time">
-                                    		<input type="text" name="start_time" value="{$package.start_time}" id="start_time" class="text mr0" readonly />
-                                            <span class="bolang">&nbsp;&nbsp;~&nbsp;&nbsp;</span>
-                                            <input type="text" name="end_time" value="{$package.end_time}" id="end_time" class="text" readonly />
-											<div class="form_prompt"></div>
+                                        <div class="label_value">
+										  <div class="text_time" id="text_time1">
+											  <input type="text" name="start_time" value="{$package.start_time}" id="start_time_id" class="text mr0" readonly />
+										  </div>
+										  <span class="bolang">&nbsp;&nbsp;~&nbsp;&nbsp;</span>
+										  <div class="text_time" id="text_time2">
+											  <input type="text" name="end_time" value="{$package.end_time}" id="end_time_id" class="text" readonly />
+										  </div>
                                         </div>
                                     </div>
                                     <div class="item">
@@ -45,12 +48,12 @@
                                                 <input type="file" class="type-file-file" id="activity_thumb" name="activity_thumb" data-state="imgfile" size="30" hidefocus="true" value="" />
                                                 {if $package.activity_thumb neq ""}
                                                 <span class="show">
-                                                    <a href="../{$package.activity_thumb}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="../{$package.activity_thumb}" ectype="tooltip" title="tooltip"></i></a>
+                                                    <a href="../{$package.activity_thumb}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../{$package.activity_thumb}>')" onmouseout="toolTip()"></i></a>
                                                 </span>
                                                 {/if}
                                                 <input type="text" name="textfile" {if $package.activity_thumb neq ''}value="../{$package.activity_thumb}"{/if} class="type-file-text" id="textfield" autocomplete="off" readonly />
                                             </div>
-                                            <div class="notic">{$lang.size}：580*270</div>
+                                            <div class="notic">{$lang.pixel80}</div>
                                             <div class="form_prompt"></div>
                                         </div>
                                     </div>
@@ -73,17 +76,17 @@
                                     <div class="item">
                                         <div class="label">{$lang.adopt_status}：</div>
                                         <div class="label_value">
-											<div class="checkbox_items" ectype="general_audit_status">
+											<div class="checkbox_items">
 												<div class="checkbox_item"> 
-													<input name="review_status" type="radio" class="ui-radio" value="1" id="review_status_1" {if $package.review_status eq 1}checked="checked"{/if} />
+													<input name="review_status" type="radio" class="ui-radio" value="1" id="review_status_1" {if $package.review_status eq 1}checked="checked"{/if} onclick="get_review_status(this.value)" />
 													<label for="review_status_1" class="ui-radio-label">{$lang.not_audited}</label>
 												</div>
 												<div class="checkbox_item"> 
-													<input name="review_status" type="radio" class="ui-radio" value="2" id="review_status_2" {if $package.review_status eq 2}checked="checked"{/if} />
+													<input name="review_status" type="radio" class="ui-radio" value="2" id="review_status_2" {if $package.review_status eq 2}checked="checked"{/if} onclick="get_review_status(this.value)" />
 													<label for="review_status_2" class="ui-radio-label">{$lang.audited_not_adopt}</label>
 												</div>
                                                 <div class="checkbox_item"> 
-													<input name="review_status" type="radio" class="ui-radio" value="3" id="review_status_3" {if $package.review_status eq 3}checked="checked"{/if} />
+													<input name="review_status" type="radio" class="ui-radio" value="3" id="review_status_3" {if $package.review_status eq 3}checked="checked"{/if} onclick="get_review_status(this.value)" />
 													<label for="review_status_3" class="ui-radio-label">{$lang.audited_yes_adopt}</label>
 												</div>
 											</div>
@@ -96,66 +99,74 @@
 										</div>
 									</div>
                                     {/if}
-                                    <div class="item">
-                                        <div class="label">{$lang.package_goods_alt}：</div>
-                                        <div class="label_value">
-                                            <input type="button" class="btn btn30 blue_btn fl mr10 valid" value="{$lang.set_goods}" ectype="setupGroupGoods" data-diffeseller="1" data-pbmode="setpackagegoods" data-pbtype="package" aria-invalid="false">
-                                        </div>
-                                    </div>
-                                    <div class="list-div">
-                                        <table cellpadding="1" cellspacing="1" >
-                                            <thead>
-                                                <tr>
-                                                    <th width="20%"><div class="tDiv">{$lang.goods_name}</div></th>
-                                                    <th width="15%"><div class="tDiv">{$lang.goods_price}</div></th>
-                                                    <th width="15%"><div class="tDiv">{$lang.goods_number}</div></th>
-                                                    <th width="20%"><div class="tDiv">{$lang.09_attribute_list}</div></th>
-                                                    <th width="10%"><div class="handle">{$lang.handler}</div></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody ectype="group_list">
-                                            {foreach from=$package_goods_list item=package_goods}
-                                                <tr data-goods="{$package_goods.goods_id}">
-                                                    <td><div class="tDiv">{$package_goods.goods_name_pack}</div></td>
-                                                    <td><div class="tDiv">{$package_goods.shop_price}</div></td>
-                                                    <td><div class="tDiv"><input class="text w50 tc fn" style="margin-right:0px;" onblur="edit_package_nuber(this)" name="goods_number[]" autocomplete="off" value="{$package_goods.goods_number}" type="text"></div></td>
-                                                    <td>
-                                                        <div class="tDiv">
-                                                            {if $package_goods.products}
-                                                            <div class="imitate_select select_w220">
-                                                                <div class="cite">{$lang.select_please}</div>
-                                                                <ul style="display: none;" class="ps-container">
-                                                                    <li><a href="javascript:;" data-value="" class="ftx-01">{$lang.select_please}</a></li>
-                                                                    {foreach from=$package_goods.products item=products}
-                                                                    <li><a href="javascript:;" data-value="{$products.product_id}" class="ftx-01" ectype="package_checked">{$products.goods_attr_str}</a></li>
-                                                                    {/foreach}
-                                                                </ul>
-                                                                <input type="hidden" name="product_id[]" value="{$package_goods.product_id}" data-oldproduct="{$package_goods.product_id}" >
-                                                            </div>
-                                                            {/if}
-                                                        </div>
-                                                    </td>
-                                                    <td class="handle">
-                                                        <div class="tDiv a1">
-                                                            {if $package_goods.products}
-                                                            <a href="javascript:;" ectype="add_package_goods" title="{$lang.increase}" class="btn_trash"><i class="icon icon-plus"></i>{$lang.increase}</a>						
-                                                            {/if}
-                                                            <a href="javascript:;" ectype="remove_group" title="{$lang.remove}" data-operation="package" data-msg="{$lang.confirm_drop_goods}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            {foreachelse}
-                                                <tr><td class="no-records" colspan="12">{$lang.no_records}</td></tr>
-                                            {/foreach}
-                                            </tbody>
-                                        </table>
+									<div class="goods_search_div bor_bt_das mt30">
+										<div class="search_select">
+											<div class="categorySelect">
+												<div class="selection">
+													<input type="text" name="category_name" id="category_name" class="text w250 valid" value="请选择分类" autocomplete="off" readonly data-filter="cat_name" />
+													<input type="hidden" name="category_id" id="category_id" value="0" data-filter="cat_id" />
+												</div>
+												<div class="select-container" style="display:none;">
+													{include file="library/filter_category.lbi"}
+												</div>
+											</div>
+										</div>
+										<div class="search_select">
+											<div class="brandSelect">
+												<div class="selection">
+													<input type="text" name="brand_name" id="brand_name" class="text w120 valid" value="请选择品牌" autocomplete="off" readonly data-filter="brand_name" />
+													<input type="hidden" name="brand_id" id="brand_id" value="0" data-filter="brand_id" />
+												</div>
+												<div class="brand-select-container" style="display:none;">
+													{include file="library/filter_brand.lbi"}
+												</div>
+											</div>                            
+										</div>
+										<input type="hidden" name="ru_id" value="{$ru_id}" />
+										<input type="text" name="keyword" class="text w150" placeholder="请输入关键字" data-filter="keyword" autocomplete="off" />
+										<a href="javascript:void(0);" class="btn btn30" onclick="searchGoods()" ><i class="icon icon-search"></i>搜索</a>
 									</div>
+									 <div class="item">
+										<div class="move_div mt0">
+											<div class="move_left">
+												<h4>{$lang.all_goods}</h4>
+												<div class="move_info" >
+													<div class="move_list" id="source_select">
+														<ul>
+														</ul>	
+													</div>
+												</div>
+												<div class="move_handle">
+													<a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">全选</a>
+													<a href="javascript:void(0);" class="btn btn25 red_btn" onclick="addGoods()">确定</a>
+												</div>
+											</div>
+											<div class="move_middle">
+												<div class="tc"><p>{$lang.goods_number}</p><input name="number" id="number" type="text" size="6" value="1" class="text w50 tc fn mr0" autocomplete="off" /></p></div>
+											</div>
+											<div class="move_right">
+												<h4>{$lang.package_goods}</h4>
+												<div class="move_info">
+													<div class="move_list" id="target_select">
+														<ul>
+														  {foreach from=$package_goods_list item=package_goods}
+														  <li><i class='sc_icon sc_icon_ok'></i><a href='javascript:;' data-value='{$package_goods.g_p}' class='ftx-01'>{$package_goods.goods_name}</a></li>
+														  {/foreach}
+														</ul>
+													</div>
+												</div>
+												<div class="move_handle">
+													<a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">全选</a><a href="javascript:void(0);" class="btn btn25 btn_red" onclick="delGoods()">移除</a>
+												</div>
+											</div>
+										</div>
+                                    </div>
 						            <div class="clear"></div>
                                     <div class="info_btn info_btn_bf100 mt30">
                                         <input type="submit" value="{$lang.button_submit}" class="button" id="submitBtn" />
+                                        <!--<input type="reset" value="{$lang.button_reset}" class="button button_reset" />-->
                                         <input type="hidden" name="act" value="{$form_action}" />
                                         <input type="hidden" name="id" value="{$package.id}" />
-                                        <input type="hidden" name="ru_id" value="{$package.ru_id}" />
                                     </div>
                             	</div>        
                             </div>
@@ -166,98 +177,175 @@
             </div>
 		</div>
 	</div>
-    {include file ='library/pagefooter.lbi'}
-	<script type="text/javascript">
-        //表单验证
-        $(function(){
-            $("#submitBtn").click(function(){
-                if($("#package_form").valid()){
-                    $("#package_form").submit();
-                }
-            });
-        
-            $('#package_form').validate({
-                errorPlacement: function(error, element){
-                    var error_div = element.parents('div.label_value').find('div.form_prompt');
-                    element.parents('div.label_value').find(".notic").hide();
-                    error_div.append(error);
-                },
-                rules : {
-                    package_name : {
-                        required : true
-                    },
-                    package_price : {
-                        required : true,
-                        number:true
-                    },
-                    desc : {
-                        required : true
-                    },
-                    start_time :{
-                        required : true
-                    },
-                    end_time :{
-                        required : true,
-                        compareDate:"#start_time",
-                    }
-                },
-                messages : {
-                    package_name : {
-                        required : '<i class="icon icon-exclamation-sign"></i>' + no_name
-                    },
-                    package_price : {
-                        required : '<i class="icon icon-exclamation-sign"></i>' + invalid_package_price,
-                        number : '<i class="icon icon-exclamation-sign"></i>' + invalid_package_price
-                    },
-                    desc : {
-                        required : '<i class="icon icon-exclamation-sign"></i>' + no_desc
-                    },
-                    start_time :{
-                        required : '<i class="icon icon-exclamation-sign"></i>'+start_data_notnull
-                    },
-                    end_time :{
-                        required : '<i class="icon icon-exclamation-sign"></i>'+end_data_notnull,
-                        compareDate:'<i class="icon icon-exclamation-sign"></i>'+data_invalid_gt
-                    }
-                },
-				onfocusout:function(element,event){
-					//实时去除结束时间是否大于开始时间验证
-					var name = $(element).attr("name");
-					
-					if(name == "end_time"){
-						var endDate = $(element).val();
-						var startDate = $(element).siblings("input[name='start_time']").val();
-						
-						var date1 = new Date(Date.parse(startDate.replace(/-/g, "/")));
-						var date2 = new Date(Date.parse(endDate.replace(/-/g, "/")));
-						
-						if(date1 > date2){
-							$(element).removeClass("error");
-							$(element).siblings(".form_prompt").html("");
-						}
-					}
+ {include file ='library/pagefooter.lbi'}
+
+<script type="text/javascript">
+	//表单验证
+	$(function(){
+		$("#submitBtn").click(function(){
+			if($("#package_form").valid()){
+				$("#package_form").submit();
+			}
+		});
+	
+		$('#package_form').validate({
+			errorPlacement: function(error, element){
+				var error_div = element.parents('div.label_value').find('div.form_prompt');
+				element.parents('div.label_value').find(".notic").hide();
+				error_div.append(error);
+			},
+			rules : {
+				package_name : {
+					required : true
+				},
+				package_price : {
+					required : true,
+					number:true
+				},
+				desc : {
+					required : true
+				},
+			},
+			messages : {
+				package_name : {
+					required : '<i class="icon icon-exclamation-sign"></i>' + no_name
+				},
+				package_price : {
+					required : '<i class="icon icon-exclamation-sign"></i>' + invalid_package_price,
+					number : '<i class="icon icon-exclamation-sign"></i>' + invalid_package_price
+				},
+				desc : {
+					required : '<i class="icon icon-exclamation-sign"></i>' + no_desc
 				}
-            });
-            
-            $('.nyroModal').nyroModal();
-        });
-        
-        //时间选择
-        var opts1 = {
-            'targetId':'start_time',//时间写入对象的id
-            'triggerId':['start_time'],//触发事件的对象id
-            'alignId':'start_time',//日历对齐对象
-            'format':'-',//时间格式 默认'YYYY-MM-DD HH:MM:SS'
-            'min':'{$package.start_time}' //最小时间
-        },opts2 = {
-            'targetId':'end_time',
-            'triggerId':['end_time'],
-            'alignId':'end_time',
-            'format':'-',
-            'min':'{$package.start_time}'
-        }
-        xvDate(opts1);
-        xvDate(opts2);
-    </script>
+			}
+		});
+		
+		$('.nyroModal').nyroModal();
+	});
+	
+	//时间选择
+	var opts1 = {
+		'targetId':'start_time_id',//时间写入对象的id
+		'triggerId':['start_time_id'],//触发事件的对象id
+		'alignId':'text_time1',//日历对齐对象
+		'format':'-',//时间格式 默认'YYYY-MM-DD HH:MM:SS'
+		'min':'{$package.start_time}' //最小时间
+	},opts2 = {
+		'targetId':'end_time_id',
+		'triggerId':['end_time_id'],
+		'alignId':'text_time2',
+		'format':'-',
+		'min':'{$package.start_time}'
+	}
+	xvDate(opts1);
+	xvDate(opts2);
+	
+	function get_review_status(val){
+		if(val == 2){
+			$("#review_content").show();
+		}else{
+			$("#review_content").hide();
+		}
+	}
+
+	function searchGoods()
+	{
+		var filter = new Object;
+		filter.keyword    = document.forms['theForm'].elements['keyword'].value;
+		filter.cat_id     = document.forms['theForm'].elements['category_id'].value;
+		filter.brand_id   = document.forms['theForm'].elements['brand_id'].value;
+		filter.ru_id = document.forms['theForm'].elements['ru_id'].value;
+		
+		$("#source_select").find("ul").html("<i class='icon-spinner icon-spin'></i>");
+		
+		setTimeout(function(){Ajax.call('package.php?is_ajax=1&act=search_goods', filter, searchGoodsResponse, 'GET', 'JSON')},300);
+	}
+	
+	function searchGoodsResponse(result)
+	{
+		var step = $("#source_select").parents(".step[ectype=filter]:first");	
+		  if (result.error == 0)
+		  {	 
+			  $("#source_select").find("li,i").remove();
+			
+			  var goods = result.content;
+			
+			  if (goods)
+			  {
+				  for (i = 0; i < goods.length; i++)
+				  {
+					
+					  if (goods[i].products.length > 0)
+					  {
+						  for (var j = 0; goods[i].products[j]; j++)
+						  {
+							  var value = goods[i].value + '_' + goods[i].products[j].product_id;
+							  var text  = goods[i].text + '[' + goods[i].products[j].goods_attr_str + ']';
+							  $("#source_select").children("ul").append("<li><i class='sc_icon sc_icon_ok'></i><a href='javascript:;' data-value='"+value+"' class='ftx-01'>"+text+"</a></li>")
+						  }
+					  }else{
+							$("#source_select").children("ul").append("<li><i class='sc_icon sc_icon_ok'></i><a href='javascript:;' data-value='"+goods[i].value+"' class='ftx-01'>"+goods[i].text+"</a></li>")
+					  }
+				  }
+			  }
+		  }
+	
+		if (result.message.length > 0)
+		{
+			alert(result.message);
+		}
+		step.find(".move_list").perfectScrollbar();	
+	}
+	
+	function addGoods()
+	{
+		var goodsId = [];
+		var num = document.getElementById('number').value;
+		var packageId = document.forms['theForm'].elements['id'].value;
+		$("#source_select").find("li").each(function(){
+			if($(this).attr("class") == 'current'){
+				var value = $(this).find("a").data('value');
+				goodsId.push(value);
+			}
+		});
+		Ajax.call('package.php?is_ajax=1&act=add_package_goods&num='+ num +'&pid='+ packageId, goodsId, addGoodsResponse, 'GET', 'JSON');
+	}	
+	
+	function addGoodsResponse(result){
+		if(result.error == 0){
+			$("#target_select").find('li').remove();
+			var goods = result.content;
+			for(i=0;i<goods.length;i++){
+				$("#target_select").children("ul").append("<li><i class='sc_icon sc_icon_ok'></i><a href='javascript:;' data-value='"+goods[i].value+"' class='ftx-01'>"+goods[i].text+"</a></li>")
+			}
+		}
+	}
+	
+	function delGoods()
+	{
+		var goodsId = [];
+		var packageId = document.forms['theForm'].elements['id'].value;
+		
+		$("#target_select").find("li").each(function(){
+			if($(this).attr("class") == 'current'){
+				var value = $(this).find("a").data('value');
+				goodsId.push(value);
+			}
+		});	
+		Ajax.call('package.php?is_ajax=1&act=drop_package_goods&pid='+ packageId, goodsId, delGoodsResponse, 'GET', 'JSON');
+	}
+	
+	function delGoodsResponse(result){
+		if(result.error == 0){
+			$("#target_select").find('li').remove();
+			var goods = result.content;
+			if(goods){
+				for(i=0;i<goods.length;i++){
+					$("#target_select").children("ul").append("<li><i class='sc_icon sc_icon_ok'></i><a href='javascript:;' data-value='"+goods[i].value+"' class='ftx-01'>"+goods[i].text+"</a></li>")
+				}
+			}
+		}	
+	}
+</script>
 </body>
 </html>

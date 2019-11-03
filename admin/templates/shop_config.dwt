@@ -3,7 +3,7 @@
 <head>{include file ='library/admin_html_head.lbi'}</head>
 <body class="iframe_body">
 	<div class="warpper shop_special">
-    	<div class="title">{$lang.11_system} - {$ur_here}</div>
+    	<div class="title">系统设置 - {$ur_here}</div>
 		<div class="content">
         	<div class="tabs_info">
             	<ul>
@@ -15,18 +15,26 @@
             <div class="explanation" id="explanation">
                 <div class="ex_tit">
                     <i class="sc_icon"></i>
-                    <h4>{$lang.operating_hints}</h4>
-                    <span id="explanationZoom" title="{$lang.fold_tips}"></span>
+                    <h4>操作提示</h4>
+                    <span id="explanationZoom" title="收起提示"></span>
                     {if $open eq 1}
                     <div class="view-case">
-                    	<div class="view-case-tit"><i></i>{$lang.view_tutorials}</div>
-                        <div class="view-case-info">{$lang.tutorials_bonus_list_one}</div>
+                    	<div class="view-case-tit"><i></i>查看教程</div>
+                        <div class="view-case-info">
+                        	<a href="http://help.ecmoban.com/article-6273.html" target="_blank">商店设置---平台基本信息设置</a>
+                            <a href="http://help.ecmoban.com/article-6274.html" target="_blank">商店设置---客服设置</a>
+                            <a href="http://help.ecmoban.com/article-6268.html" target="_blank">商店设置---市场价格比例及积分比例设置</a>
+                            <a href="http://help.ecmoban.com/article-6271.html" target="_blank">商店设置---设置区分地区商品</a>
+                            <a href="http://help.ecmoban.com/article-6266.html" target="_blank">商店设置---短信设置</a>
+                            <a href="http://help.ecmoban.com/article-6267.html" target="_blank">商店设置---WAP设置</a>
+                            <a href="http://help.ecmoban.com/article-6265.html" target="_blank">商店设置---商品属性价格模式设置</a>
+                        </div>
                     </div>
                     {/if}
                 </div>
                 <ul>
-                    <li>{$lang.operation_prompt_content.shop_config.0}</li>
-                    <li>{$lang.operation_prompt_content_common}</li>
+                    <li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
+                    <li>商店相关信息设置，请谨慎填写信息。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -62,28 +70,9 @@
 		//图片点击放大
 		$('.nyroModal').nyroModal();
 		
+		
 		//表单验证
 		$("[ectype='btnSubmit']").click(function(){
-			var invoice_type = $("input[name='invoice_type[]']");
-			var invoice_type_val = "";
-			var arr = [];
-			
-			invoice_type.each(function(){
-				invoice_type_val = $(this).val();
-				arr.push(invoice_type_val);
-			});
-			
-           	var nary = arr.sort();
-			
-			for(var i = 0; i < nary.length - 1; i++)
-			{
-			   if (nary[i] == nary[i+1])
-				{
-				   alert("{$lang.btnSubmit_notice}" + nary[i]);
-				   return false;
-				}
-			}
-			
 			if($("#shopConfigForm").valid()){
 				$("#shopConfigForm").submit();
 			}
@@ -102,7 +91,7 @@
 			},
 			messages:{
 				"value[101]" :{
-					 required : '<i class="icon icon-exclamation-sign"></i>'+seller_info_notic
+					 required : '<i class="icon icon-exclamation-sign"></i>商店名称不能为空'
 				}
 			}			
 		});
@@ -142,59 +131,38 @@
 	
 	function addCon_amount(obj)
 	{  
-		var obj = $(obj);
-		var tbl = obj.parents('#consumtable');
-		var fald = true;
-		var fald2 = true;
-		var error = "";
-		var volumeNum = obj.siblings("input");
-		var it_val ="";
-		
-		var new_it_val = obj.siblings("input[name='invoice_type[]']").val();
-		
-		tbl.find(".mt10").each(function(){
-			var it_input =$(this).find("input[name='invoice_type[]']");
-			it_val = it_input.val();
-			
-			if(new_it_val == it_val){
-				obj.siblings("input[name='invoice_type[]']").addClass("error");
-				fald2 = false;
-				error = "{$lang.type_already_exists}";
-			}
-		});
-		if(fald2 == true){
-			volumeNum.each(function(index,element){
-				var val = $(this).val(); 
-				if(val == ""){
-					$(this).addClass("error");
-					fald = false;
-					error = "{$lang.type_taxrate_not_notic}";
-				}else if(!(/^[0-9]+.?[0-9]*$/.test(val)) && index == 1){
-					$(this).addClass("error");
-					fald = false;
-					error = "{$lang.taxrate_number}";
-				}else{
-					$(this).removeClass("error");
-					fald = true;
-				}
-			});
-		
-			if(fald == true){
-				var input = tbl.find('p:first').clone();
-				input.addClass("mt10");
-				input.find("input[type='button']").remove();
-				input.find(".form_prompt").remove();
-				input.append("<a href='javascript:;' class='removeV' onclick='removeCon_amount(this)'><img src='images/no.gif' title='{$lang.drop}'></a>")
-				tbl.append(input);
-				volumeNum.val("");
-			}else{
-				obj.next(".form_prompt").find(".error").remove();
-				obj.next(".form_prompt").append("<label class='error'><i class='icon icon-exclamation-sign'></i>"+error+"</label>"); 
-			}
+	  var obj = $(obj);
+	  var tbl = obj.parents('#consumtable');
+	  var fald = true;
+	  var error = "";
+	  var volumeNum = obj.siblings("input");
+	  volumeNum.each(function(index,element){
+		var val = $(this).val(); 
+		if(val == ""){
+			$(this).addClass("error");
+			fald = false;
+			error = "类型和税率不能为空";
+		}else if(!(/^[0-9]+.?[0-9]*$/.test(val)) && index == 1){
+			$(this).addClass("error");
+			fald = false;
+			error = "税率必须为数字";
 		}else{
-			obj.next(".form_prompt").find(".error").remove();
-			obj.next(".form_prompt").append("<label class='error'><i class='icon icon-exclamation-sign'></i>"+error+"</label>"); 
+			$(this).removeClass("error");
+			fald = true;
 		}
+	  });
+	  if(fald == true){
+		  var input = tbl.find('p:first').clone();
+		  input.addClass("mt10");
+		  input.find("input[type='button']").remove();
+		  input.find(".form_prompt").remove();
+		  input.append("<a href='javascript:;' class='removeV' onclick='removeCon_amount(this)'><img src='images/no.gif' title='删除'></a>")
+		  tbl.append(input);
+		  volumeNum.val("");
+	  }else{
+		obj.next(".form_prompt").find(".error").remove();
+		obj.next(".form_prompt").append("<label class='error'><i class='icon icon-exclamation-sign'></i>"+error+"</label>"); 
+	  }
 	}
 
 	function removeCon_amount(obj)

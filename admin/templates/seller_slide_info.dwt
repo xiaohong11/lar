@@ -7,9 +7,9 @@
     	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content_common}</li>
+                	<li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
                     <li>请按提示填写准确无误的信息。</li>
                     <li>请注意上传广告图片的尺寸。</li>
                 </ul>
@@ -27,7 +27,7 @@
                                             <input type="file" class="type-file-file" name="img_url" size="30" hidefocus="true" value="">
                                             {if $slide.img_url neq ""}
                                             <span class="show">
-                                            <a href="{$slide.img_url}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="{$slide.img_url}" ectype="tooltip" title="tooltip"></i></a>
+                                            <a href="{$slide.img_url}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$slide.img_url}>')" onmouseout="toolTip()"></i></a>
                                             </span>
                                             {/if}
                                             <input type="text" name="textfile" class="type-file-text" {if $slide.img_url neq ""}value="{$slide.img_url}"{/if} id="textfield" readonly>

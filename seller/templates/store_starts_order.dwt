@@ -101,8 +101,8 @@
 </div>
 {include file ='library/seller_footer.lbi'}
 <script type="text/javascript">
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
+	listTable.recordCount = '{$record_count}';
+	listTable.pageCount = '{$page_count}';
     listTable.query = "order_stats_query";
 	{foreach from=$filter item=item key=key}
 	listTable.filter.{$key} = '{$item}';
@@ -157,8 +157,8 @@
 		if(listTable.filter['cat_name'] != ''){
 			where_cat = '&store_name=' + listTable.filter['store_name'];
 		}
-//		var a_action = document.getElementById('actionSpan');
-//		a_action.href = 'sale_general.php?act=download&date_start_time=' + listTable.filter['date_start_time'] + '&date_end_time=' + listTable.filter['date_end_time'] + '&order_type=' + listTable.filter['order_type'] + where_order + where_shipping + where_cat;
+		var a_action = document.getElementById('actionSpan');
+		a_action.href = 'sale_general.php?act=download&date_start_time=' + listTable.filter['date_start_time'] + '&date_end_time=' + listTable.filter['date_end_time'] + '&order_type=' + listTable.filter['order_type'] + where_order + where_shipping + where_cat;
 
 		listTable.filter['page'] = 1;
 		listTable.loadList();

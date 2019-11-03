@@ -396,7 +396,7 @@ i.ibar_recharge-arrow {width: 6px;height: 3px;background: url(../images/common/a
 /*我的足迹end*/
 
 /*我的资产*/
-.tbar-panel-main .s-list{ width: 230px;margin-left: 25px;overflow: hidden;position: absolute;top: 20px;bottom: 10px;/*background: url(../images/common/loading-jd.gif) no-repeat center 80px;*/}
+.tbar-panel-main .s-list{ width: 230px;margin-left: 25px;overflow: hidden;position: absolute;top: 20px;bottom: 10px;background: url(../images/common/loading-jd.gif) no-repeat center 80px;}
 .tbar-panel-main .s-list ul.s-li-con { overflow: hidden;max-height: 1500px; margin-top:10px;}
 .tbar-panel-main .s-list .s-asset { background: #fff;height: 34px;padding: 8px 0;border-radius: 3px;margin-top: 5px;overflow: hidden;}
 .tbar-panel-main .s-asset span { float: left;width: 80px;border-right: solid 1px #dfdfdf;text-align: center;font-size: 12px;font-weight: bold;color: #8f8f8f;}
@@ -452,7 +452,6 @@ i.ibar_recharge-arrow {width: 6px;height: 3px;background: url(../images/common/a
 .coupon-wrap .coupon-item { margin: 20px 0 10px 5px;width: 240px;background-position: 0 -20px;position: relative;}
 .coupon-wrap .coupon-item .item-wrap { padding: 0 10px;}
 .coupon-wrap .coupon-item .coupon-price { float: left;font-family: "microsoft yahei";font-size: 30px;font-weight: 700;display: inline;line-height: 40px;}
-.coupon-wrap .coupon-item .coupon-price-free{ font-size:24px; margin:5px 0 0 10px;}
 .coupon-item .coupon-price .token { position: relative;font-size: 20px;top: -6px;}
 .coupon-wrap .coupon-item .coupon-info { float: right;display: inline;width: 120px;margin: 8px 2px;height: 36px;overflow: hidden;line-height: 18px;}
 .coupon-wrap .coupon-item .coupon-info .tit{ display:block; width:100px; text-align:center;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; margin:0 auto;}
@@ -461,7 +460,6 @@ i.ibar_recharge-arrow {width: 6px;height: 3px;background: url(../images/common/a
 .coupon-item .coupon-time { clear: both;line-height: 21px;}
 .coupon-item .btn-get.usable { width: 189px;background-position: 0 -200px;cursor: default;}
 
-.coupon-item-notic{ color: #555; text-align: center; height: 80px; line-height: 80px; margin-top: 10px; }
 
 
 

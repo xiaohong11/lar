@@ -4,13 +4,13 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="javascript:;" ectype="goback" class="s-back">{$lang.back}</a>{$lang.promotion} - {$ur_here}</div>
+    	<div class="title"><a href="javascript:;" ectype="goback" class="s-back">{$lang.back}</a>促销 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.3}</li>
-                    <li>{$lang.operation_prompt_content.4}</li>
+                	<li>该页面展示了拍卖活动的出价记录。</li>
+                    <li>主要展示了买家、出价、时间、状态的信息列表。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -59,7 +59,7 @@
             </div>
         </div>
     </div>
-	{include file ='library/pagefooter.lbi'}
+ {include file ='library/pagefooter.lbi'}
     <script type="text/javascript">
 		//列表导航栏设置下路选项
     	$(".ps-container").perfectScrollbar();

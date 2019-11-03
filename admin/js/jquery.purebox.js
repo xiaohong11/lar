@@ -64,7 +64,7 @@
 		},
 		//定义全局变量window.zindex，每次Z值加一
 		_zindex : function() {
-			window.pb_zindex = window.pb_zindex || 99999;
+			window.pb_zindex = window.pb_zindex || 100000;
 			return ++window.pb_zindex;
 		},
 		//设置弹出层Z轴坐标

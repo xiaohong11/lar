@@ -19,8 +19,8 @@
                 var deleteid = '{$lang.delete}';
                 </script>
                 {if !$crons_enable}
-                <ul class="lilist">
-                	<li>{$lang.enable_seller_notice}</li>
+                <ul style="padding:0; margin: 0; list-style-type:none; color: #CC0000;">
+                  <li style="border: 1px solid #CC0000; background: #FFFFCC; padding: 10px; margin-bottom: 5px;" >{$lang.enable_notice}</li>
                 </ul>
                 {/if}
                 <div class="search-info">
@@ -113,22 +113,16 @@ onload = function()
 
 function validate(name)
 {
-	var val = $("input[name='date']").val();
-	var crons_enable = {$crons_enable|default:0};
-	if(val == "0000-00-00")
-	{
-		alert('{$lang.select_time}');
-		return;	
-	}
-	else
-	{
-		if(crons_enable != 0){
-			$("input[name=act]").val(name);
-			$("#listForm").submit();
-		}else{
-			alert('{$lang.enable_seller_notice}');
-		}
-	}
+  if(document.listForm.elements["date"].value == "0000-00-00")
+  {
+    alert('{$lang.select_time}');
+    return;	
+  }
+  else
+  {
+    document.listForm.act.value=name;
+    document.listForm.submit();
+  }
 }
 
 //时间选择

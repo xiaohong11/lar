@@ -10,7 +10,7 @@
             <h4>当前：<span class="j-current_city">{if $current_city.region_name}{$current_city.region_name}{else}未知{/if}</span> <em class="col-9 f-05">GPS定位</em></h4>
         </div>
         <div class="position-rel">
-            <a href="javascript:;" class="relocation"><h4><i class="iconfont icon-dingwei1 color-red"></i>重新定位</h4></a>
+            <a href=""><h4><i class="iconfont icon-dingwei1 color-red"></i>重新定位</h4></a>
         </div>
     </div>
     <section class="user-pos-left-maxbox">
@@ -37,11 +37,24 @@
         <div class="user-add-title user-pos-box" id="link_shop">
             <h4>热门城市</h4>
             <ul class="of-hidden">
-                {foreach $hot_city as $k => $h}
                 <li class="dis-flex switch_city">
-                    <a data-city="{$h.region_id}" href="javascript:void(0);">{$h.region_name}</a>
+                    <a data-city="52" href="javascript:void(0);">北京</a>
                 </li>
-                {/foreach}
+                <li class="dis-flex switch_city">
+                    <a data-city="321" href="javascript:void(0);">上海</a>
+                </li>
+                <li class="dis-flex switch_city">
+                    <a data-city="76" href="javascript:void(0);">广州</a>
+                </li>
+                <li class="dis-flex switch_city">
+                    <a data-city="77" href="javascript:void(0);">深圳</a>
+                </li>
+                <li class="dis-flex switch_city">
+                    <a data-city="322" href="javascript:void(0);">成都</a>
+                </li>
+                <li class="dis-flex switch_city">
+                    <a data-city="311" href="javascript:void(0);">西安</a>
+                </li>
             </ul>
         </div>
     </section>
@@ -100,7 +113,7 @@
                     </div>
                 </div>
             </div>
-        </form>
+            </from>
     </section>
     <div class="ec-fresh-bg ts-3"></div>
 </div>
@@ -110,21 +123,20 @@
         $('body').scrollspy({
             target: '#bs-example'
         })
-
-        var geolocation = new qq.maps.Geolocation("{C('shop.tengxun_key')}", "h5");
+        
+        var geolocation = new qq.maps.Geolocation("{config('shop.tengxun_key')}", "h5");
         var options = {timeout: 8000};
 
         geolocation.getLocation(showPosition, showErr, options)
 
         function showPosition(position) {
-            // var info = JSON.stringify(position, null, 4);
-            // 查询城市信息
-            $.post('{url("info", array("force" => 1))}', {city_name: position.city}, function(data){
-                $('.j-current_city').html(data.region_name);
-                $('.j-current_location_city').attr('data-city', data.region_id).html(data.region_name);
-            }, 'json')
+          // var info = JSON.stringify(position, null, 4);
+          // 查询城市信息
+          $.post('{url("info", array("force" => 1))}', {city_name: position.city}, function(data){
+              $('.j-current_location_city').attr('data-city', data.region_id).html(data.region_name);
+          }, 'json')
         };
-
+     
         function showErr() {
           alert('定位失败，请启用位置服务。');
         };
@@ -141,18 +153,7 @@
                     window.location.href = '{url("/")}';
                 }, 1000);
             });
-        });
-
-        // 重新定位
-        $('.relocation').click(function(){
-
-            $.post("{url('relocation')}", {status: 1}, function(res){
-                geolocation.getLocation(showPosition, showErr, options);
-                setTimeout(function(){
-                    window.location.reload();
-                }, 500);
-            });
-        });
+        })
     });
 
     function doSearch(){

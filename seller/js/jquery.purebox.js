@@ -85,7 +85,7 @@
 				that._setMaskZindex();
 				that._setPbZindex();
 			} else {
-				var css = 'position:fixed;width:100%;height:100%;top:0;left:0;filter:alpha(opacity=20);opacity:0.4;overflow:hidden;background-color:#000;_position:absolute;left:expression(documentElement.scrollLeft+documentElement.clientWidth-this.offsetWidth);top:expression(documentElement.scrollTop+documentElement.clientHeight-this.offsetHeight);',
+				var css = 'position:fixed;width:100%;height:100%;top:0;left:0;filter:alpha(opacity=20);opacity:0.2;overflow:hidden;background-color:#000;_position:absolute;left:expression(documentElement.scrollLeft+documentElement.clientWidth-this.offsetWidth);top:expression(documentElement.scrollTop+documentElement.clientHeight-this.offsetHeight);',
 					iframe = ie6 ? '<iframe src="about:blank" style="width:100%;height:100%;position:absolute;top:0;left:0;z-index:-1;filter:alpha(opacity=0)"></iframe>' : '';
 				$('<div id="pb-mask" style="'+css+'">' + iframe + '</div>').css('z-index', that._zindex()).appendTo(document.body);
 				that._setPbZindex();

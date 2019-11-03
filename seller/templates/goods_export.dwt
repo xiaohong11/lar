@@ -12,6 +12,7 @@
                 <div class="main-content" id="mainContent">
                     {include file ='library/url_here.lbi'}
                     {include file ='library/seller_menu_tab.lbi'}
+                    <!--start-->
                     <div class="wrapper-list">
                         <div class="explanation" id="explanation">
                             <div class="ex_tit"><i class="sc_icon"></i><h4>使用说明</h4></div>
@@ -43,11 +44,6 @@
                                         </div>                            
                                     </div>
                                     <input type="text" name="keyword" class="text text_2 mr10" value="" placeholder="请输入关键字" data-filter="keyword" autocomplete="off" />
-                                    <div style="border:1px dotted #f00; padding:0px 0px 0px 10px;" class="fl mr10 hide" ectype="limit_content">
-                                        <input type="text" name="limit_start" class="text w50" value="0" placeholder="{$lang.limit_start}" data-filter="limit_start" autocomplete="off" />
-                                        <input type="text" name="limit_number" class="text w50" value="50" placeholder="{$lang.limit_number}" data-filter="limit_number" autocomplete="off" />
-                                    </div>
-                                    <a href="javascript:void(0);" class="sc-btn sc-blueBg-btn" ectype="limit_button">范围</a>
                                     <a href="javascript:void(0);" class="sc-btn sc-blueBg-btn" ectype="search">搜索</a>
                                 </div>
                                 <div class="clear"></div>
@@ -101,6 +97,7 @@
                         </div>
                     </div>
 
+                    <!--重新修改 start-->
                     <div id="export_format"></div>
                     <div class="data_format_content" id="ecshop_form" style="display:none">
                         <form action="goods_export.php" method="post" name="theForm" >
@@ -349,7 +346,10 @@
                             </div>
                         </div>
                         </form>
-                    </div>
+                    </div>														
+                    <!--重新修改 end-->
+                    
+                    <!--数据分步导出-->
                     <div class="clear"></div>
                     <div class="list-div mt20" id="listDiv">
                       <table class="ecsc-default-table" id='listTable'>
@@ -362,26 +362,34 @@
                         </thead>
                       </table>
                     </div>
-                    <div style="display:none;border: 1px solid rgb(204, 0, 0);margin-top:10px; padding: 4px; background-color: rgb(255, 255, 206); color: rgb(206, 0, 0);" id="errorMsg" ></div>
+                    <div style="display:none;border: 1px solid rgb(204, 0, 0);margin-top:10px; padding: 4px; background-color: rgb(255, 255, 206); color: rgb(206, 0, 0);" id="errorMsg" ></div>								
+                    <!--直接引用 end-->
                 </div>
             </div>
         </div>
     </div>
 </div>
-{include file='library/seller_footer.lbi'}
-<script type="text/javascript">
-	var post_express_not_null = "{$lang.post_express_not_null}";
-	var express_not_null = "{$lang.express_not_null}";
-	var ems_not_null = "{$lang.ems_not_null}";
-	var custom_goods_field_not_null = "{$lang.custom_goods_field_not_null}";
-	//切换显示 by wu
+
+<script language="JavaScript">
+var post_express_not_null = "{$lang.post_express_not_null}";
+var express_not_null = "{$lang.express_not_null}";
+var ems_not_null = "{$lang.ems_not_null}";
+var custom_goods_field_not_null = "{$lang.custom_goods_field_not_null}";
+//切换显示 by wu
 	$("#dataformat_select li").click(function(){
 		var data_format = $(this).find("a").data("value");
 		show_data_format(data_format)
 	});
-    //切换显示 by wu
+        //切换显示 by wu
+	      
+{literal}
 
     var elements;
+    onload = function()
+    {
+        // 开始检查订单
+        startCheckOrder();
+    }
     var restart = 1, start = 1;
     function formValidate0()
     {
@@ -629,7 +637,7 @@
             return true;
         }
     }
-	/* 检查输入是否完整 */
+/* 检查输入是否完整 */
     function formValidate4 ()
     {
         var elements = document.forms['theForm4'].elements;
@@ -754,6 +762,124 @@
         }
     }
 
+    /* 操作自定义导出商品的Select Box */
+    var MySelectBox;
+    var MySelectBox2;
+    if (!MySelectBox)
+    {
+        var global = $import("../js/global.js","js");
+        global.onload = global.onreadystatechange= function()
+        {
+            if(this.readyState && this.readyState=="loading")return;
+            var selectbox = $import("js/selectbox.js","js");
+            selectbox.onload = selectbox.onreadystatechange = function()
+            {
+                if(this.readyState && this.readyState=="loading")return;
+                MySelectBox = new SelectBox('src_goods_fields', 'dst_goods_fields');
+                MySelectBox2 = new SelectBox('src_goods_lists', 'dst_goods_lists', true);
+            }
+        }
+    }
+    if (Utils.$('addItem'))
+    {
+        Utils.$('addItem').onclick = function ()
+        {
+            MySelectBox.addItem();
+        }
+    }
+    if (Utils.$('delItem'))
+    {
+        Utils.$('delItem').onclick = function ()
+        {
+            MySelectBox.delItem();
+        }
+    }
+    if (Utils.$('addAllItem'))
+    {
+        Utils.$('addAllItem').onclick = function ()
+        {
+            MySelectBox.addItem(true);
+        }
+    }
+    if (Utils.$('delAllItem'))
+    {
+        Utils.$('delAllItem').onclick = function ()
+        {
+            MySelectBox.delItem(true);
+        }
+    }
+    if (Utils.$('src_goods_fields'))
+    {
+        Utils.$('src_goods_fields').ondblclick = function ()
+        {
+            MySelectBox.addItem();
+        }
+    }
+    if (Utils.$('dst_goods_fields'))
+    {
+        Utils.$('dst_goods_fields').ondblclick = function ()
+        {
+            MySelectBox.delItem();
+        }
+    }
+    if (Utils.$('mvUp'))
+    {
+        Utils.$('mvUp').onclick = function ()
+        {
+            MySelectBox.moveItem('up');
+        }
+    }
+    if (Utils.$('mvDown'))
+    {
+        Utils.$('mvDown').onclick = function ()
+        {
+            MySelectBox.moveItem('down');
+        }
+    }
+
+    if (Utils.$('addGoods'))
+    {
+        Utils.$('addGoods').onclick = function ()
+        {
+            MySelectBox2.addItem();
+        }
+    }
+    if (Utils.$('delGoods'))
+    {
+        Utils.$('delGoods').onclick = function ()
+        {
+            MySelectBox2.delItem();
+        }
+    }
+    if (Utils.$('addAllGoods'))
+    {
+        Utils.$('addAllGoods').onclick = function ()
+        {
+            MySelectBox2.addItem(true);
+        }
+    }
+    if (Utils.$('delAllGoods'))
+    {
+        Utils.$('delAllGoods').onclick = function ()
+        {
+            MySelectBox2.delItem(true);
+        }
+    }
+    if (Utils.$('src_goods_lists'))
+    {
+        Utils.$('src_goods_lists').ondblclick = function ()
+        {
+            MySelectBox2.addItem();
+        }
+    }
+    if (Utils.$('dst_goods_lists'))
+    {
+        Utils.$('dst_goods_lists').ondblclick = function ()
+        {
+            MySelectBox2.delItem();
+        }
+    }
+
     /**
      * 上一次操作的对象
      */
@@ -802,17 +928,8 @@
     {
         window.addEventListener("load", init_data_format, false);
     }
-
-    //导出设置
-    $(function(){
-        $(document).on('click', "[ectype='limit_button']", function(){
-            if($("[ectype='limit_content']").hasClass('hide')){
-                $("[ectype='limit_content']").removeClass('hide');
-            }else{
-                $("[ectype='limit_content']").addClass('hide');
-            }
-        })
-    })
 </script>
+
+{include file ='library/seller_footer.lbi'}
 </body>
 </html>

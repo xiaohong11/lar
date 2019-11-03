@@ -55,7 +55,7 @@ function lookup(keyword)
 
 			});
     }
-    //document.documentElement.onkeyup = keyup;
+    document.documentElement.onkeyup = keyup;
 }
 
 /**

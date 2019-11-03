@@ -2,15 +2,14 @@
 <body class="show-search-div">
 <div class="search-div j-search-div ts-3">
     <section class="search common-search">
-        <form action="{url('category/index/search')}" method="post" id="search-form">
+        <form action="{url('/')}?m=category&a=search" method="post" id="search-form">
         <div class="text-all dis-box j-text-all text-all-back">
             <a class="a-icon-back"  href="javascript:history.go(-1);"><i class="iconfont icon-back"></i></a>
             <div class="box-flex input-text">
                 <label class="search-check j-search-check" data="2">
-                    <!-- <span>商品</span><i class="iconfont icon-xiajiantou"></i> -->
-                    <i class="iconfont icon-sousuo f-04 col-9 mr-small"></i>
+                    <span>商品</span><i class="iconfont icon-xiajiantou"></i>
                 </label>
-                <input class="j-input-text"  id="searchname" type="text" name="keyword" maxlength="15" autofocus="autofocus" placeholder="{if $keywords}{$keywords}{else}商品/店铺搜索{/if}" style="padding-left:3rem"/>
+                <input class="j-input-text" type="text" name="keyword"  autofocus="autofocus" placeholder="{if $keywords}{$keywords}{else}商品/店铺搜索{/if}" />
                 <input type="hidden" name="type_select" value="2" />
                 <input type="hidden" name="isself" value="{$isself}" />
                 <input type="hidden" name="brand" value="{$brand_id}" />
@@ -22,11 +21,6 @@
         </div>
         </form>
     </section>
-    <div class="search-nav-section history-search  bg-white swiper-scrollbar" style="bottom:0;top:5rem;z-index: 49;">
-        <div class="f-04 col-7  padding-tb wallet-bt j-store-search"><i class="iconfont icon-dianpu f-06 color-red mr-small"></i>搜索“<em class="col-3 result"></em>”店铺</div>
-        <div class="other-keywords">
-        </div>
-    </div>
     <section class="search-con">
         <div class="history-search">
            <!-- <div class="swiper-wrapper">
@@ -74,30 +68,6 @@
 </div>
 <script type="text/javascript">
     $(function(){
-        // 禁用自动提示
-        $('#searchname').attr("autocomplete","off");
-        $('#searchname').bind('input propertychange', function () {
-            var kwords = $.trim($(this).val()); // 去除空格
-            if (kwords) {
-                $('.result').html(kwords);
-                $.get("{url('search/index/search_keyword')}", {kwords:kwords}, function(data){
-                    $(".other-keywords").html('');
-                    if (data.total > 0) {
-                        var len = data.keywords_list.length > 0 ? data.keywords_list.length - 1 : 0;
-                        var html = '';
-                        for (var i=0;i <= len;i++) {
-                            html = '<div class="f-04 col-7 padding-tb wallet-bt j-other-keyword"><i class="iconfont icon-sousuo f-04 col-9 mr-small"></i><em class="col-3 ">'+data.keywords_list[i].keyword+'</em></div>';
-                            $(".other-keywords").append(html);
-                        }
-                    }
-                    return false;
-                }, 'json');
-                $(".search-nav-section").show();
-            } else {
-                $(".search-nav-section").hide();
-            }
-        });
-
         //清除搜索记录
         var history = {if $history_keywords}{$history_keywords}{else}""{/if};
         $(".clear_history").click(function(){
@@ -111,37 +81,7 @@
                 }, 'json');
             }
         });
-
-        // 相关 搜索关键词 搜索
-        $(".other-keywords").on('click','.j-other-keyword', function() {
-            var other_keyword = $(this).children('em').html();
-            if ($.trim(other_keyword)) {
-                $('input[name="keyword"]').val(other_keyword);
-                $('input[name="type_select"]').val(2);
-                // 用于直接分享搜索结果页
-                $('form').attr('action', "{url('category/index/search')}" + "&keyword=" +other_keyword);
-                $('#search-form').submit();
-            }
-        });
-
-        // 搜索 店铺
-        $('.j-store-search').click(function(){
-            var keywords = $('input[name="keyword"]').val();
-            if ($.trim(keywords)) {
-                $('input[name="type_select"]').val(1);
-                $('#search-form').submit();
-            }
-        });
-
-        // 用于直接分享搜索结果页（原页面为异步加载，直接分享无效）
-        $(".j-input-text").change(function(){
-            var keywords = $('input[name="keyword"]').val();
-            if ($.trim(keywords)) {
-                $('form').attr('action', "{url('category/index/search')}" + "&keyword=" +keywords);
-            }
-        });
-
-    });
+    })
 </script>
 </body>
 </html>

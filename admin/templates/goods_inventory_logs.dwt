@@ -7,11 +7,11 @@
     	<div class="title">{$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.list.0}</li>
-                    <li>{$lang.operation_prompt_content.list.1}</li>
-                    <li>{$lang.operation_prompt_content.list.2}</li>
+                	<li>展示了商城商品入库/出库的操作日志。</li>
+                    <li>可以按照时间段筛选、商品名称关键字搜索，查看具体商品入库/出库日志。</li>
+                    <li>侧边栏可进行高级搜索。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -21,24 +21,24 @@
                         <a href="{$action_link.href}"><div class="fbutton"><div class="piliang" title="{$action_link.text}"><span><i class="icon icon-copy"></i>{$action_link.text}</span></div></div></a>
                     </div>
                     {/if}
-                    <div class="search">
-                    	<form action="javascript:;" name="searchForm" onSubmit="searchGoodsname(this);">
+                    <form action="javascript:searchInventory()" name="searchForm">
+                        <div class="search">
                             <div id="text_time_start" class="text_time">
                                 <input type="text" readonly placeholder="{$lang.start_time}" autocomplete="off" class="text valid" id="start_time_id" name="start_time" style="margin-right:0px;">
                             </div>
                             <span class="bolang">&nbsp;&nbsp;~&nbsp;&nbsp;</span>
                             <div id="text_time_end" class="text_time">
-                                <input type="text" readonly autocomplete="off" placeholder="{$lang.end_time}" class="text" id="end_time_id" value="" name="end_time">
+                            	<input type="text" readonly autocomplete="off" placeholder="{$lang.end_time}" class="text" id="end_time_id" value="" name="end_time">
                             </div>
                             <div class="input mr10">
-                                <input type="text" name="keyword" class="text nofocus" placeholder="{$lang.goods_name}" autocomplete="off" />
+                            	<input type="text" name="keyword" class="text nofocus" placeholder="{$lang.goods_name}" autocomplete="off" />
                                 <input type="submit" value="" class="not_btn" />
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="common-content">
-				<form method="POST" action="goods_inventory_logs.php?act=batch_drop" name="listForm" onsubmit="return confirm('{$lang.confirm_batch_delete}');">
+				<form method="POST" action="goods_inventory_logs.php?act=batch_drop" name="listForm" onsubmit="return confirm('确定批量删除？');">
                 	<div class="list-div"  id="listDiv">
 						{/if}
                     	<table cellpadding="0" cellspacing="0" border="0">
@@ -52,7 +52,7 @@
                                     <th width="10%"><div class="tDiv">{$lang.order_sn}</div></th>
                                     <th width="5%"><div class="tDiv">{$lang.inventory}</div></th>
                                     <th width="10%"><div class="tDiv">{$lang.inventory_type}</div></th>
-                                    <th width="12%"><div class="tDiv">{$lang.operation_info}</div></th>
+                                    <th width="12%"><div class="tDiv">操作信息</div></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -62,12 +62,12 @@
                                     <td><div class="tDiv">{$list.id}</div></td>
 									<td>
                                         <div class="tDiv goods_list_info">
-                                            <div class="img"><a href="../goods.php?id={$list.goods_id}" target="_blank" title="{$list.goods_name|escape:html}"><img src="{$list.goods_thumb}" width="68" height="68" /></a></div>
+                                            <div class="img"><a href="../goods.php?id={$list.goods_id}" target="_blank" title="{$list.goods_name|escape:html}"><img src="{$list.goods_thumb}" width="60" height="60" /></a></div>
                                             <div class="desc">
                                                 <div class="name">
                                                     <span title="{$list.goods_name}" data-toggle="tooltip" class="span">{$list.goods_name}</span>
                                                 </div>
-												{if $list.brand_name}<p class="brand">{$lang.brand}：<em>{$list.brand_name}</em></p>{/if}
+												{if $list.brand_name}<p class="brand">品牌：<em>{$list.brand_name}</em></p>{/if}
                                             </div>        
                                         </div>
                                     </td>
@@ -159,11 +159,11 @@
             </div>
             <div class="gj_search">
                 <div class="search-gao-list" id="searchBarOpen">
-                    <i class="icon icon-zoom-in"></i>{$lang.advanced_search}
+                    <i class="icon icon-zoom-in"></i>高级搜索
                 </div>
                 <div class="search-gao-bar">
-                    <div class="handle-btn" id="searchBarClose"><i class="icon icon-zoom-out"></i>{$lang.pack_up}</div>
-                    <div class="title"><h3>{$lang.advanced_search}</h3></div>
+                    <div class="handle-btn" id="searchBarClose"><i class="icon icon-zoom-out"></i>收起边栏</div>
+                    <div class="title"><h3>高级搜索</h3></div>
                     <form method="get" name="formSearch_senior" action="javascript:searchInventory()">
                         <div class="searchContent">
                             <div class="layout-box">
@@ -226,6 +226,7 @@
                                     </dd>
                                 </dl>
                                 {else}
+                               
                                 <dl>
                                     <dt>{$lang.operation_type}</dt>
                                     <dd>
@@ -244,30 +245,11 @@
                                     </dd>
                                 </dl>
                                 {/if}
-                                <!--卖场 start-->
-                                {if $rs_enabled and !$rs_id}
-                                <dl>
-                                    <dt>{$lang.rs_name}</dt>
-                                    <dd>
-                                        <div id="" class="imitate_select select_w145">
-                                            <div class="cite">{$lang.please_select}</div>
-                                            <ul>
-                                                <li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.please_select}</a></li>
-                                                {foreach from=$region_store_list item=data key=key}
-                                                <li><a href="javascript:;" data-value="{$data.rs_id}" class="ftx-01">{$data.rs_name}</a></li>
-                                                {/foreach}
-                                            </ul>
-                                            <input name="rs_id" type="hidden" value="{$smarty.get.rs_id|default:0}" autocomplete="off">
-                                        </div>
-                                    </dd>
-                                </dl>
-                                {/if}
-                                <!--卖场 end-->
                                 <dl>
                                     <dt>{$lang.steps_shop_name}</dt>
                                     <dd>
                                         <div id="shop_name_select" class="select_w145 imitate_select">
-                                            <div class="cite">{$lang.please_select}</div>
+                                            <div class="cite">请选择</div>
                                             <ul>
                                                <li><a href="javascript:;" data-value="0">{$lang.select_please}</a></li>
                                                <li><a href="javascript:;" data-value="1">{$lang.s_shop_name}</a></li>
@@ -281,9 +263,9 @@
                                 <dl style="display:none" id="merchant_box">
                                     <dd>
                                         <div class="select_w145 imitate_select">
-                                            <div class="cite">{$lang.please_select}</div>
+                                            <div class="cite">请选择</div>
                                             <ul>
-                                               <li><a href="javascript:;" data-value="0">{$lang.please_select}</a></li>
+                                               <li><a href="javascript:;" data-value="0">请选择</a></li>
                                                {foreach from=$store_list item=store}
                                                <li><a href="javascript:;" data-value="{$store.ru_id}">{$store.store_name}</a></li>
                                                {/foreach}
@@ -298,7 +280,7 @@
                                 <dl style="display:none" id="store_type">
                                     <dd>
                                         <div class="select_w145 imitate_select">
-                                            <div class="cite">{$lang.please_select}</div>
+                                            <div class="cite">请选择</div>
                                             <ul>
                                                <li><a href="javascript:;" data-value="0">{$lang.steps_shop_type}</a></li>
                                                <li><a href="javascript:;" data-value="{$lang.flagship_store}">{$lang.flagship_store}</a></li>
@@ -310,9 +292,9 @@
                                         </div>
                                     </dd>
                                 </dl>
-                                <dl class="bot_btn">
-                                    <dd>
-                                       <input type="submit" class="btn red_btn" name="tj_search" value="{$lang.button_inquire}" /><input type="reset" class="btn btn_reset" name="reset" value="{$lang.button_reset_alt}" />
+                                <dl>
+                                    <dd class="bot_btn">
+                                       <input type="submit" class="btn red_btn" name="tj_search" value="提交查询" /><input type="reset" class="btn btn_reset" name="reset" value="重置" />
                                     </dd>
                                 </dl>
                             </div>
@@ -325,8 +307,8 @@
  	{include file ='library/pagefooter.lbi'}
     
 	<script type="text/javascript">
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
+	listTable.recordCount = '{$record_count}';
+	listTable.pageCount = '{$page_count}';
 	
 	{foreach from=$filter item=item key=key}
 	listTable.filter.{$key} = '{$item}';
@@ -346,53 +328,30 @@
 	
     function get_store_search(val){
         if(val == 1){
-			$("#merchant_box").css("display",'');
-			$("#store_keyword").css("display",'none');
-			$("#store_type").css("display",'none')
+                $("#merchant_box").css("display",'');
+                $("#store_keyword").css("display",'none');
+                $("#store_type").css("display",'none')
         }else if(val == 2){
-			$("#merchant_box").css("display",'none');
-			$("#store_keyword").css("display",'');
-			$("#store_type").css("display",'none')
+                $("#merchant_box").css("display",'none');
+                $("#store_keyword").css("display",'');
+                $("#store_type").css("display",'none')
         }else if(val == 3){
-			$("#merchant_box").css("display",'none');
-			$("#store_keyword").css("display",'');
-			$("#store_type").css("display",'')
+                $("#merchant_box").css("display",'none');
+                $("#store_keyword").css("display",'');
+                $("#store_type").css("display",'')
         }else{
-			$("#merchant_box").css("display",'none');
-			$("#store_keyword").css("display",'none');
-			$("#store_type").css("display",'none')
+                 $("#merchant_box").css("display",'none');
+                $("#store_keyword").css("display",'none');
+                $("#store_type").css("display",'none')
         }
     }
 
-    function get_search_area(warehouse_id){
-		$.jqueryAjax('goods_inventory_logs.php', 'is_ajax=1&act=search_area&warehouse_id='+  warehouse_id, function(data){
-			$("#area_list").html(data.content);
-		}, "GET", "JSON");
+    function get_search_area(warehouse_id)
+    {
+            $.jqueryAjax('goods_inventory_logs.php', 'is_ajax=1&act=search_area&warehouse_id='+  warehouse_id, function(data){
+                   $("#area_list").html(data.content);
+           }, "GET", "JSON");
     }
-	
-	function searchInventory(){
-		var frm = $("form[name='formSearch_senior']");
-		
-		listTable.filter['store_search'] = Utils.trim(frm.find("input[name='store_search']").val());
-		listTable.filter['merchant_id'] = Utils.trim(frm.find("input[name='merchant_id']").val());
-		listTable.filter['store_keyword'] = Utils.trim(frm.find("input[name='store_keyword']").val());
-		listTable.filter['store_type'] = Utils.trim(frm.find("input[name='store_type']").val());
-
-		listTable.filter['keyword'] = Utils.trim(frm.find("input[name='keyword']").val());
-		listTable.filter['order_sn'] = Utils.trim(frm.find("input[name='order_sn']").val());
-		listTable.filter['warehouse_id'] = Utils.trim(frm.find("input[name='warehouse_id']").val());
-		listTable.filter['area_id'] = Utils.trim(frm.find("input[name='area_id']").val());
-		listTable.filter['operation_type'] = Utils.trim(frm.find("input[name='operation_type']").val());
-        //卖场 start
-        {if $rs_enabled and !$rs_id}
-        listTable.filter['rs_id'] = Utils.trim(frm.find("input[name='rs_id']").val());
-        {/if}
-        //卖场 end
-	
-		listTable.filter['page'] = 1;
-		
-		listTable.loadList();
-	}
 	
 	//日期选择插件调用start sunle
 	var opts1 = {
@@ -411,6 +370,33 @@
 	xvDate(opts1);
 	xvDate(opts2);
 	//日期选择插件调用end sunle
+	
+	function searchInventory()
+	{
+		var frm = $("form[name='formSearch_senior']");
+		listTable.filter['store_search'] = Utils.trim(frm.find("input[name='store_search']").val());
+		listTable.filter['merchant_id'] = Utils.trim(frm.find("input[name='merchant_id']").val());
+		listTable.filter['store_keyword'] = Utils.trim(frm.find("input[name='store_keyword']").val());
+		listTable.filter['store_type'] = Utils.trim(frm.find("input[name='store_type']").val());
+
+		listTable.filter['keyword'] = Utils.trim(($("form[name='searchForm']").find("input[name='keyword']").val() != '') ? $("form[name='searchForm']").find("input[name='keyword']").val() :  frm.find("input[name='keyword']").val());
+		listTable.filter['order_sn'] = Utils.trim(frm.find("input[name='order_sn']").val());
+		listTable.filter['start_time'] = Utils.trim($("form[name='searchForm']").find("input[name='start_time']").val());
+		listTable.filter['end_time'] = Utils.trim($("form[name='searchForm']").find("input[name='end_time']").val());
+		listTable.filter['warehouse_id'] = Utils.trim($("form[name='searchForm']").find("input[name='warehouse_id']").val());
+		listTable.filter['area_id'] = Utils.trim($("form[name='searchForm']").find("input[name='area_id']").val());
+		listTable.filter['operation_type'] = Utils.trim($("form[name='searchForm']").find("input[name='operation_type']").val());
+	
+		listTable.filter['page'] = 1;
+		
+		if(listTable.filter['start_time'] != '' && listTable.filter['end_time'] == ''){
+			alert('结束时间不能为空');
+		}else if(listTable.filter['start_time'] == '' && listTable.filter['end_time'] != ''){
+			alert('开始时间不能为空');
+		}else{
+			listTable.loadList();
+		}
+	}
     </script>
 </body>
 </html>

@@ -5,14 +5,14 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.jurisdiction} - {$ur_here}</div>
+    	<div class="title">权限-{$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.list.0}</li>
-                    <li>{$lang.operation_prompt_content.list.1}</li>
-                    <li class="red">{$lang.operation_prompt_content.list.2}</li>
+                	<li>该页面展示了所有入驻平台的管理员列表。</li>
+                    <li>可手动添加管理员并分配权限、查看日志等操作。</li>
+                    <li class="li_color">注意：商家权限，已移至商城->商家列表</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -24,17 +24,16 @@
                     </div>
                     {/if}
                     <div class="refresh{if !$action_link} ml0{/if}">
-                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    	<div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>
-                    <div class="search">
-                        <form action="javascript:;" name="searchForm" onSubmit="searchGoodsname(this);">
-                        <div class="input">
-                            <input type="text" name="keywords" class="text nofocus" placeholder="{$lang.user_name}" autocomplete="off" />
-                            <input type="submit" class="btn" name="secrch_btn" ectype="secrch_btn" value="" />
+                    <form action="javascript:searchList()" name="searchForm">
+                        <div class="search">
+                            <div class="input">
+                                <input type="text" name="keywords" class="text nofocus" placeholder="用户名" autocomplete="off" /><input type="submit" value="" class="not_btn" />
+                            </div>
                         </div>
-                        </form>
-                    </div>
+                    </form>
                 </div>
                 <div class="common-content">
                 	<div class="list-div" id="listDiv">
@@ -43,7 +42,6 @@
                             <thead>
                                 <tr>
                                    <th width="16%"><div class="tDiv">{$lang.user_name}</div></th>
-                                   <th width="16%"><div class="tDiv">{$lang.parent_name}</div></th>
                                    <th width="18%"><div class="tDiv">{$lang.goods_steps_name}</div></th>
                                    <th width="18%"><div class="tDiv">{$lang.email}</div></th>
                                    <th width="12%"><div class="tDiv">{$lang.join_time}</div></th>
@@ -55,8 +53,7 @@
                                 {foreach from=$admin_list item=list}
                             	<tr>
                                     <td><div class="tDiv">{$list.user_name}</div></td>
-                                    <td><div class="tDiv">{$list.parent_name|default:无}</div></td>
-                                    <td><div class="tDiv">{if $list.ru_id}<font class="red">{$list.ru_name}</font>{else}<font class="blue3">{if $list.agency_id}<a href="agency.php?act=edit&id={$list.agency_id}">{$list.agency.agency_name}</a>{else}{$lang.business_admin}{/if}</font>{/if}</div></td>
+                                    <td><div class="tDiv">{if $list.ru_id}<font class="red">{$list.ru_name}</font>{else}<font class="blue3">{if $list.agency_id}<a href="agency.php?act=edit&id={$list.agency_id}">{$list.agency.agency_name}</a>{else}商城管理员{/if}</font>{/if}</div></td>
                                     <td><div class="tDiv">{$list.email}</div></td>
                                     <td><div class="tDiv">{$list.add_time}</div></td>
                                     <td><div class="tDiv">{$list.last_login|default:N/A}</div></td>
@@ -65,7 +62,7 @@
                                             <a href="privilege.php?act=allot&id={$list.user_id}&user={$list.user_name}" title="{$lang.allot_priv}" class="btn_region"><i class="icon icon-cog"></i>{$lang.allot_priv}</a>
                                             <a href="admin_logs.php?act=list&id={$list.user_id}" title="{$lang.view_log}" class="btn_see"><i class="sc_icon sc_icon_see"></i>{$lang.view_log}</a>
                                             <a href="privilege.php?act=edit&id={$list.user_id}" title="{$lang.edit}" class="btn_edit"><i class="icon icon-edit"></i>{$lang.edit}</a>
-                                            <a href="javascript:;" onclick="listTable.remove({$list.user_id}, '{$lang.drop_confirm}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                            <a href="javascript:;" onclick="listTable.remove({$list.user_id}, '{$lang.drop_confirm}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -90,16 +87,16 @@
             </div>
             <div class="gj_search hide">
                 <div id="searchBarOpen" class="search-gao-list">
-                    <i class="icon icon-zoom-in"></i>{$lang.advanced_search}
+                    <i class="icon icon-zoom-in"></i>高级搜索
                 </div>
                 <div class="search-gao-bar">
-                    <div id="searchBarClose" class="handle-btn"><i class="icon icon-zoom-out"></i>{$lang.pack_up}</div>
-                    <div class="title"><h3>{$lang.advanced_search}</h3></div>
-                    <form  name="formSearch_senior" method="get" action="javascript:searchList()">
+                    <div id="searchBarClose" class="handle-btn"><i class="icon icon-zoom-out"></i>收起边栏</div>
+                    <div class="title"><h3>高级搜索</h3></div>
+                    <form  name="formSearch_senior"  method="get" action="javascript:searchList()">
                         <div class="searchContent">
                             <div class="layout-box">
                                 <dl>
-                                    <dt>{$lang.user_name}</dt>
+                                    <dt>用户名</dt>
                                     <dd><input type="text" class="s-input-txt" name="keywords" value="" autocomplete="off" /></dd>
                                 </dl>
                                 <dl>
@@ -137,7 +134,7 @@
                                 <dl style="display:none" id="store_type">
                                     <dd>
                                         <div class="select_w145 imitate_select">
-                                            <div class="cite">{$lang.please_select}</div>
+                                            <div class="cite">请选择</div>
                                             <ul>
                                                <li><a href="javascript:;" data-value="0">{$lang.steps_shop_type}</a></li>
                                                <li><a href="javascript:;" data-value="{$lang.flagship_store}">{$lang.flagship_store}</a></li>
@@ -152,63 +149,64 @@
                             </div>
                         </div>
                         <div class="bot_btn">
-                            <input type="submit" value="{$lang.button_inquire}" name="tj_search" class="btn red_btn"><input type="reset" value="{$lang.button_reset_alt}" name="reset" class="btn btn_reset">
+                            <input type="submit" value="提交查询" name="tj_search" class="btn red_btn"><input type="reset" value="重置" name="reset" class="btn btn_reset">
                         </div>
                     </form>
                 </div>
             </div>
 		</div>
 	</div>
-    {include file ='library/pagefooter.lbi'}
-    <script type="text/javascript">
-    listTable.recordCount = {$record_count|default:0};
-    listTable.pageCount = {$page_count|default:1};
-    {foreach from=$filter item=item key=key}
-    listTable.filter.{$key} = '{$item}';
-    {/foreach}
-    
-    $(".ps-container").perfectScrollbar();
-    
-    $.divselect("#shop_name_select","#shop_name_val",function(obj){
-		var val = obj.attr("data-value");
-		get_store_search(val);
-    });
-	
-    function get_store_search(val){
-        if(val == 1){
-			$("#merchant_box").css("display",'');
-			$("#store_keyword").css("display",'none');
-			$("#store_type").css("display",'none')
-        }else if(val == 2){
-			$("#merchant_box").css("display",'none');
-			$("#store_keyword").css("display",'');
-			$("#store_type").css("display",'none')
-        }else if(val == 3){
-			$("#merchant_box").css("display",'none');
-			$("#store_keyword").css("display",'');
-			$("#store_type").css("display",'')
-        }else{
-			$("#merchant_box").css("display",'none');
-			$("#store_keyword").css("display",'none');
-			$("#store_type").css("display",'none');
-        }
-    }
+ {include file ='library/pagefooter.lbi'}
+<script type="text/javascript">
 
-	function searchList(){
-		var frm = $("form[name='formSearch_senior']");
-		{if $seller}
-		listTable.filter['store_search'] = Utils.trim(frm.find("input[name='store_search']").val());
-		listTable.filter['merchant_id'] = Utils.trim(frm.find("input[name='merchant_id']").val());
-		listTable.filter['store_keyword'] = Utils.trim(frm.find("input[name='store_keyword']").val());
-		listTable.filter['store_type'] = Utils.trim(frm.find("input[name='store_type']").val());
-		{/if}
+listTable.recordCount = '{$record_count}';
+listTable.pageCount = '{$page_count}';
+
+{foreach from=$filter item=item key=key}
+listTable.filter.{$key} = '{$item}';
+{/foreach}
+   
+$(".ps-container").perfectScrollbar();
+
+$.divselect("#shop_name_select","#shop_name_val",function(obj){
+    var val = obj.attr("data-value");
+    get_store_search(val);
+});
+function get_store_search(val){
+        if(val == 1){
+                $("#merchant_box").css("display",'');
+                $("#store_keyword").css("display",'none');
+                $("#store_type").css("display",'none')
+        }else if(val == 2){
+                $("#merchant_box").css("display",'none');
+                $("#store_keyword").css("display",'');
+                $("#store_type").css("display",'none')
+        }else if(val == 3){
+                $("#merchant_box").css("display",'none');
+                $("#store_keyword").css("display",'');
+                $("#store_type").css("display",'')
+        }else{
+                 $("#merchant_box").css("display",'none');
+                $("#store_keyword").css("display",'none');
+                $("#store_type").css("display",'none')
+        }
+}
+
+  function searchList()
+  {
+    var frm = $("form[name='formSearch_senior']");
+    {if $seller}
+    listTable.filter['store_search'] = Utils.trim(frm.find("input[name='store_search']").val());
+    listTable.filter['merchant_id'] = Utils.trim(frm.find("input[name='merchant_id']").val());
+    listTable.filter['store_keyword'] = Utils.trim(frm.find("input[name='store_keyword']").val());
+    listTable.filter['store_type'] = Utils.trim(frm.find("input[name='store_type']").val());
+    {/if}
 		
-		listTable.filter['keywords'] = Utils.trim(($("form[name='searchForm']").find("input[name='keywords']").val() != '') ? $("form[name='searchForm']").find("input[name='keywords']").val() :  frm.find("input[name='keywords']").val());
-		listTable.filter['page'] = 1;
-		listTable.loadList();
-	}
-	
-	$.gjSearch("-240px");  //高级搜索
+    listTable.filter['keywords'] = Utils.trim(($("form[name='searchForm']").find("input[name='keywords']").val() != '') ? $("form[name='searchForm']").find("input[name='keywords']").val() :  frm.find("input[name='keywords']").val());
+    listTable.filter['page'] = 1;
+    listTable.loadList();
+  }
+$.gjSearch("-240px");  //高级搜索
 </script>     
 </body>
 </html>

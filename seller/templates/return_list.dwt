@@ -64,16 +64,7 @@
                                 <td><a href="order.php?act=info&order_id={$order.order_id}" id="order_{$okey}">{$order.order_sn}{if $order.extension_code eq "group_buy"}<br /><div align="center">{$lang.group_buy}</div>{elseif $order.extension_code eq "exchange_goods"}<br /><div align="center">{$lang.exchange_goods}</div>{/if}</a></td>
                                 <td>{if $order.return_type eq 0}{$lang.repair}{elseif $order.return_type eq 1}{$lang.return_goods}{elseif $order.return_type eq 2}{$lang.change}{elseif $order.return_type eq 3}{$lang.only_return_money}{/if}</td>
                                 <td>{$order.apply_time}</td>
-                                <td align="center">
-                                	{if $order.discount_amount > 0}
-                                    + {$order.should_return}
-                                    <br/>
-                                    - {$order.discount_amount}
-                                    <br/>
-                                    =
-                                    {/if}
-                                    {$order.formated_should_return}
-                                </td>
+                                <td align="center"><a href="mailto:{$order.email}">{$order.should_return}</a></td>
                                 <td align="center">{$order.actual_return}{if $order.return_shipping_fee > 0 && $order.return_pay_status eq 1}<br/><em class="org2">(含运费：{$order.return_shipping_fee})</em>{/if}</td>
                                 <td align="center">{$order.return_number}</td>
                                 <td class="bdl">
@@ -126,8 +117,8 @@
 </div>
 {include file ='library/seller_footer.lbi'}
 <script type="text/javascript">
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
+	listTable.recordCount = '{$record_count}';
+	listTable.pageCount = '{$page_count}';
 	listTable.query = "return_list_query";
 	{foreach from=$filter item=item key=key}
 	listTable.filter.{$key} = '{$item}';

@@ -7,7 +7,7 @@
 		<div class="title"> 模板 - 库项目项管理</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                     <li>选择商城的库项目进行修改。</li>
                     <li>非技术人士请勿修改，否则将引起错误。</li>

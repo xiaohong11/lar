@@ -4,14 +4,14 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="bonus.php?act=list" class="s-back">{$lang.back}</a>{$lang.promotion} - {$ur_here}</div>
+    	<div class="title"><a href="bonus.php?act=list" class="s-back">{$lang.back}</a>促销 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content.send.0}</li>
-                    <li>{$lang.operation_prompt_content.send.1}</li>
-                    <li>{$lang.operation_prompt_content.send.2}</li>
+                    <li>根据会员等级发放红包，也可搜索具体会员发放红包。</li>
+                    <li>请合理发放红包。</li>
+                    <li>被发红包的会员可在个人主页中的账户中心查看红包信息，如果红包类型是线下发放的红包需要输入卡号和密码。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -24,7 +24,7 @@
 										<div class="search_select">
 											<div class="categorySelect">
 												<div class="selection">
-													<input type="text" name="category_name" id="category_name" class="text w250 valid" value="{$lang.select_cat}" autocomplete="off" readonly data-filter="cat_name" />
+													<input type="text" name="category_name" id="category_name" class="text w250 valid" value="请选择分类" autocomplete="off" readonly data-filter="cat_name" />
 													<input type="hidden" name="category_id" id="category_id" value="0" data-filter="cat_id" />
 												</div>
 												<div class="select-container" style="display:none;">
@@ -35,7 +35,7 @@
 										<div class="search_select">
 											<div class="brandSelect">
 												<div class="selection">
-													<input type="text" name="brand_name" id="brand_name" class="text w120 valid" {$lang.select_barnd} autocomplete="off" readonly data-filter="brand_name" />
+													<input type="text" name="brand_name" id="brand_name" class="text w120 valid" value="请选择品牌" autocomplete="off" readonly data-filter="brand_name" />
 													<input type="hidden" name="brand_id" id="brand_id" value="0" data-filter="brand_id" />
 												</div>
 												<div class="brand-select-container" style="display:none;">
@@ -44,22 +44,23 @@
 											</div>                            
 										</div>
 										<input type="hidden" name="ru_id" value="{$ru_id}" />
-										<input type="text" name="keyword" class="text w150" placeholder={$lang.input_keywords} autocomplete="off" data-filter="keyword" autocomplete="off" />
-										<a href="javascript:void(0);" class="btn btn30" ectype="search" onclick="searchGoods()" ><i class="icon icon-search"></i>{$lang.search_word}</a>
+										<input type="text" name="keyword" class="text w150" placeholder="请输入关键字" autocomplete="off" data-filter="keyword" autocomplete="off" />
+										<a href="javascript:void(0);" class="btn btn30" ectype="search" onclick="searchGoods()" ><i class="icon icon-search"></i>搜索</a>
 									</div>
                                 </form>
-                                <form name="theForm">
+                                <form name="theForm" >
                                 <div class="move_div">
                                     <div class="move_left">
                                         <h4>{$lang.all_goods}</h4>
                                         <div class="move_info">
                                             <div class="move_list" id="source_select">
-                                                <ul></ul>	
+                                                <ul>
+												</ul>	
                                             </div>
                                         </div>
                                         <div class="move_handle">
-                                            <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">{$lang.check_all}</a>
-                                            <a href="javascript:void(0);" onclick="addGoods()" class="btn btn25 red_btn">{$lang.button_submit_alt}</a>
+                                            <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">全选</a>
+                                            <a href="javascript:void(0);" onclick="addGoods()" class="btn btn25 red_btn">确定</a>
                                         </div>
                                     </div>
                                     <div class="move_middle">
@@ -71,13 +72,13 @@
                                             <div class="move_list" id="target_select" >
                                                 <ul>
 													{foreach from=$goods_list item=list}
-													<li><i class='sc_icon sc_icon_no'></i><a href='javascript:;' data-value='{$list.goods_id}' class='ftx-01'>{$list.goods_name}</a></li>
+														<li><i class='sc_icon sc_icon_no'></i><a href='javascript:;' data-value='{$list.goods_id}' class='ftx-01'>{$list.goods_name}</a></li>
 													{/foreach}
                                                 </ul>											
                                             </div>
                                         </div>
                                         <div class="move_handle">
-                                            <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">{$lang.check_all}</a><a href="javascript:void(0);" onclick="delGoods()" class="btn btn25 btn_red">{$lang.remove}</a>
+                                            <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">全选</a><a href="javascript:void(0);" onclick="delGoods()" class="btn btn25 btn_red">移除</a>
                                         </div>
                                     </div>
                                 </div>
@@ -92,8 +93,9 @@
             </div>
 		</div>
 	</div>
-	{include file ='library/pagefooter.lbi'}
-	<script type="text/javascript">
+{include file ='library/pagefooter.lbi'}
+<script type="text/javascript" src="js/jquery.purebox.js"></script>
+<script type="text/javascript">
 	//滚动轴
 	$(".move_list").perfectScrollbar();
 	$(".brand-list").perfectScrollbar();
@@ -167,6 +169,6 @@
 			}
 		}	
 	}
-    </script>
+</script>
 </body>
 </html>

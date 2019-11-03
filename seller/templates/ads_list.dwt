@@ -83,7 +83,7 @@
 </div>
 {include file="library/seller_footer.lbi"}
 {if $full_page}
-<script type="text/javascript" src="../js/jquery.picTip.js"></script>
+<script type="text/javascript" src="js/jquery.picTip.js"></script>
 <script type="text/javascript">
   listTable.recordCount = {$record_count};
   listTable.pageCount = {$page_count};

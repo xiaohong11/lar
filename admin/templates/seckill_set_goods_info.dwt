@@ -4,22 +4,21 @@
 <head>{include file ='library/admin_html_head.lbi'}</head>
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$lang.promotion} - {$ur_here}</div>
+    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>促销 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content.set_info.0}</li>
+                    <li></li>
                 </ul>
             </div>
 
-            <div class="flexilist"  ectype="item">
+            <div class="flexilist">
             	<div class="common-head">
                 	<div class="fl">
-						{if $ru_id eq 0}<a href="javascript:void(0);" ectype="setupGoods"><div class="fbutton"><div class="add" title="{$action_link.text}"><span><i class="icon icon-plus"></i>设置商品</span></div></div></a>{/if}                 
+						<a href="javascript:void(0);" ectype="setupGoods"><div class="fbutton"><div class="add" title="{$action_link.text}"><span><i class="icon icon-plus"></i>设置商品</span></div></div></a>                 
 						<input type="hidden" name="tb_id" value="{$tb_id}">
 						<input type="hidden" name="sec_id" value="{$sec_id}">
-                        <input type="hidden" name="cat_goods" value="{$cat_goods}">
 					</div>
                 </div>
                 <div class="common-content">
@@ -30,12 +29,12 @@
                         	<thead>
                             	<tr>
                                 	<th width="5%"><div class="tDiv">{$lang.record_id}</div></th>
-                                    <th width="30%"><div class="tDiv">{$lang.goods_name}</div></th>
-                                    <th width="15%"><div class="tDiv">{$lang.goods_price}</div></th>
-                                    <th width="15%"><div class="tDiv">{$lang.seckill_price}</div></th>
-                                    <th width="15%"><div class="tDiv">{$lang.seckill_number}</div></th>
-									<th width="15%"><div class="tDiv">{$lang.xiangou_number}</div></th>
-									<th width="5%"><div class="handle">{$lang.handler}</div></th>
+                                    <th width="30%"><div class="tDiv">商品名称</div></th>
+                                    <th width="15%"><div class="tDiv">商品价格</div></th>
+                                    <th width="15%"><div class="tDiv">秒杀价</div></th>
+                                    <th width="15%"><div class="tDiv">秒杀数量</div></th>
+									<th width="15%"><div class="tDiv">限购数量</div></th>
+									<th width="5%"><div class="handle">操作</div></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -44,12 +43,12 @@
                                 	<td><div class="tDiv">{$sg.id}</div></td>
                                 	<td><div class="tDiv">{$sg.goods_name}</div></td>
 									<td><div class="tDiv">{$sg.shop_price}</div></td>
-									<td><div class="tDiv"><input class="text w50 tc fn" style="margin-right:0px;" {if $ru_id eq 0}onblur="listTable.editInput(this, 'edit_sec_price', {$sg.id} );"{/if} autocomplete="off" value="{$sg.sec_price}" type="text"></div></td>
-									<td><div class="tDiv"><input class="text w50 tc fn" style="margin-right:0px;" {if $ru_id eq 0}onblur="listTable.editInput(this, 'edit_sec_num', {$sg.id} );"{/if} autocomplete="off" value="{$sg.sec_num}" type="text"></div></td>
-									<td><div class="tDiv"><input class="text w50 tc fn" style="margin-right:0px;" {if $ru_id eq 0}onblur="listTable.editInput(this, 'edit_sec_limit', {$sg.id} );"{/if} autocomplete="off" value="{$sg.sec_limit}" type="text"></div></td>
+									<td><div class="tDiv"><input class="text w50 tc fn" style="margin-right:0px;" onblur="listTable.editInput(this, 'edit_sec_price', {$sg.id} );" autocomplete="off" value="{$sg.sec_price}" type="text"></div></td>
+									<td><div class="tDiv"><input class="text w50 tc fn" style="margin-right:0px;" onblur="listTable.editInput(this, 'edit_sec_num', {$sg.id} );" autocomplete="off" value="{$sg.sec_num}" type="text"></div></td>
+									<td><div class="tDiv"><input class="text w50 tc fn" style="margin-right:0px;" onblur="listTable.editInput(this, 'edit_sec_limit', {$sg.id} );" autocomplete="off" value="{$sg.sec_limit}" type="text"></div></td>
                                     <td class="handle">
 										<div class="tDiv a1">
-											<a href="javascript:;" onclick="listTable.remove({$sg.id}, '{$lang.drop_confirm}', 'sg_remove')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>									
+											<a href="javascript:;" onclick="listTable.remove({$sg.id}, '{$lang.drop_confirm}', 'sg_remove')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>									
 										</div>
 									</td>
                                 </tr>
@@ -74,11 +73,12 @@
             </div>
         </div>
     </div>
-    {include file ='library/pagefooter.lbi'}
-	<script type="text/javascript">
+{include file ='library/pagefooter.lbi'}
+{insert_scripts files="jquery.purebox.js"}
+<script type="text/javascript">
 		//分页传值
-		listTable.recordCount = {$record_count|default:0};
-		listTable.pageCount = {$page_count|default:1};
+		listTable.recordCount = '{$record_count}';
+		listTable.pageCount = '{$page_count}';
 		listTable.query = 'sg_query';
 		listTable.filter.sec_id = {$sec_id};
 		listTable.filter.tb_id 	= {$tb_id};
@@ -92,18 +92,18 @@
 			var _this = $(this),
 				spec_attr = new Object(),
 				cat_id = _this.parents("[ectype='item']").find("input[name='cateValue[]']").val(),
-				cat_goods = _this.parents("[ectype='item']").find("input[name='cat_goods']").val();
+				cat_goods = _this.parents("[ectype='item']").find("input[name='cat_goods[]']").val();
                                 
 			spec_attr.goods_ids = cat_goods;
 			Ajax.call('seckill.php', "act=goods_info" + "&goods_type=1&cat_id=" + cat_id + "&spec_attr="+$.toJSON(spec_attr) , function(data){
 				var content = data.content;
 				pb({
 					id:"set_up_goods",
-					title: "{$lang.set_goods}",
-					width: 970,
+					title: "设置商品",
+					width: 1000,
 					content: content,
-					ok_title: "{$lang.button_submit}",
-					cl_title: "{$lang.cancel}",
+					ok_title: "确定",
+					cl_title: "取消",
 					drag: true,
 					foot: true,
 					cl_cBtn: true,
@@ -113,13 +113,12 @@
 						var sec_id = $("input[name='sec_id']").val();
 						Ajax.call('get_ajax_content.php','act=add_seckill_goods&goods_ids='+goods_ids+'&sec_id='+sec_id+'&tb_id='+tb_id,function(data){
 							document.getElementById("listDiv").innerHTML = data.content;
-                            $("[ectype='item']").find("input[name='cat_goods']").val(data.goods_ids);
 						},'GET','JSON');
 					}
 				});
 			}, 'POST', 'JSON');
 		});	
-	</script>
+</script>
  </body>
 </html>
 {/if}

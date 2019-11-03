@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>{include file ='library/seller_html_head.lbi'}</head>
+{insert_scripts files="showbox.js"}
 <body>
 {include file ='library/seller_header.lbi'}
 <div class="ecsc-layout">
@@ -39,7 +40,7 @@
                     </dl>
                     <dl data-step="5">
                     	<dt class="pointer" {if $goods.goods_id}data-step="5" ectype="stepSubmit"{/if}><i class="sc-attr"></i></dt>
-                        <dd><em>5</em>､<span>{if $code eq 'virtual_card'}填写商品相册{else}填写商品属性{/if}</span><i class="jt"></i></dd>
+                        <dd><em>5</em>､<span>填写商品属性</span><i class="jt"></i></dd>
                     </dl>
                     <dl data-step="6">
                     	<dt class="pointer" {if $goods.goods_id}data-step="6" ectype="stepSubmit"{/if}><i class="sc-rel"></i></dt>
@@ -59,7 +60,6 @@
 									</div>
 								</div>
 							</div>
-                            {if $code neq 'virtual_card'}
 							<div class="mos_item mos_warehouse{if $goods.model_price eq 1} active{/if}" data-model="1" data-stepmodel="2">
 								<div class="mos_left"><i class="icon-model"></i></div>
 								<div class="mos_right">
@@ -78,7 +78,6 @@
 									</div>
 								</div>
 							</div>
-                            {/if}
 							<input type="hidden" name="goods_model" id="goods_model" value="{$goods.model_price|default:0}" />
 						</div>
                         <div class="goods_btn">
@@ -172,8 +171,7 @@
                                             <div class="select-container" style="display:none;">
                                                 {include file="library/filter_category_seller.lbi"}
                                             </div>
-                                        </div> 
-                                        <a href="javascript:;" class="sc-btn sc-blueBg-btn btn30 ml10" ectype="ajaxCate">添加</a>                                        
+                                        </div>                                    	
                                     </dd>
                                 </dl>								
                                 <dl>
@@ -197,11 +195,7 @@
                                 <dl>
                                     <dt>{$lang.require_field}&nbsp;{$lang.lab_goods_name}</dt>
                                     <dd>
-                                        <input name="goods_name" type="text" class="text mr10" value="{$goods.goods_name|escape:html}" ectype="require">
-                                        <div id="font_color" class="font_color mr10">
-                                            <input type='text' id="full" value="{$goods_name_color}" style="display:none"/>
-                                        </div>
-                                        <input type="hidden" id="goods_name_color" name="goods_name_color" value="{$goods_name_color}">
+                                        <input name="goods_name" type="text" class="text" value="{$goods.goods_name|escape:html}" ectype="require">
                                         <div class="form_prompt"></div>
                                         <div class="notic">商品标题名称长度至少1个字符，最长150个汉字</div>
                                     </dd>
@@ -301,29 +295,6 @@
                                     </dd>
                                 </dl>
                                 <dl>
-                                    <dt>{$lang.goods_video}：</dt>
-                                    <dd>
-                                        <div id="goods_video" class="update_images mr10 fl">
-                                            <div class="img">
-                                            <img src="images/update_video.jpg" />
-                                            </div>
-                                        </div>
-                                        <div class="goods_video_div mr10 {if !$goods.goods_video}hide{/if}">
-                                            <video class="goods_video_js" id="goods_video_js" width="200" height="200" src="{$goods.goods_video_path}" controls>
-                                                <source src="{$goods.goods_video_path}" class="goods_video_js" type="video/mp4"/>
-                                            </video>
-                                            <div class="video_default"></div>
-                                            <a href="javascript:void(0);" class="video_remove" ectype="video_remove"><i class="icon icon-remove"></i></a>
-                                        </div>
-                                        <input type="hidden" name="goods_video" value="{$goods.goods_video}">
-                                        <div class="form_prompt">
-                                        	<p>像素：398px * 398px</p>
-                                            <p>大小：10MB，10秒以内的视频</p>
-                                            <p>格式：只支持MP4格式</p>
-                                        </div>
-                                    </dd>
-                                </dl>
-                                <dl>
                                     <dt>图片外部链接：</dt>
                                     <dd>
                                     	<div class="step_label">
@@ -348,6 +319,11 @@
                                     <dt class="step_label">商品运费：</dt>
                                     <dd class="step_value">
                                         <div class="checkbox_items">
+                                        
+                                            <div class="checkbox_item">
+                                                <input type="radio" name="freight" class="ui-radio freight" id="freight_0" value="0" {if $goods.freight eq 0}checked="checked"{/if} />
+                                                <label for="freight_0" class="ui-radio-label">{$lang.lab_freight_area}</label> 
+                                            </div>
                                             
                                             <div class="checkbox_item mr15">
                                                 <input type="radio" name="freight" class="ui-radio freight" id="freight_1" value="1" {if $goods.freight eq 1}checked="checked"{/if} />
@@ -359,19 +335,15 @@
                                                 <label for="freight_2" class="ui-radio-label">{$lang.lab_freight_temp}</label> 
                                             </div>
                                             
-                                            <input id="shipping_fee" type="text" name="shipping_fee" class="text w150 mr10" autocomplete="off" value="{$goods.shipping_fee}" {if $goods.freight neq 1}style="display:none;"{/if}/>
-											<div id="tid" class="fl" {if $goods.freight neq 2}style="display:none;"{/if}>
-                                            	<div class="imitate_select select_w170">
-                                                    <div class="cite">请选择</div>
-                                                    <ul style="display: none;">
-                                                        {foreach from=$transport_list item=item key=key}
-                                                        <li><a href="javascript:;" data-value="{$item.tid}" class="ftx-01">{$item.title}</a></li>
-                                                        {/foreach}
-                                                    </ul>
-                                                    <input name="tid" type="hidden" value="{$goods.tid}" />
-                                                </div>
-                                                <a href="javascript:;" class="sc-btn sc-blueBg-btn btn28 mr5" ectype="ajaxTransport">添加</a>
-                                            	<a href="javascript:;" class="sc-btn sc-blueBg-btn btn28"  data-attr="edit" ectype="ajaxTransport">编辑</a>                                            
+                                            <input id="shipping_fee" type="text" name="shipping_fee" class="text w150" autocomplete="off" value="{$goods.shipping_fee}" {if $goods.freight neq 1}style="display:none;"{/if}/>
+											<div id="tid" class="imitate_select select_w170" {if $goods.freight neq 2}style="display:none;"{/if}>
+												<div class="cite">请选择</div>
+												<ul style="display: none;">
+													{foreach from=$transport_list item=item key=key}
+													<li><a href="javascript:;" data-value="{$item.tid}" class="ftx-01">{$item.title}</a></li>
+													{/foreach}
+												</ul>
+												<input name="tid" type="hidden" value="{$goods.tid}">
 											</div>	
                                         </div>
                                     </dd>
@@ -380,7 +352,7 @@
                                 <dl>
                                     <dt class="step_label">退货标识：</dt>
                                     <dd class="step_value">
-                                        <div class="checkbox_items" ectype="return_type">
+                                        <div class="checkbox_items">
                                         
                                             <div class="checkbox_item">
                                                 <input type="checkbox" name="return_type[]" class="ui-checkbox freight" id="return_type_0" value="0" {if $is_cause && in_array(0, $is_cause)}checked="checked"{/if}>
@@ -403,30 +375,10 @@
                                             </div>
                                         </div>
                                     </dd>
-                                </dl>	
-                                <dl>
-									<dt>{$lang.lab_goods_service}</dt>
-                                    <dd>
-                                        <div class="checkbox_items">
-                                            <div class="checkbox_item">
-                                                <input type="checkbox" name="is_reality" class="ui-checkbox" value="1" id="is_reality" {if $goods.goods_extend.is_reality} checked="checked"{/if}>
-                                                <label class="ui-label" for="is_reality">正品保证</label>
-                                            </div>
-                                            <div class="checkbox_item">
-                                                <input type="checkbox" name="is_return" class="ui-checkbox" value="1" id="is_return" {if $goods.goods_extend.is_return} checked="checked"{/if}>
-                                                <label class="ui-label" for="is_return">包退服务</label>
-                                            </div>
-                                            <div class="checkbox_item">
-                                                <input type="checkbox" name="is_fast" class="ui-checkbox" value="1" id="is_fast" {if $goods.goods_extend.is_fast} checked="checked"{/if}>
-                                                <label class="ui-label" for="is_fast">闪速配送</label>
-                                            </div>
-                                        </div>
-                                    </dd>
-                                </dl>
+                                </dl>		
                                 <dl>
                                     <dt class="step_label">{$lang.lab_commission_rate}：</dt>
                                     <dd class="step_value">
-                                        {if $commission_setting}
                                         <div class="checkbox_items">
                                             <div class="checkbox_item">
                                                 <input type="text" name="commission_rate" class="text w150" autocomplete="off" value="{$goods.commission_rate}"/>&nbsp;%
@@ -434,19 +386,8 @@
                                                 <input type="hidden" name="old_commission_rate" autocomplete="off" value="{$goods.commission_rate}"/>
                                             </div>
                                         </div>
-                                        {else}
-                                        <input type="hidden" name="commission_rate" class="text w150" autocomplete="off" value="{$goods.commission_rate}"/>
-                                        <span class="red">{$goods.commission_rate}%</span>
-                                        {/if}
                                     </dd>
-                                </dl>
-                                <dl class="item">
-                                    <dt class="step_label">会员价格：</dt>
-                                    <dd class="step_value">
-                                        {include file ='library/user_price_list.lbi'}
-                                        <div class="notic">{$lang.notice_user_price}</div>
-                                    </dd>
-                                </dl>
+                                </dl>				
                             </div>
                             <div class="ecsc-form-goods">
                             	<div class="ecsc-form-title"><i class="dian"></i><h3>详细描述</h3></div>
@@ -555,56 +496,51 @@
                                             </div>
                                         </dd>
                                     </dl>
-                                    
                                     <dl class="item">
                                         <dt class="step_label">分期：</dt>
                                         <dd class="step_value">
                                             <div class="checkbox_items">
                                                 <div class="checkbox_item">
                                                     <input type="radio" name="is_stages" class="ui-radio is_handle_stages" id="stages_no" value="0" {if !$stages}checked="checked"{/if} onclick="handle_for_stages(this);"/>
-                                                    <label{if $seller_stages} for="stages_no"{/if} class="ui-radio-label">否</label> 
+                                                    <label for="stages_no" class="ui-radio-label">否</label> 
                                                 </div>
                                                 <div class="checkbox_item mr15">
                                                     <input type="radio" name="is_stages" class="ui-radio is_handle_stages" id="stages_yes" value="1" {if $stages}checked="checked"{/if} onclick="handle_for_stages(this);"/>
-                                                    <label{if $seller_stages} for="stages_yes"{/if} class="ui-radio-label">是</label> 
+                                                    <label for="stages_yes" class="ui-radio-label">是</label> 
                                                 </div>
                                                 <div class="hidden_div hidden_stages" {if $stages}style="display:block;"{/if}>
                                                     <div id="stages" class="checkbox_items">
                                                         <div class="checkbox_item">
                                                             <input type="checkbox" stages="{$stages[0]}" name="stages_num[0]" class="ui-checkbox" value="1" id="stages_num_0" />
-                                                            <label{if $seller_stages} for="stages_num_0"{/if} class="ui-label">30天免息</label>
+                                                            <label for="stages_num_0" class="ui-label">30天免息</label>
                                                         </div>
                                                         <div class="checkbox_item">
                                                             <input type="checkbox" stages="{$stages[1]}" name="stages_num[1]" class="ui-checkbox" value="3" id="stages_num_1" />
-                                                            <label{if $seller_stages} for="stages_num_1"{/if} class="ui-label">分三期</label>
+                                                            <label for="stages_num_1" class="ui-label">分三期</label>
                                                         </div>
                                                         <div class="checkbox_item">
                                                             <input type="checkbox" stages="{$stages[2]}" name="stages_num[2]" class="ui-checkbox" value="6" id="stages_num_2" />
-                                                            <label{if $seller_stages} for="stages_num_2"{/if} class="ui-label">分六期</label>
+                                                            <label for="stages_num_2" class="ui-label">分六期</label>
                                                         </div>
                                                         <div class="checkbox_item">
                                                             <input type="checkbox" stages="{$stages[3]}" name="stages_num[3]" class="ui-checkbox" value="9" id="stages_num_3" />
-                                                            <label{if $seller_stages} for="stages_num_3"{/if} class="ui-label">分九期</label>
+                                                            <label for="stages_num_3" class="ui-label">分九期</label>
                                                         </div>
                                                         <div class="checkbox_item">
                                                             <input type="checkbox" stages="{$stages[4]}" name="stages_num[4]" class="ui-checkbox" value="12" id="stages_num_4" />
-                                                            <label{if $seller_stages} for="stages_num_4"{/if} class="ui-label">分十二期</label>
+                                                            <label for="stages_num_4" class="ui-label">分十二期</label>
                                                         </div>
                                                         <div class="checkbox_item">
                                                             <input type="checkbox" stages="{$stages[5]}" name="stages_num[5]" class="ui-checkbox" value="24" id="stages_num_5" />
-                                                            <label{if $seller_stages} for="stages_num_5"{/if} class="ui-label">分二十四期</label>
+                                                            <label for="stages_num_5" class="ui-label">分二十四期</label>
                                                         </div>
-                                                        <input type="text" name="stages_rate" id="stages_rate" class="text fl w60 mr10" placeholder="每期费率" autocomplete="off" value="{$goods.stages_rate}" {if !$seller_stages}readonly="readonly"{/if}/>
+                                                        <input type="text" name="stages_rate" id="stages_rate" class="text fl w60 mr10" placeholder="每期费率" autocomplete="off" value="{$goods.stages_rate}"/>
                                                         <span class="fl">(%)</span>
                                                     </div>
                                                 </div>
-                                                {if !$seller_stages}
-                                                <div class="notic">平台未设置开启商家自行设置分期购，商家只可以查看不可以编辑分期购，编辑修改请联系平台</div>
-                                                {/if}
                                             </div>
                                         </dd>
                                     </dl>
-                                    
                                     <!--分销商品开关begin -->
                                     <!--{if $is_dis}-->
                                     <dl class="item">
@@ -632,6 +568,24 @@
                                 </div>
                                 <div class="goods_special">
                                     <dl class="item">
+                                        <dt class="step_label">会员价格：</dt>
+                                        <dd class="step_value">
+                                            <div class="checkbox_items">
+                                                <div class="checkbox_item">
+                                                    <input type="radio" name="goods_user_price" class="ui-radio" id="gup_no" value="0" {if !$member_price_list}checked="checked"{/if} />
+                                                    <label for="gup_no" class="ui-radio-label">无</label> 
+                                                </div>
+                                                <div class="checkbox_item">
+                                                    <input type="radio" name="goods_user_price" class="ui-radio" id="gup_yes" value="1" {if $member_price_list}checked="checked"{/if} />
+                                                    <label for="gup_yes" class="ui-radio-label">有</label> 
+                                                </div>
+                                            </div>
+                                            <div class="hidden_div special_div" {if $member_price_list}style="display:block"{/if}>
+                                                {include file ='library/user_price_list.lbi'}
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                    <dl class="item">
                                         <dt class="step_label">阶梯价格：</dt>
                                         <dd class="step_value">
                                             <div class="checkbox_items">
@@ -644,7 +598,7 @@
                                                   <label for="ladder_yes" class="ui-radio-label">有</label> 
                                                 </div>
                                             </div>
-                                            <div class="special_div"{if $volume_price_list} style="display:block"{/if} ectype="volumeNumber" data-number="100">
+                                            <div class="special_div" {if $volume_price_list}style="display:block"{/if}>
                                                 {include file ='library/volume_price_list.lbi'}
                                             </div>
                                         </dd>
@@ -736,6 +690,25 @@
                                     </dd>
                                 </dl>
                                 <dl>
+									<dt>{$lang.lab_goods_service}</dt>
+                                    <dd>
+                                        <div class="checkbox_items">
+                                            <div class="checkbox_item">
+                                                <input type="checkbox" name="is_reality" class="ui-checkbox" value="1" id="is_reality" {if $goods.goods_extend.is_reality} checked="checked"{/if}>
+                                                <label class="ui-label" for="is_reality">正品保证</label>
+                                            </div>
+                                            <div class="checkbox_item">
+                                                <input type="checkbox" name="is_return" class="ui-checkbox" value="1" id="is_return" {if $goods.goods_extend.is_return} checked="checked"{/if}>
+                                                <label class="ui-label" for="is_return">包退服务</label>
+                                            </div>
+                                            <div class="checkbox_item">
+                                                <input type="checkbox" name="is_fast" class="ui-checkbox" value="1" id="is_fast" {if $goods.goods_extend.is_fast} checked="checked"{/if}>
+                                                <label class="ui-label" for="is_fast">闪速配送</label>
+                                            </div>
+                                        </div>
+                                    </dd>
+                                </dl>								
+                                <dl>
                                     <dt>{$lang.lab_is_on_sale}</dt>
                                     <dd>
                                         <div class="switch switch_2 {if $goods.is_on_sale}active{/if}" title="是">
@@ -776,17 +749,10 @@
                                     </dd>
                                 </dl>
                                 <dl>
-                                    <dt>{$lang.comment_tag}</dt>
+                                    <dt>{$lang.goods_product_tag}</dt>
                                     <dd>
 										<textarea name="goods_product_tag" cols="40" rows="3" class="textarea fl">{$goods.goods_product_tag|escape}</textarea>
 										<div class="notic">{$lang.notice_product_tag}</div>
-                                    </dd>
-                                </dl>
-                                <dl>
-                                    <dt>{$lang.service_commitment_tag}</dt>
-                                    <dd>
-										<textarea class="textarea" name="goods_tag">{$goods.goods_tag|escape}</textarea>
-                                        <div class="notic">{$lang.service_commitment_tag_notic}</div>
                                     </dd>
                                 </dl>
                                 <dl>
@@ -810,27 +776,59 @@
                         </div>
                     </div>
                     <div class="step step_four" ectype="step" data-step="5" style="display:none;">
-                    	<!-- {if $code neq 'virtual_card'} 虚拟商品不需要商品属性-->
-                        <div class="step_content">
+                    	<div class="step_content">
                         	<div class="ecsc-form-goods">
                         		<div class="ecsc-form-title"><i class="dian"></i><h3>商品属性</h3></div>
-                                <div class="step_item">
-                                    <div class="step_item_left"><h5>属性分类：</h5></div>
-                                    <div class="step_item_right">
-                                        <div class="item_right_li">
-                                            <div class="value_select" ectype="type_cat">
-                                                {include file="library/type_cat_list.lbi"}
+                                        <div class="step_item">
+                                        <div class="step_item_left"><h5>属性分类：</h5></div>
+                                        <div class="step_item_right">
+                                            <div class="item_right_li">
+                                                <div class="value_select" ectype="type_cat">
+                                                    <div id="parent_id1" class="imitate_select select_w145">
+                                                        <div class="cite">请选择1</div>
+                                                        <ul>
+                                                            <li><a href="javascript:;" data-value="0" data-level='1' class="ftx-01">请选择</a></li>
+                                                            {foreach from=$type_level item=cat}
+                                                            <li><a href="javascript:;" data-value="{$cat.cat_id}" data-level="{$cat.level}" class="ftx-01">{$cat.cat_name}</a></li>
+                                                            {/foreach}
+                                                        </ul>
+                                                        <input type="hidden" value="{$cat_tree1.checked_id|default:0}" id="parent_id_val1">
+                                                    </div>
+                                                    {if $cat_tree1.arr}
+                                                    <div id="parent_id2" class="imitate_select select_w145">
+                                                        <div class="cite">请选择</div>
+                                                        <ul>
+                                                            <li><a href="javascript:;" data-value="0" data-level='2' class="ftx-01">请选择</a></li>
+                                                            {foreach from=$cat_tree1.arr item=cat}
+                                                            <li><a href="javascript:;" data-value="{$cat.cat_id}" data-level="{$cat.level}" class="ftx-01">{$cat.cat_name}</a></li>
+                                                            {/foreach}
+                                                        </ul>
+                                                        <input type="hidden" value="{$cat_tree.checked_id|default:0}" id="parent_id_val2">
+                                                    </div>
+                                                    {/if}
+                                                    {if $cat_tree.arr}
+                                                    <div id="parent_id{if $cat_tree1.arr}3{else}2{/if}" class="imitate_select select_w145">
+                                                        <div class="cite">请选择</div>
+                                                        <ul>
+                                                            <li><a href="javascript:;" data-value="0" data-level='{if $cat_tree1.arr}3{else}2{/if}' class="ftx-01">请选择</a></li>
+                                                            {foreach from=$cat_tree.arr item=cat}
+                                                            <li><a href="javascript:;" data-value="{$cat.cat_id}" data-level="{$cat.level}" class="ftx-01">{$cat.cat_name}</a></li>
+                                                            {/foreach}
+                                                        </ul>
+                                                        <input type="hidden" value="{$type_c_id|default:0}" id="parent_id_val{if $cat_tree1.arr}3{else}2{/if}">
+                                                    </div>
+                                                    {/if}
+                                                    <input name="parent_id" type="hidden" value="{$type_c_id|default:0}">
+                                                </div>
                                             </div>
-                                            <input type="button" class="sc-btn btn28 sc-blueBg-btn" value="{$lang.add_goods_type_cat}" ectype="dialog_operation" data-type="add_goods_type_cat" data-goodsid="{$goods.goods_id}">
                                         </div>
                                     </div>
-                                </div>
                                 <div class="step_item">
                                 	<div class="step_item_left"><h5>商品属性：</h5></div>
                                 	<div class="step_item_right">
 										<div class="item_right_li">
 											<div class="value_select">
-												<div id="attr_select" class="imitate_select select_w320" ectype="attrTypeSelect">
+												<div id="attr_select" class="imitate_select select_w320">
 													<div class="cite">{if $goods_type_name}{$goods_type_name}{else}请选择{/if}</div>
 													<ul style="display: none;">
 														<li><a href="javascript:getAttrList({$goods.goods_id|default:0});" data-value="0" class="ftx-01">请选择商品类型</a></li>
@@ -841,8 +839,6 @@
 													<input name="goods_type" type="hidden" value="{$goods.goods_type|default:0}" id="select_attr_val">
 												</div>
 											</div>
-                                                                                    <input type="button" class="sc-btn btn28 sc-blueBg-btn" value="{$lang.add_goods_type}" ectype="dialog_operation" data-type="add_goods_type" data-goodsid="{$goods.goods_id}">
-                                                <input type="button" class="sc-btn btn28 sc-blueBg-btn" value="{$lang.10_attribute_add}" ectype="dialog_operation" data-type="attribute_add" data-goodsid="{$goods.goods_id}">
 										</div>
                                     </div>
                                 </div>
@@ -870,7 +866,7 @@
 												<div class="checkbox_items">
 													{foreach from=$warehouse.area_list item=area name=area}
 													<div class="checkbox_item">
-														<input type="radio" name="region" class="ui-radio" id="region_{$area.region_id}" {if $cfg.area_pricetype eq 1}ectype="cityRegion"{/if} data-warehouse="{$warehouse.region_id}" {if $smarty.foreach.area.first && $smarty.foreach.warehouse.first}checked{/if} value="{$area.region_id}" data-type="region_id"/>
+														<input type="radio" name="region" class="ui-radio" id="region_{$area.region_id}" {if $smarty.foreach.area.first && $smarty.foreach.warehouse.first}checked{/if} value="{$area.region_id}" data-type="region_id"/>
 														<label for="region_{$area.region_id}" class="ui-radio-label">{$area.region_name}</label>
 													</div>
 													{/foreach}
@@ -878,15 +874,6 @@
 											</div>
 											{/foreach}
 										</div>
-                                        
-                                        {if $cfg.area_pricetype eq 1}
-                                        <div class="item_right_li" id="attribute_city_region"{if $goods.model_price neq 2} style="display:none;"{/if}>
-											<div class="label hide">{$lang.city_region}：</div>
-											<div class="value hide"  id="region_city_list">
-											</div>
-										</div>
-                                        {/if}
-                                        
 									</div>
 								</div>
 								<!--属性模式-->
@@ -894,7 +881,6 @@
                             </div>
                         </div>
 						<div class="step" id="goods_attr_gallery"></div>
-                        <!-- {/if}-->
 						<div class="step_content">
                         	<div class="ecsc-form-goods">
                         		<div class="ecsc-form-title"><i class="dian"></i><h3>商品相册</h3></div>
@@ -1175,7 +1161,7 @@
     </div>
 </div>
 {include file ='library/seller_footer.lbi'}
-{insert_scripts files="../js/plupload.full.min.js,jquery.purebox.js,../js/spectrum-master/spectrum.js"}
+{insert_scripts files="../js/plupload.full.min.js,jquery.purebox.js,spectrum-master/spectrum.js,colorselector.js"}
 <script type="text/javascript">
 	/**********************************{手机商品描述选相册 gallery_album} start*****************************/
 	$.divselect("#album_id","#album_id_val",function(obj){
@@ -1190,24 +1176,23 @@
 	
 	$.divselect("#album_file","#album_file_val",function(obj){
 		var val = obj.attr("data-value"),
-			inid = obj.parents("[ectype='album-warp']").data("inid"),
-			is_vis = 0;
+			inid = obj.parents("[ectype='album-warp']").data("inid");
 			
-		if(inid == "gallery_album"){
-			is_vis = 2;
-		}else{
-			is_vis = 1;
-		}
-			
-		changedpic(val,obj,is_vis,"",inid);
+		changedpic(val,obj,2,"",inid);
 	});
 	
-	//属性分类筛选出属性类型
-	$.divselect("*[ectype='typeCatSelect']","*[ectype='typeCatVal']",function(obj){
-		var level = obj.data('level'),
-			val = obj.data("value");
-		
+	$.divselect("#parent_id1","#parent_id_val1",function(obj){
 		get_childcat(obj,2);
+	});
+	
+	$.divselect("#parent_id3","#parent_id_val3",function(obj){
+		var val = obj.attr("data-value");
+		$("input[name='parent_id']").val(val);
+		get_childcat(obj,2,1);
+	});
+	
+	$.divselect("#parent_id2","#parent_id_val2",function(obj){
+		 get_childcat(obj,2);
 	});
     /**********************************{手机商品描述选相册 gallery_album} end*****************************/
 
@@ -1380,27 +1365,18 @@
 				steflex.removeClass("steflexActive");
 				$("dd span[ectype='model'],h3[ectype='model']").text("默认模式");
 				$("#attribute_model").hide(); //属性模式
-				{if $cfg.area_pricetype eq 1}
-				$("#attribute_city_region").hide();
-				{/if}
 			}else if(model == 1){
 				dlModel.show();
 				steflex.addClass("steflexActive");
 				$("dd span[ectype='model'],h3[ectype='model']").text("仓库模式");
 				$("#attribute_model").show(); //属性模式
 				$("#attribute_region").hide();
-				{if $cfg.area_pricetype eq 1}
-				$("#attribute_city_region").hide();
-				{/if}
 			}else if(model == 2){
 				dlModel.show();
 				steflex.addClass("steflexActive");
 				$("dd span[ectype='model'], h3[ectype='model']").text("地区模式");
 				$("#attribute_model").show(); //属性模式
 				$("#attribute_region").show();
-				{if $cfg.area_pricetype eq 1}
-				$("#attribute_city_region").show();
-				{/if}
 			}
 			
 			steflex.find("dl").each(function(index, element){
@@ -1729,17 +1705,10 @@
 			var goods_id = $(this).data('goodsid');
 			$.jqueryAjax('dialog.php', 'is_ajax=1&act=dialog_warehouse' + '&user_id=' + user_id + '&goods_id=' + goods_id + '&temp=addBatchRegion', function(data){
 				var content = data.content;
-				
-				{if $cfg.area_pricetype eq 1}
-				var width = 1000;
-				{else}
-				var width = 900;
-				{/if}
-				
 				pb({
 					id:"categroy_dialog",
 					title:"添加地区",
-					width:width,
+					width:900,
 					content:content,
 					ok_title:"确定",
 					drag:false,
@@ -1760,15 +1729,7 @@
 						input.attr('id','area_' + num);
 						input.find('font').attr('id',"warehouse_area_list_" + num);
 						input.find('div.warehouse_area_name').attr('data-key',num);
-						input.find('div.warehouse_area_name').attr('id', 'warehouse_area_name_' + num);
 						input.find("input[name='warehouse_area_name']").attr('id',"warehouse_area_name_val_" + num);
-						
-						{if $cfg.area_pricetype eq 1}
-						input.find('div.warehouse_area_city').attr('id', 'warehouse_area_city_name_' + num);
-						input.find('div.warehouse_area_city').attr('data-key',num);
-						input.find('div.area_city_list').attr('id', 'warehouse_area_city_' + num);
-						{/if}
-						
 						input.find('select').attr('id',num);
 						$("input[name='numAdd_area']").val(num);
 					}else{
@@ -1798,7 +1759,7 @@
 			var key =$(this).parents(".warehouse_area_name").data("key");
 			var value = $(this).find("a").data("value");
 
-			get_warehouse_area_name(value, key ,goods_id, user_id, 1);
+			get_warehouse_area_name(value, key ,goods_id, user_id);
 		});
 		
 		//批量添加地区
@@ -1809,11 +1770,6 @@
 			var region_price = [];
 			var region_promote_price = [];
 			var warehouse_area_list = [];
-			
-			{if $cfg.area_pricetype eq 1}
-			var warehouse_area_city = [];
-			{/if}
-			
 			var goods_id = {$goods.goods_id};
 			obj.find("select").each(function(){
 				var val = $(this).val();
@@ -1823,14 +1779,6 @@
 				var area_list = $(this).val();
 				warehouse_area_list.push(area_list);
 			});
-			
-			{if $cfg.area_pricetype eq 1}
-			obj.find("input[name='area_city_name']").each(function(){
-				var area_list = $(this).val();
-				warehouse_area_city.push(area_list);
-			});
-			{/if}
-			
 			 obj.find("input[name='region_number']").each(function(){
 				var number = $(this).val();
 				region_number.push(number);
@@ -1844,12 +1792,7 @@
 				region_promote_price.push(promote_price);
 			});
 			
-			var where = "";
-			{if $cfg.area_pricetype eq 1}
-				where = "&warehouse_area_city="+warehouse_area_city;
-			{/if}
-			
-			Ajax.call('goods.php?is_ajax=1&act=addBatchRegion', 'warehouse_area_name=' + warehouse_area_name+"&region_number="+region_number+"&region_price="+region_price+"&region_promote_price="+region_promote_price+"&goods_id="+goods_id+"&warehouse_area_list="+warehouse_area_list + where, addRegionResponse, 'POST', 'JSON');
+			Ajax.call('goods.php?is_ajax=1&act=addBatchRegion', 'warehouse_area_name=' + warehouse_area_name+"&region_number="+region_number+"&region_price="+region_price+"&region_promote_price="+region_promote_price+"&goods_id="+goods_id+"&warehouse_area_list="+warehouse_area_list, addRegionResponse, 'POST', 'JSON');
 		}
 		
 		//批量添加地区回调函数
@@ -1891,26 +1834,6 @@
 				});
 			}
 		});
-		
-		$(document).on("click",":input[ectype='cityRegion']",function(){
-			
-			var area_id = $(this).val();
-			
-			get_city_region(area_id);
-		});
-		
-		function get_city_region(area_id){
-			Ajax.call('goods.php?is_ajax=1&act=city_region', 'area_id=' + area_id, RegionCityResponse, 'GET', 'JSON');
-		}
-		
-		function RegionCityResponse(result){
-			$("#attribute_city_region .label").removeClass('hide');
-			$("#attribute_city_region .value").removeClass('hide');
-			
-			$("#attribute_city_region .label").addClass('show');
-			$("#attribute_city_region .value").addClass('show');
-			$("#region_city_list").html(result.content.html);
-		}
 		/**********************************{仓库和地区模式} end*****************************/		
 		/*************************************批量上传跳转连接 start************************************/
 		$(document).on("click","#produts_batch",function(){
@@ -1941,13 +1864,7 @@
 				}
 			});
 			
-			$("input[data-type='city_region_id']").each(function(index, element) {
-				if($(element).is(":checked") == true){
-					city_id = $(this).val();
-				}
-			});
-			
-			window.open("goods_produts_area_batch.php?act=add" + "&goods_id=" +goods_id+ "&model=" + model+ "&area_id=" + area_id+ "&city_id=" + city_id,"_blank");
+			window.open("goods_produts_area_batch.php?act=add" + "&goods_id=" +goods_id+ "&model=" + model+ "&area_id=" + area_id,"_blank");
 		});
 		
 		$(document).on("click","#attr_refresh",function(){
@@ -2309,8 +2226,7 @@
 				ok_title:"确定",
 				cl_title:"取消",
 				drag:false,
-				foot:true,
-				onOk:function(){}
+				foot:true
 			});
 			$(".category_list").perfectScrollbar();
 		});
@@ -2367,7 +2283,7 @@
 		filters: {
 			max_file_size: '2mb', //最大上传文件大小（格式100b, 10kb, 10mb, 1gb）
 			mime_types: [//允许文件上传类型
-				{title: "files", extensions: "jpg,png,gif,jpeg"}
+				{title: "files", extensions: "jpg,png,gif"}
 			]
 		},
 		multi_selection: false, //true:ctrl多文件上传, false 单文件上传
@@ -2396,50 +2312,6 @@
 		}
 	});
 	uploader.init();
-
-    //上传视频
-    $("#goods_video").on("click",function(){
-        $.jqueryAjax("dialog.php", "is_ajax=1&act=video_box", function(data){
-            var content = data.content;
-            pb({
-                id:"update_video_dialog",
-                title:"上传视频",
-                width:500,
-                content:content,
-                drag:true,
-                foot:false
-            });
-        });
-    });
-
-    $(".video_default").on("click",function(){
-        $('#goods_video_js').click();
-        $(this).hide();
-    });
-
-    var video=document.getElementById("goods_video_js");
-
-    if(video){
-        video.onclick=function(){
-            if(video.paused){
-                video.play();
-                $(".video_default").hide();
-            }else{
-                video.pause();
-                $(".video_default").show();
-            }
-        }
-    }
-
-    //删除视频
-    $("*[ectype='video_remove']").on("click",function(){
-        pbDialog("是否要删除视频","",0,"","","",true,function(){
-            $.jqueryAjax("gallery_album.php", "is_ajax=1&act=del_video&goods_id=" + goods_id, function(data){
-				$(".goods_video_div").addClass("hide");
-				$(".goods_video_js").attr("src", '');
-			});
-        });
-    });
 
 	//日期选择插件调用
 	var opts1 = {
@@ -2779,33 +2651,7 @@
 			$("#goods_attr_gallery").hide();
 		}
 		
-		{if $cfg.area_pricetype eq 1}
-		var warehouse_id = $("#attribute_model #attribute_warehouse").find("input[type=radio][data-type=warehouse_id]:first").val()
-		var region_id = $("#attribute_region").find("input[type=radio][data-warehouse=" + warehouse_id + "]:first").val();
-		
-		var city_id = 0;
-		$.ajax({
-			type:"get",
-			url:"goods.php?is_ajax=1&act=city_region&onload=1",
-			data:'area_id=' + region_id,
-			dataType: 'json',
-			async : false, //设置为同步操作就可以给全局变量赋值成功
-			success:function(result){
-				
-				$("#attribute_city_region .label").removeClass('hide');
-				$("#attribute_city_region .value").removeClass('hide');
-				$("#attribute_city_region .label").addClass('show');
-				$("#attribute_city_region .value").addClass('show');
-				$("#region_city_list").html(result.content.html);
-			
-				city_id = result.content.city_id;
-			}
-		});
-		
-		set_attribute_table(goods_id, 2, city_id);
-		{else}
 		set_attribute_table(goods_id);
-		{/if}
 	}
 	
 	//删除货品
@@ -2942,19 +2788,10 @@
 		var attr_id = _this.data("attrid");
 		var goods_attr_id = _this.data("goodsattrid");
 		var attr_value = _this.data("attrvalue");
-		var model = $(":input[name='goods_model']").val();
-                var warehouse_id = $("#attribute_model").find("input[type=radio][data-type=warehouse_id]:checked").val();
-                var region_id = $("#attribute_model").find("input[type=radio][data-type=region_id]:checked").val();
-                var extension = '';
-                if(goods_model == 1){
-                        extension = "&region_id="+warehouse_id;
-                }else if(goods_model == 2){
-                        extension = "&region_id="+region_id;
-                }
-                
+		
 		if(_this.siblings("input[type='checkbox']").is(":checked") == true){
 			_this.siblings("input[type='checkbox']").prop("checked",false);
-			$.jqueryAjax('dialog.php', 'act=del_goods_attr' + '&goods_id=' + goods_id + '&attr_id=' + attr_id + '&goods_attr_id=' + goods_attr_id + '&attr_value=' + attr_value + "&model=" + model + extension, function(data){
+			$.jqueryAjax('dialog.php', 'act=del_goods_attr' + '&goods_id=' + goods_id + '&attr_id=' + attr_id + '&goods_attr_id=' + goods_attr_id + '&attr_value=' + attr_value, function(data){
 				getAttrList(goods_id);
 			});
 		};
@@ -3061,7 +2898,7 @@
 		filters: {
 			max_file_size: '2mb', //最大上传文件大小（格式100b, 10kb, 10mb, 1gb）
 			mime_types: [//允许文件上传类型
-				{title: "files", extensions: "jpg,png,gif,jpeg"}
+				{title: "files", extensions: "jpg,png,gif"}
 			]
 		},
 		multi_selection: true, //true:ctrl多文件上传, false 单文件上传
@@ -3101,7 +2938,6 @@
 	function img_default(img_id){
 		Ajax.call('goods.php?act=img_default', "img_id=" + img_id , img_defaultResult, "POST", "JSON");
 	}
-	
 	function img_defaultResult(result){
 		if(result.error == 1){
 			$(".goods_album").html(result.content);
@@ -3136,47 +2972,20 @@
 	function insert_attr_input(){
 		var actionUrl = "dialog.php?act=insert_attr_input";  
 		$("#insertAttrInput").ajaxSubmit({
-			type: "POST",
-			dataType: "JSON",
-			url: actionUrl,
-			data: { "action": "TemporaryImage" },
-			success: function (data) {
-				$(".attr_input_type_" + data.attr_id).html(data.content);
-				
-				//自动加载商品属性
-				getAttrList(data.goods_id);
-			},
-			async: true
-		});
-	}
-
-	//唯一属性框进入焦点
-	function insert_attr_input_val(obj){
-		var _this = $(obj).parents('.value'),
-			attr_id_val = [],
-			value_list_val = [],
-			attr_id = _this.find("input[name='attr_id_list[]']").val(),
-			goods_id = $("input[name='goods_id']").val();
-			
-		attr_id_val.push(_this.find("input[name='goods_attr_id_list[]']").val());
-		value_list_val.push(_this.find("input[name='attr_value_list[]']").val());
-		$.jqueryAjax('dialog.php', 'is_ajax=1&act=insert_attr_input&attr_id_val=' + attr_id_val + '&attr_id=' + attr_id + '&goods_id=' + goods_id + "&value_list_val=" + value_list_val, function(data){});
+				type: "POST",
+				dataType: "JSON",
+				url: actionUrl,
+				data: { "action": "TemporaryImage" },
+				success: function (data) {
+					$(".attr_input_type_" + data.attr_id).html(data.content);
+					
+					//自动加载商品属性
+					getAttrList(data.goods_id);
+				},
+				async: true  
+		 });
 	}
 	
-	//下拉属性选择
-	$.divselect("#blur_attr_list","#blur_attr_list_val",function(obj){
-		var val = obj.data("value"),
-			_this = obj.parents('.value'),
-			attr_id_val = [],
-			value_list_val = [],
-			attr_id = _this.find("input[name='attr_id_list[]']").val(),
-			goods_id = $("input[name='goods_id']").val();
-			
-		attr_id_val.push(_this.find("input[name='goods_attr_id_list[]']").val());
-		value_list_val.push(val);
-		
-		$.jqueryAjax('dialog.php', 'is_ajax=1&act=insert_attr_input&attr_id_val=' + attr_id_val + '&attr_id=' + attr_id + '&goods_id=' + goods_id + "&value_list_val=" + value_list_val, function(data){});
-	});
 	$(document).on("click",".xds_up",function(){
 		var _div = $(this).parent().clone();
 		_div.find("i").removeClass("xds_up").addClass("xds_down");
@@ -3206,89 +3015,7 @@
 			parent.remove();
 		}
 	});
-        $(document).on("click","[ectype='search_attr']",function(){
-            set_attribute_table(goods_id , 1); //重置表格
-        })
 	/**********************************{商品属性信息} end*****************************/
-    
-    /* 异步添加各类信息 begin */
-    //添加运费模板
-	$(document).on("click","[ectype='ajaxTransport']",function(){
-        var name = "添加运费模板";
-        var act = 'act=ajaxTransport';
-        var _this = $(this);
-        if(_this.data('attr') == 'edit'){
-            var tid = $('#tid').find("input[name='tid']").val();
-            name = "编辑运费模板";
-            act = 'act=ajaxTransport&tid=' + tid;
-        }
-        
-        $.jqueryAjax('dialog.php',act, function(data){
-            goods_visual_desc(name,1000,data.content,function(){
-                var form = $("#transport_dialog").find("form[name='theForm']");
-                var title = form.find("input[name='title']");
-                var act = form.find("input[name='act']").val();
-                var fald = true;
-                
-                if(title.val() == ""){
-                    error_div("#transport_dialog input[name='title']","运费模板标题不能为空");
-					fald = false;
-                }else{
-                    form.ajaxSubmit({
-                        type: "POST",
-                        dataType: "JSON",
-                        url: "dialog.php?act=" + act,
-                        data: { "action": "TemporaryImage" },
-                        success: function (data) {
-                            alert(data.message);
-                            if(data.error == 0){
-                                $("#tid").html(data.content); 
-                            }
-
-                        },
-                        async: true  
-                    });
-                    
-                    fald = true;
-                }
-                return fald;   
-            },'transport_dialog');            
-        });		
-	});
-    
-    //添加分类
-	$(document).on("click","[ectype='ajaxCate']",function(){
-        $.jqueryAjax('dialog.php', 'act=ajaxCate', function(data){
-            goods_visual_desc("添加分类",1200,data.content,function(){
-                var form = $("#cate_dialog").find("form[name='theForm']");
-                var cat_name = form.find("input[name='cat_name']");
-                var fald = true;
-                
-                if(cat_name.val() == ""){
-                    error_div("#cate_dialog input[name='cat_name']","分类名称不能为空");
-					fald = false;
-                }else{
-                    form.ajaxSubmit({
-                        type: "POST",
-                        dataType: "JSON",
-                        url: "dialog.php?act=cate_insert",
-                        data: { "action": "TemporaryImage" },
-                        success: function (data) {
-                            alert(data.message);
-                            if(data.error == 0){
-                                $("#cate_add").html(data.content); 
-                            }                            
-                        },
-                        async: true  
-                    });
-                    
-                    fald = true;
-                }
-                return fald;   
-            },'cate_dialog');
-        });		
-	});
-    /* 异步添加各类信息 end */
 </script>
 </body>
 </html>

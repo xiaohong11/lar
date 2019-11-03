@@ -16,7 +16,7 @@
 
 <body class="show">
 <!-- #BeginLibraryItem "/library/page_header_presale.lbi" --><!-- #EndLibraryItem -->
-{* DSC 提醒您：动态载入presale_banner_new.lbi，显示首页分类小广告 *}{insert name='get_adv_child' ad_arr=$presale_banner_new}
+{* ECSHOP 提醒您：动态载入presale_banner_new.lbi，显示首页分类小广告 *}{insert name='get_adv_child' ad_arr=$presale_banner_new}
 
 <div class="preSale-filter">
     <div id="filter">
@@ -46,8 +46,7 @@
 </div>
 <div id="content">
     <div class="preSaleNew-list w1200 pb40 w">
-		{if $date_result}
-		<!-- {foreach from=$date_result item=date_result_goods} 遍历日期楼层 -->
+    <!-- {foreach from=$date_result item=date_result_goods} 遍历日期楼层 -->
         <div class="preSaleNew-item">
             <div class="preSaleNewTime">
                 <div class="p-data">
@@ -63,10 +62,10 @@
                         <div class="p-warp">
                             <div class="p-img"><a href="{$goods.url}" target="_blank"><img src="{$goods.thumb}" width="196" height="196"/></a></div>
                             <div class="p-info">
-                                <div class="p-name"><a href="{$goods.url}" title="{$goods.goods_name|escape:html}" target="_blank">{$goods.goods_name}</a></div>
+                                <div class="p-name"><a href="{$goods.url}" target="_blank">{$goods.goods_name}</a></div>
                                 <div class="p-item">
                                     <div class="p-price"><em>￥</em>{$goods.shop_price}</div>
-                                    <span class="appointment">{$lang.existing}<em>{$goods.pre_num}</em>{$lang.subscribe_p}</span>
+                                    <span class="appointment">{$lang.existing}<em>{$goods.sales_volume}</em>{$lang.subscribe_p}</span>
                                 </div>
                                 <div class="p-dibu">
                                     <!-- {if $goods.no_start eq 1} -->
@@ -92,17 +91,6 @@
             </div>
         </div>
         <!-- {/foreach} -->
-		{else}
-		<div class="no_records no_records_tc">
-            <i class="no_icon_two"></i>
-            <div class="no_info no_info_line">
-                <h3>该分类下没有内容</h3>
-                <div class="no_btn">
-                    <a href="index.php" class="btn sc-redBg-btn">返回首页</a>
-                </div>
-            </div>
-        </div>
-		{/if}
     </div>
 </div>
 <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->

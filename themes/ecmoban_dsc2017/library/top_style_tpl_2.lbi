@@ -3,10 +3,10 @@
 <div class="banner catetop-banner">
     <div class="banner-ad">
         <div class="w w1200">
-            {* DSC 提醒您：动态载入cate_layer_right.lbi，轮播右侧广告 *}{insert name='get_adv_child' ad_arr=$top_style_right_banne id=$cate_info.cat_id}
+            {* ECSHOP 提醒您：动态载入cate_layer_right.lbi，轮播右侧广告 *}{insert name='get_adv_child' ad_arr=$top_style_right_banne id=$cate_info.cat_id}
         </div>
     </div>
-    <div class="bd">{* DSC 提醒您：动态载入cat_top_ad.lbi，轮播广告 *}{insert name='get_adv_child' ad_arr=$top_style_elec_banner id=$cate_info.cat_id}</div>
+    <div class="bd">{* ECSHOP 提醒您：动态载入cat_top_ad.lbi，轮播广告 *}{insert name='get_adv_child' ad_arr=$top_style_elec_banner id=$cate_info.cat_id}</div>
     <div class="hd"><ul></ul></div>
 </div>
 <div class="catetop-main w w1200" ectype="catetopWarp">
@@ -104,9 +104,9 @@
     <div class="catetop-brand clearfix" id="catBrand">
         <div class="hd"><h2>品牌旗舰</h2></div>
         <div class="bd">
-            <div class="cb-l">{* DSC 提醒您：动态载入cate_layer_right.lbi，显示品牌左侧小广告 *}{insert name='get_adv_child' ad_arr=$top_style_elec_brand_left id=$cate_info.cat_id}</div>
+            <div class="cb-l">{* ECSHOP 提醒您：动态载入cate_layer_right.lbi，显示品牌左侧小广告 *}{insert name='get_adv_child' ad_arr=$top_style_elec_brand_left id=$cate_info.cat_id}</div>
             <div class="cb-m">
-                {* DSC 提醒您：动态载入top_style_elec_brand.lbi，显示品牌右侧小广告 *}{insert name='get_adv_child' ad_arr=$top_style_elec_brand id=$cate_info.cat_id}
+                {* ECSHOP 提醒您：动态载入top_style_elec_brand.lbi，显示品牌右侧小广告 *}{insert name='get_adv_child' ad_arr=$top_style_elec_brand id=$cate_info.cat_id}
             </div>
             <div class="cb-r">
                 <ul>

@@ -40,10 +40,6 @@
         {if $val.attr_checked}
         <div class="img" data-type="img"><img src="images/yes.png" /></div>
         {/if}
-		
-        {if $val.attr_gallery_flie}
-        <a href="../{$val.attr_gallery_flie}" class="nyroModal" style="cursor:pointer; font-size:14px; margin:5px 0px 0px 5px;"><i class="icon icon-picture"></i></a>
-        {/if}		
         
         <input name="attr_id" type="hidden" value="{$spec.attr_id}" id="attrId" autocomplete="off"/>
         <input name="attr_value" type="hidden" value="{$val.attr_value}" id="goodsAttrValue_{$val.goods_attr_id}" autocomplete="off"/>

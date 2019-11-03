@@ -56,7 +56,7 @@
         </div>
         <div class="dsc-search">
             <div class="form">
-                <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm(this)" class="search-form">
+                <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()" class="search-form">
                     <input autocomplete="off" onKeyUp="lookup(this.value);" name="keywords" type="text" id="keyword" value="{if $search_keywords}{$search_keywords}{else}{insert name='rand_keyword'}{/if}" class="search-text"/>
                     <input type="hidden" name="store_search_cmt" value="{$search_type|default:0}">
                     <button type="submit" class="button button-goods" onclick="checkstore_search_cmt(0)">搜商品</button>
@@ -91,7 +91,6 @@
 			<div class="categorys-tab-content">
 				<div class="categorys-items" ectype="items">
 					<!--{foreach from=$categories_child item=cat name=child}-->
-                    {if $smarty.foreach.child.index < 5}
 					<div class="categorys-item" ectype="item" data-catid="{$cat.id}" data-eveval="0">
 						<div class="item-content">
 							<i class="iconfont icon-right"></i>
@@ -119,7 +118,6 @@
 							</div>
 						</div>
 					</div>
-                    {/if}
 					<!-- {/foreach} -->
 				</div>
 			</div>
@@ -142,7 +140,6 @@
             <div class="categorys-tab-content">
                 <div class="categorys-items" ectype="items">
                     <!--{foreach from=$categories_child item=cat name=child}-->
-                    {if $smarty.foreach.child.index < 5}
                     <div class="categorys-item" ectype="item" data-catid="{$cat.id}">
                         <div class="item-content">
                             <div class="categorys-title">
@@ -165,10 +162,9 @@
                                     <!--{/foreach}-->
                                 </ul>
                             </div>
-                            {* DSC 提醒您：动态载入cate_layer_right.lbi，显示全部分类小广告 *}{insert name='get_adv_child' ad_arr=$cat.cate_layer_elec_row id=$cat.id}
+                            {* ECSHOP 提醒您：动态载入cate_layer_right.lbi，显示全部分类小广告 *}{insert name='get_adv_child' ad_arr=$cat.cate_layer_elec_row id=$cat.id}
                         </div>
                     </div>
-                    {/if}
                     <!--{/foreach}-->
                 </div>
             </div>
@@ -191,7 +187,6 @@
 			<div class="categorys-tab-content">
 				<div class="categorys-items" ectype="items">
 				<!--{foreach from=$categories_child item=cat name=child}-->
-                	{if $smarty.foreach.child.index < 7}
 					<div class="categorys-item" ectype="item" data-catid="{$cat.id}">
 						<div class="item-content">
 							<!--{if $cat.style_icon eq 'other'}-->
@@ -217,11 +212,10 @@
                                     <li><a href="{$child.url}" target="_blank">{$child.name|escape:html}</a></li>
                                     <!--{/foreach}-->
 								</ul>
-								{* DSC 提醒您：动态载入cate_layer_right.lbi，显示全部分类小广告 *}{insert name='get_adv_child' ad_arr=$cat.cate_layer_elec_row id=$cat.id}
+								{* ECSHOP 提醒您：动态载入cate_layer_right.lbi，显示全部分类小广告 *}{insert name='get_adv_child' ad_arr=$cat.cate_layer_elec_row id=$cat.id}
 							</div>
 						</div>
 					</div>
-                    {/if}
 					<!--{/foreach}-->
 				</div>			
 			</div>

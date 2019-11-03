@@ -24,7 +24,7 @@
                     <div class="shopLeft">
                     	<a href="{$shop_info.store_url}" target="_blank">
                             <div class="logo"><img src="{$basic_info.logo_thumb}" width="95" height="95" /></div>
-                            <div class="storeName">{$shop_info.shop_name}</div>
+                            <div class="storeName">{$shop_info.shop_name}{$shop_info.shopNameSuffix}</div>
                         </a>
                     </div>
                     <div class="shopHeader-info">
@@ -235,24 +235,17 @@
             </div>
             <input type="hidden" value="{$region_id}" id="region_id" name="region_id">
             <input type="hidden" value="{$area_id}" id="area_id" name="area_id">
-            <input name="script_name" value="{$script_name}" type="hidden" />
-			<input name="merchant_id" value="{$merchant_id}" type="hidden" />
             {else}
-            <div class="no_records no_records_tc">
-            	<i class="no_icon_two"></i>
-                <div class="no_info">
-            		<h3>{$lang.information_null}</h3>
-                </div>
-            </div>
+            <div class="notContent">{$lang.information_null}</div>
             {/if}
             <!--{if $store_best_list}-->
             <div class="p-panel-main guess-love">
             	<div class="ftit ftit-delr"><h3>{$lang.guess_love}</h3></div>
                 <div class="gl-list clearfix">
                 	<ul class="clearfix">
-                        <!--{foreach from=$store_best_list item=goods}-->
+                            <!--{foreach from=$store_best_list item=goods}-->
                     	<li class="opacity_img">
-                        	<div class="p-img"><a href="{$goods.goods_url}" target="_blank"><img src="{$goods.goods_thumb}" width="190" height="190"></a></div>
+                        	<div class="p-img"><a href="{$goods.preg_replace}" target="_blank"><img src="{$goods.goods_thumb}" width="190" height="190"></a></div>
                             <div class="p-price">
                                 {if $goods.promote_price neq ''}
                                     {$goods.promote_price}
@@ -260,7 +253,7 @@
                                     {$goods.shop_price}
                                 {/if}
                             </div>
-                            <div class="p-name"><a href="{$goods.goods_url}" target="_blank" title="{$goods.goods_name|escape:html}">{$goods.goods_name|escape:html}</a></div>
+                            <div class="p-name"><a href="{$goods.preg_replace}" target="_blank" title="{$goods.goods_name|escape:html}">{$goods.goods_name|escape:html}</a></div>
                         	<div class="p-num">{$lang.Sold}<em>{$goods.sales_volume}</em>{$lang.jian}</div>
                         </li>
                         <!--{/foreach}-->
@@ -270,7 +263,7 @@
             <!--{/if}-->
         </div>
     </div>
-    {* DSC 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
+    {* ECSHOP 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
     <!-- @authro guan start	添加对比文件 start -->	 
 	<!-- #BeginLibraryItem "/library/duibi.lbi" --><!-- #EndLibraryItem -->
     <!-- @authro guan start	添加对比文件 end -->

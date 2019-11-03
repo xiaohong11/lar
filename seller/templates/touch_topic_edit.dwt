@@ -4,6 +4,7 @@
 
 <body>
 {include file ='library/seller_header.lbi'}
+{insert_scripts files="colorselector_topic.js"}
 <div class="ecsc-layout">
     <div class="site wrapper">
         {include file ='library/seller_menu_left.lbi'}
@@ -284,7 +285,7 @@
     </div>
 </div>
 {include file ='library/seller_footer.lbi'}
-<script type="text/javascript" src="../js/jquery.picTip.js"></script>
+<script type="text/javascript" src="js/jquery.picTip.js"></script>
 <script type="text/javascript">
     var myTopic = Object();
 	

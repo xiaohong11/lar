@@ -12,10 +12,6 @@
  * $Author: liubo $
  * $Id: user.php 17217 2011-01-19 06:29:08Z liubo $
 */
-
-$_LANG['self_motion_goods'] = "自动确认收货";
-$_LANG['illegal_operate'] = "非法操作";
-
 $_LANG['progress'] = "进度";
 $_LANG['use_limit'] = "限 %s 可用";
 $_LANG['user_surplus_pay'] = "会员中心订单余额支付";
@@ -132,7 +128,6 @@ $_LANG['view_application'] = '查看申请记录';
 $_LANG['surplus_pro_type'] = '类型';
 $_LANG['repay_money'] = '提现金额';
 $_LANG['money'] = '金额';
-$_LANG['points'] = '积分';
 $_LANG['surplus_type_0'] = '充值';
 $_LANG['surplus_type_1'] = '提现';
 $_LANG['deposit_money'] = '充值金额';
@@ -140,7 +135,7 @@ $_LANG['process_notic'] = '会员备注';
 $_LANG['admin_notic'] = '管理员备注';
 $_LANG['submit_request'] = '提交申请';
 $_LANG['process_time'] = '操作时间';
-$_LANG['use_time'] = '操作时间';
+$_LANG['use_time'] = '使用时间';
 $_LANG['is_paid'] = '状态';
 $_LANG['is_confirmed'] = '已完成';
 $_LANG['un_confirmed'] = '未确认';
@@ -353,7 +348,7 @@ $_LANG['add_value_card_sucess'] = '绑定储值卡操作成功！';
 $_LANG['add_value_card_false'] = '绑定储值卡操作失败！';
 $_LANG['vc_is_used'] = '您已绑定此储值卡！';
 $_LANG['vc_is_used_by_other'] = '您输入的储值卡已被其他用户绑定！';
-$_LANG['vc_not_exist'] = '您输入的储值卡账号或密码错误！';
+$_LANG['vc_not_exist'] = '您输入的储值卡不存在！';
 $_LANG['vc_use_expire'] = '该储值卡已经过使用期！';
 $_LANG['vc_no_use_order'] = '该储值卡无法用于此订单！';
 $_LANG['vc_use_inspire'] = '该储值卡还未开始使用！';
@@ -400,9 +395,6 @@ $_LANG['order_exist'] = '该订单不存在！';
 $_LANG['order_is_group_buy'] = '[团购]';
 $_LANG['order_is_exchange'] = '[积分商城]';
 $_LANG['order_is_presale'] = '[预售]';
-$_LANG['order_is_auction'] = '[拍卖活动]';
-$_LANG['order_is_seckill'] = '[秒杀活动]';
-$_LANG['order_is_snatch'] = '[夺宝奇兵]';
 $_LANG['gb_deposit'] = '（保证金）';
 $_LANG['notice_gb_order_amount'] = '（备注：团购如果有保证金，第一次只需支付保证金和相应的支付费用）';
 $_LANG['business_message'] = '发送/查看商家留言';
@@ -418,7 +410,6 @@ $_LANG['os'][OS_SPLITING_PART] = '已确认';
 $_LANG['os'][OS_CANCELED] = '已取消';
 $_LANG['os'][OS_INVALID] = '无效';
 $_LANG['os'][OS_RETURNED] = '退货';
-$_LANG['os'][OS_ONLY_REFOUND] = '仅退款';
 $_LANG['os'][OS_RETURNED_PART] = '部分已退货';
 
 $_LANG['ss'][SS_UNSHIPPED] = '未发货';
@@ -432,7 +423,6 @@ $_LANG['ps'][PS_UNPAYED] = '未付款';
 $_LANG['ps'][PS_PAYING] = '付款中';
 $_LANG['ps'][PS_PAYED] = '已付款';
 $_LANG['ps'][PS_PAYED_PART] = '部分付款(定金)';
-$_LANG['ps'][PS_REFOUND] = '已退款';
 //ecmoban模板堂 --zhuo start
 
 //ecmoban模板堂 --zhuo end
@@ -524,7 +514,7 @@ $_LANG['other_mobile_phone'] = '手机';
 $_LANG['remember'] = '请保存我这次的登录信息。';
 
 $_LANG['msg_un_blank'] = '用户名不能为空';
-$_LANG['msg_un_length'] = '用户名最长不得超过15个字符，一个汉字等于2个字符';
+$_LANG['msg_un_length'] = '用户名最长不得超过7个汉字';
 $_LANG['msg_un_format'] = '用户名含有非法字符';
 $_LANG['msg_un_registered'] = '用户名已经存在,请重新输入';
 $_LANG['msg_can_rg'] = '可以注册';
@@ -549,7 +539,7 @@ $_LANG['msg_identifying_not_correct'] = '验证码不正确';
 $_LANG['login_success'] = '登录成功';
 $_LANG['confirm_login'] = '确认登录';
 $_LANG['profile_lnk'] = '查看我的个人信息';
-$_LANG['login_failure'] = "<i class='iconfont icon-minus-sign'></i>用户名或密码错误";
+$_LANG['login_failure'] = '用户名或密码错误';
 $_LANG['relogin_lnk'] = '重新登录';
 
 $_LANG['sex'] = '性　别';
@@ -627,7 +617,7 @@ $_LANG['confirm_drop_tag'] = '您确认要删除此标签吗？';
 
 /* user_passport.dwt js语言文件 */
 $_LANG['passport_js']['username_empty'] = '<i></i>请输入用户名';
-$_LANG['passport_js']['username_shorter'] = '<i></i>用户名长度不能少于 4 个字符。';
+$_LANG['passport_js']['username_shorter'] = '<i></i>用户名长度不能少于 3 个字符。';
 $_LANG['passport_js']['username_invalid'] = '<i></i>用户名只能是由字母数字以及下划线组成。';
 $_LANG['passport_js']['password_empty'] = '<i></i>请输入密码';
 $_LANG['passport_js']['password_shorter'] = '<i></i>登录密码不能少于 6 个字符。';
@@ -642,7 +632,7 @@ $_LANG['passport_js']['home_phone_invalid'] = '<i></i>家庭电话不是一个�
 $_LANG['passport_js']['office_phone_invalid'] = '<i></i>办公电话不是一个有效号码';
 $_LANG['passport_js']['mobile_phone_invalid'] = '<i></i>手机号码不是一个有效号码';
 $_LANG['passport_js']['msg_un_blank'] = '<i></i>用户名不能为空';
-$_LANG['passport_js']['msg_un_length'] = '<i></i>用户名最长不得超过15个字符，一个汉字等于2个字符';
+$_LANG['passport_js']['msg_un_length'] = '<i></i>用户名最长不得超过7个汉字';
 $_LANG['passport_js']['msg_un_format'] = '<i></i>用户名含有非法字符';
 $_LANG['passport_js']['msg_un_registered'] = '<i></i>用户名已经存在,请重新输入';
 $_LANG['passport_js']['msg_can_rg'] = '<i></i>可以注册';
@@ -846,7 +836,7 @@ $_LANG['passwd_questions']['favorite_equipe'] = '我最喜欢的运动队？';
 /* 用户菜单 */
 $_LANG['order_list'] = '我的订单';
 $_LANG['address_list'] = '收货地址';
-$_LANG['booking_list'] = '缺货登记';
+$_LANG['booking_list'] = '收货登记';
 $_LANG['return_list'] = '退换货订单';
 $_LANG['profile'] = '用户信息';
 $_LANG['collection_list'] = '我的收藏';
@@ -854,7 +844,7 @@ $_LANG['message_list'] = '我的留言';
 $_LANG['affiliate'] = '我的推荐';
 $_LANG['comment_list'] = '评论/晒单';
 $_LANG['bonus'] = '我的红包';
-$_LANG['track_packages'] = '跟踪包裹';
+$_LANG['track_packages'] = '跟踪红包';
 $_LANG['account_log'] = '资金管理';
 $_LANG['baitiao'] = '我的白条';//bylu
 $_LANG['repay_bt'] = '白条还款';//bylu
@@ -862,12 +852,6 @@ $_LANG['account_safe'] = '账户安全';
 $_LANG['account_bind'] = '账号绑定';
 $_LANG['crowdfunding'] = '我的众筹';
 $_LANG['focus_brand'] = '关注品牌';
-$_LANG['wholesale_buy'] = '采购单';
-$_LANG['wholesale_purchase'] = '求购单';
-$_LANG['invoice'] = '我的发票';
-$_LANG['vat_invoice_info'] = '增值发票信息';
-$_LANG['users_log'] = '操作日志';
-$_LANG['order_recycle'] = '订单回收站';
 
 //批发管理
 $_LANG['wholesale_centre'] = '批发中心';
@@ -875,7 +859,6 @@ $_LANG['my_purchase_order'] = '我的采购单';
 $_LANG['want_buy_order'] = '我的求购单';
 $_LANG['want_buy_order_desc'] = '求购单详情';
 $_LANG['supplier_info'] = '供货商信息';
-$_LANG['wholesale_return'] = '我的退货单';
 
 
 $_LANG['address'] = '收货人地址';
@@ -941,7 +924,6 @@ $_LANG['vouchers_all'] = "全场券";
 $_LANG['vouchers_user'] = "会员券";
 $_LANG['vouchers_shoping'] = "购物券";
 $_LANG['vouchers_login'] = "注册券";
-$_LANG['vouchers_free'] = "免邮券";
 $_LANG['unknown'] = "未知";
 $_LANG['user_vouchers'] = "用户中心_优惠券列表";
 $_LANG['Repeated_submission'] = "同一订单的同一商品不能重复提交";
@@ -951,7 +933,6 @@ $_LANG['Apply_Success_Prompt'] = "申请提交成功，工作人员将尽快审�
 $_LANG['See_Returnlist'] = "查看退换货订单";
 $_LANG['Apply_abnormal'] = "申请提交出现了异常，请稍后重试";
 $_LANG['payment_coupon'] = "还款提醒";
-$_LANG['baitiao_is_pay'] = " 已还款";
 $_LANG['balance_insufficient'] = "账户余额不足，请选择其他支付方式";
 $_LANG['Ious_Prompt_one'] = "白条分期还款 第%u期 订单号：%s";
 $_LANG['Ious_Prompt_two'] = "白条还款 订单号：%s";
@@ -994,25 +975,13 @@ $_LANG['Risk_rating'][4] = "中高级";
 $_LANG['Risk_rating'][5] = "高级";
 
 /*白条*/
-$_LANG['operation'] = '操作';
-$_LANG['record_id'] = "编号";
-$_LANG['qi'] = "期";
-$_LANG['dijiqi'] = "第几期";
-$_LANG['also_amount'] = "还款金额";
-$_LANG['also_state'] = '状态';
-$_LANG['also_time'] = '支付时间';
-$_LANG['also_pay']['not_pay'] = '未付款';
-$_LANG['also_pay']['is_pay'] = '已付款';
 $_LANG['bt_Total_amount'] = '白条总额度'; 
 $_LANG['element'] = "元";
 $_LANG['zhang'] = "张";
 $_LANG['Surplus_baitiao'] = "剩余白条额度";
-$_LANG['also_day'] = '间隔天数';
-$_LANG['also_delay'] = '延期';
-$_LANG['amount_paid'] = "待还付款总额";
+$_LANG['Deferred_repayment_period'] = '延后还款期';
+$_LANG['amount_paid'] = "待付款总额";
 $_LANG['Pending_payment'] = "待付款白条";
-$_LANG['stay_pay'] = "待还款金额";
-$_LANG['already_amount'] = "已还款金额";
 $_LANG['Transaction_detail'] = "交易明细";
 $_LANG['Consumer_account_day'] = "消费记账日";
 $_LANG['label_bt_one'] = "到期还款日";
@@ -1050,7 +1019,6 @@ $_LANG['Code_bind_one'] = "看不清？点击图片更换验证码";
 $_LANG['bindMobile_code'] = "手机验证码";
 $_LANG['bindMobile_code_null'] = "请输入手机验证码";
 $_LANG['get_bindMobile_code'] = "获取手机验证码";
-$_LANG['comment_captcha_code'] = "邮箱验证码";
 $_LANG['agreed_bind'] = "我已阅读并同意";
 $_LANG['protocol_bind'] = "用户注册协议";
 $_LANG['bind_Mobile'] = "绑定手机";
@@ -1104,7 +1072,7 @@ $_LANG['comment_see'] = "查看评论";
 $_LANG['comment_again'] = "继续评论";
 $_LANG['comment_add'] = "添加评论";
 $_LANG['Satisfaction_evaluation'] = "满意度评价";
-$_LANG['No_comment'] = "暂无";
+$_LANG['No_comment'] = "占无";
 $_LANG['product_desc'] = '商品描述相符';
 $_LANG['Like_ata'] = "赞一个";
 $_LANG['Please_rate'] = '请打分';
@@ -1113,7 +1081,6 @@ $_LANG['logistics_speed'] = '物流发货速度';
 $_LANG['logistics_senders'] = '配送人员态度';
 $_LANG['comments_think'] = "感谢您的评价";
 $_LANG['take_list'] = "提货列表";
-$_LANG['complaint_list'] = "交易纠纷";
 $_LANG['gift_gard_number'] = "礼品卡卡号";
 $_LANG['gift_goods_name'] = '提货商品';
 $_LANG['tpnd_time'] = '提货时间';
@@ -1121,10 +1088,6 @@ $_LANG['gift_address'] = "提货地址";
 $_LANG['gift_status'] = '提货状态';
 $_LANG['gift_Prompt'] = '提货成功，等待发货';
 $_LANG['null_gift_Prompt'] = '您暂无提货信息';
-$_LANG['null_handle'] = '暂无';
-$_LANG['is_complaint'] = '已申诉';
-$_LANG['complaint'] = '我要申诉';
-$_LANG['complaint_success'] = '申诉成功，已提交系统审核！';
 $_LANG['Transaction_record'] = "交易记录";
 $_LANG['all_status'] = '全部状态';
 $_LANG['Complaint_goods'] = "投诉商品";
@@ -1164,8 +1127,8 @@ $_LANG['getMobile_code'] = "获取验证码";
 $_LANG['service_agreement'] = "服务协议";
 $_LANG['Agreement_register'] = "同意协议并注册";
 $_LANG['register_now'] = "立即注册";
-$_LANG['reset_email_password'] = "邮箱验证";
-$_LANG['reset_phone_password'] = '手机验证';
+$_LANG['reset_email_password'] = "重置邮箱密码";
+$_LANG['reset_phone_password'] = '手机重置密码';
 $_LANG['Regist_problem'] = "注册问题";
 $_LANG['email_reset'] = '电子邮箱';
 $_LANG['reset_password'] = '重置密码';
@@ -1227,7 +1190,6 @@ $_LANG['Has_succeeded'] = "已成功";
 $_LANG['once'] = '立即申请';
 $_LANG['grade_info']        = '当前等级信息';
 $_LANG['now_grade']         = '当前等级';
-$_LANG['examine_info']         = '审核信息';
 $_LANG['in_time']           = '入驻时间';
 $_LANG['end_time']          = '到期时间';
 $_LANG['refund_grade']      = '剩余金额';
@@ -1244,7 +1206,6 @@ $_LANG['nothing'] = "无";
 $_LANG['Have_applied'] = "[已申请]";
 $_LANG['close_applied'] = "[已关闭]";
 $_LANG['applied'] = "申请";
-$_LANG['batch_applied'] = "批量申请";
 $_LANG['Return_repair'] = "返修退换货";
 $_LANG['Return_type'] = "退换类别";
 $_LANG['Return_reason'] = "退换原因";
@@ -1299,7 +1260,7 @@ $_LANG['Empty_picture'] = '清空图片';
 $_LANG['Contact_name'] = "联系人姓名";
 $_LANG['label_mobile'] = '手机号码';
 $_LANG['detailed_info'] = "详细信息";
-$_LANG['return_sn'] = "退货编码";
+$_LANG['return_sn'] = "退货单流水号";
 $_LANG['apply_time'] = "申请时间";
 $_LANG['return_type_user'] = "退款类型";
 $_LANG['back_cause'] = '退货原因';
@@ -1509,7 +1470,7 @@ $_LANG['xian'] = "限";
 $_LANG['employ'] = "使用";
 $_LANG['whole_platform'] = "自营";
 $_LANG['Immediate_use'] = "立即使用";
-$_lang['data_empty'] = "暂无数据";
+$_lang['data_empty'] = "占无数据";
 $_LANG['Expiration_time'] = "过期时间";
 $_LANG['latest_state'] ="最新状态";
 $_LANG['null_invoice'] = "没有包裹";
@@ -1747,58 +1708,4 @@ $_LANG['auction_staues'][0] = '未开始';
 $_LANG['auction_staues'][1] = '进行中';
 $_LANG['auction_staues'][2] = '已结束';
 $_LANG['auction_staues'][3] = '已结束';
-
-//退换货激活
-$_LANG['activation_return'] = '激活';
-$_LANG['activation_number_msg'] = '只能激活 %s 次，您不能激活了哦。。。';
-
-$_LANG['change_type'] = '操作类型';
-$_LANG['ip_address'] = "IP地址";
-$_LANG['change_city'] = "参考地点";
-$_LANG['logon_service'] = "登录业务";
-
-$_LANG['change_type_user'][1] = '会员登录';
-$_LANG['change_type_user'][2] = '修改会员头像';
-$_LANG['change_type_user'][3] = '修改会员信息';
-$_LANG['change_type_user'][4] = '会员实名认证';
-$_LANG['change_type_user'][5] = '会员支付密码';
-$_LANG['change_type_user'][6] = '修改会员手机';
-$_LANG['change_type_user'][7] = '修改会员邮箱';
-$_LANG['change_type_user'][8] = '修改会员登录密码';
-$_LANG['change_type_user'][9] = '修改会员信用额度';
-
-$_LANG['merchants_upgrade_log'] = "商家等级申请记录";
-$_LANG['refund_price'] = "等级差额";
-$_LANG['payable_amount'] = "应付金额";
-$_LANG['back_price'] = "应退金额";
-$_LANG['apply_status'] = "申请状态";
-$_LANG['drop_confirm'] = "申请状态";
-$_LANG['please_select_goods'] = "请选择需要退货的商品！";
-$_LANG['nonsupport_return_goods'] = "包含不支持退货的商品，请重新选择";
-
-$_LANG['cope_order_amount'] = '应付款';
-$_LANG['should_back_amount'] = '应退款';
-$_LANG['realpay_amount'] = '实付款';
-
-//延迟收货
-$_LANG['order_delayed'] = '延迟收货';
-$_LANG['auto_delivery_data']  = '自动确认收货时间';
-$_LANG['order_delay_day_desc'] = '距离结束超过 %s 天不可延长收货';
-$_LANG['order_delay_apply_status'][0] = "&nbsp;&nbsp; 【%s】 &nbsp;天延期收货申请（审核中）";
-$_LANG['order_delay_apply_status'][1] = "&nbsp;&nbsp;  【%s】 &nbsp;天延期收货申请（已通过）";
-$_LANG['order_delay_apply_status'][2] = "&nbsp;&nbsp; 【%s】 &nbsp;天延期收货申请（未通过审核）";
-$_LANG['order_delayed_repeat'] = '该订单已提交过申请，正在审核中';
-$_LANG['order_delayed_success'] = '已成功提交申请，请等待审核';
-$_LANG['order_delayed_beyond'] = '已申请 %s 次不能在提交延期收货';
-$_LANG['order_delayed_wrong'] = '未知错误，请重试！';
-$_LANG['pay_effective_Invalid'] = '支付超时';
-$_LANG['return_order_surplus'] = '由于取消、无效或退货操作，退回支付订单 %s 时使用的预付款';
-$_LANG['return_order_integral'] = '由于取消、无效或退货操作，退回支付订单 %s 时使用的积分';
-$_LANG['order_vcard_return'] = '【订单退款】储值卡退款金额：%s';
-
-$_LANG['allow_order_delay'] = '延迟收货';
-
-//批发
-$_LANG['wholesale_reminder_one'] = '本次售后服务将由供应商';
-$_LANG['wholesale_return_list'] = '采购退货单';
 ?>

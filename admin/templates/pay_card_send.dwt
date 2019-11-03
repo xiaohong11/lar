@@ -4,14 +4,14 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="pay_card.php?act=list" class="s-back">{$lang.back}</a>{$lang.promotion} - {$ur_here}</div>
+    	<div class="title"><a href="pay_card.php?act=list" class="s-back">{$lang.back}</a>促销 - {$ur_here}</div>
         <div class="content">
 			<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content.info.0}</li>
-                    <li>{$lang.operation_prompt_content.info.1}</li>
-                    <li>{$lang.operation_prompt_content.info.2}</li>
+                    <li>生成充值卡的数量。</li>
+                    <li>具体生成数量根据需求设定。</li>
+                     <li>注意卡号类型和密码类型的生成位数，越多数量的密码记忆更加困难。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -81,10 +81,11 @@
                     </div>
                 </div>
             </div>
+		
 		</div>
 	</div>
-	{include file ='library/pagefooter.lbi'}
-	<script type="text/javascript">
+         {include file ='library/pagefooter.lbi'}
+<script type="text/javascript">
 	$(function(){
 		//表单验证
 		$("#submitBtn").click(function(){
@@ -107,12 +108,12 @@
 			},
 			messages:{
 				send_num:{
-					required : '<i class="icon icon-exclamation-sign"></i>'+send_num_null,
-					number : '<i class="icon icon-exclamation-sign"></i>'+send_num_number
+					required : '<i class="icon icon-exclamation-sign"></i>请输入发放张数',
+					number : '<i class="icon icon-exclamation-sign"></i>请输入正确的数字'
 				}
 			}			
 		});
 	});
-    </script>   
+</script>   
 </body>
 </html>

@@ -69,7 +69,7 @@
                             <div class="summary-item is-service">
                             	<div class="si-tit">服务</div>
                                 <div class="si-warp">
-									由 <a href="{$goods.shop_url}" class="link-red" target="_blank">{$goods.rz_shopName}</a> 发货并提供售后服务
+									由 <a href="{$goods.store_url}" class="link-red" target="_blank">{$goods.rz_shopName}</a> 发货并提供售后服务
 								</div>
                             </div>	
                             <div class="summary-item">
@@ -85,7 +85,7 @@
 				{if $goods.ru_id}
 				<div class="seller-pop">
 					<div class="seller-info">
-						<a href="{$goods.shop_url}" title="{$goods.rz_shopName}" target="_blank" class="name">{$goods.rz_shopName}</a>
+						<a href="{$goods.store_url}" title="{$goods.rz_shopName}" target="_blank" class="name">{$goods.rz_shopName}</a>
 						{if $shop_information.is_IM eq 1 || $shop_information.is_dsc}
 							<a id="IM" href="javascript:;" onclick="openWin(this)" goods_id="{$goods.goods_id}"><i class="icon i-kefu"></i></a>
 						{else}
@@ -176,8 +176,6 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/jquery.purebox.js"></script>
-    <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/dsc-common.js"></script>
     <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
 </body>
 </html>

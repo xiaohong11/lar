@@ -12,4 +12,3 @@
     <a href="merchants.php" target="_blank" class="register_button">我要开店</a>
     {/if}
 </div>
-<input type="hidden" name="user_id" ectype="user_id" value="{if $user_id}{$user_id}{else}{$smarty.session.user_id|default:0}{/if}" />

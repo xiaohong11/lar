@@ -151,10 +151,8 @@ jQuery.itemLoad =function(obj,it,best,query_string,model){
 		obj = $(obj),
 		count = 0,
 		sec_count = 0,
-		wrapHeight = 0, //容器高度
-		scrollTop = 0, //浏览器滚动高度
-		screenHeight = 0, //屏幕高度
-		offsetHeight = 0, //容器距离顶部高度
+		wrapHeight,
+		scrollTop,
 		loading = $("*[ectype='floor-loading']");
 	
 	//判断it值是否存在
@@ -170,13 +168,8 @@ jQuery.itemLoad =function(obj,it,best,query_string,model){
 		count = obj.find(it).length;
 		wrapHeight = obj.height();
 		scrollTop = $(window).scrollTop();
-		screenHeight = $(window).height();
-		offsetHeight = obj.offset().top;
 		
-		//滚动高度+屏幕高度 要大于 容器高度+容器距离顶部高度
-		//console.log(scrollTop + screenHeight,wrapHeight + offsetHeight);
-		if(scrollTop + screenHeight > wrapHeight + offsetHeight){
-			//console.log(scrollTop + screenHeight,wrapHeight + offsetHeight,execute);
+		if(scrollTop > wrapHeight){
 			if(execute)
 			{
 				load_more_goods(count, sec_count);
@@ -190,12 +183,11 @@ jQuery.itemLoad =function(obj,it,best,query_string,model){
 		$.ajax({
 			type:'get',
 			url:window.location.href.replace(/\?.+/g,''),
-			data:query_string+'&act=load_more_goods&goods_num='+count+'&best_num='+sec_count +'&model=' + model,
+			data:query_string+'&act=load_more_brand&goods_num='+count+'&best_num='+sec_count +'&model=' + model,
 			dataType:'json',
 			success:function(data)			
 			{
 				loading.hide();
-				
 				if(data.cat_goods)
 				{	
 					obj.find("*[ectype='items']").append(data.cat_goods);
@@ -203,7 +195,7 @@ jQuery.itemLoad =function(obj,it,best,query_string,model){
 					{
 						$(best).find("ul").append(data.best_goods);
 					}
-					if($.goodsAjaxLoadType){$.goodsAjaxLoadType()};
+					sildeImg(count);
 					execute=true;
 				}
 			},
@@ -391,36 +383,4 @@ $.scrollLoad = function(main, list, child, info){
 	})	
 }
 
-//楼层左侧栏悬浮框
-function readyLoad(){
-	var homeWrap = $("*[ectype='homeWrap']");
-	var homeitem = homeWrap.find("*[ectype='visualItme']");
-	var mode = "";
-	var range = "";
-	var lift = "";
-	var id = "";
-	var floorItem = "";
-	var liftObj = $("*[ectype='lift']");
-	var returnTop = "";
-	
-	if(liftObj.data("type") == "one"){
-		returnTop = '<div class="lift-item lift-item-top" ectype="liftItem"><i class="iconfont icon-returntop"></i></div>';
-	}else{
-		returnTop = '<div class="lift-item lift-item-top" ectype="liftItem">TOP<i class="iconfont icon-top-alt"></i></div>';
-	}
-	
-	homeitem.each(function(k,v){
-		mode = $(this).data("mode");
-		if(mode != "lunbo" && mode != "h-streamer"){
-			range = $(this).find("*[data-type='range']");
-			lift = range.data("lift");
-			id = range.attr("id");
-			
-			var _div = '<div class="lift-item" ectype="liftItem" data-target="#'+ id +'" title="'+lift+'"><span>'+lift+'</span><i class="lift-arrow"></i></div>';
-			
-			$("*[ectype='liftList']").append(_div);
-		}
-	});
-	
-	$("*[ectype='liftList']").append(returnTop);
-}
+

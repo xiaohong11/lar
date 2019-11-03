@@ -50,7 +50,6 @@
                                         <div class="no_edit">{$favourable.end_time}</div>
                                     {/if}
                                 </div>
-                                <div class="form_prompt"></div>
                             </dd>
                         </dl>
                         {if $favourable.user_id neq 0 && $favourable.userFav_type eq 0}
@@ -88,7 +87,6 @@
                                             {if $user_rank.checked}<div class="no_edit mr10">{$user_rank.rank_name}</div>{/if}
                                         {/if}  
                                     {/foreach}
-                                    <div class="form_prompt"></div>
                                 </div>
                             </dd>
                         </dl>
@@ -99,9 +97,10 @@
                         </dl>
                         {/if}
                         <dl>
-                        	<dt>{$lang.require_field}&nbsp;{$lang.label_act_range}</dt>
+                        	<dt>{$lang.label_act_range}</dt>
                             <dd>
                             	{if $favourable.userFav_type eq 0 || $priv_ru}
+                                    
                                     <div id="act_range_select" class="imitate_select select_w170">
                                         <div class="cite">{$lang.select_please}</div>
                                         <ul>
@@ -112,8 +111,7 @@
                                         </ul>
                                         <input name="act_range" type="hidden" value="{$favourable.act_range}" id="act_range_val"/>
                                     </div>
-                                    <div class="form_prompt"></div>
-                                    <div id="range-div" class="mt10" data-goodsIds="{$favourable.act_range_ext}">
+                                    <div id="range-div" class="mt10">
                                     	<div class="checkbox_items">
                                         {foreach from=$act_range_ext item=item}
                                             <div class="checkbox_item">
@@ -123,7 +121,6 @@
                                         {/foreach}
                                         </div>
                                     </div>
-                                    <input type="hidden" name="setgoodsid" value="{$favourable.act_range_ext}" class="ignore" />
                                 {else}
                                 <div class="no_edit">
                                     {if $favourable.act_range eq 0}{$lang.far_all}{/if}
@@ -138,26 +135,21 @@
                         <dl id="range_search"{if $favourable.act_range eq 0} style="display:none"{/if}>
                         	<dt>{$lang.label_search_and_add}：</dt>
                             <dd>
-                                <div ectype="search_goodsDiv"{if $favourable.act_range neq 3} style="display:none"{/if}>
-                                     <input type="button" class="sc-btn sc-blueBg-btn btn30" value="设置商品" ectype="setupGroupGoods" data-diffeseller="1" data-pbtype="favourable" data-pbmode="setgoods_content"/>
+                            	<input name="keyword" type="text" class="text text_2 mr10 mb10" id="keyword">
+                                <input name="search" type="button" id="search" value="{$lang.button_search}" class="sc-btn sc-blueBg-btn btn30 mr10" onclick="searchItem()" />
+                                <div class="imitate_select select_w320" id="result">
+                                    <div class="cite">请选择</div>
+                                    <ul>
+                                        <li class="li_not">请先搜索商品</li>
+                                    </ul>
+                                    <input name="result_val" type="hidden" value="" id="result_val">
                                 </div>
-                                <div ectype="search_by_other" {if $favourable.act_range eq 3} style="display:none"{/if}>
-                                     <input name="keyword" type="text" class="text text_2 mr10 mb10" id="keyword">
-                                    <input name="search" type="button" id="search" value="{$lang.button_search}" class="sc-btn sc-blueBg-btn btn30 mr10" onclick="searchItem()" />
-                                    <div class="imitate_select select_w320" id="result">
-                                        <div class="cite">请选择</div>
-                                        <ul>
-                                            <li class="li_not">请先搜索商品</li>
-                                        </ul>
-                                        <input name="result_val" type="hidden" value="" id="result_val">
-                                    </div>
-                                    <input type="button" name="add_range" value="+" class="sc-btn sc-blueBg-btn btn30" onclick="addRange()" />
-                                </div>
+                                <input type="button" name="add_range" value="+" class="sc-btn sc-blueBg-btn btn30" onclick="addRange()" />
                             </dd>
                         </dl>
                         {/if}
                         <dl>
-                        	<dt>{$lang.require_field}&nbsp;{$lang.label_min_amount}</dt>
+                        	<dt>{$lang.label_min_amount}</dt>
                             <dd>
                             	{if $favourable.userFav_type eq 0 || $priv_ru}
                             	<input name="min_amount" type="text" class="text" id="min_amount" value="{$favourable.min_amount}">
@@ -168,7 +160,7 @@
                             </dd>
                         </dl>
                         <dl>
-                        	<dt>{$lang.require_field}&nbsp;{$lang.label_max_amount}</dt>
+                        	<dt>{$lang.label_max_amount}</dt>
                             <dd>
                             	{if $favourable.userFav_type eq 0 || $priv_ru}
                             	<input name="max_amount" type="text" class="text" id="max_amount" value="{$favourable.max_amount}">
@@ -294,38 +286,27 @@
     </div>
 </div>
 {include file ='library/seller_footer.lbi'}
-{insert_scripts files="jquery.purebox.js"}
-<script type="text/javascript" src="../js/jquery.picTip.js"></script>
+<script type="text/javascript" src="js/jquery.picTip.js"></script>
 <script type="text/javascript">
 $.divselect("#act_range_select","#act_range_val",function(obj){
     var val = obj.attr("data-value");
     $("#range-div").html('');
     $("#result").find(".cite").html("请选择");
     if(val != 0){
-		$("#range_search").show();
-		if(val == 3){
-			$("*[ectype='search_goodsDiv']").show();
-			$("*[ectype='search_by_other']").hide();
-			$("#range-div").siblings("input[name='setgoodsid']").removeClass("ignore");
-		}else{
-			$("*[ectype='search_goodsDiv']").hide();
-			$("*[ectype='search_by_other']").show();
-			$("#range-div").siblings("input[name='setgoodsid']").addClass("ignore");
-		}
+            $("#range_search").show();
     }else{
-		$("#range_search").hide();
-		$("#range-div").siblings("input[name='setgoodsid']").addClass("ignore");
+            $("#range_search").hide();
     }
 });
 $.divselect("#act_type","#act_type_val",function(obj){
-	var val = obj.data("value");
-	if(val == 0){
-		$("#type_search").show();
-	}else{
-		$("#gift-table").html("");
-		$("#type_search").hide();
-	}
-});
+		var val = obj.data("value");
+		if(val == 0){
+			$("#type_search").show();
+		}else{
+			$("#gift-table").html("");
+			$("#type_search").hide();
+		}
+	});
 
 //表单验证
 $(function(){
@@ -341,30 +322,18 @@ $(function(){
 			//element.parents('dl').find(".notic").hide();
 			error_div.append(error);
 		},
-		ignore:".ignore",
 		rules : {
 			act_name : {
 				required : true
 			},
 			min_amount : {
-				required : true,
+				min : 1,
 				number : true
 			},
-			max_amount : {
-				required : true,
-				number : true
-			},
-			start_time :{
+			start_time : {
 				required : true
 			},
-			end_time :{
-				required : true,
-				compareDate:"#start_time",
-			},
-			'user_rank[]':{
-				required : true
-			},
-			setgoodsid :{
+			end_time : {
 				required : true
 			}
 		},
@@ -373,42 +342,14 @@ $(function(){
 				required : '<i class="icon icon-exclamation-sign"></i>'+act_name_not_null
 			},
 			min_amount : {
-				required : '<i class="icon icon-exclamation-sign"></i>'+min_amount_null,
+				min : '<i class="icon icon-exclamation-sign"></i>请输入金额下限',
 				number : '<i class="icon icon-exclamation-sign"></i>'+min_amount_not_number
 			},
-			max_amount : {
-				required : '<i class="icon icon-exclamation-sign"></i>'+max_amount_null,
-				number : '<i class="icon icon-exclamation-sign"></i>'+max_amount_not_number
+			start_time : {
+				required : '',
 			},
-			start_time :{
-				required : '<i class="icon icon-exclamation-sign"></i>'+start_data_notnull
-			},
-			end_time :{
-				required : '<i class="icon icon-exclamation-sign"></i>'+end_data_notnull,
-				compareDate:'<i class="icon icon-exclamation-sign"></i>'+data_invalid_gt
-			},
-			'user_rank[]' :{
-				required : '<i class="icon icon-exclamation-sign"></i>{$lang.pls_set_user_rank}',
-			},
-			setgoodsid :{
-				required : '<i class="icon icon-exclamation-sign"></i>{$lang.pls_set_act_range}',
-			}
-		},
-		onfocusout:function(element,event){
-			//实时去除结束时间是否大于开始时间验证
-			var name = $(element).attr("name");
-			
-			if(name == "end_time"){
-				var endDate = $(element).val();
-				var startDate = $(element).parents("dd").find("input[name='start_time']").val();
-				
-				var date1 = new Date(Date.parse(startDate.replace(/-/g, "/")));
-				var date2 = new Date(Date.parse(endDate.replace(/-/g, "/")));
-				
-				if(date1 > date2){
-					$(element).removeClass("error");
-					$$(element).parents("dd").find(".form_prompt").html("");
-				}
+			end_time : {
+				required : '',
 			}
 		}
 	});
@@ -629,6 +570,8 @@ xvDate(opts1);
 xvDate(opts2);
 {/if}
 //日期选择插件调用end sunle
+//-->
+{/literal}
 </script>
 </body>
 </html>

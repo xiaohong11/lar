@@ -1,29 +1,7 @@
 <div class="transport_shipping_tpl">
 <form action="goods_transport.php?act=add_shipping_tpl" method="post" name="shipping_tplForm" enctype="multipart/form-data">
-<input type="hidden" name="tid" id="tab_tid" value="{$tid}">
-<input type="hidden" name="shipping_id" id="tab_shipping_id" value="{$shipping_id}">
-<input type="hidden" name="id" value="{$id}">
-
-<div class="item">
-    <div class="label">{$lang.shipping_id}：</div>
-    <div class="label_value">
-        <div class="checkbox_items">
-            <div class="checkbox_item">
-                {$shipping_info.shipping_name}
-            </div>
-        </div>
-    </div>
-</div>
-<div class="item">
-    <div class="label">{$lang.lab_area_name}：</div>
-    <div class="label_value">
-        <div class="checkbox_items">
-            <div class="checkbox_item">
-                <input type="text" name="tpl_name" value="{$tpl_info.tpl_name}" class="text" autocomplete="off"/>
-            </div>
-        </div>
-    </div>
-</div>
+<input type="hidden" name="tid" value="{$tid}">
+<input type="hidden" name="shipping_id" value="{$shipping_id}">
 {if $shipping_area.shipping_code =='ems' || $shipping_area.shipping_code =='yto' || $shipping_area.shipping_code =='zto' || $shipping_area.shipping_code =='sto_express' || $shipping_area.shipping_code =='post_mail' || $shipping_area.shipping_code =='sf_express' || $shipping_area.shipping_code =='post_express' }
 <div class="item">
     <div class="label">费用计算方式：</div>
@@ -31,11 +9,11 @@
         <div class="checkbox_items">
             <div class="checkbox_item">
                 <input type="radio" class="ui-radio" id="fee_compute_mode_1" {if $fee_compute_mode != 'by_number' }checked="true"{/if} onclick="compute_mode('{$shipping_area.shipping_code}','weight')" name="fee_compute_mode" value="by_weight"/>
-                <label for="fee_compute_mode_1" class="ui-radio-label">按重量计算</label>
+                       <label for="fee_compute_mode_1" class="ui-radio-label">按重量计算</label>
             </div>
             <div class="checkbox_item">
                 <input type="radio" class="ui-radio" id="fee_compute_mode_0" {if $fee_compute_mode == 'by_number'}checked="true"{/if}  onclick="compute_mode('{$shipping_area.shipping_code}','number')" name="fee_compute_mode" value="by_number"/>
-                <label for="fee_compute_mode_0" class="ui-radio-label">按商品件数计算</label>
+                       <label for="fee_compute_mode_0" class="ui-radio-label">按商品件数计算</label>
             </div>
         </div>
     </div>
@@ -45,7 +23,7 @@
 {foreach from=$fields item=field}
 <!--{if $fee_compute_mode == 'by_number'}-->
     <!--{if $field.name == 'item_fee' || $field.name == 'free_money' || $field.name == 'pay_fee'}-->
-        <div class="item" id="{$field.name}" {if $field.name eq 'pay_fee'}style="display:none"{/if}>
+        <div class="item" id="{$field.name}">
             <div class="label">{$lang.require_field}&nbsp;{$field.label}：</div>
             <div class="label_value">
                 <input type="text" name="{$field.name}" value="{$field.value}" class="text" autocomplete="off"/>
@@ -63,7 +41,7 @@
     <!--{/if}-->
 <!--{else}-->
     <!--{if $field.name != 'item_fee'}-->
-        <div class="item" id="{$field.name}" {if $field.name eq 'pay_fee'}style="display:none"{/if}>
+        <div class="item" id="{$field.name}">
             <div class="label">{$lang.require_field}&nbsp;{$field.label}：</div>
             <div class="label_value">
                 <input type="text" name="{$field.name}" value="{$field.value}" class="text" autocomplete="off"/>
@@ -89,46 +67,41 @@
             <div class="fl">
                 <div class="ui-dropdown smartdropdown alien">
                     <input type="hidden" value="0" name="province" id="selProvinces">
-                    <div class="txt">省/直辖市</div>
-                    <i class="down u-dropdown-icon"></i>
-                    <div class="options clearfix" style="max-height:300px;">
-                        <span class="liv" data-text="全国" data-type="0"  data-value="-1">全国</span>
-                        {foreach from=$Province_list item=list}
-                        <span class="liv" data-text="{$list.region_name}" data-type="2"  data-value="{$list.region_id}">{$list.region_name}</span>
-                        {/foreach}
-                    </div>
+                        <div class="txt">省/直辖市</div>
+                        <i class="down u-dropdown-icon"></i>
+                        <div class="options clearfix" style="max-height:300px;">
+                            {foreach from=$Province_list item=list}
+                            <span class="liv" data-text="{$list.region_name}" data-type="2"  data-value="{$list.region_id}">{$list.region_name}</span>
+                            {/foreach}
+                        </div>
                 </div>
                 <div id="dlCity" class="ui-dropdown smartdropdown alien">
                     <input type="hidden" value="0" name="city" id="selCities">
-                    <div class="txt">市</div>
-                    <i class="down u-dropdown-icon"></i>
-                    <div class="options clearfix" style="max-height:300px;">
-                        <span class="liv hide" data-text="市" data-value="0">市</span>
-                    </div>
+                        <div class="txt">市</div>
+                        <i class="down u-dropdown-icon"></i>
+                        <div class="options clearfix" style="max-height:300px;">
+                            <span class="liv hide" data-text="市" data-value="0">市</span>
+                        </div>
                 </div>
                 <div id="dlRegion" class="ui-dropdown smartdropdown alien">
                     <input type="hidden" value="0" name="district" id="selDistricts">
-                    <div class="txt">区/县</div>
-                    <i class="down u-dropdown-icon"></i>
-                    <div class="options clearfix" style="max-height:300px;">
-                        <span class="liv hide" data-text="区/县" data-value="0">区/县</span>
-                    </div>
+                        <div class="txt">区/县</div>
+                        <i class="down u-dropdown-icon"></i>
+                        <div class="options clearfix" style="max-height:300px;">
+                            <span class="liv hide" data-text="区/县" data-value="0">区/县</span>
+                        </div>
                 </div>
                 <div id="dlStreet" class="ui-dropdown smartdropdown alien">
                     <input type="hidden" value="0" name="street" id="selStreet">
-                    <div class="txt">街道</div>
-                    <i class="down u-dropdown-icon"></i>
-                    <div class="options clearfix" style="max-height:300px;">
-                        <span class="liv hide" data-text="街道" data-value="0">街道</span>
-                    </div>
+                        <div class="txt">街道</div>
+                        <i class="down u-dropdown-icon"></i>
+                        <div class="options clearfix" style="max-height:300px;">
+                            <span class="liv hide" data-text="街道" data-value="0">街道</span>
+                        </div>
                 </div>
             </div>
-            {if $shipping_area.shipping_code != 'cac'}<a href="javascript:void(0);" class="btn red_btn btn32 fl" ectype="addPrivilege"><i class="sc_icon sc_icon_warehouse"></i>添加地区</a>{/if}
-            <div class="checkbox-item">
-            	<input type="checkbox" name="deleteArea" id="deleteArea" class="ui-checkbox" checked />
-                <label class="ui-label" for="deleteArea">去除已选地区</label>
-            </div>
-            <div class="notic bf100 mt5">不选择地区（点添加地区）时会添加“全国地区”</div>
+            {if $shipping_area.shipping_code != 'cac'}<a href="javascript:void(0);" class="btn red_btn btn32 fl" ectype="addPrivilege"><i class="sc_icon sc_icon_warehouse"></i>添加地区</a><!--{/if}-->
+            <div class="notic bf100 mt5">不选择地区添加地区时会添加“全国”</div>
         </div>
     </div>
 </div>
@@ -158,12 +131,9 @@
 		var selCity     = $('#selCities');
 		var selDistrict = $('#selDistricts');
 		var regionCell  = $('#regionCell');
+		
 		var regionId = 0;
 		var regionName = '';
-		
-		var tid = $("#tab_tid").val();
-		var shipping_id = $("#tab_shipping_id").val();
-		
 		if (selDistrict.val() > 0)
 		{
 			regionId = selDistrict.val();
@@ -177,12 +147,11 @@
 					regionId = selProvince.val();
 					regionName = selProvince.next(".txt").text();
 				}else{
-					the_national(tid, shipping_id)			
-					return false;	
+					regionId = 1;
+					regionName = "全国";
 				}
 			}
 		}
-		
 		//检查该地区是否已经存在
 		exists = false;
 		$('input:checkbox[type="checkbox"]').each(function()
@@ -194,28 +163,6 @@
 				}
 			}
 		});
-		
-		//检查该地区是否已经存在运费模板 start
-		var area_erorr = 0;
-		regionId = Number(regionId);
-		if(regionId > 0){
-			$.ajax({
-				type:"get",
-				url:"goods_transport.php?act=select_area",
-				data:'tid=' + tid + "&shipping_id=" + shipping_id + "&region_id=" + regionId,
-				dataType: 'json',
-				async : false, //设置为同步操作就可以给全局变量赋值成功
-				success:function(result){
-					area_erorr = result.error;
-				}
-			});
-		}
-
-		if(area_erorr == 1){
-			exists = true;
-		}
-		//检查该地区是否已经存在运费模板 end
-					
 		//创建checkbox
 		if (exists == false)
 		{
@@ -223,15 +170,7 @@
 		}else{
 			alert("该地区已存在");
 		}
-	});
-	
-	$("input[name='deleteArea']").click(function(){
-		if($(this).prop("checked") == true){
-			$("#regionCell").find("input[type='checkbox']").prop("checked",true);
-		}else{
-			$("#regionCell").find("input[type='checkbox']").prop("checked",false);
-		}
-	});
+	});    
 			
 	//配送费用计算方式
 	function compute_mode(shipping_code,mode)
@@ -265,5 +204,4 @@
 		  }
 		}
 	}
-	
 </script>

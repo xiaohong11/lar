@@ -8,7 +8,7 @@
     	<div class="title">邮箱 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                 	<li>选择需要发送的邮件标题给会员发送订阅信息。</li>
                     <li>可进行批量发送，也可删除邮件标题。</li>
@@ -18,8 +18,8 @@
             	<!--数据列表-->
                 <div class="common-head">		
                     <div class="refresh ml0">
-                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    	<div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>
                 </div>
                 <div class="common-content">
@@ -58,7 +58,7 @@
                                     <td><div class="tDiv">{$val.last_send}</div></td>
                                     <td class="handle">
                                         <div class="tDiv a1">
-                                            <a href="view_sendlist.php?act=del&id={$val.id}" onclick="return confirm('{$lang.ckdelete}');" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                            <a href="view_sendlist.php?act=del&id={$val.id}" onclick="return confirm('{$lang.ckdelete}');" class="btn_trash"><i class="icon icon-trash"></i>删除</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -103,8 +103,8 @@
 	  frm.submit();
 	}
 
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
+	listTable.recordCount = '{$record_count}';
+	listTable.pageCount = '{$page_count}';
 	{foreach from=$filter item=item key=key}
 	listTable.filter.{$key} = '{$item}';
 	{/foreach}

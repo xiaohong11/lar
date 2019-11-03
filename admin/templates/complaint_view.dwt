@@ -4,29 +4,29 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$lang.goods_alt} - {$ur_here}</div>
+    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>商品 - {$ur_here}</div>
             <div class="content">
             <div class="flexilist">
             	<div class="stepflex">
                 	<dl class="first cur">
                     	<dt class="pointer">1</dt>
-                        <dd class="s-text">{$lang.new_complain}</dd>
+                        <dd class="s-text">新投诉</dd>
                     </dl>
                     <dl class="{if $complaint_info.complaint_state gt 0} cur{/if}">
                     	<dt class="pointer">2</dt>
-                        <dd class="s-text">{$lang.complaint_state.1}</dd>
+                        <dd class="s-text">待申诉</dd>
                     </dl>
                     <dl class="{if $complaint_info.complaint_state gt 1} cur{/if}">
                     	<dt class="pointer">3</dt>
-                        <dd class="s-text">{$lang.complaint_state.2}</dd>
+                        <dd class="s-text">对话中</dd>
                     </dl>
                     <dl class="{if $complaint_info.complaint_state gt 2} cur{/if}">
                     	<dt class="pointer">4</dt>
-                        <dd class="s-text">{$lang.complaint_state.3}</dd>
+                        <dd class="s-text">待仲裁</dd>
                     </dl>
                     <dl class="last {if $complaint_info.complaint_state gt 3} cur{/if}">
                     	<dt class="pointer">5</dt>
-                        <dd class="s-text">{$lang.complaint_state.4}</dd>
+                        <dd class="s-text">已完成</dd>
                     </dl>
                 </div>
                 <div class="mian-info order_info">
@@ -111,7 +111,7 @@
                                     <div class="label_value">
                                         {foreach from=$complaint_info.img_list item=img}
                                         <span class="show">
-                                            <a target="_blank" href="{$img.img_file}" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="{$img.img_file}" ectype="tooltip" title="tooltip"></i></a>
+                                            <a target="_blank" href="{$img.img_file}" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$img.img_file}>')" onmouseout="toolTip()"></i></a>
                                         </span>
                                         {/foreach}
                                     </div>
@@ -133,7 +133,7 @@
                                 
                                 <!--申诉开始-->
                                 {if $complaint_info.complaint_state gt 1}
-								{if $complaint_info.ru_id neq 0}
+				{if $complaint_info.ru_id neq 0}
                                 <div class="lie">
                                     <div class="step_title mb20">
                                     	<i class="ui-step"></i>
@@ -144,7 +144,7 @@
                                         <div class="label_value">
                                             {foreach from=$complaint_info.appeal_img item=img}
                                             <span class="show">
-                                                <a target="_blank" href="{$img.img_file}" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="{$img.img_file}" ectype="tooltip" title="tooltip"></i></a>
+                                                <a target="_blank" href="{$img.img_file}" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$img.img_file}>')" onmouseout="toolTip()"></i></a>
                                             </span>
                                             {/foreach}
                                         </div>
@@ -172,7 +172,7 @@
                                     <div class="item">
                                         <div class="label">{$lang.talk_record}：</div>
                                         <div class="label_value">
-                                            <div class="talk_list ps-scrollbar-visible" ectype="talk_list">
+                                            <div class="talk_list" ectype="talk_list">
                                                 <div class="talk_list_info">
                                                 {include file="library/talk_list.lbi"}
                                                 </div>
@@ -228,18 +228,18 @@
                                         <input type="hidden" name="complaint_id" class="button" value="{$complaint_info.complaint_id}"/>
                                         <div id="handle">
                                         {if $complaint_info.complaint_state eq 0}
-                                        <input type="submit" name="abopt_comp" class="button" value="{$lang.complain_adopt}" />
+                                        <input type="submit" name="abopt_comp" class="button" value="投诉通过" />
                                         {/if}
                                         {if $complaint_info.complaint_state neq 2 || $complaint_info.ru_id eq 0}
-                                        <a href="javascript:;" class="button" ectype="close_comp">{$lang.close_complain}</a>
+                                        <a href="javascript:;" class="button" ectype="close_comp"> 关闭投诉 </a>
                                         {/if}
                                         </div>
                                         <div class="hide" id="handle_submit">
-                                            <input type="submit" name="close_comp" id="submitBtn" class="button" value="{$lang.submitBtn}" />
-                                            <input type="button" class="button" ectype="cancle" value="{$lang.cancel}" />
+                                            <input type="submit" name="close_comp" id="submitBtn" class="button" value="确认提交" />
+                                            <input type="button" class="button" ectype="cancle" value="取消" />
                                         </div>
                                         {/if}
-                                        <a href="{$action_link.href}" class="button">{$lang.back}</a>
+                                        <a href="{$action_link.href}" class="button"> 返回 </a>
                                     </div>
                                 </div>
                             </div>
@@ -269,7 +269,7 @@
 				var end_handle_messg = _this.val();
                                 
 				if(!end_handle_messg){
-					var error = '<label for="end_handle_messg" class="error"><i class="icon icon-exclamation-sign"></i>'+opinion_null+'</label>';
+					var error = '<label for="end_handle_messg" class="error"><i class="icon icon-exclamation-sign"></i>处理意见不能为空</label>';
 					_this.parents('.label_value').find(".form_prompt").html(error);
 					_this.addClass('error');
 					return false;
@@ -299,7 +299,7 @@
 				}, 'POST', 'JSON');
 			}
 			else{
-				alert(conversation_null);
+				alert("谈话内容不能为空！");
 			}
                 
         })

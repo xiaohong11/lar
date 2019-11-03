@@ -80,22 +80,22 @@
         </table>
         </div>
         <div class="images_space">
-            <div class="goods_gallery mt20" ectype="album-warp">
-                <div class="nav">
-                    <form action="" id="gallery_pic" method="post" enctype="multipart/form-data"  runat="server">
-                        <div class="fl" ectype="albumFilter">
+            <div class="goods_gallery mt20">
+                <form  action="" id="gallery_pic" method="post"  enctype="multipart/form-data"  runat="server" >
+                    <div class="nav clearfix">
+                        <div class="f_l">
                             <div class="imitate_select select_w220" id="album_id">
-                                <div class="cite">请选择相册...</div>		
+                                <div class="cite">请选择相册...</div>
                                 <ul style="display: none;" class="ps-container" ectype="album_list_check">
                                     <li><a href="javascript:;" data-value="0" class="ftx-01">请选择...</a></li>
-                                    {foreach from=$cat_select item=list}
-                                    <li><a href="javascript:;" data-value="{$list.album_id}" class="ftx-01">{$list.name}</a></li>
+                                    {foreach from=$album_list item=list key=k}
+                                    <li><a href="javascript:;" data-value="{$list.album_id}" class="ftx-01">{$list.album_mame}</a></li>
                                     {/foreach}
                                 </ul>
                                 <input name="album_id" type="hidden" value="{$album_id}" id="album_id_val">
                             </div>
                             <div class="imitate_select select_w220" id="sort_name">
-                                <div class="cite">请选择...</div>
+                                <div class="cite">请选择相册...</div>
                                 <ul style="display: none;" class="ps-container">
                                     <li><a href="javascript:;" data-value="2" class="ftx-01">按上传时间从晚到早</a></li>
                                     <li><a href="javascript:;" data-value="1" class="ftx-01">按上传时间从早到晚</a></li>
@@ -107,12 +107,10 @@
                                 <input name="sort_name" type="hidden" value="2" id="sort_name_val">
                             </div>
                         </div>
-                        <div class="updata_btn">
-                        	<a href="javascript:void(0);" class="sc-btn btn28 sc-redBg-btn">上传图片<input name="file" type="file"></a>
-                            <a href="javascript:void(0);" class="sc-btn btn28 sc-redBg-btn" ectype="add_album">添加相册</a>
-                        </div>
-                    </form>
-                </div>
+                        <div class="f_r"><i class="glyphicon glyphicon-cloud-upload"></i>上传图片<input name="file" type="file"></div>
+                        <div class="f_r mr5 add_album" ectype='add_album'><i class="glyphicon"></i>添加相册</div>
+                    </div>
+                </form>
                 <div class="table_list" ectype='pic_list'>
                     <div class="gallery_album" data-act="get_albun_pic" data-inid="pic_list" data-url='get_ajax_content.php' data-where="sort_name={$filter.sort_name}&album_id={$filter.album_id}">
                         <ul class="ga-images-ul">
@@ -223,14 +221,13 @@
     </div>
 </div>      
 <script type="text/javascript">
+    imitate_select();
     $.divselect("#album_id","#album_id_val",function(obj){
         var val = obj.attr("data-value");
-        changedpic(val,obj,0);
+        changedpic(val,obj);
     });
-	
     $.divselect("#sort_name","#sort_name_val",function(obj){
-		 var sort = obj.attr("data-value");
-        changedpic(0,obj,0,sort);
+        changedpic(0,obj);
     });
 	$("input[name='file']").change(function(){
 		var album_id = $("input[name='album_id']").val();
@@ -366,18 +363,18 @@
 	//	});
     //}
     //select下拉默认值赋值
-	/*function imitate_select(){
-		$('.imitate_select').each(function()
-		{
-				var sel_this = $(this)
-				var val = sel_this.children('input[type=hidden]').val();
-				sel_this.find('a').each(function(){
-						if($(this).attr('data-value') == val){
-								sel_this.children('.cite').html($(this).html());
-						}
-				})
-		});
-	}*/
+            function imitate_select(){
+                $('.imitate_select').each(function()
+                {
+                        var sel_this = $(this)
+                        var val = sel_this.children('input[type=hidden]').val();
+                        sel_this.find('a').each(function(){
+                                if($(this).attr('data-value') == val){
+                                        sel_this.children('.cite').html($(this).html());
+                                }
+                        })
+                });
+            }
 </script>
 {/if}
 {if $temp eq 'goods_info'}
@@ -401,7 +398,7 @@
             <div class="select_box mr10">
 <!--                {if $select_category_html}{$select_category_html}{/if}
                 <input type="hidden" name="cat_id" id="cat_id" value="{$cat_id|default:0}"/>-->
-                <div class="categorySelect fl">
+                <div class="categorySelect">
                     <div class="selection">
                         <input type="text" name="category_name" id="category_name" class="text w250 mr0 valid" value="{if $parent_category}{$parent_category}{else}顶级分类{/if}" autocomplete="off" readonly data-filter="cat_name" />
                         <input type="hidden" name="cat_id" id="category_id" ectype="goods_cat_dialog" value="{$cat_id|default:0}" data-filter="cat_id" />
@@ -410,17 +407,6 @@
                         {include file="library/filter_category.lbi"}
                     </div>
                 </div>
-            </div>
-            <div class="select_box mr10">
-                <div class="categorySelect fl">
-                    <div class="selection">
-                        <input type="text" name="brand_name" id="brand_name" class="text w120 mr0 valid" value="{$lang.select_barnd}" autocomplete="off" readonly data-filter="brand_name" />
-                        <input type="hidden" name="brand_id" id="brand_id" value="{$brand_id|default:0}" data-filter="brand_id" />
-                    </div>
-                    <div class="brand-select-container" style="display:none;">
-                        {include file="library/filter_brand.lbi"}
-                    </div>
-                </div>  
             </div>
             <div class="search_con"><input width="20" name="keyword_brand" type="text" id="keyword_brand" class="text text_6"></div>
             <a href="javascript:void(0);" class="btn fl" ectype="changedgoods">确定</a>
@@ -509,12 +495,11 @@
                 </div>
             </div>
             <input name="itemsLayout" type="hidden" value="{$arr.itemsLayout}"/>
+			<input type="hidden" name="search_type" value="{$search_type}"/>
         </div>    
     </div>
-    <input type="hidden" name="search_type" value="{$search_type}"/>
-    <input type="hidden" name="goods_ids" value="{$arr.goods_ids}"/>
 </div>
-<script type="text/javascript" src="js/seller.js"></script>
+<input type="hidden" name="goods_ids" value="{$arr.goods_ids}"/>
 <script language="JavaScript">
     ajaxchangedgoods(1);
     function checkd_selected(){
@@ -535,15 +520,14 @@
 
 	
 	function ajaxchangedgoods(type){
-		var cat_id = $(".pb [ectype='goods_cat_dialog']").val();
-		var brand_id = $(".pb input[name='brand_id']").val();
-        var keyword = $(".pb input[name='keyword_brand']").val();
-        var goods_ids = $(".pb input[name='goods_ids']").val();
-		var search_type = $(".pb input[name='search_type']").val();
+        var cat_id = $("[ectype='goods_cat_dialog']").val();
+        var keyword = $("input[name='keyword_brand']").val();
+        var goods_ids = $("input[name='goods_ids']").val();
+		var search_type = $("input[name='search_type']").val();
 		$("[ectype='goods_list']").html("<i class='icon-spin'><img src='images/visual/load.gif' width='30' height='30'></i>");
 		
 		function ajax(){
-			Ajax.call('get_ajax_content.php?is_ajax=1&act=changedgoods', "cat_id="+cat_id+"&keyword="+keyword+"&goods_ids="+goods_ids+"&type="+type + "&resetRrl=1&search_type=" + search_type + "&brand_id="+brand_id, function(data){
+			Ajax.call('get_ajax_content.php?is_ajax=1&act=changedgoods', "cat_id="+cat_id+"&keyword="+keyword+"&goods_ids="+goods_ids+"&type="+type + "&resetRrl=1&search_type=" + search_type, function(data){
 				$("[ectype='goods_list']").html(data.content);
 				
 				$("*[ectype='goods_list']").perfectScrollbar("destroy");
@@ -643,7 +627,7 @@
 </div>
 <script type="text/javascript">
     var suffix = "{$content.suffix}";
-	$.upload_file("input[name='headerFile']","visual_editing.php?act=header_bg&name=headerFile&suffix="+suffix+"&topic_type=topic_type","#headerbg_img");
+	$.upload_file("input[name='headerFile']","visual_editing.php?act=header_bg&name=headerFile&suffix="+suffix+"&topic_type="+topic_type,"#headerbg_img");
 	
 	$(document).on("click","input[name='header_type']",function(){
 		if($(this).val() == "defalt_type"){
@@ -837,7 +821,67 @@
 </div>
 <div class="modal-body">{$FCKeditor}</div>
 {/if}
-
+{if $temp eq 'template_information'}
+<form  action="visual_editing.php?act=edit_information" id="information" method="post"  enctype="multipart/form-data"  runat="server" >
+<div class="modal-body">
+    <div class="body_info">
+    	<div class="control_list">
+            <div class="control_item">
+                <div class="control_text">模板名称：</div>
+                <div class="control_value">
+                	<input type="text" class="text" name="name"  value="{$template.name|escape}"  autocomplete="off" />
+                </div>
+            </div>
+            <div class="control_item">
+                <div class="control_text">版本：</div>
+                <div class="control_value">
+                	<input type="text" class="text" name="version"  value="{$template.version|escape}"  autocomplete="off" />
+                </div>
+            </div>
+            <div class="control_item">
+                <div class="control_text">作者：</div>
+                <div class="control_value">
+                	<input type="text" class="text" name="author"  value="{$template.author|escape}"  autocomplete="off" />
+                </div>
+            </div>
+            <div class="control_item">
+                <div class="control_text">作者链接：</div>
+                <div class="control_value">
+                	<input type="text" class="text" name="author_url"  value="{$template.author_uri|escape}"  autocomplete="off" />
+                </div>
+            </div>
+            <div class="control_item">
+                <div class="control_text">模板封面：</div>
+                <div class="control_value">
+                        <input type="file" class="type-file-file" id="ten_file" name="ten_file" data-state="imgfile" size="30" hidefocus="true" value="" />
+                        {if $template.screenshot}
+                        <img src={$template.screenshot} width="25" height="25"/>
+                        {/if}
+                        <span class="hint" style="color:#1b9ad5;">请上传265*388的图片，防止图片变型</span>
+                </div>
+            </div>
+            <div class="control_item">
+                <div class="control_text">模板大图：</div>
+                <div class="control_value">
+                        <input type="file" class="type-file-file" id="big_file" name="big_file" data-state="imgfile" size="30" hidefocus="true" value="" />
+                        {if $template.template}
+                        <img src={$template.template} width="25" height="25"/>
+                        {/if}
+                </div>
+            </div>
+            <div class="control_item">
+                <div class="control_text">描述：</div>
+                <div class="control_value">
+                	<textarea class="textarea" name="description">{$template.desc|escape}</textarea>
+                </div>
+            </div>
+            <input type="hidden" name="tem" value="{$code}" />
+            <input type="hidden" name="id" value="{$ru_id}" />
+        </div>
+    </div>
+</div>
+</form>
+{/if}
 {if $temp eq 'homeFloor'}
 <!--首页楼层-->
 <form action="" id="{$mode}Insert" method="post" enctype="multipart/form-data" runat="server" >
@@ -845,7 +889,7 @@
         <ul class="clearfix">
             <li class="current">楼层分类设置</li>
             <li>楼层广告设置</li>
-            {if $mode neq 'homeFloorFive' && $mode neq 'homeFloorEight' && $mode neq 'homeFloorNine' && $mode neq 'homeFloorTen' && $mode neq 'storeOneFloor1' && $mode neq 'storeTwoFloor1' && $mode neq 'storeThreeFloor1' && $mode neq 'storeFourFloor1' && $mode neq 'storeFiveFloor1' && $mode neq 'topicOneFloor' && $mode neq 'topicTwoFloor' && $mode neq 'topicThreeFloor'}
+            {if $mode neq 'homeFloorFive'}
             <li>楼层品牌设置</li>
             {/if}
         </ul>
@@ -864,12 +908,6 @@
                         <div class="control_text">标题：</div>
                         <div class="control_value"><input type="text" value="{$spec_attr.floor_title}" class="text" name="floor_title" autocomplete="off" placeholder="楼层标题"  data-msg="楼层标题" /><div class="notic">楼层标题，不填则默认为选择的楼层分类</div></div>
                     </div>
-                    {if $mode eq 'storeOneFloor1' || $mode eq 'storeTwoFloor1' || $mode eq 'storeThreeFloor1' || $mode eq 'storeFourFloor1' || $mode eq 'storeFiveFloor1' || $mode eq "topicOneFloor"}
-                    <div class="control_item">
-                        <div class="control_text">次标题：</div>
-                        <div class="control_value"><input type="text" value="{$spec_attr.sub_title}" class="text" name="sub_title" autocomplete="off" placeholder="次标题"  data-msg="次标题" /></div>
-                    </div>
-                    {/if}
                     <div class="control_text lh30">楼层分类：</div>
                     <div class="control_value">
                         <div class="imitate_select select_w220" id="cat_id">
@@ -896,15 +934,14 @@
                             </div>
                             {/if}
                         </div>
-                        {if $mode eq 'homeFloorFour' || $mode eq 'homeFloorFive' || $mode eq 'homeFloorSeven' || $mode eq 'homeFloorSix' || $mode eq 'homeFloorEight' || $mode eq 'homeFloorTen' || $mode eq 'storeOneFloor1' || $mode eq 'storeTwoFloor1' || $mode eq 'storeThreeFloor1' || $mode eq 'storeFourFloor1' || $mode eq 'storeFiveFloor1' || $mode eq "topicOneFloor" || $mode eq "topicTwoFloor" || $mode eq "topicThreeFloor"}
+                        {if $mode eq 'homeFloorFour' || $mode eq 'homeFloorFive' || $mode eq 'homeFloorSeven' || $mode eq 'homeFloorSix'}
                         <input name="top_goods" type="hidden" value='{$spec_attr.top_goods}'/>
                         <a href="javascript:void(0);" class="hdle" ectype="setupGoods" data-top='1' data-goodsnumber="{if $mode eq 'homeFloorSeven'}6{else}12{/if}">设置商品</a>
                         {/if}
                     </div>
                     <input name="Floorcat_id" type="hidden" value='{$spec_attr.cat_id}'/>
                 </div>
-                {if $mode neq "storeOneFloor1" && $mode neq 'storeTwoFloor1' && $mode neq 'storeFourFloor1' && $mode neq 'storeFiveFloor1'}
-                <div class="control_item"{if $mode eq 'storeThreeFloor1' && $spec_attr.floorMode neq 1} style="display:none;"{/if}>
+                <div class="control_item">
                     <div class="control_text lh30">楼层二级分类：</div>
                     <div class="control_value" data-catnumber="{if $mode eq 'homeFloorModule'}2{else}6{/if}" data-goodsnumber="{if $mode eq 'homeFloorModule'}4{else}12{/if}">
                         {if $spec_attr.juniorCat}
@@ -950,9 +987,6 @@
                         {/if}
                     </div>
                 </div>
-                {/if}
-                
-                {if $mode neq 'storeOneFloor1' && $mode neq 'storeTwoFloor1' && $mode neq 'storeThreeFloor1' && $mode neq 'storeFourFloor1' && $mode neq 'storeFiveFloor1' && $mode neq 'topicOneFloor' && $mode neq 'topicTwoFloor' && $mode neq 'topicThreeFloor'}
                 <div class="control_item">
                     <div class="control_text lh30">设置颜色：</div>
                     <div class="control_value">
@@ -1066,32 +1100,6 @@
                         <input type="hidden" name="typeColor" value="{if $spec_attr.typeColor}{$spec_attr.typeColor}{else}floor-color-type-1{/if}">
                     </div>
                 </div>
-                {/if}
-                
-                {if $mode eq 'storeOneFloor1' || $mode eq 'storeTwoFloor1' || $mode eq 'storeThreeFloor1' || $mode eq 'storeFourFloor1' || $mode eq 'storeFiveFloor1' || $mode eq 'topicOneFloor' || $mode eq 'topicTwoFloor' || $mode eq 'topicThreeFloor'}
-                <div class="control_item">
-                    <div class="control_text lh30">标题颜色：</div>
-                    <div class="control_value">
-                        <div class="color-item font-color-1{if $spec_attr.fontColor eq 'font-color-type-1' || (!$spec_attr.fontColor && $mode neq 'storeOneFloor1' && $mode neq 'storeFourFloor1' && $mode neq 'storeFiveFloor1' && $mode neq 'topicThreeFloor')} selected{/if}" ectype="colorItem">
-                            <input type="hidden" value="font-color-type-1">
-                            <i></i>
-                        </div>
-                        <div class="color-item font-color-2{if $spec_attr.fontColor eq 'font-color-type-2' || (!$spec_attr.fontColor && ($mode eq 'storeOneFloor1' || $mode eq 'storeFourFloor1' || $mode eq 'topicThreeFloor'))} selected{/if}" ectype="colorItem">
-                            <input type="hidden" value="font-color-type-2">
-                            <i></i>
-                        </div>
-                        <div class="color-item font-color-3{if $spec_attr.fontColor eq 'font-color-type-3'} selected{/if}" ectype="colorItem">
-                            <input type="hidden" value="font-color-type-3">
-                            <i></i>
-                        </div>
-                        <div class="color-item font-color-4{if $spec_attr.fontColor eq 'font-color-type-4' || (!$spec_attr.fontColor && $mode eq 'storeFiveFloor1')} selected{/if}" ectype="colorItem">
-                            <input type="hidden" value="font-color-type-4">
-                            <i></i>
-                        </div>
-                        <input type="hidden" name="fontColor" value="{if $spec_attr.fontColor}{$spec_attr.fontColor}{else}{if $mode eq 'storeOneFloor1'}font-color-type-2{else}font-color-type-1{/if}{/if}">
-                    </div>
-            	</div>
-                {/if}
             </div>
         </div>
         <div class="body_info" style="display:none;">
@@ -1101,7 +1109,7 @@
                         <div class="floormodeItem{if $mode eq 'homeFloorModule'} floormodeModuleItem{/if}{if $spec_attr.floorMode lt 2} selected{/if}" ectype="floormodeItem">
                         	<div class="img"><img src="images/visual/{$mode}_01.jpg"></div>
                             <div class="checkbox_item">
-                            	<input type="radio" name="floorMode" value="1" data-pattern="{$floor_style.0}"{if $mode eq 'topicOneFloor' || $mode eq "storeThreeFloor1"} data-catepmer="0"{/if} class="ui-radio" id="floorMode_1"{if $spec_attr.floorMode lt 2} checked{/if}/>
+                            	<input type="radio" name="floorMode" value="1" data-pattern="{$floor_style.0}" class="ui-radio" id="floorMode_1"{if $spec_attr.floorMode lt 2} checked{/if}/>
                             	<label class="ui-radio-label" for="floorMode_1">楼层广告模板一</label>
                             </div>
                             <div ectype="floorModehide" class="hide">
@@ -1185,7 +1193,7 @@
                         <div class="floormodeItem{if $mode eq 'homeFloorModule'} floormodeModuleItem{/if}{if $spec_attr.floorMode eq 2} selected{/if}" ectype="floormodeItem">
                         	<div class="img"><img src="images/visual/{$mode}_02.jpg"></div>
                             <div class="checkbox_item">
-                            	<input type="radio" name="floorMode" value="2" data-pattern="{$floor_style.1}"{if $mode eq 'topicOneFloor' || $mode eq "storeThreeFloor1"} data-catepmer="0"{/if} class="ui-radio" id="floorMode_2"{if $spec_attr.floorMode eq 2} checked{/if} />
+                            	<input type="radio" name="floorMode" value="2" data-pattern="{$floor_style.1}" class="ui-radio" id="floorMode_2"{if $spec_attr.floorMode eq 2} checked{/if} />
                             	<label class="ui-radio-label" for="floorMode_2">楼层广告模板二</label>
                             </div>
                             <div ectype="floorModehide" class="hide">
@@ -1269,7 +1277,7 @@
                         <div class="floormodeItem{if $mode eq 'homeFloorModule'} floormodeModuleItem{/if}{if $spec_attr.floorMode eq 3} selected{/if}" ectype="floormodeItem">
                         	<div class="img"><img src="images/visual/{$mode}_03.jpg"></div>
                             <div class="checkbox_item">
-                            	<input type="radio" name="floorMode" value="3" data-pattern="{$floor_style.2}"{if $mode eq 'topicOneFloor' || $mode eq "storeThreeFloor1"} data-catepmer="{if $mode eq 'topicOneFloor'}1{elseif $mode eq 'storeThreeFloor1'}0{/if}"{/if} class="ui-radio" id="floorMode_3"{if $spec_attr.floorMode eq 3} checked{/if}/>
+                            	<input type="radio" name="floorMode" value="3" data-pattern="{$floor_style.2}" class="ui-radio" id="floorMode_3"{if $spec_attr.floorMode eq 3} checked{/if}/>
                             	<label class="ui-radio-label" for="floorMode_3">楼层广告模板三</label>
                             </div>
                             <div ectype="floorModehide" class="hide">
@@ -1350,11 +1358,10 @@
                                 {/if}
                             </div>
                         </div>
-                        {if $mode neq "storeTwoFloor1" && $mode neq "topicOneFloor" && $mode neq "topicThreeFloor"}
                         <div class="floormodeItem{if $mode eq 'homeFloorModule'} floormodeModuleItem{/if}{if $spec_attr.floorMode eq 4} selected{/if} last" ectype="floormodeItem">
                         	<div class="img"><img src="images/visual/{$mode}_04.jpg"></div>
                             <div class="checkbox_item">
-                            	<input type="radio" name="floorMode" value="4" class="ui-radio" data-pattern="{$floor_style.3}"{if $mode eq "storeThreeFloor1"} data-catepmer="1"{/if} id="floorMode_4"{if $spec_attr.floorMode eq 4} checked{/if}/>
+                            	<input type="radio" name="floorMode" value="4" class="ui-radio" data-pattern="{$floor_style.3}" id="floorMode_4"{if $spec_attr.floorMode eq 4} checked{/if}/>
                             	<label class="ui-radio-label" for="floorMode_4">楼层广告模板四</label>
                             </div>
                             <div ectype="floorModehide" class="hide">
@@ -1435,12 +1442,11 @@
                                 {/if}
                             </div>
                         </div>
-                        {/if}
-						{if $mode eq "homeFloorFive" || $mode eq "homeFloorSeven" || $mode eq "homeFloorEight"}
+						{if $mode eq "homeFloorFive" || $mode eq "homeFloorSeven"}
                         <div class="floormodeItem{if $spec_attr.floorMode eq 5} selected{/if}" ectype="floormodeItem">
                             <div class="img"><img src="images/visual/{$mode}_05.jpg"></div>
                             <div class="checkbox_item">
-                            	<input type="radio" name="floorMode" value="5" data-pattern="{$floor_style.4}"{if $mode eq 'topicOneFloor' || $mode eq "storeThreeFloor1"} data-catepmer="0"{/if} class="ui-radio" id="floorMode_5"{if $spec_attr.floorMode eq 5} checked{/if}/>
+                            	<input type="radio" name="floorMode" value="5" data-pattern="{$floor_style.4}" class="ui-radio" id="floorMode_5"{if $spec_attr.floorMode eq 5} checked{/if}/>
                             	<label class="ui-radio-label" for="floorMode_5">楼层广告模板五</label>
                             </div>
                             <div ectype="floorModehide" class="hide">
@@ -1662,7 +1668,6 @@
 	$(document).on("click","*[ectype='floormodeItem']",function(){
 		var val = $(this).find("input[type='radio']").val(),
 			pattern = $(this).find("input[type='radio']").data("pattern"),
-			catepmer = $(this).find("input[type='radio']").data("catepmer"),
 			arr = new Array(),
 			imgNumberArr = {$imgNumberArr};
 			
@@ -1696,15 +1701,6 @@
 			var imgHtml = _this.find("[ectype='" + name + "']").find("[ectype='advimg']").html();
 			$(this).html(imgHtml);
 		});
-		
-		//判断是否显示二级分类
-		if(catepmer == 0){
-			$("*[ectype='iselectErji']").parents(".control_item").hide();
-			$("*[ectype='iselectErji']").parents(".control_item").find("*[ectype='required']").attr("ectype","requiredno")
-		}else if(catepmer == 1){
-			$("*[ectype='iselectErji']").parents(".control_item").show();
-			$("*[ectype='iselectErji']").parents(".control_item").find("*[ectype='required']").attr("ectype","required")
-		}
 	});
 	
 	//默认编辑弹框时模板模式选中
@@ -1712,53 +1708,6 @@
 	$("#floorMode_"+ radioVal).click();
 </script>
 {/if}
-{if $temp eq 'default_temp'}
-<!-- 店铺默认模板添加色调设置-->
-<div class="modal-body dtColorSet">
-    <div class="body_info">
-        <div class="control_list">
-            <div class="control_item">
-            	<div class="control_text lh30">设置整站色调：</div>
-                <div class="control_value">
-                	<div class="color-item color-item1{if $spec_attr.typeColor eq ''} selected{/if}" ectype="colorItem">
-                        <input type="hidden" value="">
-                        <i></i>
-                    </div>
-                    <div class="color-item color-item2{if $spec_attr.typeColor eq 'defaultTemp-color-type-2'} selected{/if}" ectype="colorItem">
-                        <input type="hidden" name="" value="defaultTemp-color-type-2">
-                        <i></i>
-                    </div>
-                    <div class="color-item color-item3{if $spec_attr.typeColor eq 'defaultTemp-color-type-3'} selected{/if}" ectype="colorItem">
-                        <input type="hidden" name="" value="defaultTemp-color-type-3">
-                        <i></i>
-                    </div>
-                    <div class="color-item color-item4{if $spec_attr.typeColor eq 'defaultTemp-color-type-4'} selected{/if}" ectype="colorItem">
-                        <input type="hidden" name="" value="defaultTemp-color-type-4">
-                        <i></i>
-                    </div>
-                    <div class="color-item color-item5{if $spec_attr.typeColor eq 'defaultTemp-color-type-5'} selected{/if}" ectype="colorItem">
-                        <input type="hidden" name="" value="defaultTemp-color-type-5">
-                        <i></i>
-                    </div>
-                    <div class="color-item color-item6{if $spec_attr.typeColor eq 'defaultTemp-color-type-6'} selected{/if}" ectype="colorItem">
-                        <input type="hidden" name="" value="defaultTemp-color-type-6">
-                        <i></i>
-                    </div>
-                    <div class="color-item color-item7{if $spec_attr.typeColor eq 'defaultTemp-color-type-7'} selected{/if}" ectype="colorItem">
-                        <input type="hidden" name="" value="defaultTemp-color-type-7">
-                        <i></i>
-                    </div>
-                    <div class="color-item color-item8{if $spec_attr.typeColor eq 'defaultTemp-color-type-8'} selected{/if}" ectype="colorItem">
-                        <input type="hidden" name="" value="defaultTemp-color-type-8">
-                        <i></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>                
-{/if}
-
 <script type="text/javascript">
 	pbct();
 

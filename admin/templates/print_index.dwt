@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Cache-Control" content="public">
 {insert_scripts files="../js/utils.js,../js/transport_jquery.js,common.js"}
-<script type="text/javascript">
+<script language="JavaScript">
 <!--
 // 这里把JS用到的所有语言都赋值到这里
 {foreach from=$lang.js_languages key=key item=item}

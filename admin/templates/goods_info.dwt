@@ -3,15 +3,15 @@
 <head>{include file ='library/admin_html_head.lbi'}</head>
 <body class="iframe_body">
 	<div class="warpper" style="display:none;">
-    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$lang.goods_alt} - {$ur_here}</div>
+    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>商品 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content_common}</li>
-                    <li>{$lang.operation_prompt_content.info.0}</li>
-                    <li>{$lang.operation_prompt_content.info.1}</li>
-                    <li>{$lang.operation_prompt_content.info.2}</li>
+                	<li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
+                    <li>请按提示栏信息进行商品添加。</li>
+                    <li>默认模式：不区分仓库或地区模式设置价格与库存；仓库模式：按仓库设置价格与库存；地区模式：按地区设置价格与库存</li>
+                    <li>必须点击扫码入库按钮文本框出现光标在使用扫码枪扫码，扫码入库功能必须去店铺基本信息设置里面设置扫码appkey才可以使用</li>
                 </ul>
             </div>
 			<form id="goods_form" name="theForm" method="post" action="goods.php">
@@ -20,68 +20,65 @@
                 <input name="numAdd_area" value="1" id="numAdd_area" type="hidden" /> 
                 <input name="other_catids" value="{$other_catids}" id="other_catids" type="hidden" /> 
                 <input name="numAdd" value="1" id="numAdd" type="hidden" />  
-                <input name="ru_id" value="{$goods.user_id|default:0}" id="ru_id" type="hidden" />  
                 <input type="hidden" name="act" value="{$form_act}" />			
                 <div class="flexilist">
                     <!--添加新商品-->
                     <div class="stepflex">
                         <dl class="first cur" data-step="1">
                             <dt class="pointer"{if $goods.goods_id} data-step="1" ectype="stepSubmit"{/if}>1</dt>
-                            <dd class="s-text">{$lang.tab_goodsModel}</dd>
+                            <dd class="s-text">设置商品模式</dd>
                         </dl>
-                        <dl ectype="model" data-step="2"{if $goods.model_price eq 0} style="display:none;"{/if}>
+                        <dl ectype="model" data-step="2" {if $goods.model_price eq 0}style="display:none;"{/if}>
                             <dt class="pointer"{if $goods.goods_id} data-step="2" ectype="stepSubmit"{/if}>2</dt>
                             <dd class="s-text" ectype="model">
-                                {if $goods.model_price eq 0}{$lang.default_model}{/if}
-                                {if $goods.model_price eq 1}{$lang.tab_warehouse_model}{/if}
-                                {if $goods.model_price eq 2}{$lang.warehouse_region_model}{/if}
+                                {if $goods.model_price eq 0}默认模式{/if}
+                                {if $goods.model_price eq 1}仓库模式{/if}
+                                {if $goods.model_price eq 2}地区模式{/if}
                             </dd>
                         </dl>
                         <dl data-step="3">
                             <dt class="pointer"{if $goods.goods_id} data-step="3" ectype="stepSubmit"{/if}>3</dt>
-                            <dd class="s-text">{$lang.select_goods_cat}</dd>
-                        </dl>				
+                            <dd class="s-text">选择商品分类</dd>
+                        </dl>					
                         <dl data-step="4">
                             <dt class="pointer"{if $goods.goods_id} data-step="4" ectype="stepSubmit"{/if}>4</dt>
-                            <dd class="s-text">{$lang.fill_in_goods_info}</dd>
+                            <dd class="s-text">填写商品信息</dd>
                         </dl>
                         <dl data-step="5">
                             <dt class="pointer"{if $goods.goods_id} data-step="5" ectype="stepSubmit"{/if}>5</dt>
-                            <dd class="s-text">{if $code eq 'virtual_card'}{$lang.tab_gallery}{else}{$lang.fill_in_goods_attr}{/if}</dd>
+                            <dd class="s-text">填写商品属性</dd>
                         </dl>
                         <dl class="last" data-step="6">
                             <dt class="pointer"{if $goods.goods_id} data-step="6" ectype="stepSubmit"{/if}>6</dt>
-                            <dd class="s-text">{$lang.select_goods_relation}</dd>
+                            <dd class="s-text">选择商品关联</dd>
                         </dl>
                     </div>
                     <div class="common-content goods_info">
                         <!--第一步 选择商品模式-->
                         <div class="step step_one" ectype="step" data-step="1" style="display:none;">
-                            <h3>{$lang.tab_goodsModel}</h3>
-                            <div class="mos{if $code eq 'virtual_card'} vc_mos{/if} clearfix">
-                                <div class="mos_item mos_default{if $goods.model_price eq 0} active{/if}" data-model="0" data-stepmodel="3">
+                            <h3>设置商品模式</h3>
+                            <div class="mos clearfix">
+                                <div class="mos_item mos_default {if $goods.model_price eq 0}active{/if}" data-model="0" data-stepmodel="3">
                                     <div class="mos_con">
                                         <div class="mos_left"><i class="mos_icon mos_icon_default"></i></div>
-                                        <div class="mos_right"><span>{$lang.default_model}</span></div>
+                                        <div class="mos_right"><span>默认模式</span></div>
                                     </div>
                                     <i class="sc_icon sc_icon_hook"></i>
                                 </div>
-                                {if $code neq 'virtual_card'}
                                 <div class="mos_item mos_warehouse {if $goods.model_price eq 1}active{/if}" data-model="1" data-stepmodel="2">
                                     <div class="mos_con">
                                         <div class="mos_left"><i class="mos_icon mos_icon_warehouse"></i></div>
-                                        <div class="mos_right"><span>{$lang.tab_warehouse_model}</span></div>
+                                        <div class="mos_right"><span>仓库模式</span></div>
                                     </div>
                                     <i class="sc_icon sc_icon_hook"></i>
                                 </div>
                                 <div class="mos_item mos_region {if $goods.model_price eq 2}active{/if}" data-model="2" data-stepmodel="2">
                                     <div class="mos_con">
                                         <div class="mos_left"><i class="mos_icon mos_icon_region"></i></div>
-                                        <div class="mos_right"><span>{$lang.warehouse_region_model}</span></div>
+                                        <div class="mos_right"><span>地区模式</span></div>
                                     </div>
                                     <i class="sc_icon sc_icon_hook"></i>
                                 </div>
-                                {/if}
                                 <input type="hidden" name="goods_model" id="goods_model" value="{$goods.model_price|default:0}" />
                             </div>
                             <input type="hidden" name="model_price" value="{$goods.model_price}"/> 
@@ -93,42 +90,40 @@
                         <div class="step" style="display:none;" ectype="step" data-step="2">
                             <div class="step_title"><i class="ui-step"></i>
                                 <h3 ectype="model">
-                                    {if $goods.model_price eq 0}{$lang.default_model}{/if}
-                                    {if $goods.model_price eq 1}{$lang.tab_warehouse_model}{/if}
-                                    {if $goods.model_price eq 2}{$lang.warehouse_region_model}{/if}
+                                    {if $goods.model_price eq 0}默认模式{/if}
+                                    {if $goods.model_price eq 1}仓库模式{/if}
+                                    {if $goods.model_price eq 2}地区模式{/if}
                                 </h3>
                             </div>
                             <div class="step_content" id="goods_model_list"></div>
                             <div class="goods_btn">
-                                <a href="javascript:void(0);" class="btn btn35 btn_blue" data-step="1" data-type="step" ectype="stepSubmit">{$lang.step_btn_one}</a>
-                                <a href="javascript:void(0);" class="btn btn35 blue_btn" data-step="3" data-type="step" data-down="true" ectype="stepSubmit">{$lang.step_btn_two}</a>
-                                {if $goods.goods_id}<a href="javascript:void(0);" class="btn btn35 blue_btn" data-down="true" data-type="submit" ectype="stepSubmit"><i class="sc_icon goods_complete_icon"></i>{$lang.step_btn_last}</a>{/if}
+                                <a href="javascript:void(0);" class="btn btn35 btn_blue" data-step="1" data-type="step" ectype="stepSubmit">上一步，选择商品模式</a>
+                                <a href="javascript:void(0);" class="btn btn35 blue_btn" data-step="3" data-type="step" data-down="true" ectype="stepSubmit">下一步，选择商品分类</a>
+                                {if $goods.goods_id}<a href="javascript:void(0);" class="btn btn35 blue_btn" data-down="true" data-type="submit" ectype="stepSubmit"><i class="sc_icon goods_complete_icon"></i>完成，发布商品</a>{/if}
                             </div>
                         </div>
 
                         <!--第二步 选择商品分类-->
                         <div class="step step_two" style="display:none;" ectype="step" data-step="3">
-                        	<div class="step_title"><i class="ui-step"></i><h3>{$lang.select_goods_cat}</h3></div>
+                        	<div class="step_title"><i class="ui-step"></i><h3>选择商品分类</h3></div>
                         	<!--{if $goods.user_id eq 0}-->
                             <div class="sort_tit">
-                                <strong>{$lang.recent_usage_cat}：</strong>
+                                <strong>您最近使用的商品分类：</strong>
                                 <div class="select_list select_w320" id="sortcommList">
-                                    <div class="cite">{$lang.please_select}</div>
+                                    <div class="cite">请选择</div>
                                     <ul>
-                                        <li><a href="javascript:void(0);" data-value="0">{$lang.please_select}</a></li>
+                                        <li><a href="javascript:void(0);" data-value="0">请选择</a></li>
                                         {foreach from=$recently_used_category item=category key=key}
                                         <li><a href="javascript:void(0);" data-value="{$key}">{$category}</a></li>
                                         {/foreach}
                                     </ul>
                                 	<input name="recently_used_category" type="hidden" value="" id="sortcommValue">
                                 </div>
-                                <a href="javascript:void(0);" class="btn btn30 blue_btn ml5" ectype="ajaxCate">添加</a>
                             </div>
                             <!--{else}-->
                             <div class="sort_tit" style="margin:5px 0px;">&nbsp;</div>
                             <!--{/if}-->
                             <div class="sort_info">
-                                <div id="cate_add">
                                 <div class="sort_list sort_list_one">
                                     <div class="sort_list_warp">
                                         <div class="category_list">
@@ -158,34 +153,33 @@
                                         </div>
                                     </div>
                                 </div>
-                                </div>
                                 <input type="hidden" name="cat_id" id="cat_id" value="{$goods.cat_id|default:0}" ectype="cat_id"/>
-                                <div class="choiceClass" id="choiceClass">{$lang.current_cat}：<strong class="red"></strong></div>
+                                <div class="choiceClass" id="choiceClass">您当前选择的商品类别是：<strong class="red"></strong></div>
                             </div>
                             <div class="goods_btn">
-                                <a href="javascript:void(0);" class="btn btn35 btn_blue" data-step="1" data-type="step" ectype="stepSubmit">{$lang.step_btn_one}</a>
-                                <a href="javascript:void(0);" class="btn btn35 blue_btn" data-step="4" data-type="step" data-down="true" ectype="stepSubmit">{$lang.step_btn_three}</a>
-                            	{if $goods.goods_id}<a href="javascript:void(0);" class="btn btn35 blue_btn" data-down="true" data-type="submit" ectype="stepSubmit"><i class="sc_icon goods_complete_icon"></i>{$lang.step_btn_last}</a>{/if}
+                                <a href="javascript:void(0);" class="btn btn35 btn_blue" data-step="1" data-type="step" ectype="stepSubmit">上一步，设置商品模式</a>
+                                <a href="javascript:void(0);" class="btn btn35 blue_btn" data-step="4" data-type="step" data-down="true" ectype="stepSubmit">下一步，填写通用信息</a>
+                            	{if $goods.goods_id}<a href="javascript:void(0);" class="btn btn35 blue_btn" data-down="true" data-type="submit" ectype="stepSubmit"><i class="sc_icon goods_complete_icon"></i>完成，发布商品</a>{/if}
                             </div>
                         </div>
-						
+
                         <!--第三步 通用信息-->
                         <div class="step_three" style="display:none;" ectype="step" data-step="4">
                             <div class="step">
-                                <div class="step_title"><i class="ui-step"></i><h3>{$lang.tab_general}</h3></div>
+                                <div class="step_title"><i class="ui-step"></i><h3>通用信息</h3></div>
                                 <div class="step_content">
                                     <div class="item item_wenzi">
-                                        <div class="step_label">{$lang.03_category_manage}：</div>
-                                        <div class="step_value"><span class="fl"></span><a href="javascript:;" class="edit_category" ectype="edit_category"><i class="icon icon-edit"></i></a><a href="javascript:void(0);" class="category_dialog">{$lang.add_extend_cat}</a></div>
+                                        <div class="step_label">商品分类：</div>
+                                        <div class="step_value"><span class="fl"></span><a href="javascript:;" class="edit_category" ectype="edit_category"><i class="icon icon-edit"></i></a><a href="javascript:void(0);" class="category_dialog">添加扩展分类</a></div>
                                     </div>	
                                     <!--{if $goods.user_id}-->
                                     <div class="item not_fl">
-                                        <div class="step_label">{$lang.store_cat}：</div>
+                                        <div class="step_label">店铺分类：</div>
                                         <div class="step_value">
                                             <div class="search_select nofloat">
                                                 <div class="categorySelect">
                                                     <div class="selection">
-                                                        <input type="text" name="category_name" id="category_name" class="text w290 valid" value="{if $goods.user_cat_name}{$goods.user_cat_name}{else}{$lang.select_cat}{/if}" autocomplete="off" readonly data-filter="cat_name" />
+                                                        <input type="text" name="category_name" id="category_name" class="text w290 valid" value="{if $goods.user_cat_name}{$goods.user_cat_name}{else}请选择分类{/if}" autocomplete="off" readonly data-filter="cat_name" />
                                                         <input type="hidden" name="user_cat" id="category_id" value="{$goods.user_cat|default:0}" data-filter="cat_id" />
                                                     </div>
                                                     <div class="select-container w319" style="display:none;">
@@ -201,7 +195,7 @@
                                         <div class="step_value">
                                         	<input type="text" name="goods_sn" class="text w150" autocomplete="off" onblur="checkGoodsSn(this.value,'{$goods.goods_id}')"  value="{$goods.goods_sn|escape}"/>
                                         	<div class="form_prompt"></div>
-                                            <div class="notic">{$lang.lab_goods_sn_notic}</div>
+                                            <div class="notic">如果您不输入商品货号，系统将自动生成一个唯一的货号。</div>
                                         </div>
                                     </div>	
                                     <div class="item">
@@ -209,14 +203,14 @@
                                         <div class="step_value">
                                         	<div class="fl">
                                                 <input type="text" name="bar_code" class="text w150" autocomplete="off"  value="{$goods.bar_code|escape}"/>
-                                                {if $form_act eq 'insert'}<input type="button" class="button mr10" value="{$lang.scan_code_storage}" data-role="scan_code">{/if}
-                                                <input type="button" class="button fl mr10" value="{$lang.scan_code_storage_info}" data-role="edit_scan_code"{if $form_act eq 'insert'} style="display:none;"{/if}>
+                                                {if $form_act eq 'insert'}<input type="button" class="button mr10" value="扫码入库" data-role="scan_code">{/if}
+                                                <input type="button" class="button fl mr10" value="扫码入库信息" data-role="edit_scan_code"{if $form_act eq 'insert'} style="display:none;"{/if}>
                                             </div>
-                                            <div class="notic">{$lang.lab_bar_code_notic}</div>
+                                            <div class="notic">必须点击扫码入库按钮文本框出现光标在使用扫码枪扫码，扫码入库功能必须去店铺基本信息设置里面设置<a href="index.php?act=merchants_first" class="fn">扫码appkey</a>才可以使用</div>
 										</div>
                                     </div>								
                                     <div class="item">
-                                        <div class="step_label"><em class="require-field">*</em>{$lang.goods_name}：</div>
+                                        <div class="step_label"><em class="require-field">*</em>商品名称：</div>
                                         <div class="step_value">
 											<input type="text" name="goods_name" class="text" autocomplete="off" value="{$goods.goods_name|escape}" ectype="require" style="color:{$goods_name_color};"/>
                                             <div id="font_color" class="font_color mr10">
@@ -227,17 +221,17 @@
 										</div>
                                     </div>
                                     <div class="item">
-                                        <div class="step_label">{$lang.lab_bar_simple_desc}：</div>
+                                        <div class="step_label">商品简单描述：</div>
                                         <div class="step_value">
                                             <textarea class="textarea" name="goods_brief">{$goods.goods_brief|escape}</textarea>
                                         </div>
                                     </div>
                                     {if $suppliers_exists eq 1}
                                     <div class="item">
-                                        <div class="step_label">{$lang.lab_bar_select_supplier}：</div>
+                                        <div class="step_label">选择供货商：</div>
                                         <div class="step_value">
 											<div id="suppliers_id" class="imitate_select select_w120">
-                                                <div class="cite">{$lang.please_select}</div>
+                                                <div class="cite">请选择</div>
                                                 <ul>
                                                     <li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.select_please}</a></li>
                                                     {foreach from=$suppliers_list_name item=suppliers key=id}
@@ -250,31 +244,30 @@
                                     </div>
                                     {/if}
                                     <div class="item">
-                                        <div class="step_label"><em class="require-field">*</em>{$lang.lab_bar_shop_price}：</div>
-                                        <div class="step_value"><input type="text" name="shop_price" onBlur="priceSetted()" class="text w150" ectype="require" autocomplete="off"  value="{$goods.shop_price}"/><a href="javascript:void(0);" class="mr10" onclick="marketPriceSetted()">{$lang.marketPriceSetted}</a><div class="form_prompt"></div></div>
+                                        <div class="step_label"><em class="require-field">*</em>本店售价：</div>
+                                        <div class="step_value"><input type="text" name="shop_price" onBlur="priceSetted()" class="text w150" ectype="require" autocomplete="off"  value="{$goods.shop_price}"/><a href="javascript:void(0);" class="mr10" onclick="marketPriceSetted()">按市场价</a><div class="form_prompt"></div></div>
                                     </div>
                                     <div class="item">
-                                        <div class="step_label">{$lang.lab_bar_market_price}：</div>
-                                        <div class="step_value"><input type="text" name="market_price" class="text w150" autocomplete="off" value="{$goods.market_price}"/><a href="javascript:void(0);" onclick="integral_market_price()">{$lang.integral_market_price}</a></div>
+                                        <div class="step_label">市场价：</div>
+                                        <div class="step_value"><input type="text" name="market_price" class="text w150" autocomplete="off" value="{$goods.market_price}"/><a href="javascript:void(0);" onclick="integral_market_price()">取整数</a></div>
                                     </div>
                                     <div class="item">
-                                        <div class="step_label">{$lang.lab_bar_cost_price}：</div>
+                                        <div class="step_label">成本价：</div>
                                         <div class="step_value"><input type="text" name="cost_price" class="text w150" autocomplete="off" value="{$goods.cost_price}"/></div>
                                     </div>
                                     <div class="item" id="goods_number">
-                                        <div class="step_label"><em class="require-field">*</em>{$lang.lab_bar_goods_inventory}：</div>
-                                        <div class="step_value"><input type="text" name="goods_number" class="text w150" ectype="require" autocomplete="off" value="{$goods.goods_number}"/><div class="notic">{$lang.lab_inventory_notic}</div><div class="form_prompt"></div></div>
+                                        <div class="step_label"><em class="require-field">*</em>商品库存：</div>
+                                        <div class="step_value"><input type="text" name="goods_number" class="text w150" ectype="require" autocomplete="off" value="{$goods.goods_number}"/><div class="notic">库存在商品为虚货或商品存在货品时为不可编辑状态，库存数值取决于其虚货数量或货品数量</div><div class="form_prompt"></div></div>
                                     </div>
                                     <div class="item">
-                                        <div class="step_label">{$lang.lab_bar_inventory_warn}：</div>
+                                        <div class="step_label">库存预警值：</div>
                                         <div class="step_value"><input type="text" name="warn_number" class="text w150" autocomplete="off" value="{$goods.warn_number}"/><div class="notic">{$lang.notice_warn_number}</div></div>
                                     </div>
                                     <div class="item">
-                                        <div class="step_label">{$lang.lab_bar_goods_brand}：</div>
+                                        <div class="step_label">商品品牌：</div>
                                         <div class="step_value">
                                             <div class="selection">
-                                                <input type="text" name="brand_name" id="brand_name" class="text w140 valid" data-filter="brand_name" ectype="require" autocomplete="off" value="{if $brand_name}{$brand_name}{else}{$lang.please_select}{/if}" readonly />
-                                                <a href="javascript:void(0);" class="btn btn30 blue_btn" ectype="ajaxBrand">添加</a>
+                                                <input type="text" name="brand_name" id="brand_name" class="text w140 valid" data-filter="brand_name" ectype="require" autocomplete="off" value="{if $brand_name}{$brand_name}{else}请选择{/if}" readonly />
                                                 <input type="hidden" name="brand_id" id="brand_id" value="{$goods.brand_id}" data-filter="brand_id" />
                                                 <div class="form_prompt"></div>
                                             </div>    
@@ -282,30 +275,30 @@
                                                 <div class="brand-top">
                                                     <div class="letter">
                                                         <ul>
-                                                            <li><a href="javascript:void(0);" data-letter="">{$lang.all_brand}</a></li>
+                                                            <li><a href="javascript:void(0);" data-letter="">全部品牌</a></li>
                                                             {foreach from=$letter item=letter}
                                                             <li><a href="javascript:void(0);" data-letter="{$letter}">{$letter}</a></li>
                                                             {/foreach}
-                                                            <li><a href="javascript:void(0);" data-letter="QT">{$lang.other}</a></li>
+                                                            <li><a href="javascript:void(0);" data-letter="QT">其他</a></li>
                                                         </ul>
                                                     </div>
                                                     <div class="b_search">
-                                                        <input name="search_brand_keyword" id="search_brand_keyword" ectype="require" type="text" class="b_text" autocomplete="off" placeholder="1	">
+                                                        <input name="search_brand_keyword" id="search_brand_keyword" ectype="require" type="text" class="b_text" autocomplete="off" placeholder="品牌名称关键字查找">
                                                         <a href="javascript:void(0);" class="btn-mini"><i class="icon icon-search"></i></a>
                                                     </div>
                                                 </div>
                                                 <div class="brand-list">
                                                     {include file='library/search_brand_list.lbi'}
                                                 </div>
-                                                <div class="brand-not" style="display:none;">{$lang.lab_other_brand_notic}</div>
+                                                <div class="brand-not" style="display:none;">没有符合"<strong>其他</strong>"条件的品牌</div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="item item_wenzi">
-                                        <div class="step_label"><em class="require-field">*</em>{$lang.goods_img}：</div>
+                                        <div class="step_label"><em class="require-field">*</em>商品图片：</div>
                                         <div class="step_value">
                                             <div id="goods_figure" class="update_images mr10"><div class="img"><img src="{if $goods.goods_thumb}{$goods.goods_thumb}{else}images/update_images.jpg{/if}" /></div></div><div class="form_prompt"></div>
-											<div class="notic ml70">{$lang.lab_goods_img_notic}</div>
+											<div class="notic ml70">图片尺寸建议800*800</div>
                                             <input type="hidden" name="original_img" value="">
 											<input type="hidden" name="goods_img" value="">
 											<input type="hidden" name="goods_thumb" value="">
@@ -314,35 +307,14 @@
                                     <div class="item gallery_album" data-inid="gallery_album" data-act="gallery_album_list" ectype="gallery_album_list">
                                         <div class="step_label">&nbsp;</div>
                                         <div class="step_value">
-                                            <input type="button" class="button mr10" value="{$lang.gallery_album_select}" ectype="gallery_album" >
+                                            <input type="button" class="button mr10" value="图片库选择" ectype="gallery_album" >
                                             <div class="mt10" id="gallery_album"></div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="step_label">{$lang.goods_video}：</div>
-                                        <div class="step_value">
-                                            <div id="goods_video" class="update_images mr10">
-                                                <div class="img"><img src="images/update_video.jpg" /></div>
-                                            </div>
-                                            <div class="goods_video_div mr10 {if !$goods.goods_video}hide{/if}">
-                                                <video class="goods_video_js" id="goods_video_js" width="200" height="200" src="{$goods.goods_video_path}" controls>
-                                                    <source src="{$goods.goods_video_path}" class="goods_video_js" type="video/mp4"/>
-                                                </video>
-                                                <div class="video_default"></div>
-                                                <a href="javascript:void(0);" class="video_remove" ectype="video_remove"><i class="icon icon-remove"></i></a>
-                                            </div>
-                                            <div class="form_prompt">
-                                                <p>像素：398px * 398px</p>
-                                                <p>大小：10MB，10秒以内的视频</p>
-                                                <p>格式：只支持MP4格式</p>
-                                            </div>
-                                        	<input type="hidden" name="goods_video" value="{$goods.goods_video}">
                                         </div>
                                     </div>
                                     <div class="item">
                                         <div class="step_label">
                                         	<div class="checkbox_items">
-                                            	{$lang.img_external_links}：
+                                            	图片外部链接：
                                                 <div class="checkbox_item fr mr0">
                                                     <input name="is_img_url" class="ui-checkbox" value="0" id="is_img_url" type="checkbox">
                                                     <label class="ui-label" for="is_img_url">&nbsp;</label>
@@ -351,16 +323,20 @@
                                         </div>
                                         <div class="step_value">
                                         	<div class="checkbox_items">
-                                                <input name="goods_img_url" class="text" id="goods_img_url" value="" placeholder="{$lang.img_external_links}" onfocus="if (this.value == ''){this.value='';this.style.color='#666';}" disabled type="text">
-                                                <div class="notic">{$lang.lab_img_external_links_notic}</div>
+                                                <input name="goods_img_url" class="text" id="goods_img_url" value="" placeholder="图片外部链接地址" onfocus="if (this.value == ''){this.value='';this.style.color='#666';}" disabled type="text">
+                                                <div class="notic">外链地址必须带有http://格式</div>
                                                 <div class="form_prompt"></div>
                                             </div>
                                         </div>
                                     </div>
 									<div class="item">
-                                        <div class="step_label">{$lang.goods_freight}：</div>
+                                        <div class="step_label">商品运费：</div>
                                         <div class="step_value">
-											<div class="checkbox_items">										
+											<div class="checkbox_items">
+												<div class="checkbox_item">
+												  <input type="radio" name="freight" class="ui-radio" id="freight_0" value="0" {if $goods.freight eq 0}checked="checked"{/if}/>
+												  <label for="freight_0" class="ui-radio-label">{$lang.lab_freight_area}</label> 
+												</div>											
 												<div class="checkbox_item">
 												  <input type="radio" name="freight" class="ui-radio" id="freight_1" value="1" {if $goods.freight eq 1}checked="checked"{/if}/>
 												  <label for="freight_1" class="ui-radio-label">{$lang.lab_freight_fixed}</label> 
@@ -369,63 +345,39 @@
 												  <input type="radio" name="freight" class="ui-radio" id="freight_2" value="2" {if $goods.freight eq 2}checked="checked"{/if}/>
 												  <label for="freight_2" class="ui-radio-label">{$lang.lab_freight_temp}</label> 
 												</div>
-                                                <div class="form_prompt"></div>
 											</div>
 											<input id="shipping_fee" type="text" name="shipping_fee" class="text w150" autocomplete="off" value="{$goods.shipping_fee}" {if $goods.freight neq 1}style="display:none;"{/if}/>
-											<div id="tid" {if $goods.freight neq 2}style="display:none;"{/if}>
-                                            <div class="imitate_select select_w170" id="transport_div">
-												<div class="cite">{$lang.please_select}</div>
+											<div id="tid" class="imitate_select select_w170" {if $goods.freight neq 2}style="display:none;"{/if}>
+												<div class="cite">请选择</div>
 												<ul style="display: none;">
 													{foreach from=$transport_list item=item key=key}
 													<li><a href="javascript:;" data-value="{$item.tid}" class="ftx-01">{$item.title}</a></li>
 													{/foreach}
 												</ul>
 												<input name="tid" type="hidden" value="{$goods.tid}">
-											</div>	
-                                            <a href="javascript:;" class="btn btn30 blue_btn fl mr5" ectype="ajaxTransport">添加</a>
-                                            <a href="javascript:;" class="btn btn30 blue_btn fl" data-attr="edit" ectype="ajaxTransport">编辑</a>
-                                            </div>
+											</div>											
 										</div>
                                     </div>	
-									
-                                    <div class="item" {if $goods.cloud_id || $code eq 'virtual_card'} style="display:none"{/if}>
-                                        <div class="step_label">{$lang.return_lable}：</div>
+                                    <div class="item">
+                                        <div class="step_label">退货标识：</div>
                                         <div class="step_value step_goods_service">
-                                            <div class="checkbox_items" ectype="return_type">
+                                            <div class="checkbox_items">
+                                            	
                                                 <div class="checkbox_item">
                                                     <input type="checkbox" name="return_type[]" class="ui-checkbox" id="return_type_0" value="0" {if $is_cause && in_array(0, $is_cause)}checked="checked"{/if}>
-                                                    <label class="ui-label" for="return_type_0">{$lang.return_type.0}</label>
+                                                    <label class="ui-label" for="return_type_0">维修</label>
                                                 </div>
                                                 <div class="checkbox_item">
                                                     <input type="checkbox" name="return_type[]" class="ui-checkbox" id="return_type_1" value="1" {if $is_cause && in_array(1, $is_cause)}checked="checked"{/if}>
-                                                    <label class="ui-label" for="return_type_1">{$lang.return_type.1}</label>
+                                                    <label class="ui-label" for="return_type_1">退货</label>
                                                 </div>
                                                 <div class="checkbox_item">
                                                     <input type="checkbox" name="return_type[]" class="ui-checkbox" id="return_type_2" value="2" {if $is_cause && in_array(2, $is_cause)}checked="checked"{/if}>
-                                                    <label class="ui-label" for="return_type_2">{$lang.return_type.2}</label>
+                                                    <label class="ui-label" for="return_type_2">换货</label>
                                                 </div>
                                                 <div class="checkbox_item">
                                                     <input type="checkbox" name="return_type[]" class="ui-checkbox" id="return_type_3" value="3" {if $is_cause && in_array(3, $is_cause)}checked="checked"{/if}>
-                                                    <label class="ui-label" for="return_type_3">{$lang.return_type.3}</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="step_label">{$lang.goods_service_label}：</div>
-                                        <div class="step_value step_goods_service">
-                                            <div class="checkbox_items">
-                                                <div class="checkbox_item">
-                                                    <input type="checkbox" name="is_reality" class="ui-checkbox" value="1" id="is_reality" {if $goods.goods_extend.is_reality} checked="checked"{/if}>
-                                                    <label class="ui-label" for="is_reality">{$lang.goods_service.0}</label>
-                                                </div>
-                                                <div class="checkbox_item" {if $code eq 'virtual_card'} style="display:none" {/if}>
-                                                    <input type="checkbox" name="is_return" class="ui-checkbox" value="1" id="is_return" {if $goods.goods_extend.is_return} checked="checked"{/if}>
-                                                    <label class="ui-label" for="is_return">{$lang.goods_service.1}</label>
-                                                </div>
-                                                <div class="checkbox_item">
-                                                    <input type="checkbox" name="is_fast" class="ui-checkbox" value="1" id="is_fast" {if $goods.goods_extend.is_fast} checked="checked"{/if}>
-                                                    <label class="ui-label" for="is_fast">{$lang.goods_service.2}</label>
+                                                    <label class="ui-label" for="return_type_3">仅退款</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -433,19 +385,13 @@
                                     {if $goods.user_id}
                                     <div class="item">
                                         <div class="step_label">{$lang.lab_commission_rate}：</div>
-                                    	<div class="step_value">
-                                            {if $commission_setting}
-                                            <input type="text" name="commission_rate" class="text w150" autocomplete="off" value="{$goods.commission_rate}"/>
+                                        	<div class="step_value"><input type="text" name="commission_rate" class="text w150" autocomplete="off" value="{$goods.commission_rate}"/>
                                         	<div class="notic">%，{$lang.notice_commission_rate}</div>
                                             <input type="hidden" name="old_commission_rate" autocomplete="off" value="{$goods.commission_rate}"/>
-                                            {else}
-                                            <input type="hidden" name="commission_rate" class="text w150" autocomplete="off" value="{$goods.commission_rate}"/>
-                                            <span class="red">{$goods.commission_rate|default:0}%</span>
-                                            {/if}
                                         </div>
                                     </div>	
                                     <div class="item">
-                                        <div class="step_label">{$lang.to_examine_goods}：</div>
+                                        <div class="step_label">审核商品：</div>
                                         <div class="step_value">
 											<div class="checkbox_items">
 												<div class="checkbox_item">
@@ -464,40 +410,52 @@
                                             <textarea id="review_content" name="review_content" class="text w180" autocomplete="off" value="{$goods.review_content}" style=" height:88px; {if $goods.review_status neq 2}display:none;{/if}">{$goods.review_content}</textarea>									
 										</div>
                                     </div>									
-                                    {/if}
-                                    <div class="item">
-                                        <div class="step_label">{$lang.user_price}：</div>
-                                        <div class="step_value">
-                                            {include file ='library/user_price_list.lbi'}
-                                            <div class="notic">{$lang.notice_user_price}</div>
-                                        </div>
-                                    </div>													
+                                    {/if}															
                                 </div>
                             </div>
                             <div class="step">
-                                <div class="step_title"><i class="ui-step"></i><h3>{$lang.tab_detail}</h3></div>
+                                <div class="step_title"><i class="ui-step"></i><h3>详细描述</h3></div>
                                 <div class="step_content">
                                 	<div class="tabs_desc">
                                     	<ul class="ui-tabs-nav">
-                                        	<li class="current"><a href="javascript:void(0);"><i class="icon icon-desktop"></i>{$lang.pc_terminal}</a></li>
-                                            <li><a href="javascript:void(0);"><i class="icon icon-mobile-phone"></i>{$lang.phone_terminal}</a></li>
+                                        	<li class="current"><a href="javascript:void(0);"><i class="icon icon-desktop"></i>电脑端</a></li>
+                                            <li><a href="javascript:void(0);"><i class="icon icon-mobile-phone"></i>手机端</a></li>
                                         </ul>
                                         <div class="panel-main gallery_album" ectype="gallery_album_list" data-inid="gallery_album_dsc" data-act="gallery_album_list">
                                             <div class="panel panel-pc">
                                                 <div id="FCKeditor">
                                                 {$FCKeditor}
                                                 </div>
-                                                <input type="button" class="button mr10" value="{$lang.gallery_album_select}" ectype="gallery_album" >
+                                                <input type="button" class="button mr10" value="图片库选择" ectype="gallery_album" >
                                                 <div id="gallery_album_dsc" class="mt10"></div>
                                             </div>
                                             <div class="panel panel-phone" style="display:none;">
                                                 <div class="panel_warp">
-                                                	{$lang.phone_terminal_notic}
+                                                	<div class="explain">
+                                                    	<p>
+                                                        	<strong>一、基本要求</strong>
+                                                            <span><em>1、</em>手机详情总体大小：图片+文字，<i class="red">图片不超过20张，文字不超过5000字</i>；</span>
+                                                            <span><em>建议：</em>所有图片都是本宝贝相关的图片。</span>
+                                                        </p>
+                                                        <p>
+                                                        	<strong>二、图片大小</strong>
+                                                            <span><em>1、</em>建议使用宽度480 ~ 620像素、高度小于等于960像素的图片；</span>
+                                                            <span><em>2、</em>格式为：JPG\JEPG\GIF\PNG；</span>
+                                                            <span><em>举例：</em>可以上传一张宽度为480，高度为960像素，格式为JPG的图片。</span>
+                                                        </p>
+                                                        <p>
+                                                        	<strong>三、文字要求</strong>
+                                                            <span><em>1、</em>每次插入文字不能超过500个字，标点、特殊字符按照一个字计算；</span>
+                                                            <span><em>2、</em>请手动输入文字，不要复制粘贴网页上的文字，防止出现乱码；</span>
+                                                            <span><em>3、</em>以下特殊字符“&lt;”、“&gt;”、“"”、“'”、“\”会被替换为空。</span>
+                                                            <span><em>建议：</em>不要添加太多的文字，这样看起来更清晰。</span>
+                                                        </p>
+                                                    </div>
                                                     <div class="pannel">
                                                     	<div class="pannel-content" ectype="mobile_pannel"><div class="section_warp">{$goods.desc_mobile}</div></div>
                                                         <div class="step_top_btn">
-                                                        	<a href="javascript:void(0);" class="btn red_btn" ectype="mb_add_img"><i class="sc_icon sc_icon_images"></i>{$lang.add_img}</a>
-                                                            <a href="javascript:void(0);" class="btn red_btn" ectype="mb_add_txt"><i class="sc_icon sc_icon_font"></i>{$lang.add_text}</a>
+                                                        	<a href="javascript:void(0);" class="btn red_btn" ectype="mb_add_img"><i class="sc_icon sc_icon_images"></i>添加图片</a>
+                                                            <a href="javascript:void(0);" class="btn red_btn" ectype="mb_add_txt"><i class="sc_icon sc_icon_font"></i>添加文字</a>
                                                         </div>
                                                         <input type="hidden" name="desc_mobile" value='{$goods.desc_mobile}' />
                                                     </div>
@@ -508,20 +466,20 @@
                                 </div>
                             </div>
                             <div class="step">
-                                <div class="step_title"><i class="ui-step"></i><h3>{$lang.special_info}</h3></div>
+                                <div class="step_title"><i class="ui-step"></i><h3>特殊信息</h3></div>
                                 <div class="step_content">
                                     <div class="goods_activity">
                                         <div class="item">
-                                            <div class="step_label">{$lang.promotion}：</div>
+                                            <div class="step_label">促销：</div>
                                             <div class="step_value">
                                                 <div class="checkbox_items">
                                                     <div class="checkbox_item">
-                                                        <input type="radio" name="is_promote" class="ui-radio is_promote" id="pro_no" value="0" {if !$goods.is_promote}checked="checked"{/if} onclick="handlePromote(this);" autocomplete="off" />
-                                                        <label for="pro_no" class="ui-radio-label">{$lang.no}</label> 
+                                                        <input type="radio" name="is_promote" class="ui-radio is_promote" id="pro_no" value="0" {if !$goods.is_promote}checked="checked"{/if} onclick="handlePromote(this);"/>
+                                                        <label for="pro_no" class="ui-radio-label">否</label> 
                                                     </div>
                                                     <div class="checkbox_item mr15">
-                                                        <input type="radio" name="is_promote" class="ui-radio is_promote" id="pro_yes" value="1" {if $goods.is_promote}checked="checked"{/if} onclick="handlePromote(this);" autocomplete="off" />
-                                                        <label for="pro_yes" class="ui-radio-label">{$lang.yes}</label> 
+                                                        <input type="radio" name="is_promote" class="ui-radio is_promote" id="pro_yes" value="1" {if $goods.is_promote}checked="checked"{/if} onclick="handlePromote(this);"/>
+                                                        <label for="pro_yes" class="ui-radio-label">是</label> 
                                                     </div>
                                                     <div class="hidden_div" {if $goods.is_promote}style="display:block;"{/if}>
                                                         <div id="text_time1" class="text_time {if !$goods.is_promote}time_disabled{/if}">
@@ -537,69 +495,69 @@
                                             </div>
                                         </div>
                                         <div class="item">
-                                            <div class="step_label">{$lang.xiangou}：</div>
+                                            <div class="step_label">限购：</div>
                                             <div class="step_value">
                                                 <div class="checkbox_items">
                                                     <div class="checkbox_item">
-                                                        <input type="radio" name="is_xiangou" class="ui-radio is_xiangou" id="pur_no" value="0" {if !$goods.is_xiangou}checked="checked"{/if} onclick="handle_for_purchasing(this);" autocomplete="off" />
-                                                        <label for="pur_no" class="ui-radio-label">{$lang.no}</label> 
+                                                        <input type="radio" name="is_xiangou" class="ui-radio is_xiangou" id="pur_no" value="0" {if !$goods.is_xiangou}checked="checked"{/if} onclick="handle_for_purchasing(this);"/>
+                                                        <label for="pur_no" class="ui-radio-label">否</label> 
                                                     </div>
                                                     <div class="checkbox_item mr15">
-                                                        <input type="radio" name="is_xiangou" class="ui-radio is_xiangou" id="pur_yes" value="1" {if $goods.is_xiangou}checked="checked"{/if} onclick="handle_for_purchasing(this);" autocomplete="off" />
-                                                        <label for="pur_yes" class="ui-radio-label">{$lang.yes}</label> 
+                                                        <input type="radio" name="is_xiangou" class="ui-radio is_xiangou" id="pur_yes" value="1" {if $goods.is_xiangou}checked="checked"{/if} onclick="handle_for_purchasing(this);"/>
+                                                        <label for="pur_yes" class="ui-radio-label">是</label> 
                                                     </div>
                                                     <div class="hidden_div" {if $goods.is_xiangou}style="display:block;"{/if}>
                                                         <div id="text_time3" class="text_time {if !$goods.is_xiangou}time_disabled{/if}">
-                                                            <input type="text" class="text mr0" name="xiangou_start_date" id="xiangou_start_date" value="{$goods.xiangou_start_date}" autocomplete="off" readonly autocomplete="off" />
+                                                            <input type="text" class="text mr0" name="xiangou_start_date" id="xiangou_start_date" value="{$goods.xiangou_start_date}" autocomplete="off" readonly />
                                                         </div>
                                                         <span class="bolang">&nbsp;&nbsp;~&nbsp;&nbsp;</span>
                                                         <div id="text_time4" class="text_time {if !$goods.is_xiangou}time_disabled{/if}">
-                                                            <input type="text" class="text" name="xiangou_end_date" id="xiangou_end_date" value="{$goods.xiangou_end_date}" autocomplete="off" readonly autocomplete="off" />
+                                                            <input type="text" class="text" name="xiangou_end_date" id="xiangou_end_date" value="{$goods.xiangou_end_date}" autocomplete="off" readonly />
                                                         </div>
-                                                        <input type="text" class="text w70 ml10" name="xiangou_num" id="xiangou_num" value="{$goods.xiangou_num}" placeholder="{$lang.xiangou_number}" autocomplete="off" />
+                                                        <input type="text" class="text w70 ml10" name="xiangou_num" id="xiangou_num" value="{$goods.xiangou_num}" placeholder="限购数量" autocomplete="off" />
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="item">
-                                            <div class="step_label">{$lang.by_stages}：</div>
+                                            <div class="step_label">分期：</div>
                                             <div class="step_value">
                                                 <div class="checkbox_items">
                                                     <div class="checkbox_item">
-                                                        <input type="radio" name="is_stages" class="ui-radio is_handle_stages" id="stages_no" value="0" {if !$stages}checked="checked"{/if} onclick="handle_for_stages(this);" autocomplete="off" />
-                                                        <label for="stages_no" class="ui-radio-label">{$lang.no}</label> 
+                                                        <input type="radio" name="is_stages" class="ui-radio is_handle_stages" id="stages_no" value="0" {if !$stages}checked="checked"{/if} onclick="handle_for_stages(this);"/>
+                                                        <label for="stages_no" class="ui-radio-label">否</label> 
                                                     </div>
                                                     <div class="checkbox_item mr15">
-                                                        <input type="radio" name="is_stages" class="ui-radio is_handle_stages" id="stages_yes" value="1" {if $stages}checked="checked"{/if} onclick="handle_for_stages(this);" autocomplete="off" />
-                                                        <label for="stages_yes" class="ui-radio-label">{$lang.yes}</label> 
+                                                        <input type="radio" name="is_stages" class="ui-radio is_handle_stages" id="stages_yes" value="1" {if $stages}checked="checked"{/if} onclick="handle_for_stages(this);"/>
+                                                        <label for="stages_yes" class="ui-radio-label">是</label> 
                                                     </div>
                                                     <div class="hidden_div hidden_stages" {if $stages}style="display:block;"{/if}>
                                                         <div id="stages" class="checkbox_items">
                                                             <div class="checkbox_item">
-                                                                <input type="checkbox" stages="{$stages[0]}" name="stages_num[0]" class="ui-checkbox" value="1" id="stages_num_0" autocomplete="off" />
-                                                                <label for="stages_num_0" class="ui-label">{$lang.by_stages_type.0}</label>
+                                                                <input type="checkbox" stages="{$stages[0]}" name="stages_num[0]" class="ui-checkbox" value="1" id="stages_num_0" />
+                                                                <label for="stages_num_0" class="ui-label">30天免息</label>
                                                             </div>
                                                             <div class="checkbox_item">
-                                                                <input type="checkbox" stages="{$stages[1]}" name="stages_num[1]" class="ui-checkbox" value="3" id="stages_num_1" autocomplete="off" />
-                                                                <label for="stages_num_1" class="ui-label">{$lang.by_stages_type.1}</label>
+                                                                <input type="checkbox" stages="{$stages[1]}" name="stages_num[1]" class="ui-checkbox" value="3" id="stages_num_1" />
+                                                                <label for="stages_num_1" class="ui-label">分三期</label>
                                                             </div>
                                                             <div class="checkbox_item">
-                                                                <input type="checkbox" stages="{$stages[2]}" name="stages_num[2]" class="ui-checkbox" value="6" id="stages_num_2" autocomplete="off" />
-                                                                <label for="stages_num_2" class="ui-label">{$lang.by_stages_type.2}</label>
+                                                                <input type="checkbox" stages="{$stages[2]}" name="stages_num[2]" class="ui-checkbox" value="6" id="stages_num_2" />
+                                                                <label for="stages_num_2" class="ui-label">分六期</label>
                                                             </div>
                                                             <div class="checkbox_item">
-                                                                <input type="checkbox" stages="{$stages[3]}" name="stages_num[3]" class="ui-checkbox" value="9" id="stages_num_3" autocomplete="off" />
-                                                                <label for="stages_num_3" class="ui-label">{$lang.by_stages_type.3}</label>
+                                                                <input type="checkbox" stages="{$stages[3]}" name="stages_num[3]" class="ui-checkbox" value="9" id="stages_num_3" />
+                                                                <label for="stages_num_3" class="ui-label">分九期</label>
                                                             </div>
                                                             <div class="checkbox_item">
-                                                                <input type="checkbox" stages="{$stages[4]}" name="stages_num[4]" class="ui-checkbox" value="12" id="stages_num_4" autocomplete="off" />
-                                                                <label for="stages_num_4" class="ui-label">{$lang.by_stages_type.4}</label>
+                                                                <input type="checkbox" stages="{$stages[4]}" name="stages_num[4]" class="ui-checkbox" value="12" id="stages_num_4" />
+                                                                <label for="stages_num_4" class="ui-label">分十二期</label>
                                                             </div>
                                                             <div class="checkbox_item">
-                                                                <input type="checkbox" stages="{$stages[5]}" name="stages_num[5]" class="ui-checkbox" value="24" id="stages_num_5" autocomplete="off" />
-                                                                <label for="stages_num_5" class="ui-label">{$lang.by_stages_type.5}</label>
+                                                                <input type="checkbox" stages="{$stages[5]}" name="stages_num[5]" class="ui-checkbox" value="24" id="stages_num_5" />
+                                                                <label for="stages_num_5" class="ui-label">分二十四期</label>
                                                             </div>
-                                                            <input type="text" name="stages_rate" id="stages_rate" class="text w60 mr10" placeholder="{$lang.by_stages_rate}" autocomplete="off" value="{$goods.stages_rate}" autocomplete="off" /> (%)
+                                                            <input type="text" name="stages_rate" id="stages_rate" class="text w60 mr10" placeholder="每期费率" autocomplete="off" value="{$goods.stages_rate}"/> (%)
                                                             <div class="form_prompt"></div>
                                                         </div>
                                                     </div>
@@ -613,15 +571,15 @@
                                             <div class="step_value">
                                                 <div class="checkbox_items">
                                                     <div class="checkbox_item">
-                                                        <input type="radio" name="is_distribution" class="ui-radio is_dishandle" id="drp_no" value="0" {if !$goods.is_distribution}checked="checked"{/if} onclick="handle_distribution(this);" autocomplete="off" />
-                                                        <label for="drp_no" class="ui-radio-label">{$lang.no}</label> 
+                                                        <input type="radio" name="is_distribution" class="ui-radio is_dishandle" id="drp_no" value="0" {if !$goods.is_distribution}checked="checked"{/if} onclick="handle_distribution(this);"/>
+                                                        <label for="drp_no" class="ui-radio-label">否</label> 
                                                     </div>
                                                     <div class="checkbox_item mr15">
-                                                        <input type="radio" name="is_distribution" class="ui-radio is_dishandle" id="drp_yes" value="1" {if $goods.is_distribution}checked="checked"{/if} onclick="handle_distribution(this);" autocomplete="off" />
-                                                        <label for="drp_yes" class="ui-radio-label">{$lang.yes}</label> 
+                                                        <input type="radio" name="is_distribution" class="ui-radio is_dishandle" id="drp_yes" value="1" {if $goods.is_distribution}checked="checked"{/if} onclick="handle_distribution(this);"/>
+                                                        <label for="drp_yes" class="ui-radio-label">是</label> 
                                                     </div>
                                                     <div class="hidden_div hidden_distribution" {if $$goods.is_distribution}style="display:block;"{/if}>
-														<input  type="text" id="dis_commission" name="dis_commission" value="{$goods.dis_commission}" size="20" class="text w50" autocomplete="off" />
+														<input  type="text" id="dis_commission" name="dis_commission" value="{$goods.dis_commission}" size="20" class="text w50"/>
 														<label class="blue_label"> {$lang.notice_drp_comm}</label>														
                                                         <div class="form_prompt"></div>
 													</div>
@@ -634,37 +592,55 @@
                                     
                                     <div class="goods_special">
                                         <div class="item">
-                                            <div class="step_label">{$lang.step_price}：</div>
+                                            <div class="step_label">会员价格：</div>
                                             <div class="step_value">
                                                 <div class="checkbox_items">
                                                     <div class="checkbox_item">
-                                                      <input type="radio" name="is_volume" class="ui-radio" id="ladder_no" value="0" {if $goods.is_volume eq 0}checked="checked"{/if} autocomplete="off" />
-                                                      <label for="ladder_no" class="ui-radio-label">{$lang.wu}</label> 
+                                                        <input type="radio" name="goods_user_price" class="ui-radio" id="gup_no" value="0" {if !$member_price_list}checked="checked"{/if} />
+                                                        <label for="gup_no" class="ui-radio-label">无</label> 
                                                     </div>
                                                     <div class="checkbox_item">
-                                                      <input type="radio" name="is_volume" class="ui-radio" id="ladder_yes" value="1" {if $goods.is_volume eq 1}checked="checked"{/if} autocomplete="off" />
-                                                      <label for="ladder_yes" class="ui-radio-label">{$lang.you}</label> 
+                                                        <input type="radio" name="goods_user_price" class="ui-radio" id="gup_yes" value="1" {if $member_price_list}checked="checked"{/if} />
+                                                        <label for="gup_yes" class="ui-radio-label">有</label> 
                                                     </div>
                                                 </div>
-                                                <div class="special_div"{if $volume_price_list} style="display:block"{/if} ectype="volumeNumber" data-number="100">
+                                                <div class="hidden_div special_div" {if $member_price_list}style="display:block"{/if}>
+													{include file ='library/user_price_list.lbi'}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="step_label">阶梯价格：</div>
+                                            <div class="step_value">
+                                                <div class="checkbox_items">
+                                                    <div class="checkbox_item">
+                                                      <input type="radio" name="is_volume" class="ui-radio" id="ladder_no" value="0" {if $goods.is_volume eq 0}checked="checked"{/if}/>
+                                                      <label for="ladder_no" class="ui-radio-label">无</label> 
+                                                    </div>
+                                                    <div class="checkbox_item">
+                                                      <input type="radio" name="is_volume" class="ui-radio" id="ladder_yes" value="1" {if $goods.is_volume eq 1}checked="checked"{/if}/>
+                                                      <label for="ladder_yes" class="ui-radio-label">有</label> 
+                                                    </div>
+                                                </div>
+                                                <div class="special_div" {if $volume_price_list}style="display:block"{/if}>
                                                     {include file ='library/volume_price_list.lbi'}
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="item">
-                                            <div class="step_label">{$lang.is_fullcut_price}：</div>
+                                            <div class="step_label">满减价格：</div>
                                             <div class="step_value">
                                                 <div class="checkbox_items">
                                                     <div class="checkbox_item">
-                                                      <input type="radio" name="is_fullcut" class="ui-radio" id="fullcut_no" value="0"  {if $goods.is_fullcut eq 0}checked="checked"{/if} autocomplete="off" />
-                                                      <label for="fullcut_no" class="ui-radio-label">{$lang.wu}</label> 
+                                                      <input type="radio" name="is_fullcut" class="ui-radio" id="fullcut_no" value="0"  {if $goods.is_fullcut eq 0}checked="checked"{/if}/>
+                                                      <label for="fullcut_no" class="ui-radio-label">无</label> 
                                                     </div>
                                                     <div class="checkbox_item">
-                                                      <input type="radio" name="is_fullcut" class="ui-radio" id="fullcut_yes" value="1" {if $goods.is_fullcut eq 1}checked="checked"{/if} autocomplete="off" />
-                                                      <label for="fullcut_yes" class="ui-radio-label">{$lang.you}</label> 
+                                                      <input type="radio" name="is_fullcut" class="ui-radio" id="fullcut_yes" value="1" {if $goods.is_fullcut eq 1}checked="checked"{/if}/>
+                                                      <label for="fullcut_yes" class="ui-radio-label">有</label> 
                                                     </div>
                                                 </div>
-                                                <div class="special_div"{if $consumption_list} style="display:block"{/if} ectype="volumeNumber" data-number="5">
+                                                <div class="special_div" {if $consumption_list}style="display:block"{/if}>
                                                     {include file ='library/consumption_list.lbi'}
                                                 </div>
                                             </div>
@@ -673,14 +649,14 @@
                                 </div>
                             </div>
                             <div class="step w190">
-                                <div class="step_title"><i class="ui-step"></i><h3>{$lang.tab_mix}</h3><span class="stop stop_jia" ectype="outerInfo" title="{$lang.details_out}"></span></div>
+                                <div class="step_title"><i class="ui-step"></i><h3>其他信息</h3><span class="stop stop_jia" ectype="outerInfo" title="收起详情"></span></div>
                                 <div class="step_content" style="display:none;">
                                     <div class="item dl_give_integral" {if $goods.model_price neq 0 && $goods.user_id neq 0}style="display:none"{/if}>
                                         <div class="step_label">{$lang.lab_give_integral}</div>
                                         <div class="step_value" style="margin-bottom:0px;">
                                         	<input type="text" name="give_integral" class="text" onblur="get_give_integral(this.value);" autocomplete="off" value="{$goods.give_integral}"/>
                                         	{if $goods.user_id}
-                                            <div class="notic">{$lang.maximum_setting}<em id="give_integral">{$goods.use_give_integral|default:-1}</em>{$lang.consumption_integral}</div>
+                                            <div class="notic">最高可设置<em id="give_integral">{$goods.use_give_integral|default:-1}</em>消费积分</div>
                                             {/if}
                                         </div>
                                     </div>
@@ -699,7 +675,7 @@
                                         <div class="step_value" style="margin-bottom:0px;">
                                         	<input type="text" name="rank_integral" class="text" autocomplete="off" onblur="get_rank_integral(this.value);" value="{$goods.rank_integral}"/>
                                             {if $goods.user_id}
-                                            <div class="notic">{$lang.maximum_setting}<em id="rank_integral">{$goods.use_rank_integral|default:-1}</em>{$lang.rank_integral}</div>
+                                            <div class="notic">最高可设置<em id="rank_integral">{$goods.use_rank_integral|default:-1}</em>等级积分</div>
                                             {/if}
                                         </div>
                                     </div>
@@ -718,7 +694,7 @@
                                         <div class="step_value" style="margin-bottom:0px;">
                                         	<input type="text" name="integral" class="text" autocomplete="off" onblur="parseint_integral(this.value);" value="{$goods.integral}"/>
                                         	{if $goods.user_id}
-                                            <div class="notic">{$lang.max_set_integral_buy}<em id="pay_integral">{$goods.use_pay_integral|default:0}</em>{$lang.money}</div>
+                                            <div class="notic">最高可设置积分购买<em id="pay_integral">{$goods.use_pay_integral|default:0}</em>金额</div>
                                             {/if}
                                         </div>
                                     </div>
@@ -729,12 +705,12 @@
                                         </div>
                                     </div>
                                     <div class="item">
-                                        <div class="step_label">{$lang.goods_weight}：</div>
+                                        <div class="step_label">商品重量：</div>
                                         <div class="step_value">
                                             <input type="text" name="goods_weight" class="text" autocomplete="off" value="{$goods.goods_weight_by_unit}"/>
                                             <div class="value_select">
                                                 <div id="commodity_weight" class="imitate_select select_w60">
-                                                    <div class="cite">{$lang.unit_kg}</div>
+                                                    <div class="cite">千克</div>
                                                     <ul style="display: none;">
 														{foreach from=$unit_list item=item key=key}
                                                         <li><a href="javascript:;" data-value="{$key}" class="ftx-01">{$item}</a></li>
@@ -746,99 +722,125 @@
                                         </div>
                                     </div>
                                     <div class="item">
-                                        <div class="step_label">{$lang.goods_unit}：</div>
+                                        <div class="step_label">商品单位：</div>
                                         <div class="step_value">
                                             <input type="text" name="goods_unit" class="text" autocomplete="off" value="{$goods.goods_unit}"/>
-                                            <div class="notic">{$lang.goods_unit_notic}</div>
+                                            <div class="notic">比如：个，件，份，套。默认为个</div>
                                         </div>
                                     </div>
                                     <div class="item">
-                                        <div class="step_label">{$lang.join_rec}：</div>
+                                        <div class="step_label">加入推荐：</div>
                                         <div class="step_value step_goods_service">
                                             <div class="checkbox_items">
                                                 <div class="checkbox_item">
                                                     <input type="checkbox" name="is_best" class="ui-checkbox" value="1" id="is_best" {if $goods.is_best}checked="checked"{/if}>
-                                                    <label class="ui-label" for="is_best">{$lang.is_best}</label>
+                                                    <label class="ui-label" for="is_best">精品</label>
                                                 </div>
                                                 <div class="checkbox_item">
                                                     <input type="checkbox" name="is_new" class="ui-checkbox" value="1" id="is_new" {if $goods.is_new}checked="checked"{/if}>
-                                                    <label class="ui-label" for="is_new">{$lang.is_new}</label>
+                                                    <label class="ui-label" for="is_new">新品</label>
                                                 </div>
                                                 <div class="checkbox_item">
                                                     <input type="checkbox" name="is_hot" class="ui-checkbox" value="1" id="is_hot" {if $goods.is_hot}checked="checked"{/if}>
-                                                    <label class="ui-label" for="is_hot">{$lang.is_hot}</label>
+                                                    <label class="ui-label" for="is_hot">热销</label>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     
                                     <div class="item">
-                                        <div class="step_label">{$lang.store_rec}：</div>
+                                        <div class="step_label">店铺推荐：</div>
                                         <div class="step_value step_goods_service">
                                             <div class="checkbox_items">
                                                 <div class="checkbox_item">
                                                     <input type="checkbox" name="store_best" class="ui-checkbox" value="1" id="store_best" {if $goods.store_best}checked="checked"{/if}>
-                                                    <label class="ui-label" for="store_best">{$lang.is_best}</label>
+                                                    <label class="ui-label" for="store_best">精品</label>
                                                 </div>
                                                 <div class="checkbox_item">
                                                     <input type="checkbox" name="store_new" class="ui-checkbox" value="1" id="store_new" {if $goods.store_new}checked="checked"{/if}>
-                                                    <label class="ui-label" for="store_new">{$lang.is_new}</label>
+                                                    <label class="ui-label" for="store_new">新品</label>
                                                 </div>
                                                 <div class="checkbox_item">
                                                     <input type="checkbox" name="store_hot" class="ui-checkbox" value="1" id="store_hot" {if $goods.store_hot}checked="checked"{/if}>
-                                                    <label class="ui-label" for="store_hot">{$lang.is_hot}</label>
+                                                    <label class="ui-label" for="store_hot">热销</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="item">
+                                        <div class="step_label">商品服务：</div>
+                                        <div class="step_value step_goods_service">
+                                            <div class="checkbox_items">
+                                                <div class="checkbox_item">
+                                                    <input type="checkbox" name="is_reality" class="ui-checkbox" value="1" id="is_reality" {if $goods.goods_extend.is_reality} checked="checked"{/if}>
+                                                    <label class="ui-label" for="is_reality">正品保证</label>
+                                                </div>
+                                                <div class="checkbox_item">
+                                                    <input type="checkbox" name="is_return" class="ui-checkbox" value="1" id="is_return" {if $goods.goods_extend.is_return} checked="checked"{/if}>
+                                                    <label class="ui-label" for="is_return">包退服务</label>
+                                                </div>
+                                                <div class="checkbox_item">
+                                                    <input type="checkbox" name="is_fast" class="ui-checkbox" value="1" id="is_fast" {if $goods.goods_extend.is_fast} checked="checked"{/if}>
+                                                    <label class="ui-label" for="is_fast">闪速配送</label>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="item">
-                                        <div class="step_label">{$lang.on_sale}：</div>
+                                        <div class="step_label">上架：</div>
                                         <div class="step_value step_goods_service">
-                                            <div class="switch switch_2 {if $goods.is_on_sale}active{/if}" title="{$lang.yes}">
+                                            <div class="switch switch_2 {if $goods.is_on_sale}active{/if}" title="是">
                                                 <div class="circle"></div>
                                             </div>
                                             <input type="hidden" value="{$goods.is_on_sale}" name="is_on_sale">
                                         </div>
                                     </div>
                                     <div class="item">
-                                        <div class="step_label">{$lang.is_alone_sale}：</div>
+                                        <div class="step_label">能作为普通商品销售：</div>
                                         <div class="step_value step_goods_service">
-                                            <div class="switch switch_2 {if $goods.is_alone_sale}active{/if}" title="{$lang.no}">
+                                            <div class="switch switch_2 {if $goods.is_alone_sale}active{/if}" title="否">
                                                 <div class="circle"></div>
                                             </div>
                                             <input type="hidden" value="{$goods.is_alone_sale}" name="is_alone_sale">
-                                            <div class="notic" style="margin-left:288px;">{$lang.is_alone_sale_notic}</div>
+                                            <div class="notic" style="margin-left:288px;">默认为是，如果勾选否，则该商品不能直接购买，只能作为配件、赠品等商品购买。</div>
                                         </div>
                                     </div>
                                     <div class="item">
-                                        <div class="step_label">{$lang.is_shipping}：</div>
+                                        <div class="step_label">是否为免运费商品：</div>
                                         <div class="step_value step_goods_service">
-                                            <div class="switch switch_2 {if $goods.is_shipping}active{/if}" title="{$lang.no}">
+                                            <div class="switch switch_2 {if $goods.is_shipping}active{/if}" title="否">
                                                 <div class="circle"></div>
                                             </div>
                                             <input type="hidden" value="{$goods.is_shipping}" name="is_shipping">
                                         </div>
                                     </div>
                                     <div class="item">
-                                        <div class="step_label">{$lang.goods_keywords}：</div>
-                                        <div class="step_value"><input type="text" name="keywords" class="text" autocomplete="off" value="{$goods.keywords|escape}"/><div class="notic">{$lang.goods_keywords_notic}</div></div>
+                                        <div class="step_label">商品关键词：</div>
+                                        <div class="step_value"><input type="text" name="keywords" class="text" autocomplete="off" value="{$goods.keywords|escape}"/><div class="notic">商品关键词请用空格分隔；有两个功能，一是可以作为站内关键词查询，在前台搜索框输入关键词后，能够搜索到该商品；二是作为搜索引擎收录使用</div></div>
                                     </div>
-                                    <div class="item">
-                                        <div class="step_label">{$lang.comment_tag}：</div>
+                                    <!--<div class="item">
+                                        <div class="step_label">商品简单描述：</div>
                                         <div class="step_value">
-                                            <textarea class="textarea" name="goods_product_tag">{$goods.goods_product_tag|escape}</textarea><div class="notic">{$lang.comment_tag_notic}</div>
+                                            <textarea class="textarea" name="goods_brief">{$goods.goods_brief|escape}</textarea>
+                                        </div>
+                                    </div>-->
+                                    <div class="item">
+                                        <div class="step_label">评论标签：</div>
+                                        <div class="step_value">
+                                            <textarea class="textarea" name="goods_product_tag">{$goods.goods_product_tag|escape}</textarea><div class="notic">请用','号分割；例：商品好看,很实用,材料很好...（注意逗号要使用英文逗号）<br>商品确认收货后，买家评论时可勾选的“买家印象”处内容</div>
                                         </div>
                                     </div>
                                     <div class="item">
-                                        <div class="step_label">{$lang.service_commitment_tag}：</div>
+                                        <div class="step_label">服务承诺标签：</div>
                                         <div class="step_value">
-                                            <textarea class="textarea" name="goods_tag">{$goods.goods_tag|escape}</textarea><div class="notic">{$lang.service_commitment_tag_notic}</div>
+                                            <textarea class="textarea" name="goods_tag">{$goods.goods_tag|escape}</textarea><div class="notic">请用','号分割（注：逗号要使用英文逗号）</div>
                                         </div>
                                     </div>
                                     <div class="item">
-                                        <div class="step_label">{$lang.stores_remarks}：</div>
+                                        <div class="step_label">商家备注：</div>
                                         <div class="step_value">
-                                            <textarea class="textarea" name="seller_note">{$goods.seller_note}</textarea><div class="notic">{$lang.stores_remarks_notic}</div>
+                                            <textarea class="textarea" name="seller_note">{$goods.seller_note}</textarea><div class="notic">仅供商家自己看的信息</div>
                                         </div>
                                     </div>
                                 </div>
@@ -848,43 +850,75 @@
                             </div>									
                             <div class="goods_footer">
                                 <div class="goods_btn goods_btn_fixed">
-                                    <a href="javascript:void(0);" class="btn btn35 btn_blue" data-step="3" data-type="step" ectype="stepSubmit">{$lang.step_btn_four}</a>
-                                    <a href="javascript:void(0);" class="btn btn35 blue_btn" data-step="5" data-type="step" data-down="true" ectype="stepSubmit">{if $code eq 'virtual_card'}{$lang.step_btn_five_alt}{else}{$lang.step_btn_five}{/if}</a>
-                                	{if $goods.goods_id}<a href="javascript:void(0);" class="btn btn35 blue_btn" data-down="true" data-type="submit" ectype="stepSubmit"><i class="sc_icon goods_complete_icon"></i>{$lang.step_btn_last}</a>{/if}
+                                    <a href="javascript:void(0);" class="btn btn35 btn_blue" data-step="3" data-type="step" ectype="stepSubmit">上一步，选择商品分类</a>
+                                    <a href="javascript:void(0);" class="btn btn35 blue_btn" data-step="5" data-type="step" data-down="true" ectype="stepSubmit">下一步，填写商品属性</a>
+                                	{if $goods.goods_id}<a href="javascript:void(0);" class="btn btn35 blue_btn" data-down="true" data-type="submit" ectype="stepSubmit"><i class="sc_icon goods_complete_icon"></i>完成，发布商品</a>{/if}
                                 </div>
                             </div>
                         </div>					
-						
+
                         <!--第四步 商品属性和商品相册-->
                         <div class="step_four" style="display:none;" ectype="step" data-step="5">
-                        	<!-- {if $code neq 'virtual_card'} 虚拟商品不需要商品属性-->
                             {if $goods_type_list}
                             <div class="step">
                             	<div class="step_title">
                                 	<i class="ui-step"></i>
-                                    <h3 class="fl">{$lang.tab_properties}</h3>
+                                    <h3 class="fl">商品属性</h3>
                                 </div>
                                 <div class="step_content relative">
                                     <div class="step_item">
-                                        <div class="step_item_left"><h5>{$lang.tab_properties_cat}：</h5></div>
+                                        <div class="step_item_left"><h5>属性分类：</h5></div>
                                         <div class="step_item_right">
                                             <div class="item_right_li">
                                                 <div class="value_select" ectype="type_cat">
-                                                    {include file="library/type_cat_list.lbi"}
+                                                    <div id="parent_id1" class="imitate_select select_w145">
+                                                        <div class="cite">请选择1</div>
+                                                        <ul>
+                                                            <li><a href="javascript:;" data-value="0" data-level='1' class="ftx-01">请选择</a></li>
+                                                            {foreach from=$type_level item=cat}
+                                                            <li><a href="javascript:;" data-value="{$cat.cat_id}" data-level="{$cat.level}" class="ftx-01">{$cat.cat_name}</a></li>
+                                                            {/foreach}
+                                                        </ul>
+                                                        <input type="hidden" value="{$cat_tree1.checked_id|default:0}" id="parent_id_val1">
+                                                    </div>
+                                                    {if $cat_tree1.arr}
+                                                    <div id="parent_id2" class="imitate_select select_w145">
+                                                        <div class="cite">请选择</div>
+                                                        <ul>
+                                                            <li><a href="javascript:;" data-value="0" data-level='2' class="ftx-01">请选择</a></li>
+                                                            {foreach from=$cat_tree1.arr item=cat}
+                                                            <li><a href="javascript:;" data-value="{$cat.cat_id}" data-level="{$cat.level}" class="ftx-01">{$cat.cat_name}</a></li>
+                                                            {/foreach}
+                                                        </ul>
+                                                        <input type="hidden" value="{$cat_tree.checked_id|default:0}" id="parent_id_val2">
+                                                    </div>
+                                                    {/if}
+                                                    {if $cat_tree.arr}
+                                                    <div id="parent_id{if $cat_tree1.arr}3{else}2{/if}" class="imitate_select select_w145">
+                                                        <div class="cite">请选择</div>
+                                                        <ul>
+                                                            <li><a href="javascript:;" data-value="0" data-level='{if $cat_tree1.arr}3{else}2{/if}' class="ftx-01">请选择</a></li>
+                                                            {foreach from=$cat_tree.arr item=cat}
+                                                            <li><a href="javascript:;" data-value="{$cat.cat_id}" data-level="{$cat.level}" class="ftx-01">{$cat.cat_name}</a></li>
+                                                            {/foreach}
+                                                        </ul>
+                                                        <input type="hidden" value="{$type_c_id|default:0}" id="parent_id_val{if $cat_tree1.arr}3{else}2{/if}">
+                                                    </div>
+                                                    {/if}
+                                                    <input name="parent_id" type="hidden" value="{$type_c_id|default:0}">
                                                 </div>
-                                                <input type="button" class="button mr10" value="{$lang.add_goods_type_cat}" ectype="dialog_operation" data-type="add_goods_type_cat" data-goodsid="{$goods.goods_id}">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="step_item">
-                                        <div class="step_item_left"><h5>{$lang.tab_type}：</h5></div>
+                                        <div class="step_item_left"><h5>属性类型：</h5></div>
                                         <div class="step_item_right">
                                             <div class="item_right_li">
                                                 <div class="value_select">
-                                                    <div id="attr_select" class="imitate_select select_w320" ectype="attrTypeSelect">
-                                                        <div class="cite">{if $goods_type_name}{$goods_type_name}{else}{$lang.please_select}{/if}</div>
+                                                    <div id="attr_select" class="imitate_select select_w320">
+                                                        <div class="cite">{if $goods_type_name}{$goods_type_name}{else}请选择{/if}</div>
                                                         <ul style="display: none;">
-															<li><a href="javascript:getAttrList({$goods.goods_id|default:0});" data-value="0" class="ftx-01">{$lang.sel_goods_type}</a></li>
+															<li><a href="javascript:getAttrList({$goods.goods_id|default:0});" data-value="0" class="ftx-01">请选择商品类型</a></li>
                                                             {foreach from=$goods_type_list item=goods_type key=key}
                                                             <li><a href="javascript:getAttrList({$goods.goods_id|default:0});" data-value="{$goods_type.cat_id}" class="ftx-01">{$goods_type.cat_name}</a></li>
                                                             {/foreach}
@@ -892,16 +926,13 @@
                                                         <input name="goods_type" type="hidden" value="{$goods.goods_type|default:0}" id="select_attr_val">
                                                     </div>
                                                 </div>
-                                                <input type="button" class="button mr10" value="{$lang.add_goods_type}" ectype="dialog_operation" data-type="add_goods_type" data-goodsid="{$goods.goods_id}">
-                                                <input type="button" class="button mr10" value="{$lang.10_attribute_add}" ectype="dialog_operation" data-type="attribute_add" data-goodsid="{$goods.goods_id}">
                                             </div>
-                                            
                                         </div>
                                     </div>
-                                    
-                                    <!--商品仓库地区模式属性 start-->
+                                    <div class="step_item step_item_bg pb0" id="tbody-goodsAttr"></div>
+                                    <!--属性模式-->
                                     <div class="step_item step_item_bg" id="attribute_model" {if $goods.model_price eq 0}style="display:none;"{/if}>
-                                        <div class="step_item_left"><h5>{$lang.goods_warehouse}：</h5></div>
+                                        <div class="step_item_left"><h5>商品仓库：</h5></div>
                                         <div class="step_item_right">
                                             <div class="item_right_li" id="attribute_warehouse">
                                                 <div class="value">
@@ -916,78 +947,68 @@
                                                 </div>
                                             </div>
                                             <div class="item_right_li" id="attribute_region" {if $goods.model_price neq 2}style="display:none;"{/if}>
-                                                <div class="label">{$lang.region}：</div>
+                                                <div class="label">地区：</div>
                                                 {foreach from=$warehouse_list item=warehouse name=warehouse}
                                                 <div class="value" {if !$smarty.foreach.warehouse.first}style="display:none;"{/if} data-wareid="{$warehouse.region_id}">
                                                     <div class="checkbox_tiems">
-                                                        {foreach from=$warehouse.area_list item=area name=area key=key}
+                                                        {foreach from=$warehouse.area_list item=area name=area}
                                                         <div class="checkbox_item">
-                                                            <input type="radio" name="region" class="ui-radio" {if $cfg.area_pricetype eq 1}ectype="cityRegion"{/if} data-warehouse="{$warehouse.region_id}" id="warehouse_region_{$area.region_id}" {if $smarty.foreach.area.first}checked{/if} value="{$area.region_id}" data-type="region_id"/>
-                                                            <label for="warehouse_region_{$area.region_id}" class="ui-radio-label">{$area.region_name}</label>
+                                                            <input type="radio" name="region" class="ui-radio" id="region_{$area.region_id}" {if $smarty.foreach.area.first && $smarty.foreach.warehouse.first}checked{/if} value="{$area.region_id}" data-type="region_id"/>
+                                                            <label for="region_{$area.region_id}" class="ui-radio-label">{$area.region_name}</label>
                                                         </div>
                                                         {/foreach}
                                                     </div>
                                                 </div>
                                                 {/foreach}
                                             </div>
-                                            
-                                            {if $cfg.area_pricetype eq 1}
-                                            <div class="item_right_li" id="attribute_city_region" {if $goods.model_price neq 2}style="display:none;"{/if}>
-                                                <div class="label hide">{$lang.city_region}：</div>
-                                                <div class="value hide" id="region_city_list">
-                                                    
-                                                </div>
-                                            </div>
-                                            {/if}
-                                            
                                         </div>
                                     </div>
-                                    <!--商品仓库地区模式属性 end-->
-                                    
-                                    <div class="step_item step_item_bg pb0" id="tbody-goodsAttr"></div>
-                                    <div class="step_item_table" id="attribute_table"></div>
+                                    <!--属性模式-->
+                                    <div class="step_item_table" id="attribute_table">
+    
+                                    </div>
                                 </div>
                             </div>
                             {/if}
                             
                             <div class="step" id="goods_attr_gallery"></div>
-                            <!-- {/if} -->
+                            
                             <div class="step">
-                                <div class="step_title"><i class="ui-step"></i><h3>{$lang.tab_gallery}</h3></div>
+                                <div class="step_title"><i class="ui-step"></i><h3>商品相册</h3></div>
                                 <div class="step_content">
                                     <div class="goods_album" id="gallery_img_list">
                                         {include file="library/gallery_img.lbi"}
                                     </div>
                                     <div class="clear"></div>
                                     <div class="step_top_btn gallery_album" ectype="gallery_album_list" data-inid="addAlbumimg" data-act="gallery_album_list">
-                                    	<a href="javascript:void(0);" class="btn red_btn" id="addExternalUrl"><i class="sc_icon sc_icon_images"></i>{$lang.add_href_img}</a>
-                                        <a href="javascript:void(0);" class="btn red_btn" id="addImages"><i class="sc_icon sc_icon_images"></i>{$lang.add_img}</a>
-                                        <a href="javascript:void(0);" class="btn red_btn" ectype="gallery_album" data-value="{$lang.gallery_album_select}"><i class="sc_icon sc_icon_images"></i>{$lang.gallery_album_select}</a>
-                                        <span class="red">{$lang.checkbox_select_img_notic}</span>
+                                    	<a href="javascript:void(0);" class="btn red_btn" id="addExternalUrl"><i class="sc_icon sc_icon_images"></i>添加外链图片</a>
+                                        <a href="javascript:void(0);" class="btn red_btn" id="addImages"><i class="sc_icon sc_icon_images"></i>添加图片</a>
+                                        <a href="javascript:void(0);" class="btn red_btn" ectype="gallery_album" data-value="图片库选择"><i class="sc_icon sc_icon_images"></i>图片库选择</a>
+                                        <span class="red">按住ctrl可同时批量选择多张图片上传</span>
                                         <div id="addAlbumimg"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="goods_footer">
                                 <div class="goods_btn goods_btn_fixed">
-                                    <a href="javascript:void(0);" class="btn btn35 btn_blue" data-step="4" data-type="step" ectype="stepSubmit">{$lang.step_btn_six}</a>
-                                    <a href="javascript:void(0);" class="btn btn35 blue_btn" data-step="6" data-type="step" data-down="true" ectype="stepSubmit">{$lang.step_btn_seven}</a>
-                                	{if $goods.goods_id}<a href="javascript:void(0);" class="btn btn35 blue_btn" data-down="true" data-type="submit" ectype="stepSubmit"><i class="sc_icon goods_complete_icon"></i>{$lang.step_btn_last}</a>{/if}
+                                    <a href="javascript:void(0);" class="btn btn35 btn_blue" data-step="4" data-type="step" ectype="stepSubmit">上一步，填写商品信息</a>
+                                    <a href="javascript:void(0);" class="btn btn35 blue_btn" data-step="6" data-type="step" data-down="true" ectype="stepSubmit">下一步，选择关联商品</a>
+                                	{if $goods.goods_id}<a href="javascript:void(0);" class="btn btn35 blue_btn" data-down="true" data-type="submit" ectype="stepSubmit"><i class="sc_icon goods_complete_icon"></i>完成，发布商品</a>{/if}
                                 </div>
                             </div>
-                        </div>
-						
+                        </div>					
+
                         <!--第五步 选择关联信息提交表单-->
                         <div class="step_last" style="display:none;" ectype="step" data-step="6">
                             <div class="step" ectype="filter" data-filter="goods">
-                                <div class="step_title"><i class="ui-step"></i><h3>{$lang.tab_linkgoods}</h3><span class="stop" ectype="Relationgoods" title="{$lang.details_out}"></span></div>
+                                <div class="step_title"><i class="ui-step"></i><h3>关联商品</h3><span class="stop" ectype="Relationgoods" title="收起详情"></span></div>
                                 <div class="step_content">
                                     <!--通用部分 start-->
                                     <div class="goods_search_div">
                                         <div class="search_select">
                                             <div class="categorySelect">
                                                 <div class="selection">
-                                                    <input type="text" name="category_name" id="category_name" class="text w250 valid" value="{$lang.select_cat}" autocomplete="off" readonly data-filter="cat_name" />
+                                                    <input type="text" name="category_name" id="category_name" class="text w250 valid" value="请选择分类" autocomplete="off" readonly data-filter="cat_name" />
                                                     <input type="hidden" name="category_id" id="category_id" value="0" data-filter="cat_id" />
                                                 </div>
                                                 <div class="select-container" style="display:none;">
@@ -998,7 +1019,7 @@
                                         <div class="search_select">
                                             <div class="brandSelect">
                                                 <div class="selection">
-                                                    <input type="text" name="brand_name" id="brand_name" class="text w120 valid" {$lang.select_barnd} autocomplete="off" readonly data-filter="brand_name" />
+                                                    <input type="text" name="brand_name" id="brand_name" class="text w120 valid" value="请选择品牌" autocomplete="off" readonly data-filter="brand_name" />
                                                     <input type="hidden" name="brand" id="brand_id" value="0" data-filter="brand_id" />
                                                 </div>
                                                 <div class="brand-select-container" style="display:none;">
@@ -1006,37 +1027,37 @@
                                                 </div>
                                             </div>                            
                                         </div>
-                                        <input type="text" name="keyword" class="text w150" value="" placeholder={$lang.input_keywords} data-filter="keyword" autocomplete="off" />
-                                        <a href="javascript:void(0);" class="btn btn30" ectype="search"><i class="icon icon-search"></i>{$lang.search_word}</a>
+                                        <input type="text" name="keyword" class="text w150" value="" placeholder="请输入关键字" data-filter="keyword" autocomplete="off" />
+                                        <a href="javascript:void(0);" class="btn btn30" ectype="search"><i class="icon icon-search"></i>搜索</a>
                                     </div>
                                     <!--通用部分 end-->
                                     <div class="move_div">
                                         <div class="move_left">
-                                            <h4>{$lang.all_goods}</h4>
+                                            <h4>可选商品</h4>
                                             <div class="move_info">
                                                 <div class="move_list">
                                                     {include file="library/move_left.lbi"}
                                                 </div>
                                             </div>
                                             <div class="move_handle">
-                                                <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">{$lang.check_all}</a>
-                                                <a href="javascript:void(0);" class="btn btn25 red_btn" ectype="sub" data-operation="add_link_goods">{$lang.button_submit_alt}</a>
+                                                <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">全选</a>
+                                                <a href="javascript:void(0);" class="btn btn25 red_btn" ectype="sub" data-operation="add_link_goods">确定</a>
                                             </div>
                                         </div>
                                         <div class="move_middle">
                                             <div class="checkbox_items">
                                                 <div class="checkbox_item">
                                                     <input type="radio" name="is_single" class="ui-radio" id="one_way" value="1" />
-                                                    <label for="one_way" class="ui-radio-label">{$lang.single}</label>
+                                                    <label for="one_way" class="ui-radio-label">单向关联</label>
                                                 </div>
                                                 <div class="checkbox_item">
                                                     <input type="radio" name="is_single" class="ui-radio" id="two_way" checked value="0" />
-                                                    <label for="two_way" class="ui-radio-label">{$lang.double}</label>
+                                                    <label for="two_way" class="ui-radio-label">双向关联</label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="move_right">
-                                            <h4>{$lang.link_goods}</h4>
+                                            <h4>跟该商品关联的商品</h4>
                                             <div class="move_info">
                                                 <div class="move_list">
                                                     <ul>
@@ -1047,8 +1068,8 @@
                                                 </div>
                                             </div>
                                             <div class="move_handle">
-                                                <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">{$lang.check_all}</a>
-                                                <a href="javascript:void(0);" class="btn btn25 btn_red" ectype="sub" data-operation="drop_link_goods">{$lang.remove_relation}</a>
+                                                <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">全选</a>
+                                                <a href="javascript:void(0);" class="btn btn25 btn_red" ectype="sub" data-operation="drop_link_goods">移除关联</a>
                                             </div>
                                         </div>
                                     </div>
@@ -1056,31 +1077,30 @@
                             </div>
                             
                             <div class="step w190" ectype="filter" data-filter="article">
-                                <div class="step_title"><i class="ui-step"></i><h3>{$lang.tab_article}</h3><span class="stop stop_jia" ectype="Related_articles" title="{$lang.details_out}"></span></div>
+                                <div class="step_title"><i class="ui-step"></i><h3>关联文章</h3><span class="stop stop_jia" ectype="Related_articles" title="收起详情"></span></div>
                                 <div class="step_content" style="display:none">
                                     <div class="goods_search_div">
-                                        <input type="text" name="keyword" class="text w150" value="" placeholder="{$lang.article_title}" data-filter="keyword" autocomplete="off" />
-                                        <a href="javascript:void(0);" class="btn btn30 mr10" ectype="search"><i class="icon icon-search"></i>{$lang.search_word}</a>
-                                        <a href="javascript:void(0);" class="btn btn30 red_btn" ectype="ajaxArticle">添加新文章</a>
+                                        <input type="text" name="keyword" class="text w150" value="" placeholder="文章标题" data-filter="keyword" autocomplete="off" />
+                                        <a href="javascript:void(0);" class="btn btn30" ectype="search"><i class="icon icon-search"></i>搜索</a>
                                     </div>
                                     <div class="move_div">
                                         <div class="move_left">
-                                            <h4>{$lang.all_article}</h4>
+                                            <h4>可选文章</h4>
                                             <div class="move_info">
                                                 <div class="move_list">
                                                     {include file="library/move_left.lbi"}
                                                 </div>
                                             </div>
                                             <div class="move_handle">
-                                                <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">{$lang.check_all}</a>
-                                                <a href="javascript:void(0);" class="btn btn25 red_btn" ectype="sub" data-operation="add_goods_article">{$lang.button_submit_alt}</a>
+                                                <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">全选</a>
+                                                <a href="javascript:void(0);" class="btn btn25 red_btn" ectype="sub" data-operation="add_goods_article">确定</a>
                                             </div>
                                         </div>
                                         <div class="move_middle">
                                             <div class="move_point" data-operation="add_goods_article"></div>
                                         </div>
                                         <div class="move_right">
-                                            <h4>{$lang.goods_article}</h4>
+                                            <h4>跟该商品关联的文章</h4>
                                             <div class="move_info">
                                                 <div class="move_list">
                                                     <ul>
@@ -1091,22 +1111,22 @@
                                                 </div>
                                             </div>
                                             <div class="move_handle">
-                                                <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">{$lang.check_all}</a>
-                                                <a href="javascript:void(0);" class="btn btn25 btn_red" ectype="sub" data-operation="drop_goods_article">{$lang.remove_relation}</a>
+                                                <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">全选</a>
+                                                <a href="javascript:void(0);" class="btn btn25 btn_red" ectype="sub" data-operation="drop_goods_article">移除关联</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="step w190" ectype="filter" data-filter="area">
-                                <div class="step_title"><i class="ui-step"></i><h3>{$lang.tab_areaRegion}</h3><span class="stop stop_jia" ectype="Related_region" title="{$lang.details_out}"></span></div>
+                                <div class="step_title"><i class="ui-step"></i><h3>关联地区</h3><span class="stop stop_jia" ectype="Related_region" title="收起详情"></span></div>
                                 <div class="step_content" style="display:none">
                                     <div class="goods_search_div">
                                         <div class="search_select">
                                             <div id="area_select" class="imitate_select select_w120">
-                                                <div class="cite">{$lang.select_region}</div>
+                                                <div class="cite">请选择区域</div>
                                                 <ul style="display: none;">
-                                                    <li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.all_region}</a></li>
+                                                    <li><a href="javascript:;" data-value="0" class="ftx-01">所有区域</a></li>
                                                     {foreach from=$areaRegion_list item=area}
                                                     <li><a href="javascript:;" data-value="{$area.ra_id}" class="ftx-01">{$area.ra_name}</a></li>
                                                     {/foreach}
@@ -1114,27 +1134,26 @@
                                                 <input name="ra_id" type="hidden" value="0" id="area_select_val" data-filter="keyword" />
                                             </div>
                                         </div>
-                                        <a href="javascript:void(0);" class="btn btn30 mr10" ectype="search"><i class="icon icon-search"></i>{$lang.search_word}</a>
-                                        <a href="javascript:void(0);" class="btn btn30 red_btn" ectype="ajaxArea">添加新地区</a>
+                                        <a href="javascript:void(0);" class="btn btn30" ectype="search"><i class="icon icon-search"></i>搜索</a>
                                     </div>
                                     <div class="move_div">
                                         <div class="move_left">
-                                            <h4>{$lang.optional_region}</h4>
+                                            <h4>可以地区</h4>
                                             <div class="move_info">
                                                 <div class="move_list">
                                                     {include file="library/move_left.lbi"}
                                                 </div>
                                             </div>
                                             <div class="move_handle">
-                                                <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">{$lang.check_all}</a>
-                                                <a href="javascript:void(0);" class="btn btn25 red_btn" ectype="sub" data-operation="add_area_goods">{$lang.button_submit_alt}</a>
+                                                <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">全选</a>
+                                                <a href="javascript:void(0);" class="btn btn25 red_btn" ectype="sub" data-operation="add_area_goods">确定</a>
                                             </div>
                                         </div>
                                         <div class="move_middle">
                                             <div class="move_point" data-operation="add_area_goods"></div>
                                         </div>
                                         <div class="move_right">
-                                            <h4>{$lang.goods_region}</h4>
+                                            <h4>该商品的地区</h4>
                                             <div class="move_info">
                                                 <div class="move_list">
                                                     <ul>
@@ -1145,30 +1164,30 @@
                                                 </div>
                                             </div>
                                             <div class="move_handle">
-                                                <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">{$lang.check_all}</a>
-                                                <a href="javascript:void(0);" class="btn btn25 btn_red" ectype="sub" data-operation="drop_area_goods">{$lang.remove_relation}</a>
+                                                <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">全选</a>
+                                                <a href="javascript:void(0);" class="btn btn25 btn_red" ectype="sub" data-operation="drop_area_goods">移除关联</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="step w190" ectype="filter" data-filter="goods">
-                                <div class="step_title"><i class="ui-step"></i><h3>{$lang.tab_groupgoods}</h3><span class="stop stop_jia" ectype="parts_goods" title="{$lang.details_out}"></span></div>
+                                <div class="step_title"><i class="ui-step"></i><h3>配件</h3><span class="stop stop_jia" ectype="parts_goods" title="收起详情"></span></div>
                                 <div class="step_content" style="display:none">
 									<div class="fl mb20">
-                                    	<a href="javascript:void(0);" class="btn red_btn btn30" ectype="setupGroupGoods" data-diffeseller="1">{$lang.add_accessories}</a>
-                                        <div class="fl">{$lang.xiangou_number}：</div>
-                                        <input type="text" name="group_number" class="text w150" value="{$goods.group_number}" placeholder="{$lang.xiangou_number}" autocomplete="off" />
+                                    	<a href="javascript:void(0);" class="btn red_btn btn30" ectype="setupGroupGoods">添加配件</a>
+                                        <div class="fl">限购数量：</div>
+                                        <input type="text" name="group_number" class="text w150" value="{$goods.group_number}" placeholder="限购数量" autocomplete="off" />
                                     </div>
                                     <div class="list-div">
                                         <table cellpadding="1" cellspacing="1" >
                                             <thead>
                                                 <tr>
-                                                    <th width="30%"><div class="tDiv">{$lang.goods_name}</div></th>
-                                                    <th width="15%"><div class="tDiv">{$lang.goods_price}</div></th>
-                                                    <th width="15%"><div class="tDiv">{$lang.accessories_price}</div></th>
-                                                    <th width="15%"><div class="tDiv">{$lang.accessories_type}</div></th>
-                                                    <th width="5%"><div class="handle">{$lang.handler}</div></th>
+                                                    <th width="30%"><div class="tDiv">商品名称</div></th>
+                                                    <th width="15%"><div class="tDiv">商品价格</div></th>
+                                                    <th width="15%"><div class="tDiv">配件价格</div></th>
+                                                    <th width="15%"><div class="tDiv">配件类型</div></th>
+                                                    <th width="5%"><div class="handle">操作</div></th>
                                                 </tr>
                                             </thead>
                                             <tbody ectype="group_list">
@@ -1179,9 +1198,9 @@
                                                     <td><div class="tDiv"><input class="text w50 tc fn" style="margin-right:0px;" onblur="listTable.editInput(this, 'edit_gorup_price', {$sg.id} );" autocomplete="off" value="{$sg.goods_price}" type="text"></div></td>
                                                     <td><div class="tDiv">
                                                         <div class="imitate_select select_w120">
-                                                            <div class="cite">{$lang.select_please}</div>
+                                                            <div class="cite">请选择...</div>
                                                                 <ul style="display: none;" class="ps-container">
-                                                                    <li><a href="javascript:;" data-value="" class="ftx-01">{$lang.select_please}</a></li>
+                                                                    <li><a href="javascript:;" data-value="" class="ftx-01">请选择...</a></li>
                                                                     {foreach from=$group_goods_arr item=list key=key}
                                                                     
                                                                     <li><a href="javascript:;" data-value="{$key}" class="ftx-01" ectype="group_checked">{$list}</a></li>
@@ -1194,7 +1213,7 @@
                                                     </td>
                                                     <td class="handle">
                                                         <div class="tDiv a1">
-                                                            <a href="javascript:;" ectype="remove_group" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>									
+                                                            <a href="javascript:;" ectype="remove_group" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>									
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -1208,11 +1227,11 @@
                             </div>
 							<div class="goods_footer">
                                 <div class="goods_btn goods_btn_fixed">
-                                    <a href="javascript:void(0);" class="btn btn35 btn_blue" data-step="5" data-type="step" ectype="stepSubmit">{if $code eq 'virtual_card'}{$lang.step_btn_eight_alt}{else}{$lang.step_btn_eight}{/if}</a>
-                                    <a href="javascript:void(0);" class="btn btn35 blue_btn" data-step="6" data-down="true" data-type="submit" ectype="stepSubmit"><i class="sc_icon goods_complete_icon"></i>{$lang.step_btn_last}</a>
+                                    <a href="javascript:void(0);" class="btn btn35 btn_blue" data-step="5" data-type="step" ectype="stepSubmit">上一步，商品属性、图片</a>
+                                    <a href="javascript:void(0);" class="btn btn35 blue_btn" data-step="6" data-down="true" data-type="submit" ectype="stepSubmit"><i class="sc_icon goods_complete_icon"></i>完成，发布商品</a>
                                 </div>
                             </div>
-                        </div>
+                        </div>					
                     </div>
                     <!--添加新商品end-->
                 </div>
@@ -1224,9 +1243,10 @@
             <i class="icon-spinner icon-spin"></i>
         </div>
     </div>
+    
  	{*include file ='library/pagefooter.lbi'*}
 
-    {insert_scripts files="../js/plupload.full.min.js,jquery.purebox.js,../js/spectrum-master/spectrum.js"}
+    {insert_scripts files="../js/plupload.full.min.js,jquery.purebox.js,spectrum-master/spectrum.js"}
 
 	<script type="text/javascript">	
     /**********************************{弹窗图片库 相册选择和相册图片排序 gallery_album} start*****************************/
@@ -1242,24 +1262,23 @@
 	
 	$.divselect("#album_file","#album_file_val",function(obj){
 		var val = obj.attr("data-value"),
-			inid = obj.parents("[ectype='album-warp']").data("inid"),
-			is_vis = 0;
+			inid = obj.parents("[ectype='album-warp']").data("inid");
 			
-		if(inid == "gallery_album"){
-			is_vis = 2;
-		}else{
-			is_vis = 1;
-		}
-			
-		changedpic(val,obj,is_vis,"",inid);
+		changedpic(val,obj,2,"",inid);
 	});
 	
-	//属性分类筛选出属性类型
-	$.divselect("*[ectype='typeCatSelect']","*[ectype='typeCatVal']",function(obj){
-		var level = obj.data('level'),
-			val = obj.data("value");
-		
+	$.divselect("#parent_id1","#parent_id_val1",function(obj){
 		get_childcat(obj,2);
+	});
+	
+	$.divselect("#parent_id3","#parent_id_val3",function(obj){
+		var val = obj.attr("data-value");
+		$("input[name='parent_id']").val(val);
+		get_childcat(obj,2,1);
+	});
+	
+	$.divselect("#parent_id2","#parent_id_val2",function(obj){
+		 get_childcat(obj,2);
 	});
     /**********************************{手机商品描述选相册 gallery_album} end*****************************/
 
@@ -1415,30 +1434,18 @@
 			var dlModel = steflex.find("dl[ectype='model']");
 			if(model == 0){
 				dlModel.hide();
-				$("dd[ectype='model'],h3[ectype='model']").text("{$lang.default_model}");
+				$("dd[ectype='model'],h3[ectype='model']").text("默认模式");
 				$("#attribute_model").hide(); //属性模式
-				
-				{if $cfg.area_pricetype eq 1}
-				$("#attribute_city_region").hide();
-				{/if}
 			}else if(model == 1){
 				dlModel.show();
-				$("dd[ectype='model'],h3[ectype='model']").text("{$lang.tab_warehouse_model}");
+				$("dd[ectype='model'],h3[ectype='model']").text("仓库模式");
 				$("#attribute_model").show(); //属性模式
 				$("#attribute_region").hide();
-				
-				{if $cfg.area_pricetype eq 1}
-				$("#attribute_city_region").hide();
-				{/if}
 			}else if(model == 2){
 				dlModel.show();
-				$("dd[ectype='model'], h3[ectype='model']").text("{$lang.warehouse_region_model}");
+				$("dd[ectype='model'], h3[ectype='model']").text("地区模式");
 				$("#attribute_model").show(); //属性模式
 				$("#attribute_region").show();
-				
-				{if $cfg.area_pricetype eq 1}
-				$("#attribute_city_region").show();
-				{/if}
 			}
 			
 			steflex.find("dl").each(function(index, element){
@@ -1474,7 +1481,7 @@
 			if(num == 3){
 				//验证是否选择了分类
 				if($("input[name='cat_id']").val() == 0){
-					$("#choiceClass").find("strong").html("{$lang.select_cat}");
+					$("#choiceClass").find("strong").html("请选择分类");
 					return false;
 				}
 			}else if(num == 4){
@@ -1485,28 +1492,29 @@
 				}
 
 				if(!(/^[0-9]+.?[0-9]*$/.test($("input[name='shop_price']").val()))){
-					error_div("input[name='shop_price']",shop_price_not_number);
+					error_div("input[name='shop_price']","商品价格必须数字");
 					return false;
 				}
 				if(/[^0-9 \-]+/.test($("input[name='goods_number']").val())){
-					error_div("input[name='goods_number']",goods_number_not_int);
+					error_div("input[name='goods_number']","商品库存必须为整数");
 					return false;
 				}
 				
 				if($("#is_img_url").val() == 0){
 					if($(".update_images").find("img").attr("src") == "images/update_images.jpg"){
 						
-						error_div(".moxie-shim input","{$lang.file_img_default}");
+						error_div(".moxie-shim input","请上传商品默认图片");
 						return false;
 					}
 				}else{
 					if($("#goods_img_url").val() == ''){
-						error_div("input[name='goods_img_url']","{$lang.file_img_http}");
+						error_div("input[name='goods_img_url']","请填写图片外部链接，http://格式");
 						return false;
 					}
 				}
 				
 				if(document.getElementById('dis_commission')){
+					
 					var dis_true = 0;
 					var is_dis = 0;
 					var dis = $("#dis_commission").val();
@@ -1529,85 +1537,62 @@
 					
 					if(dis_true == 1){
 						if(is_dis == 1){
-							error_div("input[name='dis_commission']","{$lang.volume_not_null}");
+							error_div("input[name='dis_commission']","值不能为空");
 							return false;
 						}else if(is_dis == 2){
-							error_div("input[name='dis_commission']","{$lang.volume_lin_dybai}");
+							error_div("input[name='dis_commission']","值不能小于0或不能大于100");
 							return false;
 						}
 					}
 				}
 				
 				if(document.getElementById('stages_rate')){
+					
 					var stages_true = 0;
 					var stagesnum = 0;
 					var is_stages = 0;
 					var stages_rate = $("input[name='stages_rate']").val();
 					
 					$("input[name='is_stages']").each(function(index, element) {
-						if($(element).is(":checked") == true){
-							if(stages_rate == ''){
-								is_stages = 1;
-							
-							}else if(stages_rate <= 0 || stages_rate > 100){
-								is_stages = 2;
-							}
-						
-							for(var i = 0; i <= 5; i++){
-								if($("input[name='stages_num[" + i + "]']").is(":checked") == true){
-									stagesnum = 0;
-									break;
-								}else{
-									stagesnum += 1;
-								}
-							}
-							stages_true = 1;
-						}else{
-							stages_true = 0;
-						}
-				  	});
 					
+					  if($(element).is(":checked") == true){
+						if(stages_rate == ''){
+							is_stages = 1;
+							
+						}else if(stages_rate <= 0 || stages_rate > 100){
+							is_stages = 2;
+						}
+						
+						for(var i = 0; i <= 5; i++){
+							if($("input[name='stages_num[" + i + "]']").is(":checked") == true){
+								stagesnum = 0;
+								break;
+							}else{
+								stagesnum += 1;
+							}
+						}
+						
+						stages_true = 1;
+					  }else{
+					  	stages_true = 0;
+					  }
+				  	});
+
+						
 					if(stages_true == 1){
 						if(stagesnum > 0){
-							error_div("input[name='stages_rate']","{$lang.by_stage_num}");
+							error_div("input[name='stages_rate']","请选择分期次数");
 							return false;
 						}else{
 							if(is_stages == 1){
-								error_div("input[name='stages_rate']","{$lang.volume_not_null}");
+								error_div("input[name='stages_rate']","值不能为空");
 								return false;
 							}else if(is_stages == 2){
-								error_div("input[name='stages_rate']","{$lang.volume_lin_dybai}");
+								error_div("input[name='stages_rate']","值不能小于0或不能大于100");
 								return false;
 							}
 						}
 					}	
-				}
-				
-				//运费验证
-				if($("input[name='freight']").length > 0){
-					var is_freight = true;
-					var error_prompt = "";
-					
-					if($("input[name='freight']").is(":checked")){
-						var val = $("input[name='freight']:checked").val();
-						if(val == 2){
-							var tid = $("input[name='tid']").val();
-							if(tid == "" || tid == 0){
-								is_freight = false;
-								error_prompt = volume_freight_not_null;
-							}
-						}else{
-							is_freight = true;
-						}
-					}else{
-						is_freight = false;
-						error_prompt = volume_goods_freight_not_null;
-					};
-
-					if(is_freight == false){
-						error_div("input[name='freight']",error_prompt);
-						return false;
-					}
 				}
 				
 			}else{
@@ -1616,16 +1601,16 @@
 		}
 		
 		//验证调用的报错提示
-		error_div = function(obj,error,is_error){
-			var error_div = $(obj).parents('div.item').find('div.form_prompt');
-			$(obj).parents('div.item').find(".notic").hide();
+		error_div = function(obj,error, is_error){
+			var error_div = $(obj).parents('div.step_value').find('div.form_prompt');
+			$(obj).parents('div.step_value').find(".notic").hide();
 			
 			if(is_error != 1){
 				$(obj).addClass("error");
 			}
 			
 			$(obj).focus();
-			error_div.find("label").remove();
+			error_div.find("div").remove();
 			error_div.append("<label class='error'><i class='icon icon-exclamation-sign'></i>"+error+"</label>");
 		}
 		
@@ -1666,10 +1651,10 @@
 				var content = data.content;
 				pb({
 					id:"categroy_dialog",
-					title:"{$lang.add_warehouse}",
+					title:"添加仓库",
 					width:788,
 					content:content,
-					ok_title:"{$lang.button_submit_alt}",
+					ok_title:"确定",
 					drag:false,
 					foot:true,
 					cl_cBtn:false,
@@ -1682,7 +1667,7 @@
 					it.append("<a href='javascript:void(0);' class='delete'></a>")
 					if(list.find(".warehouse_item").length>4){
 						$(".red_notic").remove();
-						$(this).before("<div class='red_notic'>{$lang.warehouse_not_five}</div>");
+						$(this).before("<div class='red_notic'>每次上传仓库不能超过5条</div>");
 						setTimeout('$(".red_notic").remove()',1000);
 					}else{
 						$(this).before(it);
@@ -1753,19 +1738,12 @@
 			var goods_id = $(this).data('goodsid');
 			$.jqueryAjax('dialog.php', 'is_ajax=1&act=dialog_warehouse' + '&user_id=' + user_id + '&goods_id=' + goods_id + '&temp=addBatchRegion', function(data){
 				var content = data.content;
-				
-				{if $cfg.area_pricetype eq 1}
-				var width = 1000;
-				{else}
-				var width = 900;
-				{/if}
-				
 				pb({
 					id:"categroy_dialog",
-					title:"{$lang.add_areaRegion}",
-					width:width,
+					title:"添加地区",
+					width:900,
 					content:content,
-					ok_title:"{$lang.button_submit_alt}",
+					ok_title:"确定",
 					drag:false,
 					foot:true,
 					cl_cBtn:false,
@@ -1784,26 +1762,18 @@
 						input.attr('id','area_' + num);
 						input.find('font').attr('id',"warehouse_area_list_" + num);
 						input.find('div.warehouse_area_name').attr('data-key',num);
-						input.find('div.warehouse_area_name').attr('id', 'warehouse_area_name_' + num);
 						input.find("input[name='warehouse_area_name']").attr('id',"warehouse_area_name_val_" + num);
 						input.find('select').attr('id',num);
-						
-						{if $cfg.area_pricetype eq 1}
-						input.find('div.warehouse_area_city').attr('id', 'warehouse_area_city_name_' + num);
-						input.find('div.warehouse_area_city').attr('data-key',num);
-						input.find('div.area_city_list').attr('id', 'warehouse_area_city_' + num);
-						{/if}
-						
 						$("input[name='numAdd_area']").val(num);
 					}else{
-						alert('{$lang.regin_add_one}{$area_count}{$lang.regin_add_two}');
+						alert('最多可添加{$area_count}个地区');
 					}					
 					//补充
 					
 					it.append("<a href='javascript:void(0);' class='delete'></a>")
 					if(list.find(".warehouse_item").length>4){
 						$(".red_notic").remove();
-						$(this).before("<div class='red_notic'>{$lang.region_not_five}</div>");
+						$(this).before("<div class='red_notic'>每次上传地区不能超过5条</div>");
 						setTimeout('$(".red_notic").remove()',1000);
 					}else{
 						$(this).before(it);
@@ -1822,7 +1792,7 @@
 			var key =$(this).parents(".warehouse_area_name").data("key");
 			var value = $(this).find("a").data("value");
 
-			get_warehouse_area_name(value, key ,goods_id, user_id, 1);
+			get_warehouse_area_name(value, key ,goods_id, user_id);
 		});
 		
 		//批量添加地区
@@ -1833,11 +1803,6 @@
 			var region_price = [];
 			var region_promote_price = [];
 			var warehouse_area_list = [];
-			
-			{if $cfg.area_pricetype eq 1}
-			var warehouse_area_city = [];
-			{/if}
-			
 			var goods_id = {$goods.goods_id};
 			obj.find("select").each(function(){
 				var val = $(this).val();
@@ -1847,14 +1812,6 @@
 				var area_list = $(this).val();
 				warehouse_area_list.push(area_list);
 			});
-			
-			{if $cfg.area_pricetype eq 1}
-			obj.find("input[name='area_city_name']").each(function(){
-				var area_list = $(this).val();
-				warehouse_area_city.push(area_list);
-			});
-			{/if}
-			
 			 obj.find("input[name='region_number']").each(function(){
 				var number = $(this).val();
 				region_number.push(number);
@@ -1868,12 +1825,7 @@
 				region_promote_price.push(promote_price);
 			});
 			
-			var where = "";
-			{if $cfg.area_pricetype eq 1}
-				where = "&warehouse_area_city="+warehouse_area_city;
-			{/if}
-			
-			Ajax.call('goods.php?is_ajax=1&act=addBatchRegion', 'warehouse_area_name=' + warehouse_area_name+"&region_number="+region_number+"&region_price="+region_price+"&region_promote_price="+region_promote_price+"&goods_id="+goods_id+"&warehouse_area_list="+warehouse_area_list + where, addRegionResponse, 'POST', 'JSON');
+			Ajax.call('goods.php?is_ajax=1&act=addBatchRegion', 'warehouse_area_name=' + warehouse_area_name+"&region_number="+region_number+"&region_price="+region_price+"&region_promote_price="+region_promote_price+"&goods_id="+goods_id+"&warehouse_area_list="+warehouse_area_list, addRegionResponse, 'POST', 'JSON');
 		}
 		
 		//批量添加地区回调函数
@@ -1898,7 +1850,7 @@
 				$('#warehouse_area_list_' + result.content.key).html(result.content.html);
 			}else{
 				$('#warehouse_area_list_' + result.content.key).find('select').remove();
-				alert('{$lang.warehouse_null_region}');
+				alert('该仓库暂无地区');
 			}
 		}
 		
@@ -1915,27 +1867,6 @@
 				});
 			}
 		});
-		
-		
-		$(document).on("click",":input[ectype='cityRegion']",function(){
-			
-			var area_id = $(this).val();
-			
-			get_city_region(area_id);
-		});
-		
-		function get_city_region(area_id){
-			Ajax.call('goods.php?is_ajax=1&act=city_region', 'area_id=' + area_id, RegionCityResponse, 'GET', 'JSON');
-		}
-		
-		function RegionCityResponse(result){
-			$("#attribute_city_region .label").removeClass('hide');
-			$("#attribute_city_region .value").removeClass('hide');
-			
-			$("#attribute_city_region .label").addClass('show');
-			$("#attribute_city_region .value").addClass('show');
-			$("#region_city_list").html(result.content.html);
-		}
 		/**********************************{仓库和地区模式} end*****************************/
 		
 		/*************************************批量上传跳转连接 start************************************/
@@ -1967,13 +1898,7 @@
 				}
 			});
 			
-			$("input[data-type='city_region_id']").each(function(index, element) {
-				if($(element).is(":checked") == true){
-					city_id = $(this).val();
-				}
-			});
-			
-			window.open("goods_produts_area_batch.php?act=add" + "&goods_id=" +goods_id+ "&model=" + model+ "&area_id=" + area_id+ "&city_id=" + city_id,"_blank");
+			window.open("goods_produts_area_batch.php?act=add" + "&goods_id=" +goods_id+ "&model=" + model+ "&area_id=" + area_id,"_blank");
 		});
 		
 		$(document).on("click","#attr_refresh",function(){
@@ -2033,18 +1958,15 @@
 	//商品价格
 	function priceSetted()
 	{
-		var theForm = $("form[name='theForm']"),
-			input_shop_price = theForm.find("input[name='shop_price']"),      //商品价格
-			input_promote_price = theForm.find("input[name='promote_price']"),//商品促销价格
-			shop_price = 0;
+		var shop_price = 0;  
+		if(document.forms['theForm'].elements['shop_price']){
 			
-		if(input_shop_price.length > 0){
-			var is_promote = theForm.find("input[name='is_promote']:checked").val();
+			var promote_price = document.forms['theForm'].elements['promote_price'].value;
 			
-			if(is_promote == 1){
-				shop_price = Number(parseFloat(input_promote_price.val()));
+			if($("form[name='theForm'] :input[name='is_promote']").is(":checked")){
+				shop_price = Number(parseFloat(document.forms['theForm'].elements['promote_price'].value));
 			}else{
-				shop_price = Number(parseFloat(input_shop_price.val()));
+				shop_price = Number(parseFloat(document.forms['theForm'].elements['shop_price'].value));
 			}
 		}
 		
@@ -2056,7 +1978,9 @@
 		{literal}
 		
 		{if $goods.user_id}
-		var model_price = theForm.find("input[name='model_price']").val(); //仓库价格
+		//商品价格
+		var model_price = $("form[name='theForm'] :input[name='model_price']").val();
+		
 		if(model_price == 0){
 			{if $grade_rank.give_integral}
 				var give_integral = Math.floor(shop_price * {$grade_rank.give_integral});
@@ -2080,7 +2004,7 @@
 	function integral_market_price()
 	{
 		document.forms['theForm'].elements['market_price'].value = parseInt(document.forms['theForm'].elements['market_price'].value);
-	}
+	} 
 	
 	/**
 	* 赠送消费积分数
@@ -2092,7 +2016,7 @@
 		if(val > 0 || val == -1){
 			var give_integral = Number($("#give_integral").html());
 			if(val > give_integral || val == -1){
-				alert("{$lang.max_set_value}" +give_integral+"{$lang.integral_fw}");
+				alert("最高只能设置" +give_integral+"消费积分范围内");
 				var val = give_integral;
 			} 
 		}
@@ -2114,7 +2038,7 @@
 		if(val > 0 || val == -1){
 			var rank_integral = Number($("#rank_integral").html());  
 			if(val > rank_integral || val == -1){
-				alert("{$lang.max_set_value}" +rank_integral+"{$lang.rank_integral_fw}");
+				alert("最高只能设置" +rank_integral+"等级积分范围内");
 				var val = rank_integral;
 			}
 		}
@@ -2137,7 +2061,7 @@
 			var pay_integral = Number($("#pay_integral").html());
 			
 			if(val > pay_integral || val == -1){
-				alert("{$lang.max_set_value}" +pay_integral+"{$lang.consumption_integral_fw_shopping}");
+				alert("最高只能设置" +pay_integral+"消费积分购买金额范围内");
 				var val = pay_integral;
 			}
 		}else{
@@ -2336,11 +2260,11 @@
 			var content = data.content;
 			pb({
 				id:"categroy_dialog",
-				title:"{$lang.extended_class}",
+				title:"扩展分类",
 				width:788,
 				content:content,
-				ok_title:"{$lang.button_submit_alt}",
-				cl_title:"{$lang.cancel}",
+				ok_title:"确定",
+				cl_title:"取消",
 				drag:false,
 				foot:true,
 				onOk:function(){}
@@ -2355,11 +2279,11 @@
 		var cat_id = thisObj.find("input[ectype=cat_id]").val();
 		if(cat_id == 0){
 			$(".red_notic").remove();
-			$(".sort_info").after("<div class='red_notic'>{$lang.select_cat}</div>");
+			$(".sort_info").after("<div class='red_notic'>请选择分类</div>");
 			setTimeout('$(".red_notic").remove()',1500);
 		}else if(thisObj.find(".filter_item input[value="+cat_id+"]").length > 0){
 			$(".red_notic").remove();
-			$(".sort_info").after("<div class='red_notic'>{$lang.not_cf_class}</div>");
+			$(".sort_info").after("<div class='red_notic'>不能添加重复分类</div>");
 			setTimeout('$(".red_notic").remove()',1500);
 		}else{
 			var str = "";
@@ -2400,7 +2324,7 @@
 		filters: {
 			max_file_size: '2mb', //最大上传文件大小（格式100b, 10kb, 10mb, 1gb）
 			mime_types: [//允许文件上传类型
-				{title: "files", extensions: "jpg,png,gif,jpeg"}
+				{title: "files", extensions: "jpg,png,gif"}
 			]
 		},
 		multi_selection: false, //true:ctrl多文件上传, false 单文件上传
@@ -2416,7 +2340,7 @@
 			},
 			FileUploaded: function(up, file, info) { //文件上传成功的时候触发
 				var data = eval("(" + info.response + ")");
-				$("#goods_figure").html("<div class='img'><img src='" + data.pic + "'/><div class='edit_images'>{$lang.replace_img}</div></div>");
+				$("#goods_figure").html("<div class='img'><img src='" + data.pic + "'/><div class='edit_images'>更换图片</div></div>");
 				//处理商品图片 by wu start
 				$("input[name=original_img]").val(data.data['original_img']);
 				$("input[name=goods_img]").val(data.data['goods_img']);
@@ -2430,55 +2354,6 @@
 		}
 	});
 	uploader.init();
-
-    //上传视频
-    $("#goods_video").on("click",function(){
-        $.jqueryAjax("dialog.php", "is_ajax=1&act=video_box", function(data){
-            var content = data.content;
-            pb({
-                id:"update_video_dialog",
-                title:"上传视频",
-                width:500,
-                content:content,
-                drag:true,
-                foot:false
-            });
-        });
-    });
-
-    $(".video_default").on("click",function(){
-        $('#goods_video_js').click();
-        $(this).hide();
-    });
-
-    var video=document.getElementById("goods_video_js");
-
-    if(video){
-        video.onclick=function(){
-            if(video.paused){
-                video.play();
-                $(".video_default").hide();
-            }else{
-                video.pause();
-                $(".video_default").show();
-            }
-        }
-
-        video.addEventListener("ended",function(){
-            video.currentTime = 0;
-            $(".video_default").show();
-        })
-    }
-
-    //删除视频
-    $("*[ectype='video_remove']").on("click",function(){
-        pbDialog("是否要删除视频","",0,"","","",true,function(){
-            $.jqueryAjax("gallery_album.php", "is_ajax=1&act=del_video&goods_id=" + goods_id, function(data){
-				$(".goods_video_div").addClass("hide");
-				$(".goods_video_js").attr("src", '');
-			});
-        })
-    });
 
 	//日期选择插件调用
 	var opts1 = {
@@ -2495,14 +2370,12 @@
 		'targetId':'xiangou_start_date',
 		'triggerId':['xiangou_start_date'],
 		'alignId':'text_time3',
-		'format':'-',
-		'min':'{$now}'
+		'format':'-'
 	},opts4 = {
 		'targetId':'xiangou_end_date',
 		'triggerId':['xiangou_end_date'],
 		'alignId':'text_time4',
-		'format':'-',
-		'min':'{$now}'
+		'format':'-'
 	}
 
 	xvDate(opts1);
@@ -2568,7 +2441,7 @@
 		var goods_id = $("input[name='goods_id']").val();
 		
 		if(id > 0){
-			if(confirm('{$lang.drop_volume_price}')){
+			if(confirm('您确定删除该优惠价格吗？')){
 				$.jqueryAjax('dialog.php', 'act=del_volume' + '&id=' + id + '&goods_id=' + goods_id, function(data){
 					parent.find("tr").each(function(){
 						$(this).find("td").eq(index).remove();
@@ -2593,7 +2466,7 @@
 		var goods_id = $("input[name='goods_id']").val();
 		
 		if(id > 0){
-			if(confirm('{$lang.drop_volume_price}')){
+			if(confirm('您确定删除该优惠价格吗？')){
 				$.jqueryAjax('dialog.php', 'act=del_cfull' + '&id=' + id + '&goods_id=' + goods_id, function(data){
 					parent.find("tr").each(function(){
 						$(this).find("td").eq(index).remove();
@@ -2617,7 +2490,7 @@
 		
 		$.jqueryAjax('dialog.php', 'act=insert_gallery_url' + '&external_url=' + external_url + '&img_id=' + img_id + '&goods_id=' + goods_id, function(data){
 			if(data.error){
-				alert("{$lang.img_address_cz}");
+				alert("图片链接地址已存在");
 				$(".external_url_" + data.img_id).val('');
 			}else{
 				$("#external_img_url" + data.img_id).attr("src", data.external_url);
@@ -2635,11 +2508,11 @@
 			var content = data.content;
 			pb({
 				id:"attr_input_type",
-				title:"{$lang.add_href_img}",
+				title:"添加外链图片",
 				width:820,
 				content:content,
-				ok_title:"{$lang.button_submit_alt}",
-				cl_title:"{$lang.cancel}",
+				ok_title:"确定",
+				cl_title:"取消",
 				drag:false,
 				foot:true,
 				cl_cBtn:true,
@@ -2688,7 +2561,178 @@
 		$(".pannel-content").perfectScrollbar("destroy");
 		$(".pannel-content").perfectScrollbar();
 	});
+	
+	//商品详情手机端上传图片或上传文字
+	/*$("[ectype='mb_add_img'],[ectype='mb_add_txt']").on("click",function(){
+		var ectype = $(this).attr("ectype");
+		var title = "";
+		var content = "";
+		if(ectype == "mb_add_img"){
+			title = "添加图片";
+            log_type = 'image';
+		}else if(ectype == "mb_add_txt"){
+			title = "添加文字";
+            log_type = 'word';
+		}
+		if(log_type == 'word'){
+			$.jqueryAjax('goods.php', 'act=gallery_album_dialog&log_type='+log_type, function(data){
+				goods_visual_desc(title,815,data.content,function(){
+					if(log_type == "image"){
+						append_mobile_img("#goodsMobile");
+					}else{
+						append_mobile_text("#goodsMobile");
+					}
+				});
+			});
+		}else {
+			Ajax.call('dialog.php', "act=shop_banner&is_vis=1", function(result){
+				goods_visual_desc("图片编辑器",915,result.content,function(){
+					append_mobile_img("#goodsMobile");
+				});
 		
+				//根据cookie默认选中图片库筛选方式
+				album_select(1);
+				
+			}, 'POST', 'JSON');
+		}
+	});*/
+	
+	//pc端后台商品详情 手机描述弹窗方法
+	/*function goods_visual_desc(title,width,content,onOk){
+		pb({
+			id:"goodsMobile",
+			title:title,
+			width:width,
+			content:content,
+			ok_title:"确定",
+			cl_title:"取消",
+			drag:true,
+			foot:true,
+			cl_cBtn:true,
+			onOk:onOk
+		});
+	}
+	
+	var pannel_div = "";*/
+	
+	//pc端后台商品详情-手机描述展示区域（添加图片）
+   /* function append_mobile_img(obj){
+        var url = "",
+			con = $(obj).find("*[ectype='pic_list']"),
+			cur = con.find("li.current");
+			
+		if(cur.length>0){
+			cur.each(function(){
+				url = $(this).data("url");
+				pannel_div = "<div class='section s-img'><div class='img'><img src='"+url+"' /></div><div class='tools'><a href='javascript:void(0);' class='move-up icon-arrow-up'></a><a href='javascript:void(0);' class='move-down icon-arrow-down'></a><a href='javascript:void(0);' class='move-remove'><i class='icon icon-remove'></i>删除</a><div class='cover'></div></div></div>";
+				$(".section_warp").append(pannel_div);
+			});
+		}
+		$(".section_warp").find(".section:first").find(".move-up").addClass("disabled");
+		$(".section_warp").find(".section:last").find(".move-down").addClass("disabled");
+		
+		hiddenInput();
+    }
+	
+	//pc端后台商品详情-手机描述展示区域（添加文字）
+	function append_mobile_text(obj){
+		var text = $(obj).find(".dialogTextarea").val();
+
+		text = text.replace(",","，");
+		text = text.replace("'","‘");
+		text = text.replace('"',"“");
+		text = text.replace('&',"&amp;");
+		pannel_div = "<div class='section s-txt'><div class='txt'>"+text+"</div><div class='tools'><a href='javascript:void(0);' class='move-up icon-arrow-up'></a><a href='javascript:void(0);' class='move-down icon-arrow-down'></a><a href='javascript:void(0);' class='move-remove'><i class='icon icon-remove'></i>删除</a><div class='cover'></div></div></div>";
+		$(".section_warp").append(pannel_div);
+		$(".section_warp").find(".section:first").find(".move-up").addClass("disabled");
+		$(".section_warp").find(".section:last").find(".move-down").addClass("disabled");
+		
+		hiddenInput();
+	}
+
+	$(".pannel-content").perfectScrollbar("destroy");
+	$(".pannel-content").perfectScrollbar();
+	
+	//手机端详情内容操作
+	//模块上移
+	$(document).on("click",".move-up",function(){
+		var _this = $(this);
+		var _div = _this.parents(".section");
+		var prev_div = _div.prev();
+		
+		var clone = _div.clone();
+		if(!_this.hasClass("disabled")){
+			_div.remove();
+			prev_div.before(clone);
+			disabled();
+			hiddenInput();
+		}
+	});
+	
+	//模块下移
+	$(document).on("click",".move-down",function(){
+		var _this = $(this);
+		var _div = _this.parents(".section");
+		var next_div = _div.next();
+		
+		var clone = _div.clone();
+		if(!_this.hasClass("disabled")){
+			_div.remove();
+			next_div.after(clone);
+			disabled();
+			hiddenInput();
+		}
+	});
+	
+	//删除模块
+	$(document).on("click",".move-remove",function(){
+		var _this = $(this);
+		_this.parents(".section").remove();
+		disabled();
+		hiddenInput();
+	});
+	
+	//判断模块是顶部模块或底部模块
+	function disabled(){
+		var demo = $("[ectype='mobile_pannel']");
+		demo.find(".section .move-up").removeClass("disabled");
+		demo.find(".section:first .move-up").addClass("disabled");
+		
+		demo.find(".section .move-down").removeClass("disabled");
+		demo.find(".section:last .move-down").addClass("disabled");
+	}
+	
+	function hiddenInput(){
+		var obj = $(".section_warp");
+		var clone = obj.clone();
+		//clone.find(".tools").remove();
+		$("input[name='desc_mobile']").val(clone.html());
+	}*/
+	
+	//图片库弹窗 选择使用图片（分为单复选）
+	/*$(document).on("click","*[ectype='pic_replace'] li",function(){
+		var length = $(this).siblings(".current").length;
+		var type = $(this).parents("*[ectype='pic_replace']").data("type");
+		if(type == "check"){
+			if(length<20){
+				if($(this).hasClass("current")){
+					$(this).removeClass("current");
+				}else{
+					$(this).addClass("current");
+				}
+			}else{
+				alert("图片不能超过20张");
+			}
+		}else{
+			if($(this).hasClass("current")){
+				$(this).removeClass("current");
+			}else{
+				$(this).addClass("current").siblings().removeClass("current");
+			}
+		}
+	});*/
+	
+	
 	//商品运费 by wu
 	$("input[name='freight']").click(function(){
 		var value = $(this).val();
@@ -2734,11 +2778,11 @@
 					
 					pb({
 						id:"scanCode",
-						title:"{$lang.scan_code_kz_info}",
+						title:"扫码扩展信息",
 						width:550,
 						height:470,
 						content:content,
-						ok_title:"{$lang.button_submit_alt}",
+						ok_title:"确定",
 						drag:false,
 						foot:true,
 						cl_cBtn:false,
@@ -2779,11 +2823,11 @@
 		$("#scanCodeDialog .step_content").remove();
 		pb({
 			id:"scanCode",
-			title:"{$lang.scan_code_kz_info}",
+			title:"扫码扩展信息",
 			width:550,
 			height:470,
 			content:cp,
-			ok_title:"{$lang.button_submit_alt}",
+			ok_title:"确定",
 			drag:false,
 			foot:true,
 			cl_cBtn:false,
@@ -2846,7 +2890,6 @@
 	function setAttrList(result, text_result)
 	{
 		document.getElementById('tbody-goodsAttr').innerHTML = result.goods_attribute;
-
 		if(result.is_spec){
 			$("#goods_attr_gallery").show();
 			document.getElementById('goods_attr_gallery').innerHTML = result.goods_attr_gallery;
@@ -2854,33 +2897,7 @@
 			$("#goods_attr_gallery").hide();
 		}
 		
-		{if $cfg.area_pricetype eq 1}
-		var warehouse_id = $("#attribute_model #attribute_warehouse").find("input[type=radio][data-type=warehouse_id]:first").val()
-		var region_id = $("#attribute_region").find("input[type=radio][data-warehouse=" + warehouse_id + "]:first").val();
-		
-		var city_id = 0;
-		$.ajax({
-			type:"get",
-			url:"goods.php?is_ajax=1&act=city_region&onload=1",
-			data:'area_id=' + region_id,
-			dataType: 'json',
-			async : false, //设置为同步操作就可以给全局变量赋值成功
-			success:function(result){
-				
-				$("#attribute_city_region .label").removeClass('hide');
-				$("#attribute_city_region .value").removeClass('hide');
-				$("#attribute_city_region .label").addClass('show');
-				$("#attribute_city_region .value").addClass('show');
-				$("#region_city_list").html(result.content.html);
-			
-				city_id = result.content.city_id;
-			}
-		});
-		
-		set_attribute_table(goods_id, 2, city_id);
-		{else}
 		set_attribute_table(goods_id);
-		{/if}
 	}
 	
 	//删除货品
@@ -2912,7 +2929,7 @@
 	
 	$(document).on("click",".delete_img",function(){
 		var id = $(this).data("imgid");
-		if (confirm('{$lang.drop_img_confirm}')){
+		if (confirm('您确实要删除该图片吗？')){
 			dropImg(id);
 		}
 	});
@@ -2925,7 +2942,7 @@
 		var attr_value = $("#goodsAttrValue_" + goods_attr_id).val();
 		
 		if(attr_value == ''){
-			alert("{$lang.select_goods_spec}");
+			alert("请选择商品规格");
 			return false;
 		}
 		
@@ -2933,11 +2950,11 @@
 			var content = data.content;
 			pb({
 				id:"categroy_dialog",
-				title:"{$lang.attr_warehouse_price}",
+				title:"属性仓库价格",
 				width:664,
 				content:content,
-				ok_title:"{$lang.button_submit_alt}",
-				cl_title:"{$lang.cancel}",
+				ok_title:"确定",
+				cl_title:"取消",
 				drag:true,
 				foot:true,
 				cl_cBtn:true,
@@ -2970,7 +2987,7 @@
 		var attr_value = $("#goodsAttrValue_" + goods_attr_id).val();
 		
 		if(attr_value == ''){
-			alert("{$lang.select_goods_spec}");
+			alert("请选择商品规格");
 			return false;
 		}
 		
@@ -2978,11 +2995,11 @@
 			var content = data.content;
 			pb({
 				id:"categroy_dialog",
-				title:"{$lang.attr_region_price}",
+				title:"属性地区价格",
 				width:864,
 				content:content,
-				ok_title:"{$lang.button_submit_alt}",
-				cl_title:"{$lang.cancel}",
+				ok_title:"确定",
+				cl_title:"取消",
 				drag:true,
 				foot:true,
 				cl_cBtn:true,
@@ -3014,19 +3031,10 @@
 		var attr_id = _this.data("attrid");
 		var goods_attr_id = _this.data("goodsattrid");
 		var attr_value = _this.data("attrvalue");
-		var model = $(":input[name='goods_model']").val();
-                var warehouse_id = $("#attribute_model").find("input[type=radio][data-type=warehouse_id]:checked").val();
-                var region_id = $("#attribute_model").find("input[type=radio][data-type=region_id]:checked").val();
-                var extension = '';
-                if(goods_model == 1){
-                        extension = "&region_id="+warehouse_id;
-                }else if(goods_model == 2){
-                        extension = "&region_id="+region_id;
-                }
-                
+		
 		if(_this.siblings("input[type='checkbox']").is(":checked") == true){
 			_this.siblings("input[type='checkbox']").prop("checked",false);
-			$.jqueryAjax('dialog.php', 'act=del_goods_attr' + '&goods_id=' + goods_id + '&attr_id=' + attr_id + '&goods_attr_id=' + goods_attr_id + '&attr_value=' + attr_value + "&model=" + model + extension, function(data){
+			$.jqueryAjax('dialog.php', 'act=del_goods_attr' + '&goods_id=' + goods_id + '&attr_id=' + attr_id + '&goods_attr_id=' + goods_attr_id + '&attr_value=' + attr_value, function(data){
 				getAttrList(goods_id);
 			});
 		};
@@ -3043,7 +3051,7 @@
 		var attr_value = $("#goodsAttrValue_" + goods_attr_id).val();
 		
 		if(attr_value == ''){
-			alert("{$lang.select_goods_spec}");
+			alert("请选择商品规格");
 			return false;
 		}
 		
@@ -3051,11 +3059,11 @@
 			var content = data.content;
 			pb({
 				id:"categroy_dialog",
-				title:"{$lang.file_attr_img}",
+				title:"上传属性图片",
 				width:664,
 				content:content,
-				ok_title:"{$lang.button_submit_alt}",
-				cl_title:"{$lang.cancel}",
+				ok_title:"确定",
+				cl_title:"取消",
 				drag:true,
 				foot:true,
 				cl_cBtn:true,
@@ -3099,9 +3107,6 @@
 			if(data.error == 0){
 				$("#feedcontent").html(data.content);
 				$("#feedbox").show();
-				
-				var pb = $("#feedbox").parents(".pb");
-				pb.css("top",($(window).height() - pb.height())/2);
 			}
 		 });
 		}else{
@@ -3136,14 +3141,14 @@
 		filters: {
 			max_file_size: '2mb', //最大上传文件大小（格式100b, 10kb, 10mb, 1gb）
 			mime_types: [//允许文件上传类型
-				{title: "files", extensions: "jpg,png,gif,jpeg"}
+				{title: "files", extensions: "jpg,png,gif"}
 			]
 		},
 		multi_selection: true, //true:ctrl多文件上传, false 单文件上传
 		init: {
 			FilesAdded: function(up, files) { //文件上传前
 				if ($("#ul_pics").children("li").length > 30) {
-					alert("{$lang.file_img_too_much}");
+					alert("您上传的图片太多了！");
 					uploader_gallery.destroy();
 				} else {
 					var li = '';
@@ -3156,16 +3161,16 @@
 			},
 			FileUploaded: function(up, file, info) { //文件上传成功的时候触发
 				var data = eval("(" + info.response + ")");
-				var html = "&nbsp;";
-				if(data.img_id == data.min_img_id){
-					html = "{$lang.master_map}";
-					$("#ul_pics").find(".zt").each(function(){
-						$(this).html("&nbsp;");
-					});
-				}
-				$("#gallery_"+data.min_img_id).find(".zt").html("{$lang.master_map}");
-				$("#" + file.id).html("<div class='img' onclick='img_default("+data.img_id+")'><img src='" + data.pic + "'/></div><div class='info'><span class='zt red'>"+html+"</span><div class='sort'><span>{$lang.region_sort}：</span><input type='text' name='sort' value='" + data.img_desc + "' class='stext' /></div><a href='javascript:void(0);' class='delete_img' data-imgid='"+data.img_id+"'><i class='icon icon-trash'></i></a></div><div class='info'><input name='external_url' type='text' class='text w130' ectype='external_url' value='" + data.external_url + "' title='" + data.external_url + "' data-imgid='" + data.img_id + "' placeholder='{$lang.img_external_links}' onfocus='if (this.value == '{$lang.img_external_links}'){this.value='http://';this.style.color='#000';}></div>");
-            },
+                                var html = "&nbsp;";
+                                if(data.img_id == data.min_img_id){
+                                    html = "主图";
+                                    $("#ul_pics").find(".zt").each(function(){
+                                        $(this).html("&nbsp;");
+                                    });
+                                }
+                                $("#gallery_"+data.min_img_id).find(".zt").html("主图");
+				$("#" + file.id).html("<div class='img' onclick='img_default("+data.img_id+")'><img src='" + data.pic + "'/></div><div class='info'><span class='zt red'>"+html+"</span><div class='sort'><span>排序：</span><input type='text' name='sort' value='" + data.img_desc + "' class='stext' /></div><a href='javascript:void(0);' class='delete_img' data-imgid='"+data.img_id+"'><i class='icon icon-trash'></i></a></div><div class='info'><input name='external_url' type='text' class='text w130' ectype='external_url' value='" + data.external_url + "' title='" + data.external_url + "' data-imgid='" + data.img_id + "' placeholder='图片外部链接地址' onfocus='if (this.value == '图片外部链接地址'){this.value='http://';this.style.color='#000';}></div>");
+                        },
 			Error: function(up, err) { //上传出错的时候触发
 				alert(err.message);
 			}
@@ -3192,11 +3197,11 @@
 			var content = data.content;
 			pb({
 				id:"attr_input_type",
-				title:"{$lang.manual_entry_property}",
+				title:"手工录入属性",
 				width:820,
 				content:content,
-				ok_title:"{$lang.button_submit_alt}",
-				cl_title:"{$lang.cancel}",
+				ok_title:"确定",
+				cl_title:"取消",
 				drag:false,
 				foot:true,
 				cl_cBtn:true,
@@ -3224,35 +3229,6 @@
 		 });
 	}
 	
-	//唯一属性框进入焦点
-	function insert_attr_input_val(obj){
-		var _this = $(obj).parents('.value'),
-			attr_id_val = [],
-			value_list_val = [],
-			attr_id = _this.find("input[name='attr_id_list[]']").val(),
-			goods_id = $("input[name='goods_id']").val();
-		
-		attr_id_val.push(_this.find("input[name='goods_attr_id_list[]']").val());
-		value_list_val.push(_this.find("input[name='attr_value_list[]']").val());
-		
-		$.jqueryAjax('dialog.php', 'is_ajax=1&act=insert_attr_input&attr_id_val=' + attr_id_val + '&attr_id=' + attr_id + '&goods_id=' + goods_id + "&value_list_val=" + value_list_val, function(data){});
-	}
-	
-	//下拉属性选择
-	$.divselect("#blur_attr_list","#blur_attr_list_val",function(obj){
-		var val = obj.data("value"),
-			_this = obj.parents('.value'),
-			attr_id_val = [],
-			value_list_val = [],
-			attr_id = _this.find("input[name='attr_id_list[]']").val(),
-			goods_id = $("input[name='goods_id']").val();
-		
-		attr_id_val.push(_this.find("input[name='goods_attr_id_list[]']").val());
-		value_list_val.push(val);
-		
-		$.jqueryAjax('dialog.php', 'is_ajax=1&act=insert_attr_input&attr_id_val=' + attr_id_val + '&attr_id=' + attr_id + '&goods_id=' + goods_id + "&value_list_val=" + value_list_val, function(data){});
-	});
-	
 	$(document).on("click",".xds_up",function(){
 		var _div = $(this).parent().clone();
 		_div.find("i").removeClass("xds_up").addClass("xds_down");
@@ -3268,7 +3244,7 @@
 			
 			var attr_id = $("input[name='attr_id']").val();
 
-			if(confirm('{$lang.drop_goods_attr_confirm}')){
+			if(confirm('您确定删除该属性吗？')){
 				$.jqueryAjax('dialog.php', 'is_ajax=1&act=del_input_type' + '&goods_attr_id=' + goods_attr_id + '&attr_id=' + attr_id + '&goods_id=' + goods_id, function(data){
 					$(".attr_input_type_" + data.attr_id).html(data.attr_content);
 					parent.remove();
@@ -3282,174 +3258,103 @@
 			parent.remove();
 		}
 	});
-	
-	$(document).on("click","[ectype='search_attr']",function(){
-		set_attribute_table(goods_id , 1); //重置表格
-	});
 	/**********************************{商品属性信息} end*****************************/
-    
-    /* 异步添加各类信息 begin */
-    //添加运费模板
-	$(document).on("click","[ectype='ajaxTransport']",function(){
-        var name = "添加运费模板";
-        var act = 'act=ajaxTransport';
-        var _this = $(this);
-        if(_this.data('attr') == 'edit'){
-            var tid = $('#transport_div').find("input[name='tid']").val();
-            name = "编辑运费模板";
-            act = 'act=ajaxTransport&tid=' + tid;
-        }
-        
-        $.jqueryAjax('dialog.php',act, function(data){
-            goods_visual_desc(name,1000,data.content,function(){
-                var form = $("#transport_dialog").find("form[name='theForm']");
-                var title = form.find("input[name='title']");
-                var act = form.find("input[name='act']").val();
-                var fald = true;
-				
-                if(title.val() == ""){
-                    error_div("#transport_dialog input[name='title']","运费模板标题不能为空");
-					fald = false;
-                }else{
-                    form.ajaxSubmit({
-                        type: "POST",
-                        dataType: "JSON",
-                        url: "dialog.php?act=" + act,
-                        data: { "action": "TemporaryImage" },
-                        success: function (data) {
-                            alert(data.message);
-                            if(data.error == 0){
-                                $("#transport_div").html(data.content); 
-                            }
-                        },
-                        async: true  
-                    });
-                    
-                    fald = true;
-                }
-                return fald;   
-            },'transport_dialog');            
-        });		
+	
+	/**********************************{商品图片图库调用} start*****************************/
+	/*function insert_img(pic_id,inid,img_src){
+		if(pic_id > 0){
+			//商品描述添加图片
+			if(inid == 'gallery_album_dsc'){
+				var content = $("input[name='goods_desc']").val();
+				$.jqueryAjax('get_ajax_content.php', 'act=getFCKeditor&content='+encodeURIComponent(content)+"&img_src="+img_src, function(data){
+					$("#FCKeditor").html(data.goods_desc);
+				});
+			}else{
+				$.jqueryAjax('get_ajax_content.php', 'is_ajax=1&act=insert_goodsImg' + '&pic_id=' + pic_id + '&goods_id=' + goods_id + "&inid="+inid, function(data){
+					if(data.error > 0){
+						alert(data.message);
+					}else{
+						if(inid == 'addAlbumimg'){
+                                                        if(data.img_id > 0){
+                                                            var html = "";
+                                                            if(data.img_id == data.min_img_id){
+                                                                    html = "主图";
+                                                                    $("#ul_pics").find(".zt").each(function(){
+                                                                            $(this).html("");
+                                                                    });
+                                                            }
+                                                            $("#gallery_"+data.min_img_id).find(".zt").html("主图");
+                                                            var img_html = "<li id='gallery_" + data.img_id + "'><div class='img' onclick='img_default("+data.img_id+")'><img src='../" + data.data['goods_thumb']+ "'/></div><div class='info'><span class='zt red'>"+html +"</span><div class='sort'><span>排序：</span><input type='text' name='sort' value='"+ data.img_desc + "' class='stext' /></div><a href='javascript:void(0);' class='delete_img' data-imgid='"+data.img_id+"'><i class='icon icon-trash'></i></a></div><div class='info'><input name='external_url' type='text' class='text w130' ectype='external_url' value='' title='' data-imgid='" + data.img_id + "' placeholder='图片外部链接地址' onfocus='if (this.value == '图片外部链接地址'){this.value='http://';this.style.color='#000';}></div></li>";
+                                                            $("#ul_pics").append(img_html);
+                                                        }else{
+                                                            alert('图片'+ data.data['goods_thumb'] + '"已存在！');
+                                                        }
+						}else{
+							$("#goods_figure").html("<div class='img'><img src='../" + data.data['goods_thumb'] + "'/><div class='edit_images'>更换图片</div></div>");
+							$("input[name=original_img]").val(data.data['original_img']);
+							$("input[name=goods_img]").val(data.data['goods_img']);
+							$("input[name=goods_thumb]").val(data.data['goods_thumb']);
+						}
+					}
+				});
+			}
+		}else{
+			alert("系统出错，请重新选择图片");
+		}
+	}*/
+	
+	/*$("[ectype='gallery_album']").on("click",function(){
+        var inid = $(this).parents(".gallery_album").data("inid");
+		var picId = "";
+		var img_src = "";
+		var obj = "";
+		Ajax.call('dialog.php', "act=shop_banner&is_vis=2&image_type=1&inid=" + inid, function(result){
+			goods_visual_desc("图片编辑器",915,result.content,function(){
+				obj = $("*[ectype='pic_replace']").find("li.current");
+				if(inid == "gallery_album_dsc"){
+					obj.each(function(){
+						picId = $(this).data("picid");
+						var src = $(this).data('url');
+						if(img_src){
+							img_src += "," + src;
+						}else{
+							img_src = src
+						}
+					});
+
+					insert_img(picId,inid,img_src);
+				}else{
+					obj.each(function(){
+						picId = $(this).data("picid");
+						insert_img(picId,inid);
+					});
+				}
+			});
+			
+			//根据cookie默认选中图片库筛选方式
+			//album_select(2);
+		}, 'POST', 'JSON');
+	});*/
+	
+	$.divselect("#album_file","#album_file_val",function(obj){
+		var val = obj.attr("data-value");
+		changedpic(val,obj,2);
 	});
-    
-    //添加文章
-	$(document).on("click","[ectype='ajaxArticle']",function(){
-        $.jqueryAjax('dialog.php', 'act=ajaxArticle', function(data){
-            goods_visual_desc("添加文章",1000,data.content,function(){
-                var form = $("#article_dialog").find("form[name='theForm']");
-                var title = form.find("input[name='title']");
-                var article_cat = form.find("input[name='article_cat']");
-                var fald = true;
-                
-                if(title.val() == ""){
-                    error_div("#article_dialog input[name='title']","文章标题不能为空");
-					fald = false;
-                }else if(article_cat.val() == ""){
-                    error_div("#article_dialog input[name='article_cat']","请选择文章分类");
-					fald = false;
-                }else{
-                    form.ajaxSubmit({
-                        type: "POST",
-                        dataType: "JSON",
-                        url: "dialog.php?act=article_insert",
-                        data: { "action": "TemporaryImage" },
-                        success: function (data) {
-                            alert(data.message);
-                        },
-                        async: true  
-                    });
-                    
-                    fald = true;
-                }
-                return fald;   
-            },'article_dialog');
-        });		
+	
+	$.divselect("#parent_id1","#parent_id_val1",function(obj){
+		get_childcat(obj,2);
 	});
-    
-    //添加地区
-	$(document).on("click","[ectype='ajaxArea']",function(){
-        $.jqueryAjax('dialog.php', 'act=ajaxArea', function(data){
-            goods_visual_desc("添加区域",1000,data.content,function(){
-                var form = $("#area_dialog").find("form[name='theForm']");
-                form.ajaxSubmit({
-                    type: "POST",
-                    dataType: "JSON",
-                    url: "dialog.php?act=article_insert",
-                    data: { "action": "TemporaryImage" },
-                    success: function (){},
-                    async: true  
-                });
-            },'area_dialog');
-        });
-    });
-    
-    //添加品牌
-	$(document).on("click","[ectype='ajaxBrand']",function(){
-        $.jqueryAjax('dialog.php', 'act=ajaxBrand', function(data){
-            goods_visual_desc("添加品牌",1000,data.content,function(){
-                var form = $("#brand_dialog").find("form[name='theForm']");
-                var brand_name = form.find("input[name='brand_name']");
-                var brand_logo = form.find("input[name='brand_logo']");
-                var fald = true;
-                
-                if(brand_name.val() == ""){
-                    error_div("#brand_dialog input[name='brand_name']","品牌名称不能为空");
-					fald = false;
-                }else if(brand_logo.val() == ""){
-                    error_div("#brand_dialog input[name='brand_logo']","品牌LOGO不能为空");
-					fald = false;
-                }else{
-                    form.ajaxSubmit({
-                        type: "POST",
-                        dataType: "JSON",
-                        url: "dialog.php?act=brand_insert",
-                        data: { "action": "TemporaryImage" },
-                        success: function (data) {
-                            alert(data.message);
-                        },
-                        async: true  
-                    });
-                    
-                    fald = true;
-                }
-                return fald;   
-            },'brand_dialog');
-        });		
+	
+	$.divselect("#parent_id3","#parent_id_val3",function(obj){
+		var val = obj.attr("data-value");
+		$("input[name='parent_id']").val(val);
+		get_childcat(obj,2,1);
 	});
-    
-    //添加分类
-	$(document).on("click","[ectype='ajaxCate']",function(){
-        $.jqueryAjax('dialog.php', 'act=ajaxCate', function(data){
-            goods_visual_desc("添加分类",1000,data.content,function(){
-                var form = $("#cate_dialog").find("form[name='theForm']");
-                var cat_name = form.find("input[name='cat_name']");
-                var fald = true;
-                
-                if(cat_name.val() == ""){
-                    error_div("#cate_dialog input[name='cat_name']","分类名称不能为空");
-					fald = false;
-                }else{
-                    form.ajaxSubmit({
-                        type: "POST",
-                        dataType: "JSON",
-                        url: "dialog.php?act=cate_insert",
-                        data: { "action": "TemporaryImage" },
-                        success: function (data) {
-                            alert(data.message);
-                            if(data.error == 0){
-                                $("#cate_add").html(data.content); 
-                            }
-                        },
-                        async: true  
-                    });
-                    
-                    fald = true;
-                }
-                return fald;   
-            },'cate_dialog');
-        });		
+	
+	$.divselect("#parent_id2","#parent_id_val2",function(obj){
+		 get_childcat(obj,2);
 	});
-    /* 异步添加各类信息 end */
+	/**********************************{商品图片图库调用} end*****************************/
 	</script>
     </body>
 </html>

@@ -3,13 +3,13 @@
 $db_host   = "localhost:3306";
 
 // database name
-$db_name   = "c_shopadv_cn";
+$db_name   = "shangc";
 
 // database username
-$db_user   = "c_shopadv_cn";
+$db_user   = "root";
 
 // database password
-$db_pass   = "hh25DKZNN7";
+$db_pass   = "";
 
 // table prefix
 $prefix    = "dsc_";

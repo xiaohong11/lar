@@ -108,7 +108,7 @@
                             <div class="text-all dis-box j-text-all text-all-back">
                                 <a class="a-icon-back j-close-search" href="javascript:;"><i class="iconfont icon-back"></i></a>
                                 <div class="box-flex input-text">
-                                    <input class="j-input-text" style="padding-left:1rem " type="text" name="inputkeyword" placeholder="{if $keywords}{$keywords}{else}商品搜索{/if}" />
+                                    <input class="j-input-text" style="padding-left:1rem " type="text" name="infokeyword" placeholder="{if $keywords}{$keywords}{else}商品搜索{/if}" />
                                     <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
                                 </div>
                                 <a type="button" class="btn-submit">搜索</a>
@@ -125,7 +125,7 @@
                                     </p>
                                     <ul class="hot-search a-text-more a-text-one" id="search-con">
                                         {foreach $history_keywords as $v}
-                                        <li><a href="{url('store/index/pro_list', array('keyword'=>$v,'ru_id'=>$ru_id))}"><span>{$v}</span></a></li>
+                                        <li><a href="{url('store/index/pro_list', array('keyword'=>$v,'ru_id'=>$info.ru_id))}"><span>{$v}</span></a></li>
                                         {/foreach}
                                     </ul>
                                 </div>
@@ -144,14 +144,14 @@
         <a href="{url('store/index/index')}">
              <i class="iconfont icon-dianpu"></i>
               <p>店铺街</p>
-        </a>
-    </li>
-{include file="float_nav_footer"}
+        </a> 
+    </li> 
+{include file="float_nav_footer"}  
 </div>
 <!--筛选e-->
 </div>
 <input type="hidden" name="type" value="{$type}">
-<input type="hidden" name="ruid" value="{$ru_id}">
+<input type="hidden" name="ru_id" value="{$ru_id}">
 <input type="hidden" name="bid" value="{$bid}">
 <input type="hidden" name="cat_id" value="{$cat_id}">
 <input type="hidden" name="bigcat" value="{$bigcat}">
@@ -170,7 +170,7 @@
     var maxpage ;
     //var page = $("input[name=page]").val();
     var type  = $("input[name=type]").val();
-    var ruid = $("input[name=ruid]").val();
+    var ru_id = $("input[name=ru_id]").val();
     var where = $("input[name=where]").val();
     var url = ROOT_URL + 'index.php?m=store&a=pro_list';
     var sort;
@@ -241,7 +241,7 @@
                 $(this).removeClass('active');
             }
         });
-        var str ="type="+type+"&ru_id="+ruid+"&cat_id="+cat_id+"&sort="+sort+"&keyword="+keyword+"&bigcat="+bigcat+"&resetpage=1"+'&order='+order;
+        var str ="type="+type+"&ru_id="+ru_id+"&sort="+sort+"&keyword="+keyword+"&bigcat="+bigcat+"&resetpage=1"+'&order='+order;
         infinite.onload(str);
         if(order == 'DESC'){
             $(this).attr("order","ASC");
@@ -255,7 +255,7 @@
         type='';
     }
     $("input[name=showword]").val(keyword);
-    var str ="type="+type+"&ru_id="+ruid+"&keyword="+keyword+"&bid="+bid+"&bigcat="+bigcat+"&cat_id="+cat_id;
+    var str ="type="+type+"&ru_id="+ru_id+"&keyword="+keyword+"&bid="+bid+"&bigcat="+bigcat+"&cat_id="+cat_id;
     var infinite = $('.store_info').infinite({url: url,params:str, template: 'j-product'});
     swiper_scroll();
     //清空搜索
@@ -272,7 +272,7 @@
     $(".btn-submit").click(function (){
         $(".show-search-div").removeClass("show-search-div");
         keyword = $("input[name=inputkeyword]").val();
-        var str ="type="+type+"&ru_id="+ruid+"&keyword="+keyword;
+        var str ="type="+type+"&ru_id="+ru_id+"&keyword="+keyword;
         infinite.onload(str);
     })
     //分类
@@ -280,7 +280,7 @@
         $(this).css({ color: "#BD5858"});
         bid = $(this).attr("bid");
         $(".show-filter-div").removeClass("show-filter-div");
-        var str ="type="+type+"&ru_id="+ruid+"&bid="+bid;
+        var str ="type="+type+"&ru_id="+ru_id+"&bid="+bid;
         infinite.onload(str);
     })
     $(".category").click(function (){
@@ -288,7 +288,7 @@
         cat_id = $(this).attr("cat-id");
         //alert(cat_id);
         $(".show-filter-div").removeClass("show-filter-div");
-        var str ="type="+type+"&ru_id="+ruid+"&cat_id="+cat_id;
+        var str ="type="+type+"&ru_id="+ru_id+"&cat_id="+cat_id;
         infinite.onload(str);
     })
     /*店铺信息商品滚动*/

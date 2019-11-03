@@ -4,12 +4,15 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.goods_alt} - {$ur_here}</div>
+    	<div class="title">商品 - {$ur_here}</div>
         <div class="content">
         	{include file ='library/batch_tab.lbi'}
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
-                {$lang.use_help}
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
+                <ul>
+                	<li>首先下载csv文件，打开excel表格添加多个商品信息字段。</li>
+                    <li>上传编辑好的csv文件，选择数据格式、分类、编码进行上传文件。</li>
+                </ul>
             </div>
             <div class="flexilist">
                 <div class="common-content">
@@ -22,7 +25,7 @@
                                 	<div class="search_select">
                                     	<div class="categorySelect">
                                             <div class="selection">
-                                                <input type="text" name="category_name" id="category_name" class="text w290 valid" value="{$lang.select_cat}" autocomplete="off" readonly data-filter="cat_name" />
+                                                <input type="text" name="category_name" id="category_name" class="text w290 valid" value="请选择分类" autocomplete="off" readonly data-filter="cat_name" />
                                                 <input type="hidden" name="cat" id="cat" value="0" data-filter="cat_id" />
                                             </div>
                                             <div class="select-container" style="width:319px;display:none;">
@@ -37,9 +40,9 @@
                                 <div class="label">{$lang.export_format}：</div>
                                 <div class="label_value">
                                 	<div id="format" class="imitate_select select_w320">
-                                        <div class="cite">{$lang.please_select}</div>
+                                        <div class="cite">请选择</div>
                                         <ul>
-											<li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.please_select}</a></li>
+											<li><a href="javascript:;" data-value="0" class="ftx-01">请选择</a></li>
 											{foreach from=$data_format item=data key=key}
 											<li><a href="javascript:;" data-value="{$key}" class="ftx-01">{$data}</a></li>
 											{/foreach}
@@ -85,7 +88,8 @@
                             <div class="item">
                                 <div class="label">&nbsp;</div>
                                 <div class="label_value info_btn">
-                                    <input type="submit" value="{$lang.button_submit_alt}" class="button" id="submitBtn">
+                                    <input type="submit" value="确定" class="button" id="submitBtn">	
+                                    <!--<input type="reset" value="重置" class="button button_reset">-->
                                 </div>
                             </div>
                             </div>
@@ -109,7 +113,7 @@
 			}else{
 				$("#category_name").addClass("error");
 				$(".categorySelect .form_prompt label").remove();
-				$(".categorySelect .form_prompt").append('<label class="label_error"><i class="icon icon-exclamation-sign"></i>{$lang.select_cat}</label>')
+				$(".categorySelect .form_prompt").append('<label class="label_error"><i class="icon icon-exclamation-sign"></i>请选择分类</label>')
 			}
 			
 			if($("#goods_batch_form").valid()){
@@ -130,7 +134,7 @@
 			},
 			messages:{
 				textfile:{
-					required : '<i class="icon icon-exclamation-sign"></i>{$lang.select_csv_file}'
+					required : '<i class="icon icon-exclamation-sign"></i>请上传批量csv文件'
 				}
 			}			
 		});

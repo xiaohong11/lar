@@ -25,25 +25,15 @@
                                     <dt>{$lang.label_order_time}</dt>
                                     <dd>{$order.formated_add_time}</dd>
                                 </dl>
-                                <dl>
-                                    <dt>支付状态</dt>
-                                    <dd>{if $order.pay_status eq 0}未支付<a href="javascipt:void(0);" ectype="pay" class="btn btn25 red_btn" data-order="{$order.order_id}">支付</a>{else}已支付{/if}</dd>
-                                </dl>
-                                {if $order.pay_status eq 1}
-                                <dl>
-                                    <dt>支付时间</dt>
-                                    <dd>{$order.pay_time}</dd>
-                                </dl>
-                                {/if}
                             </div>
                         </div>
                         
                         <!--订单其他信息-->
                         <div class="step">
                             <div class="step_title"><i class="ui-step"></i><h3>{$lang.other_info}{if !$order.child_order}<a href="order.php?act=edit&order_id={$order.order_id}&step=other"><i class="icon icon-edit"></i></a>{/if}</h3></div>
-                            <div class="section{if $order.inv_type} section3{else} section1{/if}">
+                            <div class="section section3">
                                 <dl>
-                                    <dt>发票类型：</dt>
+                                    <dt>发票类型</dt>
                                     <dd>{$lang.need_invoice.$order.inv_type}</dd>
                                 </dl>
 								{if $order.inv_type}
@@ -56,13 +46,17 @@
                                     <dd>{$order.tax_id}</dd>								
                                 </dl>
 								{/if}
+                                <!--<dl>
+                                    <dt>{$lang.label_inv_content}</dt>
+                                    <dd>{$order.inv_content}</dd>								
+                                </dl>-->
                             </div>
                         </div>
                         
                         <!--收货人信息-->
                         <div class="step">
                             <div class="step_title"><i class="ui-step"></i><h3>{$lang.consignee_info}{if !$order.child_order}<a href="order.php?act=edit&order_id={$order.order_id}&step=consignee"><i class="icon icon-edit"></i></a>{/if}</h3></div>
-                            <div class="section">
+                            <div class="section section5">
                                 <dl>
                                     <dt>{$lang.label_consignee}</dt>
                                     <dd>{$order.consignee|escape}</dd>
@@ -73,15 +67,15 @@
                                 </dl>
                                 <dl>
                                     <dt>支付方式：</dt>
-                                    <dd>{$order.pay_name}</dd>
+                                    <dd>线下支付</dd>
                                 </dl>
                                 <dl>
                                     <dt>{$lang.label_address}</dt>
                                     <dd>{$order.address|escape}</dd>
                                 </dl>
-                                <dl style="width:33%;">
+                                <dl>
                                     <dt>订单备注：</dt>
-                                    <dd title="{$order.postscript|escape}" data-toggle="tooltip">{$order.postscript|escape}</dd>
+                                    <dd>{$order.postscript|escape}</dd>
                                 </dl>
                             </div>
                         </div>
@@ -277,7 +271,7 @@
                 </form>
             </div>
 		</div>
-        
+	</div>
     {if !$operable_list.receive}
     <form action="order.php?act=operate" method="post" name="theForm" id="operate_form">
     {include file ='library/order_delivery.lbi'}
@@ -360,18 +354,6 @@
     {/if}
 
 	<script type="text/javascript">
-            $(document).on("click","[ectype='pay']",function(){
-                var order_id = $(this).data('order');
-                if(confirm("确定支付吗？")){
-                     $.jqueryAjax('wholesale_order.php', 'act=pay_order&order_id='+order_id, function(data){
-                         if(data.error == 1){
-                             alert(data.msg);
-                         }else{
-                             location.reload();
-                         }
-                    });
-                }
-            })
 	  /* 门店设置抢单 */
 	  function set_grab_order(order_id)
 	  {

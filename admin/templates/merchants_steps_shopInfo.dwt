@@ -13,17 +13,17 @@
 					<div class="fl">
 						<div class="ui-dropdown smartdropdown alien">
 							<input type="hidden" value="{$fields.textAreaForm.country}" name="{$fields.textFields}[]">
-							<div class="txt">{$lang.country}</div>
+							<div class="txt">国家</div>
 							<i class="down u-dropdown-icon"></i>
 							<div class="options clearfix" style="max-height:300px;">
 							<!-- {foreach from=$country_list item=country} -->
-								<span class="liv" data-text="{$lang.china}"  data-type="1" data-value="{$country.region_id}">{$lang.china}</span>
+								<span class="liv" data-text="中国"  data-type="1" data-value="{$country.region_id}">中国</span>
 							<!--{/foreach}-->
 							</div>
 						</div>
 						<div class="ui-dropdown smartdropdown alien">
 							<input type="hidden" value="{$fields.textAreaForm.province}" name="{$fields.textFields}[]" id="selProvinces">
-							<div class="txt">{$lang.province_alt}</div>
+							<div class="txt">省/直辖市</div>
 							<i class="down u-dropdown-icon"></i>
 							<div class="options clearfix" style="max-height:300px;">
 								<!--{foreach from=$province_list item=list}-->
@@ -33,21 +33,21 @@
 						</div>
 						<div class="ui-dropdown smartdropdown alien">
 							<input type="hidden" value="{$fields.textAreaForm.city}" name="{$fields.textFields}[]" id="selCities">
-							<div class="txt">{$lang.city}</div>
+							<div class="txt">市</div>
 							<i class="down u-dropdown-icon"></i>
 							<div class="options clearfix" style="max-height:300px;">
 							<!-- {foreach from=$fields.city_list item=city_list} -->
-								<span class="liv hide" data-text="{$lang.city}" data-type="3" data-value="{$city_list.region_id}">{$lang.city}</span>
+								<span class="liv hide" data-text="市" data-type="3" data-value="{$city_list.region_id}">市</span>
 							<!--{/foreach}-->
 							</div>
 						</div>
 						<div class="ui-dropdown smartdropdown alien">
 							<input type="hidden" value="{$fields.textAreaForm.district}" name="{$fields.textFields}[]" id="selDistricts">
-							<div class="txt">{$lang.area_alt}</div>
+							<div class="txt">区/县</div>
 							<i class="down u-dropdown-icon"></i>
 							<div class="options clearfix" style="max-height:300px;">
 								<!-- {foreach from=$fields.district_list item=district_list} -->
-								<span class="liv hide" data-text="{$lang.area_alt}" data-type="4" data-value="{$district_list.region_id}">{$lang.area_alt}</span>
+								<span class="liv hide" data-text="区/县" data-type="4" data-value="{$district_list.region_id}">区/县</span>
 								<!--{/foreach}-->
 							</div>
 						</div>
@@ -59,7 +59,7 @@
 						<input type="file" class="type-file-file" name="{$fields.textFields}" size="30" hidefocus="true" value="" />
 						<input name="text_{$fields.textFields}" type="hidden" value="{$fields.titles_centents}" />
 						<span class="show">
-							{if $fields.titles_centents neq ''}<a href="../{$fields.titles_centents}" target="_blank" class="nyroModal">{/if}<i class="icon icon-picture" data-tooltipimg="../{$fields.titles_centents}" ectype="tooltip" title="tooltip"></i></a>
+							{if $fields.titles_centents neq ''}<a href="../{$fields.titles_centents}" target="_blank" class="nyroModal">{/if}<i class="icon icon-picture" onmouseover="toolTip('<img src=../{$fields.titles_centents}>')" onmouseout="toolTip()"></i></a>
 						</span>
 						<input type="text" name="textfile" class="type-file-text" id="textfield" readonly />
 					</div>
@@ -125,55 +125,12 @@
 	</div>
 	{/foreach}
 	<!--以上是自定义基本信息，以下是固定信息-->
-    {if $rs_enabled}
-	<!--卖场-入驻地区 start-->
-	<div class="item">
-		<div class="label">{$lang.require_field}{$lang.belong_region}：</div>
-		<div class="value">
-			<div class="level_linkage">
-				<div class="fl">
-					<div class="ui-dropdown smartdropdown alien">
-						<input type="hidden" value="{$title.belong_region.region_level.0}" name="rs_country_id">
-						<div class="txt">{$lang.country}</div>
-						<i class="down u-dropdown-icon"></i>
-						<div class="options clearfix" style="max-height:300px;">
-						<!-- {foreach from=$title.belong_region.country_list item=country} -->
-							<span class="liv" data-text="{$country.region_name}"  data-type="1" data-value="{$country.region_id}">{$country.region_name}</span>
-						<!--{/foreach}-->
-						</div>
-					</div>
-					<div class="ui-dropdown smartdropdown alien">
-						<input type="hidden" value="{$title.belong_region.region_level.1}" name="rs_province_id" id="selProvinces">
-						<div class="txt">{$lang.province_alt}</div>
-						<i class="down u-dropdown-icon"></i>
-						<div class="options clearfix" style="max-height:300px;">
-							<!--{foreach from=$title.belong_region.province_list item=province}-->
-							<span class="liv" data-text="{$province.region_name}" data-type="2" data-value="{$province.region_id}">{$province.region_name}</span>
-							<!--{/foreach}-->
-						</div>
-					</div>
-					<div class="ui-dropdown smartdropdown alien">
-						<input type="hidden" value="{$title.belong_region.region_level.2}" name="rs_city_id" id="selCities">
-						<div class="txt">{$lang.city}</div>
-						<i class="down u-dropdown-icon"></i>
-						<div class="options clearfix" style="max-height:300px;">
-						<!-- {foreach from=$title.belong_region.city_list item=city} -->
-							<span class="liv hide" data-text="{$city.region_name}" data-type="3" data-value="{$city.region_id}">{$city.region_name}</span>
-						<!--{/foreach}-->
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>	
-	<!--卖场-入驻地区 end-->
-    {/if}
 	<div class="item">
 		<div class="label">{$lang.require_field}{$lang.expect_shop_type}：</div>
 		<div class="value red">
 			<!--{if $title.parentType.shoprz_type eq 1}{$lang.flagship_store}{elseif $title.parentType.shoprz_type eq 2}{$lang.exclusive_shop}{elseif $title.parentType.shoprz_type eq 3}{$lang.franchised_store}{/if}--> 
-			{$title.parentType.shoprz_type}
-		</div>
+                        {$title.parentType.shoprz_type}
+                </div>
 	</div>
 	<div class="item">
 		<div class="label">{$lang.naming_conventions}：</div>

@@ -64,7 +64,7 @@
                         <!-- 判断是否启用验证码{if $login_captcha} -->
                         <div class="form-item form-item-authcode">
                             <label>{$lang.Code_bind}</label>
-                            <input type="text" name="captcha" ectype="input" placeholder="{$lang.captcha_empty}" autocomplete="off" />
+                            <input type="text" name="captcha" ectype="input" onclick="login_captcha();" placeholder="{$lang.captcha_empty}" autocomplete="off" />
                             <img src="captcha_verify.php?captcha=is_login&{$rand}" class="login_captcha" alt="captcha" id="captcha_img" style="vertical-align: middle;cursor: pointer;" onClick="this.src='captcha_verify.php?captcha=is_login&'+Math.random()" width="119" height="52" />
                         </div>
                         <!--{/if}-->
@@ -119,7 +119,7 @@
                     <!-- 判断是否启用验证码{if $register_captcha} -->
                     <div class="form-item form-item-authcode">
                         <label>{$lang.Code_bind}</label>
-                        <input type="text" name="captcha" id="captcha" ectype="input" data-valid="captcha" data-default="<i class='i-def'></i>{$lang.Code_bind_one}" placeholder="{$lang.captcha_empty}" autocomplete="off" />
+                        <input type="text" name="captcha" id="captcha" ectype="input" data-valid="captcha" onclick="register_email();" data-default="<i class='i-def'></i>{$lang.Code_bind_one}" placeholder="{$lang.captcha_empty}" autocomplete="off" />
                         <img src="captcha_verify.php?captcha=is_register_phone&{$rand}" alt="captcha" id="authcode_img" class="is_register_email" style="vertical-align: middle;cursor: pointer;" onClick="this.src='captcha_verify.php?captcha=is_register_phone&'+Math.random()" width="119" height="52" />
                     </div>
                     <div class="input-tip"><span></span></div>
@@ -236,6 +236,14 @@ $("#form-bound").click(function(){
 		} , 'GET', 'JSON', true, true);	
 	}
 });
+
+function login_captcha(){
+	$(".login_captcha").click();
+}
+
+function register_email(){
+	$(".is_register_email").click();
+}
 </script>
 </body>
 </html>

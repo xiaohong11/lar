@@ -103,22 +103,20 @@ input[type='text']:focus::-webkit-input-placeholder{ color:#fff;}
 .backPwd_form .formInfo{ width:226px;}
 .backPwd_form .btn_div{ padding-top:15px;}
 .btn_div .sub{ width:113px; height:41px; border:0; background:#ff7c3a; color:#fff; border-radius:50px 0 0 50px; padding:0; font-size:14px; font-weight:bold; cursor:pointer;font-family: "Microsoft YaHei"; float:left;}
-.btn_div .cancel{ width:113px; height:41px; line-height:41px; border:0; background:#cecece; color:#fff; border-radius:0 50px 50px 0; padding:0; font-size:14px; font-weight:bold; cursor:pointer;font-family: "Microsoft YaHei"; float:left; text-align:center;}
+.btn_div .cancel{ width:113px; height:41px; border:0; background:#cecece; color:#fff; border-radius:0 50px 50px 0; padding:0; font-size:14px; font-weight:bold; cursor:pointer;font-family: "Microsoft YaHei"; float:left;}
 
 .btn_div .sub:hover,.btn_div .cancel:hover{box-shadow: 2px 3px 6px 0 rgba(0,0,0,0.3) inset;}
 
 .formText .return{ font-size:12px; color:#999; float:right; margin-right:10px;}
 .formText .return:hover{ color:#ec5151;}
 .backPwd_form .formText .input-text{ padding-left:20px; width:200px;}
-.error{display: inline-block;padding-top: 5px;font-size: 12px;color: #ec5051;width:418px;}
+.error{display: inline-block;padding-top: 5px;font-size: 12px;color: #ec5051;width:395px;}
 
-#notIe{ position:fixed; border-radius:0; box-shadow:inherit; border:0;}
-#notIe .pb-bd{ padding:0;}
-#notIe .pb-ft{ padding:0; position:static;}
+#notIe{ position:fixed;}
 #notIe .noContent{ width:316px; height:376px; background:url(../images/not_ie78.png) no-repeat;}
 #notIe .noContent .noText{ padding-top:190px; width:100%;}
 #notIe .noContent .noText p{ text-align:center; margin:0;}
 #notIe .noContent .noText p.p1{ font-size:16px; color:#0092ce; margin-bottom:6px;}
 #notIe .noContent .noText p.p2{ padding-top:10px;}
 #notIe .noContent .noText p.p2,#notIe .noContent .noText p.p3{ font-size:14px; color:#333333; margin-bottom:5px;}
-#notIe .pb-btn{ position:absolute; background:none; border:0; padding:0; border-radius:0; width:270px; height:60px; line-height:60px; font-size:18px; color:#fff; bottom:0; left:20px; text-align:center; cursor:pointer;}
+#notIe .pb-btn{ position:absolute; width:270px; height:60px; line-height:60px; font-size:18px; color:#fff; bottom:0; left:20px; text-align:center; cursor:pointer;}

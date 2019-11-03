@@ -25,7 +25,7 @@
                     <div class="img_flie_{$goods_attr_id}">
                     {if $goods_attr_info.attr_img_flie}
                     <span class="show">
-                    <a href="{$goods_attr_info.attr_img_flie}" target="_blank" class="nyroModal" title="点击查看"><i class="icon icon-picture"></i></a>
+                    <a href="../{$goods_attr_info.attr_img_flie}" target="_blank" class="nyroModal" title="点击查看"><i class="icon icon-picture"></i></a>
                     </span>
                     {/if}
                     {if $goods_attr_info.attr_img_flie}
@@ -37,16 +37,14 @@
                 </div>
 			</div>
 		</div>
-		{if $lib_type neq 1}
         <div class="item">
 			<div class="label">属性相册图：</div>
 			<div class="value lh30">
                 <input name="choose_attrImg" value="选择图片" type="button" onclick="get_choose_attrImg({$goods_id}, {$goods_attr_id})"class="sc-btn btn25 sc-redBg-btn mr10" />
-                {if $goods_attr_info.attr_gallery_flie}<a href="{$goods_attr_info.attr_gallery_flie}" id="attr_gallery_flie_{$goods_attr_id}" class="nyroModal" title="点击查看"><i class="icon icon-picture"></i></a>{/if}
+                {if $goods_attr_info.attr_gallery_flie}<a href="../{$goods_attr_info.attr_gallery_flie}" id="attr_gallery_flie_{$goods_attr_id}" class="nyroModal" title="点击查看"><i class="icon icon-picture"></i></a>{/if}
                 <input type="hidden" name="img_url" value="{$goods_attr_info.attr_gallery_flie}" id="imgUrl" />
 			</div>
 		</div>
-		{/if}
         <div class="item">
 			<div class="label">属性外链地址：</div>
 			<div class="value lh30">

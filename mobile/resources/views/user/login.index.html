@@ -3,20 +3,21 @@
     <section class="user-center user-login margin-lr p-r">
         <form class="login-form validation" action="{url('index')}" method="post">
         <div class="user-login-header-box">
-            <div class="user-login-header"><div class="user-login-header-img"><div class="img-commom"><img style="border-radius:100%" src="{elixir('img/get_avatar.png')}"/></div></div></div>
+            <div class="user-login-header"><div class="user-login-header-img"><img src="{elixir('img/get_avatar.png')}"/></div></div>
         </div>
             <div class="b-color-f  user-login-ul user-login-ul-after">
                 <div class="text-all dis-box j-text-all login-li " name="usernamediv">
                     <i class="iconfont icon-huiyuan"></i>
                     <div class="box-flex input-text">
-                        <input class="j-input-text" name="username" datatype="*" nullmsg="请输入用户名" errormsg="请输入用户名" type="text" placeholder="请输入您的用户名/手机号"/>
+                        <input class="j-input-text" name="username" datatype="*" nullmsg="请输入用户名"
+                               type="text" placeholder="请输入您的账号"/>
                         <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
                     </div>
                 </div>
                 <div class="text-all dis-box j-text-all login-li m-top10" name="passworddiv">
                     <i class="iconfont icon-password"></i>
                     <div class="box-flex input-text">
-                        <input class="j-input-text" name="password" type="password" datatype="*6-20" nullmsg="请输入密码" errormsg="密码至少6位数" placeholder="请输入6-20位登录密码"/>
+                        <input class="j-input-text" name="password" type="password" datatype="*" nullmsg="请输入密码" placeholder="请输入您的密码"/>
                         <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
                     </div>
                     <i class="iconfont icon-yanjing is-yanjing j-yanjing disabled"></i>
@@ -32,9 +33,9 @@
             <div class="box-flex">
                  <a class="list-password f-04" href="{url('user/login/get_password')}">忘记密码</a>
             </div>
-            <div class="box-flex">
-                 <a class="list-new f-04" href="{url('user/login/register',array('back_act' => $back_act))}">新用户注册</a>
-            </div>
+           
+                 <a class="list-new f-04" href="{url('user/login/register')}">新用户注册</a>
+           
         </div>
         {if $oauth_list}
         <div class="other-login">
@@ -43,7 +44,7 @@
             </h5>
             <ul class="dis-box">
                 {foreach $oauth_list as $vo}
-                    <li class="box-flex"><a href="{url('oauth/index/index', array('type' => $vo['type'], 'refer' => 'user', 'back_url' => $back_act))}">
+                    <li class="box-flex"><a href="{url('oauth/index/index', array('type' => $vo['type'],'back_url' => $back_act))}">
                         <img src="{elixir('img/oauth/sns_'.$vo['type'].'.png')}" alt="" width="60">
                         </a>
                     </li>
@@ -71,12 +72,7 @@
                 }
             }
         });
-    });
-
-    header_img()
-    window.onresize = function(){
-        header_img()
-    }
+    })
 </script>
 </body>
 

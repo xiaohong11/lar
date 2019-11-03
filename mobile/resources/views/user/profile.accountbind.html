@@ -32,16 +32,14 @@
                             <a href="javascript:;">
                                <sapn class="color-red">已绑定</sapn>
                             </a>
-                            {if $val.type != 'wechat'}
                             <label>|</label>
                             <a href="javascript:;" data-item="{$val.id}" class="accountbind">
                                 <sapn class="col-7">解绑</sapn>
                             </a>
-                            {/if}
                         </div>
                         {else}
                         <div class="user_profile_bind_btn">
-                            <a href="{url('oauth/index/index', array('type' => $val.type, 'user_id' => $user_id, 'back_url' => $back_url))}">
+                            <a href="{url('oauth/index/index', array('type' => $val.type, 'user_id' => $user_id))}">
                                 <sapn class="col-7">去绑定</sapn>
                             </a>
                          </div>
@@ -97,8 +95,6 @@
                 d_messages(data.msg);
                 if(data.url){
                     window.location.href = data.url;
-                } else {
-                    window.location.reload();
                 }
                 return false;
             },'json');

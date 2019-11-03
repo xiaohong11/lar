@@ -14,7 +14,23 @@
 <link href="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/css/merchants.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="../js/perfect-scrollbar/perfect-scrollbar.min.css" />
 <link rel="stylesheet" type="text/css" href="../js/calendar/calendar.min.css" />
-{insert_scripts files='calendar/calendar.min.js'}
+<script type="text/javascript" src="../js/calendar/calendar.min.js"></script>
+<script type="text/javascript">
+	function openDiv() {
+		if(document.getElementById('shop_categoryMain_id')){
+			var shop_categoryMain = document.getElementById('shop_categoryMain_id');//  主营类目
+			var addCategoryMain_Id = document.getElementById('addCategoryMain_Id');//  一级类目
+			addCategoryMain_Id.value = shop_categoryMain.value;
+			selectChildCate(shop_categoryMain.value);
+		}
+		
+		$("#divSCA").OpenDiv();
+	}
+
+	function closeDiv() {
+		$("#divSCA").CloseDiv();	
+	}
+</script>
 </head>
 
 <body class="merchants">
@@ -25,25 +41,24 @@
             <!--{if $step neq 'stepSubmit'}-->
             <div class="s-p-steps">
                 <ul>
-                    <li class="{if $sid eq 1}curr{elseif $sid gt 1  || $step eq 'stepSubmit'} cur{/if}">
+                    <li {if $sid eq 1}class="curr"{elseif $sid gt 1  || $step eq 'stepSubmit'}class="cur"{/if}>
                         <span>1. 入驻须知</span>
                         <i class="iconfont icon-arrow-right-alt"></i>
                     </li>
-                    <li class="{if $sid eq 2} curr{elseif $sid gt 2  || $step eq 'stepSubmit'} cur{/if}">
+                    <li {if $sid eq 2}class="curr"{elseif $sid gt 2  || $step eq 'stepSubmit'}class="cur"{/if}>
                         <span>2. 公司信息认证</span>
                         <i class="iconfont icon-arrow-right-alt"></i>
                     </li>
-                    <li class="{if $sid eq 3} curr{elseif $sid gt 3 || $step eq 'stepSubmit'} cur{/if}">
+                    <li {if $sid eq 3}class="curr"{elseif $sid gt 3 || $step eq 'stepSubmit'}class="cur"{/if}>
                         <span>3. 店铺信息认证</span>
                         <i class="iconfont icon-arrow-right-alt"></i>
                     </li>
-                    <li class="last{if $step eq 'stepSubmit'} curr{elseif $sid gt 4} cur{/if}">
+                    <li class="last {if $step eq 'stepSubmit'} curr{elseif $sid gt 4} cur{/if}">
                         <span>4. 等待审核</span>
                     </li>
                 </ul>
             </div>
             <!--{/if}-->
-            
             <!--{if $sid eq 1}-->
             <div class="panel">
                 <form id="stepForm" action="merchants_steps_action.php" method="post" name="stepForm">
@@ -66,7 +81,7 @@
             <!--{else} -->
             <div class="panel">
             <!--{if $step neq 'stepSubmit'}-->
-            <form enctype="multipart/form-data" id="stepForm" method="post" action="merchants_steps_action.php" name="stepForm">
+            <form enctype="multipart/form-data" id="stepForm" method="post" action="merchants_steps_action.php" name="stepForm" onsubmit="return validate();">
                 <div class="panel-content">
                     <div class="bg-warp">
                         <div class="title">
@@ -74,7 +89,7 @@
                         </div>
                         {foreach from=$steps_title item=title}
                             {if $title.special_type eq 1 && $title.fields_special neq ''}
-                            <div class="prompt">{$title.fields_special}</div>
+                                <div class="prompt">{$title.fields_special}</div>
                             {/if}
                             
                             {if $title.steps_style eq 0}
@@ -97,26 +112,26 @@
                             {/if}
                         {/foreach}
                     </div>
+                    
                 </div>
                 {if $brandView neq 'addBrand'}
                 <div class="btn-group">
-                    <input type="hidden" name="numAdd" value="1" id="numAdd" />
-                    <input type="hidden" name="pid_key" value="{$pid_key}" />
-                    <input type="hidden" name="sid" value="{$sid}" />
-                    <input type="hidden" name="step" value="{$step}" />
-                    
+                    <input name="numAdd" value="1" id="numAdd" type="hidden" />
+                    <input name="pid_key" type="hidden" value="{$pid_key}" />
+                    <input name="sid" type="hidden" value="{$sid}" />
+                    <input name="step" type="hidden" value="{$step}" />
                     {if $pid_key>1 || $sid>=3}
-                    <input type="button" value="{$lang.merchants_step_Seven}" class="btn btn-w" id="js-pre-step" />
+                    <input class="btn btn-w" id="js-pre-step" type="button" value="{$lang.merchants_step_Seven}" />
                     {/if}
-                    
                     {if $brandView eq 'brandView'}
-                    <input type="hidden" name="brandView" value="{$brandView}" />
-                    <input type="submit" value="{$lang.Preservation}" class="btn" id="nextStepBtn" />
+                    <input name="brandView" type="hidden" value="{$brandView}" />
+                    <input id="nextStepBtn" class="btn" type="submit" value="{$lang.Preservation}">
+                   
                     {elseif $brandView eq 'add_brand'}
-                    <input type="hidden" name="brandView" value="{$brandView}" />
+                    <input name="brandView" type="hidden" value="{$brandView}" />
                     {else}
                         {if $process.fields_next}
-                        <input type="submit" value="{$process.fields_next}" class="btn" id="nextStepBtn" />
+                        <input id="nextStepBtn" class="btn" type="submit" value="{$process.fields_next}">
                         {/if}
                     {/if}
                 </div>
@@ -173,7 +188,7 @@
 </div>
 <!-- #BeginLibraryItem "/library/page_footer_flow.lbi" --><!-- #EndLibraryItem -->
 </body>
-{insert_scripts files='jquery.divbox.js,common.js,shopping_flow.js,region.js,utils.js,perfect-scrollbar/perfect-scrollbar.min.js,jquery.validation.min.js,lib_ecmobanFunc.js'}
+{insert_scripts files='jquery.divbox.js,common.js,shopping_flow.js,region.js,utils.js,perfect-scrollbar/perfect-scrollbar.min.js'}
 <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/dsc-common.js"></script>
 <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/jquery.purebox.js"></script>
 <script type="text/javascript">
@@ -187,349 +202,281 @@ var btn_buy = "{$lang.btn_buy}";
 var is_cancel = "{$lang.is_cancel}";
 var select_spe = "{$lang.select_spe}";
 
-/* 日期勾选永久 */
-function get_shopTime_term(t){
-	var parent = $(t).parent(".cart-checkbox");
-	var input = parent.siblings("input[type='text']");
-	
-	if($(t).is(":checked")){
-		parent.addClass("cart-checkbox-checked");
-		input.val('');
-		input.removeClass("jdate");
-	}else{
-		parent.removeClass("cart-checkbox-checked");
-		input.addClass("jdate");
-	}
-}
-
 $(function(){
-	//默认加载主营类目
-	var shop_categoryMain = $("#shop_categoryMain_id_val").val();
-	selectChildCate(shop_categoryMain);
-	
-	/* 添加详细类目 */
-	$("#addCategoryBtn").on("click",function(){
-		var content = $("#divSCA .mod").clone();
-		$("#divSCA .mod").remove();
-		
-		pb({
-			id:"dialogCate",
-			title:"添加类目",
-			width:560,
-			content:content,
-			ok_title:"确定",
-			cl_title:"取消",
-			onOk:function(){
-				scanCodeDialog("#dialogCate");
-				
-				//类目提交
-				selectChildCate_cheked();
-			},
-			onCancel:function(){
-				scanCodeDialog("#dialogCate");
-			},
-			onClose:function(){
-				scanCodeDialog("#dialogCate");
-			}
-		});
-	});
-	
-	//类目关闭弹窗
-	function scanCodeDialog(obj){
-		var obj = $(obj).find(".mod");
-		var cp = obj.clone();
-		$("#divSCA").append(cp);
-	}
-	
-	//类目复选框选择
-	$(document).on("click","input[name='cateChild[]']",function(){
-		if($(this).prop("checked") == true){
-			$(this).parent().addClass("cart-checkbox-checked");
-		}else{
-			$(this).parent().removeClass("cart-checkbox-checked");
-		}
-	});
-	
-	//二级类目全选
-	$(document).on("click","#getCateAll",function(){
-		var t = $(this);
-		
-		if(t.prop("checked") == true){
-			t.parent().addClass("cart-checkbox-checked");
-			$("#steps_re_span").find("input[name='cateChild[]']").prop("checked",true);
-			$("#steps_re_span").find(".cart-checkbox").addClass("cart-checkbox-checked");
-		}else{
-			t.parent().removeClass("cart-checkbox-checked");
-			$("#steps_re_span").find("input[name='cateChild[]']").prop("checked",false);
-			$("#steps_re_span").find(".cart-checkbox").removeClass("cart-checkbox-checked");
-		}
-	});
-	
-	//返回上一步
 	$("#js-pre-step").click(function(){
-		var pid_key = {$pid_key} - 2;
+		var pid_key={$pid_key}-2;
 		var step='{$step}';
-		
-		if(step>-1){
+		if(step>-1)
+		{
 			location.href="merchants_steps.php?step="+step+"&pid_key="+pid_key;	
-		}else{
+		}
+		else
+		{
 			history.go(-1);
 		}
-	});
-	
-	//入驻验证
-	$("#nextStepBtn").click(function(){
-		$("#stepForm").validate({
-			ignore : ".ignore"
-		});
-		
-		$("input[name='ec_shoprz_type']").rules("add",{
-			min : 1,
-			messages : {
-				min : json_languages.merchants_step_error_one
-			}
-		});
-		
-		$("input[name='ec_subShoprz_type']").rules("add",{
-			min : 1,
-			messages : {
-				min : json_languages.merchants_step_error_three
-			}
-		});
-		
-		$("input[name='ec_shop_categoryMain']").rules("add",{
-			min : 1,
-			messages : {
-				min : json_languages.merchants_step_error_four
-			}
-		});
-		
-		$("input[name='detailed_category']").rules("add",{
-			min : 1,
-			messages : {
-				min : '{$lang.please_Add_category}'
-			}
-		});
-		
-		$("input[name='title_brand_list']").rules("add",{
-			min : 1,
-			messages : {
-				min : json_languages.merchants_step_error_two
-			}
-		});
-		
-		$("input[name='ec_bank_name_letter']").rules("add",{
-			required : true,
-			isEnglish : true,
-			messages : {
-				required : json_languages.merchants_step_error_En,
-				isEnglish : json_languages.merchants_step_error_En_name
-			}
-		});
-		
-		$("input[name='ec_brandFirstChar']").rules("add",{
-			required:true,
-			maxlength : 1,			
-			messages : {
-				required: json_languages.merchants_step_error_six,
-				maxlength : json_languages.merchants_step_error_shou_null
-			}
-		});
-		
-		$("input[name='ec_brandLogo']").rules("add",{
-			required : 1,
-			messages : {
-				required :  json_languages.merchants_step_error_seven
-			}
-		});
-		
-		$("input[name='ec_brandType']").rules("add",{
-			min : 1,
-			messages : {
-				min :  json_languages.merchants_step_error_Eight
-			}
-		});
-		
-		$("input[name='ec_brand_operateType']").rules("add",{
-			min : 1,
-			messages : {
-				min : json_languages.merchants_step_error_Nine
-			}
-		});
-		
-		$("input[name='ec_shoprz_brandName']").rules("add",{
-			required:true,
-			messages : {
-				required : json_languages.merchants_step_error_brand
-			}
-		});
-		
-		$("input[name='ec_shop_class_keyWords']").rules("add",{
-			required:true,
-			messages : {
-				required : json_languages.merchants_step_cata_key
-			}
-		});
-		
-		$("input[name='ec_rz_shopName']").rules("add",{
-			required:true,
-			messages : {
-				required : json_languages.merchants_step_error_Eleven
-			}
-		});
-		
-		$("input[name='ec_hopeLoginName']").rules("add",{
-			required:true,
-			messages : {
-				required : json_languages.merchants_step_error_Twelve
-			}
-		});
-	});	
+	})
 });
 
-<!-- 入驻第三步 店铺信息认证 店铺类型及类目信息 start -->
-/* 期望店铺类型选择 */
-$.divselect("#ec_shoprz_type","#ec_shoprz_type_val",function(obj){
-	var val = obj.data("value");
+function validate(){
 	
-	if(val == 0){
-		$("#subShoprz_Html").html(json_languages.merchants_step_error_one);
-		$("#ec_subShoprz_type").hide();
-		$("*[ectype='shopType']").hide();
-	}else{
-		if(val == 1){
-			$("#ec_subShoprz_type").show();
-			$("#ec_subShoprz_type_val").removeClass("ignore");
-			$("*[ectype='shopType']").show();
-		}else{
-			$("#ec_subShoprz_type").hide();
-			$("*[ectype='shopType']").hide();
-			$("#ec_subShoprz_type_val").addClass("ignore");
-		}
-		
-		$("*[ectype='shopSellerPrompt']").find(".item").eq(val-1).show().siblings().hide();
-		
-		$("#subShoprz_Html").html('');
-	}
-});
-
-/* 期望旗舰店店铺选择 */
-$.divselect("#ec_subShoprz_type","#ec_subShoprz_type_val",function(obj){
-	var val = obj.data("value");
+	var contactName = document.getElementById('contactName');
+	var contactPhone = document.getElementById('contactPhone');
+	var contactEmail = document.getElementById('contactEmail');
 	
-	if(val == 0){
-		$("#subShoprz_Html").html(json_languages.merchants_step_error_three);
-		$("*[ectype='shopType']").hide();
-		$("*[ectype='shopType']").find(".item-item").hide();
-	}else{
-		$("*[ectype='shopType']").show();
-		if(val != 1){
-			$("*[ectype='shopType']").find(".item-item").eq(val-2).show().siblings().hide();
-		}else{
-			$("*[ectype='shopType']").find(".item-item").hide();
-		}
-		
-		$("#subShoprz_Html").html('');
-	}
-});
-
-/* 主营类目选择 */
-$.divselect("#shop_categoryMain_id","#shop_categoryMain_id_val",function(obj){
-	var val = obj.data("value");
-	var name = obj.text();
-	if(val != 0){
-		$("#cate_Html").html('');
-		selectChildCate(val);
-		
-		//给弹出窗口一级目录赋值
-		$("#addCategoryMain_Id_val").val(val);
-		$("#addCategoryMain_Id .cite").find("span").html(name);
-	}else{
-		$("#cate_Html").html(json_languages.merchants_step_error_four);		
-	}
-});
-
-$.divselect("#addCategoryMain_Id","#addCategoryMain_Id_val",function(obj){
-	var val = obj.data("value");
-	var name = obj.text();
-	
-	selectChildCate(val);
-	
-	//给主营类目赋值
-	$("#shop_categoryMain_id_val").val(val);
-	$("#shop_categoryMain_id .cite").find("span").html(name);
-});
-
-//选择一级类目查找二级类目
-function selectChildCate(val,type,cateArr){
-	if(typeof(type) == 'undefined'){
-		type = 0;
-	}
-	
-	if(typeof(cateArr) == 'undefined'){
-		cateArr = '';
-	}
-
-	Ajax.call('merchants_steps.php?step=addChildCate', 'cat_id=' + val + '&type=' + type + '&cateArr=' + $.toJSON(cateArr),function(result){
-		if(result.error == 1){
-			pbDialog(result.message,"",0);
-			location.href = 'user.php';
-		}else{
-			$('#steps_re_span').html(result.content);
-			$('#getCateAll').attr('checked',false);
-			
-			if(result.type == 1){ //取消二级类目
-				$('#detailCategoryTable').html(result.cate_checked); //删除二级类目列表
-				$('#category_permanent').html(result.catePermanent); //以及类目证件列表
-			}
-		}
-	}, 'POST', 'JSON');
-}
-
-//添加二级类目
-function selectChildCate_cheked(){
-	var cateArr = new Object();
-	var child = new Array();
-	var cateChild = $("#dialogCate").find("input[name='cateChild[]']");
-	for(i=0; i<cateChild.length; i++){
-		if(cateChild[i].checked == true){
-			child[i] = cateChild[i].value;
-		}else{
-			child[i] = '';
-		}
-	}
-	
-	//记录详细类目数量 验证时用到
-	$("input[name='detailed_category']").val(cateChild.length);
-	
-	cateArr.cat_id = child;
-	
-	Ajax.call('merchants_steps.php?step=addChildCate_checked', 'cat_id=' + $.toJSON(cateArr),function(result){
-		if(result.error == 1){
-			pbDialog(result.message,"",0);
-			location.href = 'user.php';
-		}else{
-			$('#detailCategoryTable').html(result.content); //二级类目别表
-			$('#category_permanent').html(result.catePermanent); //以及类目证件列表
-		}
-	}, 'POST', 'JSON');
-}
-
-//删除二级类目
-function deleteChildCate(ct_id){
-	Ajax.call('merchants_steps.php?step=deleteChildCate_checked', 'ct_id=' + ct_id,function(result){
-		if(result.error == 1){
-			pbDialog(result.message,"",0);
-			location.href = 'user.php';
-		}else{
-			$('#detailCategoryTable').html(result.content); //删除类目
-			$('#category_permanent').html(result.catePermanent); //以及类目证件列表
+	if(contactName && contactPhone && contactEmail){
+		var name_result = _contactName();
+		var phone_result = _contactPhone();
+		var email_result = _contactEmail();
+		if(name_result == false || phone_result == false || email_result == false){
+			return false;
 		}	
-	}, 'POST', 'JSON');
-}
-<!-- 入驻第三步 店铺信息认证 店铺类型及类目信息 end -->
+	}
+	
+	var cate_result = get_element('shoprz_type', 'shoprz_Html', 0, json_languages.merchants_step_error_one);
+	
+	if(cate_result == false){
+		return false;
+	}
+	
+	var title_brand_list = document.getElementById('title_brand_list');
+	
+	if(title_brand_list && title_brand_list.value == 0){
+		var title_brand_listHTML = document.getElementById('title_brand_listHTML');
+		title_brand_listHTML.innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp'+json_languages.merchants_step_error_two;
+		return false;
+	}
+	
+	if(document.getElementById('subShoprz_type')){
+		var subShoprz = document.getElementById('subShoprz_type');
+		if(subShoprz.style.display == 'block' || subShoprz.style.display == ''){
+			if(subShoprz.value == 0){
+				if(document.getElementById('subShoprz_Html')){
+					var subShoprz_Html = document.getElementById('subShoprz_Html');
+					subShoprz_Html.innerHTML = json_languages.merchants_step_error_three;
+					
+					return false;
+				}
+			}else{
+				if(document.getElementById('subShoprz_Html')){
+					var subShoprz_Html = document.getElementById('subShoprz_Html');
+					subShoprz_Html.innerHTML = '';
+				}
+			}
+		}
+	}
+	
+	var cate_result = get_element('shop_categoryMain_id', 'cate_Html', 0, json_languages.merchants_step_error_four);
+	
+	if(cate_result == false){
+		return false;
+	}else{
+		
+		if(document.getElementById('shop_categoryMain_id')){
+			
+			var seller_category = $(".seller_category").size();
+			
+			if(seller_category == 0){
+				$("#categorySpan").removeClass("hide");
+				return false;
+			}else{
+				$("#categorySpan").addClass("hide");
+			}
+		}
+	}
+	
+	var brandName_result = get_element('brandName', 'brandNameHTML', '', json_languages.merchants_step_error_five);
+	
+	if(brandName_result == false){
+		return false;
+	}
+	
+	var brandFirst_result = get_element('brandFirstChar', 'brandFirstCharHTML', '', json_languages.merchants_step_error_six);
+	if(brandFirst_result == false){
+		return false;
+	}
 
-/* 添加品牌资质 */
+	var text_brandView_brandLogo = document.getElementById('textBrandLogo');
+	if(text_brandView_brandLogo && text_brandView_brandLogo.value == ''){
+		var brandLogo_result = get_element('brandLogo', 'textBrandLogoHTML', '', json_languages.merchants_step_error_seven);
+		
+		if(brandLogo_result == false){
+			var textBrandLogo_result = get_element('textBrandLogo', '', '', '');
+			if(textBrandLogo_result == false){
+				return false;
+			}
+		}
+	}
+
+	var brandType_result = get_element('brandType', 'brandTypeHTML', 0, json_languages.merchants_step_error_Eight);
+	
+	if(brandType_result == false){
+		return false;
+	}
+	
+	var operateType_result = get_element('brand_operateType', 'operateTypeHTML', 0, json_languages.merchants_step_error_Nine);
+	
+	if(operateType_result == false){
+		return false;
+	}
+	
+	var brandEndTime_result = get_element('ec_brandEndTime', 'brandEndTimeHTML', '', json_languages.merchants_step_error_ten);
+	
+	if(brandEndTime_result == false){
+		var textBrandLogo_result = get_element('brandEndTime_permanent', '', false, '', 'checkbox');
+
+		if(textBrandLogo_result == false){
+			return false;
+		}
+	}
+	
+	var rz_shopName_result = get_element('rz_shopName', 'rz_shopNameHTML', '', json_languages.merchants_step_error_Eleven);
+	
+	if(rz_shopName_result == false){
+		return false;
+	}
+	
+	var hopeLoginName_result = get_element('hopeLoginName', 'hopeLoginNameHTML', '', json_languages.merchants_step_error_Twelve);
+	
+	if(hopeLoginName_result == false){
+		return false;
+	}
+	
+	{if $choose_process eq 1}
+	{foreach from=$steps_title item=title}
+		{foreach from=$title.cententFields item=fields}
+			{if $fields.chooseForm eq 'input' || $fields.chooseForm eq 'textarea'} //纯文本
+				var input_{$fields.textFields} = document.forms['stepForm'].elements['{$fields.textFields}'].value;
+				{if $fields.will_choose eq 1}
+					if(input_{$fields.textFields} == ''){
+						
+						document.getElementById('{$fields.textFields}').innerHTML = '请填写{$fields.fieldsFormName}';
+						document.forms['stepForm'].elements['{$fields.textFields}'].focus();
+						
+						return false;
+					}else{
+						document.getElementById('{$fields.textFields}').innerHTML = '';
+					}
+				{/if}
+			{elseif $fields.chooseForm eq 'other'} //地区、上传文件、日期
+				{if $fields.otherForm eq 'textArea'}
+					//地区
+					var selCountries_{$fields.textFields} = document.getElementById('selCountries_{$fields.textFields}_{$sn}').value;
+					var selProvinces_{$fields.textFields} = document.getElementById('selProvinces_{$fields.textFields}_{$sn}').value;
+					var selCities_{$fields.textFields} = document.getElementById('selCities_{$fields.textFields}_{$sn}').value;
+					var selDistricts_{$fields.textFields} = document.getElementById('selDistricts_{$fields.textFields}_{$sn}').value;
+					
+					var selD_{$fields.textFields} = document.getElementById('selDistricts_{$fields.textFields}_{$sn}').style.display;
+					
+					{if $fields.will_choose eq 1}
+						if(selCountries_{$fields.textFields} == 0){
+							document.getElementById('{$fields.textFields}').innerHTML = json_languages.Please_select+'{$fields.fieldsFormName}';
+							return false;	
+						}else{
+							document.getElementById('{$fields.textFields}').innerHTML = '';
+						}
+						
+						if(selProvinces_{$fields.textFields} == 0){
+							document.getElementById('{$fields.textFields}').innerHTML =  json_languages.Please_select+'{$fields.fieldsFormName}';
+							return false;
+						}else{
+							document.getElementById('{$fields.textFields}').innerHTML = '';
+						}
+						
+						if(selCities_{$fields.textFields} == 0){
+							document.getElementById('{$fields.textFields}').innerHTML =  json_languages.Please_select+'{$fields.fieldsFormName}';
+							return false;
+						}else{
+							document.getElementById('{$fields.textFields}').innerHTML = '';
+						}
+						
+						if(selD_{$fields.textFields} != 'none'){	
+							if(selDistricts_{$fields.textFields} == 0){
+								document.getElementById('{$fields.textFields}').innerHTML =  json_languages.Please_select+'{$fields.fieldsFormName}';
+								return false;
+							}else{
+								document.getElementById('{$fields.textFields}').innerHTML = '';
+							}
+						}
+					{/if}
+				{elseif $fields.otherForm eq 'dateFile'} 	
+					//上传文件
+					var input_{$fields.textFields} = document.forms['stepForm'].elements['{$fields.textFields}'].value;
+					var text_{$fields.textFields} = document.forms['stepForm'].elements['text_{$fields.textFields}'].value;
+					
+					{if $fields.will_choose eq 1}
+						if(input_{$fields.textFields} == '' && text_{$fields.textFields} == ''){
+							document.getElementById('{$fields.textFields}').innerHTML = json_languages.Please_upload+'{$fields.fieldsFormName}'+json_languages.Photo;
+							return false;	
+						}else{
+							document.getElementById('{$fields.textFields}').innerHTML = '';
+						}
+					{/if}
+				{elseif $fields.otherForm eq 'dateTime'} 
+					//日期
+					{foreach from=$fields.dateTimeForm item=date key=dk}
+						var dateTime_{$fields.textFields} = document.getElementById('{$fields.textFields}_{$dk}').value;
+						{if $fields.will_choose eq 1}
+							if(dateTime_{$fields.textFields} == ''){
+								document.getElementById('{$fields.textFields}').innerHTML = json_languages.Please_input+'{$fields.fieldsFormName}';
+								return false;
+							}else{
+								document.getElementById('{$fields.textFields}').innerHTML = '';
+							}
+						{/if}	
+					{/foreach}
+				{/if}
+			{elseif $fields.chooseForm eq 'select'} 
+			 	var select_{$fields.textFields} = document.forms['stepForm'].elements['{$fields.textFields}'].value;
+				{if $fields.will_choose eq 1}
+					if(select_{$fields.textFields} == 0){
+						document.getElementById('{$fields.textFields}').innerHTML = json_languages.Please_select+'{$fields.fieldsFormName}';
+						document.forms['stepForm'].elements['{$fields.textFields}'].focus();
+						
+						return false;
+					}else{
+						document.getElementById('{$fields.textFields}').innerHTML = '';
+					}	
+				{/if}	
+			{/if}
+		{/foreach}
+	{/foreach}
+	{/if}
+}
+
+function $id(element) {
+  return document.getElementById(element);
+}
+
+function get_element(element, elementHTML, where, textCen, type){
+	if($id(element)){
+		
+		var where_type;
+		
+		if(type != 'checkbox'){
+			var element = $id(element).value;
+			where_type = (element == where);
+		}else{
+			where_type = ($id(element).checked == false);
+		}
+		
+		if(where_type){
+			if($id(elementHTML)){
+				if($id(elementHTML) && elementHTML != ''){
+					$id(elementHTML).innerHTML = textCen;
+				}
+			}
+			
+			return false;
+		}else{
+			if($id(elementHTML) && elementHTML != ''){
+				$id(elementHTML).innerHTML = '';
+			}
+			
+			return true;
+		}
+	}
+}
+
 function addBrandTable(obj)
 {  
 	var add_num = 1000;
@@ -555,11 +502,10 @@ function addBrandTable(obj)
 	}
 }
 
-/* 删除品牌资质 */
 function removeBrandTable(obj,b_fid)
 {
 	if(b_fid > 0){
-		if (confirm(json_languages.merchants_step_remove)){
+		if (confirm(merchants_step_remove)){
 		   location.href = 'merchants_steps.php?step={$step}&pid_key={$b_pidKey}&ec_shop_bid={$ec_shop_bid}&del_bFid=' + b_fid + '&brandView=brandView';
 	   }
 	}else{
@@ -577,11 +523,84 @@ function removeBrandTable(obj,b_fid)
 			radioCheckbox_val[i].value = i;
 		}
 	}
+}  
+
+//永久 清空开始时间和结束时间
+function get_authorizeCheckBox(f,id_start,id_end, start_date, end_date){
+	if(id_start != '' || id_end != ''){
+		if(id_start == ''){
+			id_start = 'n_s';
+		}
+		if(id_end == ''){
+			id_end = 'n_e';
+		}
+		
+		var start_time = document.getElementById(id_start);
+		var end_time = document.getElementById(id_end);
+		
+		if(f.checked){
+			start_time.value = '';
+			end_time.value = '';
+		}else{
+			if(start_date != '' || end_date != ''){
+				start_time.value = start_date;
+				end_time.value = end_date;
+			}
+		}
+	}
 }
 
-/* 删除品牌 */
+function get_categoryId_permanent(f, permanent_date, dt_id){
+	var categoryId = document.getElementById('categoryId_date_' + dt_id);
+	if(f.checked){
+		categoryId.value = '';
+	}else{
+		if(permanent_date != ''){
+			categoryId.value = permanent_date;
+		}
+	}
+}
+
+function get_expiredDate_permanent(f, expiredDateInput, b_fid){
+	if(b_fid > 0){
+		var expiredDate = document.getElementById('expiredDateInput_' + b_fid);
+		if(f.checked){
+			$(f).parent().addClass("cart-checkbox-checked");
+			expiredDate.value = '';
+		}else{
+			$(f).parent().removeClass("cart-checkbox-checked");
+			if(expiredDateInput != ''){
+				expiredDate.value = expiredDateInput;
+			}
+		}
+	}else{
+		var DateInput = document.getElementsByName("ec_expiredDateInput[]");
+		var permanent = document.getElementsByName("ec_expiredDate_permanent[]");
+		for(i=0; i<permanent.length; i++){
+			if(permanent[i].checked){
+				if(DateInput[i].value != ''){
+					DateInput[i].value = '';
+				}
+			}
+		}
+	}
+}
+
+function get_brandEndTime_permanent(f, brandEndTime){
+	var ec_brandEndTime = document.getElementById('ec_brandEndTime');
+	if(f.checked){
+		$(f).parent().addClass("cart-checkbox-checked");
+		ec_brandEndTime.value = '';
+	}else{
+		$(f).parent().removeClass("cart-checkbox-checked");
+		if(brandEndTime != ''){
+			ec_brandEndTime.value = brandEndTime;
+		}
+	}
+}
+
 function get_deleteBrand(bid){
-	if (confirm(json_languages.merchants_step_remove)){
+	if (confirm(merchants_step_remove)){
 		location.href = 'merchants_steps.php?step={$step}&pid_key={$b_pidKey}&ec_shop_bid=' + bid + '&del=deleteBrand';
 	}
 }

@@ -15,9 +15,9 @@
                 </ul>
             </div>		
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content_common}</li>
+                	<li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
                 </ul>
             </div>
 			<form action="zc_project.php?act={$state}" method="post" name="theForm" enctype="multipart/form-data" id="zc_project_form">
@@ -80,7 +80,7 @@
 										<input type="file" class="type-file-file" id="tit_img" name="tit_img" data-state="imgfile" size="30" hidefocus="true" value="" />
 										{if $info}
 										<span class="show">
-											<a href="../{$info.title_img}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="../{$info.title_img}" ectype="tooltip" title="tooltip"></i></a>
+											<a href="../{$info.title_img}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../{$info.title_img}>')" onmouseout="toolTip()"></i></a>
 										</span>
 										{/if}
 										<input type="text" name="textfile" class="type-file-text" value="{if $info}../{$info.title_img}{/if}" id="textfield" autocomplete="off" readonly />
@@ -153,14 +153,15 @@
     </style>
  	{include file ='library/pagefooter.lbi'}
     
-	<script type="text/javascript">
+	<script language="JavaScript">
 	//切换标签
 	$(".tabs_info li").click(function(){
 		var this_tab = $(this).data('tab');
 		$(".flexilist[data-table="+this_tab+"]").show();
 		$(".flexilist[data-table="+this_tab+"]").siblings(".flexilist").hide();
-	});
-	
+	})
+	</script>	
+	<script>
 	$(function(){
 		//表单验证
 		$("#submitBtn").click(function(){
@@ -206,24 +207,44 @@
 				}
 			}			
 		});
-		$('.nyroModal').nyroModal();
+	$('.nyroModal').nyroModal();
 	});
 	
-	var opts1 = {
-		'targetId':'promote_start_date',
-		'triggerId':['promote_start_date'],
-		'alignId':'text_time1',
-		'format':'-',
-		'hms':'off'
-	},opts2 = {
-		'targetId':'promote_end_date',
-		'triggerId':['promote_end_date'],
-		'alignId':'text_time2',
-		'format':'-',
-		'hms':'off'
+	function validate()
+	{
+		validator = new Validator("theForm");
+		validator.required("title", '{$lang.zc_project_name}{$lang.empty}');
+		validator.required("initiator", '{$lang.initiator_name}{$lang.empty}');
+		validator.required("cat_id", '{$lang.category_name}{$lang.empty}');
+		validator.required("money", '{$lang.zc_project_raise_money}{$lang.empty}');
+		validator.required("des", '{$lang.zc_project_desc}{$lang.empty}');
+		validator.required("risk_instruction", '{$lang.zc_risk_instruction}{$lang.empty}');
+		{if $act eq 'add'}
+		validator.required("tit_img", '{$lang.zc_project_title_img}{$lang.empty}');
+		{/if}	
+		return validator.passed();
 	}
-	xvDate(opts1);
-	xvDate(opts2);
 	</script>
+	{literal}
+	
+	<script>
+		var opts1 = {
+			'targetId':'promote_start_date',
+			'triggerId':['promote_start_date'],
+			'alignId':'text_time1',
+			'format':'-',
+			'hms':'off'
+		},opts2 = {
+			'targetId':'promote_end_date',
+			'triggerId':['promote_end_date'],
+			'alignId':'text_time2',
+			'format':'-',
+			'hms':'off'
+		}
+		
+		xvDate(opts1);
+		xvDate(opts2);
+	</script>
+	{/literal}
 </body>
 </html>

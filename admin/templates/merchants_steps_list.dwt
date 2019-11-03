@@ -5,33 +5,30 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.seller} - {$ur_here}</div>
+    	<div class="title">商家 - {$ur_here}</div>
         <div class="content">
         	{include file ='library/seller_step_tab.lbi'}		
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.list.0}</li>
-                    <li>{$lang.operation_prompt_content.list.1}</li>
-                    <li>{$lang.operation_prompt_content.list.2}</li>
+                	<li>商家入驻申请流程步骤信息管理。</li>
+                    <li>平台按实际业务需要设定流程步骤。</li>
+                    <li>如不清楚流程设定请谨慎删除通用流程。</li>
                 </ul>
             </div>
             <div class="flexilist">
             	<div class="common-head">
                 	<div class="fl">
-                        <a href="merchants_steps.php?act=add"><div class="fbutton"><div class="add" title="{$lang.02_merchants_add}"><span><i class="icon icon-plus"></i>{$lang.steps_process_title}</span></div></div></a>
+                        <a href="merchants_steps.php?act=add"><div class="fbutton"><div class="add" title="添加流程步骤"><span><i class="icon icon-plus"></i>添加流程步骤</span></div></div></a>
                     </div>
                    	<div class="refresh">
-                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    	<div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>
                     <div class="search">
-                    	<form action="javascript:;" name="searchForm" onSubmit="searchGoodsname(this);">
                     	<div class="input">
-                        	<input type="text" name="keywords" class="text nofocus" placeholder="{$lang.steps_process_title}" autocomplete="off" />
-                            <input type="submit" class="btn" name="secrch_btn" ectype="secrch_btn" value="" />
+                        	<input type="text" name="keywords" class="text nofocus" placeholder="流程信息标题" autocomplete="off" /><button class="btn" name="secrch_btn"></button>
                         </div>
-                        </form>
                     </div>
                 </div>
                 <div class="common-content">
@@ -75,7 +72,7 @@
                                     	<div class="tDiv"><img src="images/yes.png" class="pl3" /></div>
 									{else}
                                     	<div class="tDiv">
-                                        	<div class="switch {if $process.is_show}active{/if}" onclick="listTable.switchBt(this, 'toggle_steps_show', {$process.id})" title="{$lang.yes}">
+                                        	<div class="switch {if $process.is_show}active{/if}" onclick="listTable.switchBt(this, 'toggle_steps_show', {$process.id})" title="是">
                                             	<div class="circle"></div>
                                             </div>
                                             <input type="hidden" value="1" name="">
@@ -116,25 +113,25 @@
             </div>
         </div>
     </div>
-    {include file ='library/pagefooter.lbi'}
-    
-    <script type="text/javascript">
+ {include file ='library/pagefooter.lbi'}
+<script type="text/javascript">
 	//列表导航栏设置下路选项
 	$(".ps-container").perfectScrollbar();
 		
 	//分页传值
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
+	listTable.recordCount = '{$record_count}';
+	listTable.pageCount = '{$page_count}';
 
 	{foreach from=$filter item=item key=key}
 	listTable.filter.{$key} = '{$item}';
 	{/foreach}
 
-	function confirm_bath(){
-		cfm = '{$lang.list_still_accounts}' + '{$lang.remove_confirm_process}';
-		return confirm(cfm);
-	}
-    </script>
+    function confirm_bath()
+    {
+      cfm = '{$lang.list_still_accounts}' + '{$lang.remove_confirm_process}';
+      return confirm(cfm);
+    }
+</script>
 </body>
 </html>
 {/if}

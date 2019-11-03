@@ -17,7 +17,7 @@
 					<input type="button" name="button" id="button" class="type-file-button" value="" />
 					<input type="file" class="type-file-file" id="legal_person_fileImg" name="permanentFile_{$permanent.cat_id}[]" size="30" hidefocus="true" value="" onchange="document.getElementById('textfield5').value=this.value" />
 					<span class="show">
-						<a href="../{$permanent.permanent_file}" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="../{$permanent.permanent_file}" ectype="tooltip" title="tooltip"></i></a>
+						<a href="../{$permanent.permanent_file}" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('../{$permanent.permanent_file}')" onmouseout="toolTip()"></i></a>
 					</span>
 					<input type="text" name="textfile" class="type-file-text" id="textfield5" readonly />
 				</div>
@@ -30,7 +30,7 @@
 					<div class="checkbox_items">
 						<div class="checkbox_item">
 							<input type="checkbox" name="categoryId_permanent_{$permanent.cat_id}[]" class="ui-checkbox" id="categoryId_permanent_{$permanent.dt_id}">
-							<label for="categoryId_permanent_{$permanent.dt_id}" class="ui-label">{$lang.permanent}</label>
+							<label for="categoryId_permanent_{$permanent.dt_id}" class="ui-label">永久</label>
 						</div>
 					</div>
 				</div>

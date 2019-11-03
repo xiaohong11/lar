@@ -13,17 +13,12 @@
  * $Id: calendar.php 17217 2011-01-19 06:29:08Z liubo $
 */
 
-$_LANG['flow_salve_error'] = "海量用户正在同一时刻下单，请返回重新下单";
-
-$_LANG['user_baitiao_pay'] = "订单白条支付";
-
 /*购物车*/
 $_LANG['With_a_gift'] = "满赠";
 $_LANG['Full_reduction'] = "满减";
 $_LANG['discount'] = "折扣";
-$_LANG['shiping_prompt'] = "暂不支持配送";
+$_LANG['shiping_prompt'] = "该地区暂不支持配送";
 $_LANG['shelves_goods'] = "该商品已下架";
-$_LANG['shortage'] = "对不起，该商品已经库存不足暂停销售。\n你现在要进行缺货登记来预订该商品吗？";
 $_LANG['purchasing_prompt'] = "该商品购买已达到限购条件,无法再购买";
 $_LANG['purchasing_prompt_two'] = "对不起，该商品已经累计超过限购数量";
 $_LANG['system_error'] = "系统无法接收不完整的数据";
@@ -46,11 +41,10 @@ $_LANG['Ious_error_one'] = "您未被授权使用会员白条支付，请选择�
 $_LANG['Ious_error_two'] = "会员白条余额不足，请选择其他支付方式";
 $_LANG['Ious_error_Three'] = "您有过期未付款金融，不可以用会员白条支付，请选择其他支付方式";
 $_LANG['pay_password_packup_error'] = '您的支付密码有误！'; 
-$_LANG['have_no_store_goods'] = '没有找到门店商品，请重新选择！';
 $_LANG['balance_pay'] = "余额支付";
 $_LANG['ious_pay'] = "白条支付";
 $_LANG['store_msg'] = "尊敬的 %s 用户，您的门店订单 %s 提货码是：%s ，请不要把提货码泄露给其他人，如非本人操作，可不用理会.";
-$_LANG['purchasing_prompt'] = "该 '%s' 商品已经累计超过限购数量";
+$_LANG['purchasing_prompt'] = "该 %s 商品已经累计超过限购数量";
 $_LANG['purchase_Prompt'] = "该 %s 商品您已购买过，无法再购买";
 $_LANG['youhui'] = "优惠";
 $_LANG['Distribution_exists'] = "配送信息已存在"; 
@@ -250,10 +244,5 @@ $_LANG['pay_dialog_fail'] = "支付失败了";
 $_LANG['pay_problem'] = "支付遇到问题";
 $_LANG['pay_qt'] = "继续购物";
 /* 新前台模板新增 end*/
-
-$_LANG['district_null'] = "所在地区不能为空！";
-$_LANG['street_null'] = "所在街道不能为空！";
-
-$_LANG['package_null'] = "商品【%s】暂时缺货，请联系客服！";
 
 

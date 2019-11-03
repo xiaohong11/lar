@@ -3,7 +3,7 @@
 /**
  * ECSHOP EMS插件的语言文件
  * ============================================================================
- * * 版权所有 2005-2017 上海商创网络科技有限公司，并保留所有权利。
+ * * 版权所有 2005-2016 上海商创网络科技有限公司，并保留所有权利。
  * 网站地址: http://www.ecmoban.com；
  * ----------------------------------------------------------------------------
  * 这不是一个自由软件！您只能在不用于商业目的的前提下对程序代码进行修改和
@@ -14,12 +14,11 @@
 */
 
 $_LANG['ems']                   = 'EMS 国内邮政特快专递';
-//$_LANG['ems_express_desc']      = 'EMS 国内邮政特快专递描述内容';
-$_LANG['ems_express_desc']      = '<a href="http://www.ems.com.cn" target="_blank">http://www.ems.com.cn</a>';
+$_LANG['ems_express_desc']      = 'EMS 国内邮政特快专递描述内容';
 //$_LANG['fee_compute_mode'] = '费用计算方式';
-$_LANG['item_fee']              = '单件商品费用';
-$_LANG['base_fee']              = '500克以内费用';
-$_LANG['step_fee']              = '续重每500克或其零数的费用';
+$_LANG['item_fee']              = '单件商品费用：';
+$_LANG['base_fee']              = '500克以内费用：';
+$_LANG['step_fee']              = '续重每500克或其零数的费用：';
 $_LANG['shipping_print'] = '<table style="width:18.8cm" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td style="height:3.2cm;">&nbsp;</td>

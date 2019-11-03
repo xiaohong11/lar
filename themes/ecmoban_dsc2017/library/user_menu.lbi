@@ -4,7 +4,7 @@
 	<dl>
         <dt><i class="square"></i><span>{$lang.oreder_core}</span></dt>
 		<dd>
-			<p{if $action eq 'order_list' || $action eq 'order_detail' || $action eq 'order_recycle'} class="current"{/if}><a href="user.php?act=order_list" target="_self">{$lang.label_order}</a></p>
+			<p{if $action eq 'order_list' || $action eq 'order_detail'} class="current"{/if}><a href="user.php?act=order_list" target="_self">{$lang.label_order}</a></p>
 			<p{if $action eq 'address_list' || $action eq 'address'} class="current"{/if}><a href="user.php?act=address_list" target="_self">{$lang.label_address}</a></p>
 			<p{if $action eq 'booking_list'} class="current"{/if}><a href="user.php?act=booking_list" target="_self">{$lang.label_booking}</a></p>
 			<p{if $action eq 'return_list' || $action eq 'return_detail'} class="current"{/if}><a href="user.php?act=return_list" target="_self">{$lang.return_list}</a></p>
@@ -13,11 +13,11 @@
     <dl>
         <dt><i class="square"></i><span>{$lang.user_core}</span></dt>
 		<dd>
-			<p{if $action eq 'profile' || $action eq 'users_log'} class="current"{/if}><a href="user.php?act=profile" target="_self">{$lang.label_profile}</a></p>
+			<p{if $action eq 'profile'} class="current"{/if}><a href="user.php?act=profile" target="_self">{$lang.label_profile}</a></p>
 			<p{if $action eq 'account_safe'} class="current"{/if}><a href="user.php?act=account_safe" target="_self">{$lang.account_safe}</a></p>
 			<p{if $action eq 'account_bind'} class="current"{/if}><a href="user.php?act=account_bind" target="_self">{$lang.account_bind}</a></p>
 			<p{if $action eq 'crowdfunding'} class="current"{/if}><a href="user.php?act=crowdfunding" target="_self">{$lang.crowdfunding}</a></p>
-			<p{if $action eq 'collection_list' || $action eq 'store_list' || $action eq 'focus_brand'} class="current"{/if}><a href="user.php?act=collection_list" target="_self">{$lang.btn_collect}/{$lang.attention}</a></p>
+			<p{if $action eq 'collection_list' || $action eq 'store_list'} class="current"{/if}><a href="user.php?act=collection_list" target="_self">{$lang.btn_collect}/{$lang.attention}</a></p>
 <!--        <p{if $action eq 'focus_brand'} class="current"{/if}><a href="user.php?act=focus_brand" target="_self">{$lang.focus_brand}</a></p>-->
 			<p{if $action eq 'message_list'} class="current"{/if}><a href="user.php?act=message_list" target="_self">{$lang.message_list}</a></p>
 			<!-- {if $affiliate.on eq 1} -->
@@ -26,10 +26,8 @@
 			<p{if $action eq 'comment_list' || $action eq 'commented_view'} class="current"{/if}><a href="user.php?act=comment_list" target="_self">{$lang.comment_list}</a></p>
 			<p{if $action eq 'take_list'} class="current"{/if}><a href="user.php?act=take_list"> {$lang.my_take_delivery}</a></p>
 			<p{if $action eq 'complaint_list' || $action eq 'complaint_apply' } class="current"{/if}><a href="user.php?act=complaint_list"> {$lang.Trade_complaint}</a></p>
-			<p{if $action eq 'invoice' || $action eq 'vat_invoice_info'} class="current"{/if}><a href="user.php?act=invoice"> {$lang.my_invoice}</a></p>
-			{if $is_illegal eq 1}
+			<p{if $action eq 'invoice'} class="current"{/if}><a href="user.php?act=invoice"> {$lang.my_invoice}</a></p>
 			<p{if $action eq 'illegal_report' || $action eq 'goods_report'} class="current"{/if}><a href="user.php?act=illegal_report"> {$lang.illegal_report}</a></p>
-			{/if}
         </dd>
 	</dl>
     <dl>

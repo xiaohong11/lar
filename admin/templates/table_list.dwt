@@ -4,10 +4,10 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="group_buy.php?act=list" class="s-back">{$lang.back}</a>{$lang.13_backup} - {$ur_here}</div>
+    	<div class="title"><a href="group_buy.php?act=list" class="s-back">{$lang.back}</a>数据库管理 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>使用说明：</h4><span id="explanationZoom" title="使用说明"></span></div>
                 <ul>
                 	<li>修改表前缀之后，请将根目录下的 data/config.php 文件中的 $prefix 变量的值也改成 "修改后表前缀"</li>
                 </ul>
@@ -22,7 +22,7 @@
 						<div class="list-div">
 						<table id="listTable">
 							<tr>
-								<th width="10%"><div class="tDiv">{$lang.record_id}<div></th>
+								<th width="10%"><div class="tDiv">编号</div></th>
 								<th width="15%"><div class="tDiv">当前表前缀</div></th>
 								<th width="15%"><div class="tDiv">修改后表前缀</div></th>
 								<th width="60%"><div class="tDiv">SQL语句</div></th>

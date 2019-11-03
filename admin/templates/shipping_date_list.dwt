@@ -4,14 +4,23 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.11_system} - {$ur_here}</div>
+    	<div class="title">系统设置 - {$ur_here}</div>
         <div class="content">
-        	{include file ='library/shipping_menu_tab.lbi'}		
+        	<div class="tabs_info">
+            	<ul>
+                    <li {if $menu_select.current eq '03_shipping_list'}class="curr"{/if}><a href="shipping.php?act=list">配送方式</a></li>
+                    <li {if $menu_select.current eq '05_area_list'}class="curr"{/if}><a href="area_manage.php?act=list">地区列表</a></li>
+                    <li {if $menu_select.current eq '09_region_area_management'}class="curr"{/if}><a href="region_area.php?act=list">区域管理</a></li>
+                    <li {if $menu_select.current eq '09_warehouse_management'}class="curr"{/if}><a href="warehouse.php?act=list">仓库管理</a></li>
+					<li {if $menu_select.current eq 'warehouse_ship_list'}class="curr"{/if}><a href="warehouse.php?act=ship_list">仓库运费模板</a></li>
+                    <li {if $menu_select.current eq 'shipping_date_list'}class="curr"{/if}><a href="shipping.php?act=date_list">自提时间段</a></li>
+                </ul>
+            </div>		
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.data_list.0}</li>
-                    <li>{$lang.operation_prompt_content.data_list.1}</li>
+                	<li>自提点时间段列表。</li>
+                    <li>在前台结算页面上门自取时间选择中会使用到。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -41,7 +50,7 @@
                                     <td class="handle">
                                         <div class="tDiv a2">
                                             <a href="shipping.php?act=date_edit&sid={$shipping.shipping_date_id}" class="btn_edit"><i class="icon icon-edit"></i>{$lang.edit}</a>
-                                            <a href="shipping.php?act=date_remove&sid={$shipping.shipping_date_id}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                            <a href="shipping.php?act=date_remove&sid={$shipping.shipping_date_id}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>
                                         </div>
                                     </td>                           
                                 </tr>
@@ -56,6 +65,6 @@
             </div>
 		</div>
 	</div>
-	{include file ='library/pagefooter.lbi'}
+ {include file ='library/pagefooter.lbi'}
 </body>
 </html>

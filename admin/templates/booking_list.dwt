@@ -5,26 +5,24 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.order_word} - {$ur_here}</div>
+    	<div class="title">订单 - {$ur_here}</div>
         <div class="content">
-            {include file="library/common_tabs_info.lbi"}
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.0}</li>
-                    <li>{$lang.operation_prompt_content.1}</li>
+                	<li>前台商品详情页无货的情况下，买家可进行缺货登记。</li>
+                    <li>后台管理缺货登记信息，及时通知买家。</li>
                 </ul>
             </div>
             <div class="flexilist">
             	<div class="common-head">
-                    <div class="search">
-                        <form action="javascript:;" name="searchForm" onSubmit="searchGoodsname(this);">
-                        <div class="input">
-                            <input type="text" name="keyword" class="text nofocus" placeholder="{$lang.goods_name}" autocomplete="off" />
-                            <input type="submit" class="btn" name="secrch_btn" ectype="secrch_btn" value="" />
+                    <form action="javascript:searchGoodsname()" name="searchForm">
+                        <div class="search">
+                            <div class="input">
+                                <input type="text" name="keyword" class="text nofocus" placeholder="{$lang.goods_name}" autocomplete="off" /><input type="submit" value="" class="not_btn" />
+                            </div>
                         </div>
-                        </form>
-                    </div>
+                    </form>
                 </div>
                 <div class="common-content">
 				<form method="post" action="" name="listForm">
@@ -47,7 +45,7 @@
 							{foreach from=$booking_list item=booking}
                             	<tr>
                                     <td><div class="tDiv">{$booking.rec_id}</div></td>
-                                	<td><div class="tDiv">{if $booking.user_name}<font class="red">{$booking.user_name}</font>{else}<font class="blue">自营</font>{/if}</div></td>
+                                	<td><div class="tDiv">{if $booking.user_name}<font style="color:#F00;">{$booking.user_name}</font>{else}<font class="blue">自营</font>{/if}</div></td>
                                     <td><div class="tDiv">{$booking.link_man|escape}</div></td>
                                     <td><div class="tDiv">{$booking.goods_name}</div></td>
                                     <td><div class="tDiv">{$booking.goods_number}</div></td>
@@ -55,8 +53,8 @@
                                     <td><div class="tDiv">{if $booking.is_dispose}<img src="images/yes.png">{else}<img src="images/no.png">{/if}</div></td>    
                                     <td class="handle">
 										<div class="tDiv a2">
-											<a href="goods_booking.php?act=detail&amp;id={$booking.rec_id}" title="{$lang.detail}" class="btn_see"><i class="sc_icon sc_icon_see"></i>{$lang.view}</a>
-											<a href="javascript:;" onclick="listTable.remove({$booking.rec_id},'{$lang.drop_confirm}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+											<a href="?act=detail&amp;id={$booking.rec_id}" title="{$lang.detail}" class="btn_see"><i class="sc_icon sc_icon_see"></i>{$lang.view}</a>
+											<a href="javascript:;" onclick="listTable.remove({$booking.rec_id},'{$lang.drop_confirm}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>
 										</div>
 									</td>
                                 </tr>
@@ -81,15 +79,25 @@
             </div>
         </div>
     </div>
-    {include file ='library/pagefooter.lbi'}
+     {include file ='library/pagefooter.lbi'}
 	<script type="text/javascript">
-	//分页传值
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
+        //分页传值
+        listTable.recordCount = '{$record_count}';
+        listTable.pageCount = '{$page_count}';
+    
+        {foreach from=$filter item=item key=key}
+        listTable.filter.{$key} = '{$item}';
+        {/foreach}
 
-	{foreach from=$filter item=item key=key}
-	listTable.filter.{$key} = '{$item}';
-	{/foreach}
+        /**
+         * 搜索标题
+         */
+        function searchGoodsname()
+        {
+            listTable.filter['keywords'] =  Utils.trim($("form[name='searchForm']").find("input[name='keyword']").val());
+            listTable.filter['page'] = 1;
+            listTable.loadList("get_bookinglist");
+        }
     </script>
 </body>
 </html>

@@ -4,27 +4,28 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.11_system} - {$ur_here}</div>
+    	<div class="title">系统设置 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
             	<div class="ex_tit">
-					<i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span>
+					<i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span>
                     {if $open eq 1}
                     <div class="view-case">
-                    	<div class="view-case-tit"><i></i>{$lang.view_tutorials}</div>
+                    	<div class="view-case-tit"><i></i>查看教程</div>
                         <div class="view-case-info">
-                        	<a href="http://help.ecmoban.com/article-6873.html" target="_blank">{$lang.tutorials_bonus_list_one}</a>
+                        	<a href="http://help.ecmoban.com/article-6873.html" target="_blank">商城支付方式设置</a>
                         </div>
                     </div>			
                     {/if}	
 				</div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.list.0}</li>
-                    <li>{$lang.operation_prompt_content.list.1}</li>
-                    <li>{$lang.operation_prompt_content.list.2}</li>
+                	<li>该页面展示了所有平台支付方式的相关信息列表。</li>
+                    <li>可进行卸载或安装相应的支付方式。</li>
+                    <li>安装相应支付方式后，用户购物时便可使用相应的支付方式，请谨慎卸载。</li>
                 </ul>
             </div>
             <div class="flexilist">
+            	<!--商品分类列表-->
                 <div class="common-content">
                 	<div class="list-div" id="listDiv">
                     	<table class="table_layout">
@@ -88,10 +89,11 @@
                         </table>
                     </div>
                 </div>
+                <!--商品分类列表end-->
             </div>
 		</div>
 	</div>
- 	{include file ='library/pagefooter.lbi'}
+ {include file ='library/pagefooter.lbi'}
     <script type="text/javascript">
 		//列表导航栏设置下路选项
     	$(".ps-container").perfectScrollbar();

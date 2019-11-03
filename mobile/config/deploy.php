@@ -9,10 +9,7 @@
 return [
 
     // 设置URL链接地址
-    'pc_url' => '', // 如；http://www.dscmall.cn（PC站点的URL地址）
-
-    // 设置资源URL链接地址
-    'static_url' => '', // 如；http://static.dscmall.cn（PC站点的资源URL地址）
+    'static_url' => '', // 如；http://www.dscmall.cn（PC站点的URL地址）
 
     // 设置PC目录绝对路径
     'upload_path' => dirname(dirname(__DIR__)) . '/', // 如：/mnt/www（PC站点所在文件目录）

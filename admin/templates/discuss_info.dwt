@@ -4,22 +4,22 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$lang.goods_alt} - {$ur_here}</div>
+    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>商品 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content_common}</li>
-                    <li>{$lang.operation_prompt_content.list.0}</li>
-                    <li>{$lang.operation_prompt_content.list.1}</li>
+                	<li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
+                    <li>请先选择合适的讨论主题的类型。</li>
+                    <li>请合理设置讨论主题和内容。</li>
                 </ul>
             </div>
-            <!--直接引用 start-->
+            <!--直接引用 start-->	
             {foreach from=$single_img item=img}
-            <img style="overflow:hidden; word-break:break-all;" src="{$img.thumb_url}" alt="" title=""/>
-            <div style="display:none; margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0;"><img src='{$img.img_url}' /></div>
+                <img style="overflow:hidden; word-break:break-all;" src="{$img.thumb_url}" alt="" title=""/>
+                <div style="display:none; margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0;"><img src='{$img.img_url}' /></div>
             {/foreach}
-
+            
             {if $reply_info.content}
             <!-- reply content list -->
             <div class="info_warp">
@@ -39,18 +39,18 @@
                     <div align="right"><b>{$lang.ip_address}</b>: {$reply_info.ip_address}</div>
                   </td>
                 </tr>
-
+                
               </table>
             </div>
             {/if}
-
+            
             {if $send_fail}
             <ul style="padding:0; margin: 0; list-style-type:none; color: #CC0000;">
             <li style="border: 1px solid #CC0000; background: #FFFFCC; padding: 10px; margin-bottom: 5px;" >{$lang.mail_send_fail}</li>
             </ul>
             {/if}
             <!--直接引用 end-->
-
+            
             <div class="flexilist">
                 <div class="common-content">
                     <div class="mian-info">
@@ -59,28 +59,6 @@
                                 <div class="item">
                                     <div class="label">{$lang.discuss_circle_type}：</div>
                                     <div class="label_value">
-                                        {if $action eq 'relpy'}
-                                        <div class="checkbox_items">
-                                            {if $msg.dis_type eq 1}
-                                            <div class="checkbox_item">
-                                                <input type="radio" class="ui-radio" name="discuss_type" id="discuss_type_1" value="1" {if $msg.dis_type eq 1}checked="checked"{/if} />
-                                                <label for="discuss_type_1" class="ui-radio-label">{$lang.forum.1}</label>
-                                            </div>
-                                            {/if}
-                                            {if $msg.dis_type eq 2}
-                                            <div class="checkbox_item">
-                                                <input type="radio" class="ui-radio" name="discuss_type" id="discuss_type_2" value="2" {if $msg.dis_type eq 2}checked="checked"{/if} />
-                                                <label for="discuss_type_2" class="ui-radio-label">{$lang.forum.2}</label>
-                                            </div>
-                                            {/if}
-                                            {if $msg.dis_type eq 3}
-                                            <div class="checkbox_item">
-                                                <input type="radio" class="ui-radio" name="discuss_type" id="discuss_type_3" value="3" {if $msg.dis_type eq 3}checked="checked"{/if} />
-                                                <label for="discuss_type_3" class="ui-radio-label">{$lang.forum.3}</label>
-                                            </div>
-                                            {/if}
-                                        </div>
-                                        {else}
                                         <div class="checkbox_items">
                                             <div class="checkbox_item">
                                                 <input type="radio" class="ui-radio" name="discuss_type" id="discuss_type_1" value="1" {if $msg.dis_type eq 1}checked="checked"{/if} />
@@ -93,9 +71,8 @@
                                             <div class="checkbox_item">
                                                 <input type="radio" class="ui-radio" name="discuss_type" id="discuss_type_3" value="3" {if $msg.dis_type eq 3}checked="checked"{/if} />
                                                 <label for="discuss_type_3" class="ui-radio-label">{$lang.forum.3}</label>
-                                            </div>
+                                            </div>											
                                         </div>
-                                        {/if}
                                     </div>
                                 </div>
 								{if $act neq 'update'}
@@ -105,74 +82,84 @@
 										<input name="keyword" type="text" id="keyword" class="text" autocomplete="off" />
 										<input name="search" type="button" id="search" value="{$lang.button_search}" class="btn btn30 red_btn" onclick="searchGoods()" />
                                     </div>
-                                </div>
+                                </div>	
                                 <div class="item">
                                     <div class="label">{$lang.goods_name}：</div>
                                     <div class="label_value">
                                         <div class="imitate_select select_w320" id="goods_id">
-                                          <div class="cite">{$lang.please}{$lang.search_goods}</div>
+                                          <div class="cite">请先{$lang.search_goods}</div>
                                           <ul>
-                                             <li><a href="javascript:;" data-value="{$tag.goods_id}" class="ftx-01">{$lang.please}{$lang.search_goods}</a></li>
+                                             <li><a href="javascript:;" data-value="{$tag.goods_id}" class="ftx-01">请先{$lang.search_goods}</a></li>
                                           </ul>
                                           <input name="goods_id" type="hidden" value="" id="goods_id_val">
                                         </div>
                                     </div>
-                                </div>
+                                </div>	
                                 <div class="item">
                                     <div class="label">{$lang.discuss_user}：</div>
                                     <div class="label_value">
 										<input name="user_name" type="text" id="user_name" class="text">
                                     </div>
-                                </div>
+                                </div>									
 								{else}
                                 <div class="item">
                                     <div class="label">{$lang.discuss_goods}：</div>
                                     <div class="label_value">
-                                        <a href="../{$msg.original_img}" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="../{$msg.original_img}" ectype="tooltip" title="tooltip"></i></a>
+                                        <a href="../{$msg.original_img}" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../{$msg.original_img}>')" onmouseout="toolTip()"></i></a>
                                         <a href="../goods.php?id={$msg.goods_id}" target="_blank">{$msg.goods_name}</a>
                                     </div>
-                                </div>
+                                </div>									
 								{/if}
                                 <div class="item">
                                     <div class="label">{$lang.discuss_title}：</div>
                                     <div class="label_value">
-										<input id="dis_title" class="text" {if $action eq 'relpy'} readonly {/if} type="text" name="dis_title" value="{$msg.dis_title}" size="60" autocomplete="off" />
+										<input id="dis_title" class="text" type="text" name="dis_title" value="{$msg.dis_title}" size="60" autocomplete="off" />
                                     </div>
-                                </div>
+                                </div>								
                                 <div class="item">
                                     <div class="label">{$lang.discuss_text}：</div>
                                     <div class="label_value">
-										<textarea name="content" id="content" {if $action eq 'relpy'} readonly {/if} class="textarea h200" >{$msg.dis_text}</textarea>
-										<!-- <iframe src="templates/editor/editor.html?id=content" frameborder="0" scrolling="no" width="693" height="320"></iframe> -->
+										<input type="hidden" name="content" id="content" value="{$msg.dis_text}">
+										<iframe src="templates/editor/editor.html?id=content" frameborder="0" scrolling="no" width="693" height="320"></iframe>
                                     </div>
                                 </div>
-                                {if $act eq 'update'}
+								<!--{if $act eq 'update'}
                                 <div class="item">
-                                    <div class="label">{$lang.adopt_status}：</div>
+                                    <div class="label">{$lang.img_list}:</div>
                                     <div class="label_value">
-                                        <div class="checkbox_items" ectype="general_audit_status">
-                                            <div class="checkbox_item">
-                                                <input name="review_status" type="radio" class="ui-radio" value="1" id="review_status_1" {if $msg.review_status eq 1}checked="checked"{/if} />
-                                                <label for="review_status_1" class="ui-radio-label">{$lang.not_audited}</label>
-                                            </div>
-                                            <div class="checkbox_item">
-                                                <input name="review_status" type="radio" class="ui-radio" value="2" id="review_status_2" {if $msg.review_status eq 2}checked="checked"{/if} />
-                                                <label for="review_status_2" class="ui-radio-label">{$lang.audited_not_adopt}</label>
-                                            </div>
-                                            <div class="checkbox_item">
-                                                <input name="review_status" type="radio" class="ui-radio" value="3" id="review_status_3" {if $msg.review_status eq 3}checked="checked"{/if} />
-                                                <label for="review_status_3" class="ui-radio-label">{$lang.audited_yes_adopt}</label>
-                                            </div>
-                                        </div>
+										{foreach from=$imgs item=imgs key=i}
+										<div id="gallery_{$imgs.img_id}" style="float:left; text-align:center; border: 1px solid #DADADA; margin: 4px; padding:2px;">
+										<a href="javascript:;" onclick="if (confirm('{$lang.drop_img_confirm}')) dropImg('{$imgs.img_id}')">[-]&nbsp;{$lang.drop_img}</a>
+										<br />
+										<a href="goods.php?act=show_image&img_url={$imgs.img_url}" target="_blank"><img src="../{$imgs.thumb_url}" width="300" border="0" /></a>
+										</div>
+										{/foreach}
+                                    </div>
+                                </div>	
+								{/if}
+								{if $act eq 'insert'}
+                                <div class="item">
+                                    <div class="label">{$lang.add_img}：</div>
+                                    <div class="label_value">
+										<table id="gallery-table" align="left">
+											<tr>
+												<td class="pt5">
+													<a href="javascript:;" onclick="addImg(this)" class="fl mr10">[+]</a>
+													<input type="hidden" name="img_desc[]" size="20" />
+													<input type="file" name="img_url[]" id="img_url_id" class="fl" />
+													<input type="hidden" size="40" value="http://" style="color:#aaa;" name="img_file[]"/>
+												</td>
+											</tr>
+										</table>
                                     </div>
                                 </div>
-                                <div class="item {if $bonus_arr.review_status neq 2}hide{/if}" id="review_content">
-                                    <div class="label">{$lang.adopt_reply}：</div>
-                                    <div class="value">
-                                        <textarea name="review_content" class="textarea h100">{$bonus_arr.review_content}</textarea>
+								{/if}
+                                <div class="item">
+                                    <div class="label">&nbsp;</div>
+                                    <div class="label_value">
+										<div id="img_list"></div>
                                     </div>
-                                </div>
-                                {/if}
+                                </div>-->						
                                 <div class="item">
                                     <div class="label">&nbsp;</div>
                                     <div class="label_value info_btn">
@@ -183,7 +170,7 @@
 										<input type="hidden" name="dis_type" value="{$msg.dis_type}">
 										<input type="hidden" name="act" value="{$act}">
                                     </div>
-                                </div>
+                                </div>								
                             </div>
                         </form>
                     </div>
@@ -191,8 +178,10 @@
             </div>
 		</div>
     </div>
-	{include file ='library/pagefooter.lbi'}
-	<script type="text/javascript">
+ {include file ='library/pagefooter.lbi'}
+	{literal}
+    
+	<script language="JavaScript">
 	function add_integ(obj, act, id, goods_id, user_id)
 	{
 		var integ = document.getElementById('add_integration').value;
@@ -216,9 +205,9 @@
 	  }
 
 	  $('#goods_id').find('li').remove();
-
+	  
 	  var goods = result.content;
-
+	  
 	  if(goods){
 		  for (i=0; i<goods.length;i++){
 			  $('#goods_id').find('ul').append('<li><a href="javascript:;" data-value="'+goods[i].goods_id+'" class="ftx-01">'+goods[i].goods_name+'</a></li>');
@@ -243,7 +232,7 @@
 			alert("{$lang.max_ten_img}");
 			return false;
 		}
-
+		
 		var row  = tbl.insertRow(idx + 1);
 		var cell = row.insertCell(-1);
 		cell.innerHTML = src.cells[0].innerHTML.replace(/(.*)(addImg)(.*)(\[)(\+)/i, "$1removeImg$3$4-");
@@ -276,5 +265,6 @@
 		}
 	}
 	</script>
+	{/literal}
 </body>
 </html>

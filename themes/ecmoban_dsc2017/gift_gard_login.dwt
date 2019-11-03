@@ -37,7 +37,7 @@
                         <div class="value">
                         	<div class="captcha_input">
                             	<input name="captcha" id="captcha" type="text" size="20" class="text" />
-                            	<img src="captcha_verify.php?captcha=is_common&{$rand}" alt="captcha" class="captcha_img" onClick="this.src='captcha_verify.php?captcha=is_common&'+Math.random()" data-key="captcha_common" />
+                            	<img src="captcha_verify.php?captcha=is_login&{$rand}" alt="captcha" class="captcha_img" onClick="this.src='captcha_verify.php?captcha=is_login&'+Math.random()" />
                             </div>
                             <div class="form_prompt"></div>
                         </div>
@@ -82,7 +82,7 @@
 		$('#gift_gard_form').validate({
 			errorPlacement:function(error, element){
 				var error_div = element.parents('div.value').find('div.form_prompt');
-				error_div.html("").append(error);
+				error_div.append(error);
 			},
 			rules : {
 				gift_card : {
@@ -96,21 +96,14 @@
 					required : true,
 					maxlength : 4,
 					remote : {
-						cache: false,
 						async:false,
-						type:'POST',
-						url:'ajax_dialog.php?act=ajax_captcha&seKey='+$("input[name='captcha']").siblings(".captcha_img").data("key"),
+						url:'single_sun.php?act=ajax_verify',
 						data:{
 							captcha:function(){
 								return $("input[name='captcha']").val();
 							}
 						},
-						dataFilter:function(data,type){
-							if(data == "false"){
-								$("input[name='captcha']").siblings(".captcha_img").click();
-							}
-							return data;
-						}
+						type:'get'
 					}
 				}
 				<!--{/if}-->
@@ -129,18 +122,6 @@
 					remote : json_languages.captcha_cw
 				}
 				<!--{/if}-->
-			},
-			success:function(label){
-				label.removeClass().addClass("succeed").html("<i></i>");
-			},
-			onkeyup:function(element,event){
-				var name = $(element).attr("name");
-				if(name == "captcha"){
-					//不可去除，当是验证码输入必须失去焦点才可以验证（错误刷新验证码）
-					return true;
-				}else{
-					$(element).valid();
-				}
 			}
 		});
 	});

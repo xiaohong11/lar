@@ -8,22 +8,23 @@
     	<div class="title">推荐分成 - {$ur_here}</div>
         <div class="content">		
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                 	<li>分成订单信息管理。</li>
                     <li>可搜索分成订单号查询分成订单。</li>
                 </ul>
             </div>
             <div class="flexilist">
+            	<!--商品列表-->
                 <div class="common-head">
                     <div class="refresh ml0">
-                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    	<div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>
-                    <div class="search">
-                    	<form action="javascript:;" name="searchForm" onSubmit="searchGoodsname(this);">
-                            <div class="select_w120 imitate_select">
-                                <div class="cite">{$lang.please_select}</div>
+                    <form action="javascript:searchUser()" name="searchForm">
+                        <div class="search">
+                            <div  class="select_w120 imitate_select">
+                                <div class="cite">请选择</div>
                                 <ul>
                                    <li><a href="javascript:;" data-value="">{$lang.sch_stats.all}</a></li>
                                    <li><a href="javascript:;" data-value="0">{$lang.sch_stats.0}</a></li>
@@ -33,11 +34,10 @@
                                 <input name="status" type="hidden" value="">
                             </div>
                             <div class="input">
-                                <input type="text" name="order_sn" class="text nofocus" placeholder="{$lang.sch_order}" autocomplete="off" />
-                                <input type="submit" class="btn" name="secrch_btn" ectype="secrch_btn" value="" />
+                                <input type="text" name="order_sn" class="text nofocus" placeholder="{$lang.sch_order}" autocomplete="off" /><input type="submit" value="" class="not_btn" />
                             </div>
-                    	</form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="common-content">
                 	<div class="list-div" id="listDiv">
@@ -91,17 +91,31 @@
 						{if $full_page}
                     </div>
                 </div>
+                <!--商品列表end-->
             </div>
 		</div>
 	</div>
  	{include file ='library/pagefooter.lbi'}
 	<script type="Text/Javascript" language="JavaScript">
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
+	listTable.recordCount = '{$record_count}';
+	listTable.pageCount = '{$page_count}';
 
 	{foreach from=$filter item=item key=key}
 	listTable.filter.{$key} = '{$item}';
 	{/foreach}
+
+	/**
+	* 搜索用户
+	*/
+	function searchUser()
+	{
+	   var frm = $("form[name='searchForm']");
+	
+	   listTable.filter['order_sn'] = frm.find("input[name='order_sn']").val();
+	   listTable.filter['status'] = Utils.trim(frm.find("input[name='status']").val());
+	   listTable.filter['page'] = 1;
+	   listTable.loadList();
+	}
 	</script>
 </body>
 </html>

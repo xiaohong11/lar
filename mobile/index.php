@@ -6,8 +6,9 @@
  * @package  ECTouch
  * @author   carson <wanganlin@ecmoban.com>
  */
+@ini_set('display_errors',        1);
 
-// define('APP_DEBUG', true);
+ define('APP_DEBUG', true);
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@
 |
 */
 
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------

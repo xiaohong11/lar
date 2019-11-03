@@ -4,28 +4,28 @@
  
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="brand.php?act=list" class="s-back">{$lang.back}</a>{$lang.goods_alt} - {$ur_here}</div>
+    	<div class="title"><a href="brand.php?act=list" class="s-back">{$lang.back}</a>商品 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>使用说明：</h4><span id="explanationZoom" title="使用说明"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.create_brand_letter.0}</li>
+                	<li>生成品牌的首字母，主要用于后台的品牌搜索按首字母查询</li>
                 </ul>
             </div>
             <div class="flexilist">
                 <div class="common-content">
                     <div class="mian-info">
 						<div class="list-div">
-						{$lang.current_modification_data}{$record_count|default:0}{$lang.tiao}
+						当前需要修改的数据有{$record_count|default:0}条
 						</div>
 						<div style=" width:100px; height:10px; clear:both; overflow:hidden;"></div>
 						<div class="list-div">
 						<table id="listTable">
 							<tr>
-                            	<th width="10%"><div class="tDiv">{$lang.record_id}<div></th>
-								<th width="10%"><div class="tDiv">{$lang.brand}ID</div></th>
-								<th width="15%"><div class="tDiv">{$lang.brand_name}</div></th>
-								<th width="15%"><div class="tDiv">{$lang.brand_first_char}</div></th>
+                            	<th width="10%"><div class="tDiv">编号</div></th>
+								<th width="10%"><div class="tDiv">品牌ID</div></th>
+								<th width="15%"><div class="tDiv">品牌名称</div></th>
+								<th width="15%"><div class="tDiv">首字母</div></th>
 							</tr>
 						</table>
 						</div>
@@ -74,9 +74,9 @@
             
             if(result.is_stop == 0){
 				$("#title_name").addClass("red");
-                $("#title_name").html(title_name_one);
+                $("#title_name").html("已完成更新，请关闭该窗口！");
             }else{
-				$("#title_name").html(title_name_two);
+				$("#title_name").html("正在生成品牌首字母中，请勿关闭该窗口！");
 			}
         }
     </script>

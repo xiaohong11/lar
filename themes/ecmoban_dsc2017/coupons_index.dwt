@@ -16,7 +16,7 @@
 
 <body>
 <!-- #BeginLibraryItem "/library/page_header_coupons.lbi" --><!-- #EndLibraryItem -->
-{* DSC 提醒您：动态载入coupons_index.lbi，显示首页分类小广告 *}{insert name='get_adv_child' ad_arr=$coupons_index id=0}
+{* ECSHOP 提醒您：动态载入coupons_index.lbi，显示首页分类小广告 *}{insert name='get_adv_child' ad_arr=$coupons_index id=0}
 <div id="content" class="quan_content">
     <div class="quan-main">
         <div class="gray-wrap">
@@ -38,7 +38,7 @@
                                                 <strong class="num">{$vo.cou_money}</strong>
                                                 <div class="txt"><div class="typ-txt">{$vo.cou_type_name}</div></div>
                                             </div>
-                                            <div class="limit"><span class="quota">{if $vo.cou_man gt 0}{$lang.full}{$vo.cou_man}{$lang.available_full}{else}{$lang.unlimited}{/if}</span></div>
+                                            <div class="limit"><span class="quota">{$lang.consumption_full}{$vo.cou_man}{$lang.available_full}</span></div>
                                             <div class="q-range">
                                                 <div class="range-item" title="{$vo.cou_title}">
                                                     {$vo.cou_title}
@@ -99,7 +99,6 @@
                             </div>
                             <div class="task-rcol">
                                 <div class="p-name"><a href="search.php?cou_id={$vo.cou_id}" target="_blank">{$vo.cou_name}</a></div>
-								<div class="range-item">{$vo.store_name}</div>
                                 <div class="p-ad"><i class="i1"></i><i class="i2"></i>{$lang.Top_up_coupons}</div>
                                 <div class="p-price">
                                     <em>￥</em>
@@ -136,64 +135,9 @@
                                         <strong class="num">{$vo.cou_money}</strong>
                                         <div class="txt" style="float: none;"><div class="typ-txt">{$vo.cou_type_name}</div></div>
                                         <div class="txt">
-                                            <div class="limit"><span class="ftx-06">{if $vo.cou_man gt 0}{$lang.full}{$vo.cou_man}{$lang.available_full}{else}{$lang.unlimited}{/if}</span></div>
+                                            <div class="limit"><span class="ftx-06">{$lang.full}{$vo.cou_man}{$lang.available_full}</span></div>
                                         </div>
                                     </div>
-                                <div class="q-range">
-                                    <div class="range-item"><p title="{if $vo.cou_goods}<p>{$lang.permissions_buy}</p>{else}<p>{$lang.category}</p>{/if}">
-                                        {$vo.cou_title}
-                                    </p></div>
-                                    <div class="range-item">{$vo.store_name}</div>
-                                    <div class="range-item">{$vo.cou_start_time_format}-{$vo.cou_end_time_format}</div>
-                                </div>
-                            </div>
-                            {if !empty($smarty.session.user_id) && $vo.cou_is_receive}
-                                {if $vo.is_use==0}
-                                    {if $vo.cou_surplus eq 0}
-                                        <div class="q-opbtns"><a href="javascript:;" class="" cou_id="{$vo.cou_id}"><b class="semi-circle"></b>{$lang.Take_up}</a></div>
-                                    {else}
-                                        <div class="q-opbtns"><a href="search.php?cou_id={$vo.cou_id}" target="_blank"><b class="semi-circle"></b>{$lang.Immediate_use}</a></div>
-                                        <div class="q-state"><div class="btn-state btn-geted">{$lang.receive_hove}</div></div>
-                                    {/if}
-
-                                {else}
-                                    {if $vo.cou_surplus eq 0}
-                                    <div class="q-opbtns"><a href="javascript:;" class="" cou_id="{$vo.cou_id}"><b class="semi-circle"></b>{$lang.Take_up}</a></div>
-                                    {else}
-                                    <div class="q-opbtns"><a href="javascript:;" class="q-btn get-coupon" cou_id="{$vo.cou_id}"><b class="semi-circle"></b>{$lang.receive_now}</a></div>
-                                    {/if}
-                                {/if}
-                            {else}
-                                {if $vo.cou_surplus eq 0}
-                                <div class="q-opbtns"><a href="javascript:;" class="" cou_id="{$vo.cou_id}"><b class="semi-circle"></b>{$lang.Take_up}</a></div>
-                                {else}
-                                <div class="q-opbtns"><a href="javascript:;" class="q-btn get-coupon" cou_id="{$vo.cou_id}"><b class="semi-circle"></b>{$lang.receive_now}</a></div>
-                                {/if}
-                            {/if}
-                        </div>
-                        {/foreach}
-                    </div>
-                </div>
-            </div>
-            <div class="quan-mod">
-                <div class="mt">
-                    <h3><b class="find-icon"></b>免邮神券</h3>
-                    <div class="slogan s2">{$lang.always_you}</div>
-                    <div class="extra-r"><a target="_blank" href="coupons.php?act=coupons_list&type=shipping" class="more">{$lang.more} &gt;</a></div>
-                    <div class="line"></div>
-                </div>
-                <div class="mc cou_shipping">
-                    <div class="quan-list">
-                        {foreach from=$cou_shipping item=vo}
-                        <div class="quan-item quan-d-item quan-item-acoupon{if $vo.cou_surplus eq 0} quan-gray-item{/if}">
-                            <div class="q-type">
-                                <div class="q-price">
-                                    <i class="icon-my"></i>
-                                    <div class="txt" style="float: none;"><div class="typ-txt">{$vo.cou_type_name}</div></div>
-                                    <div class="txt">
-                                        <div class="limit"><span class="ftx-06">{if $vo.cou_man gt 0}{$lang.full}{$vo.cou_man}{$lang.available_full}{else}{$lang.unlimited}{/if}</span></div>
-                                    </div>
-                                </div>
                                 <div class="q-range">
                                     <div class="range-item"><p title="{if $vo.cou_goods}<p>{$lang.permissions_buy}</p>{else}<p>{$lang.category}</p>{/if}">
                                         {$vo.cou_title}
@@ -233,7 +177,7 @@
         </div>
     </div>
 </div>
-{* DSC 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
+{* ECSHOP 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
 <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
 {insert_scripts files='jquery.SuperSlide.2.1.1.js,jquery.yomi.js,parabola.js,cart_common.js,cart_quick_links.js'}
 <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/dsc-common.js"></script>
@@ -252,6 +196,64 @@
 
 		$(".ui-switchable-panel-main").find(".ui-switchable-panel").eq(index).show().siblings().hide();
 	});
+
+	//优惠券领取 bylu
+	$(document).on("click",".get-coupon",function(){
+		if({$smarty.session.user_id} == 0){
+			var back_url = "coupons.php?act=coupons_index";
+			$.notLogin("get_ajax_content.php?act=get_login_dialog",back_url);
+        	return false;
+		}else{
+			var cou_id = $(this).attr('cou_id');
+			$.post('coupons.php?act=coupons_receive',{'cou_id':cou_id},function(data){
+				if(data.status=='ok'){
+                    $(".item-fore h3").html(data.msg);
+                    $(".success-icon").removeClass("i-icon").addClass("m-icon");
+					var content =$("#pd_coupons").html();
+					pb({
+						id:"coupons_dialog",
+						title:json_languages.receive_coupons,
+						width:550,
+						height:140,
+						ok_title:json_languages.Immediate_use, 	//按钮名称
+						cl_title:json_languages.close, 	//按钮名称
+						content:content, 	//调取内容
+						drag:false,
+						foot:true,
+						onOk:function(){
+							location.href="search.php?cou_id="+cou_id
+						},
+						onCancel:function(){
+							$(".cou-data").html(data.content);
+							$(".cou-seckill").html(data.content_kill);
+						},
+					});
+					
+					$(".pb-ok").addClass("color_df3134");
+				}else{
+					$(".success-icon").removeClass("m-icon").addClass("i-icon");
+					$(".item-fore h3").addClass("red");
+					$(".item-fore h3").html(data.msg);
+					var content =$("#pd_coupons").html();
+					
+					pb({
+						id:"coupons_dialog",
+						title:json_languages.receive_coupons,
+						width:550,
+						height:140,
+						ok_title:json_languages.close, 	//按钮名称
+						content:content, 	//调取内容
+						cl_cBtn:false,
+						onOk:function(){}
+					});
+				}
+			},'json');
+		}
+	});
+
+	function updateResponse(){
+		
+	}
 	
 	$(".canvas").each(function(){
 		var per = 100 - $(this).data("per");

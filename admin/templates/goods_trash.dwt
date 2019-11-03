@@ -5,55 +5,52 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.goods_alt} - {$ur_here}</div>
+    	<div class="title">商品 - {$ur_here}</div>
         <div class="content">
-            {include file="library/common_tabs_info.lbi"}
-        	<div class="explanation mb10" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
-                <ul>
-                	<li>{$lang.operation_prompt_content.trash.0}</li>
-                    <li>{$lang.operation_prompt_content.trash.1}</li>
-                </ul>
-            </div>            
         	<div class="tabs_info">
             	<ul>
                     <li {if $menu_select.current eq '01_goods_list'}class="curr"{/if}>
-                    	<a href="goods.php?act=list{$seller_list}">{$lang.ordinary_goods} {if $menu_select.current neq '01_goods_list'}{if $goods_list_type}<em class="li_color">({$goods_list_type.ordinary|default:0})</em>{/if}{/if}</a>
+                    	<a href="goods.php?act=list">普通商品 {if $menu_select.current neq '01_goods_list'}{if $goods_list_type}<em class="li_color">({$goods_list_type.ordinary|default:0})</em>{/if}{/if}</a>
                     </li>
                     <li {if $menu_select.current eq '50_virtual_card_list'}class="curr"{/if}>
-                    	<a href="goods.php?act=list&extension_code=virtual_card{$seller_list}">{$lang.virtual_goods} {if $menu_select.current neq '50_virtual_card_list'}{if $goods_list_type}<em class="li_color">({$goods_list_type.virtual_card|default:0})</em>{/if}{/if}</a>
+                    	<a href="goods.php?act=list&extension_code=virtual_card">虚拟商品 {if $menu_select.current neq '50_virtual_card_list'}{if $goods_list_type}<em class="li_color">({$goods_list_type.virtual_card|default:0})</em>{/if}{/if}</a>
                     </li>
-                    {if $cfg.review_goods && $filter.seller_list eq 1}
+                    {if $cfg.review_goods}
                 	<li {if $menu_select.current eq '01_review_status'}class="curr"{/if}>
-                    	<a href="goods.php?act=review_status{$seller_list}">{$lang.01_review_status} {if $menu_select.current neq '01_review_status'}{if $goods_list_type}<em class="li_color">({$goods_list_type.review_status|default:0})</em>{/if}{/if}</a>
+                    	<a href="goods.php?act=review_status">商品审核 {if $menu_select.current neq '01_review_status'}{if $goods_list_type}<em class="li_color">({$goods_list_type.review_status|default:0})</em>{/if}{/if}</a>
                     </li>
                     {/if}
 					<li {if $menu_select.current eq '11_goods_trash'}class="curr"{/if}>
-                    	<a href="goods.php?act=trash{$seller_list}">{$lang.11_goods_trash} {if $menu_select.current neq '11_goods_trash'}{if $goods_list_type}<em class="li_color">({$goods_list_type.delete|default:0})</em>{/if}{/if}</a>
+                    	<a href="goods.php?act=trash">商品回收站 {if $menu_select.current neq '11_goods_trash'}{if $goods_list_type}<em class="li_color">({$goods_list_type.delete|default:0})</em>{/if}{/if}</a>
                     </li>
                     <li {if $menu_select.current eq '19_is_sale'}class="curr"{/if}>
-                    	<a href="goods.php?act=is_sale{$seller_list}">{$lang.shelves_goods} {if $menu_select.current neq '19_is_sale'}{if $goods_list_type}<em class="li_color">({$goods_list_type.is_sale|default:0})</em>{/if}{/if}</a>
+                    	<a href="goods.php?act=is_sale">已上架商品 {if $menu_select.current neq '19_is_sale'}{if $goods_list_type}<em class="li_color">({$goods_list_type.is_sale|default:0})</em>{/if}{/if}</a>
                     </li>
                     
                     <li {if $menu_select.current eq '20_is_sale'}class="curr"{/if}>
-                    	<a href="goods.php?act=on_sale{$seller_list}">{$lang.off_the_shelf_goods} {if $menu_select.current neq '20_is_sale'}{if $goods_list_type}<em class="li_color">({$goods_list_type.on_sale|default:0})</em>{/if}{/if}</a>
+                    	<a href="goods.php?act=on_sale">未上架商品 {if $menu_select.current neq '20_is_sale'}{if $goods_list_type}<em class="li_color">({$goods_list_type.on_sale|default:0})</em>{/if}{/if}</a>
                     </li>
                 </ul>
             </div>			
+        	<div class="explanation" id="explanation">
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
+                <ul>
+                	<li>删除后的商品可在商品回收站保存。</li>
+                    <li>可以进行商品还原，也可以彻底删除。</li>
+                </ul>
+            </div>
             <div class="flexilist">
             	<!--商品列表-->
                 <div class="common-head">
                     <div class="refresh ml0">
-                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    	<div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>
 					<div class="search">
-                    	<form action="javascript:;" name="searchForm" onSubmit="searchGoodsname(this);">
                     	<div class="input">
-                        	<input type="text" name="keyword" class="text nofocus" placeholder="{$lang.goods_name}" autocomplete="off">
-							<input type="submit" class="btn" name="secrch_btn" ectype="secrch_btn" value="" />
+                        	<input type="text" name="keyword" class="text nofocus" placeholder="商品名称" autocomplete="off">
+							<button class="btn" name="secrch_btn"></button>
                         </div>
-                        </form>
                     </div>						
                 </div>
                 <div class="common-content">
@@ -90,38 +87,34 @@
                                         	<div class="name">
                                                 	<span onclick="listTable.edit(this, 'edit_goods_name', {$goods.goods_id})" title="{$goods.goods_name|escape:html}" data-toggle="tooltip" class="span">{$goods.goods_name|escape:html}</span>
                                                 </div>
-                                            	{if $goods.brand_name}<p class="brand">{$lang.brand}：<em>{$goods.brand_name}</em></p>{/if}
+                                            	{if $goods.brand_name}<p class="brand">品牌：<em>{$goods.brand_name}</em></p>{/if}
                                                 <p class="activity"> 
                                                     {if $goods.is_shipping}
-                                                    <em class="free">{$alng.free_shipping_alt}</em>
+                                                    <em class="free">免邮</em>
                                                     {/if}
     
                                                     {if $goods.stages}
-                                                    <em class="byStage">{$lang.by_stages}</em>
+                                                    <em class="byStage">分期</em>
                                                     {/if}
                                                     {if !$goods.is_alone_sale}
-                                                    <em class="parts">{$lang.tab_groupgoods}</em>
+                                                    <em class="parts">配件</em>
                                                     {/if}
                                                     
                                                     {if $goods.is_promote}
                                                         {if $nowTime gte $goods.promote_end_date}
-                                                    <em class="saleEnd">{$lang.promote_end_date}</em>
+                                                    <em class="saleEnd">特卖结束</em>
                                                         {else}
-                                                    <em class="sale">{$lang.promote_date}</em>    
+                                                    <em class="sale">特卖</em>    
                                                         {/if}
                                                     {/if}
                                                     
                                                     {if $goods.is_xiangou}
                                                         {if $nowTime gte $goods.xiangou_end_date}
-                                                    <em class="purchaseEnd">{$lang.xiangou_end}</em>
+                                                    <em class="purchaseEnd">限购结束</em>
                                                         {else}
-                                                    <em class="purchase">{$lang.xiangou}</em>    
+                                                    <em class="purchase">限购</em>    
                                                         {/if}
                                                     {/if}
-													
-                                                    {if $goods.is_distribution}
-                                                    <em class="distribution">{$lang.distribution}</em>
-                                                    {/if}													
                                                 </p>
                                             </div>
                                         </div>
@@ -132,8 +125,8 @@
                                     <td><div class="tDiv">{$goods.shop_price}</div></td>                               
                                     <td class="handle">
                                         <div class="tDiv a2">
-                                            <a href="javascript:;" onclick="listTable.remove({$goods.goods_id}, '{$lang.restore_goods_confirm}', 'restore_goods')" class="btn_see"><i class="sc_icon sc_icon_see"></i>{$lang.reduction}</a>
-                                            <a href="javascript:;" onclick="listTable.remove({$goods.goods_id}, '{$lang.drop_goods_confirm}', 'drop_goods')" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>									
+                                            <a href="javascript:;" onclick="listTable.remove({$goods.goods_id}, '{$lang.restore_goods_confirm}', 'restore_goods')" class="btn_see"><i class="sc_icon sc_icon_see"></i>还原</a>
+                                            <a href="javascript:;" onclick="listTable.remove({$goods.goods_id}, '{$lang.drop_goods_confirm}', 'drop_goods')" class="btn_trash"><i class="icon icon-trash"></i>删除</a>									
                                         </div>
                                     </td>
                                 </tr>
@@ -148,15 +141,15 @@
                                             <div class="tfoot_btninfo">
                                                 <div class="shenhe">
                                                     <div class="checkbox_item fl font12 mt5 mr5">
-                                                	<input type="checkbox" name="all_list" class="ui-checkbox" id="all_list"><label for="all_list" class="ui-label">{$lang.check_all}</label>
+                                                	<input type="checkbox" name="all_list" class="ui-checkbox" id="all_list"><label for="all_list" class="ui-label">全选</label>
                                                 </div>
                                                   <input type="hidden" name="act" value="batch" />
                                                     <div id="" class="imitate_select select_w120">
-                                                        <div class="cite">{$lang.please_select}</div>
+                                                        <div class="cite">请选择</div>
                                                         <ul>
                                                             <li><a href="javascript:;" data-value="" class="ftx-01">{$lang.select_please}</a></li>
                                                             <li><a href="javascript:;" data-value="restore" class="ftx-01">{$lang.restore}</a></li>
-                                                            <li><a href="javascript:;" data-value="drop" class="ftx-01">{$lang.drop}</a></li>
+                                                            <li><a href="javascript:;" data-value="drop" class="ftx-01">{$lang.remove}</a></li>
                                                         </ul>
                                                         <input name="type" type="hidden" value="" id="">
                                                     </div>											  
@@ -183,13 +176,14 @@
             </div>
 		</div>
 	</div>
+	
 	<!--高级搜索 start-->
 	{include file="library/goods_search.lbi"}
 	<!--高级搜索 end-->
-	{include file ='library/pagefooter.lbi'}
-	<script type="text/javascript">
-	  listTable.recordCount = {$record_count|default:0};
-	  listTable.pageCount = {$page_count|default:1};
+	 {include file ='library/pagefooter.lbi'}
+	<script language="JavaScript">
+	  listTable.recordCount = '{$record_count}';
+	  listTable.pageCount = '{$page_count}';
 
 	  {foreach from=$filter item=item key=key}
 	  listTable.filter.{$key} = '{$item}';

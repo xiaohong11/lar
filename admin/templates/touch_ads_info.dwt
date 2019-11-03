@@ -7,10 +7,11 @@
     	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>手机-{$ur_here}</div>
             <div class="content">
             <div class="explanation" id="explanation">
-                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content_common}</li>
-                    <li>上传广告图片时请注意图片尺寸问题。</li>
+                    <li>可从管理平台手动添加一名新会员，并填写相关信息。</li>
+                    <li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
+                    <li>新增会员后可从会员列表中找到该条数据，并再次进行编辑操作，但该会员名称不可变。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -113,7 +114,7 @@
                                                 <input type="file" class="type-file-file" id="ad_img" name="ad_img" data-state="imgfile" size="30" hidefocus="true" value="" />
                                                 {if $ads.ad_code}
                                                 <span class="show">
-                                                    <a href="{$ads.ad_code}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="../data/afficheimg/{$ads.ad_code}" ectype="tooltip" title="tooltip"></i></a>
+                                                    <a href="{$ads.ad_code}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../data/afficheimg/{$ads.ad_code}>')" onmouseout="toolTip()"></i></a>
                                                 </span>
                                                 {/if}
                                                 <input type="text" name="textfile" class="type-file-text" id="textfield" autocomplete="off" readonly />
@@ -139,7 +140,7 @@
                                                 <input type="file" class="type-file-file" id="upfile_flash" name="upfile_flash" data-state="imgfile" size="30" hidefocus="true" value="" />
                                                 {if $ads.ad_code}
                                                 <span class="show">
-                                                    <a href="../data/afficheimg/{$ads.ad_code}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="../data/afficheimg/{$ads.ad_code}" ectype="tooltip" title="tooltip"></i></a>
+                                                    <a href="../data/afficheimg/{$ads.ad_code}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../data/afficheimg/{$ads.ad_code}>')" onmouseout="toolTip()"></i></a>
                                                 </span>
                                                 {/if}
                                                 <input type="text" name="textfile" class="type-file-text" id="textfield" autocomplete="off" readonly />

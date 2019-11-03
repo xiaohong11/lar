@@ -6,13 +6,13 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$lang.goods_alt} - {$ur_here}</div>
+    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>商品 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content_common}</li>
-                    <li>{$lang.operation_prompt_content.info.0}</li>
+                	<li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
+                    <li>请按提示信息填写每一个字段。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -32,31 +32,30 @@
                                       <div class="form_prompt"></div>
                                     </div>
                                 </div>
-                                
                                 <div class="item">
-                                    <div class="label">{$lang.cat_name_alias}：</div>
+                                    <div class="label">分类别名：</div>
                                     <div class="label_value">
-                                        <input type='text' name='cat_alias_name' class="text" id="cat_alias_name" maxlength="20" value='{if $cat_info.parent_id eq 0}{$cat_info.cat_alias_name|escape:html}{/if}' size='27' {if $parent_id neq 0}disabled="true"{/if} />
-                                        <div class="notic">{$lang.cat_name_alias_notic}</div>
+                                        <input type='text' name='cat_alias_name' class="text" id="cat_alias_name" maxlength="20" value='{if $cat_info.parent_id eq 0}{$cat_info.cat_alias_name|escape:html}{/if}' size='27' {if $cat_info.parent_id neq 0}disabled="true"{/if} />
+                                        <div class="notic">（注：分类名过长设置别名方便显示，字数设置为2-4个汉字字符）</div>
                                     </div>
                                 </div>
                                 <div class="item">
-                                    <div class="label">{$lang.phone_icon}：</div>
-                                    <div class="label_value">
-                                        <div class="type-file-box">
-                                            <input type="button" name="button" id="button" class="type-file-button" value="" />
-                                            <input type="file" class="type-file-file" id="ad_img" name="touch_icon" data-state="imgfile" size="30" hidefocus="true" value="" />
-                                            {if $cat_info.touch_icon}
-                                            <span class="show">
-                                                <a href="../{$cat_info.touch_icon}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="../{$cat_info.touch_icon}" ectype="tooltip" title="tooltip"></i></a>
-                                            </span>
-                                            {/if}
-                                            <input type="text" name="textfile" class="type-file-text" {if $cat_info.touch_icon}{$cat_info.touch_icon}{/if} id="textfield" autocomplete="off" readonly />
+                                        <div class="label">手机小图标：</div>
+                                        <div class="label_value">
+                                        	<div class="type-file-box">
+                                                <input type="button" name="button" id="button" class="type-file-button" value="" />
+                                                <input type="file" class="type-file-file" id="ad_img" name="touch_icon" data-state="imgfile" size="30" hidefocus="true" value="" />
+                                                {if $cat_info.touch_icon}
+                                                <span class="show">
+                                                    <a href="../{$cat_info.touch_icon}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../{$cat_info.touch_icon}>')" onmouseout="toolTip()"></i></a>
+                                                </span>
+                                                {/if}
+                                                <input type="text" name="textfile" class="type-file-text" {if $cat_info.touch_icon}{$cat_info.touch_icon}{/if} id="textfield" autocomplete="off" readonly />
+                                            </div>
+                                            <div class="form_prompt"></div>
+                                            <div class="notic m20" id="AdCodeImg">（注：手机端专用,建议上传正方形图片（100*100））</div>
                                         </div>
-                                        <div class="form_prompt"></div>
-                                        <div class="notic m20" id="AdCodeImg">{$lang.phone_icon_notic}</div>
                                     </div>
-                                </div>
                                 <div class="item">
                                     <div class="label">{$lang.parent_id}：</div>
                                     <div class="label_value">
@@ -71,7 +70,7 @@
 												</div>
 											</div>
 										</div>
-                                        <div class="notic">{$lang.parent_id_notic}</div>
+                                        <div class="notic">不选择分类默认为顶级分类</div>
                                     </div>
                                 </div>								
                                 <div class="item">
@@ -90,7 +89,7 @@
                                     <div class="label">{$lang.commission_rate}：</div>
                                     <div class="label_value">
 										<input type="text" class="text text_2" name='commission_rate' value='{$cat_info.commission_rate}' size="12" autocomplete="off" />
-										<div class="notic">% {$lang.commission_rate_notic}</div>
+										<div class="notic">%（请输入0-100以内的整数）</div>
                                     </div>
                                 </div>
                                 <div class="item">
@@ -108,7 +107,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="item hide">
+                                <div class="item">
                                     <div class="label">{$lang.show_in_nav}：</div>
                                     <div class="label_value">
                                         <div class="checkbox_items">
@@ -157,15 +156,15 @@
                                     </div>
                                 </div>
                                 <div class="item" {if $cat_info.is_top_style eq 0}style="display:none"{/if}>
-                                    <div class="label">{$lang.top_category_mode}：</div>
+                                    <div class="label">顶级分类页模板：</div>
                                     <div class="label_value">
                                       	<div class="imitate_select select_w120">
-                                            <div class="cite">{$lang.top_category_mode_0}</div>
+                                            <div class="cite">默认模板</div>
                                             <ul style="display: none;">
-                                                <li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.top_category_mode_0}</a></li>
-                                                <li><a href="javascript:;" data-value="1" class="ftx-01">{$lang.top_category_mode_1}</a></li>
-                                                <li><a href="javascript:;" data-value="2" class="ftx-01">{$lang.top_category_mode_2}</a></li>
-                                                <li><a href="javascript:;" data-value="3" class="ftx-01">{$lang.top_category_mode_3}</a></li>
+                                                <li><a href="javascript:;" data-value="0" class="ftx-01">默认模板</a></li>
+                                                <li><a href="javascript:;" data-value="1" class="ftx-01">女装模板</a></li>
+                                                <li><a href="javascript:;" data-value="2" class="ftx-01">家电模板</a></li>
+                                                <li><a href="javascript:;" data-value="3" class="ftx-01">食品模板</a></li>
                                             </ul>
                                             <input name="top_style_tpl" type="hidden" value="{$cat_info.top_style_tpl}">
                                         </div>
@@ -173,7 +172,7 @@
                                 </div>							
 								{/if}
                                 <div class="item">
-                                    <div class="label">{$lang.category_icon}：</div>
+                                    <div class="label">分类菜单图标：</div>
                                     <div class="label_value">
                                     	<div class="checkbox-items checkbox-cateicon-items" ectype="style_icon">
 											{foreach from=$lang.icon item=icon key=key}
@@ -192,16 +191,35 @@
                                                     <input type="file" class="type-file-file" id="cat_icon" name="cat_icon" size="30" data-state="imgfile" hidefocus="true" value="" />
                                                     {if $cat_info.cat_icon}
                                                     <span class="show">
-                                                        <a href="../{$cat_info.cat_icon}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="../{$cat_info.cat_icon}" ectype="tooltip" title="tooltip"></i></a>
+                                                        <a href="../{$cat_info.cat_icon}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../{$cat_info.cat_icon}>')" onmouseout="toolTip()"></i></a>
                                                     </span>
                                                     {/if}
                                                     <input type="text" name="textfile" class="type-file-text" id="textfield" readonly />
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="notic">{$lang.category_icon_notic}</div>
+                                        <div class="notic">图标尺寸为18*18比例，大小不能超过200KB，图片只能为jpg、png、gif格式</div>
                                     </div>
                                 </div>	
+                                <div class="item">
+                                    <div class="label">{$lang.show_in_index}：</div>
+                                    <div class="label_value">
+                                        <div class="checkbox_items">
+                                            <div class="checkbox_item">
+                                                <input type="checkbox" class="ui-checkbox" name="cat_recommend[]" id="cat_recommend_1" value="1" {if $cat_recommend[1] eq 1} checked="true" {/if}  />
+                                                <label for="cat_recommend_1" class="ui-label">{$lang.index_best}</label>
+                                            </div>
+                                            <div class="checkbox_item">
+                                                <input type="checkbox" class="ui-checkbox" name="cat_recommend[]" id="cat_recommend_2" value="2" {if $cat_recommend[2] eq 1} checked="true" {/if}  />
+                                                <label for="cat_recommend_2" class="ui-label">{$lang.index_new}</label>
+                                            </div>
+                                            <div class="checkbox_item">
+                                                <input type="checkbox" class="ui-checkbox" name="cat_recommend[]" id="cat_recommend_3" value="3" {if $cat_recommend[3] eq 1} checked="true" {/if}  />
+                                                <label for="cat_recommend_3" class="ui-label">{$lang.index_hot}</label>
+                                            </div>											
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="item" {if !$cat_name_arr}style="display:none"{/if}>
                                     <div class="label">{$lang.category_herf}：</div>
                                     <div class="label_value">
@@ -210,53 +228,21 @@
                                     </div>
                                 </div>
                                 <div class="item" {if $parent_id neq 0 || $form_act eq 'insert'}style=" display:none"{/if}>
-                                    <div class="label">{$lang.category_top_mode_content}：</div>
+                                    <div class="label">分类树顶级分类模块内容：</div>
                                     <div class="label_value">
                                         <textarea name='category_topic' rows="6" cols="48" class="textarea">{$cat_info.category_topic}</textarea>
-                                        <div class="notic">{$lang.category_top_mode_content_notic}</div>
+                                        <div class="notic">(格式：名称+"英文竖线"+链接地址)，每行一条数据。</div>
                                     </div>
                                 </div>
                                 <div class="item">
                                     <div class="label">{$lang.filter_attr}：</div>
-                                    <div class="label_value">
-										<div class="lv-item" ectype="item">
-                                            <div class="value_select" ectype="type_cat">
-                                                <div id="parent_id1" class="imitate_select select_w145" ectype="typeCatSelect">
-                                                    <div class="cite">{$lang.please_select}</div>
-                                                    <ul>
-                                                        <li><a href="javascript:;" data-value="0" data-level='1' data-cat='1' class="ftx-01">{$lang.please_select}</a></li>
-                                                        {foreach from=$type_level item=cat}
-                                                        <li><a href="javascript:;" data-value="{$cat.cat_id}" data-level="{$cat.level}"  data-cat='1' class="ftx-01">{$cat.cat_name}</a></li>
-                                                        {/foreach}
-                                                    </ul>
-                                                    <input type="hidden" value="{$cat_tree1.checked_id|default:0}" id="parent_id_val1" ectype="typeCatVal">
-                                                </div>
-                                                {if $cat_tree1.arr}
-                                                <div id="parent_id2" class="imitate_select select_w145" ectype="typeCatSelect">
-                                                    <div class="cite">{$lang.please_select}</div>
-                                                    <ul>
-                                                        <li><a href="javascript:;" data-value="0" data-level='2' data-cat='1' class="ftx-01">{$lang.please_select}</a></li>
-                                                        {foreach from=$cat_tree1.arr item=cat}
-                                                        <li><a href="javascript:;" data-value="{$cat.cat_id}" data-level="{$cat.level}" data-cat='1' class="ftx-01">{$cat.cat_name}</a></li>
-                                                        {/foreach}
-                                                    </ul>
-                                                    <input type="hidden" value="{$cat_tree.checked_id|default:0}" id="parent_id_val2" ectype="typeCatVal">
-                                                </div>
-                                                {/if}
-                                                {if $cat_tree.arr}
-                                                <div id="parent_id{if $cat_tree1.arr}3{else}2{/if}" class="imitate_select select_w145" ectype="typeCatSelect">
-                                                    <div class="cite">{$lang.please_select}</div>
-                                                    <ul>
-                                                        <li><a href="javascript:;" data-value="0" data-level='{if $cat_tree1.arr}3{else}2{/if}' data-cat='1' class="ftx-01">{$lang.please_select}</a></li>
-                                                        {foreach from=$cat_tree.arr item=cat}
-                                                        <li><a href="javascript:;" data-value="{$cat.cat_id}" data-level="{$cat.level}" data-cat='1' class="ftx-01">{$cat.cat_name}</a></li>
-                                                        {/foreach}
-                                                    </ul>
-                                                    <input type="hidden" value="{$type_c_id|default:0}" id="parent_id_val{if $cat_tree1.arr}3{else}2{/if}" ectype="typeCatVal">
-                                                </div>
-                                                {/if}
-                                            </div>
-                                            <div class="imitate_select select_w170" ectype="attrTypeSelect">
+                                    <div class="label_value">	
+									  <table width="100%" id="tbody-attr" align="center">
+										{if $attr_cat_id eq 0}
+										<tr>
+										  <td>
+                                           <a href="javascript:;" onclick="addFilterAttr(this)" class="fl mr10 w20 tc">[+]</a>
+                                           <div class="imitate_select select_w170">
                                                 <div class="cite">{$lang.sel_goods_type}</div>
                                                 <ul style="display: none;">
                                                     {$goods_type_list}
@@ -270,32 +256,40 @@
                                                 </ul>
                                                 <input name="filter_attr[]" type="hidden" value="0">
                                             </div>
-                                            <a href="javascript:;" onclick="addFilterAttr(this)" class="fl mr10" ectype="operation">[+]</a>
-										</div>         
+										  </td>
+										</tr> 
+										{/if}           
 										{foreach from=$filter_attr_list item=filter_attr name="filter_attr_tab"}
-										<div class="lv-item" ectype="item">
-                                            <div class="imitate_select select_w170">
-                                                <div class="cite">{$lang.sel_goods_type}</div>
-                                                <ul style="display: none;">
-                                                    {$goods_type_list}
-                                                </ul>
-                                                <input name="goods_type" type="hidden" value="{$filter_attr.goods_type}">
-                                            </div>
-                                            <div class="imitate_select select_w120">
-                                                <div class="cite">{$lang.sel_goods_type}</div>
-                                                <ul style="display: none;">
-                                                    <li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.sel_filter_attr}</a></li>
-                                                    {foreach from=$filter_attr.option item=item key=key}
-                                                    <li><a href="javascript:;" data-value="{$key}" class="ftx-01">{$item}</a></li>
-                                                    {/foreach}
-                                                </ul>
-                                                <input name="filter_attr[]" type="hidden" value="{$filter_attr.filter_attr}">
-                                            </div>
-                                            <a href="javascript:;" onclick="removeFilterAttr(this)" class="fl mr10" ectype="operation">[-]&nbsp;</a>
-                                        </div>
+										<tr>
+										  <td>
+											 {if $smarty.foreach.filter_attr_tab.iteration eq 1}
+											   <a href="javascript:;" onclick="addFilterAttr(this)" class="fl mr10 w20 tc">[+]</a>
+											 {else}
+											   <a href="javascript:;" onclick="removeFilterAttr(this)" class="fl mr10 w20 tc">[-]&nbsp;</a>
+											 {/if}
+											 <div class="imitate_select select_w170">
+												<div class="cite">{$lang.sel_goods_type}</div>
+												<ul style="display: none;">
+													{$goods_type_list}
+												</ul>
+												<input name="goods_type" type="hidden" value="{$filter_attr.goods_type}">
+											 </div>
+											 <div class="imitate_select select_w120">
+												<div class="cite">{$lang.sel_goods_type}</div>
+												<ul style="display: none;">
+													<li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.sel_filter_attr}</a></li>
+													{foreach from=$filter_attr.option item=item key=key}
+													<li><a href="javascript:;" data-value="{$key}" class="ftx-01">{$item}</a></li>
+													{/foreach}
+												</ul>
+												<input name="filter_attr[]" type="hidden" value="{$filter_attr.filter_attr}">
+											 </div>
+											 <!--<div class="notic bf100 ml0">{$lang.filter_attr_notic}</div>-->
+										  </td>
+										</tr>
 										{/foreach}
-                                    	<input name="attr_parent_id" type="hidden" value="{$type_c_id|default:0}">
-                                	</div>
+									  </table>
+                                    </div>
                                 </div>
                                 <div class="item">
                                     <div class="label">{$lang.grade}：</div>
@@ -436,8 +430,8 @@
 					 required : '<i class="icon icon-exclamation-sign"></i>'+catname_empty
 				},
 				grade:{
-					 min : '<i class="icon icon-exclamation-sign"></i>' + grade_min_0,
-					 max : '<i class="icon icon-exclamation-sign"></i>' + grade_max_10
+					 min : '<i class="icon icon-exclamation-sign"></i>价格区间不能小于0',
+					 max : '<i class="icon icon-exclamation-sign"></i>价格区间不能大于10'
 				}
 			}			
 		});
@@ -447,27 +441,27 @@
      * 新增一个筛选属性
      */
     function addFilterAttr(obj)
-	{
-		var obj = $(obj);
-		var parent = obj.parents("*[ectype='item']");
-		var clone = parent.clone();
-		clone.find("[ectype='operation']")
-		.attr("onclick",'removeFilterAttr(this)')
-		.html("[-]");
-
-		parent.after(clone);
-	}
-
+    {
+      var src = obj.parentNode.parentNode;
+      var tbl = document.getElementById('tbody-attr');
+      var filterAttr = document.getElementsByName("filter_attr[]");
+      var row  = tbl.insertRow(tbl.rows.length);
+      var cell = row.insertCell(-1);
+      cell.innerHTML = src.cells[0].innerHTML.replace(/(.*)(addFilterAttr)(.*)(\[)(\+)/i, "$1removeFilterAttr$3$4-");
+      filterAttr[filterAttr.length-1].value = 0;
+      
+    }
     
     /**
      * 删除一个筛选属性
      */
     function removeFilterAttr(obj)
-	{
-		var obj = $(obj);
-		var parent = obj.parents("*[ectype='item']");
-		parent.remove();
-	}
+    {
+      var row = rowindex(obj.parentNode.parentNode);
+      var tbl = document.getElementById('tbody-attr');
+    
+      tbl.deleteRow(row);
+    }
     
     //ecmoban模板堂 --zhuo start
     
@@ -508,7 +502,7 @@
          var catParent = document.getElementById('category_id').value; 
     
          if(catParent != 0){
-             alert(category_top_use_null);
+             alert('该分类必须是顶级分类才能使用!');
     
              for(i=0; i<title_list.length; i++){
                  title_list[i].value = '';
@@ -533,7 +527,7 @@
       function removeCategoryFile(obj,dt_id)
       {
           if(dt_id > 0){
-           if (confirm(is_delete_info)){
+           if (confirm('确实要删除该信息吗')){
                {if $cat_id > 0}
                location.href = 'category.php?act=title_remove&dt_id=' + dt_id + '&cat_id=' + {$cat_id};  
                {/if}
@@ -555,12 +549,12 @@
             if($(this).attr('value')==1)
             {
                 $("[name='top_style_tpl']").parents('.item').show();
-                //$("[name='cat_icon']").parents('.item').show();
+                $("[name='cat_icon']").parents('.item').show();
             }
             else
             {
                 $("[name='top_style_tpl']").parents('.item').hide();
-                //$("[name='cat_icon']").parents('.item').hide();
+                $("[name='cat_icon']").parents('.item').hide();
             }
         })
     })
@@ -579,7 +573,7 @@
                 }
                 if(data.error==0)
                 {	
-                    alert(delete_fail);
+                    alert('删除失败');
                 }			
             }
         })
@@ -641,15 +635,6 @@
 			}
 		}
 	}
-	
-	//属性分类筛选出属性类型
-	$.divselect("*[ectype='typeCatSelect']","*[ectype='typeCatVal']",function(obj){
-		var level = obj.data('level'),
-            cat = obj.data("cat"),
-			val = obj.data("value");
-
-		get_childcat(obj,2);
-	});
     </script>
 	{/literal}
 </body>

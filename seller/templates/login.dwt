@@ -5,13 +5,7 @@
 	<div class="sller_login">
     	<div class="sller_login_warp">
             <div class="ecsc-login-container">
-            	<div class="logo">
-                	{if $seller_login_logo}
-                	<img src="{$seller_login_logo}" />
-                    {else}
-                    <img src="images/loginImg.png">
-                    {/if}
-                </div>
+            	<div class="logo"><img src="images/logo_new.png" /></div>
                 <div class="container">
                 	<div class="warp">
                     	<div class="warp_content">
@@ -56,7 +50,6 @@
                                             <input type="submit"  name="submit" class="sub qp_sub" value="登 录" />
                                         </span>
                                         {/if}
-                                        <input type="hidden" name="dsc_token" value="{$dsc_token}" autocomplete="off" />
                                     </div>
                                 </div>
                                 <div id="error" class="error"></div>
@@ -157,7 +150,7 @@
 		$(function(){
 			$('#theForm input[name=submit]').on('click',function(){
                 var username=true,password=true,captcha=true;
-				var dsc_token = $(":input[name='dsc_token']").val();
+				
 				var yzm = $('#theForm input[name=captcha]'),
 					seller_name = $('#theForm input[name=username]'),
 					pwd = $('#theForm input[name=password]');
@@ -187,7 +180,7 @@
 					$.ajax({
 						async:false,
 						url:'privilege.php?act=signin&type=captcha',
-						data:{'captcha':yzm.val(),'dsc_token':dsc_token},
+						data:{'captcha':yzm.val()},
 						type:'post',
 						success:function(data){
 							if(data == 'false'){
@@ -202,7 +195,7 @@
                     $.ajax({
                         async:false,
                         url:'privilege.php?act=signin&type=password',
-                        data:{'username':seller_name.val(),'password':pwd.val(),'dsc_token':dsc_token},
+                        data:{'username':seller_name.val(),'password':pwd.val()},
                         type:'post',
                         success:function(data){
                             if(data == 'false'){

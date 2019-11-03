@@ -9,7 +9,7 @@
                             <div class="label">{$lang.require_field}客户端应用：</div>
                             <div class="label_value">
                                 <div id="mobile_signup_reward_div" class="imitate_select select_w145">
-                                    <div class="cite">{if $event_info.app_name}{$event_info.app_name}{else}{$lang.please_select}{/if}</div>
+                                    <div class="cite">{if $event_info.app_name}{$event_info.app_name}{else}请选择{/if}</div>
                                     <ul class="ps-container" style="display: none;">
                                         {$app_select}
                                     </ul>
@@ -22,7 +22,7 @@
                             <div class="label">{$lang.require_field}消息模板：</div>
                             <div class="label_value">
                                 <div id="mobile_signup_reward_div" class="imitate_select select_w145">
-                                    <div class="cite">{if $event_info.template_subject}{$event_info.template_subject}{else}{$lang.please_select}{/if}</div>
+                                    <div class="cite">{if $event_info.template_subject}{$event_info.template_subject}{else}请选择{/if}</div>
                                     <ul class="ps-container" style="display: none;">
                                         {$template_select}
                                     </ul>
@@ -37,11 +37,11 @@
                                 <div class="checkbox_items">
                                     <div class="checkbox_item">
                                         <input type="radio" class="ui-radio" name="status" id="sex_0" value="1" {if $event_info.is_open eq 1} checked="true" {/if}  />
-                                        <label for="sex_0" class="ui-radio-label">{$lang.yes}</label>
+                                        <label for="sex_0" class="ui-radio-label">是</label>
                                     </div>
                                     <div class="checkbox_item">
                                         <input type="radio" class="ui-radio" name="status" id="sex_1" value="0" {if $event_info.is_open eq 0} checked="true" {/if}  />
-                                        <label for="sex_1" class="ui-radio-label">{$lang.no}</label>
+                                        <label for="sex_1" class="ui-radio-label">否</label>
                                     </div>
                                 </div>
                             </div>

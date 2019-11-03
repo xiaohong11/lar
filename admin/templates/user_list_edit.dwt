@@ -18,7 +18,7 @@
             <div class="explanation" id="explanation">
             	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content_common}</li>
+                	<li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
                     <li>编辑会员账号信息请根据提示慎重操作，避免出现不必要的问题。</li>
                 </ul>
             </div>
@@ -51,10 +51,9 @@
                                     </div>
                                 </div>
                                 <div class="item">
-                                    <div class="label">{$lang.email}：</div>
+                                    <div class="label">{$lang.require_field}&nbsp;{$lang.email}：</div>
                                     <div class="label_value">
                                         <input type="text" name="email" class="text" autocomplete="off" value="{$user.email}" id="email"/>
-                                        <input type="hidden" name="old_email" value="{$user.email}"/>
                                         <div class="form_prompt"></div>
                                         <div class="notic">{$lang.notice_user_email}</div>
                                     </div>
@@ -93,7 +92,6 @@
                                           </ul>
                                           <input name="user_rank" type="hidden" value="{$user.user_rank}" id="user_grade_val">
                                         </div>
-                                        <input type="hidden" name="old_user_rank" value="{$user.user_rank}"/>
                                     </div>
                                 </div>
                                 <div class="item">
@@ -107,7 +105,6 @@
                                             </div>
                                             {/foreach}
                                         </div>
-                                        <input type="hidden" name="old_sex" value="{$user.sex}"/>
                                     </div>
                                 </div>
                                 <div class="item">
@@ -148,29 +145,23 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input type="hidden" name="old_birthday" value="{$user.birthday}"/>
                                 <div class="item">
                                     <div class="label">{$lang.credit_line}：</div>
-                                    <div class="label_value">
-                                        <input type="text" name="credit_line" id="credit_line" value="{$user.credit_line}" class="text" autocomplete="off" />
-                                        <input type="hidden" name="old_credit_line" value="{$user.credit_line}"/>
-                                    </div>
+                                    <div class="label_value"><input type="text" name="credit_line" id="credit_line" value="{$user.credit_line}" class="text" autocomplete="off" /></div>
                                 </div>
-                                {if $user.front_of_id_card || $user.reverse_of_id_card}
                                 <div class="item">
                                     <div class="label">身份证信息：</div>
                                     <div class="label_value">
 										<div class="type-file-box">
                                             <span class="show">正面：
-                                            	<a href="{$user.front_of_id_card}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="{$user.front_of_id_card}" ectype="tooltip" title="tooltip"></i></a>
+                                            	<a href="../data/idcard/{$user.front_of_id_card}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../data/idcard/{$user.front_of_id_card}>')" onmouseout="toolTip()"></i></a>
                                             </span>
                                             <span class="show">反面：
-                                            	<a href="{$user.reverse_of_id_card}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="{$user.reverse_of_id_card}" ectype="tooltip" title="tooltip"></i></a>
+                                            	<a href="../data/idcard/{$user.reverse_of_id_card}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../data/idcard/{$user.reverse_of_id_card}>')" onmouseout="toolTip()"></i></a>
                                             </span>
                                         </div>								
 									</div>
 								</div>
-                                {/if}
                                 {foreach from=$extend_info_list item=field}
                                 <!-- {if $field.id eq 6} -->
                                   <div class="item">
@@ -195,20 +186,16 @@
                                           </ul>
                                           <input name="sel_question" type="hidden" value="{$user.passwd_question}" id="sel_question">
                                         </div>
-                                        <input type="hidden" name="old_sel_question" value="{$user.passwd_question}"/>
                                     </div>
                                 </div>
                                 <div class="item">
                                     <div class="label" {if $field.is_need}id="passwd_quesetion"{/if}>{$lang.passwd_answer}：</div>
-                                    <div class="label_value"><input type="text" name="passwd_answer" class="text" value="{$user.passwd_answer}" autocomplete="off" /><input type="hidden" name="old_passwd_answer" value="{$user.passwd_answer}"/>&nbsp;{if $field.is_need}{$lang.require_field}{/if}</div>
+                                    <div class="label_value"><input type="text" name="passwd_answer" class="text" value="{$user.passwd_answer}" autocomplete="off" />&nbsp;{if $field.is_need}{$lang.require_field}{/if}</div>
                                 </div>
                                 <!-- {else} -->
                                 <div class="item">
                                     <div class="label">{$field.reg_field_name}：</div>
-                                    <div class="label_value">
-                                        <input type="text" name="extend_field{$field.id}" class="text" value="{$field.content}" autocomplete="off" />
-                                        <input type="hidden" name="old_extend_field{$field.id}" value="{$field.content}"/>
-                                    </div>
+                                    <div class="label_value"><input type="text" name="extend_field{$field.id}" class="text" value="{$field.content}" autocomplete="off" /></div>
                                 </div>
                                 <!--{/if}-->
                                 {/foreach}
@@ -289,7 +276,7 @@
                                             <td class="handle">
                                                 <div class="tDiv a2">
                                                     <a href="user_address_log.php?act=edit&address_id={$val.address_id}&user_id={$val.user_id}" title="{$lang.edit}" class="btn_edit"><i class="icon icon-edit"></i>{$lang.edit}</a>
-                                                    <a href="javascript:confirm_redirect('{$lang.remove_confirm_address}', 'user_address_log.php?act=remove&id={$val.address_id}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                                    <a href="javascript:confirm_redirect('{$lang.remove_confirm_address}', 'user_address_log.php?act=remove&id={$val.address_id}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -317,11 +304,11 @@
                             <form method="post" action="user_baitiao_log.php" name="theForm" id="user_baitiao_log">
                                 <div class="common-content">
                                     <div class="item">
-                                        <div class="label">{$lang.require_field}&nbsp;{$lang.user_name}：</div>
+                                        <div class="label">{$lang.require_field}&nbsp;{$lang.user_name}</div>
                                         <div class="label_value font14">{$user_info.user_name}<input type="hidden" name="user_id" value="{$user_info.user_id}" /></div>
                                     </div>
                                     <div class="item">
-                                        <div class="label">{$lang.require_field}&nbsp;{$lang.financial_credit}：</div>
+                                        <div class="label">{$lang.require_field}&nbsp;{$lang.financial_credit}</div>
                                         <div class="label_value">
                                             <input type="text" name="amount" class="text" autocomplete="off" value="{$bt_info.amount}"  id="amount"/>
                                             <div class="form_prompt"></div>
@@ -329,7 +316,7 @@
                                         </div>
                                     </div>
                                     <div class="item">
-                                        <div class="label">{$lang.require_field}&nbsp;{$lang.Credit_payment_days}：</div>
+                                        <div class="label">{$lang.require_field}&nbsp;{$lang.Credit_payment_days}</div>
                                         <div class="label_value">
                                             <input type="text" name="repay_term" class="text" autocomplete="off" value="{$bt_info.repay_term}" id="repay_term"/>
                                             <div class="form_prompt"></div>
@@ -414,7 +401,7 @@
                                                             {if $account.user_money gt 0}
                                                                 <span style="color:#0000FF">+{$account.user_money}</span>
                                                             {elseif $account.user_money lt 0}
-                                                                <span style="color:#FF0000">{$account.user_money}{if $account.deposit_fee neq 0}(手续费：{$account.deposit_fee}){/if}</span>
+                                                                <span style="color:#FF0000">{$account.user_money}</span>
                                                             {else}
                                                                 {$account.user_money}
                                                             {/if}
@@ -485,8 +472,8 @@
 	
     <script type="text/javascript">
 		{if $form_action eq 'account_log'}
-			listTable.recordCount = {$record_count|default:0};
-			listTable.pageCount = {$page_count|default:1};
+			listTable.recordCount = '{$record_count}';
+			listTable.pageCount = '{$page_count}';
 			
 			{foreach from=$filter item=item key=key}
 			listTable.filter.{$key} = '{$item}';
@@ -512,19 +499,19 @@
 					error_div.append(error);
 				},
 				rules:{
-					/*email:{
+					email:{
 						required:true,
 						email:true
-					},*/
+					},
 					confirm_password:{
 						equalTo:"#password"
 					}
 				},
 				messages:{
-					/*email:{
+					email:{
 						required : '<i class="icon icon-exclamation-sign"></i>'+invalid_email,
 						email : '<i class="icon icon-exclamation-sign"></i>'+invalid_email
-					},*/
+					},
 					confirm_password : {
 						equalTo:'<i class="icon icon-exclamation-sign"></i>'+password_not_same
 					}

@@ -4,19 +4,14 @@
 <table class="table_head" width="100%">
     <thead>
         <tr>
-            <th {if $add_shop_price eq 1}width="20%"{/if}>
-                {foreach from=$attribute_array item=attribute name=attribute}
-                {$attribute.attr_name}{if !$smarty.foreach.attribute.last}，{/if}
-                {/foreach}
-            </th>
+            <th width="10%">{foreach from=$attribute_array item=attribute name=attribute}{$attribute.attr_name}{if !$smarty.foreach.attribute.last}，{/if}{/foreach}</th>
             <th width="5%" {if $model_name eq ''}class="hide"{/if}>{$model_name}</th>
-            <th width="10%" {if $goods_attr_price eq 0 || $add_shop_price eq 1}class="hide"{/if}><em class="require-field">*</em>市场价<i class="sc_icon sc_icon_edit pointer pro_market"></i></th>
-            <th width="10%" {if $goods_attr_price eq 0}class="hide"{/if}><em class="require-field pointer">*</em>本店价<i class="sc_icon sc_icon_edit pointer pro_shop"></i></th>
-            <th width="10%" {if $goods_attr_price eq 0 || $add_shop_price eq 1}class="hide"{/if}><em class="require-field pointer">*</em>促销价<i class="sc_icon sc_icon_edit pointer pro_promote"></i></th>
-            <th width="10%"><em class="require-field">*</em>库存<i class="sc_icon sc_icon_edit pointer pro_number pointer"></i></th>
-            <th width="10%"><em class="require-field">*</em>预警值<i class="sc_icon sc_icon_edit pointer pro_warning pointer"></i></th>
-            <th width="12%">商品货号</th>
-            <th width="12%">商品条形码</th>
+            <th width="15%" class="hide"><em class="require-field">*</em>市场价<i class="sc_icon sc_icon_edit pointer pro_market"></i></th>
+            <th width="8%" {if $goods_attr_price eq 0}class="hide"{/if}><em class="require-field pointer">*</em>本店价<i class="sc_icon sc_icon_edit pointer pro_shop"></i></th>
+            <th width="8%"><em class="require-field">*</em>库存<i class="sc_icon sc_icon_edit pointer pro_number pointer"></i></th>
+            <th width="8%"><em class="require-field">*</em>预警值<i class="sc_icon sc_icon_edit pointer pro_warning pointer"></i></th>
+            <th width="10%">商品货号</th>
+            <th width="10%">商品条形码</th>
             <th width="5%">操作</th>
         </tr>
     </thead>
@@ -27,30 +22,22 @@
         <table class="table_attr" width="100%">
             <tbody>
                 {foreach from=$attr_group item=group}
-                <tr data-changelog="{$group.changelog}">
-                    <td class="td_bg_blue" style="padding:0px 5px;" {if $add_shop_price eq 1}width="20%"{/if}>
-                        {foreach from=$group.attr_info item=one name=one}{$one.attr_value}
-                        <input type="hidden" name="attr[{$one.attr_id}][]" value="{$one.attr_value}" />
-                        <input type="hidden" name="goods_attr_id[{$one.goods_attr_id}][]" value="{$one.goods_attr_id}" />
-                        {if !$smarty.foreach.one.last}，{/if}
-                        {/foreach}
-                    </td>		
+                <tr>
+                    <td class="td_bg_blue" width="10%">{foreach from=$group.attr_info item=one name=one}{$one.attr_value}<input type="hidden" name="attr[{$one.attr_id}][]" value="{$one.attr_value}" />{if !$smarty.foreach.one.last}，{/if}{/foreach}</td>		
                     <td width="5%" {if $region_name eq ''}class="hide"{/if}>{$region_name}</td>
-                    <td width="10%" {if $goods_attr_price eq 0 || $add_shop_price eq 1}class="hide"{/if}><input type="text" name="product_market_price[]" onBlur="listTable.editInput(this, 'edit_product_market_price', {$group.product_id|default:0}, $('#goods_model').val(), 'goods_model');" class="text w60" autocomplete="off" value="{$group.product_market_price|default:0.00}" /></td>
-                    <td width="10%" {if $goods_attr_price eq 0}class="hide"{/if}><input type="text" name="product_price[]" onBlur="listTable.editInput(this, 'edit_product_price', {$group.product_id|default:0}, $('#goods_model').val(), 'goods_model');" class="text w60" autocomplete="off" value="{$group.product_price|default:0.00}" /></td>
-                    <td width="10%" {if $goods_attr_price eq 0 || $add_shop_price eq 1}class="hide"{/if}><input type="text" name="product_promote_price[]" onBlur="listTable.editInput(this, 'edit_product_promote_price', {$group.product_id|default:0}, $('#goods_model').val(), 'goods_model');" class="text w60" autocomplete="off" value="{$group.product_promote_price|default:0.00}" /></td>
-                    <td width="10%"><input type="text" name="product_number[]" onBlur="listTable.editInput(this, 'edit_product_number', {$group.product_id|default:0}, $('#goods_model').val(), 'goods_model');" class="text w50 tc" autocomplete="off" value="{$group.product_number|default:0}" /></td>
-                    <td width="10%"><input type="text" name="product_warn_number[]" onBlur="listTable.editInput(this, 'edit_product_warn_number', {$group.product_id|default:0}, $('#goods_model').val(), 'goods_model');" class="text w50 tc" autocomplete="off" value="{$group.product_warn_number|default:1}" /></td>
-                    <td width="12%"><input type="text" name="product_sn[]" onBlur="listTable.editInput(this, 'edit_product_sn', {$group.product_id|default:0}, $('#goods_model').val(), 'goods_model');" class="text w90" autocomplete="off" value="{$group.product_sn}" /></td>
-                    <td width="12%"><input type="text" name="product_bar_code[]" onBlur="listTable.editInput(this, 'edit_product_bar_code', {$group.product_id|default:0}, $('#goods_model').val(), 'goods_model');" class="text w90" autocomplete="off" value="{$group.bar_code}" /></td>
+                    <td width="15%" class="hide"><input type="text" name="product_market_price[]" class="text w60" autocomplete="off" value="{$group.product_market_price|default:0.00}" /></td>
+                    <td width="8%" {if $goods_attr_price eq 0}class="hide"{/if}><input type="text" name="product_price[]" onBlur="listTable.editInput(this, 'edit_product_price', {$group.product_id|default:0}, $('#goods_model').val(), 'goods_model');" class="text w60" autocomplete="off" value="{$group.product_price|default:0.00}" /></td>
+                    <td width="8%"><input type="text" name="product_number[]" onBlur="listTable.editInput(this, 'edit_product_number', {$group.product_id|default:0}, $('#goods_model').val(), 'goods_model');" class="text w50 tc" autocomplete="off" value="{$group.product_number|default:0}" /></td>
+                    <td width="8%"><input type="text" name="product_warn_number[]" onBlur="listTable.editInput(this, 'edit_product_warn_number', {$group.product_id|default:0}, $('#goods_model').val(), 'goods_model');" class="text w50 tc" autocomplete="off" value="{$group.product_warn_number|default:1}" /></td>
+                    <td width="10%"><input type="text" name="product_sn[]" onBlur="listTable.editInput(this, 'edit_product_sn', {$group.product_id|default:0}, $('#goods_model').val(), 'goods_model');" class="text w90" autocomplete="off" value="{$group.product_sn}" /></td>
+                    <td width="10%"><input type="text" name="product_bar_code[]" onBlur="listTable.editInput(this, 'edit_product_bar_code', {$group.product_id|default:0}, $('#goods_model').val(), 'goods_model');" class="text w90" autocomplete="off" value="{$group.bar_code}" /></td>
                     <td width="5%">
-                        {if $group.product_id && $group.changelog eq 0}
+                        {if $group.product_id}
                             <a href="javascript:void(0);" class="blue" onclick="if (confirm('{$lang.trash_product_confirm}')) dropProduct('{$group.product_id}')">{$lang.drop}</a>
                         {else}
                             {$lang.n_a}
                         {/if}
-                        <input type="hidden" name="product_id[]" value="{if $group.changelog eq 1}0{else}{$group.product_id|default:0}{/if}" />
-                        <input type="hidden" name="changelog_product_id[]" value="{if $group.changelog eq 1}{$group.product_id|default:0}{else}0{/if}" />
+                        <input type="hidden" name="product_id[]" value="{$group.product_id|default:0}" />
                     </td>
                 </tr>
                 {/foreach}
@@ -110,32 +97,20 @@
             $(this).perfectScrollbar("destroy");
             $(this).perfectScrollbar();
         });
-		
         /**
         *货品市场价
         */
         $(".pro_market").click(function(){
             var val = $("form[name='theForm'] :input[name='product_market_price[]']").get(0).value;
-            var field = 'product_market_price';
-            synchronization_attr(field,val);
+            $("form[name='theForm'] :input[name='product_market_price[]']").val(val);
         });
         
         /**
         *货品本店价
         */
-        $(".pro_promote").click(function(){
-            var val = $("form[name='theForm'] :input[name='product_promote_price[]']").get(0).value;
-            var field = 'product_promote_price';
-            synchronization_attr(field,val);
-        });
-		
-		/**
-        *货品本店价
-        */
         $(".pro_shop").click(function(){
-           var val = $("form[name='theForm'] :input[name='product_price[]']").get(0).value;
-            var field = 'product_price';
-            synchronization_attr(field,val);
+            var val = $("form[name='theForm'] :input[name='product_price[]']").get(0).value;
+            $("form[name='theForm'] :input[name='product_price[]']").val(val);
         });
         
         /**
@@ -143,8 +118,7 @@
         */
         $(".pro_number").click(function(){
             var val = $("form[name='theForm'] :input[name='product_number[]']").get(0).value;
-            var field = 'product_number';
-            synchronization_attr(field,val);
+            $("form[name='theForm'] :input[name='product_number[]']").val(val);
         });
         
         /**
@@ -152,29 +126,9 @@
         */
         $(".pro_warning").click(function(){
             var val = $("form[name='theForm'] :input[name='product_warn_number[]']").get(0).value;
-            var field = 'product_warn_number';
-            synchronization_attr(field,val);
+            $("form[name='theForm'] :input[name='product_warn_number[]']").val(val);
         });
     });
-    function synchronization_attr(field,val){
-            var goods_id = $("input[name='goods_id']").val();
-            var model = $(":input[name='goods_model']").val();//商品模式
-            var warehouse_id = $("#attribute_model").find("input[type=radio][data-type=warehouse_id]:checked").val();
-            var region_id = $("#attribute_model").find("input[type=radio][data-type=region_id]:checked").val();
-            var changelog = $(".table_attr tr:eq(0)").data('changelog');
-            var extension = '';
-            if(model == 1){
-                        extension = "&region_id="+warehouse_id;
-                }else if(model == 2){
-                        extension = "&region_id="+region_id;
-                }
-            extension += "&field="+field;
-            extension += "&changelog="+changelog;
-            extension += "&val="+val;
-            $.jqueryAjax('goods.php', 'act=synchronization_attr' + '&goods_id=' + goods_id + "&model=" + model + extension, function(data){
-                    getAttrList(goods_id);
-            });
-        }
     </script>
 <!--{/if}-->
 {/if}

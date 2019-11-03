@@ -16,7 +16,7 @@
                     <div class="text-all dis-box j-text-all login-li m-top10" name="mobilediv" >
 						<!-- <label>+86</label> -->
 						<div class="box-flex input-text">
-							<input class="j-input-text" name="mobile" id="focus-mobile" maxlength="11"  type="tel" placeholder="请输入验证的手机号" value="{$mobile}" />
+							<input class="j-input-text" name="mobile" id="focus-mobile" maxlength="11"  type="tel" placeholder="请输入修改的手机号" value="{$mobile}" />
 							<i class="iconfont icon-guanbi1 close-common j-is-null"></i>
 						</div>
 					</div>
@@ -29,7 +29,7 @@
                     </div>
 				</div>
                 <input type="hidden" name="sms_signin" value="{$sms_signin}" />
-                <button type="submit"  class="btn-submit br-5 min-two-btn">确定</button>
+                <button type="submit"  class="btn-submit br-5 min-two-btn">确定修改</button>
 			</section>
 		</div>
         </form>
@@ -43,12 +43,12 @@
 		<div class="b-color-f  user-login-ul">
 			<div class="text-all dis-box j-text-all login-li">
 				<div class="input-text box-flex" name="mobilediv">
-					<input class="j-input-text mobile" id="focus" maxlength="11" name="mobile" placeholder="请输入验证的手机号" value="{$mobile}" />
+					<input class="j-input-text mobile" id="focus" maxlength="11" name="mobile" placeholder="请输入手机号" value="{$mobile}" />
 					<i class="iconfont icon-guanbi1 close-common j-is-null"></i>
 				</div>
 			</div>
 			</div>
-			<button type="submit" class="btn-submit br-5 min-two-btn">确定</button>
+			<button type="submit" class="btn-submit br-5 min-two-btn">确定修改</button>
 		</form>
 	</section>
 	{/if}
@@ -106,7 +106,7 @@
             return false;
         }
         if (mobile == '') {
-            d_messages('请输入验证的手机号');
+            d_messages('请输入手机号');
             $("#focus-mobile").focus();
             return false;
         }
@@ -140,7 +140,7 @@
         var mobile = $("input[name=mobile]").val();
         var myreg = /^1(3[0-9]|4[57]|5[0-35-9]|7[0135678]|8[0-9])\d{8}$/;
         if( mobile == ''){
-            d_messages('请输入验证的手机号');
+            d_messages('请输入手机号');
             $("#focus-mobile").focus();
             $("div[name=mobilediv]").addClass("active");
             return false;

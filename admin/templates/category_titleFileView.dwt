@@ -3,13 +3,13 @@
 <head>{include file ='library/admin_html_head.lbi'}</head>
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$lang.back} "{$cat_name}"</div>
+    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>返回{$cat_name}详情</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.titleFileView.0}</li>
-                    <li>{$lang.operation_prompt_content.titleFileView.1}</li>
+                	<li>商家入驻分类的类目证件</li>
+                    <li>请谨慎添加，以防出现错误。</li>
                 </ul>
             </div>
             <div class="flexilist">

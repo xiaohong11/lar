@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 {include file ='library/seller_html_head.lbi'}
+{insert_scripts files='./sms/sms.js'}
 </head>
 
 <body>
@@ -16,7 +17,7 @@
 				{include file ='library/seller_menu_tab.lbi'}
                 {/if}
                 <div class="ecsc-form-goods">
-                <form method="post" action="merchants_account.php" name="listForm" id="submitForm">
+                <form method="post" action="merchants_account.php" name="listForm" onsubmit="return accountCheck();">
                 <div class="wrapper-list">
                 	<dl>
                     	<dt>{$lang.label_deposit_balance}：</dt>
@@ -43,8 +44,8 @@
                         <dd class="txtline">{$real.bank_mobile}</dd>
                     </dl>
                     <dl>
-                    	<dt>{$lang.require_field}&nbsp;{$lang.label_deposit_account}：</dt>
-                        <dd><input name="deposit" type="text" id="deposit" class="text"><div class="form_prompt"></div></dd>
+                    	<dt>{$lang.label_deposit_account}：</dt>
+                        <dd><input name="deposit" type="text" id="deposit" class="text"></dd>
                     </dl>
                     <dl>
                     	<dt>{$lang.label_deposit_mode}：</dt>
@@ -74,7 +75,6 @@
                             <input type="hidden" name="real_id" value="{$real.real_id}"/>
                             <input type="hidden" name="act" value="{$form_act}"/>
                             <input type="hidden" name="submit_act" value="1"/>
-                            <input type="hidden" name="click_count" value="0"/>
                         </dd>
                     </dl>
                 </div>
@@ -86,41 +86,21 @@
     </div>
 </div>
 <script type="text/javascript">
-$(function(){
-	//表单验证
-	$("#query").click(function(){
-		if($("#submitForm").valid()){
-			//防止表单重复提交
-			if(checkSubmit() == true){
-				$(this).parents("form").submit();
-			}else{
-				return false;
-			}
-        }
-    });
+function accountCheck(){
+	var deposit = $("#deposit").val();
+	var seller_money = $("#seller_money").html();
+	seller_money = Number(seller_money);
 	
-	$('#submitForm').validate({
-        errorPlacement:function(error, element){
-            var error_div = element.parents('dl').find('div.form_prompt');
-            element.parents('dd').find(".notic").hide();
-            error_div.append(error);
-        },
-        rules : {
-            deposit : {
-                required : true,
-				max : {$seller_shopinfo.seller_money},
-				min : 1
-            }
-        },
-        messages : {
-            deposit : {
-                required : '<i class="icon icon-exclamation-sign"></i>'+deposit_not_null,
-				max : '<i class="icon icon-exclamation-sign"></i>'+deposit_is_seller_money,
-				min : '<i class="icon icon-exclamation-sign"></i>'+number_is_0,
-            }
-        }
-    });
-});
+	if(deposit == ''){
+		alert("提现金额不能为空");
+		return false;
+	}else if(deposit > seller_money){
+		alert("提现金额不能大于当前可提现余额");
+		return false;
+	}
+	
+	return true;
+}
 </script>
 {include file ='library/seller_footer.lbi'}
 </body>

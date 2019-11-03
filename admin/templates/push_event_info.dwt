@@ -7,9 +7,9 @@
         <div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>事件列表 - {$ur_here}</div>
         <div class="content">
             <div class="explanation" id="explanation">
-                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content_common}</li>
+                    <li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -55,8 +55,8 @@
                         <div class="step_title" style="border: 0px;">
                             <span>{$event_list.app_name}</span>
                             <span>{$event_list.template_subject}</span>
-                            <a href="ecjia_push_event.php?act=delete&event_id={$event_list.event_id}" onclick="javascrip:confirm('确定要删除吗')" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
-                            <a href="javascript:;" title="编辑" class="btn_edit" ectype="edit_update" event_id="{$event_list.event_id}"><i class="icon icon-edit"></i>{$lang.edit}</a>
+                            <a href="ecjia_push_event.php?act=delete&event_id={$event_list.event_id}" onclick="javascrip:confirm('确定要删除吗')" class="btn_trash"><i class="icon icon-trash"></i>删除</a>
+                            <a href="javascript:;" title="编辑" class="btn_edit" ectype="edit_update" event_id="{$event_list.event_id}"><i class="icon icon-edit"></i>编辑</a>
                         </div>
                     </div>
                     {/foreach}
@@ -128,8 +128,8 @@
                         title:title,
                         width:600,
                         content:content,
-                        ok_title:"{$lang.button_submit_alt}",
-                        cl_title:"{$lang.cancel}",
+                        ok_title:"确定",
+                        cl_title:"取消",
                         drag:false,
                         foot:false,
                         cl_cBtn:true,

@@ -1,6 +1,6 @@
 <!--申请店铺信息-->
 <div class="step">
-    <div class="tit"><h4>{$lang.select_business_cate}</h4></div>
+    <div class="tit"><h4>选择可经营类目</h4></div>
     <div class="items">
         <div class="item">
             <div class="label">{$lang.require_field}&nbsp;{$lang.steps_main_categories}：</div>
@@ -26,7 +26,7 @@
                         <li><a href='javascript:;' data-value='{$cate.cat_id}' class='ftx-01'>{$cate.cat_name}</a></li>
                     {/foreach}
                     </ul>
-                    <input name="addCategoryMain" type="hidden" value="{$title.parentType.shop_categoryMain}" id="addCategoryMain_Id_val">
+                    <input name="addCategoryMain" type="hidden" value="0" id="addCategoryMain_Id_val">
                 </div>
                 <div class="category_checkbox_list">
                     <div class="checkbox_items" id="steps_re_span">
@@ -73,7 +73,7 @@
                                 <td><div class="tDiv"><a class="btn_trash" href="javascript:void(0);" onClick="deleteChildCate({$category.ct_id})"><i class="icon icon-trash"></i>{$lang.drop}</a></div></td>
                             </tr>
                         {foreachelse}
-                            <tr><td colspan='4'>{$lang.not_categroy_notic}</td></tr>
+                            <tr><td colspan='4'>暂时没有分类</td></tr>
                         {/foreach}
                         </tbody>
                     </table>
@@ -105,7 +105,7 @@
                                         <input type="file" class="type-file-file" id="legal_person_fileImg" name="permanentFile_{$permanent.cat_id}[]" size="30" hidefocus="true" value="" />
 										{if $permanent.permanent_file}
 										<span class="show">
-                                            <a href="../{$permanent.permanent_file}" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="../{$permanent.permanent_file}" ectype="tooltip" title="tooltip"></i></a>
+                                            <a href="../{$permanent.permanent_file}" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../{$permanent.permanent_file}>')" onmouseout="toolTip()"></i></a>
                                         </span>
 										{/if}
                                     </div>
@@ -117,7 +117,7 @@
                                         </div>
                                         <div class="checkbox_item fl">
                                             <input type="checkbox" name="categoryId_permanent_{$permanent.cat_id}[]" class="ui-checkbox" id="categoryId_permanent_{$permanent.dt_id}" onClick="get_categoryId_permanent(this, '{$permanent.permanent_date}', {$permanent.dt_id})">
-                                            <label for="categoryId_permanent_{$permanent.dt_id}" class="ui-label">{$lang.permanent}</label>
+                                            <label for="categoryId_permanent_{$permanent.dt_id}" class="ui-label">永久</label>
                                         </div>
                                     </div>
                                 </td>
@@ -265,11 +265,12 @@
 		cateArr.cat_id = child;
 		cateArr.user_id = user_id;
 		if(cateChild.length > 0){
-			Ajax.call('merchants_users_list.php?is_ajax=1&act=addChildCate_checked', 'cat_id=' + $.toJSON(cateArr), responseSelectChildCate_cheked, 'POST', 'JSON');
-		}
+                    Ajax.call('merchants_users_list.php?is_ajax=1&act=addChildCate_checked', 'cat_id=' + $.toJSON(cateArr), responseSelectChildCate_cheked, 'POST', 'JSON');
+                }
 	}
 	function responseSelectChildCate_cheked(result){
-		$('#detailCategoryTable').html(result.content); //二级类目别表
-		$('#category_permanent').html(result.catePermanent); //以及类目证件列表
+		
+		 $('#detailCategoryTable').html(result.content); //二级类目别表
+		 $('#category_permanent').html(result.catePermanent); //以及类目证件列表
 	}
 </script>

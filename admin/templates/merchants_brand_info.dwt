@@ -4,14 +4,14 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$lang.goods_alt} - {$ur_here}</div>
+    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>商品 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content_common}</li>
-                    <li>{$lang.operation_prompt_content.info.0}</li>
-                    <li>{$lang.operation_prompt_content.info.1}</li>
+                	<li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
+                    <li>请按提示文案填写信息，以免出错。</li>
+                    <li>审核商家品牌是请先关联到平台品牌，不然会无法通过审核</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -47,7 +47,7 @@
                                             <input type="file" class="type-file-file" id="logo" name="brand_logo" size="30" data-state="imgfile" hidefocus="true" value="">
                                             {if $brand.brand_logo neq ""}
                                             <span class="show">
-                                            	<a href="../{$brand.brand_logo}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="../{$brand.brand_logo}" ectype="tooltip" title="tooltip"></i></a>
+                                            	<a href="../{$brand.brand_logo}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../{$brand.brand_logo}>')" onmouseout="toolTip()"></i></a>
                                             </span>
                                             {/if}
                                         	<input type="text" name="textfile" class="type-file-text" {if $brand.brand_logo neq ""}value="../{$brand.brand_logo}"{/if} id="textfield" readonly>
@@ -55,9 +55,9 @@
                                         <div class="form_prompt"></div>
 										<div class="notic" id="warn_brandlogo">
 										{if $brand.brand_logo eq ''}
-										{$lang.up_brandlogo}
+										{$lang.up_brandlogo}标准尺寸200*88
 										{else}
-										{$lang.warn_brandlogo}
+										{$lang.warn_brandlogo}标准尺寸200*88
 										{/if}
                                         </div>										
                                     </div>
@@ -98,7 +98,7 @@
                                         <div class="search_select">
                                             <div class="brandSelect">
                                                 <div class="selection">
-                                                    <input type="text" name="brand_name" id="brand_name" class="text w120 valid" value="{if $link_brand}{$link_brand.brand_name}{else}{$lang.select_barnd}{/if}" autocomplete="off" readonly data-filter="brand_name" />
+                                                    <input type="text" name="brand_name" id="brand_name" class="text w120 valid" value="{if $link_brand}{$link_brand.brand_name}{else}请选择品牌{/if}" autocomplete="off" readonly data-filter="brand_name" />
                                                     <input type="hidden" name="link_brand" id="brand_id" value="{$link_brand.brand_id|default:0}" data-filter="brand_id" />
                                                 </div>
                                                 <div class="brand-select-container" style="display:none;">
@@ -159,7 +159,6 @@
 										<input type="submit" class="button" value="{$lang.button_submit}" id="submitBtn" />
 										<input type="reset" class="button button_reset" value="{$lang.button_reset}" />
 										<input type="hidden" name="ubrand" value="{$ubrand}" />
-                                        <input type="hidden" name="ru_id" value="{$brand.user_id|default:0}" />
 										<input type="hidden" name="act" value="{$form_action}" />
 										<input type="hidden" name="old_brandname" value="{$brand.brand_name}" />
 										<input type="hidden" name="id" value="{$brand.brand_id}" />
@@ -174,6 +173,8 @@
 		</div>
     </div>
  	{include file ='library/pagefooter.lbi'}
+	
+    {literal}
 	<script type="text/javascript">
 	$(function(){
 		$('.nyroModal').nyroModal();
@@ -204,17 +205,18 @@
 			},
 			messages:{
 				mer_brand_name:{
-					required : '<i class="icon icon-exclamation-sign"></i>'+brand_zh_name_null
+					required : '<i class="icon icon-exclamation-sign"></i>请输入中文品牌名称'
 				},
 				link_brand:{
-					min : '<i class="icon icon-exclamation-sign"></i>'+guanlian_brand_null
+					min : '<i class="icon icon-exclamation-sign"></i>请选择关联品牌'
 				},
 				textfile:{
-					required : '<i class="icon icon-exclamation-sign"></i>'+brand_logo_null
+					required : '<i class="icon icon-exclamation-sign"></i>请上传品牌logo'
 				}
 			}			
 		});
 	});	
 	</script>
+	{/literal}
 </body>
 </html>

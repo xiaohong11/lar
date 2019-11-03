@@ -3,11 +3,7 @@
     	<div class="admin-logo">
         	<a href="./">
                 <div class="t">
-                    {if $seller_logo}
-                    <img src="{$seller_logo}" class="logo"/>
-                    {else}
                     <img src="images/logo.png" class="logo"/>
-                    {/if}
                     <h1>商家中心</h1>
                 </div>
                 <div class="en"><img src="images/en.png" /></div>
@@ -37,7 +33,7 @@
                     {if $privilege_seller eq 1}<a href="privilege.php?act=modif" class="modif"><i class="icon icon-edit"></i></a>{/if}
                 </dt>
                 <dd>
-                    <span><i class="sc_icon sc_icon_seller"></i><a class="navbar-brand" href="{if $head_shop_url}{$head_shop_url}{else}../merchants_store.php?merchant_id={$ru_id}{/if}" target="_blank">店铺</a></span>
+                    <span><i class="sc_icon sc_icon_seller"></i><a class="navbar-brand" href="../merchants_store.php?merchant_id={$ru_id}" target="_blank">店铺</a></span>
                     <span><i class="sc_icon sc_icon_set"></i><a class="navbar-brand navbar-right" href="index.php?act=clear_cache">清缓存</a></span>
                     <span><i class="sc_icon sc_icon_out"></i><a class="navbar-brand navbar-right" href="privilege.php?act=logout">退出</a></span>
                 </dd>

@@ -14,8 +14,8 @@
             <div class="checkbox_items">
                 {foreach from=$priv.priv key=priv_list item=list}
                 <div class="checkbox_item">
-                    <input type="checkbox" value="{$priv_list}" name="action_code[]" class="ui-checkbox" id="{$priv_list}_{$priv.action_id}" date="{$priv.action_code}" {if $list.cando eq 1} checked="true" {/if} title="{$list.relevance}"/>
-                    <label for="{$priv_list}_{$priv.action_id}" class="ui-label">{$lang[$list.action_code]}</label>
+                    <input type="checkbox" value="{$priv_list}" name="action_code[]" class="ui-checkbox" id="{$priv_list}" date="{$priv.action_code}" {if $list.cando eq 1} checked="true" {/if} title="{$list.relevance}"/>
+                    <label for="{$priv_list}" class="ui-label">{$lang[$list.action_code]}</label>
                 </div>
                 {/foreach}
             </div>
@@ -28,7 +28,7 @@
     <div class="checkbox_items">
             <div class="checkbox_item">
             <input type="checkbox" name="checkall" value="checkbox" class="ui-checkbox" id="checkall" />
-            <label for="checkall" class="ui-label">{$lang.check_all}</label>
+            <label for="checkall" class="ui-label">全选</label>
         </div>
     </div>
     <div class="info_btn">

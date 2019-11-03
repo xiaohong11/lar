@@ -4,7 +4,7 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.seller} - {$ur_here}</div>
+    	<div class="title">商家 - {$ur_here}</div>
         <div class="content">
         	<div class="tabs_info">
             	<ul>
@@ -13,7 +13,7 @@
                 </ul>
             </div>			
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                 	<li>请上传合适的头部图片。</li>
                     <li>头部内容尽量简短，但要能吸睛，引导消费者进入店铺。</li>
@@ -47,7 +47,7 @@
                                             <input type="file" class="type-file-file" id="img_url" name="img_url" data-state="imgfile" size="30" hidefocus="true" value="" />
                                             {if $shopheader_info.headbg_img}
                                             <span class="show">
-                                                <a href="{$shopheader_info.headbg_img}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="{$shopheader_info.headbg_img}" ectype="tooltip" title="tooltip"></i></a>
+                                                <a href="{$shopheader_info.headbg_img}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$shopheader_info.headbg_img}>')" onmouseout="toolTip()"></i></a>
                                             </span>
                                             {/if}
                                             <input type="text" name="textfile" class="type-file-text" id="textfield" {if $shopheader_info.headbg_img}value="{$shopheader_info.headbg_img}"{/if} autocomplete="off" readonly />
@@ -85,7 +85,7 @@
 		</div>
     </div>
  	{include file ='library/pagefooter.lbi'}
-    {insert_scripts files="../js/spectrum-master/spectrum.js"}
+    {insert_scripts files="spectrum-master/spectrum.js"}
 	<script type="text/javascript">
 	//选色 start
 	$(function(){

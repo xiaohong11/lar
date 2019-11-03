@@ -47,14 +47,14 @@
                   <table class="ecsc-default-table">
                       <thead>
                           <tr>
-                              <th width="18%" class="tl pl10">{$lang.type_name}</th>
-                              <th width="10%">{$lang.send_type}</th>
-                              <th width="10%">{$lang.type_money}</th>
-                              <th width="10%">{$lang.min_goods_amount}</th>
-                              <th width="8%">{$lang.send_count}</th>
-                              <th width="8%">{$lang.use_count}</th>
+                              <th width="20%" class="tl pl10">类型名称</th>
+                              <th width="10%">发放类型</th>
+                              <th width="10%">红包金额</th>
+                              <th width="10%">订单下限</th>
+                              <th width="8%">发放数量</th>
+                              <th width="8%">使用数量</th>
                               <th width="10%">{$lang.adopt_status}</th>
-                              <th width="26%" class="tr pr20">{$lang.handler}</th>
+                              <th width="24%" class="tr pr20">操作</th>
                           </tr>
                       </thead>
                       <tbody>
@@ -70,7 +70,7 @@
                             </td>
                             <td>{$type.send_by}</td>
                             <td><span onclick="listTable.edit(this, 'edit_type_money', {$type.type_id})">{$type.type_money}</span></td>
-                            <td><span onclick="listTable.edit(this, 'edit_min_goods_amount', {$type.type_id})">{$type.min_goods_amount}</span></td>
+                            <td><span onclick="listTable.edit(this, 'edit_min_amount', {$type.type_id})">{$type.min_amount}</span></td>
                             <td><span>{$type.send_count}</span></td>
                             <td>{$type.use_count}</td>
                             <td class="audit_status">
@@ -88,19 +88,12 @@
                                   {if $type.send_type eq 3}
                                   <span><a href="bonus.php?act=gen_excel&tid={$type.type_id}" class="btn-green"><i class="icon icon-download-alt"></i><p>报表</p></a></span>
                                   {/if}
-                                  {if $type.send_type eq 4}
-                                  <span id="clip_container"><a href="javascript:void(0);" data-url="{$url}bonus.php?act=bonus_info&id={$type.type_id}" class="btn-green" id="clip_button" ectype="clip_button"><i class="icon icon-copy"></i><p>{$lang.copy_url}</p></a></span>
-                                  {/if}
-                                  {if $type.send_type neq 2 && $type.review_status eq 3}
+                                  {if $type.send_type neq 2}
                                   <span><a href="bonus.php?act=send&amp;id={$type.type_id}&amp;send_by={$type.send_type}" class="btn-orange"><i class="icon icon-screenshot"></i><p>{$lang.send}</p></a></span>
                                   {/if}
                                   <span><a href="bonus.php?act=bonus_list&amp;bonus_type={$type.type_id}" class="btn-orange"><i class="icon sc_icon_see"></i><p>{$lang.view}</p></a></span>
-                                {/if}
-                                {if $type.user_id gt 0}
+                                {/if}  
                                 <span><a href="bonus.php?act=edit&amp;type_id={$type.type_id}" class="btn-green"><i class="icon icon-edit"></i><p>{$lang.edit}</p></a></span>
-                                {else}
-                                <span><a href="bonus.php?act=edit&amp;type_id={$type.type_id}" class="btn-orange"><i class="icon sc_icon_see"></i><p>{$lang.view}</p></a></span>
-                                {/if}
                                 {if $type.usebonus_type eq 0 || $priv_ru}
                                 <span><a href="javascript:;" onclick="listTable.remove({$type.type_id}, '{$lang.drop_confirm}')" class="btn-red"><i class="icon icon-trash"></i><p>{$lang.drop}</p></a></span>
                                 {/if}
@@ -125,8 +118,11 @@
     </div>
 </div>
 {include file ='library/seller_footer.lbi'}
-<script type="text/javascript" src="../seller/js/jquery.purebox.js"></script>
 <script type="text/javascript">
+
+
+
+
 <!--
   listTable.recordCount = {$record_count};
   listTable.pageCount = {$page_count};

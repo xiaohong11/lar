@@ -7,7 +7,7 @@
         <div class="title">移动应用 - {$ur_here}</div>
         <div class="content">       
             <div class="explanation" id="explanation">
-                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                     <li>该页面展示了商城所有的头条信息，可对头条信息进行编辑和删除操作。</li>
                     <li>可输入头条标题关键字进行检索。</li>
@@ -19,16 +19,14 @@
                         <a href="{$action_link.href}"><div class="fbutton"><div class="add" title="{$action_link.text}"><span><i class="icon icon-plus"></i>{$action_link.text}</span></div></div></a>
                     </div>
                     <div class="refresh">
-                        <div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                        <div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                        <div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                        <div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>
                     <div class="search">
-                    	<form action="javascript:;" name="searchForm" onSubmit="searchGoodsname(this);">
                         <div class="input">
                             <input type="text" name="keyword" class="text nofocus w140" placeholder="输入头条标题" autocomplete="off">
-                            <input type="submit" class="btn" name="secrch_btn" ectype="secrch_btn" value="" />
+                            <button class="btn" name="secrch_btn"></button>
                         </div>
-                        </form>
                     </div>                  
                 </div>
                 <div class="common-content">
@@ -68,9 +66,9 @@
                                     <td class="sky_id"><div class="tDiv">{$mobile_toutiao.date}</div></td>
                                     <td class="handle">
                                         <div class="tDiv ht_tdiv">
-                                            <a href="ecjia_mobile_toutiao.php?act=edit&id={$mobile_toutiao.id}" class="btn_edit"><i class="icon icon-edit"></i>{$lang.edit}</a>
+                                            <a href="ecjia_mobile_toutiao.php?act=edit&id={$mobile_toutiao.id}" class="btn_edit"><i class="icon icon-edit"></i>编辑</a>
                                             
-                                            <a href="javascript:;" onclick="listTable.remove({$mobile_toutiao.id}, '确定要删除吗')" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                            <a href="javascript:;" onclick="listTable.remove({$mobile_toutiao.id}, '确定要删除吗')" class="btn_trash"><i class="icon icon-trash"></i>删除</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -86,7 +84,7 @@
                                                 <input type="hidden" name="act" value="batch" />
                                                 <!-- 操作类型 start -->
                                                 <div class="imitate_select select_w120">
-                                                    <div class="cite">{$lang.please_select}</div>
+                                                    <div class="cite">请选择</div>
                                                     <ul>
                                                         <li><a href="javascript:changeAction();" data-value="" class="ftx-01">{$lang.select_please}</a></li>
                                                         <li><a href="javascript:changeAction();" data-value="delete" class="ftx-01">删除</a></li>
@@ -121,8 +119,8 @@
     
     {literal}
     <script type="text/javascript">
-    listTable.recordCount = {$record_count|default:0};
-    listTable.pageCount = {$page_count|default:1};
+    listTable.recordCount = '{$record_count}';
+    listTable.pageCount = '{$page_count}';
     
     {foreach from=$filter item=item key=key}
     listTable.filter.{$key} = '{$item}';

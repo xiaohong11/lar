@@ -14,8 +14,7 @@
 
 <script type="text/javascript">
 var json_languages = {$json_languages};
-
 //加载效果
-var load_cart_info = '<img src="{$site_domain}themes/<?php echo $GLOBALS['_CFG']['template']; ?>/images/load/loadGoods.gif" class="load" />';
-var load_icon = '<img src="{$site_domain}themes/<?php echo $GLOBALS['_CFG']['template']; ?>/images/load/load.gif" width="200" height="200" />';
+var load_cart_info = '<img src="{$site_domain}themes/<?php echo $GLOBALS['_CFG']['template']; ?>/images/load/loadGoods.gif" height="108" class="ml100">';
+var load_icon = '<img src="{$site_domain}themes/<?php echo $GLOBALS['_CFG']['template']; ?>/images/load/load.gif" width="200" height="200">';
 </script>

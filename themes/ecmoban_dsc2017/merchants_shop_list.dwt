@@ -22,11 +22,7 @@
                 <div class="crumbs-nav-item">
                     <span>全部</span>
                     <span class="arrow">></span>
-                    {if $display eq 'list'}
                     <span>共{$shop_count}家店铺</span>
-                    {else}
-                    <span>共{$shop_count}件商品</span>
-                    {/if}
                 </div>
             </div>
         </div>
@@ -115,9 +111,9 @@
                                        </div>
                                         <div class="ssc-bottom">
                                             <span class="col1">{$lang.peer_comparison}</span>
-                                            <span class="col2">{$shop.merch_cmt.cmt.commentRank.zconments.goodReview}%<i class="iconfont icon-arrow-{if $shop.merch_cmt.cmt.commentRank.zconments.is_status eq 1}up{elseif $shop.merch_cmt.cmt.commentRank.zconments.is_status eq 2}average{else}down{/if}"></i></span>
-                                            <span class="col3">{$shop.merch_cmt.cmt.commentServer.zconments.goodReview}%<i class="iconfont icon-arrow-{if $shop.merch_cmt.cmt.commentServer.zconments.is_status eq 1}up{elseif $shop.merch_cmt.cmt.commentServer.zconments.is_status eq 2}average{else}down{/if}"></i></span>
-                                            <span class="col4">{$shop.merch_cmt.cmt.commentDelivery.zconments.goodReview}%<i class="iconfont icon-arrow-{if $shop.merch_cmt.cmt.commentDelivery.zconments.is_status eq 1}up{elseif $shop.merch_cmt.cmt.commentDelivery.zconments.is_status eq 2}average{else}down{/if}"></i></span>
+                                            <span class="col2">{$shop.merch_cmt.cmt.commentRank.zconments.goodReview}%<i class="iconfont icon-arrow-down"></i></span>
+                                            <span class="col3">{$shop.merch_cmt.cmt.commentServer.zconments.goodReview}%<i class="iconfont icon-arrow-down"></i></span>
+                                            <span class="col4">{$shop.merch_cmt.cmt.commentDelivery.zconments.goodReview}%<i class="iconfont icon-arrow-up"></i></span>
                                         </div>
                                     </div>
                                 </div>
@@ -156,7 +152,7 @@
                         </div>
                     </div>
                     <!--{foreachelse}-->
-                    <div class="no_records no_records_1200">
+                    <div class="no_records">
                         <i class="no_icon_two"></i>
                         <div class="no_info">
                             <h3>{$lang.information_null}</h3>
@@ -294,7 +290,7 @@
                                         <div class="col col-1">
                                             <div class="p-img"><a href="{$goods.goods_url}" target="_blank"><img src="{$goods.goods_thumb}" /></a></div>
                                             <div class="p-right">
-												<div class="p-name fl"><a href="{$goods.goods_url}" title="{$goods.goods_name|escape:html}" target="_blank">{if $goods.self_run}<div class="seller-sr fl">{$lang.self_run}</div>&nbsp;&nbsp;{/if}{$goods.goods_name}</a></div>
+												<div class="p-name fl"><a href="{$goods.goods_url}" title="{$goods.goods_name|escape:html}" target="_blank">{if $goods.self_run}<div class="seller-sr fl">{$lang.self_run}</div>{/if}{$goods.goods_name}</a></div>
                                                 <div class="p-lie">
                                                     <div class="p-num">{$lang.sales_volume}：{$goods.sales_volume}</div>
                                                     <div class="p-comm">{$lang.comments_rank}：{$goods.cmt_count} +</div>

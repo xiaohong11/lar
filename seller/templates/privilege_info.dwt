@@ -17,15 +17,15 @@
                     	<dl>
                         	<dt>{$lang.require_field}&nbsp;{$lang.user_name}：</dt>
                             <dd>
-                                <input type="text" name="user_name" maxlength="20" value="{$user.user_name|escape}" size="34" class="text"{if $action eq "modif"} readonly="readonly"{/if}/>
-                                <div class="form_prompt"></div>
+							<input type="text" name="user_name" maxlength="20" value="{$user.user_name|escape}" size="34" class="text"/>
+							<div class="form_prompt"></div>
 							</dd>
                         </dl>
                         <dl>
                         	<dt>{$lang.require_field}&nbsp;{$lang.email}：</dt>
                             <dd>
-                                <input type="text" name="email" value="{$user.email|escape}" size="34" class="text"/>
-                                <div class="form_prompt"></div>
+							<input type="text" name="email" value="{$user.email|escape}" size="34" class="text"/>
+							<div class="form_prompt"></div>
 							</dd>
                         </dl>
                         {if $action eq "add"}
@@ -33,8 +33,8 @@
                         	<dt>{$lang.require_field}&nbsp;{$lang.password}：</dt>
                             <dd>
                                 <input type="password"   style="display:none"/>
-                                <input type="password" name="password" maxlength="32" size="34" class="text" id="password"/>
-                                <div class="form_prompt"></div>
+							<input type="password" name="password" maxlength="32" size="34" class="text" id="password"/>
+							<div class="form_prompt"></div>
 							</dd>
                         </dl>
                         <dl>
@@ -48,19 +48,28 @@
                         {/if}
                         {if $action neq "add"}
                         <dl>
-                        	<dt>{$lang.new_password}：</dt>
+                        	<dt>{$lang.require_field}&nbsp;{$lang.old_password}：</dt>
                             <dd>
-                                <input type="password" style="display:none"/>
-                                <input type="password" name="new_password" maxlength="32" size="34" class="text ignore" id="new_password"/>
-                                <div class="form_prompt"></div>
+                                <input type="password"   style="display:none"/>
+                            	<input type="password" name="old_password" size="34" class="text"/>
+								<div class="form_prompt"></div>
+							  	<div class="notic" id="passwordNotic">{$lang.password_notic}</div>
+                            </dd>
+                        </dl>
+                        <dl>
+                        	<dt>{$lang.require_field}&nbsp;{$lang.new_password}：</dt>
+                            <dd>
+                                <input type="password"   style="display:none"/>
+							<input type="password" name="new_password" maxlength="32" size="34" class="text" id="new_password"/>
+							<div class="form_prompt"></div>
 							</dd>
                         </dl>
                         <dl>
-                        	<dt>{$lang.pwd_confirm}：</dt>
+                        	<dt>{$lang.require_field}&nbsp;{$lang.pwd_confirm}：</dt>
                             <dd>
-                                <input type="password" style="display:none"/>
-                                <input type="password" name="pwd_confirm" value="" size="34" class="text ignore"/>
-                                <div class="form_prompt"></div>
+                                <input type="password"   style="display:none"/>
+							<input type="password" name="pwd_confirm" value="" size="34" class="text"/>
+							<div class="form_prompt"></div>
 							</dd>
                         </dl>
                         {if $user.agency_name}
@@ -123,7 +132,6 @@ $(function(){
 				//element.parents('dl').find(".notic").hide();
 				error_div.append(error);
 			},
-			ignore:".ignore",
 			rules : {
 				user_name : {
 					required : true
@@ -169,7 +177,6 @@ $(function(){
 				//element.parents('dl').find(".notic").hide();
 				error_div.append(error);
 			},
-			ignore:".ignore",
 			rules : {
 				user_name : {
 					required : true
@@ -177,6 +184,10 @@ $(function(){
 				email : {
 					required : true,
 					email : true
+				},
+				old_password : {
+					required : true,
+					minlength:6
 				},
 				new_password : {
 					required : true,
@@ -195,6 +206,10 @@ $(function(){
 				email : {
 					required : '<i class="icon icon-exclamation-sign"></i>'+email_empty,
 					email : '<i class="icon icon-exclamation-sign"></i>'+email_error
+				},
+				old_password : {
+					required : '<i class="icon icon-exclamation-sign"></i>旧密码不能为空',
+					minlength : '<i class="icon icon-exclamation-sign"></i>旧密码不正确'
 				},
 				new_password : {
 					required : '<i class="icon icon-exclamation-sign"></i>新密码不能为空',

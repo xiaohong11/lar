@@ -83,7 +83,7 @@
                     </div>    
                     {/if}
                 </div>
-                {if $msg.comment_type lt 2}
+                
                 <div class="ecsc-form-goods">
                 <form method="post" action="comment_manage.php?act=action" name="theForm" id="comment_manage_form">
                 <div class="wrapper-list wrapper-list-bjq">	
@@ -130,7 +130,6 @@
                 </div>
                 </form>
                 </div>
-                {/if}
             </div>
         </div>
     </div>

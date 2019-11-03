@@ -4,7 +4,7 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.13_backup} - {$lang.backups}</div>
+    	<div class="title">数据库管理 - 备份</div>
         <div class="content">
             <div class="flexilist">
                 <div class="common-content">

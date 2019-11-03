@@ -10,7 +10,7 @@
         </div>
         {/foreach}
         </div>
-        <p><a href="javascript:selectAll('yes')">{$lang.check_all}</a> / <a href="javascript:selectAll('no')">取消全选</a></p>
+        <p><a href="javascript:selectAll('yes')">全选</a> / <a href="javascript:selectAll('no')">取消全选</a></p>
         <div class="pb-ct tc">
             <input type="hidden" name="order_id" value="{$order_id}">
             <input type="hidden" name="act" value="set_grab">

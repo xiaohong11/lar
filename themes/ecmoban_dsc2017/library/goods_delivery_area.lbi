@@ -3,7 +3,7 @@
 <div class="tit">
     <span>{$province_row.region_name}&nbsp;{$city_row.region_name}&nbsp;{$district_row.region_name}</span><i class="iconfont icon-down"></i>
 </div>
-<div class="area-warp" id="area_list" ectype="areaWarp">
+<div class="area-warp" id="area_list">
 	{if $consignee_list}
 	<div class="stock-add-used">
     	<div class="stock-top"><strong>{$lang.Common_address}</strong></div>
@@ -21,12 +21,12 @@
         <li onclick="region.selectArea(this, 2);" value="{$city_row.region_id}" id="city_li">{$city_row.region_name}<i class="sc-icon-right"></i></li>
         <li class="curr" onclick="region.selectArea(this, 3);" value="{$city_district.region_id}" id="district_type">{$district_row.region_name}<i class="sc-icon-right"></i></li>
     </ul>
-    <div class="tab-content" id="house_list" style="display:none;">
+    <div class="tab-content" id="house_list" style="display:none;" >
         <ul id="province_list">
             <!-- 省、直辖市 start --> 
             {foreach from=$province_list item=province name=noprovince}
                 <li>
-                    <a v="{$province.region_id}" title="{$province.region_name}" {if $province.choosable}onclick="region.getRegion({$province.region_id}, 2, city_list, this,{$user_id},{$merchant_id|default:0});"{else}class="choosable"{/if} href="javascript:void(0);">{$province.region_name}</a>
+                    <a v="{$province.region_id}" title="{$province.region_name}" {if $province.choosable}onclick="region.getRegion({$province.region_id}, 2, city_list, this,{$user_id},{$merchant_id});"{else}class="choosable"{/if} href="javascript:void(0);">{$province.region_name}</a>
                 </li>
             {/foreach}
             <!-- 省、直辖市 start -->
@@ -37,7 +37,7 @@
             <!-- 市区 start -->                   	                             
             {foreach from=$city_list item=city name=nocity}                                     
                 <li>
-                    <a v="{$city.region_id}" title="{$city.region_name}" {if $city.choosable}onclick="region.getRegion({$city.region_id}, 3, district_list, '{$city.region_name}',{$user_id},{$merchant_id|default:0});"{else}class="choosable"{/if} href="javascript:void(0);">{$city.region_name}</a>  
+                    <a v="{$city.region_id}" title="{$city.region_name}" {if $city.choosable}onclick="region.getRegion({$city.region_id}, 3, district_list, '{$city.region_name}',{$user_id},{$merchant_id});"{else}class="choosable"{/if} href="javascript:void(0);">{$city.region_name}</a>  
                 </li>
             {/foreach}   
             <!-- 市区 end -->                  
@@ -55,11 +55,9 @@
         </ul>
     </div>
     <div class="mod_storage_state">{$lang.Distribution_limit}</div>
-    <input type="hidden" value="{$province_row.region_id|default:0}" id="province_id" name="province_region_id">
-    <input type="hidden" value="{$city_row.region_id|default:0}" id="city_id" name="city_region_id">
-    <input type="hidden" value="{$district_row.region_id|default:0}" id="district_id" name="district_region_id">         
-    <input type="hidden" value="{$merchant_id|default:0}" id="merchantId" name="merchantId">
-    <input type="hidden" value="{$region_id|default:0}" id="region_id" name="region_id" />
-    <input type="hidden" value="{$area_id|default:0}" id="area_id" name="area_id" />
+    <input type="hidden" value="{$province_row.region_id}" id="province_id" name="province_region_id">
+    <input type="hidden" value="{$city_row.region_id}" id="city_id" name="city_region_id">
+    <input type="hidden" value="{if $district_row.region_id}{$district_row.region_id}{else}0{/if}" id="district_id" name="district_region_id">         
+    <input type="hidden" value="{$merchant_id}" id="merchantId" name="merchantId">
 </div>
   

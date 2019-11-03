@@ -5,7 +5,7 @@
 				{foreach from=$seller_menu item=menu key=key}
 					{if $menu.action eq $menu_select.action}
 						{foreach from=$menu.children item=child}
-							<li {if $menu_select.current eq $child.action}class="current"{/if}><a href="{$child.url}"> {$child.label} </a><div class="arrow"></div></li>
+							<li {if $menu_select.current eq $child.action}class="current"{/if}><a href="{$child.url}" {if $child.label eq '店铺可视化装修'}target="_blank"{/if}> {$child.label} </a><div class="arrow"></div></li>
 						{/foreach}
 					{/if}
 				{/foreach}

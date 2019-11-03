@@ -52,7 +52,7 @@
     </div>
 </div>
 
-{insert_scripts files="../js/utils.js"}
+{insert_scripts files="../js/utils.js,validator.js"}
 {include file ='library/seller_footer.lbi'}
 </body>
 </html>

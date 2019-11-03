@@ -11,15 +11,10 @@
 <!-- TemplateEndEditable -->
 <link rel="shortcut icon" href="favicon.ico" />
 <!-- #BeginLibraryItem "/library/js_languages_new.lbi" --><!-- #EndLibraryItem -->
-<link rel="stylesheet" type="text/css" href="themes/ecmoban_dsc2017/css/color.css">
 </head>
 
-<body class="home_visual_body{if $pc_page.tem eq 'backup_festival_1'} festival_home{/if}"{if $bg_image.img_file}style="background:url({$bg_image.img_file}){if $bg_image.bg_color} {$bg_image.bg_color}{/if} top {$bg_image.align} {$bg_image.bgrepeat};"{/if}>
-	{if $pc_page.tem eq 'backup_festival_1'}
-    <!-- #BeginLibraryItem "/library/page_header_festival.lbi" --><!-- #EndLibraryItem -->
-    {else}
+<body>
 	<!-- #BeginLibraryItem "/library/page_header_common.lbi" --><!-- #EndLibraryItem -->
-    {/if}
     <div class="homeindex" ectype="homeWrap">
     	{$page}
         
@@ -34,7 +29,7 @@
                 <div class="mall-search">
                    <div class="dsc-search">
                         <div class="form">
-                            <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm(this)" class="search-form">
+                            <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()" class="search-form">
                                 <input autocomplete="off" name="keywords" type="text" id="keyword2" value="{if $search_keywords}{$search_keywords}{else}{insert name='rand_keyword'}{/if}" class="search-text"/>
                                 <input type="hidden" name="store_search_cmt" value="{$search_type|default:0}">
                                 <button type="submit" class="button button-goods" onclick="checkstore_search_cmt(0)" >搜商品</button>
@@ -51,22 +46,29 @@
                 </div>
             </div>
     	</div>
-        <div class="lift lift-mode-{$floor_nav_type|default:one} lift-hide" ectype="lift" data-type="{$floor_nav_type|default:one}" style="z-index:100001">
+        <div class="lift lift-hide" ectype="lift" style="z-index:100001">
             <div class="lift-list" ectype="liftList">
+                <div class="lift-item lift-h-seckill lift-item-first" ectype="liftItem" data-target="#h-seckill"><span>秒杀</span></div>
             </div>
         </div>
         
         <input name="warehouse_id" type="hidden" value="{$warehouse_id}">
     	<input name="area_id" type="hidden" value="{$area_id}">
-        <input name="temp" type="hidden" value="{$pc_page.tem}">
-        
-        <!--首页弹出广告-->
-    	<div ectype="bonusadv_box"></div>
     </div>
     
-    {* DSC 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
+    {* ECSHOP 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
     <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
-
+    	
+	<!--首页弹出广告-->
+     {if $bonusadv.img_file && $cfg_bonus_adv eq 1}
+    <div class="ejectAdv" ectype="ejectAdv">
+    	<div class="ejectAdvbg"></div>
+    	<div class="ejectAdvimg">
+        	<a href="{$bonusadv.fileurl}" target="_blank"><img src="{$bonusadv.img_file}"></a>
+            <a href="javascript:void(0);" class="ejectClose" ectype="ejectClose"></a>
+        </div>
+    </div>
+     {/if}
     {insert_scripts files='jquery.SuperSlide.2.1.1.js,jquery.yomi.js,cart_common.js,cart_quick_links.js'}
     <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/dsc-common.js"></script>
     <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/asyLoadfloor.js"></script>
@@ -84,14 +86,15 @@
 			$(".banner").slide({titCell:".hd ul",mainCell:".bd ul",effect:slideType,interTime:5000,delayTime:500,autoPlay:true,autoPage:true,trigger:"click",endFun:function(i,c,s){
 				$(window).resize(function(){
 					var width = $(window).width();
-					if(!$('body').hasClass("festival_home")){
-						s.find(".bd li").css("width",width);
-					}
+					s.find(".bd li").css("width",width);
 				});
 			}});
 		}else{
 			$(".banner .hd").hide();
 		}
+		
+		//首页信息栏 新闻文章切换 
+		$(".vip-item").slide({titCell:".tit a",mainCell:".con"});
 		
 		//楼层二级分类商品切换
 		$("*[ectype='floorItem']").slide({titCell:".hd-tags li",mainCell:".floor-tabs-content",titOnClassName:"current"});
@@ -114,74 +117,57 @@
 			}
         });
 
-		//异步加载出首页个人信息、秒杀活动、品牌信息、首页弹出广告
+		//异步加载出秒杀活动、品牌信息
         $(function(){
             var site_domain = "{$site_domain}";
             var brand_id = $('*[ectype="homeBrand"]').find(".brand-list").data("value");
-			var seckillid = $('[data-mode="h-seckill"]').find('[data-type="range"]').data('seckillid');
-			var temp = "{$pc_page.tem}";
-			
 			var where = '';
 			if(!brand_id){
 				brand_id = '';
 			}
-			
-            seckillid = JSON.stringify(seckillid);
-			
             if(site_domain){
-				$.ajax({
-					type: "GET",
-					url: "{$site_domain}ajax_dialog.php", /*jquery Ajax跨域*/
-					data: "act=getUserInfo&is_jsonp=1&brand_id="+brand_id + "&seckillid=" + seckillid + "&temp=" + temp,
-					dataType:"jsonp",
-					jsonp:"jsoncallback",
-					success: homeAjax
-				});
+                $.ajax({
+                    type: "GET",
+                    /*jquery Ajax跨域*/
+                    url: "{$site_domain}ajax_dialog.php",
+                    data: "act=getUserInfo&is_jsonp=1&brand_id="+brand_id,
+                    dataType:"jsonp",
+                    jsonp:"jsoncallback",
+                    success: homeAjax
+                 });
             }else{
-                Ajax.call('ajax_dialog.php?act=getUserInfo', 'brand_id=' + brand_id + "&seckillid=" + seckillid + "&temp=" + temp, homeAjax , 'POST', 'JSON');
+                Ajax.call('ajax_dialog.php?act=getUserInfo', 'brand_id=' + brand_id, homeAjax , 'POST', 'JSON');
             }
-			
-			function ajax_Homeindex_Bonusadv(){
-				var cfg_bonus_adv = "{$cfg_bonus_adv}";//是否开启首页弹出广告
-				var suffix = "{$pc_page.tem}";
-				
-				if(cfg_bonus_adv == 1 && suffix){
-					Ajax.call('ajax_dialog.php?act=ajax_Homeindex_Bonusadv', 'suffix=' + suffix, function(data){
-						if(data.error != 1){
-							$("[ectype='bonusadv_box']").html(data.content);
-						}
-					} , 'POST', 'JSON');
-				}
-			}
-			
-			ajax_Homeindex_Bonusadv();
 			
 			function homeAjax(data){
 				$("*[ectype='user_info']").html(data.content);
 				$("*[ectype='homeBrand']").html(data.brand_list);
-				if(data.seckill_goods){
-					$('[data-mode="h-seckill"]').show().find('[data-type="range"] .box-bd').html(data.seckill_goods);
-					var sec_begin_time =  $('[data-mode="h-seckill"]').find('[data-type="range"] .box-bd').find('input[name="sec_begin_time"]').val();
-					var sec_end_time = $('[data-mode="h-seckill"]').find('[data-type="range"] .box-bd').find('input[name="sec_end_time"]').val();
-					if(sec_begin_time){
-						$('[data-mode="h-seckill"]').find('[data-type="range"] .box-hd [ectype="time"]').attr("data-time",sec_begin_time)
-					}else{
-						$('[data-mode="h-seckill"]').find('[data-type="range"] .box-hd [ectype="time"]').attr("data-time",sec_end_time)
-					}
-					$("*[ectype='time']").each(function(){
-						$(this).yomi();
-					});
-					//首页秒杀商品滚动
-					$(".seckill-channel").slide({mainCell:".box-bd ul",effect:"leftLoop",autoPlay:true,autoPage:true,interTime:5000,delayTime:500,vis:5,scroll:1,trigger:"click"});
+				
+				if($("*[data-mode='lunbo']").length > 0){
+					$("*[data-mode='lunbo']").after("<div class='visual-item w1200' ectype='channel'>"+data.seckill_goods+"</div>");
 				}else{
-					$('[data-mode="h-seckill"]').hide();
+					$(".content").find("*[ectype='visualItme']").eq(0).before("<div class='visual-item w1200' ectype='channel'>"+data.seckill_goods+"</div>");
 				}
+				$("*[ectype='time']").each(function(){
+					$(this).yomi();
+				});
+				
+				//秒杀活动
+				var seckill_goods = $("input[name='seckill_goods']").val();
+				if(seckill_goods == 0){
+					$(".lift-h-seckill").hide();
+				}else{
+					$(".lift-h-seckill").show();
+				}
+				
+				//首页秒杀商品滚动
+				$(".seckill-channel").slide({mainCell:".box-bd ul",effect:"leftLoop",autoPlay:true,autoPage:true,interTime:5000,delayTime:500,vis:5,scroll:1,trigger:"click"});
 				
 				$.catetopLift();
 				
 				$(window).scroll(function(){
 					var scrollTop = $(document).scrollTop();
-					var navTop = $("*[ectype='dscNav']").offset().top;  //by yanxin
+					var navTop = $("*[ectype='channel']").offset().top;  //by yanxin
 						
 					if(scrollTop>navTop){
 						$("*[ectype='suspColumn']").addClass("show");
@@ -198,11 +184,11 @@
 				var warehouse_id = $("input[name='warehouse_id']").val();
 				var area_id = $("input[name='area_id']").val();
 				if(goods_ids){
-					Ajax.call('ajax_dialog.php?act=getguessYouLike', 'goods_ids=' + goods_ids + "&warehouse_id=" + warehouse_id + "&area_id=" + area_id, function(data){
-						if(data.content){
+					 Ajax.call('ajax_dialog.php?act=getguessYouLike', 'goods_ids=' + goods_ids + "&warehouse_id=" + warehouse_id + "&area_id=" + area_id, function(data){
+						 if(data.content){
 							_this.find(".view .lift-channel ul").html(data.content);
 						}
-					} , 'POST', 'JSON');
+					 } , 'POST', 'JSON');
 				}
 			});
                        
@@ -213,48 +199,37 @@
 			$("[ectype='identi_floorgoods'].current").each(function(){
 				 get_homefloor_cat_content(this);
 			});
-			
-			function checked_article_cat(){
-				var cat_ids = '';
-				
-				$('[data-mode="insertVipEdit"] .tit a').each(function(){
-					var val = $(this).data('catid');
-					if(cat_ids){
-						cat_ids = cat_ids + "," + val;
-					}else{
-						cat_ids = val;
-					}
-				});
-				
-				if(cat_ids){
-					Ajax.call('ajax_dialog.php?act=checked_article_cat', 'cat_ids=' + cat_ids, function(data){
-						$('[data-mode="insertVipEdit"] .vip_article_cat').html(data.content);
-						
-						//首页信息栏 新闻文章切换 
-						$(".vip-item").slide({titCell:".tit a",mainCell:".con"});
-					} , 'POST', 'JSON');
-				}
-			}
-			checked_article_cat();
-                        //异步新品排行
-                        $("[ectype='h-phb3']").each(function(){
-				 var _this = $(this);
-                                 var activitytype = _this.data('activitytype');
-                                 var goodsids = _this.data('goodsids');
-                                 var warehouse_id = $("input[name='warehouse_id']").val();
-				var area_id = $("input[name='area_id']").val();
-                                
-                                 Ajax.call('ajax_dialog.php?act=checked_home_rank', 'goodsids=' + goodsids + "&activitytype=" + activitytype + "&warehouse_id=" + warehouse_id + "&area_id=" + area_id, function(data){
-						_this.html(data.content);
-					} , 'POST', 'JSON');
-			});
         });
 		
-		//楼层左侧栏悬浮框
+		function readyLoad(){
+			var homeWrap = $("*[ectype='homeWrap']");
+			var homeitem = homeWrap.find("*[ectype='visualItme']");
+			var mode = "";
+			var range = "";
+			var lift = "";
+			var id = "";
+			var floorItem = "";
+			var returnTop = '<div class="lift-item lift-item-top" ectype="liftItem"><i class="iconfont icon-returntop"></i></div>';
+			homeitem.each(function(k,v){
+				mode = $(this).data("mode");
+				if(mode != "lunbo" && mode != "h-streamer" && mode != "custom"){
+					range = $(this).find("*[data-type='range']");
+					lift = range.data("lift");
+					id = range.attr("id");
+					
+					var _div = '<div class="lift-item" ectype="liftItem" data-target="#'+ id +'"><span>'+lift+'</span></div>';
+					
+					$("*[ectype='liftList']").append(_div);
+				}
+				
+			});
+			
+			$("*[ectype='liftList']").append(returnTop);
+		}
 		readyLoad();
 		
 		//会员名称*号 by yanxin
-		/*var name = $(".suspend-login a.nick_name").text();
+		var name = $(".suspend-login a.nick_name").text();
 		var star = new Array();
 		var nameLen = name.length > 2 ? name.length-2:"1";
 		for(var i=1;i<=nameLen;i++){
@@ -267,12 +242,13 @@
 			var new_name = name[0] + star;
 		}
 		$(".suspend-login a.nick_name").text(new_name);
-		*/
+		
 		//去掉悬浮框 我的购物车
 		$(".attached-search-container .shopCart-con a span").text("");
 		
-		/*首页可视化 第八套模板 楼层左侧前后轮播 */
-		aroundSilder(".floor_silder")
+		$("*[ectype='time']").each(function(){
+			$(this).yomi();
+		});
     </script>
 </body>
 </html>

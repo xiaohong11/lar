@@ -21,7 +21,7 @@
     <div class="z_container">
         <div class="w_c banner_c">
             <div class="wrap_c">
-				{* DSC 提醒您：动态载入zc_index_banner.lbi，显示众筹首页轮播图 *}{insert name='get_adv_child' ad_arr=$zc_index_banner}
+				{* ECSHOP 提醒您：动态载入zc_index_banner.lbi，显示众筹首页轮播图 *}{insert name='get_adv_child' ad_arr=$zc_index_banner}
             </div>
             <div class="ban_nav"><ul></ul></div>
             <a class="btn_Left" href="javascript:;"></a>
@@ -123,15 +123,7 @@
                     </div>
                     {/foreach}
                 {else}
-               		<div class="no_records">
-						<i class="no_icon_two"></i>
-						<div class="no_info no_info_line">
-							<h3>{$lang.information_null}</h3>
-							<div class="no_btn">
-								<a href="index.php" class="btn sc-redBg-btn">返回首页</a>
-							</div>
-						</div>
-					</div>
+               		暂无商品
             	{/if}
             </div>
             
@@ -438,10 +430,10 @@
                 	<div class="box-promoters">
                     	<div class="common-title">{$lang.project_Promoter}</div>
                         <div class="promoters clearfix">
-                        	<div class="promoters-img"><img height="70" width="70" src="{$init.img}" alt=""></div>
+                        	<div class="promoters-img"><a href="javascript:void(0);" target="_blank"><img height="70" width="70" src="{$init.img}" alt=""></a></div>
                             <div class="promoters-detail">
                             	<div class="promoters-name">
-                                	<span class="fl">{$init.name}</span>
+                                	<a href="javascript:void(0);" target="_blank"><span class="fl">{$init.name}</span></a>
                                     <i class="ico-crown">
                                     	<div class="alt"></div>
                                         {foreach from=$init.logo item=logo}
@@ -498,7 +490,7 @@
                                 	<li><img class="alertPic img-s" src="{$item.img}" width="80"></li>
                                 </ul>
                             </div>
-                            <p class="box-item">{$lang.shipping_fee}：<span class="font-b">{if $item.shipping_fee eq 0}{$lang.Free_shipping}{else}￥{$item.shipping_fee}{/if}</span></p>
+                            <p class="box-item">{$lang.shipping_fee}：<span class="font-b">{if $item.yunfei eq 0}{$lang.Free_shipping}{else}{/if}</span></p>
                             <p class="box-item">{$lang.zc_Prompt_one}：<span class="font-b">{$lang.zc_Prompt_two}<span class="font-red">{$item.return_time}</span>{$lang.Days}</span></p>
                             <p class="box-btn">
                             	{if $zhongchou.zc_status eq 0}
@@ -650,9 +642,9 @@
 				$.notLogin("get_ajax_content.php?act=get_login_dialog",back_url);	
 				//刷新列表
 				get_topic_list({$smarty.get.id},1);
-				//数量更新
-				//var topic_num=parseInt($("#topicBtn").find(".tab-bubble").html());
-				$("#topicBtn").find(".tab-bubble").html(data.content.zc_topic_num);
+				//数量加1
+				var topic_num=parseInt($("#topicBtn").find(".tab-bubble").html());
+				$("#topicBtn").find(".tab-bubble").html(topic_num+1);					
 			}
 			if(data.error==1)
 			{
@@ -660,9 +652,9 @@
 				pbDialog(data.message,'',0,'','',135);
 				//刷新列表
 				get_topic_list({$smarty.get.id},1);
-				//数量更新
-				//var topic_num=parseInt($("#topicBtn").find(".tab-bubble").html());
-				$("#topicBtn").find(".tab-bubble").html(data.content.zc_topic_num);
+				//数量加1
+				var topic_num=parseInt($("#topicBtn").find(".tab-bubble").html());
+				$("#topicBtn").find(".tab-bubble").html(topic_num+1);
 			}
 			
 			if(data.error==8)
@@ -959,24 +951,16 @@
                             <dl>
                                 <dt>{$lang.zc_invoice}：</dt>
                                 <dd>
-                                    <div class="ck-step-cont" id='inv_content'>
-                                        <div class="invoice-warp">
-                                            <div class="invoice-part">
-                                                <span>
-                                                    <em class="invoice_type">{$lang.Ordinary_invoice}</em>
-                                                    <em class="inv_payee">{$lang.personal}</em>
-                                                    <em class="inv_content">{$inv_content}</em>
-                                                </span>
-                                                <a href="javascript:void(0);" class="i-edit" ectype="invEdit" data-value='{"divid":"edit_invoice","url":"ajax_dialog.php?act=edit_invoice&from=crowfunding","title":"{$lang.Invoice_information}"}'>{$lang.edit}</a>
-                                                <input type="hidden" name="inv_payee" value="{$lang.personal}">
-                                                <input type="hidden" name="inv_content" value="{$inv_content}">
-                                                <input type="hidden" name="invoice_type" value="0">
-												<input type="hidden" name="from" value="crowfunding">
-                                                <input type="hidden" name="tax_id" value="">
-                                            </div>
-                                        </div>
+                                    <div class="bor_t_li">
+                                        <p><label><input type="radio" name="invoiceFlag" id="if0" value="0" onclick="changeInvoiceFlag();" checked="checked"> {$lang.zc_invoice_not}</label></p>
+                                        <p><label><input type="radio" name="invoiceFlag" id="if1" value="1" onclick="newInvoiceTitle();"> {$lang.zc_invoice_need}</label></p>
                                     </div>
-                                    
+                                    <div class="new_add pt10" style="display: none;" id="invoiceTitleDetail">
+                                        <dl>
+                                            <dt><span class="f_red">*</span> {$lang.Invoice_header}：</dt>
+                                            <dd><input name="invoiceTitle" id="_invoiceTitle" type="text" class="inp145" placeholder="{$lang.Invoice_header}"></dd>
+                                        </dl>
+                                    </div>
                                 </dd>
                             </dl>
                             <dl>
@@ -1021,7 +1005,9 @@
                                         </div>
                                         <div class="address-btns">
                                         	<input id="addNewAddress" class="btn-normal" type="button" value="{$lang.add_address_zc}">
+											{if $consignee.address}
                                             <input id="confirmAddress" class="btn-normal" type="button" value="{$lang.confirm_address_zc}">
+											{/if}
                                         </div>
                                 	</div>
                                 </dd>
@@ -1056,13 +1042,6 @@
                             <input type="hidden" name="g_title" value="{$g_title}">
                             <input type="hidden" name="xm_id" value="{$goods_arr.goods_id}">
                             <input type="hidden" name="gid" value="{$smarty.get.gid}">
-							
-							<input type="hidden" name="inv_payee" value="{$lang.personal}">
-							<input type="hidden" name="inv_content" value="{$inv_content}">
-							<input type="hidden" name="invoice_type" value="0">
-							<input type="hidden" name="from" value="crowfunding">
-							<input type="hidden" name="tax_id" value="">
-							
                             <input type="submit" id="btn_sub" value="下一步">
                         </form>
                     </div>
@@ -1086,7 +1065,7 @@
 			$("#invoiceFlag").val('0');
 		}
 		
-		$(document).on("click",".consignee-cont li",function(){
+		$(".consignee-cont li").click(function(){
 			var address_id = $(this).data('addressid');
 			$(this).addClass("item-selected").siblings().removeClass("item-selected");
 			zc_Consignee(address_id);
@@ -1292,45 +1271,7 @@
     </div>
 	<script>
 		$('#zf').find('input').addClass('btn_zf');
-		$('#zf').find('input').val("立即付款");
-		
-		
-		$(function(){
-			//微信支付定时查询订单状态 by wanglu
-    		checkOrder();
-
-			//微信扫码
-			$("[data-type='wxpay']").on("click",function(){
-				var content = $("#wxpay_dialog").html();
-				pb({
-					id: "scanCode",
-					title: "",
-					width: 716,
-					content: content,
-					drag: true,
-					foot: false,
-					cl_cBtn: false,
-					cBtn: false
-				});
-			});
-		});
-		
-		var timer;
-		function checkOrder(){
-			var pay_name = "{$order.pay_name}";
-			var pay_status = "{$order.pay_status}";
-			var url = "flow.php?step=checkorder&order_id={$order.order_id}";
-			if(pay_name == "在线支付" && pay_status == 0){
-				$.get(url, {}, function(data){
-					//已付款
-					if(data.code > 0 && data.pay_code == 'wxpay'){
-						clearTimeout(timer);
-						location.href = "respond.php?code=" + data.pay_code + "&status=1";
-					}
-				},'json');
-			}
-			timer = setTimeout("checkOrder()", 5000);
-		}
+		$('#zf').find('input').val(Immediate_payment);
 	</script>
 	<!-- {/if} -->
 	<!-- 众筹项目订单确认页 end -->	
@@ -1369,13 +1310,15 @@
     <!-- {if $action eq 'xm'} -->
     <div class="query-result">
         <div class="query-condition">
-            <div class="searchNew">
-                <input type="text" class="search-text" id="w" value="" placeholder="请输入关键字">
-                <a href="javascript:;" id="sousuo" class="searchNewbtn"><i class="iconfont icon-search"></i></a>
+            <div class="search">
+                <div class="searchInput">
+                    <input type="text" class="searchtext s-placeholder" id="w" value="">
+                    <a href="javascript:;" id="sousuo" class="searchbtn">{$lang.search}</a>
+                </div>
             </div>
             <div class="query-list">
-                <div class="attr">
-                    <div class="a-key"><i class="iconfont icon-sort"></i>{$lang.category}：</div>
+                <div class="attr" style="border-bottom:none;">
+                    <div class="a-key">{$lang.category}：</div>
                     <div class="a-values">
                         <div class="v-fold v-list">
                             <ul class="f-list f-left" id="parent_catagory">
@@ -1397,7 +1340,7 @@
                     </div>
                 </div>
                 <div class="attr">
-                    <div class="a-key"><i class="iconfont icon-list"></i>{$lang.sort}：</div>
+                    <div class="a-key">{$lang.sort}：</div>
                     <div class="a-values">
                         <div class="v-fold v-order">
                             <ul class="f-list" id="sort" code="zhtj">
@@ -1433,28 +1376,28 @@
                         </div>
                         <div class="p-i-infos">
                             <div class="fore1">
-                                <p class="num">{$lang.reached}<span>{$item.baifen_bi}%</span></p>
+                                <p class="num">{$item.baifen_bi}%</p>
+                                <p class="p-num">{$lang.reached}</p>
                             </div>
                             <div class="fore2">
-                                <p class="num"><span>￥{$item.join_money}</span>{$lang.Raise}</p>
+                                <p class="num">￥{$item.join_money}</p>
+                                <p class="p-num">{$lang.Raise}</p>
                             </div>
                             <div class="fore3">
-                                <p class="num">剩余<span>{$item.shenyu_time}</span>{$lang.day}</p>
+                                <p class="num">{$item.shenyu_time}{$lang.day}</p>
+                                <p class="p-num">{$lang.residual_time}</p>
                             </div>
                         </div>
                     </li>
                 {/foreach}
             </ul>
             {else}
-            <div class="no_records">
-				<i class="no_icon_two"></i>
-				<div class="no_info no_info_line">
-					<h3>{$lang.information_null}</h3>
-					<div class="no_btn">
-						<a href="index.php" class="btn sc-redBg-btn">返回首页</a>
-					</div>
-				</div>
-			</div>
+            <div class="no_records pl450">
+                <i class="no_icon_two"></i>
+                <div class="no_info">
+                    <h3>暂无众筹商品</h3>
+                </div>
+            </div>
             {/if}
         </div>
         {if $page_arr}
@@ -1621,10 +1564,9 @@
 	<!-- {/if} -->
 	<!-- 众筹项目搜索页 end -->	
     <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/dsc-common.js"></script>
-    <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/region.js"></script>
     <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/jquery.purebox.js"></script>
 	
-	{insert_scripts files='region.js,utils.js,shopping_flow.js,perfect-scrollbar/perfect-scrollbar.min.js,jquery.SuperSlide.2.1.1.js'}
+	{insert_scripts files='region.js,utils.js,shopping_flow.js,perfect-scrollbar/perfect-scrollbar.min.js'}
 	<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
 </body>
 </html>

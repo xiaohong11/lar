@@ -6,12 +6,12 @@
 					<section class="flow-checkout-adr padding-all">
 						<!--<p class="flow-no-adr" style="display:none"><i class="iconfont icon-dingwei"></i>请选择配送地址</p>-->
 						<div class="address-icon"><i class="iconfont icon-dingwei"></i></div>
-						<div class="flow-have-adr">
-                        <div class="f-h-adr-title dis-box p-r">
-                            <span class="address-name onelist-hidden">{$consignee.consignee}</span><label class="mobile">{$consignee.mobile}</label>
-                        </div>
-                        <div class="f-h-adr-con f-04 m-top04 col-7">{$consignee.region} {$consignee.address}</div>
-                    </div>
+						<section class="flow-have-adr">
+							<header class="f-h-adr-title">
+								<p>{$consignee.consignee} {$consignee.mobile}</p>
+							</header>
+							<p class="f-h-adr-con t-remark m-top04">{$consignee.region} {$consignee.address}</p>
+						</section>
 						<span class="t-jiantou"><i class="iconfont icon-jiantou tf-180"></i></span>
 					</section>
 				</a>
@@ -57,7 +57,7 @@
 					<section class="flow-checkout-select b-color-f">
 						<ul>
 							<li>
-								<!-- <section class="dis-box j-goods-dist j-show-div j-show-get-val padding-all">
+								<section class="dis-box j-goods-dist j-show-div j-show-get-val padding-all">
 									<label class="t-remark g-t-temark">配送方式</label>
 
 									<div class="box-flex t-goods1 text-right onelist-hidden">
@@ -72,7 +72,7 @@
 										{/if}
 									</div>
 									<div class="f-04"><span class="t-jiantou"><i class="iconfont icon-jiantou tf-180"></i></span></div>
-
+									<!--配送方式star-->
 									<div class="show-goods-dist ts-3 b-color-1 j-show-goods-text j-filter-show-div">
 										<section class="goods-show-title of-hidden padding-all b-color-f">
 											<h3 class="fl g-c-title-h3">配送方式</h3>
@@ -84,6 +84,7 @@
 													<ul class="j-get-one padding-all select-shipping">
 														{foreach $shipping_list as $shipping}
 														<li class="ect-select">
+															<!-- <label class="ts-1 dis-box shipping {if $order.shipping_id == $shipping.shipping_id}active{/if}" data-shipping="{$shipping.shipping_id}" onclick="selectShipping({$shipping.shipping_id})"> -->
 															<label class="ts-1 dis-box shipping {if $order.shipping_id == $shipping.shipping_id}active{/if}" data-shipping="{$shipping.shipping_id}">
 																<dd><span>{$shipping.shipping_name}</span>
 																<em class="t-first">
@@ -101,13 +102,7 @@
 											</div>
 										</section>
 									</div>
-
-								</section> -->
-								<section class="dis-box padding-all">
-									<label class="t-remark g-t-temark">配送费用</label>
-									<div class="box-flex t-goods1 text-right onelist-hidden">
-										<em class="t-first">{if $goods.shipping_fee}[ ￥{$goods.shipping_fee} ]{else}[ 免运费 ]{/if}</em>
-									</div>
+									<!--配送方式end-->
 								</section>
 							</li>
 							<li>
@@ -190,18 +185,18 @@
 		<div class="div-messages"></div>
 		<div class="raise-bg-box ts-3 active"></div>
 			     <!--快捷导航-->
-    {include file="no_search_nav"}
+    {include file="no_search_nav"} 
        <li>
 	     <a href="{url('crowd_funding/index/index')}">
 	             <i class="iconfont icon-shequ"></i>
 	              <p>微筹广场</p>
-	       </a>
+	       </a> 
        </li>
         <li>
 	        <a href="{url('user/crowd/index')}">
 	             <i class="iconfont icon-geren"></i>
 	              <p>微筹中心</p>
-	        </a>
+	        </a> 
         </li>
     {include file="float_nav_footer"}
 		<!--悬浮菜单e-->
@@ -233,7 +228,7 @@
             });
 
 			function submit_buy(){
-				/*var shipping_id='';
+				var shipping_id='';
 				$(".shipping").each(function (){
 					if($(this).hasClass("active")) {
 						shipping_id = $(this).attr("data-shipping");
@@ -242,7 +237,7 @@
 				if(shipping_id==''){
 					alert('请先择配送方式');
 					return false;
-				}*/
+				}
 				var payment_id='';
 				$(".payment").each(function (){
 					if($(this).hasClass("active")) {
@@ -253,7 +248,7 @@
 					alert('请先择支付方式');
 					return false;
 				}
-				//$("input[name=shipping_id]").val(shipping_id);
+				$("input[name=shipping_id]").val(shipping_id);
 				$("input[name=payment_id]").val(payment_id);
 				document.getElementById("theForm").submit();
 			}

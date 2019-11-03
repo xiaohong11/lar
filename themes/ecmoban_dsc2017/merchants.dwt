@@ -13,10 +13,10 @@
 <!-- #BeginLibraryItem "/library/js_languages_new.lbi" --><!-- #EndLibraryItem -->
 </head>
 
-<body class="merchants bg-ligtGary">
+<body class="bg-ligtGary">
 <!-- #BeginLibraryItem "/library/page_header_merchants.lbi" --><!-- #EndLibraryItem -->
 <div class="container settled-container">
-    {* DSC 提醒您：merchants_index_top_ad.lbi，入驻首页头部小广告 *}{insert name='get_adv_child' ad_arr=$merchants_index_top}
+    {* ECSHOP 提醒您：merchants_index_top_ad.lbi，入驻首页头部小广告 *}{insert name='get_adv_child' ad_arr=$merchants_index_top}
     <div class="sett-section s-section-step">
         <div class="w w1200">
             <div class="sett-title">
@@ -68,7 +68,7 @@
             </div>
             <div class="sett-warp">
                 {foreach from=$categories_pro item=cat name=name}
-                {* DSC 提醒您：merchants_index_category_ad.lbi，入驻首页类目小广告 *}{insert name='get_adv_child' ad_arr=$merchants_index_category_ad id=$cat.id}
+                {* ECSHOP 提醒您：merchants_index_category_ad.lbi，入驻首页类目小广告 *}{insert name='get_adv_child' ad_arr=$merchants_index_category_ad id=$cat.id}
                 {/foreach}
             </div>
         </div>
@@ -83,7 +83,7 @@
                 <span class="yw-tit">SUCCESSFUL CASE</span>
             </div>
             <div class="sett-warp">
-                {* DSC 提醒您：merchants_index_case_ad.lbi，入驻首页类目小广告 *}{insert name='get_adv_child' ad_arr=$merchants_index_case_ad}
+                {* ECSHOP 提醒您：merchants_index_case_ad.lbi，入驻首页类目小广告 *}{insert name='get_adv_child' ad_arr=$merchants_index_case_ad}
             </div>
         </div>
     </div>

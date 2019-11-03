@@ -9,7 +9,7 @@
         	<div class="explanation" id="explanation">
             	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content_common}</li>
+                	<li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
                     <li>请设置合适的广告位名称和图片尺寸。</li>
                     <li>步骤：添加广告位-添加广告信息-设置模板，每一步都不用返回，直接按提示一步步进行。</li>
                 </ul>
@@ -87,66 +87,66 @@
             </div>
 		</div>
     </div>
-	{include file ='library/pagefooter.lbi'}
+ {include file ='library/pagefooter.lbi'}
     <script type="text/javascript">
-	//列表导航栏设置下路选项
-	$(".ps-container").perfectScrollbar();
-
-	$(function(){
-		$("#submitBtn").click(function(){
-			if($("#posit_arr_form").valid()){
-				$("#posit_arr_form").submit();
-			}
-		});
-	
-		$('#posit_arr_form').validate({
-			errorPlacement: function(error, element){
-				var error_div = element.parents('div.label_value').find('div.form_prompt');
-				error_div.siblings(".notic").hide();
-				error_div.append(error);
-			},
-			rules : {
-				position_name : {
-					required : true
-				},
-				ad_width : {
-					required : true,
-					digits :true,
-					min : 0,
-					max : 2000
-				},
-				ad_height : {
-					required : true,
-					digits :true,
-					min : 0,
-					max : 2000
-				},
-				position_style : {
-					required : true,
+		//列表导航栏设置下路选项
+    	$(".ps-container").perfectScrollbar();
+  
+		$(function(){
+			$("#submitBtn").click(function(){
+				if($("#posit_arr_form").valid()){
+					$("#posit_arr_form").submit();
 				}
-			},
-			messages : {
-				position_name : {
-					required : '<i class="icon icon-exclamation-sign"></i>'+posit_name_empty
-				},
-				ad_width : {
-					required : '<i class="icon icon-exclamation-sign"></i>'+ad_width_empty,
-					digits :  '<i class="icon icon-exclamation-sign"></i>'+ad_width_number,
-					min : '<i class="icon icon-exclamation-sign"></i>'+width_value,
-					max : '<i class="icon icon-exclamation-sign"></i>'+width_value
-				},
-				ad_height : {
-					required : '<i class="icon icon-exclamation-sign"></i>'+ad_height_empty,
-					digits :  '<i class="icon icon-exclamation-sign"></i>'+ad_height_number,
-					min : '<i class="icon icon-exclamation-sign"></i>'+height_value,
-					max : '<i class="icon icon-exclamation-sign"></i>'+height_value
-				},
-				position_style : {
-					required : '<i class="icon icon-exclamation-sign"></i>'+empty_position_style
-				}
-			}
+			});
+		
+			$('#posit_arr_form').validate({
+					errorPlacement: function(error, element){
+						var error_div = element.parents('div.label_value').find('div.form_prompt');
+						error_div.siblings(".notic").hide();
+						error_div.append(error);
+					},
+					rules : {
+							position_name : {
+									required : true
+							},
+							ad_width : {
+									required : true,
+									digits :true,
+									min : 0,
+									max : 2000
+							},
+							ad_height : {
+									required : true,
+									digits :true,
+									min : 0,
+									max : 2000
+							},
+							position_style : {
+									required : true,
+							}
+					},
+					messages : {
+							position_name : {
+									required : '<i class="icon icon-exclamation-sign"></i>'+posit_name_empty
+							},
+							ad_width : {
+									required : '<i class="icon icon-exclamation-sign"></i>'+ad_width_empty,
+									digits :  '<i class="icon icon-exclamation-sign"></i>'+ad_width_number,
+									min : '<i class="icon icon-exclamation-sign"></i>'+width_value,
+									max : '<i class="icon icon-exclamation-sign"></i>'+width_value
+							},
+							ad_height : {
+									required : '<i class="icon icon-exclamation-sign"></i>'+ad_height_empty,
+									digits :  '<i class="icon icon-exclamation-sign"></i>'+ad_height_number,
+									min : '<i class="icon icon-exclamation-sign"></i>'+height_value,
+									max : '<i class="icon icon-exclamation-sign"></i>'+height_value
+							},
+							position_style : {
+									required : '<i class="icon icon-exclamation-sign"></i>'+empty_position_style
+							}
+					}
+			});
 		});
-	});
     </script>     
 </body>
 </html>

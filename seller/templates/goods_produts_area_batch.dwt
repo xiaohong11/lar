@@ -58,7 +58,7 @@
                                     <div class="fl bf100">
                                         {foreach from=$download_list item=download key=charset}
                                             {if $charset eq 'zh_cn'}
-                                                <a onclick="get_produts_batch('{$charset}', {$goods_id}, {$model}, {$area_id}, {$city_id});" href="javascript:;" class="bule">{$download}</a>
+                                                <a onclick="get_produts_batch('{$charset}', {$goods_id}, {$model}, {$area_id});" href="javascript:;" class="bule">{$download}</a>
                                             {/if}
                                         {/foreach}
                                     </div>
@@ -112,8 +112,8 @@
 		});
 	});
 	
-	function get_produts_batch(charset, goods_id, model, area_id, city_id){
-		location.href="goods_produts_area_batch.php?act=download&charset=" +charset+ "&goods_id=" +goods_id+ "&model=" + model+ "&area_id=" + area_id+ "&city_id=" + city_id;
+	function get_produts_batch(charset, goods_id, model, area_id){
+		location.href="goods_produts_area_batch.php?act=download&charset=" +charset+ "&goods_id=" +goods_id+ "&model=" + model+ "&area_id=" + area_id;
 	}
 </script>
 {/literal}

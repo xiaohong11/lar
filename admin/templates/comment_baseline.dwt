@@ -8,10 +8,10 @@
         <div class="content">
         	{include file ='library/seller_comment_tab.lbi'}
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content_common}</li>
-                    <li>{$lang.operation_prompt_content.baseline.0}</li>
+                	<li>标识“*”的选项为必填项，其余为选填项</li>
+                    <li>请合理设置商家评分基线。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -44,6 +44,7 @@
                                     <div class="label">&nbsp;</div>
                                     <div class="label_value info_btn">
 										<input type="submit" value="{$lang.button_submit}" class="button" id="submitBtn" />
+										<!--<input type="reset" value="{$lang.button_reset}" class="button button_reset" />-->
 										<input type="hidden" name="act" value="{$form_action}" />
 										<input type="hidden" name="id" value="{$baseline.id}" />
                                     </div>
@@ -55,7 +56,7 @@
             </div>
 		</div>
     </div>
-	{include file ='library/pagefooter.lbi'}
+ {include file ='library/pagefooter.lbi'}
     <script type="text/javascript">
 		$(function(){
 			//表单验证
@@ -84,13 +85,13 @@
 				},
 				messages:{
 					goods_baseline:{
-						 required : '<i class="icon icon-exclamation-sign"></i>'+goods_baseline_null
+						 required : '<i class="icon icon-exclamation-sign"></i>商品基线不能为空'
 					},
 					service_baseline:{
-						required : '<i class="icon icon-exclamation-sign"></i>'+service_baseline_null
+						required : '<i class="icon icon-exclamation-sign"></i>服务基线不能为空'
 					},
 					shipping_baseline:{
-						required : '<i class="icon icon-exclamation-sign"></i>'+data_baseline_null
+						required : '<i class="icon icon-exclamation-sign"></i>时效基线不能为空'
 					}
 				}			
 			});

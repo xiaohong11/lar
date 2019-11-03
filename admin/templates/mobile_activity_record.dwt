@@ -7,7 +7,7 @@
         <div class="title"><a href="ecjia_mobile_activity.php?act=list" class="s-back">返回</a>活动列表 - {$ur_here}</div>
         <div class="content">       
             <div class="explanation" id="explanation">
-                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                     <li>可输入用户名关键字进行检索。</li>
                 </ul>
@@ -17,15 +17,13 @@
                     <div class="fl">
                     </div>
                     <div class="refresh">
-                        <div class="refresh_span">共{$record_count}{$lang.record}</div>
+                        <div class="refresh_span">共{$record_count}条记录</div>
                     </div>
                     <div class="search">
-                    	<form action="javascript:;" name="searchForm" onSubmit="searchGoodsname(this);">
                         <div class="input">
                             <input type="text" name="keyword" class="text nofocus w140" placeholder="输入用户名" autocomplete="off">
-                            <input type="submit" class="btn" name="secrch_btn" ectype="secrch_btn" value="" />
+                            <button class="btn" name="secrch_btn"></button>
                         </div>
-                        </form>
                     </div>                  
                 </div>
                 <div class="common-content">
@@ -86,8 +84,8 @@
     
     {literal}
     <script type="text/javascript">
-    listTable.recordCount = {$record_count|default:0};
-    listTable.pageCount = {$page_count|default:1};
+    listTable.recordCount = '{$record_count}';
+    listTable.pageCount = '{$page_count}';
     
     {foreach from=$filter item=item key=key}
     listTable.filter.{$key} = '{$item}';

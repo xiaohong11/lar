@@ -33,13 +33,21 @@
         <!-- TemplateEndEditable -->
     </div>
 </div>
-{* DSC 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
+
 <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
-{insert_scripts files='common.js,perfect-scrollbar/perfect-scrollbar.min.js,cart_common.js,parabola.js,cart_quick_links.js'}
+{insert_scripts files='region.js,perfect-scrollbar/perfect-scrollbar.min.js'}
 <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/dsc-common.js"></script>
 <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/jquery.purebox.js"></script>
 <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/region.js"></script>
 <script type="text/javascript">
+//清空浏览历史
+function clear_history()
+{
+	Ajax.call('user.php','act=clear_history',function(){
+		$(".search_history ul").html('<div class="history_tishi">{$lang.no_history}<br /><a href="index.php" class="ftx-05">{$lang.go_shoping}</a></div>');
+	},'GET','TEXT',1,1);
+}
+
 $(function(){
 	$("*[ectype='openLayer']").on("click",function(){
 		var value = $(this).data("value");
@@ -66,7 +74,7 @@ $(function(){
 				}
 			});
 			
-			$.levelLink(1);
+			$.levelLink(1);	
 			
 		}, 'POST','JSON');
 	});

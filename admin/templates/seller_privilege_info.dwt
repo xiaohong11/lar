@@ -3,17 +3,18 @@
 <head>{include file ='library/admin_html_head.lbi'}</head>
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$lang.10_priv_admin} - {$ur_here}</div>
+    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>权限 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content.info.0}</li>
-                    <li>{$lang.operation_prompt_content.info.1}</li>
-                    <li>{$lang.operation_prompt_content_common}</li>
+                    <li>可从管理平台手动添加一名新管理员，并填写相关信息。</li>
+                    <li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
+                    <li>新增管理员后可从管理员列表中找到该条数据，并再次进行编辑操作。</li>
                 </ul>
             </div>
             <div class="flexilist">
+                
                 <div class="common-content">
                     <div class="mian-info">
                         <form name="theForm" method="post" enctype="multipart/form-data" id="user_form" >
@@ -114,7 +115,7 @@
             </div>
 		</div>
     </div>
-	{include file ='library/pagefooter.lbi'}
+ {include file ='library/pagefooter.lbi'}
     <script type="text/javascript">
         var action = "{$action}";
 		$(function(){
@@ -123,6 +124,10 @@
 					$("#user_form").submit();
 				}
 			});
+			
+			jQuery.validator.addMethod("pwd_confirm", function(value, element) {      
+				return this.optional(element) || /^[\u0391-\uFFE5\w]+$/.test(value);       
+			}, "只能包括中文字、英文字母、数字和下划线");  
 			
 			//添加表单验证js
 			if(action == 'add'){
@@ -158,11 +163,11 @@
 							email : '<i class="icon icon-exclamation-sign"></i>'+email_error
 						},
 						password : {
-							required : '<i class="icon icon-exclamation-sign"></i>'+new_password_empty,
-							minlength : '<i class="icon icon-exclamation-sign"></i>'+new_password_error
+							required : '<i class="icon icon-exclamation-sign"></i>密码不能为空',
+							minlength : '<i class="icon icon-exclamation-sign"></i>密码长度不能小于六位'
 						},
 						pwd_confirm : {
-							required : '<i class="icon icon-exclamation-sign"></i>'+pwd_confirm_empty,
+							required : '<i class="icon icon-exclamation-sign"></i>确认密码不能为空',
 							equalTo:'<i class="icon icon-exclamation-sign"></i>'+password_error
 						}
 					}
@@ -197,6 +202,7 @@
 							required : true,
 							equalTo:"#new_password"
 						}
+						
 					},
 					messages : {
 						user_name : {
@@ -207,17 +213,18 @@
 							email : '<i class="icon icon-exclamation-sign"></i>'+email_error
 						},
 						old_password : {
-							required : '<i class="icon icon-exclamation-sign"></i>'+old_password_empty,
-							minlength : '<i class="icon icon-exclamation-sign"></i>'+old_password_error
+							required : '<i class="icon icon-exclamation-sign"></i>旧密码不能为空',
+							minlength : '<i class="icon icon-exclamation-sign"></i>旧密码不正确'
 						},
 						new_password : {
-							required : '<i class="icon icon-exclamation-sign"></i>'+new_password_empty,
-							minlength : '<i class="icon icon-exclamation-sign"></i>'+new_password_error
+							required : '<i class="icon icon-exclamation-sign"></i>新密码不能为空',
+							minlength : '<i class="icon icon-exclamation-sign"></i>密码长度不能小于六位'
 						},
 						pwd_confirm : {
-							required : '<i class="icon icon-exclamation-sign"></i>'+pwd_confirm_empty,
+							required : '<i class="icon icon-exclamation-sign"></i>确认密码不能为空',
 							equalTo:'<i class="icon icon-exclamation-sign"></i>'+password_error
 						}
+						
 					}
 				});
 			}

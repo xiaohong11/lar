@@ -4,27 +4,27 @@
 
 <body class="iframe_body">
 <div class="warpper">
-    <div class="title">{$lang.report_form} - {$lang.report_order}</div>
+    <div class="title">报表 - 订单统计</div>
     <div class="content">
         <div class="explanation" id="explanation">
-            <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
             <ul>
-                <li>{$lang.operation_prompt_content.stats.0}</li>
-                <li>{$lang.operation_prompt_content.stats.1}</li>
+                <li>统计商城所有的订单，销售总额、有效金额、总点击数、每日点击数、每日点击购买额。</li>
+                <li>选择不同月份统计出现几个月的订单概括、配送方式、支付方式统计图。</li>
             </ul>
         </div>
         <div class="flexilist mt30">
             <div class="common-head">
                 <div class="fl">
-                    <div class="fbutton"><div class="csv" title="{$lang.export_list}"><span><i class="icon icon-download-alt"></i>{$lang.export_list}</span></div></div>
+                    <div class="fbutton"><div class="csv" title="导出数据"><span><i class="icon icon-download-alt"></i>导出列表</span></div></div>
                 </div>
                 <div class="total_items">
                     <ul>
-                        <li>{$lang.order_stats_01}：<b>{$order_total}</b></li>
-                        <li>{$lang.order_stats_02}：<b>{$total_turnover}</b></li>
-                        <li>{$lang.order_stats_03}：<b>{$click_count}</b></li>
-                        <li>{$lang.order_stats_04}：<b>{$click_ordernum}</b></li>
-                        <li>{$lang.order_stats_05}：<b>{$click_turnover}</b></li>
+                        <li>销售总额：<b>￥{$order_total}</b></li>
+                        <li>有效订单总额：<b>{$total_turnover}</b></li>
+                        <li>总点击数：<b>{$click_count}</b></li>
+                        <li>每天点击订单数：<b>{$click_ordernum}</b></li>
+                        <li>每天点击购物数：<b>{$click_turnover}</b></li>
                     </ul>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                         <div class="stat_order_search">
                             <div class="search_item">
                                 <form action="" method="post" id="selectForm" name="selectForm">
-                                    <strong>{$lang.start_end_data}：</strong>
+                                    <strong>起止日期：</strong>
                                     <div class="text_time" id="text_time_start">
                                         <input type="text" class="text" name="start_date" value="{$start_date}" id="start_date" value="" autocomplete="off" readonly>
                                     </div>
@@ -42,12 +42,12 @@
                                     <div class="text_time" id="text_time_end">
                                         <input type="text" class="text" name="end_date" value="{$end_date}" id="end_date" value="" autocomplete="off" readonly>
                                     </div>
-                                    <a href="javascript:void(0);" onclick="$('#selectForm').submit()" class="btn btn30 blue_btn" ectype="query"><i class="icon icon-search"></i>{$lang.query}</a>
+                                    <a href="javascript:void(0);" onclick="$('#selectForm').submit()" class="btn btn30 blue_btn" ectype="query"><i class="icon icon-search"></i>查询</a>
                                 </form>
                             </div>   
                             <div class="search_item">
-                                <strong>{$lang.query_years}：</strong>
-                                <form method="post" id="selectForm_2" name="selectForm_2">
+                                <strong>查询年月：</strong>
+                                <form method="post" id="selectForm" name="selectForm">
                                     <!--{foreach from=$start_date_arr item=start_date key=k}-->
                                     {if $k > 0}
                                     <span class="bolang">&nbsp;&nbsp;+&nbsp;&nbsp;</span>
@@ -57,36 +57,134 @@
                                     </div>
                                     <!--{/foreach}-->
                                     <input type="hidden" name="is_multi" value="1" />
-                                	<a href="javascript:;" onclick="$('#selectForm_2').submit()" class="btn btn30 blue_btn" ectype="query"><i class="icon icon-search"></i>{$lang.query}</a>
+                                <a href="javascript:;" onclick="$('#selectForm').submit()" class="btn btn30 blue_btn" ectype="query"><i class="icon icon-search"></i>查询</a>
                                 </form>
                             </div>
                         </div>
-                        <div class="clear"></div>
-                        <div class="stat_order_warp">
-                            <div class="stat_order_tabs">
-                                <ul>
-                                    <li class="current">{$lang.order_survey}</li>
-                                    <li>{$lang.distribution_mode}</li>
-                                    <li>{$lang.payment_method}</li>
-                                    <li>{$lang.distribution_area}</li>
-                                </ul>
+                        <div class="stat_order_tabs">
+                            <ul>
+                                <li class="current">订单概况</li>
+                                <li>配送方式</li>
+                                <li>支付方式</li>
+                                <li>配送地区</li>
+                            </ul>
+                        </div>
+                        <div class="stat_order_table">
+                            <div class="stat_order_table_info">
+                                {if $is_multi eq '0'}
+                                <OBJECT classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"  codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" WIDTH="650" HEIGHT="400" id="OrderGeneral" ALIGN="middle">
+                                    <PARAM NAME="FlashVars" value="&dataXML={$order_general_xml}">
+                                    <PARAM NAME="movie" VALUE="images/charts/pie3d.swf?chartWidth=650&chartHeight=400">
+                                    <PARAM NAME="quality" VALUE="high">
+                                    <PARAM NAME=bgcolor VALUE="#FFFFFF">
+                                    <param name="wmode" value="opaque" />
+                                    <EMBED src="images/charts/pie3d.swf?chartWidth=650&chartHeight=400" FlashVars="&dataXML={$order_general_xml}" quality="high" bgcolor="#FFFFFF" WIDTH="650" HEIGHT="400" wmode="opaque" NAME="OrderGeneral" ALIGN="middle" TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer"></EMBED>
+                                </OBJECT>
+                                {else}
+                                <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                                        codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                                        width="565" height="420" id="FCColumn2" align="middle">
+                                    <PARAM NAME="FlashVars" value="&dataXML={$order_general_xml}">
+                                    <PARAM NAME=movie VALUE="images/charts/MSColumn3D.swf?chartWidth=650&chartHeight=400">
+                                    <param NAME="quality" VALUE="high">
+                                    <param NAME="bgcolor" VALUE="#FFFFFF">
+                                    <param name="wmode" value="opaque" />
+                                    <embed src="images/charts/MSColumn3D.swf?chartWidth=650&chartHeight=400" FlashVars="&dataXML={$order_general_xml}" quality="high" bgcolor="#FFFFFF"  width="650" height="400" name="FCColumn2" wmode="opaque" align="middle" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
+                                </object>
+                                {/if}
                             </div>
-                            <div class="stat_order_content">
-                            	<div class="stat_order_item">
-                                	<div id="order_main" style="height:378px;"></div>
-                                    <div id="order_main_price" style="height:378px;"></div>
-                                </div>
-                                <div class="stat_order_item">
-                                	<div id="ship_main" style="width:970px; height:500px; margin:0 auto;"></div>
-                                </div>
-                                <div class="stat_order_item">
-                                	<div id="pay_main" style="width:970px; height:500px; margin:0 auto;"></div>
-                                </div>
-                                <div class="stat_order_item">
-                                	<div id="area_main" style="width:970px; height:500px; margin:0 auto;"></div>
-                                </div>
+                            <div class="stat_order_table_info" style="display:none;">
+                                {if $is_multi eq '0'}
+                                <OBJECT classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"  codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" WIDTH="650" HEIGHT="400" id="ShipType" ALIGN="middle">
+                                    <PARAM NAME="FlashVars" value="&dataXML={$ship_xml}">
+                                    <PARAM NAME="movie" VALUE="images/charts/pie3d.swf?chartWidth=650&chartHeight=400">
+                                    <PARAM NAME="quality" VALUE="high">
+                                    <param name="wmode" value="opaque" />
+                                    <PARAM NAME="bgcolor" VALUE="#FFFFFF">
+                                    <EMBED src="images/charts/pie3d.swf?chartWidth=650&chartHeight=400" FlashVars="&dataXML={$ship_xml}" quality="high" bgcolor="#FFFFFF" WIDTH="650" HEIGHT="400" NAME="ShipType" ALIGN="middle" TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer" wmode="opaque"></EMBED>
+                                </OBJECT>
+                                {else}
+                                <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                                        codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                                        width="565" height="420" id="FCColumn2" align="middle">
+                                    <PARAM NAME="FlashVars" value="&dataXML={$ship_xml}">
+                                    <PARAM NAME=movie VALUE="images/charts/MSColumn3D.swf?chartWidth=650&chartHeight=400">
+                                    <param NAME="quality" VALUE="high">
+                                    <param NAME="bgcolor" VALUE="#FFFFFF">
+                                    <param name="wmode" value="opaque" />
+                                    <embed src="images/charts/MSColumn3D.swf?chartWidth=650&chartHeight=400" FlashVars="&dataXML={$ship_xml}" quality="high" bgcolor="#FFFFFF"  width="650" height="400" name="FCColumn2" wmode="opaque" align="middle" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
+                                </object>
+                                {/if}
                             </div>
-                            <div class="clear"></div>
+                            <div class="stat_order_table_info" style="display:none;">
+                                {if $is_multi eq '0'}
+                                <OBJECT classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"  codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" WIDTH="650" HEIGHT="400" id="PayMethod" ALIGN="middle">
+                                    <PARAM NAME="FlashVars" value="&dataXML={$pay_xml}">
+                                    <PARAM NAME="movie" VALUE="images/charts/pie3d.swf?chartWidth=650&chartHeight=400">
+                                    <PARAM NAME="quality" VALUE="high">
+                                    <PARAM NAME="bgcolor" VALUE="#FFFFFF">
+                                    <param name="wmode" value="opaque" />
+                                    <EMBED src="images/charts/pie3d.swf?chartWidth=650&chartHeight=400" FlashVars="&dataXML={$pay_xml}" quality="high" bgcolor="#FFFFFF" WIDTH="650" HEIGHT="400" NAME="PayMethod" wmode="opaque" ALIGN="middle" TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer"></EMBED>
+                                </OBJECT>
+                                {else}
+                                <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                                        width="565" height="420" id="FCColumn2" align="middle">
+                                    <PARAM NAME="FlashVars" value="&dataXML={$pay_xml}">
+                                    <PARAM NAME=movie VALUE="images/charts/MSColumn3D.swf?chartWidth=650&chartHeight=400">
+                                    <param NAME="quality" VALUE="high">
+                                    <param NAME="bgcolor" VALUE="#FFFFFF">
+                                    <param name="wmode" value="opaque" />
+                                    <embed src="images/charts/MSColumn3D.swf?chartWidth=650&chartHeight=400" FlashVars="&dataXML={$pay_xml}" quality="high" bgcolor="#FFFFFF"  width="650" height="400" name="FCColumn2" wmode="opaque" align="middle" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"></object>
+                                {/if}
+                            </div>
+                            <div class="stat_order_table_info" style="display:none;">
+                            	<div class="fl mt20">
+                                <div class="ui-dropdown smartdropdown alien">
+                                    <input type="hidden" value="" name="country" id="countries">
+                                    <div class="txt">国家</div>
+                                    <i class="down u-dropdown-icon"></i>
+                                    <div class="options clearfix" style="max-height:300px;">
+                                        {foreach from=$countries item=list}
+                                        <span class="liv" data-text="{$list.region_name}" data-type="1" data-value="{$list.region_id}">{$list.region_name}</span>
+                                        {/foreach}
+                                    </div>
+                                </div>
+                                <div class="ui-dropdown smartdropdown alien">
+                                    <input type="hidden" value="" name="province" id="provinces">
+                                    <div class="txt">省/直辖市</div>
+                                    <i class="down u-dropdown-icon"></i>
+                                    <div class="options clearfix" style="max-height:300px;">
+                                        {foreach from=$provinces item=list}
+                                        <span class="liv" data-text="{$list.region_name}" data-type="2" data-value="{$list.region_id}">{$list.region_name}</span>
+                                        {/foreach}
+                                    </div>
+                                </div>
+                                <div class="item" style="width:80px">
+                                    <div class="label_value info_btn" style=" margin:0px">
+                                        <input type="submit" value=" 确定 " ectype="btnSubmit" class="button" onClick="get_country()" style="height:31px; line-height:29px">	
+                                    </div>
+                                </div>
+                                </div>
+                                {if $is_multi eq '0'}
+                                <OBJECT classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"  codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" WIDTH="650" HEIGHT="400" id="OrderArea" ALIGN="middle">
+                                    <PARAM NAME="{$region_name}" id="area_value" value="&dataXML={$order_area_xml}">
+                                    <PARAM NAME="movie" VALUE="images/charts/pie3d.swf?chartWidth=650&chartHeight=400">
+                                    <PARAM NAME="quality" VALUE="high">
+                                    <PARAM NAME="bgcolor" VALUE="#FFFFFF">
+                                    <param name="wmode" value="opaque" />
+                                    <EMBED id="embed" src="images/charts/pie3d.swf?chartWidth=650&chartHeight=400" FlashVars="&dataXML={$order_area_xml}" quality="high" bgcolor="#FFFFFF" WIDTH="650" HEIGHT="400" NAME="FCColumn2" wmode="opaque" ALIGN="middle" TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer"></EMBED>
+                                </OBJECT>
+                                {else}
+                                <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                                        width="565" height="420" id="OrderArea" align="middle">
+                                    <PARAM NAME="FlashVars" id="area_value" value="&dataXML={$order_area_xml}">
+                                    <PARAM NAME=movie VALUE="images/charts/MSColumn3D.swf?chartWidth=650&chartHeight=400">
+                                    <param NAME="quality" VALUE="high">
+                                    <param NAME="bgcolor" VALUE="#FFFFFF">
+                                    <param name="wmode" value="opaque" />
+                                    <embed id="embed" src="images/charts/MSColumn3D.swf?chartWidth=650&chartHeight=400" FlashVars="&dataXML={$order_area_xml}" quality="high" bgcolor="#FFFFFF"  width="650" height="400" name="FCColumn2" wmode="opaque" align="middle" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"></object>
+                                {/if}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -94,340 +192,10 @@
         </div>
     </div>
 </div>
-{include file ='library/pagefooter.lbi'}
-<script type="text/javascript" src="js/region.js"></script>
-<script type="text/javascript" src="../js/echarts-all.js"></script>
-<script type="text/javascript" src="../js/jquery.SuperSlide.2.1.1.js"></script>
+ {include file ='library/pagefooter.lbi'}
+ <script type="text/javascript" src="js/region.js"></script>
+</body>
 <script type="text/javascript">
-	//统计数据 start
-	var is_multi = {if $is_multi}true{else}false{/if};
-	var order_data = {if $order_data}{$order_data}{else}''{/if};
-	var sale_data = {if $sale_data}{$sale_data}{else}''{/if};
-	var ship_data = {if $ship_data}{$ship_data}{else}''{/if};
-	var pay_data = {if $pay_data}{$pay_data}{else}''{/if};
-	var area_data = {if $area_data}{$area_data}{else}''{/if};
-
-	var myChart_order = echarts.init(document.getElementById("order_main"));
-	var myChart_ship = echarts.init(document.getElementById("ship_main"));
-	var myChart_pay = echarts.init(document.getElementById("pay_main"));
-	var myChart_area = echarts.init(document.getElementById("area_main"));
-	var myChart_price = echarts.init(document.getElementById("order_main_price"));
-	
-	if(is_multi){
-		//订单概况
-		var option_order = {
-			title : {
-				text: '{$lang.order_survey}',
-				subtext: ''
-			},
-			tooltip : {
-				trigger: 'axis'
-			},
-			legend: {
-				data:['{$lang.order_state_01}','{$lang.order_state_02}',"{$lang.order_state_03}","{$lang.order_state_04}"]
-			},
-			toolbox: {
-				show : true,
-				feature : {
-					magicType : {show: true, type: ['line', 'bar']},
-					restore : {show: true},
-					saveAsImage : {show: true}
-				}
-			},
-			calculable : true,
-			xAxis : [
-				{
-					type : 'category',
-					data : order_data[0]
-				}
-			],
-			yAxis : [
-				{
-					type : 'value'
-				}
-			],
-			series : [
-				{
-					name:'{$lang.order_state_01}',
-					type:'bar',
-					data:order_data[1],
-					markPoint : {
-						data : [
-							{type : 'max', name: '{$lang.max_value}'},
-							{type : 'min', name: '{$lang.min_value}'}
-						]
-					},
-					markLine : {
-						data : [
-							{type : 'average', name: '{$lang.average_value}'}
-						]
-					}
-				},
-				{
-					name:'{$lang.order_state_02}',
-					type:'bar',
-					data:order_data[2],
-					markPoint : {
-						data : [
-							{type : 'max', name: '{$lang.max_value}'},
-							{type : 'min', name: '{$lang.min_value}'}
-						]
-					},
-					markLine : {
-						data : [
-							{type : 'average', name : '{$lang.average_value}'}
-						]
-					}
-				},
-				{
-					name:'{$lang.order_state_03}',
-					type:'bar',
-					data:order_data[3],
-					markPoint : {
-						data : [
-							{type : 'max', name: '{$lang.max_value}'},
-							{type : 'min', name: '{$lang.min_value}'}
-						]
-					},
-					markLine : {
-						data : [
-							{type : 'average', name : '{$lang.average_value}'}
-						]
-					}
-				},
-				{
-					name:'{$lang.order_state_04}',
-					type:'bar',
-					data:order_data[4],
-					markPoint : {
-						data : [
-							{type : 'max', name: '{$lang.max_value}'},
-							{type : 'min', name: '{$lang.min_value}'}
-						]
-					},
-					markLine : {
-						data : [
-							{type : 'average', name : '{$lang.average_value}'}
-						]
-					}
-				}
-			]
-		};
-
-		//订单概况
-		var option_sale = {
-			title : {
-				text: '{$lang.sale_survey}',
-				subtext: ''
-			},
-			tooltip : {
-				trigger: 'axis'
-			},
-			legend: {
-				data:['{$lang.order_state_01}','{$lang.order_state_02}',"{$lang.order_state_03}","{$lang.order_state_04}"]
-			},
-			toolbox: {
-				show : true,
-				feature : {
-					magicType : {show: true, type: ['line', 'bar']},
-					restore : {show: true},
-					saveAsImage : {show: true}
-				}
-			},
-			calculable : true,
-			xAxis : [
-				{
-					type : 'category',
-					data : sale_data[0]
-				}
-			],
-			yAxis : [
-				{
-					type : 'value'
-				}
-			],
-			series : [
-				{
-					name:'{$lang.order_state_01}',
-					type:'bar',
-					data:sale_data[1],
-					markPoint : {
-						data : [
-							{type : 'max', name: '{$lang.max_value}'},
-							{type : 'min', name: '{$lang.min_value}'}
-						]
-					},
-					markLine : {
-						data : [
-							{type : 'average', name: '{$lang.average_value}'}
-						]
-					}
-				},
-				{
-					name:'{$lang.order_state_02}',
-					type:'bar',
-					data:sale_data[2],
-					markPoint : {
-						data : [
-							{type : 'max', name: '{$lang.max_value}'},
-							{type : 'min', name: '{$lang.min_value}'}
-						]
-					},
-					markLine : {
-						data : [
-							{type : 'average', name : '{$lang.average_value}'}
-						]
-					}
-				},
-				{
-					name:'{$lang.order_state_03}',
-					type:'bar',
-					data:sale_data[3],
-					markPoint : {
-						data : [
-							{type : 'max', name: '{$lang.max_value}'},
-							{type : 'min', name: '{$lang.min_value}'}
-						]
-					},
-					markLine : {
-						data : [
-							{type : 'average', name : '{$lang.average_value}'}
-						]
-					}
-				},
-				{
-					name:'{$lang.order_state_04}',
-					type:'bar',
-					data:sale_data[4],
-					markPoint : {
-						data : [
-							{type : 'max', name: '{$lang.max_value}'},
-							{type : 'min', name: '{$lang.min_value}'}
-						]
-					},
-					markLine : {
-						data : [
-							{type : 'average', name : '{$lang.average_value}'}
-						]
-					}
-				}
-			]
-		};
-	}else{
-	}
-	
-	//配送方式
-	option_ship = {
-		title : {
-			text: '{$lang.distribution_mode}',
-			subtext: '',
-		},
-		tooltip : {
-			trigger: 'item',
-			formatter: "{a} <br/>{b} : {c} ({d}%)"
-		},
-		legend: {
-			data: ship_data[0]
-		},
-		series : [
-			{
-				name: '{$lang.access_source}',
-				type: 'pie',
-				radius : '55%',
-				center: ['50%', '60%'],
-				data: ship_data[1],
-				itemStyle: {
-					emphasis: {
-						shadowBlur: 10,
-						shadowOffsetX: 0,
-						shadowColor: 'rgba(0, 0, 0, 0.5)'
-					}
-				}
-			}
-		]
-	};
-	
-	//支付方式
-	option_pay = {
-		title : {
-			text: '{$lang.payment_method}',
-			subtext: '',
-		},
-		tooltip : {
-			trigger: 'item',
-			formatter: "{a} <br/>{b} : {c} ({d}%)"
-		},
-		legend: {
-			data: pay_data[0]
-		},
-		series : [
-			{
-				name: '{$lang.access_source}',
-				type: 'pie',
-				radius : '55%',
-				center: ['50%', '60%'],
-				data: pay_data[1],
-				itemStyle: {
-					emphasis: {
-						shadowBlur: 10,
-						shadowOffsetX: 0,
-						shadowColor: 'rgba(0, 0, 0, 0.5)'
-					}
-				}
-			}
-		]
-	};
-
-	//配送地区
-	option_area = {
-		title : {
-			text: '{$lang.distribution_area}',
-			subtext: '',
-		},
-		tooltip : {
-			trigger: 'item',
-			formatter: "{a} <br/>{b} : {c} ({d}%)"
-		},
-		legend: {
-			data: area_data[0]
-		},
-		series : [
-			{
-				name: '{$lang.access_source}',
-				type: 'pie',
-				radius : '55%',
-				center: ['50%', '60%'],
-				data: area_data[1],
-				itemStyle: {
-					emphasis: {
-						shadowBlur: 10,
-						shadowOffsetX: 0,
-						shadowColor: 'rgba(0, 0, 0, 0.5)'
-					}
-				}
-			}
-		]
-	};
-	
-	if(is_multi){
-		//订单概况
-		myChart_order.setOption(option_order);
-		myChart_price.setOption(option_sale);
-	}else{
-		//订单概况
-		myChart_order.setOption(order_data['order']);
-		myChart_price.setOption(order_data['sale']);
-	}
-	//配送方式
-	myChart_ship.setOption(option_ship);
-	//支付方式
-	myChart_pay.setOption(option_pay);
-	//配送地区
-	myChart_area.setOption(option_area);	
-	//统计数据 end
-	
-	$(".stat_order_warp").slide({titCell:".stat_order_tabs ul li",mainCell:".stat_order_content",trigger:"click",titOnClassName:"current",});
-	
     //地区三级联动调用
     $.levelLink();
 	
@@ -498,8 +266,9 @@
         var time_str = date.getTime().toString();
         return time_str.substr(0, 10);
     }
-	
-	function get_country(){
+</script>
+<script>
+    function get_country(){
         var countries = $('#countries').val();
         var provinces = $('#provinces').val();
         Ajax.call('order_stats.php?act=area', "country="+countries+"&province="+provinces, get_Response, "POST", "TEXT");
@@ -514,5 +283,4 @@
         $(str).replaceAll("#embed");
     }
 </script>
-</body>
 </html>

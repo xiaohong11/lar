@@ -22,13 +22,12 @@
                     <tr>
                         <td class="label">{$lang.label_handle_refund}</td>
                         <td>
-                            <dd>
-                                <div class="checkbox_items">
-                                    {if !$anonymous}<div class="checkbox_item"><input type="radio" class="ui-radio" name="refund" value="1" id="refund_1" checked="checked" autocomplete="off" /><label class="ui-radio-label" for="refund_1">{$lang.return_user_money}</label></div>{/if}
-                                    <div class="checkbox_item"><input type="radio" class="ui-radio" name="refund" value="2" id="refund_2" {if $anonymous}checked="checked"{/if} autocomplete="off" /><label class="ui-radio-label" for="refund_2">{$lang.create_user_account}</label></div>
-                                    <div class="checkbox_item"><input name="refund" type="radio" class="ui-radio" value="3" id="refund_3" autocomplete="off" /><label class="ui-radio-label" for="refund_3">{$lang.not_handle}</label></div>
-                                </div>
-                            </dd>
+                            <p>{if !$anonymous}
+                              <label><input type="radio" name="refund" value="1" />{$lang.return_user_money}</label><br>{/if}
+                              <label><input type="radio" name="refund" value="2" checked="checked"/>{$lang.create_user_account}</label><br>
+                              <label><input name="refund" type="radio" value="3" />
+                               {$lang.not_handle}</label><br>
+                            </p>
                         </td>
                     </tr>
                   <tr>

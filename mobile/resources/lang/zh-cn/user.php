@@ -1,7 +1,6 @@
 <?php
 defined('IN_ECTOUCH') or die('Deny Access');
 
-$_LANG['self_motion_goods'] = "自动确认收货";
 $_LANG['require_login'] = '非法入口。<br />必须登录才能完成操作。';
 
 $_LANG['no_records'] = '没有记录';
@@ -10,8 +9,7 @@ $_LANG['shot_message'] = "短消息";
 
 //退换货 start
 $_LANG['return'] = '售后申请';
-$_LANG['return_progres'] = '进度查询';
-$_LANG['user_return'] = '由用户寄回';
+$_LANG['user_return'] ='由用户寄回';
 $_LANG['get_goods'] = '退换商品已收到';
 $_LANG['send_alone'] = '换货商品寄出(分单)';
 $_LANG['send'] = '换货商品寄出';
@@ -25,25 +23,19 @@ $_LANG['return_info'] = '返回退换货信息';
 $_LANG['return_list_lnk'] = '我的售后申请';
 $_LANG['return_exist'] = '该订单不存在！';
 $_LANG['return_not_unconfirmed'] = '当前订单状态不是“用户寄回”。';
-$_LANG['current_os_already_receive'] = '商家已收到退换货商品';
-$_LANG['already_out_goods'] = '商家已发送出换货商品';
+$_LANG['current_os_already_receive'] ='商家已收到退换货商品';
+$_LANG['already_out_goods'] ='商家已发送出换货商品';
 $_LANG['have_refound'] = "商家已退款";
+
 $_LANG['rf'][RF_RETURNMON] = '仅退款';
-$_LANG['rf'][RF_APPLICATION] = '由买家寄回';
+$_LANG['rf'][RF_APPLICATION] = '由用户寄回';
 $_LANG['rf'][RF_RECEIVE] =  '收到退换货';
 $_LANG['rf'][RF_SWAPPED_OUT_SINGLE] =  '换出商品寄出【分单】';
 $_LANG['rf'][RF_SWAPPED_OUT] =  '换出商品寄出';
 $_LANG['rf'][RF_COMPLETE] =  '完成';
-$_LANG['rf'][RF_AGREE_APPLY] = '同意申请';
-$_LANG['rf'][REFUSE_APPLY] =  '申请被拒';
 $_LANG['ff'][FF_REFOUND] = '已退款';
 $_LANG['ff'][FF_NOREFOUND] = '未退款';
-$_LANG['ff'][FF_NOMAINTENANCE] =  '未维修';
-$_LANG['ff'][FF_MAINTENANCE] =  '已维修';
-$_LANG['ff'][FF_NOEXCHANGE] =  '未换货';
-$_LANG['ff'][FF_EXCHANGE] =  '已换货';
 $_LANG['return_info'] = "退换货申请已提交";
-$_LANG['pay_who_order'] = '支付批发订单';
 //退换货 end
 
 /* 用户菜单 */
@@ -108,8 +100,6 @@ $_LANG['confirm_remove_account'] = '您确定要删除此条记录吗？';
 $_LANG['back_page_up'] = '返回上一页';
 $_LANG['back_account_log'] = '返回帐户明细列表';
 $_LANG['amount_gt_zero'] = '请在“金额”栏输入大于0的数字';
-$_LANG['amount_gt_little'] = '转出金额小于最低可提现金额';
-$_LANG['amount_gt_pay'] = '充值金额小于最低可充值金额';
 $_LANG['select_payment_pls'] = '请选择支付方式';
 $_LANG['account_detail'] = '账户明细';
 $_LANG['account_user_charge'] = '用户充值';
@@ -179,7 +169,7 @@ $_LANG['back_login'] = '返回登录页面';
 $_LANG['edit_password'] = '修改密码';
 $_LANG['edit_sucsess'] = '修改成功';
 $_LANG['edit_error'] = '修改失败';
-$_LANG['edit_mobile'] = '验证手机';
+$_LANG['edit_mobile'] = '修改手机';
 $_LANG['log_mobile_verify_error'] = '短信验证码不正确';
 $_LANG['profile'] = '个人资料';
 
@@ -367,8 +357,6 @@ $_LANG['os'][OS_SPLITING_PART] = '已确认';
 $_LANG['os'][OS_CANCELED] = '已取消';
 $_LANG['os'][OS_INVALID] = '无效';
 $_LANG['os'][OS_RETURNED] = '退货';
-$_LANG['os'][OS_ONLY_REFOUND] = '仅退款';
-$_LANG['os'][OS_RETURNED_PART] = '部分已退货';
 
 $_LANG['ss'][SS_UNSHIPPED] = '未发货';
 $_LANG['ss'][SS_PREPARING] = '配货中';
@@ -381,7 +369,6 @@ $_LANG['ps'][PS_UNPAYED] = '未付款';
 $_LANG['ps'][PS_PAYING] = '付款中';
 $_LANG['ps'][PS_PAYED] = '已付款';
 $_LANG['ps'][PS_PAYED_PART] = '部分付款(定金)';
-$_LANG['ps'][PS_REFOUND] = '已退款';
 
 //预售
 $_LANG['presale_tip_1'] = '尾款支付时间: %s 至 %s';
@@ -396,7 +383,7 @@ $_LANG['confirm_received'] = '你确认已经收到货物了吗？';
 
 /* 合并订单及订单详情 */
 $_LANG['merge_order_success'] = '合并的订单的操作已成功！';
-$_LANG['merge_order_failed'] = '合并的订单的操作失败！请返回重试！';
+$_LANG['merge_order_failed']  = '合并的订单的操作失败！请返回重试！';
 $_LANG['order_sn_not_null'] = '请填写要合并的订单号';
 $_LANG['two_order_sn_same'] = '要合并的两个订单号不能相同';
 $_LANG['order_not_exist'] = "订单 %s 不存在";
@@ -464,7 +451,7 @@ $_LANG['label_email'] = 'email';
 $_LANG['label_password'] = '密码';
 $_LANG['label_confirm_password'] = '确认密码';
 $_LANG['label_password_intensity'] = '密码强度';
-$_LANG['want_login'] = '已注册直接登录';
+$_LANG['want_login'] = '我已有账号，我要登录';
 $_LANG['other_msn'] = 'MSN';
 $_LANG['other_qq'] = 'QQ';
 $_LANG['other_office_phone'] = '办公电话';
@@ -483,7 +470,7 @@ $_LANG['msg_email_format'] = '邮件地址不合法';
 $_LANG['msg_register_fail'] = '注册失败';
 
 $_LANG['edit_email'] = '修改邮箱';
-$_LANG['registered_user'] = '新用户注册';
+$_LANG['registered_user'] = '注册用户';
 $_LANG['login_success'] = '登录成功';
 $_LANG['confirm_login'] = '确认登录';
 $_LANG['profile_lnk'] = '查看我的个人信息';
@@ -567,8 +554,7 @@ $_LANG['confirm_drop_tag'] = '您确认要删除此标签吗？';
 
 /* user_passport.dwt js语言文件 */
 $_LANG['passport_js']['username_empty'] = '用户名不能为空。';
-$_LANG['passport_js']['username_shorter'] = '用户名长度不能少于 4 个字符。';
-$_LANG['passport_js']['username_longest'] = '用户名长度不能超过 15 个字符。';
+$_LANG['passport_js']['username_shorter'] = '用户名长度不能少于 3 个字符。';
 $_LANG['passport_js']['username_invalid'] = '用户名只能是由字母数字以及下划线组成。';
 $_LANG['passport_js']['password_empty'] = '登录密码不能为空。';
 $_LANG['passport_js']['password_shorter'] = '登录密码不能少于 6 个字符。';
@@ -696,7 +682,6 @@ $_LANG['not_validated'] = '您还没有通过邮件认证';
 $_LANG['resend_hash_mail'] = '点此发送认证邮件';
 
 $_LANG['query_status'] = '查询状态';
-$_LANG['user_pay_points'] = '积分使用明细';
 
 $_LANG['change_payment'] = '改用其他在线支付方式';
 
@@ -758,17 +743,17 @@ $_LANG['user_reg_info'][4] = '保存您的个人资料';
 $_LANG['user_reg_info'][5] = '收藏您关注的商品';
 $_LANG['user_reg_info'][6] = '享受会员积分制度';
 $_LANG['user_reg_info'][7] = '订阅本店商品信息';
-
+$_LANG['add_bonus'] = '添加优惠券';
 
 /* 密码找回问题 */
 $_LANG['passwd_questions']['friend_birthday'] = '我最好朋友的生日？';
-$_LANG['passwd_questions']['old_address'] = '我儿时居住地的地址？';
-$_LANG['passwd_questions']['motto'] = '我的座右铭是？';
-$_LANG['passwd_questions']['favorite_movie'] = '我最喜爱的电影？';
-$_LANG['passwd_questions']['favorite_song'] = '我最喜爱的歌曲？';
-$_LANG['passwd_questions']['favorite_food'] = '我最喜爱的食物？';
-$_LANG['passwd_questions']['interest'] = '我最大的爱好？';
-$_LANG['passwd_questions']['favorite_novel'] = '我最喜欢的小说？';
+$_LANG['passwd_questions']['old_address']     = '我儿时居住地的地址？';
+$_LANG['passwd_questions']['motto']           = '我的座右铭是？';
+$_LANG['passwd_questions']['favorite_movie']  = '我最喜爱的电影？';
+$_LANG['passwd_questions']['favorite_song']   = '我最喜爱的歌曲？';
+$_LANG['passwd_questions']['favorite_food']   = '我最喜爱的食物？';
+$_LANG['passwd_questions']['interest']        = '我最大的爱好？';
+$_LANG['passwd_questions']['favorite_novel']  = '我最喜欢的小说？';
 $_LANG['passwd_questions']['favorite_equipe'] = '我最喜欢的运动队？';
 
 $_LANG['forget_email_check'] = '用户名邮箱不匹配';
@@ -820,7 +805,7 @@ $_LANG['cancel_attention'] = '已取消关注';
 $_LANG['all_category'] = '全部分类';
 
 /* 社区  community */
-$_LANG['community_my'] = '我的帖子';
+$_LANG['community_my'] = '我的社区';
 $_LANG['community_group'] = '社区圈子';
 $_LANG['discuss_post'] = '讨论贴';
 $_LANG['answer_post'] = '问答帖';
@@ -872,184 +857,4 @@ $_LANG['order_return_type'][2] = "换货";
 $_LANG['order_return_type'][3] = "仅退款";
 
 
-//交易纠纷
-$_LANG['transaction_disputes'] = '交易纠纷';
-$_LANG['may_apply_order'] = '可申请订单';
-$_LANG['already_apply_order'] = '已申请订单';
-$_LANG['apply_disputes_order'] = '申请纠纷单';
-$_LANG['view_disputes_order'] = '查看纠纷单';
-$_LANG['complaint_title'] = '纠纷类型';
-$_LANG['evidence_upload'] = "证据上传";
-$_LANG['complaint_title_null'] = '请选择纠纷类型！';
-$_LANG['complaint_content_null'] = '问题描述不能为空！';
-$_LANG['complaint_success'] = "投诉成功";
-$_LANG['back_complaint_list'] = "返回投诉列表";
-$_LANG['complaint_reprat'] = "该订单您已经投诉过了，不能重复提交！";
-//违规举报
-$_LANG['illegal_report'] = '违规举报';
-$_LANG['report_goods'] = '举报商品';
-$_LANG['trade_snapshot'] = '交易快照';
-$_LANG['malice_report'] = "您存在恶意举报，您的举报权限已被冻结！";
-$_LANG['malice_report_end'] = "冻结到期时间：";
-$_LANG['handle_message'] = "回复";
-$_LANG['handle_type'] = "处理结果";
-$_LANG['handle_type_desc'][1] = "无效举报--商品会正常销售";
-$_LANG['handle_type_desc'][2] = "恶意举报--您所有未处理举报将被无效处理，用户将被禁止举报";
-$_LANG['handle_type_desc'][3] = "有效举报--商品将被违规下架";
-$_LANG['complaint_state'][0] = "未处理";
-$_LANG['complaint_state'][1] = "待申诉";
-$_LANG['complaint_state'][2] = "对话中";
-$_LANG['complaint_state'][3] = "待仲裁";
-$_LANG['complaint_state'][4] = "完成";
-$_LANG['complaint_info'] = "投诉信息";
-$_LANG['appeal_info'] = "申诉详情";
-$_LANG['appeal_content'] = "申诉内容";
-$_LANG['appeal_img'] = "申诉图片";
-$_LANG['complaint_time'] = "投诉时间";
-$_LANG['talk_record'] = "对话记录";
-$_LANG['talk_release'] = "发布对话";
-$_LANG['talk_refresh'] = "刷新对话";
-$_LANG['talk_info'] = "对话详情";
-$_LANG['talk_member_type'][1] = "投诉方";
-$_LANG['talk_member_type'][2] = "被投诉方";
-$_LANG['talk_member_type'][3] = "管理员";
-$_LANG['end_handle_time'] = "处理时间";
-$_LANG['complaint_handle_time'] = "初步审核时间";
-$_LANG['handle_user'] = "操作人";
-$_LANG['end_handle_messg'] = "处理意见";
-$_LANG['type_null'] = '请选择举报类型！';
-$_LANG['title_null'] = '请选择举报主题！';
-$_LANG['report_success'] = "举报成功";
-$_LANG['back_report_list'] = "返回举报列表";
-$_LANG['repeat_report'] = "该商品你已经举报，请等待处理结果！";
-$_LANG['offgoods_report'] = "该商品下架整顿中，暂时不能举报！";
-$_LANG['inform_content_null'] = '举报内容不能为空！';
-
-$_LANG['already_got'] = "您已经领过该红包啦";
-$_LANG['no_bonus'] = "红包已发完";
-$_LANG['get_success'] = "领取成功";
-$_LANG['add_bonus'] = '兑换红包';
-
-// 退换货
-$_LANG['apply_return'] = "申请退换货";
-$_LANG['return_detail'] = "退换货详情";
-
-$_LANG['Repeated_Submission'] = "同一订单的同一商品不能重复提交";
-$_LANG['Return_abnormal'] = "退换货提交出现异常，请稍后重试";
-$_LANG['Apply_refund'] = "申请退款（由用户寄回）";
-$_LANG['Apply_Success_Prompt'] = "申请提交成功，工作人员将尽快审核！";
-$_LANG['See_returnlist'] = "查看退换货订单";
-$_LANG['Apply_Abnormal'] = "申请提交出现了异常，请稍后重试";
-
-$_LANG['cause_id_empty'] = "退货原因不能为空";
-$_LANG['shipping_name_empty'] = "快递公司不能为空";
-$_LANG['invoice_no_empty'] = "快递单号不能为空";
-
-$_LANG['activation_return'] = '激活';
-$_LANG['activation_success'] = '激活成功！请等待管理员同意';
-$_LANG['activation_number_msg'] = '只能激活 %s 次，您不能激活了哦。。。';
-$_LANG['return_is_apply'] = "该退换货商品已申请过了哦，不能重复申请！";
-
-$_LANG['return_received'] = "退换货确认收货";
-
-$_LANG['return_goods_nonsupport'] = "此商品不支持退换货";
-$_LANG['return_detail_look'] = "查看详情";
-$_LANG['Have_applied'] = "[已申请]";
-$_LANG['close_applied'] = "[已关闭]";
-$_LANG['is_agree_apply'] = "已同意";
-$_LANG['no_agree_apply'] = "待同意";
-$_LANG['applied'] = "申请";
-$_LANG['applied_to'] = "申请售后";
-$_LANG['Return_repair'] = "返修退换货";
-$_LANG['Return_type'] = "退换类别";
-$_LANG['Return_reason'] = "退换原因";
-$_LANG['Return_one'] = "7天内退换货";
-$_LANG['Return_two'] = "8-15天换货";
-$_LANG['Return_three'] = "15天以上在质保期内";
-$_LANG['Performance_fault'] = "性能故障";
-$_LANG['Performance_fault_one'] = "商品使用过程中，无法满足售前介绍的使用基本需求";
-$_LANG['Missing_parts'] = "缺少配件";
-$_LANG['Missing_parts_one'] = "实际收到商品附件与网页介绍包装清单中的内容不符";
-$_LANG['Logistics_loss'] = "物流损";
-$_LANG['Logistics_loss_one'] = "因物流运输导致商品损坏、残缺，无法正常使用";
-$_LANG['Inconsistent_goods'] = "商品实物与网站不符";
-$_LANG['Inconsistent_goods_one'] = "实际收到 商品实物与网页介绍规格参数中的内容不符";
-$_LANG['Buy_wrong'] = "错买、多买";
-$_LANG['Buy_wrong_one'] = "在商品（包装及附件）完好的前提下";
-$_LANG['Buy_wrong_two'] = "可退";
-$_LANG['Return_Explain'] = '<h4 class="f-04 col-6 mb-1"> 服务说明</h4 >
-                <p class="f-03 col-9">1.附件赠品，退换货时请一并退回。</p>
-                <p class="f-03 col-9 m-top04">2.关于物流损，请您在收到货时务必仔细检查，如发现商品外包装或商品本身外观存在异常，需当场向派送人员指出，并拒收整个包裹；如您在收到货后发现外观异常，请在收货24小时内提交退换货申请，如超时未申请，将无法受理。</p>
-                <p class="f-03 col-9 m-top04">3.关于商品实物与网站描述不符；商创保证所出商品均为正品行货，并与时下市场上同样直流商品一致，但因厂家会在没有任何提前通知的情况下更改产品包装，产地或者一些附件，所以我们无法确保您收到的货物与商城图片、产地、附件说明完全一致。</p>
-                <p class="f-03 col-9 m-top04">4、如果您在使用时对商品质量表示置疑，您可出具相关书面鉴定，我们会按照国家法律规定予以处理。</p>';
-$_LANG['Service_Mingxi'] = "服务单明细";
-$_LANG['reminder'] = '温馨提示';
-$_LANG['reminder_one'] = '本次售后服务将由卖家';
-$_LANG['reminder_two'] = '为您提供';
-$_LANG['Service_type'] = "服务类型";
-$_LANG['order_return_type'][0] = "维修";
-$_LANG['order_return_type'][1] = "退货";
-$_LANG['order_return_type'][2] = "换货";
-$_LANG['order_return_type'][3] = "退款";
-$_LANG['cause'] = "原因";
-$_LANG['return_goods_number'] = "商品数量";
-$_LANG['return_goods_attr'] = "换货属性";
-$_LANG['please_write'] = "请填写";
-$_LANG['return_remark'] = "留言";
-$_LANG['Repair_number'] = "维修数量";
-$_LANG['Repair_one'] = "可供维修";
-$_LANG['Repair_two'] = "件，已维修";
-$_LANG['jian'] = "件";
-$_LANG['return_number'] = "退货数量";
-$_LANG['return_one'] = "可供退换";
-$_LANG['return_two'] = "件，已退";
-$_LANG['return_one'] = "可供退换";
-$_LANG['return_two'] = "件，已退";
-$_LANG['change_two'] = "件，已换";
-$_LANG['Application_credentials'] = "申请凭据";
-$_LANG['has_Test_Report'] = "有检测报告";
-$_LANG['return_reason']='退换货原因';
-$_LANG['problem_desc'] = '问题描述';
-$_LANG['pic_info'] = '图片信息';
-$_LANG['upload_pic'] = '上传凭证';
-$_LANG['pic_info_one'] = '为了帮助我们更好的解决问题，请您上传图片<br>注：最多可上传5张图片，支持jpg,png格式文件';
-$_LANG['Empty_picture'] = '清空图片';
-$_LANG['Contact_name'] = "联系人姓名";
-$_LANG['label_mobile'] = '手机号码';
-$_LANG['detailed_info'] = "详细信息";
-$_LANG['return_sn'] = "退货单流水号";
-$_LANG['apply_time'] = "申请时间";
-$_LANG['return_type_user'] = "退款类型";
-$_LANG['back_cause'] = '退货原因';
-$_LANG['amount_return'] = '商品退款';
-$_LANG['return_shipping'] = '运费退款';
-$_LANG['return_total'] = '合计已退款';
-$_LANG['Contact_address'] = "联系地址";
-$_LANG['progress_return'] = "换货发货进度";
-$_LANG['Waybill'] = "运货单";
-$_LANG['Logistics_company'] = "物流公司";
-$_LANG['Express_info'] = "快递信息";
-$_LANG['Express_company'] = "快递公司";
-$_LANG['select_Express_company'] = "请选择快递公司";
-$_LANG['other_express'] ='其他快递';
-$_LANG['User_sent'] = "用户寄出";
-$_LANG['courier_sz'] ='快递单号';
-$_LANG['Express_info_two'] = "请填写您寄回商品的快递信息";
-$_LANG['seller_shipping'] ='商家发货';
-$_LANG['modify'] = "修改";
-$_LANG['Newly'] = "新增";
-$_LANG['consignee_empty'] = "收货人信息不为空";
-$_LANG['Local_area'] = '所在地区';
-$_LANG['select_Local_area'] = '请选择所在地区';
-$_LANG['detailed_address_null'] = '请填写详细地址';
-$_LANG['label_tel'] = '电话号码';
-$_LANG['label_tel_empty'] = "请填写联系方式";
-$_LANG['youhave'] = '你有';
-$_LANG['return_goods_user'] = '件退换货商品';
-$_LANG['return_sn_user'] = '退换货流水号';
-$_LANG['y_amount'] = '应退金额';
-$_LANG['return_order_user'] = '您当前没有退换货订单';
-$_LANG['return_order_user_desc'] = '<h5>提示</h5>
-                    <h5>1、请您尽快寄出退换货商品</h5>
-                    <h5>2、请您寄出商品后填写快递信息，填写快递信息后，您的退换货业务将在我们收到退换货商品后第一时间为您受理</h5>';
 return $_LANG;

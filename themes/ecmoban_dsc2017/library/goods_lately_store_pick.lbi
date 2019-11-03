@@ -17,8 +17,8 @@
             <p class="city-hot">
                 <span>{$lang.hot_city}：</span>
                 <a href="javascript:void(0);" data-level="1" data-id="25" data-name="上海" class="city-item">上海</a>
-                <a href="javascript:void(0);" data-level="2" data-id="2" data-name="北京" class="city-item">北京</a>
-                <a href="javascript:void(0);" data-level="2" data-id="32" data-name="重庆" class="city-item">重庆</a>
+                <a href="javascript:void(0);" data-level="1" data-id="2" data-name="北京" class="city-item">北京</a>
+                <a href="javascript:void(0);" data-level="1" data-id="32" data-name="重庆" class="city-item">重庆</a>
                 <a href="javascript:void(0);" data-level="2" data-id="220" data-name="南京" class="city-item">南京</a>
             </p>
             <div class="city-tab">
@@ -45,7 +45,7 @@
                         <input type="hidden" name="store_id" value='{$list.id}'/>
                     </div>
                 {/if}
-			{/foreach}
+		{/foreach}
         </div>
     </div>
 </div>

@@ -18,9 +18,6 @@ return [
         'vendor/swiper/js/swiper-3.2.5.min.js',
         'vendor/common/jquery.infinite.js',
         'vendor/common/jquery.json.js',
-        'vendor/common/jquery.form.js',
-        'vendor/common/jquery.time.js',
-        'vendor/common/lazyload.min.js',
         'vendor/common/template.js',
         'vendor/common/validform.js',
         'vendor/common/ap.js',
@@ -38,20 +35,20 @@ return [
         'vendor/ecshop/region_goods.js',
         'vendor/ecshop/lefttime.js',
         'vendor/ecshop/sms.js',
-        'vendor/common/chart.min.js',
         'js/ectouch.js',
-        'js/qrcode.js',
         'js/fastclick.js',
+        'vendor/common/jquery.form.js',
+        'vendor/common/jquery.time.js',
     ],
     'console' => [
         // styles
         '../../'.ADMIN_PATH.'/css/main.css',
         '../../'.ADMIN_PATH.'/css/font-awesome.min.css',
-        '../../js/perfect-scrollbar/perfect-scrollbar.min.css',
+        '../../'.ADMIN_PATH.'/css/perfect-scrollbar.min.css',
         '../../'.ADMIN_PATH.'/css/purebox.css',
-        '../../js/jquery-ui/jquery-ui.min.css',
+        '../../'.ADMIN_PATH.'/js/jquery-ui/jquery-ui.min.css',
         '../../js/calendar/calendar.min.css',
-        '../../js/spectrum-master/spectrum.css',
+        '../../'.ADMIN_PATH.'/js/spectrum-master/spectrum.css',
         'css/console_style.css',
         // script
         'vendor/common/jquery.min.js',
@@ -71,10 +68,6 @@ return [
         'vendor/bootstrap/js/bootstrap.min.js',
         'vendor/fancybox/jquery.fancybox.js',
         'vendor/common/jquery.form.js',
-        'vendor/md5/md5.js',
-        '../../js/spectrum-master/spectrum.css',
-        '../../js/spectrum-master/spectrum.js',
-        '../../js/jquery.SuperSlide.2.1.1.js',
     ],
     'crowd_funding' => [
         // styles
@@ -103,20 +96,6 @@ return [
         'vendor/font-awesome/css/font-awesome.min.css',
         'vendor/fancybox/jquery.fancybox.css',
         'css/console_team.css',
-        'vendor/layer/mobile/need/layer.css',
-        // script
-        'vendor/common/jquery.min.js',
-        'vendor/bootstrap/js/bootstrap.min.js',
-        'vendor/fancybox/jquery.fancybox.js',
-        'vendor/common/validform.js',
-        'vendor/layer/mobile/layer.m.js',
-    ],
-	 'bargain' => [
-        // styles
-        'vendor/bootstrap/css/bootstrap.min.css',
-        'vendor/font-awesome/css/font-awesome.min.css',
-        'vendor/fancybox/jquery.fancybox.css',
-        'css/console_bargain.css',
         'vendor/layer/mobile/need/layer.css',
         // script
         'vendor/common/jquery.min.js',

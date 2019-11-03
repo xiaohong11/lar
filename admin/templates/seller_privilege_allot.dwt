@@ -4,14 +4,14 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="javascript:;" ectype="goback" class="s-back"></a>{$lang.privilege} - {$ur_here}</div>
+    	<div class="title"><a href="javascript" ectype="goback" class="s-back"></a>管理员 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.allot.0}</li>
-                    <li>{$lang.operation_prompt_content.allot.1}</li>
-                    <li>{$lang.operation_prompt_content.allot.2}</li>
+                	<li>该页面展示商城所有功能权限。</li>
+                    <li>打钩即是分配权限，请谨慎操作。</li>
+                    <li>初始化是基本功能权限。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -39,8 +39,8 @@
                                         <div class="checkbox_items">
                                             {foreach from=$priv.priv key=priv_list item=list}
                                             <div class="checkbox_item">
-                                                <input type="checkbox" value="{$priv_list}" name="action_code[]" class="ui-checkbox" id="{$priv_list}_{$priv.action_id}" date="{$priv.action_code}" {if $list.cando eq 1} checked="true" {/if} title="{$list.relevance}"/>
-                                                <label for="{$priv_list}_{$priv.action_id}" class="ui-label">{$lang[$list.action_code]}</label>
+                                                <input type="checkbox" value="{$priv_list}" name="action_code[]" class="ui-checkbox" id="{$priv_list}" date="{$priv.action_code}" {if $list.cando eq 1} checked="true" {/if} title="{$list.relevance}"/>
+                                                <label for="{$priv_list}" class="ui-label">{$lang[$list.action_code]}</label>
                                             </div>
                                             {/foreach}
                                         </div>
@@ -53,7 +53,7 @@
                             	<div class="checkbox_items">
                                 	<div class="checkbox_item">
                                     	<input type="checkbox" name="checkall" value="checkbox" class="ui-checkbox" id="checkall" />
-                                        <label for="checkall" class="ui-label">{$lang.check_all}</label>
+                                        <label for="checkall" class="ui-label">全选</label>
                                     </div>
                                 </div>
                                 <div class="info_btn">

@@ -7,9 +7,9 @@
         <div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>短信模板 - {$ur_here}</div>
         <div class="content">
             <div class="explanation" id="explanation">
-                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content_common}</li>
+                    <li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
                     <li>此快捷菜单的图片标准宽度为：120px 标准高度为：120px</li>
                 </ul>
             </div>
@@ -36,7 +36,7 @@
                                     <div class="label">{$lang.require_field}Client：</div>
                                     <div class="label_value">
                                         <div id="device_client" class="imitate_select select_w320">
-                                            <div class="cite">{if $client_info.device_client}{$mobile_client[$client_info.device_client]}{else}{$lang.please_select}{/if}</div>
+                                            <div class="cite">{if $client_info.device_client}{$mobile_client[$client_info.device_client]}{else}请选择{/if}</div>
                                             <ul class="ps-container ps-active-y" style="display: none;">
                                             {foreach from=$mobile_client item=client key=key}
                                                 <li><a href="javascript:;" data-value="{$key}" class="ftx-01">{$client}</a></li>
@@ -72,7 +72,7 @@
                                     <div class="label">{$lang.require_field}服务平台：</div>
                                     <div class="label_value">
                                         <div id="platform" class="imitate_select select_w320">
-                                            <div class="cite">{if $client_info.platform}{$mobile_platform[$client_info.platform]}{else}{$lang.please_select}{/if}</div>
+                                            <div class="cite">{if $client_info.platform}{$mobile_platform[$client_info.platform]}{else}请选择{/if}</div>
                                             <ul class="ps-container ps-active-y" style="display: none;">
                                             {foreach from=$mobile_platform item=platform key=key}
                                                 <li><a href="javascript:;" data-value="{$key}" class="ftx-01">{$platform}</a></li>
@@ -89,11 +89,11 @@
                                         <div class="checkbox_items">
                                             <div class="checkbox_item">
                                                 <input type="radio" class="ui-radio" name="status" id="sex_0" value="1" {if $client_info.status eq 1} checked="true" {/if}>
-                                                <label for="sex_0" class="ui-radio-label">{$lang.yes}</label>
+                                                <label for="sex_0" class="ui-radio-label">是</label>
                                             </div>
                                             <div class="checkbox_item">
                                                 <input type="radio" class="ui-radio" name="status" id="sex_1" value="0" {if $client_info.status eq 0} checked="true" {/if}>
-                                                <label for="sex_1" class="ui-radio-label">{$lang.no}</label>
+                                                <label for="sex_1" class="ui-radio-label">否</label>
                                             </div>
                                         </div>
                                     </div>

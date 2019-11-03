@@ -1,0 +1,105 @@
+{include file="pageheader"}
+<div class="wrapper">
+	<div class="title">{$lang['wechat_menu']} - 活动记录</div>
+	<div class="content_tips">
+        <div class="tabs_info">
+            <ul>
+                <li class="curr"><a href="{url('index')}">现金红包</a></li>
+                <li><a href="{url('share_setting')}">设置分享内容</a></li>
+            </ul>
+        </div>
+	    <div class="explanation" id="explanation">
+            <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
+            <ul>
+                <li>当前活动所有参与人员领取红包的记录</li>
+<!--                 <li>2，点击上墙地址，获得微信墙二维码地址，用微信扫描即可进入参与活动。</li>
+                <li>3，大屏幕：主要是用来展示在幻灯片大屏幕上，显示参与用户，用户留言，进行抽奖。</li> -->
+            </ul>
+        </div>
+		<div class="flexilist of">
+<!-- 			<div class="common-head">
+                <div class="fl">
+                	<a href="{url('log_edit',array('market_id' => $market_id))}" ><div class="fbutton"><div class="add " title="添加红包数据"><span><i class="fa fa-plus"></i>添加红包数据</span></div></div></a>
+                </div>
+            </div> -->
+            <div class="common-content">
+                <div class="list-div">
+<!--                     <div class="panel panel-default">
+                        <div class="panel-heading">删除所有数据</div>
+                        <div class="panel-body">
+                            确认删除本公众号红包表所有信息？
+                            <a onclick="if(!confirm('删除后将不可恢复,确定删除吗?')) return false;" href="{url('log_delete', array('op'=>'deleteall','market_id' => $market_id))}" class="btn btn-default btn-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="删除所有">删除所有</a>
+
+                        </div>
+                    </div> -->
+                    <div class="panel panel-default">
+                        <div class="table-responsive">
+                            <table class="table-hover table-striped">
+                                <thead class="navbar-inner">
+                                    <tr>
+                                        <th class="col-sm-1 text-center">id</th>
+                                        <th class="col-sm-2 text-center">微信昵称</th>
+                                        <th class="col-sm-1 text-center">红包类型</th>
+                                        <th class="col-sm-1 text-center">是否领取</th>
+                                        <th class="col-sm-2 text-center">红包领取金额(元)</th>
+                                        <th class="col-sm-2 text-center">红包领取时间</th>
+                                        <th class="col-sm-3 text-center">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {foreach $redpacks as $redpack}
+                                    <tr class="text-center">
+                                        <td>{$redpack['id']}</td>
+                                        <td>{$redpack['nickname']}</td>
+                                        <td>{if $redpack['hb_type'] == 1}裂变红包{else}普通红包{/if}</td>
+                                        <td>{if $redpack['hassub'] == 1}已领取{else}未领取{/if}</td>
+                                        <td>{$redpack['money']}</td>
+                                        <td>{$redpack['time']}</td>
+                                        <td class="handle">
+                                        <div class="tDiv a2">
+                                            <a class="btn_edit fancybox fancybox.iframe" href="{url('log_edit', array('market_id' => $redpack['market_id'],'id'=> $redpack['id']))}" title="编辑" ><i class="fa fa-edit"></i>{$lang['wechat_editor']}</a>
+                                            <!-- <a class="btn_see fancybox fancybox.iframe getinfo" href="{url('log_info', array('market_id' => $redpack['market_id'],'id'=> $redpack['id']))}" title="查看详情" ><i class="fa fa-eye"></i>{$lang['wechat_see']}</a> -->
+                                            <a class="btn_trash" onclick="if(!confirm('删除后将不可恢复,确定删除吗?')) return false;" href="{url('log_delete', array('market_id' => $redpack['market_id'],'id'=> $redpack['id']))}" data-toggle="tooltip" data-placement="top" title="删除" ><i class="fa fa-trash-o"></i>{$lang['drop']}</a>
+                                        </div>
+                                        </td>
+                                    </tr>
+                                    {/foreach}
+                                    {if empty($redpacks)}
+                                    <tr class="no-records" ><td colspan="6">没有找到任何记录</td></tr>
+                                    {/if}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+		    </div>
+	    </div>
+        <div class="list-div of">
+            <table cellspacing="0" cellpadding="0" border="0">
+                <tfoot>
+                    <tr>
+                        <td colspan="6">
+                            {include file="pageview"}
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+	</div>
+</div>
+<script type="text/javascript">
+$(function(){
+    $(".getinfo").click(function(){
+        var url = $(this).attr("href");
+        $.get(url, '', function(data){
+            if(data.status <= 0 ){
+                layer.msg(data.msg);
+                $.fancybox.close();
+                return false;
+            }
+        }, 'json');
+    });
+})
+</script>
+{include file="pagefooter_copyright"}
+{include file="pagefooter"}

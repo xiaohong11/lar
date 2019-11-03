@@ -5,22 +5,23 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.mail} - {$ur_here}</div>
+    	<div class="title">邮件 - {$ur_here}</div>
         <div class="content">		
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.list.0}</li>
+                	<li>杂志可发送给不同类型的会员。</li>
                 </ul>
             </div>
             <div class="flexilist">
+            	<!--数据列表-->
                 <div class="common-head">
                     <div class="fl">
                     	<a href="{$action_link.href}"><div class="fbutton"><div class="add" title="{$action_link.text}"><span><i class="icon icon-plus"></i>{$action_link.text}</span></div></div></a>
                     </div>
                     <div class="refresh">
-                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    	<div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>					
                 </div>
                 <div class="common-content">
@@ -47,7 +48,7 @@
 											<input type="hidden" name="id" value="{$val.template_id}" />
 											<input type="hidden" name="act" value="addtolist" />
 											<div id="" class="imitate_select select_w120">
-												<div class="cite">{$lang.please_select}</div>
+												<div class="cite">请选择</div>
 												<ul>
 													<li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.pri.0}</a></li>
 													<li><a href="javascript:;" data-value="1" class="ftx-01">{$lang.pri.1}</a></li>
@@ -55,7 +56,7 @@
 												<input name="pri" type="hidden" value="0" id="">
 											</div>
 											<div id="" class="imitate_select select_w120">
-												<div class="cite">{$lang.please_select}</div>
+												<div class="cite">请选择</div>
 												<ul>
 													{foreach from=$send_rank item=data key=key}
 													<li><a href="javascript:;" data-value="{$key}" class="ftx-01">{$data}</a></li>
@@ -69,7 +70,7 @@
                                     <td class="handle">
                                         <div class="tDiv a2">
                                             <a href="magazine_list.php?act=edit&id={$val.template_id}" class="btn_edit"><i class="icon icon-edit"></i>{$lang.edit}</a>
-                                            <a href="magazine_list.php?act=del&id={$val.template_id}" onclick="return confirm('{$lang.ck_del}');" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                            <a href="magazine_list.php?act=del&id={$val.template_id}" onclick="return confirm('{$lang.ck_del}');" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -90,17 +91,21 @@
 						{if $full_page}
                     </div>
                 </div>
+                <!--数据列表end-->
             </div>
 		</div>
 	</div>
+	
     {include file ='library/pagefooter.lbi'}
-	<script type="text/javascript">
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
+	<script type="text/javascript" language="JavaScript">
+	listTable.recordCount = '{$record_count}';
+	listTable.pageCount = '{$page_count}';
 	{foreach from=$filter item=item key=key}
 	listTable.filter.{$key} = '{$item}';
 	{/foreach}
+	{literal}
 	</script>
+	{/literal}
 </body>
 </html>
 {/if}

@@ -40,11 +40,7 @@
                                 <em>:</em>
                                 <span class="seconds"></span>
                             </div>
-                            <!-- {if $group_buy.is_end eq 1} -->
-                            <a href="{$group_buy.url}" class="crazy-btn bid_end">{$lang.Group_purchase_end}</a>
-                            <!-- {else} -->
                             <a href="{$group_buy.url}" class="crazy-btn">{$lang.Group_purchase_now}</a>
-                            <!-- {/if} -->
                         </li>
                         <!-- {/foreach}-->
                     </ul>
@@ -53,40 +49,38 @@
         </div>
         <div class="gb-index-main w w1200">
             <h2>热门团购</h2>
-            <div class="gb-index-list">
-                <ul class="clearfix" ectype="items">
-                    <!-- {foreach from=$hot_list item=group_buy name=foo} 循环团购活动开始 --> 
-                    <li class="mod-shadow-card">
-                        <a href="{$group_buy.url}" target="_blank" class="img"><img src="{$group_buy.goods_thumb}" alt="{$group_buy.goods_name|escape:html}" title="{$group_buy.goods_name|escape:html}"></a>
-                        <div class="clearfix">
-                            <div class="price">¥{$group_buy.price_ladder.0.price}</div>
-                            <div class="man">{$group_buy.cur_amount}{$lang.people_participate}</div>
-                        </div>
-                        <a href="{$group_buy.url}" target="_blank" class="name" title="{$group_buy.goods_name|escape:html}">{$group_buy.goods_name|escape:html}</a>
-                        <div class="lefttime" data-time='{$group_buy.formated_end_date}'>
-                            <i class="iconfont icon-time"></i>
-                            <span>{$lang.residue_time}</span>
-                            <span class="days"></span>
-                            <em>:</em>
-                            <span class="hours"></span>
-                            <em>:</em>
-                            <span class="minutes"></span>
-                            <em>:</em>
-                            <span class="seconds"></span>
-                        </div>
-                        <!-- {if $group_buy.is_end eq 1} -->
-                        <a href="{$group_buy.url}" class="gb-btn bid_end">{$lang.Group_purchase_end}</a>
-                        <!-- {else} -->
-                        <a href="{$group_buy.url}" class="gb-btn">{$lang.Group_purchase_now}</a>
-                        <!-- {/if} -->
-                    </li>
-                    <!-- {/foreach}-->
-                </ul>
-            </div>
+            <ul class="gb-index-list clearfix">
+                <!-- {foreach from=$hot_list item=group_buy name=foo} 循环团购活动开始 --> 
+                <li class="mod-shadow-card">
+                    <a href="{$group_buy.url}" class="img"><img src="{$group_buy.goods_thumb}" alt="{$group_buy.goods_name|escape:html}" title="{$group_buy.goods_name|escape:html}"></a>
+                    <div class="clearfix">
+                        <div class="price">¥{$group_buy.price_ladder.0.price}</div>
+                        <div class="man">{$group_buy.cur_amount}{$lang.people_participate}</div>
+                    </div>
+                    <a href="{$group_buy.url}" target="_blank" class="name" title="{$group_buy.goods_name|escape:html}">{$group_buy.goods_name|escape:html}</a>
+                    <div class="lefttime" data-time='{$group_buy.formated_end_date}'>
+                        <i class="iconfont icon-time"></i>
+                        <span>{$lang.residue_time}</span>
+                        <span class="days"></span>
+                        <em>:</em>
+                        <span class="hours"></span>
+                        <em>:</em>
+                        <span class="minutes"></span>
+                        <em>:</em>
+                        <span class="seconds"></span>
+                    </div>
+                    <!-- {if $group_buy.is_end eq 1} -->
+                    <a href="{$group_buy.url}" class="gb-btn bid_end">{$lang.Group_purchase_end}</a>
+                    <!-- {else} -->
+                    <a href="{$group_buy.url}" class="gb-btn">{$lang.Group_purchase_now}</a>
+                    <!-- {/if} -->
+                </li>
+                <!-- {/foreach}-->
+            </ul>
             <a href="group_buy.php?act=list" class="gb-btn-all">全部团购</a>
         </div>
     </div>
-    {* DSC 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
+    {* ECSHOP 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
     <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
     
     {insert_scripts files='jquery.SuperSlide.2.1.1.js,common.js,jquery.yomi.js,parabola.js,cart_common.js,cart_quick_links.js'}

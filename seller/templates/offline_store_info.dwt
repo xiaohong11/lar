@@ -43,15 +43,15 @@
                         	<dt>{$lang.newpass}：</dt>
                             <dd>
                                 <input type="password"   style="display:none"/>
-                                <input type="password" name="newpass" maxlength="20" value="" size="20" class="text ignore" />
-                                <div class="form_prompt"></div>
+							<input type="password" name="newpass" maxlength="20" value="" size="20" class="text" />
+							<div class="form_prompt"></div>
 							</dd>
                         </dl>
                         <dl>
                         	<dt>{$lang.confirm_pwd}：</dt>
                             <dd>
                                 <input type="password"   style="display:none"/>
-							<input type="password" name="newconfirm_pwd" maxlength="20" size="20" class="text ignore" />
+							<input type="password" name="newconfirm_pwd" maxlength="20" size="20" class="text" />
 							<div class="form_prompt"></div>
 							</dd>
                         </dl>
@@ -68,7 +68,7 @@
                         	<dt>{$lang.require_field}&nbsp;{$lang.area_info}：</dt>
                             <dd>
                                 <div id="dlcountry" class="ui-dropdown smartdropdown alien mr15">
-                                    <input type="hidden" value="{$offline_store.country|default:0}" name="country" id="selcountry">
+                                    <input type="hidden" value="{$offline_store.country}" name="country" id="selcountry">
                                     <div class="txt">国家</div>
                                     <i class="down u-dropdown-icon"></i>
                                     <div class="options clearfix" style="max-height:300px;">
@@ -136,7 +136,7 @@
                             </dd>
                         </dl>
                         <dl>
-                        	<dt>{$lang.stores_opening_hours}：</dt>
+                        	<dt>{$lang.require_field}&nbsp;{$lang.stores_opening_hours}：</dt>
                             <dd>
                             	<input type="text" class="text" name="stores_opening_hours" maxlength="60" size = "30" value="{$offline_store.stores_opening_hours}" />
 								<div class="form_prompt"></div>
@@ -202,8 +202,8 @@
     </div>
 </div>
 {include file ='library/seller_footer.lbi'}
-{insert_scripts files="../js/utils.js"}
-<script type="text/javascript" src="../js/jquery.picTip.js"></script>
+{insert_scripts files="../js/utils.js,validator.js"}
+<script type="text/javascript" src="js/jquery.picTip.js"></script>
 <script type="text/javascript" src="js/region.js"></script>
 <script>
 <!--
@@ -229,103 +229,126 @@ $(function(){
 		}
 	});
 	
-	$('#offline_store_form').validate({
-		errorPlacement:function(error, element){
-			var error_div = element.parents('dl').find('div.form_prompt');
-			//element.parents('dl').find(".notic").hide();
-			error_div.html("").append(error);
-		},
-		ignore:".ignore",
-		rules:{
-			stores_user :{
-				required : true
+	jQuery.validator.addMethod("confirm_pwd", function(value, element) {      
+			return this.optional(element) || /^[\u0391-\uFFE5\w]+$/.test(value);       
+		}, "只能包括中文字、英文字母、数字和下划线");
+		
+	if(action ==  "insert"){
+		$('#offline_store_form').validate({
+			errorPlacement:function(error, element){
+				var error_div = element.parents('dl').find('div.form_prompt');
+				//element.parents('dl').find(".notic").hide();
+				error_div.append(error);
 			},
-			stores_pwd:{
-				required : true,
-				minlength:6
+			rules:{
+				stores_user :{
+					required : true
+				},
+				stores_pwd:{
+					required : true,
+					minlength:6
+				},
+				confirm_pwd:{
+					required : true,
+					equalTo:"#stores_pwd"
+				},
+				country:{
+					required : true
+				},
+				stores_name:{
+					required : true
+				},
+				stores_address:{
+					required : true
+				},
+				textfile:{
+					required : true
+				},
+				stores_tel : {
+						required : true
+				},
+				stores_email:{
+					required : true
+				}
 			},
-			confirm_pwd:{
-				required : true,
-				equalTo:"#stores_pwd"
+			messages:{
+				stores_user:{
+					 required : '<i class="icon icon-exclamation-sign"></i>'+stores_user_null
+				},
+				stores_pwd:{
+					 required : '<i class="icon icon-exclamation-sign"></i>'+stores_pwd_null,
+					 minlength : '<i class="icon icon-exclamation-sign"></i>密码长度不能小于六位'
+				},
+				confirm_pwd:{
+					 required : '<i class="icon icon-exclamation-sign"></i>'+confirm_pwd_null,
+					 equalTo:'<i class="icon icon-exclamation-sign"></i>两次输入的密码不一致'
+				},
+				stores_name:{
+					 required : '<i class="icon icon-exclamation-sign"></i>'+stores_name_null
+				},
+				country:{
+					 required : '<i class="icon icon-exclamation-sign"></i>请选择地区'
+				},
+				stores_address:{
+					 required : '<i class="icon icon-exclamation-sign"></i>'+stores_address_null
+				},
+				textfile:{
+					required : '<i class="icon icon-exclamation-sign"></i>请上传实景图片'
+				},
+				stores_tel:{
+					required : '<i class="icon icon-exclamation-sign"></i>手机必填'
+				},
+				stores_email:{
+					required : '<i class="icon icon-exclamation-sign"></i>电子邮箱不能为空'
+				}
+			}			
+		});
+	}
+	
+	if(action ==  "update"){
+		$('#offline_store_form').validate({
+			errorPlacement:function(error, element){
+				var error_div = element.parents('dl').find('div.form_prompt');
+				//element.parents('dl').find(".notic").hide();
+				error_div.append(error);
 			},
-			country:{
-				required : true
+			rules:{
+				stores_user :{
+					required : true
+				},
+				country:{
+					required : true
+				},
+				stores_name:{
+					required : true
+				},
+				stores_address:{
+					required : true
+				},
+				textfile:{
+					required : true
+				}
 			},
-			stores_name:{
-				required : true
-			},
-			stores_address:{
-				required : true
-			},
-			textfile:{
-				required : true
-			},
-			stores_tel : {
-				required : true,
-				isTel : true
-			},
-			email:{
-				required : true
-			},
-			country : {
-				min : 1
-			},
-			province : {
-				min : 1
-			},
-			city : {
-				min : 1
-			},
-			district : {
-				min : 1
-			}
-		},
-		messages:{
-			stores_user:{
-				 required : '<i class="icon icon-exclamation-sign"></i>'+stores_user_null
-			},
-			stores_pwd:{
-				 required : '<i class="icon icon-exclamation-sign"></i>'+stores_pwd_null,
-				 minlength : '<i class="icon icon-exclamation-sign"></i>'+pwd_not_six
-			},
-			confirm_pwd:{
-				 required : '<i class="icon icon-exclamation-sign"></i>'+confirm_pwd_null,
-				 equalTo:'<i class="icon icon-exclamation-sign"></i>'+confirm_pwd_equal
-			},
-			stores_name:{
-				 required : '<i class="icon icon-exclamation-sign"></i>'+stores_name_null
-			},
-			country:{
-				 required : '<i class="icon icon-exclamation-sign"></i>'+country_null
-			},
-			stores_address:{
-				 required : '<i class="icon icon-exclamation-sign"></i>'+stores_address_null
-			},
-			textfile:{
-				required : '<i class="icon icon-exclamation-sign"></i>'+stores_img_null
-			},
-			stores_tel:{
-				required : '<i class="icon icon-exclamation-sign"></i>'+stores_tel_null,
-				isTel : '<i class="icon icon-exclamation-sign"></i>'+stores_tel_error,
-			},
-			email:{
-				required : '<i class="icon icon-exclamation-sign"></i>'+stores_email_null,
-				email : '<i class="icon icon-exclamation-sign"></i>'+stores_email_error
-			},
-			country : {
-				min : '<i class="icon icon-exclamation-sign"></i>'+country_null
-			},
-			province : {
-				min : '<i class="icon icon-exclamation-sign"></i>'+province_null
-			},
-			city : {
-				min : '<i class="icon icon-exclamation-sign"></i>'+city_null
-			},
-			district : {
-				min : '<i class="icon icon-exclamation-sign"></i>'+district_null
-			}
-		}			
-	});
+			messages:{
+				stores_user:{
+					 required : '<i class="icon icon-exclamation-sign"></i>'+stores_user_null
+				},
+				stores_name:{
+					 required : '<i class="icon icon-exclamation-sign"></i>'+stores_name_null
+				},
+				country:{
+					 required : '<i class="icon icon-exclamation-sign"></i>请选择地区'
+				},
+				stores_address:{
+					 required : '<i class="icon icon-exclamation-sign"></i>'+stores_address_null
+				},
+				textfile:{
+					required : '<i class="icon icon-exclamation-sign"></i>请上传实景图片'
+				}
+			}			
+		});
+	}
+	
 });
 </script>
 {/literal}

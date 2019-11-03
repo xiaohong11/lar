@@ -3,7 +3,6 @@
 return [
 
     'name' => 'ECTouch',
-    'wxapp_on' => false, // 是否支持微信小程序 true 支持， false 不支持
 
     /*
     |--------------------------------------------------------------------------
@@ -16,7 +15,7 @@ return [
     |
     */
 
-    'key' => md5(__DIR__),
+    'key' => env('APP_KEY', 'SomeRandomString!!!'),
 
     'cipher' => 'AES-256-CBC',
 
@@ -31,7 +30,7 @@ return [
     |
     */
 
-    'locale' => 'zh-cn',
+    'locale' => env('APP_LOCALE', 'zh-cn'),
 
     /*
     |--------------------------------------------------------------------------
@@ -44,24 +43,21 @@ return [
     |
     */
 
-    'fallback_locale' => 'en-us',
+    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en-us'),
 
     // 商城URL
     'SHOP_URL' => 'http://shop.ectouch.cn/b2c/',
 
     // 微信小程序
-    'WX_MINI_APPID' => '',
-    'WX_MINI_SECRET' => '',
-    // 微信小程序支付 配置
-    'WX_MCH_ID' => '',
-    'WX_MCH_KEY' => '',
+    'WX_MINI_APPID' => 'wx33bcb1404bd452a8',
+    'WX_MINI_SECRET' => '3ae4f89244c5df99e74c58713c48e6af',
 
     // 注册协议地址
     'TERMS_URL' => 'http://localhost/article.php?cat_id=-1',
     'ABOUT_URL' => 'http://localhost/article.php?cat_id=-2',
 
     // Token授权加密key
-    'TOKEN_SECRET' => '', // 重要！！！
+    'TOKEN_SECRET' => '1161a348ddb044ae8e02f5337ae2a570',
     'TOKEN_ALG' => 'HS256',
     'TOKEN_TTL' => '43200',
     'TOKEN_REFRESH' => false,

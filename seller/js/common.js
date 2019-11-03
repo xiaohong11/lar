@@ -105,6 +105,16 @@ function outCheckBillResponse(result)
   catch (e) { }
 }
 
+/* *
+ * 检测配送地区缓存文件是否存在；
+ */
+function sellerShippingArea(){
+	Ajax.call('index.php?is_ajax=1&act=seller_shipping_area','', shippingAreaResponse, 'GET', 'JSON');
+}
+
+function shippingAreaResponse(result){
+}
+
 /**
  * 确认后跳转到指定的URL
  */
@@ -534,7 +544,7 @@ function set_cat_nav()
 }
 
 //设置属性表格
-function set_attribute_table(goodsId , type, city_id)
+function set_attribute_table(goodsId)
 {
 	var attr_id_arr = [];
 	var attr_value_arr = [];
@@ -553,11 +563,6 @@ function set_attribute_table(goodsId , type, city_id)
 		var dataVal = $(this).val();
 		dataVal = dataVal.replace(/\+/g, "%2B");
     	dataVal = dataVal.replace(/\&/g, "%26");
-		dataVal = dataVal.replace(/\#/g, "%23");
-		dataVal = dataVal.replace(/\//g, "%2F");
-		dataVal = dataVal.replace(/\@/g, "%40");
-		dataVal = dataVal.replace(/\$/g, "%24");
-		dataVal = dataVal.replace(/\*/g, "%2A");
 	
 		attr_value_arr.push(dataVal);
 	});
@@ -566,53 +571,19 @@ function set_attribute_table(goodsId , type, city_id)
 	var extension = "";
 	var goods_model = $("input[name=model_price]").val(); 
 	var warehouse_id = $("#attribute_model").find("input[type=radio][data-type=warehouse_id]:checked").val();
-	
-	if($("#attribute_city_region").length > 0){
-		if(type != 2){
-			var region_id = $("#attribute_model").find("input[type=radio][data-type=region_id]:checked").val();
-			var city_id = $("#attribute_city_region").find("input[type=radio][data-type=city_region_id]:checked").val();
-		}else{
-			var region_id = $("#attribute_region").find("input[type=radio][data-warehouse=" + warehouse_id + "]:first").val();
-		}
-	}else{
-		var region_id = $("#attribute_model").find("input[type=radio][data-type=region_id]:checked").val();
-	}
-	
-	if(type != 3){
-		var warehouse_obj = $("#attribute_region .value[data-wareid="+warehouse_id+"]");
-		warehouse_obj.find("input[type=radio]:first").prop("checked", true);
-	}
-	
+	var region_id = $("#attribute_model").find("input[type=radio][data-type=region_id]:checked").val();
 	extension += "&goods_model="+goods_model;
 	if(goods_model == 1){
 		extension += "&region_id="+warehouse_id;
 	}else if(goods_model == 2){
-		if($("#attribute_city_region").length > 0){
-			extension += "&region_id="+region_id + "&city_id="+city_id;
-		}else{
-			extension += "&region_id="+region_id;
-		}
+		extension += "&region_id="+region_id;
 	}
 	
 	var goods_type = $("input[name='goods_type']").val();
 	if(goods_type > 0){
 		extension += "&goods_type="+goods_type;
 	}
-	//获取筛选项
-	if(type == 1){
-		var search_attr = '';
-		$("*[ectype='attr_search_main']").find(".select").each(function(){
-			var search_val = $(this).find('input[type="hidden"]').val();
-			if(search_val){
-				if(search_attr){
-					search_attr = search_attr + "," + search_val
-				}else{
-					search_attr = search_val;
-				}
-			}
-		});
-		extension += "&search_attr=" + search_attr;
-	}
+	
 	$.jqueryAjax('goods.php', 'act=set_attribute_table&goods_id='+goodsId+'&attr_id='+attr_id_arr+'&attr_value='+attr_value_arr+extension, function(data){
 		$("#attribute_table").html(data.content);
 		

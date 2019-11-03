@@ -9,7 +9,6 @@
 var auctionDate = 0;
 var _GMTEndTime = 0;
 var showTime = "leftTime";
-var _month = 'month';
 var _day = 'day';
 var _hour = 'hour';
 var _minute = 'minute';
@@ -65,9 +64,8 @@ function showtime()
 
   if (dateLeft > 0)
   {
-
-    Temp = '' + _month +dateLeft + _day + hourZero + hourLeft + _hour + minuteZero + minuteLeft + _minute + secondZero + secondLeft + _second;
-	  //Temp = '' + _day + hourZero + hourLeft + _hour + minuteZero + minuteLeft + _minute + secondZero + secondLeft + _second;
+    //Temp = dateLeft + _day + hourZero + hourLeft + _hour + minuteZero + minuteLeft + _minute + secondZero + secondLeft + _second;
+	  Temp = '' + _day + hourZero + hourLeft + _hour + minuteZero + minuteLeft + _minute + secondZero + secondLeft + _second;
   }
   else
   {
@@ -89,8 +87,7 @@ function showtime()
         }
         else
         {
-          Temp = dateLeft + _day + hourZero + hourLeft + _hour + minuteZero + minuteLeft + _minute + secondZero + secondLeft + _second;
-         //Temp = '';
+          Temp = '';
         }
       }
     }
@@ -136,7 +133,6 @@ function onload_leftTime(now_time)
   {
     _GMTEndTime = gmt_end_time;
     // 剩余时间
-    _month = month;
     _day = day;
     _hour = hour;
     _minute = minute;

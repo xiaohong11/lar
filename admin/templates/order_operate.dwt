@@ -25,7 +25,7 @@
 									<div class="label">{$lang.require_field}&nbsp;{$lang.label_cancel_note}</div>
 									<div class="label_value">
 										<textarea name="cancel_note" cols="60" rows="3" id="cancel_note" class="textarea fl">{$cancel_note}</textarea>
-                                        <label class="blue_label fl" style="margin-top:92px; line-height:normal;">{$lang.notice_cancel_note}</label>
+                                        <label class="blue_label fl" style=" margin-top:92px; line-height:normal;">{$lang.notice_cancel_note}</label>
 									</div>
 								</div>
 								{/if}
@@ -43,36 +43,26 @@
                                     <div class="item">
                                         <div class="label">{$lang.refund_money}：</div>
                                         <div class="label_value">
-                                            <!--{if $refound_pay_points > 0}-->
-                                            <span class="fl">{$lang.pay_points}：</span>
-                                            <input name="refound_pay_points" id="refound_pay_points" type="text" class="text text_2" size="10" value="{$refound_pay_points}" autocomplete="off" onchange="refound_points(this.value)" />
-                                            <!--{/if}-->
-                                            <span class="fl">{$lang.money}：</span>
-                                            <input name="refound_amount" id="refoundAmount" type="text" class="text text_2" size="10" value="{$refound_amount}" autocomplete="off" onchange="get_refound_amount(this.value, 1)" />
-                                            <span class="fl">{$lang.shipping_money}：</span>
-                                            <input type="text" name="shipping" value="{$shipping_fee|default:0}" id="shippingFee" size="6" class="text text_2" onchange="get_refound_amount(this.value, 2)" autocomplete="off" />
-                                            <div class="checkbox-items fl">
-                                                <div class="checkbox-item fl mr10">
-                                                    <input type="radio" name="is_shipping" class="ui-radio" id="is_shipping_0" autocomplete="off" value="0" {if $operation neq 'return'}checked{/if} />
-                                                    <label for="is_shipping_0" class="ui-radio-label">{$lang.no_shipping_money}</label>
-                                                </div>
-                                                <div class="checkbox-item fl">
-                                                    <input type="radio" name="is_shipping" class="ui-radio" value="1" autocomplete="off" id="is_shipping_1" {if $operation eq 'return'}checked{/if} />
-                                                    <label for="is_shipping_1" class="ui-radio-label">{$lang.is_shipping_money}</label>
-                                                </div>
+                                        <!--{if $refound_pay_points > 0}-->
+                                        <span class="fl">{$lang.pay_points}：</span>
+                                        <input name="refound_pay_points" id="refound_pay_points" type="text" size="10" value="{$refound_pay_points}" autocomplete="off" onchange="refound_points(this.value)" />
+                                        <!--{/if}-->
+                                        <span class="fl">{$lang.money}：</span>
+                                        <input name="refound_amount" id="refoundAmount" type="text" class="text text_2" size="10" value="{$refound_amount}" autocomplete="off" onchange="get_refound_amount(this.value, 1)" />
+                                        <span class="fl">{$lang.shipping_money}：</span>
+                                        <input type="text" name="shipping" value="{$shipping_fee|default:0}" id="shippingFee" size="6" class="text text_2" onchange="get_refound_amount(this.value, 2)" autocomplete="off" />
+                                        <div class="checkbox-items fl">
+                                            <div class="checkbox-item fl mr10">
+                                                <input type="radio" name="is_shipping" class="ui-radio" id="is_shipping_0" autocomplete="off" value="0" {if $operation neq 'return'}checked{/if} />
+                                                <label for="is_shipping_0" class="ui-radio-label">{$lang.no_shipping_money}</label>
+                                            </div>
+                                            <div class="checkbox-item fl">
+                                                <input type="radio" name="is_shipping" class="ui-radio" value="1" autocomplete="off" id="is_shipping_1" {if $operation eq 'return'}checked{/if} />
+                                                <label for="is_shipping_1" class="ui-radio-label">{$lang.is_shipping_money}</label>
                                             </div>
                                         </div>
-                                    </div>
-                                    {if $value_card && $is_whole neq 1}
-                                    <div class="item">
-                                        <div class="label">{$lang.18_value_card}：</div>
-                                        <div class="label_value">
-                                            <span class="fl">{$lang.money}：</span>
-                                            <input name="refound_vcard" id="refound_vcard" type="text" class="text text_2" size="10" value="{$value_card.use_val}" autocomplete="off" onchange="get_refound_value_card(this.value, {$value_card.vc_id|default:0})" />
-                                            <input type="hidden" name="vc_id" value="{$value_card.vc_id|default:0}" />
                                         </div>
                                     </div>
-                                    {/if}
                                     {/if}
                                 {/if}
                                 {if $show_refund1}
@@ -116,16 +106,16 @@
                                         	<div class="checkbox-items">
                                                 {if !$anonymous}
                                                 <div class="chekbox-item">
-                                                    <input type="radio" name="refund" value="1" id="refund_radio_1" class="ui-radio" checked autocomplete="off" />
+                                                    <input type="radio" name="refund" value="1" id="refund_radio_1" class="ui-radio" checked />
                                                     <label for="refund_radio_1" class="ui-radio-label">{$lang.return_user_money}</label>
                                                 </div>
                                                 {/if}
                                                 <div class="chekbox-item">
-                                                    <input type="radio" name="refund" value="2" id="refund_radio_2" class="ui-radio" {if $anonymous}checked="checked"{/if} autocomplete="off" />
+                                                    <input type="radio" name="refund" value="2" id="refund_radio_2" class="ui-radio" />
                                                     <label for="refund_radio_2" class="ui-radio-label">{$lang.create_user_account}</label>
                                                 </div>
                                                 <div class="chekbox-item">
-                                                    <input type="radio" name="refund" value="3" id="refund_radio_3" class="ui-radio" autocomplete="off" />
+                                                    <input type="radio" name="refund" value="3" id="refund_radio_3" class="ui-radio" />
                                                     <label for="refund_radio_3" class="ui-radio-label">{$lang.not_handle}</label>
                                                 </div>
 											</div>
@@ -153,9 +143,9 @@
 									<div class="label_value info_btn">
 										<input type="submit" name="submit" value="{$lang.button_submit}" class="button" />
 										<input type="button" name="back" value="{$lang.back}" class="button" onclick="history.back()" />
-										<input type="hidden" id="orderId" name="order_id" value="{$order_id|default:0}" />
-										<input type="hidden" id="recId" name="rec_id" value="{$rec_id|default:0}"/>
-										<input type="hidden" id="retId" name="ret_id" value="{$ret_id|default:0}"/>
+										<input type="hidden" id="orderId" name="order_id" value="{$order_id}" />
+										<input type="hidden" id="recId" name="rec_id" value="{$rec_id}"/>
+										<input type="hidden" id="retId" name="ret_id" value="{$ret_id}"/>
 										<input type="hidden" name="operation" value="{$operation}" />
 										<input type="hidden" name="act" value="{if $batch}batch_operate_post{else}operate_post{/if}" />
 									</div>
@@ -169,7 +159,7 @@
 		</div>
 	</div>
  {include file ='library/pagefooter.lbi'}
-<script type="text/javascript">
+<script language="JavaScript">
   var require_note = '{$require_note}';
   var show_refund  = '{$show_refund}';
   var show_cancel = '{$show_cancel_note}';
@@ -224,18 +214,6 @@
 		  document.getElementById('shippingFee').value = result.content.shipping_fee;
 	  }
 	  
-  }
-  
-  function get_refound_value_card(refound_vcard, vc_id){
-	  
-	  var order_id = document.getElementById('orderId').value;
-	  var retId = document.getElementById('retId').value;
-	  
-	  Ajax.call('order.php?is_ajax=1&act=edit_refound_value_card', "vc_id="+ vc_id + "&order_id=" + order_id + "&refound_vcard=" + refound_vcard + "&ret_id=" + retId, refoundValueCardResponse, "GET", "JSON");
-  }
-  
-  function refoundValueCardResponse(result){
-	  $("#refound_vcard").val(result.content.refound_vcard);
   }
   /*判断返回积分的值   BY kong*/
   function refound_points(refound_pay_points){

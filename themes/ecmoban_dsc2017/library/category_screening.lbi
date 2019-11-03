@@ -56,7 +56,7 @@
                 <!--{/foreach}-->
                 <!--{/if}-->
             </dd>
-            <dd class="give_up_all"><a href="{if $script_name eq 'search'}search.php?{if $cou_id}&cou_id={$cou_id}{/if}&keywords={$pager.search.keywords}{else}category.php?id={$category}{/if}" class="ftx-05">{$lang.All_undo}</a></dd>
+            <dd class="give_up_all"><a href="category.php?id={$category}" class="ftx-05">{$lang.All_undo}</a></dd>
         </dl>
     </div>
 	<div class="goods_list">

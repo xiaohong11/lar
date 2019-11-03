@@ -14,18 +14,18 @@
 						<div class="fl">
 							<div class="ui-dropdown smartdropdown alien">
 								<input type="hidden" value="{$fields.textAreaForm.country}" name="{$fields.textFields}[]">
-								<div class="txt">{$lang.country}</div>
+								<div class="txt">国家</div>
 								<i class="down u-dropdown-icon"></i>
 								<div class="options clearfix" style="max-height:300px;">
 
                                 <!-- {foreach from=$country_list item=country} -->
-									<span class="liv" data-text="{$lang.china}"  data-type="1" data-value="{$country.region_id}">{$lang.china}</span>
+									<span class="liv" data-text="中国"  data-type="1" data-value="{$country.region_id}">中国</span>
                                 <!--{/foreach}-->
 								</div>
 							</div>
 							<div class="ui-dropdown smartdropdown alien">
 								<input type="hidden" value="{$fields.textAreaForm.province}" name="{$fields.textFields}[]" id="selProvinces">
-								<div class="txt">{$lang.province_alt}</div>
+								<div class="txt">省/直辖市</div>
 								<i class="down u-dropdown-icon"></i>
 								<div class="options clearfix" style="max-height:300px;">
 									<!--{foreach from=$province_list item=list}-->
@@ -35,21 +35,21 @@
 							</div>
 							<div class="ui-dropdown smartdropdown alien">
 								<input type="hidden" value="{$fields.textAreaForm.city}" name="{$fields.textFields}[]" id="selCities">
-								<div class="txt">{$lang.city}</div>
+								<div class="txt">市</div>
 								<i class="down u-dropdown-icon"></i>
 								<div class="options clearfix" style="max-height:300px;">
                                 <!-- {foreach from=$fields.city_list item=city_list} -->
-									<span class="liv hide" data-text="{$lang.city}" data-type="3" data-value="{$city_list.region_id}">{$lang.city}</span>
+									<span class="liv hide" data-text="市" data-type="3" data-value="{$city_list.region_id}">市</span>
                                 <!--{/foreach}-->
 								</div>
 							</div>
 							<div class="ui-dropdown smartdropdown alien">
 								<input type="hidden" value="{$fields.textAreaForm.district}" name="{$fields.textFields}[]" id="selDistricts">
-								<div class="txt">{$lang.area_alt}</div>
+								<div class="txt">区/县</div>
 								<i class="down u-dropdown-icon"></i>
 								<div class="options clearfix" style="max-height:300px;">
                                 	<!-- {foreach from=$fields.district_list item=district_list} -->
-									<span class="liv hide" data-text="{$lang.area_alt}" data-type="4" data-value="{$district_list.region_id}">{$lang.area_alt}</span>
+									<span class="liv hide" data-text="区/县" data-type="4" data-value="{$district_list.region_id}">区/县</span>
                                     <!--{/foreach}-->
 								</div>
 							</div>
@@ -62,7 +62,7 @@
 						<input name="text_{$fields.textFields}" type="hidden" value="{$fields.titles_centents}" />
 						{if $fields.titles_centents neq ''}
                         <span class="show">
-							<a href="../{$fields.titles_centents}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="{$fields.titles_centents}" ectype="tooltip" title="tooltip"></i></a>
+							<a href="../{$fields.titles_centents}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('{$fields.titles_centents}')" onmouseout="toolTip()"></i></a>
 						</span>
                         {/if}
 						<input type="text" name="textfile" class="type-file-text" id="textfield" readonly />
@@ -126,36 +126,38 @@
 		</div>
 	</div>
 {/foreach}
-	<!--以上是自定义基本信息，以下是固定信息-->
+<!--以上是自定义基本信息，以下是固定信息-->
 	<div class="item">
-		<div class="label">{$lang.require_field}&nbsp;{$lang.expect_shop_type}：</div>
+		<div class="label">{$lang.require_field}&nbsp;期望店铺类型：</div>
 		<div class="label_value">
 			<div id="shoprz_type" class="imitate_select select_w320">
 				<div class="cite">{$lang.select_please}</div>
 				<ul>
-					<li><a href='javascript:;' data-value='1' class='ftx-01'>{$lang.flagship_store}</a></li>
-					<li><a href='javascript:;' data-value='2' class='ftx-01'>{$lang.exclusive_shop}</a></li>
-					<li><a href='javascript:;' data-value='3' class='ftx-01'>{$lang.franchised_store}</a></li>
+					<li><a href='javascript:;' data-value='1' class='ftx-01'>旗舰店</a></li>
+					<li><a href='javascript:;' data-value='2' class='ftx-01'>专卖店</a></li>
+					<li><a href='javascript:;' data-value='3' class='ftx-01'>专营店</a></li>
 				</ul>
 				<input name="ec_shoprz_type" type="hidden" value="{if $title.parentType.shoprz_type}{$title.parentType.shoprz_type}{else}0{/if}" id="shoprz_type_val">
-                                    
 			</div>
-			<div id="subShoprz_type" style="display:{if $title.parentType.shoprz_type eq 1}block{else}none{/if}" class="imitate_select select_w320">
+			<div id="subShoprz_type" style="display:none;" class="imitate_select select_w320">
 				<div class="cite">{$lang.select_please}</div>
 				<ul>
-					<li><a href='javascript:;' data-value='1' class='ftx-01'>{$lang.subShoprz_type.0}</a></li>
-					<li><a href='javascript:;' data-value='2' class='ftx-01'>{$lang.subShoprz_type.1}</a></li>
-					<li><a href='javascript:;' data-value='3' class='ftx-01'>{$lang.subShoprz_type.2}</a></li>
+					<li><a href='javascript:;' data-value='1' class='ftx-01'>厂商直营旗舰店</a></li>
+					<li><a href='javascript:;' data-value='2' class='ftx-01'>厂商授权旗舰店</a></li>
+					<li><a href='javascript:;' data-value='3' class='ftx-01'>卖场型旗舰店</a></li>
 				</ul>
 				<input name="ec_subShoprz_type" type="hidden" value="{if $title.parentType.subShoprz_type}{$title.parentType.subShoprz_type}{else}0{/if}" id="subShoprz_type_val">
 			</div>	
 			
 			<div id="shopSellerType1" style="display:{if $title.parentType.shoprz_type eq 1}block{else}none{/if}">
-				<div class="org" id="subShoprz_type1" style="display:{if $title.parentType.subShoprz_type eq 1}block{else}none{/if}; clear:both; padding-top:7px;">{$lang.subshop_brand_notic}</div>
+				<div class="org" id="subShoprz_type1" style="display:{if $title.parentType.subShoprz_type eq 1}block{else}none{/if}; clear:both; padding-top:7px;">
+					旗舰店默认仅可上传一个品牌，如经营多品牌时，请在申请品牌时提供多品牌同属唯一实际控制人/公司的证明材料。
+				</div>
+			
 				<div style="display:{if $title.parentType.subShoprz_type eq 2}block{else}none{/if};" class="fl bf100" id="subShoprz_type2">
-					<div class="org">{$lang.subShoprz_org_notic.0}<a class="blue" href="#" target="_blank" style="display:none">{$lang.subShoprz_org_notic.1}</a></div>
+					<div class="org">若由品牌权利人授权开通旗舰店，需提供相关授权书<a class="blue" href="#" target="_blank" style="display:none">下载授权书模板</a></div>
 					<div class="shop_nr">
-						<label class="fl">{$lang.grant_validity}：</label>
+						<label class="fl">授权有效期：</label>
 						<div class="text_time" id="text_time5">
 							<input type="text" name="ec_shop_expireDateStart" value="{$title.parentType.shop_expireDateStart}" id="shop_expireDateStart" class="text mr0" readonly />
 						</div>
@@ -174,7 +176,7 @@
 							<input type="file" class="type-file-file" name="ec_authorizeFile" size="30" hidefocus="true" value="" />
 							{if $title.parentType.authorizeFile}
                             <span class="show">
-								<a href="../{$title.parentType.authorizeFile}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="../{$title.parentType.authorizeFile}" ectype="tooltip" title="tooltip"></i></a>
+								<a href="{$title.parentType.authorizeFile}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$title.parentType.authorizeFile}>')" onmouseout="toolTip()"></i></a>
 							</span>
                             {/if}
 							<input type="text" name="textfile" class="type-file-text" id="textfield" readonly />
@@ -183,14 +185,14 @@
 				</div>
 			
 				<div style="display:{if $title.parentType.subShoprz_type eq 3}block{else}none{/if}; clear:both; line-height:30px;" id="subShoprz_type3">
-					{$lang.subShoprz_type_notic.0}：
+					申请卖场类旗舰店，提供服务类商标注册证：
 					<div id="container1" style="position: relative;">
 						<div class="type-file-box">
 							<input type="button" name="button" id="button" class="type-file-button" value="" />
 							<input type="file" class="type-file-file" name="ec_shop_hypermarketFile" size="30" hidefocus="true" value="" />
 							{if $title.parentType.shop_hypermarketFile}
                             <span class="show">
-								<a href="../{$title.parentType.shop_hypermarketFile}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="../{$title.parentType.shop_hypermarketFile}" ectype="tooltip" title="tooltip"></i></a>
+								<a href="{$title.parentType.shop_hypermarketFile}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$title.parentType.shop_hypermarketFile}>')" onmouseout="toolTip()"></i></a>
 							</span>
                             {/if}
 							<input type="text" name="textfile" class="type-file-text" id="textfield" readonly />
@@ -200,12 +202,11 @@
 			</div>
 			
 			<div style="display:{if $title.parentType.shoprz_type eq 2}block{else}none{/if}; clear:both; padding-top:7px;" id="shopSellerType2" class="orange">
-				 {$lang.subShoprz_type_notic.1}
+				 专卖店默认仅可上传一个品牌，如经营多品牌时，请在申请品牌时提供多品牌同属唯一实际控制人/公司的证明材料。
 			</div>
 			<div style="display:{if $title.parentType.shoprz_type eq 3}block{else}none{/if}; clear:both; padding-top:7px;" id="shopSellerType3" class="orange">
-				{$lang.subShoprz_type_notic.2}
+				专营店可经营同一招商一级类目下的两个及以上品牌，同一公司在同一一级类目下仅可申请一家相同模式专营店。
 			</div>
-            <div class="form_prompt"></div>
 		</div>
 	</div>
 </div>
@@ -278,4 +279,5 @@
 	}
 	xvDate(opts1);
 	xvDate(opts2);
+
 </script>

@@ -13,7 +13,7 @@
 				{include file ='library/seller_menu_tab.lbi.lbi'}
                 <div class="search-info">
                 	<div class="search-form">
-                	<form name="searchForm" action="javascript:searchlog()" class="fl mr20">
+                		<form name="theForm" method="POST" action="admin_logs.php" class="fl mr20">
                         	<div  class="imitate_select select_w145">
                                 <div class="cite">{$lang.select_ip}</div>
                                 <ul>
@@ -24,12 +24,9 @@
                                 </ul>
                                 <input name="ip" type="hidden" />
                             </div>
-                            <div class="search-key">
-                                <input type="text" class="text text_2" name="keywords" value="" placeholder="{$lang.keyword}">
-                                <input type="submit" class="submit" value="{$lang.button_search}">
-                            </div>
+                            <input type="submit" value="{$lang.comfrom}" class="sc-btn btn30 sc-blueBg-btn" />
                         </form>
-                        <form name="Form2" action="admin_logs.php?act=batch_drop" method="POST" class="fl" onsubmit="return batch_drop();">
+                        <form name="Form2" action="admin_logs.php?act=batch_drop" method="POST" class="fl">
                             <div  class="imitate_select select_w145">
                                 <div class="cite">{$lang.select_date}</div>
                                 <ul>
@@ -105,29 +102,6 @@
     startCheckOrder();
   }
   {/literal}
-/**
- * 搜索用户名称
- */
-function searchlog()
-{
-	var frm = $("form[name='searchForm']");
-	
-	listTable.filter = [];
-	listTable.filter['keywords'] = Utils.trim(frm.find("input[name='keywords']").val());
-	listTable.filter['ip'] = Utils.trim(frm.find("input[name='ip']").val());
-	listTable.filter['page'] = 1;
-    listTable.loadList();
-}
-
-function batch_drop(){
-	var frm = $("form[name='Form2']");
-	var val = frm.find("input[name='log_date']").val();
-	if(val == ""){
-		alert("请选择清除的日期");
-		return false;
-	}
-	return true;
-}
 </script>
 </body>
 </html>

@@ -16,16 +16,16 @@
 
 <body class="show">
 <!-- #BeginLibraryItem "/library/page_header_presale.lbi" --><!-- #EndLibraryItem -->
-{* DSC 提醒您：动态载入presale_banner.lbi，显示首页分类小广告 *}{insert name='get_adv_child' ad_arr=$presale_banner}
+{* ECSHOP 提醒您：动态载入presale_banner.lbi，显示首页分类小广告 *}{insert name='get_adv_child' ad_arr=$presale_banner}
 <div id="content">
     <div class="ecsc-sign w1200 w">
         <h1 class="preSale_title">招牌推荐</h1>
         <div class="sign-warpper">
-        {* DSC 提醒您：动态载入presale_banner_small_left.lbi，显示首页分类小广告 *}{insert name='get_adv_child' ad_arr=$presale_banner_small_left}
+        {* ECSHOP 提醒您：动态载入presale_banner_small_left.lbi，显示首页分类小广告 *}{insert name='get_adv_child' ad_arr=$presale_banner_small_left}
 
-        {* DSC 提醒您：动态载入presale_banner_small.lbi，显示首页分类小广告 *}{insert name='get_adv_child' ad_arr=$presale_banner_small}
+        {* ECSHOP 提醒您：动态载入presale_banner_small.lbi，显示首页分类小广告 *}{insert name='get_adv_child' ad_arr=$presale_banner_small}
         
-        {* DSC 提醒您：动态载入presale_banner_small_right.lbi，显示首页分类小广告 *}{insert name='get_adv_child' ad_arr=$presale_banner_small_right}
+        {* ECSHOP 提醒您：动态载入presale_banner_small_right.lbi，显示首页分类小广告 *}{insert name='get_adv_child' ad_arr=$presale_banner_small_right}
         </div>
     </div>
     <div class="special-list w1200 pb40 w">
@@ -43,7 +43,7 @@
                                 <span><em>￥</em>{$goods.shop_price}</span>
                                 <del><em>￥</em>{$goods.market_price}</del>
                             </div>
-                            <div class="p-name"><a href="{$goods.url}" title="{$goods.goods_name|escape:html}" target="_blank">{$goods.goods_name}</a></div>
+                            <div class="p-name"><a href="{$goods.url}" target="_blank">{$goods.goods_name}</a></div>
                             <div class="p-info">
                                 <div class="p-left">
                                     <!-- {if $goods.no_start} -->

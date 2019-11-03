@@ -6,6 +6,71 @@
         <a href="search.php?keywords={$pager.search.keywords}&display={$pager.display}&price_min={$pager.search.price_min}&price_max={$pager.search.price_max}&page={$pager.page}&sort=comments_number&is_ship={$pager.search.is_ship}&order=<!-- {if $pager.search.sort == 'comments_number' && $pager.search.order == 'ASC'} -->DESC<!-- {else} -->ASC<!-- {/if} -->{if $cou_id}&cou_id={$cou_id}{/if}#goods_list" class="<!-- {if $pager.search.sort == 'comments_number'}-->curr<!-- {/if} -->">{$lang.Comment_number}<i class="iconfont <!-- {if $pager.search.sort == 'comments_number' && $pager.search.order == 'DESC'} -->icon-arrow-down<!-- {else} -->icon-arrow-up<!-- {/if} -->"></i></a>
         <a href="search.php?keywords={$pager.search.keywords}&display={$pager.display}&price_min={$pager.search.price_min}&price_max={$pager.search.price_max}&page={$pager.page}&sort=shop_price&is_ship={$pager.search.is_ship}&order=<!-- {if $pager.search.sort == 'shop_price' && $pager.search.order == 'ASC'} -->DESC<!-- {else} -->ASC<!-- {/if} -->{if $cou_id}&cou_id={$cou_id}{/if}" class="<!-- {if $pager.search.sort == 'shop_price'}-->curr<!-- {/if} -->">{$lang.price}<i class="iconfont <!-- {if $pager.search.sort == 'shop_price' && $pager.search.order == 'DESC'} -->icon-arrow-down<!-- {else} -->icon-arrow-up<!-- {/if} -->"></i></a>
     </div>
+    {if $open_area_goods}
+    <div class="f-store dorpdown">
+        <div class="sc-icon">
+            <span class="fs-cell">{$lang.Receiving_land}：</span>
+            <div class="sc-choie"><span class="sc-address">{$province_row.region_name}&nbsp;{$city_row.region_name}&nbsp;{$district_row.region_name}</span><i class="icon"></i></div>
+        </div>
+        <div class="dorpdown-layer" id="area_list">
+            <div class="dd-spacer"></div>
+            <div id="stock_list" class="stock_list">
+                <div class="mt">
+                    <ul class="tab">
+                        <li class="curr" onclick="region.selectArea(this, 1);" value="{$province_row.region_id}" id="province_li">{$province_row.region_name}<i class="sc-icon-right"></i></li>
+                        <li class="select_city" id="city_li" onclick="region.selectArea(this, 2);" value="{$city_row.region_id}">{$city_row.region_name}<i class="sc-icon-right"></i></li>
+                        <li class="select_district" id="district_type" onclick="region.selectArea(this, 3);" value="{$city_district.region_id}">{$district_row.region_name}<i class="sc-icon-right"></i></li>
+                    </ul>
+                    <div class="stock-line"></div>
+                </div>
+                <div class="mc" id="house_list">
+                    <ul class="area-list" id="province_list">
+                    <!-- 省、直辖市 start --> 
+                    {foreach from=$province_list item=province name=noprovince}
+                        <li>
+                            <a v="{$province.region_id}" title="{$province.region_name}" onclick="region.getRegion({$province.region_id}, 2, city_list, this,{$user_id});" href="javascript:void(0);">{$province.region_name}</a>
+                        </li>
+                    {/foreach}
+                    <!-- 省、直辖市 end -->
+                    </ul>
+                </div>
+                <div class="mc hide" id="city_list_id">
+                    <ul class="area-list" id="city_list">
+                    <!-- 市区 start -->                   	                             
+                        {foreach from=$city_list item=city name=nocity}                                     
+                            <li>
+                                <a v="{$city.region_id}" title="{$city.region_name}" onclick="region.getRegion({$city.region_id}, 3, district_list, '{$city.region_name}',{$user_id});" href="javascript:void(0);">{$city.region_name}</a>  
+                            </li>
+                        {/foreach}
+                    <!-- 市区 end -->
+                    </ul>
+                </div>
+                <div class="mc hide" id="district_list_id">
+                    <ul class="area-list"  id="district_list">
+                     <!-- 县 start -->    
+                        {foreach from=$district_list item=district name=nodistrict}
+                            <li>                     
+                                <a v="{$county.region_id}" title="{$district.region_name}" onclick="region.changedDis({$district.region_id},{$user_id});" href="javascript:void(0);" id="district_{$district.region_id}">{$district.region_name}</a>  
+                            </li>    
+                        {/foreach}
+                    <!-- 县 start -->
+                    </ul>
+                </div>
+                <p class="mod_storage_state">{$lang.Distribution_limit}</p>
+                <div onclick="$('.f-store').removeClass('hover')" class="close"></div>
+                 <input type="hidden" value="{$province_row.region_id}" id="province_id" name="province_region_id">
+                 <input type="hidden" value="{$city_row.region_id}" id="city_id" name="city_region_id">
+                 <input type="hidden" value="{if $district_row.region_id}{$district_row.region_id}{else}0{/if}" id="district_id" name="district_region_id">         
+                 <input type="hidden" value="{$region_id}" id="region_id" name="region_id">
+                 <input type="hidden" value="{$goods_id}" id="good_id" name="good_id">
+                 <input type="hidden" value="{$user_id}" id="user_id" name="user_id">
+                 <input type="hidden" value="{$area_id}" id="area_id" name="area_id">
+                 <input type="hidden" value="{$goods.user_id}" id="merchantId" name="merchantId">
+            </div>
+        </div>
+    </div>
+    {/if}
+    
     <div class="filter-range">
         <div class="fprice">
             <form method="GET" class="sort" name="listform" action="">
@@ -31,20 +96,20 @@
                 <div class="checkbox_item <!-- {if $pager.search.is_ship == 'is_shipping'} -->checkbox-checked<!-- {/if} -->">
                     <input type="checkbox" name="fk-type" class="ui-checkbox" value="" id="store-checkbox-011" <!-- {if $pager.search.is_ship == 'is_shipping'} -->checked="checked"<!-- {/if} -->>
                     <label class="ui-label" for="store-checkbox-011">{$lang.Free_shipping}</label>
-                    <i id="input-i1" rev="search.php?keywords={$pager.search.keywords}{if $cou_id}&cou_id={$cou_id}{/if}&display={$pager.display}&price_min={$price_min}&price_max={$price_max}&page={$pager.page}&sort={$pager.search.sort}&is_ship=is_shipping<!-- {if $pager.search.self_support == 1} -->&is_self=1<!-- {/if} --><!-- {if $pager.search.have == 1} -->&have=1<!-- {/if} -->"></i>
-                    <i id="input-i2" rev="search.php?keywords={$pager.search.keywords}{if $cou_id}&cou_id={$cou_id}{/if}&display={$pager.display}&price_min={$price_min}&price_max={$price_max}&page={$pager.page}&sort={$pager.search.sort}&order={$pager.search.order}<!-- {if $pager.search.self_support == 1} -->&is_self=1<!-- {/if} --><!-- {if $pager.search.have == 1} -->&have=1<!-- {/if} -->"></i>
+                    <i id="input-i1" rev="search.php?{if $cou_id}&cou_id={$cou_id}{/if}&keywords={$pager.search.keywords}&display={$pager.display}&price_min={$price_min}&price_max={$price_max}&page={$pager.page}&sort={$pager.search.sort}&is_ship=is_shipping<!-- {if $pager.search.self_support == 1} -->&is_self=1<!-- {/if} --><!-- {if $pager.search.have == 1} -->&have=1<!-- {/if} -->"></i>
+                    <i id="input-i2" rev="search.php?{if $cou_id}&cou_id={$cou_id}{/if}&keywords={$pager.search.keywords}&display={$pager.display}&price_min={$price_min}&price_max={$price_max}&page={$pager.page}&sort={$pager.search.sort}&order={$pager.search.order}<!-- {if $pager.search.self_support == 1} -->&is_self=1<!-- {/if} --><!-- {if $pager.search.have == 1} -->&have=1<!-- {/if} -->"></i>
                 </div>
                 <div class="checkbox_item <!-- {if $pager.search.self_support == 1} -->checkbox-checked<!-- {/if} -->">
                     <input type="checkbox" name="fk-type" class="ui-checkbox" value="" id="store-checkbox-012" <!-- {if $pager.search.self_support == 1} -->checked="checked"<!-- {/if} -->>
                     <label class="ui-label" for="store-checkbox-012">{$lang.Self_goods}</label>
-                    <i id="input-i1" rev="search.php?keywords={$pager.search.keywords}{if $cou_id}&cou_id={$cou_id}{/if}&display={$pager.display}&price_min={$price_min}&price_max={$price_max}&page={$pager.page}&sort={$pager.search.sort}&is_self=1<!-- {if $pager.search.is_ship == 'is_shipping'} -->&is_ship=is_shipping<!-- {/if} --><!-- {if $pager.search.have == 1} -->&have=1<!-- {/if} -->"></i>
-                    <i id="input-i2" rev="search.php?keywords={$pager.search.keywords}{if $cou_id}&cou_id={$cou_id}{/if}&display={$pager.display}&price_min={$price_min}&price_max={$price_max}&page={$pager.page}&sort={$pager.search.sort}&order={$pager.search.order}<!-- {if $pager.search.is_ship == 'is_shipping'} -->&is_ship=is_shipping<!-- {/if} --><!-- {if $pager.search.have == 1} -->&have=1<!-- {/if} -->"></i>
+                    <i id="input-i1" rev="search.php?{if $cou_id}&cou_id={$cou_id}{/if}&keywords={$pager.search.keywords}&display={$pager.display}&price_min={$price_min}&price_max={$price_max}&page={$pager.page}&sort={$pager.search.sort}&is_self=1<!-- {if $pager.search.is_ship == 'is_shipping'} -->&is_ship=is_shipping<!-- {/if} --><!-- {if $pager.search.have == 1} -->&have=1<!-- {/if} -->"></i>
+                    <i id="input-i2" rev="search.php?{if $cou_id}&cou_id={$cou_id}{/if}&keywords={$pager.search.keywords}&display={$pager.display}&price_min={$price_min}&price_max={$price_max}&page={$pager.page}&sort={$pager.search.sort}&order={$pager.search.order}<!-- {if $pager.search.is_ship == 'is_shipping'} -->&is_ship=is_shipping<!-- {/if} --><!-- {if $pager.search.have == 1} -->&have=1<!-- {/if} -->"></i>
                 </div>
                 <div class="checkbox_item <!-- {if $pager.search.have == 1} -->checkbox-checked<!-- {/if} -->">
                     <input type="checkbox" name="fk-type" class="ui-checkbox" value="" id="store-checkbox-012" <!-- {if $pager.search.have == 1} -->checked="checked"<!-- {/if} -->>
                     <label class="ui-label" for="store-checkbox-013">{$lang.Only_have_inventory}</label>
-                    <i id="input-i1" rev="search.php?keywords={$pager.search.keywords}{if $cou_id}&cou_id={$cou_id}{/if}&display={$pager.display}&price_min={$price_min}&price_max={$price_max}&page={$pager.page}&sort={$pager.search.sort}&have=1<!-- {if $pager.search.is_ship == 'is_shipping'} -->&is_ship=is_shipping<!-- {/if} --><!-- {if $pager.search.self_support == 1} -->&is_self=1<!-- {/if} -->"></i>
-                    <i id="input-i2" rev="search.php?keywords={$pager.search.keywords}{if $cou_id}&cou_id={$cou_id}{/if}&display={$pager.display}&price_min={$price_min}&price_max={$price_max}&page={$pager.page}&sort={$pager.search.sort}&order={$pager.search.order}<!-- {if $pager.search.is_ship == 'is_shipping'} -->&is_ship=is_shipping<!-- {/if} --><!-- {if $pager.search.self_support == 1} -->&is_self=1<!-- {/if} -->"></i>
+                    <i id="input-i1" rev="search.php?{if $cou_id}&cou_id={$cou_id}{/if}&keywords={$pager.search.keywords}&display={$pager.display}&price_min={$price_min}&price_max={$price_max}&page={$pager.page}&sort={$pager.search.sort}&have=1<!-- {if $pager.search.is_ship == 'is_shipping'} -->&is_ship=is_shipping<!-- {/if} --><!-- {if $pager.search.self_support == 1} -->&is_self=1<!-- {/if} -->"></i>
+                    <i id="input-i2" rev="search.php?{if $cou_id}&cou_id={$cou_id}{/if}&keywords={$pager.search.keywords}&display={$pager.display}&price_min={$price_min}&price_max={$price_max}&page={$pager.page}&sort={$pager.search.sort}&order={$pager.search.order}<!-- {if $pager.search.is_ship == 'is_shipping'} -->&is_ship=is_shipping<!-- {/if} --><!-- {if $pager.search.self_support == 1} -->&is_self=1<!-- {/if} -->"></i>
                 </div>
             </div>
         </div>

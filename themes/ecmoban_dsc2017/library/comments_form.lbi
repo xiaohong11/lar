@@ -1,5 +1,5 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<div class="comment-goods">
+<div class="comment-goods form">
     <div class="user-items">
         <div class="item item-pf">
             <div class="label"><em>*</em>{$lang.score}：</div>

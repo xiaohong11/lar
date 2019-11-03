@@ -20,20 +20,6 @@
 							<div class="form_prompt"></div>
 						</dd>
                     </dl>
-                      <dl>
-                          <dt>上级相册：</dt>
-                          <dd>
-                              <div id="parent_id" class="imitate_select select_w320">
-                                  <div class="cite">顶级相册</div>
-                                  <ul>
-                                      {foreach from=$cat_select item=list}
-                                      <li><a href="javascript:;" data-value="{$list.album_id}" class="ftx-01">{$list.name}</a></li>
-                                      {/foreach}
-                                  </ul>
-                                  <input name="parent_id" type="hidden" value="{$album_info.parent_album_id}" id="parent_id_val">
-                              </div>
-                          </dd>
-                      </dl>
                     <dl>
                     	<dt>{$lang.album_cover}：</dt>
                         <dd>
@@ -68,7 +54,6 @@
                             <input type="reset" value="{$lang.button_reset}" class="sc-btn btn35 sc-blue-btn" />
                             <input type="hidden" name="act" value="{$form_action}" />
                             <input type="hidden" name="id" value="{$album_info.album_id}" />
-                            <input type="hidden" name="seller_id" value="{$album_info.ru_id}" />
                         </dd>
                     </dl>
                  </div>
@@ -79,7 +64,7 @@
     </div>
 </div>
 {include file ='library/seller_footer.lbi'}
-    <script type="text/javascript" src="../js/jquery.picTip.js"></script>
+    <script type="text/javascript" src="js/jquery.picTip.js"></script>
 <script type="text/javascript">
 $(function(){
 	$("#submitBtn").click(function(){

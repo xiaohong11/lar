@@ -85,7 +85,7 @@
                             <div class="item-value">
                             	<div class="captcha_input">
                                     <input type="text" class="text w100" id="captcha" name="captcha">
-                                    <img src="captcha_verify.php?captcha=is_common&{$rand}" alt="captcha" class="captcha_img" onClick="this.src='captcha_verify.php?captcha=is_common&'+Math.random()" data-key="captcha_common" />
+                                    <img src="captcha_verify.php?captcha=is_discuss&{$rand}" alt="captcha" class="captcha_img" onClick="this.src='captcha_verify.php?captcha=is_discuss&'+Math.random()" />
                                 </div>
 								<div class="form_prompt"></div>
                             </div>
@@ -108,11 +108,11 @@
         </div>
     </div>
     
-	{* DSC 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
+	{* ECSHOP 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
     
     <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
    
-    {insert_scripts files='common.js,cart_common.js,parabola.js,cart_quick_links.js,jquery.validation.min.js'}
+    {insert_scripts files='cart_common.js,parabola.js,cart_quick_links.js,jquery.validation.min.js'}
     <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/dsc-common.js"></script>
 	<script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/jquery.purebox.js"></script>
 	<script type="text/javascript">
@@ -137,9 +137,8 @@
 		$('#theFrom').validate({
 			errorPlacement:function(error, element){
 				var error_div = element.parents('div.item-value').find('div.form_prompt');
-				error_div.html("").append(error);
+				error_div.append(error);
 			},
-			ignore:".ignore",
 			rules : {
 				commentTitle : {
 					required : true,
@@ -154,53 +153,34 @@
 					required : true,
 					maxlength : 4,
 					remote : {
-						cache: false,
 						async:false,
-						type:'POST',
-						url:'ajax_dialog.php?act=ajax_captcha&seKey='+$("input[name='captcha']").siblings(".captcha_img").data("key"),
+						url:'single_sun.php?act=ajax_verify',
 						data:{
 							captcha:function(){
 								return $("input[name='captcha']").val();
 							}
 						},
-						dataFilter:function(data,type){
-							if(data == "false"){
-								$("input[name='captcha']").siblings(".captcha_img").click();
-							}
-							return data;
-						}
+						type:'get'
 					}
 				}
 				<!--{/if}-->
 			},
 			messages : {
 				commentTitle : {
-					required : "<i class='iconfont icon-info-sign'></i> {$lang.commentTitle_not}",
-					minlength: "<i class='iconfont icon-info-sign'></i> {$lang.commentTitle_xz}",
-					maxlength: "<i class='iconfont icon-info-sign'></i> {$lang.commentTitle_xz}"
+					required : "{$lang.commentTitle_not}",
+					minlength: "{$lang.commentTitle_xz}",
+					maxlength: "{$lang.commentTitle_xz}"
 				},
 				content : {
-					required : "<i class='iconfont icon-info-sign'></i> {$lang.content_not}"
+					required : "{$lang.content_not}"
 				}
 				<!--{if $enabled_captcha}-->
 				,captcha:{
-					required : "<i class='iconfont icon-info-sign'></i> " + json_languages.captcha_not,
-					maxlength: "<i class='iconfont icon-info-sign'></i> " + json_languages.captcha_xz,
-					remote : "<i class='iconfont icon-info-sign'></i> " + json_languages.captcha_cw
+					required : json_languages.captcha_not,
+					maxlength: json_languages.captcha_xz,
+					remote : json_languages.captcha_cw
 				}
 				<!--{/if}-->
-			},
-			success:function(label){
-				label.removeClass().addClass("succeed").html("<i></i>");
-			},
-			onkeyup:function(element,event){
-				var name = $(element).attr("name");
-				if(name == "captcha"){
-					//不可去除，当是验证码输入必须失去焦点才可以验证（错误刷新验证码）
-					return true;
-				}else{
-					$(element).valid();
-				}
 			}
 		});
 		

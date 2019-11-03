@@ -12,17 +12,6 @@
                     </div>
                 </div>
             </div>
-            <div class="select_box mr10">
-                <div class="categorySelect fl">
-                    <div class="selection">
-                        <input type="text" name="brand_name" id="brand_name" class="text w120 mr0 valid" value="{$lang.select_barnd}" autocomplete="off" readonly data-filter="brand_name" />
-                        <input type="hidden" name="brand_id" id="brand_id" value="{$brand_id|default:0}" data-filter="brand_id" />
-                    </div>
-                    <div class="brand-select-container" style="display:none;">
-                        {include file="library/filter_brand.lbi"}
-                    </div>
-                </div>  
-            </div>			
 
             <div class="search_con mr10"><input width="20" name="keyword_brand" type="text" id="keyword_brand" class="text text_6 mr0"></div>
             <a href="javascript:void(0);" class="sc-btn fl" ectype="changedgoods">确定</a>
@@ -51,7 +40,6 @@
     <input type="hidden" name="goods_ids" value="{$arr.goods_ids}"/>
 	<input type="hidden" name="goods_name" value=''>
 </div>
-<script type="text/javascript" src="js/dsc_admin2.0.js"></script>
 <script language="JavaScript">
     ajaxchangedgoods(1);
     function checkd_selected(obj){
@@ -77,14 +65,13 @@
     
     function ajaxchangedgoods(type){
         var cat_id = $("input[name='cat_id'][data-filter='cat_id']").val();
-		var brand_id = $("input[name='brand_id']").val();
         var keyword = $("input[name='keyword_brand']").val();
         var goods_ids = $("input[name='goods_ids']").val();
 		
 		$("[ectype='goods_list']").html("<i class='icon-spin'><img src='images/visual/load.gif' width='30' height='30'></i>");
 		
 		function ajax(){
-			Ajax.call('wholesale.php?is_ajax=1&act=changedgoods', "cat_id="+cat_id+"&keyword="+keyword+"&goods_ids="+goods_ids+"&type="+type + "&resetRrl=1"+"&brand_id="+brand_id, function(data){
+			Ajax.call('wholesale.php?is_ajax=1&act=changedgoods', "cat_id="+cat_id+"&keyword="+keyword+"&goods_ids="+goods_ids+"&type="+type + "&resetRrl=1", function(data){
 				$("[ectype='goods_list']").html(data.content);
 				
 				$("*[ectype='goods_list']").perfectScrollbar("destroy");

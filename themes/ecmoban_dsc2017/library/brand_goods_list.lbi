@@ -7,9 +7,9 @@
 				<!-- {foreach from=$goods_list item=goods name=goods} -->
 				<!-- {if $smarty.foreach.goods.iteration lte 100} -->
 				<li>
-					<div class="p-img"><a href="{$goods.url}" target="_blank"><img src="{$goods.goods_thumb}"></a></div>
+					<div class="p-img"><a href="{$goods.url}"><img src="{$goods.goods_thumb}"></a></div>
 					<div class="p-price">{$goods.shop_price}</div>
-					<div class="p-name"><a href="{$goods.url}" target="_blank" title="{$goods.goods_name|escape:html}">{$goods.goods_name}</a></div>
+					<div class="p-name"><a href="{$goods.url}">{$goods.goods_name}</a></div>
 				</li>								
 				<!-- {/if} -->
 				<!-- {/foreach} -->

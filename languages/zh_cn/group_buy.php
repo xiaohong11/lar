@@ -12,7 +12,6 @@
  * $Author: liubo $
  * $Id: calendar.php 17217 2011-01-19 06:29:08Z liubo $
 */
-$_LANG['summary_phone'] = '手机购买';
 $_LANG['Group_purchase'] = "团购";
 $_LANG['Group_purchase_title'] = "精品质 惠生活";
 $_LANG['day'] = '天';
@@ -34,7 +33,7 @@ $_LANG['Sold'] = "已售";
 $_LANG['hot_group_purchase'] = "本期热卖团购";
 $_LANG['Change_set'] = "换一组";
 $_LANG['store_other_group'] = "该商铺的其他团购";
-$_LANG['details_order'] = "团购详情";
+$_LANG['details_order'] = "本单详情";
 $_LANG['introduce_pic'] = "图文介绍";
 $_LANG['evaluate_user'] = "会员评价";
 $_LANG['captcha_comment'] = '发表评论';
@@ -56,7 +55,7 @@ $_LANG['gong'] = "共";
 $_LANG['di_no'] = "第";
 $_LANG['weight'] = "重量";
 
-$_LANG['js_languages']['shiping_prompt'] = "暂不支持配送";
+$_LANG['js_languages']['shiping_prompt'] = "该地区暂不支持配送";
 $_LANG['js_languages']['Have_goods'] = "有货"; 
 $_LANG['js_languages']['No_goods'] = "无货";
 $_LANG['js_languages']['Deliver_back_order'] = "下单后立即发货";
@@ -67,6 +66,3 @@ $_LANG['js_languages']['Already_buy_two'] = '件商品达到限购条件,无法�
 $_LANG['js_languages']['Already_buy_three'] = '件该商品,只能再购买';
 $_LANG['js_languages']['jian'] = '件';
 $_LANG['js_languages']['Purchase_quantity'] = '超过限购数量';
-
-$_LANG['js_languages']['common']['Stock_goods_null'] = "您团购的商品暂时缺货，请耐心等待！";
-$_LANG['buy_error'] = "很抱歉，您团购的商品暂时缺货，请及时联系客服！";

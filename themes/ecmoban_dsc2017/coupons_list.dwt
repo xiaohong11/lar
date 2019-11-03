@@ -29,7 +29,6 @@
                     <a href="javascript:void(0);" {if empty($smarty.get.type) || $smarty.get.type==undefined}class="selted"{/if} data-id="3,4"><i></i>{$lang.type_all}</a>
                     <a href="javascript:void(0);" {if $smarty.get.type==all}class="selted"{/if} data="all"><i></i>{$lang.vouchers_all}</a>
                     <a href="javascript:void(0);" {if $smarty.get.type==member}class="selted"{/if} data="member"><i></i>{$lang.vouchers_user}</a>
-                    <a href="javascript:void(0);" {if $smarty.get.type==shipping}class="selted"{/if} data="shipping"><i></i>{$lang.vouchers_shipping}</a>
                 </div>
             </div>
             <div class="quan-list">
@@ -37,16 +36,11 @@
                     <div class="quan-item quan-d-item quan-item-acoupon{if $vo.cou_surplus eq 0} quan-gray-item{/if}">
                         <div class="q-type">
                             <div class="q-price">
-                                {if $vo.cou_type eq 5}
-                                <i class="icon-my"></i>
-                                {else}
                                 <em>￥</em>
                                 <strong class="num">{$vo.cou_money}</strong>
-                                {/if}
-                                
                                 <div class="txt" style="float: none;"><div class="typ-txt">{$vo.cou_type_name}</div></div>
                                 <div class="txt">
-                                    <div class="limit"><span class="ftx-06">{if $vo.cou_man gt 0}{$lang.full}{$vo.cou_man}{$lang.available_full}{else}{$lang.unlimited}{/if}</span></div>
+                                    <div class="limit"><span class="ftx-06">{$lang.full}{$vo.cou_man}{$lang.available_full}</span></div>
                                 </div>
                             </div>
                             <div class="q-range">
@@ -101,20 +95,26 @@
     {if $page_total>1}
     <div class="pages" id="pager">
         <ul>
-            <li class="item prev"><a href="coupons.php?{$page_url}&p={$prev_page}"><i class="iconfont icon-left"></i></a></li>
+            <li class="previous"><a href="coupons.php?{$page_url}&p={$prev_page}"><i>&lt;&lt;</i>{$lang.page_prev}</a></li>
             {foreach from=$page_total2 item=vo}
-            <li class="item {if $page==$vo }cur{/if}"><a href=coupons.php?{$page_url}&p={$vo}>{$vo}</a></li>
+            <li {if $page==$vo }class="current"{/if}><a href=coupons.php?{$page_url}&p={$vo}>{$vo}</a></li>
             {/foreach}
-            <li class="item next"><a href="coupons.php?{$page_url}&p={$next_page}"><i class="iconfont icon-right"></i></a></li>
+            <li class="nextious"><a href="coupons.php?{$page_url}&p={$next_page}">{$lang.page_next}<i>&gt;&gt;</i></a></li>
         </ul>
     </div>
     {/if}
-    <input name="script_name" value="{$script_name}" type="hidden" />
-    <input name="cur_url" value="{$cur_url}" type="hidden" />
+
 </div>
+<!-- @authro guan start	添加对比文件 start -->
+<!-- #BeginLibraryItem "/library/duibi.lbi" --><!-- #EndLibraryItem -->
+<!-- @authro guan start	添加对比文件 end -->
 <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
 <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/dsc-common.js"></script>
 <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/jquery.purebox.js"></script>
+<input name="script_name" value="{$script_name}" type="hidden" />
+<input name="cur_url" value="{$cur_url}" type="hidden" />
+</body>
+
 <!--@author-bylu 搜索过滤 start-->
 <script type="text/javascript">
 	$('.f-types a').on('click',function(){
@@ -126,8 +126,58 @@
 
 		location.href=url+'&type='+$(this).attr('data')
 
+	})
+
+	//优惠券领取 bylu
+	$(".get-coupon").click(function(){
+		if({$smarty.session.user_id} == 0){
+			var back_url = "coupons.php?act=coupons_list";
+			$.notLogin("get_ajax_content.php?act=get_login_dialog",back_url);
+			return false;
+		}else{
+			var cou_id = $(this).attr('cou_id');
+			$.post('coupons.php?act=coupons_receive',{'cou_id':cou_id},function(data){
+				if(data.status=='ok'){
+					$(".item-fore h3").html(data.msg);
+					$(".success-icon").removeClass("i-icon").addClass("m-icon");
+					var content =$("#pd_coupons").html();
+
+					pb({
+						id:"coupons_dialog",
+						title:json_languages.receive_coupons,
+						width:550,
+						height:140,
+						ok_title:json_languages.Immediate_use, 	//按钮名称
+						cl_title:json_languages.close, 	//按钮名称
+						content:content, 	//调取内容
+						drag:false,
+						foot:true,
+						onOk:function(){
+							location.href="search.php?cou_id="+cou_id
+						}
+					});
+
+					$(".pb-ok").addClass("color_df3134");
+				}else{
+					$(".success-icon").removeClass("m-icon").addClass("i-icon");
+					$(".item-fore h3").addClass("red");
+					$(".item-fore h3").html(data.msg);
+					var content =$("#pd_coupons").html();
+
+					pb({
+						id:"coupons_dialog",
+						title:json_languages.receive_coupons,
+						width:550,
+						height:140,
+						ok_title:json_languages.close, 	//按钮名称
+						content:content, 	//调取内容
+						cl_cBtn:false
+					});
+				}
+			},'json');
+		}
 	});
+
 </script>
 <!--@author-bylu end-->
-</body>
 </html>

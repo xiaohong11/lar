@@ -7,9 +7,9 @@
         <div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>短信模板 - {$ur_here}</div>
         <div class="content">
             <div class="explanation" id="explanation">
-                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content_common}</li>
+                    <li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -39,7 +39,7 @@
                                     <div class="label">{$lang.require_field}活动参与平台：</div>
                                     <div class="label_value">
                                         <div id="activity_object" class="imitate_select select_w320">
-                                            <div class="cite">{if $activity_info.activity_object}{$mobile_client[$activity_info.activity_object]}{else}{$lang.please_select}{/if}</div>
+                                            <div class="cite">{if $activity_info.activity_object}{$mobile_client[$activity_info.activity_object]}{else}请选择{/if}</div>
                                             <ul class="ps-container ps-active-y" style="display: none;">
                                             {foreach from=$activity_object item=client key=key}
                                                 <li><a href="javascript:;" data-value="{$key}" class="ftx-01">{$client}</a></li>
@@ -56,11 +56,11 @@
                                         <div class="checkbox_items">
                                             <div class="checkbox_item">
                                                 <input type="radio" class="ui-radio" name="enabled" id="sex_0" value="1" {if $activity_info.enabled eq 1} checked="true" {/if}>
-                                                <label for="sex_0" class="ui-radio-label">{$lang.yes}</label>
+                                                <label for="sex_0" class="ui-radio-label">是</label>
                                             </div>
                                             <div class="checkbox_item">
                                                 <input type="radio" class="ui-radio" name="enabled" id="sex_1" value="0" {if $activity_info.enabled eq 0} checked="true" {/if}>
-                                                <label for="sex_1" class="ui-radio-label">{$lang.no}</label>
+                                                <label for="sex_1" class="ui-radio-label">否</label>
                                             </div>
                                         </div>
                                     </div>

@@ -9,11 +9,10 @@
             <!-- {if $activity.available} 满足最低消费-->
             <a href="coudan.php?id={$activity.act_id|default:0}" class="ftx-03" target="_blank">{$lang.activity_notes_one}{$activity.min_amount}{$lang.activity}， {$lang.receive_gifts}{if $activity.cart_favourable_gift_num gt 0}，{$lang.Already_receive}{$activity.cart_favourable_gift_num}{$lang.jian}{/if}&gt;</a>
             <a href="javascript:void(0);" class="f-btn" data-actid="{$activity.act_id|default:0}" data-ruid="{$ru_id}" id="select-gift-{$activity.act_id|default:0}" class="f-btn" ectype="tradeBtn">{$lang.receive_gift}</a>
-            
+            <a href="coudan.php?id={$activity.act_id|default:0}" class="ftx-05" target="_blank">&nbsp;{$lang.gather_together}&nbsp;></a>
             <!-- {else} -->
             <a href="coudan.php?id={$activity.act_id|default:0}" class="ftx-03" target="_blank">{$lang.activity_notes_one}{$activity.min_amount}{$lang.yuan}，{$lang.receive_gifts} &gt; </a>
             <a href="javascript:void(0);" data-actid="{$activity.act_id|default:0}" data-ruid="{$ru_id}" id="select-gift-{$activity.act_id|default:0}" class="f-btn" ectype="tradeBtn">{$lang.see_gift}</a>
-			<a href="coudan.php?id={$activity.act_id|default:0}" class="ftx-05" target="_blank">&nbsp;{$lang.gather_together}&nbsp;></a>
             <!-- {/if} -->
             <!-- {else} -->
             <!-- {if $activity.available} 满足最低消费-->
@@ -22,7 +21,6 @@
             <!-- {else} -->
             <a href="coudan.php?id={$activity.act_id|default:0}" class="ftx-03" target="_blank">{$lang.activity_notes_one}{$activity.min_amount}{$lang.yuan}，{$lang.receive_gifts}{$activity.act_type_ext}{$lang.jian} &gt; </a>
             <a href="javascript:void(0);" data-actid="{$activity.act_id|default:0}" data-ruid="{$ru_id}" id="select-gift-{$activity.act_id|default:0}" class="f-btn" ectype="tradeBtn">{$lang.see_gift}</a>
-			<a href="coudan.php?id={$activity.act_id|default:0}" class="ftx-05" target="_blank">&nbsp;{$lang.gather_together}&nbsp;></a>
             <!-- {/if} -->
             <!-- {/if} -->
             <span class="full-txt">{$goods.act_name}</span>
@@ -56,7 +54,7 @@
     </div>
                                     
     <!-- {foreach from=$activity.act_goods_list item=goods name=act_goods_list} 优惠活动商品 -->
-    <div class="item-item{if $goods.sel_checked eq 1} selected{/if}" ectype="item" data-recid="{$goods.rec_id}">
+    <div class="item-item{if $goods.sel_checked eq 1} selected{/if}" ectype="item">
         <div class="item-form">
             <div class="cell s-checkbox">
                 <div class="cart-checkbox" ectype="ckList">
@@ -68,12 +66,11 @@
                 <div class="goods-item">
                     <div class="p-img"><a href="{$goods.url}" target="_blank"><img src="{$goods.goods_thumb}" width="70" height="70"></a></div>
                     <div class="item-msg">
-                        <div class="p-name"><a href="{$goods.url}" target="_blank" title="{$goods.goods_name|escape:html}">{$goods.goods_name}</a></div>
+                        <div class="p-name"><a href="{$goods.url}" target="_blank">{$goods.goods_name}</a></div>
                         <div class="gds-types">
                             <!--{if $goods.stages_qishu neq -1}-->
                             <em class="gds-type gds-type-stages">{$lang.by_stages}</em>
                             <!--{/if}-->
-                            {if $goods.is_invalid}<span class="red">（已失效）</span>{/if}
                         </div>
                     </div>
                 </div>
@@ -121,7 +118,7 @@
     <!-- {/foreach} 优惠活动商品-->
     
     <!-- {foreach from=$activity.act_cart_gift item=goods} 赠品开始 -->
-    <div class="item-item zp selected" ectype="item" data-recid="{$goods.rec_id}">
+    <div class="item-item zp selected" ectype="item">
         <div class="item-form">
             <div class="cell s-checkbox hide">
                 <div class="cart-checkbox" ectype="ckList">
@@ -158,7 +155,6 @@
                         
                         <div class="gds-types">
                             <em class="gds-type gds-type-stages">{$lang.largess}</em>
-                            {if $goods.is_invalid}<span class="red">（已失效）</span>{/if}
                         </div>
                     </div>
                 </div>
@@ -203,7 +199,7 @@
     <!-- {/foreach} 赠品结束-->
     
     <!-- {if $activity.act_gift_list} 如果活动存在赠品 -->
-    <div class="gift-box" ectype="giftBox" id="gift_box_list_{$activity.act_id|default:0}_{$goods.ru_id}" style="display:none;">
+    <div class="gift-box" ectype="giftBox" id="gift_box_list_{$goods.ru_id}" style="display:none;">
         {include file="/library/cart_gift_box.lbi"}
     </div>
     <!-- {/if} -->

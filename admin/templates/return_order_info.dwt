@@ -114,7 +114,7 @@
                         
                         <!--商品维修-->
                         <div class="step">
-                            <div class="step_title"><i class="ui-step"></i><h3>{if $back_order.return_type eq 0}{$lang.product_repair}{elseif $back_order.return_type eq 1}{$lang.product_return}{elseif $back_order.return_type eq 2}{$lang.product_change}{elseif $back_order.return_type eq 3}{$lang.only_return_money}{/if}</h3></div>
+                            <div class="step_title"><i class="ui-step"></i><h3>{if $back_order.return_type eq 0}{$lang.product_repair}{elseif $back_order.return_type eq 1}{$lang.product_return}{elseif $back_order.return_type eq 2}{$lang.product_change}{/if}</h3></div>
                             <div class="step_info step_info2">
                             	<div class="step_info_fl">
                                     <table class="table" width="100%">
@@ -152,7 +152,7 @@
                                     </table>
                                 </div>
                                 <div class="step_info_fr">
-									<div class="hh_desc return_order_hh_desc">
+									<div class="hh_desc">
                                         <div class="item">
                                             {if $back_order.return_type eq 0 || $back_order.return_type eq 2}
                                             	<div class="label">{$lang.seller_mail}：</div>
@@ -185,22 +185,9 @@
                                         	<span class="red">{$back_order.return_cause}</span>
                                         </div>
                                         {if $back_order.return_type eq 1 || $back_order.return_type eq 3}
-                                        	
-                                            {if $back_order.discount_percent_decimal > 0}
-                                        	<div class="item">
-                                                <div class="label">{$lang.return_discount}：</div>
-                                                <span class="price">{$back_order.formated_discount_amount}({$back_order.discount_percent}%)</span>
-                                                <input type="hidden" name="discount_percent" value="{$back_order.discount_percent_decimal}"/>
-                                            </div>
-                                        	{/if}
-                                            
                                             <div class="item">
                                                 <div class="label">{$lang.amount_return}：</div>
-                                                {if $back_order.discount_percent_decimal > 0}
-                                                <span class="price">{$back_order.formated_goods_amount} - {$back_order.formated_discount_amount} = {$back_order.formated_should_return}</span>
-                                                {else}
                                                 <span class="price">{$back_order.formated_should_return}</span>
-                                                {/if}
                                                 <input type="hidden" name="refound_amount" value="{$back_order.should_return1}"/>
                                             </div>
                                              {if $back_order.return_shipping_fee > 0}
@@ -210,31 +197,25 @@
                                                 <input type="hidden" name="return_shipping_fee" value="{$back_order.return_shipping_fee}"/>
                                             </div>
                                             {/if}
-                                            
-                                            {if $back_order.actual_return > 0}
-                                            <div class="item">
-                                                <div class="label cl">{$lang.actual_return}：</div>
-                                                <span class="price">{$back_order.formated_actual_return}</span>
-                                            </div>
-                                            {else}
                                             <div class="item">
                                                 <div class="label cl">{$lang.label_total}</div>
                                                 <span class="price">{$back_order.formated_return_amount}</span>
                                             </div>
-                                            {/if}
+                                            
                                         {/if}
                                   </div>
-                                  <script type="text/javascript">
+                                  
+                                  <script>
                                       function check_shipping(){
 										var frm =  document.forms['theForm'];
 										var shipping_name = frm['shipping_name'].value;
 										var invoice_no = frm['invoice_no'].value;
 										if( shipping_name <= 0 ){
-											alert('{$lang.select_courier}');
+											alert('请选择快递公司');
 											return false;
 										}
 										if(invoice_no == ''|| invoice_no == null ){
-											alert('{$lang.fillin_courier_number}');
+											alert('请填写快递单号');
 											return false;
 										}
                                       }
@@ -242,13 +223,15 @@
                                 </div>
                             </div>
                         </div>
+    
+                        <!--  -->
                         {if $back_order.img_list}
                         <div class="step">
                             <div class="step_title"><i class="ui-step"></i><h3>{$lang.user_file_image}</h3></div>
                             <div class="step_info">
                                 <div class="hh_items">
                                     {foreach from=$back_order.img_list item=img}
-                                        <a href="{$img.img_file}" target="_blank"><img src="{$img.img_file}" width="100" height="100" style="border:1px #ccc solid; padding:2px;" /></a>
+                                        <a href="../{$img.img_file}" target="_blank"><img src="../{$img.img_file}" width="100" height="100" style="border:1px #ccc solid; padding:2px;" /></a>
                                     {/foreach}
                                 </div>
                             </div>
@@ -272,11 +255,11 @@
                                                   <input class="btn btn25 red_btn" type="submit" value="{$lang.agree_apply}" name="agree_apply">
                                                 {/if}
                                                 
-                                                {if $back_order.return_status1 lt 1 && $back_order.return_status1 ge 0 && $back_order.agree_apply}
+                                                {if $back_order.return_status1 lt 1 && $back_order.return_status1 ge 0}
                                                   <input class="btn btn25 red_btn" type="submit" value="{$lang.receive_goods}" name="receive_goods">
                                                 {/if}
                                                 
-                                                {if $back_order.return_type eq 1 || $back_order.return_type eq 3 && $back_order.chargeoff_status eq 0 && $back_order.agree_apply}
+                                                {if $back_order.return_type eq 1 || $back_order.return_type eq 3 && $back_order.chargeoff_status eq 0}
                                                     {if $back_order.refound_status1 eq 0 }
                                                     <input class="btn btn25 red_btn" type="submit" value="{$lang.refound}" name="refound">
                                                     {/if}
@@ -296,11 +279,11 @@
                                                 {/if}    
                                             {/if}
                                             
-                                            {if $back_order.refound_status1 neq 1 && $back_order.agree_apply neq 1}
+                                            {if $back_order.refound_status1 neq 1}
                                                 {if $back_order.return_status1 neq 6}
-                                                <input class="btn btn25 red_btn" type="submit" value="{$lang.refuse}" name="refuse_apply">	
+                                                <input class="btn btn25 red_btn" type="submit" value="拒绝" name="refuse_apply">	
                                                 {else}
-                                                <input class="btn btn25 red_btn" type="button" title="{$lang.unable_to_click}" value="{$lang.is_refuse_apply}" name="no_refuse_apply">	    
+                                                <input class="btn btn25 red_btn" type="button" title="无法点击" value="已拒绝申请" name="no_refuse_apply">	    
                                                 {/if}   	
                                             {/if}
                                 
@@ -345,6 +328,6 @@
             </div>
 		</div>
 	</div>
-	{include file ='library/pagefooter.lbi'}
+ {include file ='library/pagefooter.lbi'}
 </body>
 </html>

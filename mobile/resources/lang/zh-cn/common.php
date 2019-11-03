@@ -149,7 +149,7 @@ $_LANG['comment_num'] = "用户评论 %d 条记录";
 $_LANG['login_please'] = '由于您还没有登录，因此您还不能使用该功能。';
 $_LANG['collect_existed'] = '该商品已经存在于您的收藏夹中。';
 $_LANG['collect_success'] = '该商品已经成功地加入了您的收藏夹。';
-$_LANG['copyright'] = "版权所有 &copy; 2005-%s 上海商创网络科技有限公司，并保留所有权利。";
+$_LANG['copyright'] = "版权所有 &copy; 2005-%s 哈尔滨易淘网络科技有限公司，并保留所有权利。";
 $_LANG['no_ads_id'] = '没有指定广告的ID以及跳转的URL地址!';
 $_LANG['remove_collection_confirm'] = '您确定要从收藏夹中删除选定的商品吗？';
 $_LANG['err_change_attr'] = '没有找到指定的商品或者没有找到指定的商品属性。';
@@ -292,7 +292,7 @@ $_LANG['img'] = '图片';
 $_LANG['no_pack'] = '不要包装';
 $_LANG['no_card'] = '不要贺卡';
 $_LANG['bless_note'] = '祝福语';
-$_LANG['use_integral'] = '使用积分抵扣';
+$_LANG['use_integral'] = '使用积分';
 $_LANG['can_use_integral'] = '您当前的可用积分为';
 $_LANG['noworder_can_integral'] = '本订单最多可以使用';
 $_LANG['use_surplus'] = '使用余额';
@@ -714,7 +714,7 @@ $_LANG['label_min_amount'] = '金额下限：';
 $_LANG['label_max_amount'] = '金额上限：';
 $_LANG['notice_max_amount'] = '0表示没有上限';
 $_LANG['label_act_type'] = '优惠方式：';
-$_LANG['fat_goods'] = '享受赠品';
+$_LANG['fat_goods'] = '享受赠品（特惠品）';
 $_LANG['fat_price'] = '享受现金减免';
 $_LANG['fat_discount'] = '享受价格折扣';
 $_LANG['orgtotal'] = '原始价格';
@@ -797,49 +797,5 @@ $_LANG['special'] = '专题';
 
 // 后台权限判断
 $_LANG['priv_error'] = '对不起,您没有执行此项操作的权限!';
-
-
-// 微信jssdk 分享标题语言包
-$_LANG['activity_sdk_title'] = '促销活动';
-$_LANG['article_sdk_title'] = '文章频道';
-$_LANG['auction_sdk_title'] = '拍卖活动';
-$_LANG['bonus_sdk_title'] = '红包列表';
-$_LANG['brand_sdk_title'] = '品牌街';
-$_LANG['cart_sdk_title'] = '购物车';
-$_LANG['category_sdk_title'] = '商品分类';
-$_LANG['comment_sdk_title'] = '评论列表';
-$_LANG['community_sdk_title'] = '社区圈子';
-$_LANG['coupont_sdk_title'] = '优惠券';
-$_LANG['crowdfunding_sdk_title'] = '微筹频道';
-$_LANG['drp_sdk_title'] = '分销';
-$_LANG['exchange_sdk_title'] = '积分商城';
-$_LANG['goods_sdk_title'] = '商品详情';
-$_LANG['groupbuy_sdk_title'] = '团购活动';
-$_LANG['index_sdk_title'] = '';
-$_LANG['offlinestore_sdk_title'] = '门店列表';
-$_LANG['package_sdk_title'] = '超值礼包';
-$_LANG['presale_sdk_title'] = '预售活动';
-$_LANG['region_sdk_title'] = '地区列表';
-$_LANG['seckill_sdk_title'] = '秒杀活动';
-$_LANG['site_sdk_title'] = '';
-$_LANG['store_sdk_title'] = '店铺街';
-$_LANG['team_sdk_title'] = '拼团频道';
-$_LANG['topic_sdk_title'] = '专题列表';
-$_LANG['user_sdk_title'] = '用户中心';
-$_LANG['wholesale_sdk_title'] = '批发列表';
-$_LANG['purchase_sdk_title'] = '供求列表';
-
-// 优惠券语言包
-$_LANG['use_limit'] = "限 %s 可用";
-$_LANG['platform_use'] = "全平台可用";
-$_LANG['vouchers_all'] = "全场券";
-$_LANG['vouchers_user'] = "会员券";
-$_LANG['vouchers_shoping'] = "购物券";
-$_LANG['vouchers_login'] = "注册券";
-$_LANG['vouchers_shipping'] = "免邮券";
-$_LANG['unknown'] = "未知";
-$_LANG['lang_goods_coupons']['is_goods'] = "限商品";
-$_LANG['lang_goods_coupons']['is_cate'] = "限分类";
-$_LANG['lang_goods_coupons']['is_all'] = "全品类通用";
 
 return $_LANG;

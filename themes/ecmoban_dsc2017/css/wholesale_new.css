@@ -82,7 +82,6 @@
 .b2b-purchase .bp-title{ height:40px; line-height:40px; margin-bottom:10px;}
 .b2b-purchase .bp-title h3{ font-size:24px; color:#333; font-weight:normal;}
 .b2b-purchase .bp-content{ position:relative;}
-.b2b-purchase .bp-content .bd{ width:1200px; position:relative;}
 .b2b-purchase .bp-content .bd ul{ width:1215px; height:351px; overflow:hidden;}
 .b2b-purchase .bp-content .bd li{ float:left; width:228px; margin-right:15px;}
 .b2b-purchase .bp-content .bd li .p-img{ width:228px; height:228px;}
@@ -101,17 +100,6 @@
 .b2b-purchase .bp-content .hd ul{ position:absolute; right:0; top:-30px;}
 .b2b-purchase .bp-content .hd ul li{ float: left;height: 8px;width: 8px;border-radius: 4px;background: #9F9F9F;margin-right: 5px;transition: all .2s;cursor: pointer; font-size:0;}
 .b2b-purchase .bp-content .hd ul li.on{ width: 20px; background: #ff5f2e;}
-
-
-.bp-content .bd .prev,.bp-content .bd .next{ width: 30px;height: 70px;position: absolute;top: 50%;margin-top: -35px;background: rgba(0,0,0,.3);z-index: 2;text-align: center;color: rgba(255,255,255,.8);display: none;}
-.bp-content .bd .prev{ left: 0; }
-.bp-content .bd .next{ right: 0; }
-.bp-content .bd .prev .iconfont,
-.bp-content .bd .next .iconfont{ font-size: 20px; line-height: 70px; }
-.bp-content .bd:hover .prev,
-.bp-content .bd:hover .next{ display: block; }
-.bp-content .bd .prev:hover,
-.bp-content .bd .next:hover{ background: rgba(0,0,0,.5) }
 
 .b2b-floor{ background-color:#f8f8f8;}
 .b2b-floor-line{ margin-top:40px; overflow:hidden;}
@@ -235,17 +223,13 @@
 .b2b-filter .bf-right .bf-label{ float:left; margin-right:30px;}
 .b2b-filter .bf-right .bf-label em{ color:#4dcdd2; font-weight:bold;}
 
-.b2b-filter .bf-tab li.f-search{ margin-left:20px;}
-.f-search .text{ margin-right:10px;}
-.f-search .btn{ outline:0;}
-
 .buyinfo-list{ overflow:hidden;}
 .buyinfo-list ul{ width:1221px;}
 .buyinfo-list li{ float:left; width:386px; margin:15px 21px 0 0; background-color:#fff;}
 .buyinfo-list li .buyinfo-warp{ padding:20px; overflow:hidden;}
 .buyinfo-list li .bw-top{ overflow:hidden; padding-bottom:20px; border-bottom:1px dashed #d2d2d2;}
 .buyinfo-list li .bw-top .bwt-left{ float:left; width:200px;}
-.buyinfo-list li .bw-top .bwt-left .tit{ font-size:16px; color:#333; margin-top:-2px; height:48px; overflow:hidden;}
+.buyinfo-list li .bw-top .bwt-left .tit{ font-size:16px; color:#333; margin-top:-2px;}
 .buyinfo-list li .bw-top .bwt-left .bwt-info{ border-radius:5px; background-color:#f8f8f8; padding:7px 10px; margin-top:10px;}
 .buyinfo-list li .bw-top .bwt-left .bwt-info p{ line-height:20px; color:#8c8c8c;}
 .buyinfo-list li .bw-top .bwt-right{ width:130px; height:130px; float:right; position:relative;}

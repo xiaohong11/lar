@@ -53,8 +53,8 @@
         <thead>
             <tr>
                 <th>{$lang.au_bid_status}</th>
-                <th>{$lang.au_ren}</th>
                 <th>{$lang.price}</th>
+                <th>{$lang.au_ren}</th>
                 <th>{$lang.time}</th>
             </tr>
         </thead>

@@ -3,7 +3,7 @@
 	<div class="mt">
 		<h3>{$goods.rz_shopName}</h3>
 		{if $shop_information.is_IM eq 1 || $shop_information.is_dsc}
-			<a id="IM" onclick="openWin(this)" href="javascript:;" ru_id="{$goods.user_id}" goods_id="{$goods.goods_id}" class="s-a-kefu"><i class="icon i-kefu"></i></a>
+			<a id="IM" onclick="openWin(this)" href="javascript:;" goods_id="{$goods.goods_id}" class="s-a-kefu"><i class="icon i-kefu"></i></a>
 		{else}
 			{if $basic_info.kf_type eq 1}
 			<a href="http://www.taobao.com/webww/ww.php?ver=3&touid={$basic_info.kf_ww}&siteid=cntaobao&status=1&charset=utf-8" class="s-a-kefu" target="_blank"><i class="icon i-kefu"></i></a>
@@ -17,13 +17,13 @@
 			<div class="g-s-brand">
 				{if $goods.user_id}
 					{if $goods.shopinfo.brand_thumb}
-					<a href="{$goods.store_url}" target="_blank"><img src="{$goods.shopinfo.brand_thumb}" /></a>
+					<a href="{$goods.store_url}" target="_blank"><img src="{$goods.shopinfo.brand_thumb}" height="45" /></a>
 					{else}
 					<a href="{$goods.goods_brand_url}" target="_blank">{$goods.goods_brand}</a>
 					{/if}
 				{else}
 					{if $goods.brand.brand_logo}
-					<a href="{$goods.brand.url}" target="_blank"><img src="{$goods.brand.brand_logo}" /></a>
+					<a href="{$goods.brand.url}" target="_blank"><img src="{$goods.brand.brand_logo}" height="45" /></a>
 					{else}
 					<a href="{$goods.goods_brand_url}" target="_blank">{$goods.goods_brand}</a>
 					{/if}
@@ -41,7 +41,7 @@
 				<input type="hidden" name="merchant_id" value="{$goods.user_id}">
 				</form>
 			</div>
-		</div>
+		</div>	
 		{/if}
 		{/if}
 	</div>

@@ -132,7 +132,7 @@ $.Validform = function(a,b,c){
         	}else if(val.length < 6){
 				error.parent().prev().addClass("form-item-error").removeClass("form-item-valid");
 				error.removeClass().addClass("error");
-            	error.html(i_error+ json_languages.password_number);
+            	error.html(i_error+ json_languages.username_number);
 			}
 		}else{
             var Modes = 0;
@@ -218,29 +218,22 @@ $.Validform = function(a,b,c){
 			error.html(i_error+ json_languages.Mobile_error);
 			return false;
 		}else{
-			var username_val = error.parents("form[name='formUser']").find("input[name='username']").val();
-			if(val != username_val){
-				Ajax.call('user.php?act=check_phone', 'mobile_phone=' + val, function(result){
-					if ( result == 'true' ){
-						error.parent().prev().removeClass("form-item-error").addClass("form-item-valid");
-						error.html('');
-						$("#zphone").attr("onclick","sendSms();");
-						return_mobile = 0;
-						return false;
-					}else{
-						//验证验证码是否正确
-						error.parent().prev().addClass("form-item-error").removeClass("form-item-valid");
-						error.removeClass().addClass("error");
-						error.html(i_error+ json_languages.exist_phone);
-						return_mobile = 1;
-						return false;
-					}
-				} , 'GET', 'TEXT', true, true);	
-			}else{
-				error.parent().prev().addClass("form-item-error").removeClass("form-item-valid");
-				error.removeClass().addClass("error");
-				error.html(i_error+ json_languages.mobile_phone_username_equalTo);
-			}
+			Ajax.call('user.php?act=check_phone', 'mobile_phone=' + val, function(result){
+				if ( result.replace(/\r\n/g,'') == 'ok' ){
+					error.parent().prev().removeClass("form-item-error").addClass("form-item-valid");
+					error.html('');
+					$("#zphone").attr("onclick","sendSms();");
+					return_mobile = 0;
+					return false;
+				}else{
+					//验证验证码是否正确
+					error.parent().prev().addClass("form-item-error").removeClass("form-item-valid");
+					error.removeClass().addClass("error");
+					error.html(i_error+ json_languages.exist_phone);
+					return_mobile = 1;
+					return false;
+				}
+			} , 'GET', 'TEXT', true, true);	
 		}
 	}
 	

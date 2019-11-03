@@ -2,43 +2,27 @@
 <div class="storeDialog">
     <div class="storeDialog-top">
         <div class="dt">{$lang.Selection_region}：</div>
-        <div class="dd" ectype="regionLinkage">
-        	<dl class="mod-select mod-select-small" ectype="smartdropdown" id="selProvinces">
-                <dt>
-                    <span class="txt" ectype="txt">{$lang.please_select}</span>
-                    <input type="hidden" value="{$consignee.province}" name="province">
-                </dt>
-                <dd ectype="layer">
-                    <div class="option" data-value="0">{$lang.please_select}</div>
-                    <!-- {foreach from=$provinces item=province} -->
-                    <div class="option" data-value="{$province.region_id}" data-text="{$province.region_name}" data-type="2" ectype="ragionItem">{$province.region_name}</div>
-                    <!-- {/foreach} -->
-                </dd>
-            </dl>
-            <dl class="mod-select mod-select-small" ectype="smartdropdown" id="selCities">
-                <dt>
-                    <span class="txt" ectype="txt">{$lang.please_select}</span>
-                    <input type="hidden" value="{$consignee.city}" name="city">
-                </dt>
-                <dd ectype="layer">
-                    <div class="option" data-value="0">{$lang.please_select}</div>
-                    <!-- {foreach from=$cities item=city} -->
-                    <div class="option" data-value="{$city.region_id}" data-type="3" data-text="{$city.region_name}" ectype="ragionItem">{$city.region_name}</div>
-                    <!-- {/foreach} -->
-                </dd>
-            </dl>
-            <dl class="mod-select mod-select-small" ectype="smartdropdown" data-store="2" id="selDistricts" style="display:none;">
-                <dt>
-                    <span class="txt" ectype="txt">{$lang.please_select}</span>
-                    <input type="hidden" value="{$consignee.district}" name="district">
-                </dt>
-                <dd ectype="layer">
-                    <div class="option" data-value="0">{$lang.please_select}</div>
-                    {foreach from=$city item=district}
-                    <div class="option" data-value="{$district.region_id}" data-type="4" data-text="{$district.region_name}" ectype="ragionItem">{$district.region_name}</div>
-                    {/foreach}
-                </dd>
-            </dl>
+        <div class="dd">
+            <select id="selProvinces" onchange="region.changed(this, 2, 'selCities')">
+                <option value=''>{$lang.Please_select}</option>
+                {foreach from=$provinces item=region}
+                <option value="{$region.region_id}" > {$region.region_name}</option>
+                {/foreach}
+            </select>
+
+            <select  id="selCities" onchange="region.changed(this, 3, 'selDistricts')" style="display:none">
+                <option value=''>{$lang.Please_select}</option>
+                {foreach from=$cities item=region}
+                <option value="{$region.region_id}" {if $region.region_id eq 35}selected{/if}>{$region.region_name}</option>
+                {/foreach}
+            </select>
+
+            <select  id="selDistricts" onchange="get_store_list(this)" style="display:none">
+                <option value=''>{$lang.Please_select}</option>
+                {foreach from=$city item=region}
+                <option value="{$region.region_id}" {if $region.region_id eq 369}selected{/if}>{$region.region_name}</option>
+                {/foreach}
+            </select>
         </div>
 		<a href="javascript:;" onclick="all_stores({$goods_id})" class="fr mr10">{$lang.view}{$lang.all_store_list}</a>
         <input type="hidden" id="goods_id" value="{$goods_id}"/>
@@ -58,11 +42,12 @@
     </div>
 </div>
 <script type="text/javascript">
-    function get_store_list_goods(district){
+    function get_store_list(obj){
         var formBuy      = document.forms['ECS_FORMBUY'];
         var goods_id = document.getElementById('goods_id').value;
-        var province = $("#selProvinces").find("input[name='province']").val();
-        var city = $("#selCities").find("input[name='city']").val();
+        var province = document.getElementById('selProvinces').value;
+        var city = document.getElementById('selCities').value;
+        var district = obj.value;
         var spec_arr = '';
         // 检查是否有商品规格 
         if (formBuy)
@@ -71,11 +56,10 @@
         }
 
         if(district > 0){
-            Ajax.call('ajax_dialog.php?act=get_store_list', 'province=' + province + '&city=' + city + '&district=' + district + '&goods_id=' + goods_id + '&spec_arr=' + spec_arr, get_store_list_goodsResponse, 'GET', 'JSON'); 
-		}
+            Ajax.call('ajax_dialog.php?act=get_store_list', 'province=' + province + '&city=' + city + '&district=' + district + '&goods_id=' + goods_id + '&spec_arr=' + spec_arr, get_store_listResponse, 'GET', 'JSON'); 
+        }
     }
-	
-    function get_store_list_goodsResponse(result){
+    function get_store_listResponse(result){
         if(result.error > 0){
             $("#store_see").html(result.content);
 			$("#store_see").show();

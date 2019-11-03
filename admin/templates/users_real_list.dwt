@@ -13,7 +13,7 @@
             	{include file ='library/users_tab.lbi'}
             {/if}
             <div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                 	<li>该页面展示所有实名认证的会员信息。</li>
                     <li>可进行审核实名信息，请谨慎编辑会员的实名信息。</li>
@@ -23,28 +23,26 @@
             <div class="flexilist">
             	<div class="common-head">
                    	<div class="refresh ml0">
-                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    	<div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>
-                    
-                    <div class="search">
-                    	<form action="javascript:;" name="searchForm" onSubmit="searchGoodsname(this);">
-                        <div class="select_w120 imitate_select">
-                            <div class="cite">全部</div>
-                            <ul>
-                                <li><a href="javascript:;" data-value="-1">全部</a></li>
-                                <li><a href="javascript:;" data-value="0">未审核</a></li>
-                                <li><a href="javascript:;" data-value="1">审核通过</a></li>
-                                <li><a href="javascript:;" data-value="2">审核未通过</a></li>
-                            </ul>
-                            <input name="review_status" type="hidden" value="-1">
+                    <form action="javascript:searchUser()" name="searchForm">
+                        <div class="search">
+                            <div  class="select_w120 imitate_select">
+                                <div class="cite">全部</div>
+                                <ul>
+                                    <li><a href="javascript:;" data-value="-1">全部</a></li>
+                                    <li><a href="javascript:;" data-value="0">未审核</a></li>
+                                    <li><a href="javascript:;" data-value="1">审核通过</a></li>
+                                    <li><a href="javascript:;" data-value="2">审核未通过</a></li>
+                                </ul>
+                                <input name="review_status" type="hidden" value="-1">
+                            </div>
+                            <div class="input">
+                                <input type="text" name="keyword" class="text nofocus" placeholder="会员名称" autocomplete="off" /><input type="submit" value="" class="not_btn" />
+                            </div>
                         </div>
-                        <div class="input">
-                            <input type="text" name="keyword" class="text nofocus" placeholder="会员名称" autocomplete="off" />
-                            <input type="submit" class="btn" name="secrch_btn" ectype="secrch_btn" value="" />
-                        </div>
-                        </form>
-                    </div>
+                    </form>
                 </div>
                 <div class="common-content">
                     <form method="POST" action="" name="listForm" onsubmit="return confirmSubmit()">
@@ -76,7 +74,7 @@
                                     <td class="handle">
                                         <div class="tDiv a2">
                                             <a href="user_real.php?act=edit&real_id={$users_real_list.real_id}&user_type={$user_type}" title="{$lang.edit}" class="btn_edit"><i class="icon icon-edit"></i>{$lang.edit}</a>
-                                            <a href="javascript:confirm_redirect('你确定要删除该会员的实名认证吗？', 'user_real.php?act=remove&real_id={$users_real_list.real_id}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                            <a href="javascript:confirm_redirect('你确定要删除该会员的实名认证吗？', 'user_real.php?act=remove&real_id={$users_real_list.real_id}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -113,7 +111,7 @@
                                                     </div>
                                                 </div>
                                                 <input name="review_content" type="text" value="" class="text text_2 mr10 lh26" style="display:none" />
-                                                <input type="submit" value="{$lang.button_submit_alt}" name="remove" ectype="btnSubmit" class="btn btn_disabled" disabled="">
+                                                <input type="submit" value="确定" name="remove" ectype="btnSubmit" class="btn btn_disabled" disabled="">
                                             </div>
                                             <div class="list-page">
                                                 {include file="library/page.lbi"}
@@ -130,10 +128,10 @@
             </div>
         </div>
     </div>
-	{include file ='library/pagefooter.lbi'}
+ {include file ='library/pagefooter.lbi'}
     <script type="text/javascript">
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
+	listTable.recordCount = '{$record_count}';
+	listTable.pageCount = '{$page_count}';
 	
 	{foreach from=$filter item=item key=key}
 	listTable.filter.{$key} = '{$item}';
@@ -188,6 +186,21 @@
 		review_status.css("display", 'none');
 	  }
 	}
+	
+	/**
+	 * 搜索用户
+	 */
+	function searchUser()
+	{
+		var frm = $("form[name='searchForm']");
+		listTable.filter['keywords'] = frm.find("input[name='keyword']").val();
+		listTable.filter['review_status'] = Utils.trim(frm.find("input[name='review_status']").val());
+		listTable.filter['page'] = 1;
+		listTable.loadList();
+	}
+	
+	//高级搜索
+	$.gjSearch("-240px");
     </script>
 </body>
 </html>

@@ -5,43 +5,42 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.goods_alt} - {$ur_here}</div>
+    	<div class="title">商品 - {$ur_here}</div>
         <div class="content">		
         	{include file ='library/seller_comment_tab.lbi'}
         	<div class="explanation" id="explanation">
             	<div class="ex_tit">
-					<i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span>
+					<i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span>
                     {if $open eq 1}
                     <div class="view-case">
-                    	<div class="view-case-tit"><i></i>{$lang.view_tutorials}</div>
+                    	<div class="view-case-tit"><i></i>查看教程</div>
                         <div class="view-case-info">
-                        	<a href="http://help.ecmoban.com/article-4709.html" target="_blank">{$lang.tutorials_bonus_list_one}</a>
+                        	<a href="http://help.ecmoban.com/article-4709.html" target="_blank">商家满意度使用说明</a>
                         </div>
                     </div>			
                     {/if}				
 				</div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.list.0}</li>
-                    <li>{$lang.operation_prompt_content.list.1}</li>
+                	<li>展示商家服务相关信息的评分。</li>
+                    <li>可根据店铺名称、用户名称进行搜索。</li>
                 </ul>
             </div>
             <div class="flexilist">
+            	<!--商品列表-->
                 <div class="common-head">
                     <div class="fl">
-                    	<a href="comment_seller.php?act=baseline"><div class="fbutton"><div class="add" title="{$lang.seller_industry_baseline}"><span><i class="icon icon-plus"></i>{$lang.seller_industry_baseline}</span></div></div></a>
+                    	<a href="comment_seller.php?act=baseline"><div class="fbutton"><div class="add" title="商家评分基线"><span><i class="icon icon-plus"></i>商家评分基线</span></div></div></a>
                     </div>				
                     <div class="refresh">
-                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    	<div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>
 					<div class="search">
-                    	<form action="javascript:;" name="searchForm" onSubmit="searchGoodsname(this);">
 						{include file ='library/search_store.lbi'}
                     	<div class="input">
-                        	<input type="text" name="keywords" class="text nofocus" placeholder="{$lang.user_name}" autocomplete="off">
-							<input type="submit" class="btn" name="secrch_btn" ectype="secrch_btn" value="" />
+                        	<input type="text" name="keywords" class="text nofocus" placeholder="用户名称" autocomplete="off">
+							<button class="btn" name="secrch_btn"></button>
                         </div>
-                        </form>
                     </div>
                 </div>
                 <div class="common-content">
@@ -76,7 +75,7 @@
                                     <td><div class="tDiv">{$comment.add_time}</div></td>                             
                                     <td class="handle">
                                         <div class="tDiv a1">
-                                            <a href="javascript:;" onclick="listTable.remove({$comment.sid}, '{$lang.drop_confirm}')" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>								
+                                            <a href="javascript:;" onclick="listTable.remove({$comment.sid}, '{$lang.drop_confirm}')" class="btn_trash"><i class="icon icon-trash"></i>删除</a>								
                                         </div>
                                     </td>
                                 </tr>
@@ -97,30 +96,54 @@
 						{if $full_page}
                     </div>
                 </div>
+                <!--商品列表end-->
             </div>
 		</div>
 	</div>
- 	{include file ='library/pagefooter.lbi'}
-	<script type="text/javascript">
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
-	cfm = new Object();
-	cfm['allow'] = '{$lang.cfm_allow}';
-	cfm['remove'] = '{$lang.cfm_remove}';
-	cfm['deny'] = '{$lang.cfm_deny}';
-	
-	{foreach from=$filter item=item key=key}
-	listTable.filter.{$key} = '{$item}';
-	{/foreach}
-	
-	{literal}
-	
-	function confirm_bath()
-	{
+ {include file ='library/pagefooter.lbi'}
+	<script type="text/javascript" language="JavaScript">
+	<!--
+	  listTable.recordCount = '{$record_count}';
+	  listTable.pageCount = '{$page_count}';
+	  cfm = new Object();
+	  cfm['allow'] = '{$lang.cfm_allow}';
+	  cfm['remove'] = '{$lang.cfm_remove}';
+	  cfm['deny'] = '{$lang.cfm_deny}';
+
+	  {foreach from=$filter item=item key=key}
+	  listTable.filter.{$key} = '{$item}';
+	  {/foreach}
+
+	  {literal}
+
+	  /**
+	   * 搜索评论
+	   */
+	  function searchComment()
+	  {
+		  var keyword = Utils.trim(document.forms['searchForm'].elements['keyword'].value);
+		  var send_status = document.forms['searchForm'].elements['send_status'].value;
+		  if (keyword.length > 0 ||　send_status)
+		  {
+			listTable.filter['keywords'] = keyword;
+			listTable.filter['send_status'] = send_status;
+			listTable.filter.page = 1;
+			listTable.loadList();
+		  }
+		  else
+		  {
+			  document.forms['searchForm'].elements['keyword'].focus();
+		  }
+	  }
+	  {/literal}
+
+	  function confirm_bath()
+	  {
 		var action = document.forms['listForm'].elements['sel_action'].value;
-		
+
 		return confirm(cfm[action]);
-	}
+	  }
+	//-->
 	</script>
 </body>
 </html>

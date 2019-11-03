@@ -56,7 +56,7 @@ $_LANG['mobile_number_Unknown'] = '手机号码不存在\n无法通过该号码�
 $_LANG['please_protect_authcode'] = '，请不要把验证码泄露给其他人，如非本人操作，可不用理会';
 $_LANG['you_auth_code'] = '您的验证码是：';
 $_LANG['send_auth_code'] = '验证码已发送';
-$_LANG['mobile_auth_code_error'] = '短信验证码不正确';
+$_LANG['mobile_auth_code_error'] = '手机验证码输入错误。';
 
 
 /* store 店铺街 */

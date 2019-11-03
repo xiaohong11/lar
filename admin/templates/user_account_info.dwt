@@ -4,12 +4,12 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$lang.08_members} - {$ur_here}</div>
+    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>会员 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content_common}</li>
+                    <li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
                     <li>会员充值编辑类型和到款状态是不可以修改的。</li>
                 </ul>
             </div>
@@ -38,7 +38,7 @@
                                         <div class="form_prompt"></div>
                                     </div>
                                 </div>
-                                <div class="item payment" {if $user_surplus.process_type eq 1} style=" display:none;"{/if}>
+                                <div class="item">
                                     <div class="label">{$lang.pay_mothed}：</div>
                                     <div class="label_value">
                                         <div id="user_grade" class="imitate_select select_w320">
@@ -46,10 +46,10 @@
                                           <ul {if $user_surplus.process_type eq 2 || $user_surplus.process_type eq 3}style="display:none" {/if}>
                                              <li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.please_select}</a></li>
                                              {foreach from=$payment_list item=item key=k}
-                                             <li><a href="javascript:;" data-value="{$item.pay_id}" class="ftx-01">{$item.pay_name}</a></li>
+                                             <li><a href="javascript:;" data-value="{$k}" class="ftx-01">{$item}</a></li>
                                              {/foreach}
                                           </ul>
-                                          <input name="pay_id" type="hidden" value="{$user_surplus.pay_id|default:$payment_list.0.pay_id}" id="user_grade_val">
+                                          <input name="payment" type="hidden" value="{$user_surplus.payment}" id="user_grade_val">
                                         </div>
                                     </div>
                                 </div>
@@ -102,23 +102,11 @@
                                             </div>
                                             <div class="checkbox_item">
                                                 <input type="radio" name="is_paid" value="1" class="ui-radio" id="is_paid_1" {if $user_surplus.is_paid eq 1} checked="true" {/if} {if $user_surplus.process_type eq 2 || $user_surplus.process_type eq 3 ||$action eq "edit"} disabled="true"{/if}/>
-                                                <label for="is_paid_1" class="ui-radio-label">
-                                                	{if $user_surplus.process_type eq 1}
-                                                    	{$lang.is_confirm}
-                                                    {else}
-                                                    	{$lang.confirm}
-                                                    {/if}
-                                                </label>
+                                                <label for="is_paid_1" class="ui-radio-label">{$lang.confirm}</label>
                                             </div>
                                             <div class="checkbox_item">
                                                 <input type="radio" name="is_paid" value="2" id="is_paid_2" class="ui-radio" {if $user_surplus.is_paid eq 2} checked="true" {/if} {if $user_surplus.process_type eq 2 || $user_surplus.process_type eq 3 ||$action eq "edit"} disabled="true"{/if}/>
-                                                <label for="is_paid_2" class="ui-radio-label">
-                                                	{if $user_surplus.process_type eq 1}
-                                                    	{$lang.cancel}
-                                                    {else}
-                                                    	{$lang.confirm_nopay}
-                                                    {/if}
-                                                </label>
+                                                <label for="is_paid_2" class="ui-radio-label">{$lang.cancel}</label>
                                             </div>
                                         </div>
                                     </div>
@@ -149,17 +137,6 @@
         $.divselect("#user_grade","#user_grade_val");
 
 $(function(){
-	
-	$(":input[name='process_type']").click(function(){
-		var val =$(this).val();
-		
-		if(val == 1){
-			$(".payment").hide();
-		}else{
-			$(".payment").show();
-		}
-	});
-	
     $("#submitBtn").click(function(){
             if($("#user_account_form").valid()){
                     $("#user_account_form").submit();

@@ -5,34 +5,35 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.11_system} - {$ur_here}</div>
+    	<div class="title">系统设置 - {$ur_here}</div>
         <div class="content">			
         	<div class="explanation" id="explanation">
             	<div class="ex_tit">
-					<i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span>
+					<i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span>
                     {if $open eq 1}
                     <div class="view-case">
-                    	<div class="view-case-tit"><i></i>{$lang.view_tutorials}</div>
+                    	<div class="view-case-tit"><i></i>查看教程</div>
                         <div class="view-case-info">
-                        	<a href="http://help.ecmoban.com/article-6898.html" target="_blank">{$lang.tutorials_bonus_list_one}</a>
+                        	<a href="http://help.ecmoban.com/article-6898.html" target="_blank">商城自定义导航栏操作说明</a>
                         </div>
                     </div>			
                     {/if}	
 				</div>
                 <ul>
-                    <li>{$lang.operation_prompt_content.list.0}</li>
-                    <li>{$lang.operation_prompt_content.list.1}</li>
-                    <li>{$lang.operation_prompt_content.list.2}</li>
+                	<li>该页面展示了所有商城的导航名称。</li>
+                    <li>列表页直接设置是否显示该导航、是否在新页面打开等操作。</li>
+                    <li>请合理增加导航、设置导航的位置，谨慎删除导航。</li>
                 </ul>
             </div>
             <div class="flexilist">
+            	<!--商品列表-->
                 <div class="common-head">
                     <div class="fl">
                     	<a href="{$action_link.href}"><div class="fbutton"><div class="add" title="{$action_link.text}"><span><i class="icon icon-plus"></i>{$action_link.text}</span></div></div></a>
                     </div>				
                     <div class="refresh">
-                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    	<div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>
                 </div>
                 <div class="common-content">
@@ -93,7 +94,7 @@
                                         <div class="tDiv a2">
                                             <!-- {if $val.id} -->
                                             <a href="navigator.php?act=edit&id={$val.id}" class="btn_edit"><i class="icon icon-edit"></i>{$lang.edit}</a>
-                                            <a href="navigator.php?act=del&id={$val.id}" onclick="return confirm('{$lang.ckdel}');" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                            <a href="navigator.php?act=del&id={$val.id}" onclick="return confirm('{$lang.ckdel}');" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>
                                             <!-- {/if} -->
                                         </div>
                                     </td>
@@ -115,13 +116,15 @@
 						{if $full_page}
                     </div>
                 </div>
+                <!--商品列表end-->
             </div>
 		</div>
 	</div>
  	{include file ='library/pagefooter.lbi'}
-	<script type="text/javascript">
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
+	<script type="Text/Javascript" language="JavaScript">
+	<!--
+	listTable.recordCount = '{$record_count}';
+	listTable.pageCount = '{$page_count}';
 	{foreach from=$filter item=item key=key}
 	listTable.filter.{$key} = '{$item}';
 	{/foreach}

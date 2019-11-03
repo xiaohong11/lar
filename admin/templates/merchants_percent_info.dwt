@@ -4,13 +4,13 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="javascript:history.go(-1);" class="s-back">{$lang.back}</a>{$lang.seller} - {$ur_here}</div>
+    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>商家 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content_common}</li>
-                    <li>{$lang.operation_prompt_content.info.0}</li>
+                    <li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
+                    <li>请填写合适的佣金百分比并且双方达成一致。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -50,7 +50,7 @@
             </div>
 		</div>
 	</div>
-	{include file ='library/pagefooter.lbi'}
+ {include file ='library/pagefooter.lbi'}
 	<script type="text/javascript">
         $(function(){
 			//表单验证
@@ -73,7 +73,7 @@
 				},
 				messages:{
 					percent_value:{
-						 required : '<i class="icon icon-exclamation-sign"></i>'+no_percent_value
+						 required : '<i class="icon icon-exclamation-sign"></i>请输入奖励额度'
 					}
 				}			
 			});

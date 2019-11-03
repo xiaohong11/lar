@@ -5,10 +5,10 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.08_members} - {$ur_here}</div>
+    	<div class="title">会员 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                     <li>该页面展示所有会员预留收货地址信息。</li>
                     <li>可编辑或删除会员收货地址。</li>
@@ -18,17 +18,16 @@
             <div class="flexilist">
             	<div class="common-head">
                    	<div class="refresh ml0">
-                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    	<div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>
-                    <div class="search">
-                    	<form action="javascript:;" name="searchForm" onSubmit="searchGoodsname(this);">
-                        <div class="input">
-                            <input type="text" name="user_name" class="text nofocus " placeholder="{$lang.user_name}" autocomplete="off" />
-                            <input type="submit" class="btn" name="secrch_btn" ectype="secrch_btn" value="" />
+                    <form action="javascript:searchAddress()" name="searchForm">
+                        <div class="search">
+                            <div class="input">
+                                <input type="text" name="user_name" class="text nofocus " placeholder="{$lang.user_name}" autocomplete="off" /><input type="submit" value="" class="not_btn" />
+                            </div>
                         </div>
-                        </form>
-                    </div>
+                    </form>
                 </div>
                 <div class="common-content">
                     <form method="POST" action="" name="listForm" onsubmit="return confirm_bath()">
@@ -66,7 +65,7 @@
                                     <td class="handle">
                                         <div class="tDiv a2">
                                             <a href="user_address_log.php?act=edit&address_id={$address.address_id}&user_id={$address.user_id}" title="{$lang.edit}" class="btn_edit"><i class="icon icon-edit"></i>{$lang.edit}</a>
-                                            <a href="javascript:confirm_redirect('{$lang.remove_confirm_address}', 'user_address_log.php?act=remove&id={$address.address_id}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                            <a href="javascript:confirm_redirect('{$lang.remove_confirm_address}', 'user_address_log.php?act=remove&id={$address.address_id}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -97,11 +96,11 @@
             </div>
             <div class="gj_search">
                 <div class="search-gao-list" id="searchBarOpen">
-                    <i class="icon icon-zoom-in"></i>{$lang.advanced_search}
+                    <i class="icon icon-zoom-in"></i>高级搜索
                 </div>
                 <div class="search-gao-bar">
-                    <div class="handle-btn" id="searchBarClose"><i class="icon icon-zoom-out"></i>{$lang.pack_up}</div>
-                    <div class="title"><h3>{$lang.advanced_search}</h3></div>
+                    <div class="handle-btn" id="searchBarClose"><i class="icon icon-zoom-out"></i>收起边栏</div>
+                    <div class="title"><h3>高级搜索</h3></div>
                     <form method="get" name="formSearch_senior" action="javascript:searchAddress()">
                         <div class="searchContent">
                             <div class="layout-box">
@@ -120,17 +119,17 @@
                             </div>
                         </div>
                         <div class="bot_btn">
-                            <input type="submit" class="btn red_btn" name="tj_search" value="{$lang.button_inquire}" /><input type="reset" class="btn btn_reset" name="reset" value="{$lang.button_reset_alt}" />
+                            <input type="submit" class="btn red_btn" name="tj_search" value="提交查询" /><input type="reset" class="btn btn_reset" name="reset" value="重置" />
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
- 	{include file ='library/pagefooter.lbi'}
+ {include file ='library/pagefooter.lbi'}
     <script type="text/javascript">
-    listTable.recordCount = {$record_count|default:0};
-    listTable.pageCount = {$page_count|default:1};
+    listTable.recordCount = '{$record_count}';
+    listTable.pageCount = '{$page_count}';
 
     {foreach from=$filter item=item key=key}
     listTable.filter.{$key} = '{$item}';
@@ -144,16 +143,16 @@
     /**
     * 搜索用户
     */
-	function searchAddress()
-	{
-		var frm = $("form[name='formSearch_senior']");
-	   listTable.filter['consignee'] = Utils.trim(frm.find("input[name='consignee']").val());
-	   listTable.filter['user_name'] = Utils.trim(($("form[name='searchForm']").find("input[name='user_name']").val() != '') ? $("form[name='searchForm']").find("input[name='user_name']").val() :  frm.find("input[name='user_name']").val());
-	   listTable.filter['mobile'] = Utils.trim(frm.find("input[name='mobile']").val());
-	   listTable.filter['page'] = 1;
-	   listTable.loadList();
-	}
-	$.gjSearch("-240px");  //高级搜索
+   function searchAddress()
+   {
+        var frm = $("form[name='formSearch_senior']");
+       listTable.filter['consignee'] = Utils.trim(frm.find("input[name='consignee']").val());
+       listTable.filter['user_name'] = Utils.trim(($("form[name='searchForm']").find("input[name='user_name']").val() != '') ? $("form[name='searchForm']").find("input[name='user_name']").val() :  frm.find("input[name='user_name']").val());
+       listTable.filter['mobile'] = Utils.trim(frm.find("input[name='mobile']").val());
+       listTable.filter['page'] = 1;
+       listTable.loadList();
+   }
+$.gjSearch("-240px");  //高级搜索
     </script>
 </body>
 </html>

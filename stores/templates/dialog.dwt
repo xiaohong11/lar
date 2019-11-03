@@ -10,8 +10,8 @@
         <i class="bg_yuan2"></i>
     </div>
 </div>
-{elseif $dialog_type eq 'success' || $dialog_type eq 'ajaxfail'}
-<div class="{if $dialog_type eq 'success'}success{else}fail{/if}">
+{elseif $dialog_type eq 'success'}
+<div class="success">
     <div class="dialog_head">
         <div class="icon_title"></div>
     </div>
@@ -22,7 +22,7 @@
         <i class="bg_yuan2"></i>
     </div>
     <div class="dialog_foot">
-        <a href="goods.php?act=list&page={$page}">门店商品</a>
+        <a href="goods.php?act=list">门店商品</a>
         <a href="order.php?act=list">订单列表</a>
     </div>
 </div>

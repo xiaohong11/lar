@@ -5,21 +5,21 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.synchronization} - {$ur_here}</div>
+    	<div class="title">同步 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.info.0}</li>
-                    <li>{$lang.operation_prompt_content.info.1}</li>
-                    <li>{$lang.operation_prompt_content.info.2}</li>
-                    <li class="li_color">{$lang.operation_prompt_content.info.3}</li>
+                	<li>检查images下面的文件</li>
+                    <li>同步服务器图片到OSS，根据弹窗提示，耐心等待</li>
+                    <li>由于文件在同步的过程中有部分文件OSS上传会失败，您可以重新按F5刷新再次执行即可.</li>
+                    <li class="li_color">建议：以下两个跳转链接使用右键点击新窗口打开，避免F5刷新页面丢失.</li>
                 </ul>
             </div>
             <div class="flexilist">
             	<div class="common-head">
                 	<div class="fl">
-                        <a href="goods.php?act=goods_img_list&type=1"><div class="fbutton"><div class="add" ><span>{$lang.sync_oss_img_delete}</span></div></div></a>
+                        <a href="goods.php?act=goods_img_list&type=1"><div class="fbutton"><div class="add" ><span>一键同步OSS并删除本地图片</span></div></div></a>
 					</div>
                 </div>
                 <div class="common-content">
@@ -28,9 +28,9 @@
                         <table cellpadding="1" cellspacing="1" id="listTable">
                             <thead>
                                 <tr>
-                                    <th width="45%"><div class="tDiv">{$lang.catalog_name}</div></th>
-                                    <th><div class="tDiv">{$lang.subdirectory_name}</div></th>
-                                    <th><div class="tDiv">{$lang.catalog_size}</div></th>
+                                    <th width="45%"><div class="tDiv">目录名称</div></th>
+                                    <th><div class="tDiv">子目录名称</div></th>
+                                    <th><div class="tDiv">目录大小</div></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -66,17 +66,19 @@
             </div> 
         </div>
     </div>
-	{include file ='library/pagefooter.lbi'}
-	<script type="text/javascript">
+ {include file ='library/pagefooter.lbi'}
+<script type="text/javascript">
+
 	//分页传值
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
+	listTable.recordCount = '{$record_count}';
+	listTable.pageCount = '{$page_count}';
 	listTable.query = 'file_list_query';
 
 	{foreach from=$filter item=item key=key}
 	listTable.filter.{$key} = '{$item}';
-	{/foreach}
-    </script>
+	{/foreach}		
+	
+</script>
 </body>
 </html>
 {/if}

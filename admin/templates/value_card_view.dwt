@@ -4,7 +4,7 @@
 <head>{include file ='library/admin_html_head.lbi'}</head>
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.promotion} - {$ur_here}</div>
+    	<div class="title">促销 - {$ur_here}</div>
         <div class="content">
         	<div class="tabs_info">
             	<ul>
@@ -15,23 +15,18 @@
 				</ul>
             </div>	
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.prompt_for_action}</h4><span id="explanationZoom" title="{$lang.prompt_for_action}"></span></div>
                 <ul>
                 	<li>一种类型下的储值卡列表。</li>
-                    <li>显示每个储值卡的序列号和密码</li>
-                    <li>在会员中心，我的储值卡处可进行绑定储值卡。</li>
+                        <li>显示每个储值卡的序列号和密码</li>
+                        <li>在会员中心，我的储值卡处可进行绑定储值卡。</li>
                 </ul>
             </div>
             <div class="flexilist">
 				<div class="common-head">
-                	{if $action_link}
-                    <div class="fl">
-                        <a href="{$action_link.href}"><div class="fbutton"><div class="csv" title="{$action_link.text}"><span><i class="icon icon-download-alt"></i>{$action_link.text}</span></div></div></a>
-                    </div>
-                    {/if}
 			        <div class="refresh ml0">
-                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    	<div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>
 				</div>
                 <div class="common-content">
@@ -63,7 +58,7 @@
 									<td><div class="tDiv">{$vc.bind_time}</div></td>
 									<td align="center"  class="handle">
 										<div class="tDiv">
-											<a href="javascript:;" onclick="listTable.remove({$vc.vid}, '{$lang.drop_confirm}', 'remove_vc')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+											<a href="javascript:;" onclick="listTable.remove({$vc.vid}, '{$lang.drop_confirm}', 'remove_vc')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>
 										</div>
 									</td>
 								</tr>
@@ -95,8 +90,8 @@
 	//列表导航栏设置下路选项
 	$(".ps-container").perfectScrollbar();
 		
-  listTable.recordCount = {$record_count|default:0};
-  listTable.pageCount = {$page_count|default:1};
+  listTable.recordCount = '{$record_count}';
+  listTable.pageCount = '{$page_count}';
   listTable.query = "vc_query";
 
   {foreach from=$filter item=item key=key}

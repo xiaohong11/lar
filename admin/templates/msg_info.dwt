@@ -7,12 +7,13 @@
         <div class="title"><a href="user_msg.php?act=list_all" class="s-back">{$lang.back}</a>{$ur_here}</div>
         <div class="content">
             <div class="explanation" id="explanation">
-                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content.info.0}</li>
+                    <li>{$lang.have_reply_content}</li>
                 </ul>
             </div>
             <div class="flexilist">
+            	<!--查看会员留言-->
             	<div class="common-content">
                 	<div class="mian-info">
                     	<div class="message-item message-item-user">
@@ -50,7 +51,7 @@
                                     <div class="label">{$lang.reply_content}：</div>
                                     <div class="nr">
                                         <textarea name="msg_content" class="textarea" id="msg_content">{$msg.reply_content|escape:"html"|nl2br}</textarea>
-                                        <div class="form_prompt ml100"></div>
+                                        <div class="form_prompt"></div>
                                     </div>
                                 </div>
                                 <div class="lie email_notify"><input type="checkbox" name="send_email_notice" class="ui-checkbox" value="" id="email_notify"><label for="email_notify" class="ui-label">{$lang.send_email_notice}</label></div>
@@ -75,36 +76,37 @@
                         </div>
                     </div>
                 </div>
+                <!--查看会员留言end-->
             </div>
 		</div>
 	</div>
  	{include file ='library/pagefooter.lbi'}
     <script type="text/javascript">
-	$(function(){
-		$("#submitBtn").click(function(){
-			if($("#msg_form").valid()){
-				$("#msg_form").submit();
-			}
-		});
+        $(function(){
+			$("#submitBtn").click(function(){
+				if($("#msg_form").valid()){
+					$("#msg_form").submit();
+				}
+			});
 
-		$('#msg_form').validate({
-			errorPlacement:function(error, element){
-				var error_div = element.parents('div.lie').find('div.form_prompt');
-				element.parents('div.label_value').find(".notic").hide();
-				error_div.append(error);
-			},
-			rules:{
-				msg_content : {
-					required : true
+			$('#msg_form').validate({
+				errorPlacement:function(error, element){
+					var error_div = element.parents('div.label_value').find('div.form_prompt');
+					element.parents('div.label_value').find(".notic").hide();
+					error_div.append(error);
+				},
+				rules:{
+					msg_content : {
+						required : true
+					}
+				},
+				messages:{
+					msg_content : {
+						required : '<i class="icon icon-exclamation-sign"></i>'+no_reply_content
+					}
 				}
-			},
-			messages:{
-				msg_content : {
-					required : '<i class="icon icon-exclamation-sign"></i>'+no_reply_content
-				}
-			}
+			});
 		});
-	});
     </script>     
 </body>
 </html>

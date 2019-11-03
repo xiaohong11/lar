@@ -80,6 +80,7 @@
     </div>
 </div>
 {include file ='library/seller_footer.lbi'}
+<script language="javascript" src="js/validator.js"></script>
 <script type="text/javascript">
 $(function(){
 	//表单验证

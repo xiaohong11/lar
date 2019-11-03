@@ -30,7 +30,7 @@
                                 <dt>{$lang.label_shipping_fee}</dt>
                                 <dd>{$order.shipping_fee}</dd>
                             </dl>
-                            <dl style=" width:50%;">
+                            <dl>
                             	<dt>{$lang.label_insure_yn}</dt>
                                 <dd>{if $insure_yn}{$lang.yes}{else}{$lang.no}{/if}</dd>
                                 <dt>{$lang.label_insure_fee}</dt>
@@ -46,13 +46,13 @@
                             	<dt>{$lang.label_consignee}</dt>
                                 <dd>{$order.consignee|escape}</dd>
                                 <dt>{$lang.label_email}</dt>
-                                <dd>{if $order.email}{$order.email}{else}{$lang.wu}{/if}</dd>
+                                <dd>{$order.email}</dd>
                             </dl>
                             <dl>
-                            	<dt>{$lang.label_mobile}</dt>
-                                <dd>{if $order.mobile}{$order.mobile|escape}{else}{$lang.wu}{/if}</dd>
                             	<dt>{$lang.label_tel}</dt>
-                                <dd>{if $order.tel}{$order.tel}{else}{$lang.wu}{/if}</dd>
+                                <dd>{$order.tel}</dd>
+                                <dt>{$lang.label_mobile}</dt>
+                                <dd>{if $order.mobile}{$order.mobile|escape}{else}{$lang.wu}{/if}</dd>
                             </dl>
                             <dl>
                             	<dt>{$lang.label_best_time}</dt>
@@ -64,8 +64,12 @@
                             	<dt>{$lang.label_address}</dt>
                                 <dd>[{$order.region}] {$order.address|escape}</dd>
                                 <dt>{$lang.label_zipcode}</dt>
-                                <dd>{if $order.zipcode}{$order.zipcode|escape}{else}{$lang.wu}{/if}</dd>
-                            </dl>										
+                                <dd>{$order.zipcode|escape}</dd>
+                            </dl>
+                            <dl style="width:50%">
+                                <dt>{$lang.buyer_message}：</dt>
+                                <dd>{if $order.postscript}{$order.postscript}{else}{$lang.wu}{/if}</dd>
+                            </dl>													
                         </div>
                     </div>
                     
@@ -93,23 +97,20 @@
                                     <tbody>
 									{foreach from=$goods_list item=goods}
                                         <tr class="tr">
-                                            <td>
+                                            <td class="first">
 											<div class="order_goods_div">
-											<div class="img mr10"><img src="{$goods.goods_thumb}" width="72" /></div>
+											<div class="img mr10"><img src="{$goods.goods_thumb}" width="72" height="72" /></div>
 											<div class="name">
 											{if $goods.goods_id gt 0 && $goods.extension_code neq 'package_buy'}
 											<a href="../goods.php?id={$goods.goods_id}" target="_blank">{$goods.goods_name} {if $goods.brand_name}[ {$goods.brand_name} ]{/if}
 											{if $goods.is_gift}{if $goods.goods_price > 0}{$lang.remark_favourable}{else}{$lang.remark_gift}{/if}{/if}
 											{if $goods.parent_id > 0}{$lang.remark_fittings}{/if}</a>
 											{elseif $goods.goods_id gt 0 && $goods.extension_code eq 'package_buy'}
-											<a href="javascript:void(0)">{$goods.goods_name}<span style="color:#FF0000;">{$lang.remark_package}</span></a>
-											<div id="suit_{$goods.goods_id}" class="package_goods">
-                                            	<div class="tit">{$lang.contain_content}：</div>
-                                                <ul>
+											<a href="javascript:void(0)" onclick="setSuitShow({$goods.goods_id})">{$goods.goods_name}<span style="color:#FF0000;">{$lang.remark_package}</span></a>
+											<div id="suit_{$goods.goods_id}" style="display:none">
 												{foreach from=$goods.package_goods_list item=package_goods_list}
-												<li><a href="../goods.php?id={$package_goods_list.goods_id}" target="_blank">{$package_goods_list.goods_name}</a></li>
+												  <a href="../goods.php?id={$package_goods_list.goods_id}" target="_blank">{$package_goods_list.goods_name}</a><br />
 												{/foreach}
-                                                </ul>
 											</div>
 											</div>
 											</div>
@@ -124,14 +125,10 @@
 											<td>
 												{if $goods.extension_code eq 'package_buy'}
 												{foreach from=$goods.package_goods_list item=package_goods_list}
-												<input name="send_number[{$goods.rec_id}][{$package_goods_list.g_p}]" type="text" id="send_number_{$goods.rec_id}_{$package_goods_list.goods_id}" class="text mb5" value="{$package_goods_list.send}" size="10" maxlength="11" {$package_goods_list.readonly}/>
+												<input name="send_number[{$goods.rec_id}][{$package_goods_list.g_p}]" type="text" class="text" id="send_number_{$goods.rec_id}_{$package_goods_list.goods_id}" class="text_3" value="{$package_goods_list.send}" size="10" maxlength="11" {$package_goods_list.readonly}/>
 												{/foreach}
 												{else}
-                                                    {if !$goods.ret_id || ($goods.return_status && $goods.return_status == 6)}
-                                                    <input name="send_number[{$goods.rec_id}]" type="text" id="send_number_{$goods.rec_id}" class="text" value="{$goods.send}" size="10" maxlength="11" {$goods.readonly}/>
-                                                    {else}
-                                                    <span class="red">{$lang.application_refund}</span>
-                                                    {/if}
+												<input name="send_number[{$goods.rec_id}]" type="text" class="text" id="send_number_{$goods.rec_id}" class="text_3" value="{$goods.send}" size="10" maxlength="11" {$goods.readonly}/>
 												{/if}
 											</td>
                                             <td>{$goods.goods_attr|nl2br}</td>
@@ -146,7 +143,6 @@
                                         </tr>
 									{/foreach}
 										<tr>
-                                        	<td></td>
 											<td></td>
 											<td></td>
 											<td></td>
@@ -229,45 +225,44 @@
                         </div>
                     </div>
                     <div class="step order_total">
-                        <div class="step_info">
-                            <div class="operation_record">
-                                <table cellpadding="0" cellspacing="0">
-                                    <thead>
-                                        <th width="5%">&nbsp;</th>
-                                        <th width="15%">{$lang.action_user}</th>
-                                        <th width="15%">{$lang.action_time}</th>
-                                        <th width="15%">{$lang.order_status}</th>
-                                        <th width="15%">{$lang.pay_status}</th>
-                                        <th width="15%">{$lang.shipping_status}</th>
-                                        <th width="20%">{$lang.action_note}</th>
-                                    </thead>
-                                    <tbody>
-                                    {foreach from=$action_list item=action}
-                                        <tr>
-                                        <td>&nbsp;</td>
-                                        <td>{$action.action_user}</td>
-                                        <td>{$action.action_time}</td>
-                                        <td>{$action.order_status}</td>
-                                        <td>{$action.pay_status}</td>
-                                        <td>{$action.shipping_status}</td>
-                                        <td>{$action.action_note|nl2br}</td>
-                                        </tr>
-                                    {/foreach}
-                                    </tbody>
-                                </table>
+                            <div class="step_info">
+                                <div class="operation_record">
+                                    <table cellpadding="0" cellspacing="0">
+                                        <thead>
+                                            <th width="5%">&nbsp;</th>
+                                            <th width="15%">{$lang.action_user}</th>
+                                            <th width="15%">{$lang.action_time}</th>
+                                            <th width="15%">{$lang.order_status}</th>
+                                            <th width="15%">{$lang.pay_status}</th>
+                                            <th width="15%">{$lang.shipping_status}</th>
+                                            <th width="20%">{$lang.action_note}</th>
+                                        </thead>
+                                        <tbody>
+                                        {foreach from=$action_list item=action}
+                                            <tr>
+                                            <td>&nbsp;</td>
+                                            <td>{$action.action_user}</td>
+                                            <td>{$action.action_time}</td>
+                                            <td>{$action.order_status}</td>
+                                            <td>{$action.pay_status}</td>
+                                            <td>{$action.shipping_status}</td>
+                                            <td>{$action.action_note|nl2br}</td>
+                                            </tr>
+                                        {/foreach}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
                 </div>
 			</form>
             </div>
 		</div>
 	</div> 
-	{include file ='library/pagefooter.lbi'}
+ {include file ='library/pagefooter.lbi'}
     <script type="text/javascript">
-	//超值礼包
-	$(".package_goods ul").perfectScrollbar("destroy");
-	$(".package_goods ul").perfectScrollbar();
+		//移动到一键发货悬浮展示详情方法调用
+		//orderLevitate("one_delivery","order_goods_layer",12.5);
     </script>     
 </body>
 </html>

@@ -4,7 +4,7 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="order.php?act=list" class="s-back">{$lang.back}</a>{$lang.order_word} - {$lang.02_order_list} - {$lang.operation_error}</div>
+    	<div class="title"><a href="order.php?act=list" class="s-back">{$lang.back}</a>订单 - 订单列表 - 操作错误</div>
         <div class="content">
             <div class="flexilist">
 				<ul class="lilist">

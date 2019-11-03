@@ -4,7 +4,7 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.seller} - {$ur_here}</div>
+    	<div class="title">商家 - {$ur_here}</div>
         <div class="content">
         	<div class="tabs_info">
             	<ul>
@@ -13,9 +13,9 @@
                 </ul>
             </div>		
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content_common}</li>
+                	<li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
                     <li>请设置合适且看着舒适的店铺背景，可给店铺加分。</li>
                 </ul>
             </div>
@@ -32,7 +32,7 @@
                                             <input type="file" class="type-file-file" id="bgimg" name="bgimg" data-state="imgfile" size="30" hidefocus="true" value="" />
                                             {if $shop_bg.bgimg}
                                             <span class="show">
-                                                <a href="{$shop_bg.bgimg}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="{$shop_bg.bgimg}" ectype="tooltip" title="tooltip"></i></a>
+                                                <a href="{$shop_bg.bgimg}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$shop_bg.bgimg}>')" onmouseout="toolTip()"></i></a>
                                             </span>
                                             {/if}
                                             <input type="text" name="textfile" class="type-file-text" id="textfield" {if $shop_bg.bgimg}value="{$shop_bg.bgimg}"{/if} autocomplete="off" readonly />
@@ -43,7 +43,7 @@
                                     <div class="label">{$lang.background_repeat}：</div>
                                     <div class="label_value">
 										<div id="bgrepeat_div" class="imitate_select select_w320">
-											<div class="cite">{$lang.please_select}</div>
+											<div class="cite">请选择</div>
 											<ul>
 												<li><a href="javascript:;" data-value="no-repeat" class="ftx-01">{$lang.not_repeat}</a></li>
 												<li><a href="javascript:;" data-value="repeat" class="ftx-01">{$lang.repeat}</a></li>
@@ -107,7 +107,7 @@
 		</div>
     </div>
  	{include file ='library/pagefooter.lbi'}
- 	{insert_scripts files="../js/spectrum-master/spectrum.js"}
+ 	{insert_scripts files="spectrum-master/spectrum.js"}
 	<script type="text/javascript">
 	//选色 start
 	$(function(){

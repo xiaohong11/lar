@@ -4,22 +4,26 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.goods_alt} - {$ur_here}</div>
+    	<div class="title">商品 - {$ur_here}</div>
         <div class="content">
         	{include file ='library/batch_tab.lbi'}
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
-                {$lang.user_guide}
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
+                <ul>
+                	<li>根据商品分类、品牌或关键字搜索出需要导出的商品。</li>
+                    <li>选择数据格式和编码，进行商品导出。</li>
+                </ul>
             </div>
             <div class="flexilist">
                 <div class="common-content">
                     <div class="step" ectype="filter" data-filter="goods">
                         <div class="step_content">
+							<!--通用部分 start-->
 							<div class="goods_search_div">
 								<div class="search_select">
 									<div class="categorySelect">
 										<div class="selection">
-											<input type="text" name="category_name" id="category_name" class="text w250 valid" value="{$lang.select_cat}" autocomplete="off" readonly data-filter="cat_name" />
+											<input type="text" name="category_name" id="category_name" class="text w250 valid" value="请选择分类" autocomplete="off" readonly data-filter="cat_name" />
 											<input type="hidden" name="category_id" id="category_id" value="0" data-filter="cat_id" />
 										</div>
 										<div class="select-container" style="display:none;">
@@ -30,7 +34,7 @@
 								<div class="search_select">
 									<div class="brandSelect">
 										<div class="selection">
-											<input type="text" name="brand_name" id="brand_name" class="text w120 valid" value="{$lang.select_barnd}" autocomplete="off" readonly data-filter="brand_name" />
+											<input type="text" name="brand_name" id="brand_name" class="text w120 valid" value="请选择品牌" autocomplete="off" readonly data-filter="brand_name" />
 											<input type="hidden" name="brand_id" id="brand_id" value="0" data-filter="brand_id" />
 										</div>
 										<div class="brand-select-container" style="display:none;">
@@ -38,49 +42,45 @@
 										</div>
 									</div>                            
 								</div>
-								<input type="text" name="keyword" class="text w150" value="" placeholder={$lang.input_keywords} data-filter="keyword" autocomplete="off" />
-                                <div style="border:1px dotted #f00; padding:0px 0px 0px 10px;" class="fl mr10 hide" ectype="limit_content">
-                                    <input type="text" name="limit_start" class="text w50" value="0" placeholder="{$lang.limit_start}" data-filter="limit_start" autocomplete="off" />
-                                    <input type="text" name="limit_number" class="text w50" value="50" placeholder="{$lang.limit_number}" data-filter="limit_number" autocomplete="off" />
-                                </div>
-                                <a href="javascript:void(0);" class="btn btn30" ectype="limit_button"><i class="icon icon-edit"></i> 范围</a>
-								<a href="javascript:void(0);" class="btn btn30" ectype="search"><i class="icon icon-search"></i>{$lang.search_word}</a>
-							</div>                          
+								<input type="text" name="keyword" class="text w150" value="" placeholder="请输入关键字" data-filter="keyword" autocomplete="off" />
+								<a href="javascript:void(0);" class="btn btn30" ectype="search"><i class="icon icon-search"></i>搜索</a>
+							</div>
+							<!--通用部分 end-->                            
                             <div class="move_div">
                                 <div class="move_left">
-                                    <h4>{$lang.all_goods}</h4>
+                                    <h4>可选商品</h4>
                                     <div class="move_info">
                                         <div class="move_list">
 											{include file="library/move_left.lbi"}
                                         </div>
                                     </div>
                                     <div class="move_handle">
-                                        <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">{$lang.check_all}</a>
-                                        <a href="javascript:void(0);" class="btn btn25 red_btn" ectype="sub" data-operation="add_export_goods">{$lang.button_submit_alt}</a>
+                                        <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">全选</a>
+                                        <a href="javascript:void(0);" class="btn btn25 red_btn" ectype="sub" data-operation="add_export_goods">确定</a>
                                     </div>
                                 </div>
                                 <div class="move_middle">
                                     <div class="move_point" data-operation="add_export_goods"></div>
                                 </div>
                                 <div class="move_right">
-                                    <h4>{$lang.export_data_goods}</h4>
+                                    <h4>数据批量导出的商品</h4>
                                     <div class="move_info">
                                         <div class="move_list" id="export_goods">
                                             {include file="library/move_right.lbi"}
                                         </div>
                                     </div>
                                     <div class="move_handle">
-                                        <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">{$lang.check_all}</a>
-										<a href="javascript:void(0);" class="btn btn25 btn_red" ectype="sub" data-operation="drop_export_goods">{$lang.remove}</a>
+                                        <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">全选</a>
+										<a href="javascript:void(0);" class="btn btn25 btn_red" ectype="sub" data-operation="drop_export_goods">移除</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="move_buttom_div">
                             	<div class="data_format_select">
-                                	<div class="label">{$lang.export_format}：</div>
+                                	<div class="label">数据格式：</div>
                                     <div class="value">
                                     	<div id="dataformat_select" class="imitate_select select_w320">
-                                            <div class="cite">{$lang.please_select}</div>
+                                            <div class="cite">请选择</div>
                                             <ul style="display: none;">
 												{foreach from=$data_format item=data key=key}
                                                 <li><a href="javascript:;" data-value="{$key}" class="ftx-01">{$data}</a></li>
@@ -90,7 +90,8 @@
                                         </div>
                                     </div>
                                 </div>
-							
+								
+								<!--重新修改 start-->
 								<div id="export_format"></div>
                                 <div class="data_format_content" id="ecshop_form" style="display:none">
 									<form action="goods_export.php" method="post" name="theForm" >
@@ -98,7 +99,7 @@
                                         <div class="label">{$lang.select_charset}：</div>
                                         <div class="value">
 											<div id="charset_select" class="imitate_select select_w320">
-												<div class="cite">{$lang.please_select}</div>
+												<div class="cite">请选择</div>
 												<ul style="display: none;">
 													<li><a href="javascript:;" data-value="UTF8" class="ftx-01">UTF8</a></li>
 													<li><a href="javascript:;" data-value="GB2312" class="ftx-01">GB2312</a></li>
@@ -266,7 +267,7 @@
                                         <div class="label">{$lang.select_charset}：</div>
                                         <div class="value">
 											<div id="custom_charset_select" class="imitate_select select_w320">
-												<div class="cite">{$lang.please_select}</div>
+												<div class="cite">请选择</div>
 												<ul style="display: none;">
 													<li><a href="javascript:;" data-value="UTF8" class="ftx-01">UTF8</a></li>
 													<li><a href="javascript:;" data-value="GB2312" class="ftx-01">GB2312</a></li>
@@ -278,13 +279,14 @@
                                     </div>									
 									
 									<div class="step" ectype="filter" data-filter="goods_type">
+										<!--<div class="step_title"><i class="ui-step"></i><h3>商品类型</h3></div>-->
 										<div class="step_content">									
 											<div class="goods_search_div">
 												<div class="search_select">
 													<div id="" class="imitate_select select_w170">
-														<div class="cite">{$lang.select_type}</div>
+														<div class="cite">选择类型</div>
 														<ul style="display: none;">
-															<li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.all_type}</a></li>
+															<li><a href="javascript:;" data-value="0" class="ftx-01">所有类型</a></li>
 															{foreach from=$goods_type_list item=goods_type}
 															<li><a href="javascript:;" data-value="{$goods_type.cat_id}" class="ftx-01">{$goods_type.cat_name}</a></li>
 															{/foreach}
@@ -292,11 +294,11 @@
 														<input name="goods_type" type="hidden" value="0" id="" data-filter="keyword" />
 													</div>
 												</div>
-												<a href="javascript:void(0);" class="btn btn30" ectype="search"><i class="icon icon-search"></i>{$lang.search_word}</a>
+												<a href="javascript:void(0);" class="btn btn30" ectype="search"><i class="icon icon-search"></i>搜索</a>
 											</div>									
 											<div class="move_div">
 												<div class="move_left">
-													<h4>{$lang.select_data}</h4>
+													<h4>可选数据列</h4>
 													<div class="move_info">
 														<div class="move_list">
 															<ul>
@@ -307,23 +309,23 @@
 														</div>
 													</div>
 													<div class="move_handle">
-														<a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">{$lang.check_all}</a>
-														<a href="javascript:void(0);" class="btn btn25 red_btn" ectype="sub" data-operation="add_goods_fields">{$lang.button_submit_alt}</a>
+														<a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">全选</a>
+														<a href="javascript:void(0);" class="btn btn25 red_btn" ectype="sub" data-operation="add_goods_fields">确定</a>
 													</div>
 												</div>
 												<div class="move_middle">
 													<div class="move_point" data-operation="add_goods_fields"></div>
 												</div>
 												<div class="move_right">
-													<h4>{$lang.output_data}</h4>
+													<h4>输出数据列</h4>
 													<div class="move_info">
 														<div class="move_list" id="goods_type">
 															{include file="library/move_right.lbi"}
 														</div>
 													</div>
 													<div class="move_handle">
-														<a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">{$lang.check_all}</a>
-														<a href="javascript:void(0);" class="btn btn25 btn_red" ectype="sub" data-operation="drop_goods_fields">{$lang.remove}</a>
+														<a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">全选</a>
+														<a href="javascript:void(0);" class="btn btn25 btn_red" ectype="sub" data-operation="drop_goods_fields">移除</a>
 													</div>
 												</div>
 											</div>	
@@ -342,25 +344,32 @@
 										</div>
                                     </div>
 									</form>
-                                </div>
+                                </div>															
+								<!--重新修改 end-->				
+
+								<!--数据分步导出-->
 								<div class="list-div" id="listDiv">
 								  <table cellspacing='0' cellpadding='0' id='listTable'>
 									<tr>
-									  <th>{$lang.page_number}</th>
-									  <th>{$lang.total_number}</th>
-									  <th>{$lang.time}</th>
+									  <th>页数</th>
+									  <th>总数</th>
+									  <th>时间</th>
 									</tr>
 								  </table>
 								</div>
-								<div style="display:none;border: 1px solid rgb(204, 0, 0);margin-top:10px; padding: 4px; background-color: rgb(255, 255, 206); color: rgb(206, 0, 0);" id="errorMsg" ></div>
+								<div style="display:none;border: 1px solid rgb(204, 0, 0);margin-top:10px; padding: 4px; background-color: rgb(255, 255, 206); color: rgb(206, 0, 0);" id="errorMsg" ></div>								
+								<!--直接引用 end-->
                             </div>
                         </div>
                     </div>
                 </div>
+                <!--添加新商品end-->
             </div>
 		</div>
 	</div>
 	{include file ='library/pagefooter.lbi'}
+	{insert_scripts files="jquery.purebox.js"}
+    {literal}
 	<script type="text/javascript">
 	//滚动轴
 	$(".move_list").perfectScrollbar();
@@ -428,7 +437,7 @@
            location.href = 'goods_export.php?act=act_export_ecshop&filter=' + filter + '&page=' + result.page + '&page_size=' + result.page_size + '&total=' + result.total+ '&mark=' + result.mark;
        }else
        {
-           alert(downloaded_completed);
+           alert('已下载完成！');
        }
        
        //没有执行错误
@@ -684,6 +693,19 @@
         }
     }
 
+    /*function copy_search_result(src_obj, dst_obj)
+    {
+        dst_obj.cat_id.value = src_obj.cat_id.value;
+        dst_obj.brand_id.value = src_obj.brand_id.value;
+        dst_obj.keyword.value = src_obj.keyword.value;
+        var goods_lists = Utils.$('dst_goods_lists');
+        for (var i=0,l=goods_lists.options.length; i<l; i++)
+        {
+            var separator = (i==0)?'':',';
+            dst_obj.goods_ids.value += separator + goods_lists.options[i].value;
+        }
+    }*/
+
 	//修改 by wu
     function copy_search_result(src_obj, dst_obj)
     {
@@ -756,6 +778,124 @@
         }
     }
 
+    /* 操作自定义导出商品的Select Box */
+    var MySelectBox;
+    var MySelectBox2;
+    if (!MySelectBox)
+    {
+        var global = $import("../js/global.js","js");
+        global.onload = global.onreadystatechange= function()
+        {
+            if(this.readyState && this.readyState=="loading")return;
+            var selectbox = $import("js/selectbox.js","js");
+            selectbox.onload = selectbox.onreadystatechange = function()
+            {
+                if(this.readyState && this.readyState=="loading")return;
+                MySelectBox = new SelectBox('src_goods_fields', 'dst_goods_fields');
+                MySelectBox2 = new SelectBox('src_goods_lists', 'dst_goods_lists', true);
+            }
+        }
+    }
+    if (Utils.$('addItem'))
+    {
+        Utils.$('addItem').onclick = function ()
+        {
+            MySelectBox.addItem();
+        }
+    }
+    if (Utils.$('delItem'))
+    {
+        Utils.$('delItem').onclick = function ()
+        {
+            MySelectBox.delItem();
+        }
+    }
+    if (Utils.$('addAllItem'))
+    {
+        Utils.$('addAllItem').onclick = function ()
+        {
+            MySelectBox.addItem(true);
+        }
+    }
+    if (Utils.$('delAllItem'))
+    {
+        Utils.$('delAllItem').onclick = function ()
+        {
+            MySelectBox.delItem(true);
+        }
+    }
+    if (Utils.$('src_goods_fields'))
+    {
+        Utils.$('src_goods_fields').ondblclick = function ()
+        {
+            MySelectBox.addItem();
+        }
+    }
+    if (Utils.$('dst_goods_fields'))
+    {
+        Utils.$('dst_goods_fields').ondblclick = function ()
+        {
+            MySelectBox.delItem();
+        }
+    }
+    if (Utils.$('mvUp'))
+    {
+        Utils.$('mvUp').onclick = function ()
+        {
+            MySelectBox.moveItem('up');
+        }
+    }
+    if (Utils.$('mvDown'))
+    {
+        Utils.$('mvDown').onclick = function ()
+        {
+            MySelectBox.moveItem('down');
+        }
+    }
+
+    if (Utils.$('addGoods'))
+    {
+        Utils.$('addGoods').onclick = function ()
+        {
+            MySelectBox2.addItem();
+        }
+    }
+    if (Utils.$('delGoods'))
+    {
+        Utils.$('delGoods').onclick = function ()
+        {
+            MySelectBox2.delItem();
+        }
+    }
+    if (Utils.$('addAllGoods'))
+    {
+        Utils.$('addAllGoods').onclick = function ()
+        {
+            MySelectBox2.addItem(true);
+        }
+    }
+    if (Utils.$('delAllGoods'))
+    {
+        Utils.$('delAllGoods').onclick = function ()
+        {
+            MySelectBox2.delItem(true);
+        }
+    }
+    if (Utils.$('src_goods_lists'))
+    {
+        Utils.$('src_goods_lists').ondblclick = function ()
+        {
+            MySelectBox2.addItem();
+        }
+    }
+    if (Utils.$('dst_goods_lists'))
+    {
+        Utils.$('dst_goods_lists').ondblclick = function ()
+        {
+            MySelectBox2.delItem();
+        }
+    }
+
     /**
      * 上一次操作的对象
      */
@@ -804,17 +944,7 @@
     {
         window.addEventListener("load", init_data_format, false);
     }
-
-    //导出设置
-    $(function(){
-        $(document).on('click', "[ectype='limit_button']", function(){
-            if($("[ectype='limit_content']").hasClass('hide')){
-                $("[ectype='limit_content']").removeClass('hide');
-            }else{
-                $("[ectype='limit_content']").addClass('hide');
-            }
-        })
-    })
 </script>
+{/literal}
 </body>
 </html>

@@ -23,10 +23,9 @@
                             <th width="18%">
                             	<a href="javascript:;">{$lang.record_id}</a>
                             </th>
-                            <th width="16%"><a href="javascript:listTable.sort('type_name');">{$lang.coupons_sn}</a>{$sort_type_name}</th>
-                            <th width="16%"><a href="javascript:listTable.sort('user_id');">{$lang.user_name}</a>{$sort_user_id}</th>
-                            <th width="12%">{$lang.type_money}</th>
-                            <th width="16%"><a href="javascript:listTable.sort('order_id');">{$lang.order_id}</a>{$sort_order_id}</th>
+                            <th width="20%"><a href="javascript:listTable.sort('type_name');">{$lang.coupons_sn}</a>{$sort_type_name}</th>
+                            <th width="20%"><a href="javascript:listTable.sort('user_id');">{$lang.user_name}</a>{$sort_user_id}</th>
+                            <th width="20%"><a href="javascript:listTable.sort('order_id');">{$lang.order_id}</a>{$sort_order_id}</th>
                             <th width="14%"><a href="javascript:listTable.sort('used_time');">{$lang.used_time}</a>{$sort_use_time}{$sort_used_time}</th>
                             <th>{$lang.handler}</th>
                         </tr>
@@ -39,7 +38,6 @@
                             </td>
                             <td>{$coupons.uc_sn}</td>
                             <td>{$coupons.user_name}</td>
-                            <td>{$coupons.cou_money}</td>
                             <td>{$coupons.order_sn}</td>
                             <td>{$coupons.is_use_time}</td>
                             <td class="ecsc-table-handle">

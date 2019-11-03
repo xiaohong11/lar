@@ -39,17 +39,14 @@
                                 {if $list.id eq $grade_id}
                                     <span class="red">已成功</span>
                                 {else}           
-                                    {if $is_expiry}
                                     <a href="merchants_upgrade.php?act=application_grade&grade_id={$list.id}" title="申请">立即申请</a>&nbsp;
-                                    {else}
-                                    <span>不可申请</span>&nbsp;
-                                    {/if}
                                 {/if}
                             </td>
                         </tr>
                         {foreachelse}
                         <tr><td class="no-records" colspan="10">{$lang.no_article}</td></tr>
                         {/foreach}
+
                     </table>
                 </div>
                 </form>

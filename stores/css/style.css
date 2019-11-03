@@ -335,7 +335,6 @@ input.error{ background-color: #FFF0F0;background-repeat: repeat;border: 1px das
 .list-div .tr_bg_blue td{ background:#f4fdfb;}
 .sep-row td{ height:15px;}
 
-
 .product{ overflow:hidden; padding:10px 0;}
 .product .img{ width:46px; height:45px; float:left;}
 .product .name{ float:left; width:calc(100% - 66px); margin-left:20px; height:44px; overflow:hidden;}
@@ -351,13 +350,6 @@ input.error{ background-color: #FFF0F0;background-repeat: repeat;border: 1px das
 .handle a.btn_trash{ border: 1px solid #dcdcdc; color:#707070}
 .handle a.btn_trash:hover{ border-color:#4fd5b2; color:#4fd5b2; background:#fff;}
 
-.grab-icon{ width: 20px; height: 20px; background: #139ff0; color: #fff; text-align: center; line-height: 20px; border-radius: 3px; display: inline-block; margin-left: 20px; }
-
-.order_state_tab{ border-bottom:1px solid #e1e1e1; height:30px; float:left; margin: 20px 0; width: 100%;}
-.order_state_tab a{ float:left; display:block; height:29px; border:1px solid #e1e1e1; border-bottom:0; border-radius:3px 3px 0 0; margin-right:7px; text-align:center; color:#717171; line-height:29px; padding:0 15px;}
-.order_state_tab a:last-child{ margin-right:0;}
-.order_state_tab a.current{ color:#268ff2; font-weight:bold; border-color:#268ff2; }
-.order_state_tab a.current{ border-bottom:1px solid #fff;}
 
 .footer{ height:40px; width:100%; background:#52565a; text-align:center;}
 .footer p{ line-height:40px; color:#fff;}
@@ -392,7 +384,7 @@ input.error{ background-color: #FFF0F0;background-repeat: repeat;border: 1px das
 
 .imitate_select{ float: left; position:relative;border: 1px solid #dbdbdb;border-radius: 2px;height: 28px;line-height: 28px;padding: 0 10px; min-width:80px; background:#fff;}
 .imitate_select .cite{ background: #fff url(../images/xjt.png) right 11px no-repeat; cursor:pointer; text-align:left; padding-right:20px; height:28px; overflow:hidden;white-space: nowrap;text-overflow: ellipsis;}
-.imitate_select ul{ position:absolute; top:28px; left:-1px; background:#fff; width:100%; max-height:392px; border:1px solid #dbdbdb; border-radius:0 0 3px 3px; display:none; z-index:99; overflow:hidden;}
+.imitate_select ul{ position:absolute; top:28px; left:-1px; background:#fff; width:100%; border:1px solid #dbdbdb; border-radius:0 0 3px 3px; display:none; z-index:99;}
 .imitate_select ul li{ padding:0 10px; cursor:pointer; text-align:left;}
 .imitate_select ul li:hover{ background:#f5faff;}
 .imitate_select ul li a{ display:block;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;}
@@ -423,7 +415,7 @@ input.error{ background-color: #FFF0F0;background-repeat: repeat;border: 1px das
 .order-hd td.hd-info{text-align:left;}
 .order_product{ overflow:hidden; padding:10px 0;}
 .order_product .img{ width:50px; height:50px; float:left; border:1px solid #dcdcdc;}
-.order_product .name{ float:left; margin:0 23px 0 15px; width:340px; text-align:left; line-height:22px; min-height: 44px;}
+.order_product .name{ float:left; margin:0 36px 0 15px; width:340px; text-align:left; line-height:22px; overflow:hidden; height:44px;}
 .order_product .name a{ color:#268ff2;}
 .order_product .name a:hover{ color:#ec5151;}
 .border-left{ border-left:1px solid #dcdcdc;}
@@ -606,14 +598,3 @@ input.error{ background-color: #FFF0F0;background-repeat: repeat;border: 1px das
 .type-file-box input[type="file"]{ position:absolute; left:0; opacity:0;filter: alpha(opacity=0); width:104px; height:30px; cursor:pointer;}
 .type-file-box .type-file-text{ float:left; height:20px; padding:5px 0; border:0; width:178px; overflow: hidden;white-space: nowrap;text-overflow: ellipsis; margin-left:10px; background:#fff;}
 .type-file-box .show{ float:left; margin-left:10px; height:30px; line-height:30px;}
-
-/* 列表页全中 */
-.list-div .tr_bg_org td{ background:#fffccb;}
-.list-div .sign input[type='checkbox']{ display:none;}
-.list-div .sign .checkbox_stars{ width:12px; height:12px; background:url(../images/input_checkbox.png) no-repeat; display:inline-block;}
-.list-div .sign .checkbox:checked+label,.list-div .sign .checked{ background:url(../images/input_checked.png) no-repeat;}
-.tfoot_btninfo{ font-size:0; position:relative;}
-.tfoot_btninfo input.btn{ height:30px; line-height:28px; padding:0 15px; color:#fff; background:#31b4e1; font-size:12px; float:left; margin-right:10px;}
-.tfoot_btninfo input.btn:hover{ background:#31b4e1; color:#fff}
-.tfoot_btninfo input.btn_disabled,.tfoot_btninfo input.btn_disabled:hover{ border-color:#8e8e8e; background:#8e8e8e; cursor:default; color:#fff;}
-.tfoot_btninfo .item{ float:left;}

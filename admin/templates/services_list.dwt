@@ -31,7 +31,7 @@
                 </ul>
             </div>
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                 	<li>该页面展示了所有客服的信息。</li>
                     <li>可删除、编辑客服。</li>
@@ -40,7 +40,7 @@
             <div class="contentWarp_item">
                 <div class="section_select">
                     <div class="item item_order">
-                        <i class="icon"><img src="../mobile/public/assets/chat/images/reception1.png" width='74px' height='74px'></i>
+                        <i class="icon"><img src="../kefu/public/assets/images/reception1.png" width='74px' height='74px'></i>
                         <div class="desc">
                             <div class="tit">{$times.times}</div>
                             <span>历史接待次数</span>
@@ -48,7 +48,7 @@
                         <i class="icon"></i>
                     </div>
                     <div class="item item_order">
-                        <i class="icon"><img src="../mobile/public/assets/chat/images/reception2.png" width='74px' height='74px'></i>
+                        <i class="icon"><img src="../kefu/public/assets/images/reception2.png" width='74px' height='74px'></i>
                         <div class="desc">
                             <div class="tit">{$times.people}</div>
                             <span>历史接待人数</span>
@@ -56,7 +56,7 @@
                         <i class="icon"></i>
                     </div>
                     <div class="item item_order">
-                        <i class="icon"><img src="../mobile/public/assets/chat/images/reception3.png" width='74px' height='74px'></i>
+                        <i class="icon"><img src="../kefu/public/assets/images/reception3.png" width='74px' height='74px'></i>
                         <div class="desc">
                             <div class="tit">{$times.today_times}</div>
                             <span>今日接待次数</span>
@@ -64,7 +64,7 @@
                         <i class="icon"></i>
                     </div>
                     <div class="item item_order">
-                        <i class="icon"><img src="../mobile/public/assets/chat/images/reception4.png" width='74px' height='74px'></i>
+                        <i class="icon"><img src="../kefu/public/assets/images/reception4.png" width='74px' height='74px'></i>
                         <div class="desc">
                             <div class="tit">{$times.today_people}</div>
                             <span>今日接待人数</span>
@@ -78,18 +78,18 @@
             	<!--客服人员列表-->
                 <div class="common-head">
                     <div class="fl">
-                        <a href="services.php?act=add{if $pix}&extension_code={$pix}{/if}">
+                        <a href="services.php?act=add">
                         <div class="fbutton"><div class="add" title="添加客服">
                         <span><i class="icon icon-plus"></i>添加客服</span>
                         </div></div>
                         </a>
                     </div>
                     <div class="search">
-                        <form action="javascript:;" name="searchForm" onSubmit="searchGoodsname(this);">
+                        <form name='search' action='services.php?act=list' method='post'>
                         <div class="input">
                             <input type="text" name="keyword" value="{$filter.keyword}" class="text nofocus w140" placeholder="请输入关键词" autocomplete="off">
                             <input type="hidden" name="extension_code" value="{$filter.extension_code}">
-                            <input type="submit" class="btn" name="secrch_btn" ectype="secrch_btn" value="" />
+                            <button class="btn" name="secrch_btn"></button>
                         </div>
                         </form>
                     </div>
@@ -124,7 +124,7 @@
                                                <a title="恢复客服"  class="btn_edit" onclick='backservice();'><i class="icon icon-edit"></i>恢复客服</a>
                                            {else}
                                                <a href="services.php?act=edit&id={$services.id}" title="{$lang.edit}"  class="btn_edit"><i class="icon icon-edit"></i>{$lang.edit}</a>
-                                           <a href="javascript:void(0);" onclick="listTable.remove({$services.id}, '{$lang.drop_confirm}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                           <a href="javascript:void(0);" onclick="listTable.remove({$services.id}, '{$lang.drop_confirm}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>
                                           {/if}
                                         </div>
                                     </td>

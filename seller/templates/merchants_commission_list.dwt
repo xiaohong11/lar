@@ -17,19 +17,21 @@
                     <div class="ex_tit"><i class="sc_icon"></i><h4>温馨提示</h4></div>
                     <ul>
                     	<li>商城所有店铺结算订单相关信息管理。</li>
-                    	<li>【订单】：表示是按店铺比例或者分类比例</li>
-                    	<li>【商品】：表示是商品单独设置比例结算</li>
+                    	<li>【订单】：表示是按店铺佣金比例或者分类佣金比例</li>
+                    	<li>【商品】：表示是商品单独设置佣金比例</li>
                     </ul>
                 </div>
                 
                 <form method="post" action="" name="listForm" onsubmit="return confirm(batch_drop_confirm);">
                 <div class="list-div" id="listDiv">
                 {/if}
-                  <table class="ecsc-default-table goods-default-table mt20">	
+                  <table class="ecsc-default-table mt20">	
                     <thead>
                     <tr>
                       <th width="6%">
-                        <div class="first_all">{$lang.record_id}</div>
+                        <div class="first_all">
+                            <input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox" id="all" class="ui-checkbox" /><label class="ui-label" for="all">{$lang.record_id}</label>
+                        </div>
                       </th>
                       <th width="6%">{$lang.suppliers_name}</th>
                       <th width="18%">{$lang.suppliers_company}</th>
@@ -45,7 +47,9 @@
                     {foreach from=$merchants_commission_list item=commission}
                     <tr>
                       <td class="first_td_checkbox">
-                        <div class="first_all">{$commission.server_id}</div>
+                        <div class="first_all">
+                            <input type="checkbox" name="checkboxes[]" value="{$commission.server_id}" id="checkbox_{$commission.server_id}" class="ui-checkbox" /><label class="ui-label" for="checkbox_{$commission.server_id}">{$commission.server_id}</label>
+                        </div>
                       </td>
                       <td class="first-cell">{$commission.user_name}</td>
                       <td>{$commission.companyName}</td>  
@@ -84,8 +88,8 @@
                     <tr><td class="no-records" colspan="11">{$lang.no_records}</td></tr>
                     {/foreach}
                     </tbody>
+                    <tfoot><tr><td colspan="11" class="tc">{include file="page.dwt"}</td></tr></tfoot>
                   </table>
-                  {include file="page.dwt"}
                 {if $full_page}
                 </div>
                 </form>					

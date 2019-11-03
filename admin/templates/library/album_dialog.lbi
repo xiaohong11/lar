@@ -6,11 +6,11 @@
                 <div class="cite">请选择图库...</div>
                 <ul style="display:none;" ectype="album_list_check">
                     <li><a href="javascript:;" data-value="0" class="ftx-01">请选择...</a></li>
-                    {foreach from=$cat_select item=list}
-                    <li><a href="javascript:;" data-value="{$list.album_id}" class="ftx-01">{$list.name}</a></li>
+                    {foreach from=$album_list item=gallery_album}
+                    <li><a href="javascript:;" data-value="{$gallery_album.album_id}" class="ftx-01">{$gallery_album.album_mame}</a></li>
                     {/foreach}
                 </ul>
-                <input name="album_id" type="hidden" value="{$album_id|default:0}" id="album_id_val" ectype="album_id_val">
+                <input name="album_id" type="hidden" value="{$album_id|default:0}" id="album_id_val">
             </div>
             <div class="imitate_select select_w220" id="sort_name">
                 <div class="cite">请选择...</div>
@@ -25,8 +25,9 @@
                 <input name="sort_name" type="hidden" value="2" id="sort_name_val">
             </div>
             <div class="fl"><a href="javascript:void(0);"  class="btn red_btn btn30" ectype="add_album">添加图库</a></div>
-            <div class="fl ml10"><a href="javascript:void(0);"  class="btn red_btn btn30" ectype="albumFile" id="albumFile">上传图片</a></div>
-			<div class="fl album_Percent ml20 hide">
+            <div class="fl ml10"><a href="javascript:void(0);"  class="btn red_btn btn30" ectype="albumFile" id="albumFile">上传商品</a></div>
+			<div class="item album_Percent hide">
+                <div class="label">&nbsp;</div>
                 <div class="label_value">
                     <div class="text_div mr0 w120 pl0"><span class="Percent_pic" ></span></div><div class="Percent"></div>
                 </div>
@@ -38,46 +39,6 @@
                     {foreach from=$pic_list item=pic_album key=key}
                     <li data-url="{$pic_album.pic_file}"><div class="img-container"><img src="{$pic_album.pic_file}"></div><i class="checked"></i></li>
                     {foreachelse}
-                    <li class="notic">暂无图片</li>
-                    {/foreach}
-                </ul>
-                <div class="clear"></div>
-                {include file="library/lib_page.lbi"}
-            </div>
-        </div>
-    </div>
-	
-    <!-- {else} -->
-    <div id="dialogTxt">
-        {include file="library/goods_mobile_test.lbi"}
-    </div>
-    <!-- {/if} -->
-<!-- {else} -->
-	<div id="dialogAlbum" ectype="album-warp" data-inid="{$inid}" data-act="gallery_album_list">
-        <div class="dialogTop" ectype="albumFilter">
-            <div class="imitate_select select_w220 mr0" id="album_file">
-                <div class="cite">{if $album_mame}{$album_mame}{else}请选择图库...{/if}</div>
-                <ul style="display:none;" ectype="album_list_check">
-                    {foreach from=$cat_select item=list}
-                    <li><a href="javascript:;" data-value="{$list.album_id}" class="ftx-01">{$list.name}</a></li>
-                    {/foreach}
-                </ul>
-                <input name="album_id" type="hidden" value="{$album_id|default:0}" ectype="album_id_val" id="album_file_val">
-            </div>
-            <div class="fl ml10"><a href="javascript:void(0);"  class="btn red_btn btn30" ectype="add_album">添加图库</a></div>
-            <div class="fl ml10"><a href="javascript:void(0);"  class="btn red_btn btn30" ectype="albumFile" id="albumFile">上传图片</a></div>
-            <div class="fl album_Percent ml20 hide">
-                <div class="label_value">
-                    <div class="text_div mr0 w120 pl0"><span class="Percent_pic" ></span></div><div class="Percent"></div>
-                </div>
-            </div>
-        </div>
-        <div class="table_list" ectype="pic_list">
-            <div class="gallery_album" data-act="get_albun_pic" data-vis="2" data-inid="pic_list" data-url='get_ajax_content.php' data-where="sort_name={$filter.sort_name}&album_id={$filter.album_id}&image_type={$image_type}&is_vis={$is_vis}&inid={$inid}">
-                <ul class="ga-images-ul" ectype="pic_replace" data-type="{if $inid eq 'gallery_album'}radio{else}check{/if}">
-                    {foreach from=$pic_list item=pic_album key=key}
-                    <li data-url="{$pic_album.pic_file}" data-picid="{$pic_album.pic_id}"><div class="img-container"><img src="{$pic_album.pic_file}"></div><i class="checked"></i></li>
-                    {foreachelse}
                         <li class="notic">暂无图片</li>
                     {/foreach}
                 </ul>
@@ -85,10 +46,9 @@
                 {include file="library/lib_page.lbi"}
             </div>
         </div>
+        {include file="library/goods_mobile_detail.lbi"}
     </div>
-<!-- {/if} -->
-<!--{if $log_type neq 'word'}-->
-<script type="text/javascript">
+	<script type="text/javascript">
 		var uploader_gallery = new plupload.Uploader({//创建实例的构造方法
 			runtimes: 'html5,flash,silverlight,html4', //上传插件初始化选用那种方式的优先级顺序
 			browse_button: 'albumFile', // 上传按钮
@@ -96,7 +56,7 @@
 			filters: {
 				max_file_size: '2mb', //最大上传文件大小（格式100b, 10kb, 10mb, 1gb）
 				mime_types: [//允许文件上传类型
-					{title: "files", extensions: "jpg,png,gif,jpeg"}
+					{title: "files", extensions: "jpg,png,gif"}
 				]
 			},
 			multi_selection: true, //true:ctrl多文件上传, false 单文件上传
@@ -120,8 +80,8 @@
 					$(".Percent").html(Math.round(window.Percent) + "%");
 					var data = eval("(" + info.response + ")");
 					
-					$("[ectype='pic_replace']").find(".notic").remove();
-					$("[ectype='pic_replace']").prepend("<li data-url='" + data.pic + "' data-picid='" + data.picid + "'><div class='img-container'><img src='" + data.pic + "'></div><i class='checked'></i></li>");
+					$("[ectype='pic_replace']").html("");
+					$("[ectype='pic_replace']").prepend("<li data-url='" + data.pic + "'><div class='img-container'><img src='" + data.pic + "'></div><i class='checked'></i></li>");
 				},
 				UploadComplete:function(up,file){//所有文件上传成功时触发
 					$(".album_Percent").hide();
@@ -135,7 +95,7 @@
 		uploader_gallery.init();
 
 		function album_submitBtn(){
-			var album_id = $("[ectype='album_id_val']").val();
+			var album_id = $("#album_id_val").val();
 			var data = {
 				album_id: album_id
 			};
@@ -143,4 +103,37 @@
 			uploader_gallery.start();
 		};
 	</script>
-<!--{/if}-->
+    <!-- {else} -->
+    <div id="dialogTxt">
+        {include file="library/goods_mobile_test.lbi"}
+    </div>
+    <!-- {/if} -->
+<!-- {else} -->
+	<div id="dialogAlbum" ectype="album-warp" data-inid="{$inid}" data-act="gallery_album_list">
+        <div class="dialogTop" ectype="albumFilter">
+            <div class="imitate_select select_w220 mr0" id="album_file">
+                <div class="cite">{if $album_mame}{$album_mame}{else}请选择图库...{/if}</div>
+                <ul style="display:none;">
+                    {foreach from=$album_list item=gallery_album}
+                    <li><a href="javascript:;" data-value="{$gallery_album.album_id}" class="ftx-01">{$gallery_album.album_mame}</a></li>
+                    {/foreach}
+                </ul>
+                <input name="album_id" type="hidden" value="{$album_id|default:0}" id="album_file_val">
+            </div>
+        </div>
+        <div class="table_list" ectype="pic_list">
+            <div class="gallery_album" data-act="get_albun_pic" data-vis="2" data-inid="pic_list" data-url='get_ajax_content.php' data-where="sort_name={$filter.sort_name}&album_id={$filter.album_id}&image_type={$image_type}&is_vis={$is_vis}&inid={$inid}">
+                <ul class="ga-images-ul" ectype="pic_replace" data-type="{if $inid eq 'gallery_album'}radio{else}check{/if}">
+                    {foreach from=$pic_list item=pic_album key=key}
+                    <li data-url="{$pic_album.pic_file}" data-picid="{$pic_album.pic_id}"><div class="img-container"><img src="{$pic_album.pic_file}"></div><i class="checked"></i></li>
+                    {foreachelse}
+                        <li class="notic">暂无图片</li>
+                    {/foreach}
+                </ul>
+                <div class="clear"></div>
+                {include file="library/lib_page.lbi"}
+            </div>
+        </div>
+        {include file="library/goods_mobile_detail.lbi"}
+    </div>
+<!-- {/if} -->

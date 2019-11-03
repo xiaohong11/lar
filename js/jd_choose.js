@@ -97,6 +97,32 @@ $(function(){
     if(lt_a>=lt_b){
     	$('.click_more').remove();
     }
+    
+    // 品牌搜索
+    $(".input_search input").keyup(function(){
+      //多选拼音中文搜索
+      var pinyin = codefans_net_CC2PY($(this).val());
+      $('.get_more li').css('display','none');
+      $('.get_more li a').each(function(){
+          if(codefans_net_CC2PY($(this).text()).toLowerCase()==pinyin.toLowerCase()){
+            $(this).parents('li').css('display','block');
+          }
+    })
+
+	// 单项中文拼音搜索 
+	if($('.wrap_brand').is(':visible')){
+		  $('.brand_img_word').css('display','none');	
+		  $('.brand_img_word').each(function(){
+			if(codefans_net_CC2PY($(this).find('strong').text()).toLowerCase()==pinyin.toLowerCase()){
+				$(this).css('display','block');
+			}
+			
+			if(codefans_net_CC2PY($(this).find('b').text()).toLowerCase()==pinyin.toLowerCase()){
+				$(this).css('display','block');
+			  }
+		  })
+		}
+	});
 
     // 品牌单选多选跳转
     $('.yes_bt').click(function(){
@@ -236,8 +262,6 @@ $(function(){
 				
 				if($this.hasClass("s-l-more")){
 					$this.html("<i class='iconfont icon-down'></i>");
-					
-					$(".brand_select_more").perfectScrollbar("destroy");
 				}else{
 					$this.children().removeClass("icon_down");
 				}
@@ -251,9 +275,6 @@ $(function(){
 				//2017模板新增判断
 				if($this.hasClass("s-l-more")){
 					$this.html("<i class='iconfont icon-up'></i>");
-					
-					$(".brand_select_more").perfectScrollbar("destroy");
-					$(".brand_select_more").perfectScrollbar();
 				}else{
 					$this.children().addClass("icon_down");
 				}
@@ -309,8 +330,6 @@ $(function(){
 				//2017模板新增判断
 				if($this.hasClass("s-l-multiple")){
 					$this.html("<i class='iconfont icon-plus'></i>"+json_languages.multi_select);
-					
-					$(".brand_select_more").perfectScrollbar("destroy");
 				}else{
 					$this.html("<i class='icon'></i>"+json_languages.multi_select);
 				}
@@ -328,9 +347,6 @@ $(function(){
 				//2017模板新增判断
 				if($this.hasClass("s-l-multiple")){
 					$this.html("<i class='iconfont icon-reduce'></i>"+json_languages.Pack_up);
-					
-					$(".brand_select_more").perfectScrollbar("destroy");
-					$(".brand_select_more").perfectScrollbar();
 				}else{
 					$this.html("<i class='icon'></i>"+json_languages.Pack_up);
 				}
@@ -346,9 +362,8 @@ $(function(){
 				
 				brands.addClass("multiple").parents("li").siblings().find(".multiple").removeClass("multiple");
 				
-                if(brands.length != 1){
-				    attr_list.find("a").removeAttr('href');
-				}
+				attr_list.find("a").removeAttr('href');
+				
 				same_li.find("dd").addClass("get_me");
 				
 				li.siblings().find(".multiple").removeClass("multiple");
@@ -580,4 +595,4 @@ $(function(){
      var r = window.location.search.substr(1).match(reg);
      if (r!=null) return unescape(r[2]); return null;
     }
-});
+})

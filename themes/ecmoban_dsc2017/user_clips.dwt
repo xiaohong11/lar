@@ -13,8 +13,9 @@
 <!-- #BeginLibraryItem "/library/js_languages_new.lbi" --><!-- #EndLibraryItem -->
 <link rel="stylesheet" type="text/css" href="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/css/user.css">
 <link rel="stylesheet" type="text/css" href="../js/perfect-scrollbar/perfect-scrollbar.min.css" />
-</head>
+</script>
 
+</head>
 <body>
 <!-- #BeginLibraryItem "/library/page_header_common.lbi" --><!-- #EndLibraryItem -->
 <div class="user-content clearfix">
@@ -29,11 +30,7 @@
                 </div>
                 <div class="name">
                     <h2>{$user_default_info.nick_name}</h2>
-					{if $user_default_info.special_rank}
-                    <div class="">{$user_default_info.rank_name}</div>
-					{else}
-					<div class="user-rank user-rank-{$user_default_info.rank_sort|default:1}">{$user_default_info.rank_name}</div>
-					{/if}
+                    <div class="user-rank user-rank-1">{$user_default_info.rank_name}</div>
                 </div>
             </div>
         </div>
@@ -48,10 +45,10 @@
                 </div>
                 <div class="name">
                     <h2>{$info.nick_name}</h2>
-                    {if $user_default_info.special_rank}
-                    <div class="">{$user_default_info.rank_name}</div>
+                    {if $special_rank}
+                    <div class="user-rank user-rank-1"></div>
                     {else}
-                    <div class="user-rank user-rank-{$user_default_info.rank_sort|default:1}">{$user_default_info.rank_name}</div>
+                    <div class="user-rank user-rank-1">{$rank.user_rank.rank_name}</div>
                     {/if}
                 </div>
             </div>
@@ -78,7 +75,7 @@
             <!-- #BeginLibraryItem "/library/user_menu.lbi" --><!-- #EndLibraryItem -->
         </div>
     </div>
-    <div class="user-main" ectype="userMain" data-action="{if $action eq 'default'}default{else}noDefault{/if}">
+    <div class="user-main" ectype="userMain">
         <!-- {if $action neq 'default'} -->
         <div class="user-crumbs hide">
             <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
@@ -168,28 +165,21 @@
                     <div class="tr">
                         <div class="td td-goods">
                             {foreach from=$order.goods item=goods name=name}
-                            {assign var="order_goods_num" value=$smarty.foreach.name.iteration}
 							{if $smarty.foreach.name.total gt 1}
-                                {if $goods.og_extension_code neq 'package_buy'}
-                                	{if $smarty.foreach.name.index lt 4}
-                                    <div class="c-img"><a href="{$goods.url}"><img src="{if $goods.goods_thumb}{$goods.goods_thumb}{else}{$order.no_picture}{/if}" alt=""></a></div>
-                                    {/if}
-                                {else}
-                                    <div class="c-img"><a href="./package.php"><img src="{if $goods.goods_thumb}./data/gallery_album/package_goods_default.jpg{else}{$order.no_picture}{/if}" alt=""></a></div> 
-                                {/if}
+							{if $goods.extension_code neq 'package_buy'}
+							<div class="c-img"><a href="{$goods.url}"><img src="{if $goods.goods_thumb}{$goods.goods_thumb}{else}{$order.no_picture}{/if}" alt=""></a></div>
 							{else}
-                                {if $goods.og_extension_code neq 'package_buy'}
-                                    <div class="c-img"><a href="{$goods.url}"><img src="{if $goods.goods_thumb}{$goods.goods_thumb}{else}{$order.no_picture}{/if}" alt=""></a></div>
-                                {else}
-                                    <div class="c-img"><a href="./package.php"><img src="{if $goods.goods_thumb}./data/gallery_album/package_goods_default.jpg{else}{$order.no_picture}{/if}" alt=""></a></div> 
-                                {/if}
-								<div class="c-info">{$goods.goods_name}</div>
+							<div class="c-img"><a href="javascript:void(0);"><img src="../images/17184624079016pa.jpg" alt=""></a></div>
+							{/if}
+							{else}
+                            {if $goods.extension_code neq 'package_buy'}
+							<div class="c-img"><a href="{$goods.url}"><img src="{if $goods.goods_thumb}{$goods.goods_thumb}{else}{$order.no_picture}{/if}" alt=""></a></div>
+							{else}
+							<div class="c-img"><a href="javascript:void(0);"><img src="../images/17184624079016pa.jpg" alt=""></a></div>
+							{/if}
+							<div class="c-info">{$goods.goods_name}</div>
 							{/if}
                             {/foreach}
-                            
-                            {if $order_goods_num gt 4}
-                            <div class="ellipsis">....</div>
-                            {/if}
                         </div>
                         <div class="td td-price">{$order.total_fee}</div>
                         <div class="td td-name">{$order.consignee}</div>
@@ -215,7 +205,7 @@
             <div class="user-section">
                 <div class="user-title">
                     <h2>{$lang.Recent_collection}</h2>
-                    <a href="user.php?act=collection_list" class="more">{$lang.see_all_Collection}</a>
+                    <a href="" class="more">{$lang.see_all_Collection}</a>
                 </div>
                 <div class="user-index-collection-list">
                     {foreach from=$collection_goods item=goods}
@@ -232,16 +222,8 @@
                             {/if}
                         </div>
                         <div class="td td-shop">
-                            <a href="{$goods.shop_url}" class="name">{$goods.shop_name}</a>
-                            {if $goods.is_IM eq 1 || $goods.is_dsc}
-                            <a id="IM" onclick="openWin(this)" href="javascript:;" goods_id="{$goods.goods_id}" class="iconfont icon-kefu user-shop-kefu"></a>
-                            {else}
-                                {if $goods.kf_type eq 1}
-                                <a href="http://www.taobao.com/webww/ww.php?ver=3&touid={$order.kf_ww}&siteid=cntaobao&status=1&charset=utf-8" class="iconfont icon-kefu user-shop-kefu" target="_blank"></a>
-                                {else}
-                                <a href="http://wpa.qq.com/msgrd?v=3&uin={$order.kf_qq}&site=qq&menu=yes" class="iconfont icon-kefu user-shop-kefu" target="_blank"></a>
-                                {/if}
-                            {/if}
+                            <a href="" class="name">{$goods.shop_name}</a>
+                            <a href="" class="iconfont icon-kefu"></a>
                         </div>
                         <div class="td td-handle"><a href="{$goods.url}" class="sc-btn">立即购买</a></div>
                     </div>
@@ -299,7 +281,7 @@
                 <dl class="item">
                     <dt class="item-t">
                         <div class="t-handle">
-                            <a href="javascript:void(0);" ectype="goods_del_booking" data-url="user.php?act=act_del_booking&id={$item.rec_id}" class="sc-btn">取消订购</a>
+                            <a href="user.php?act=act_del_booking&id={$item.rec_id}" data-dialog="goods_del_booking" data-divid="delete_del_booking" data-goodsid="0" class="sc-btn">取消订购</a>
                         </div>
                         <a href="{$item.url}" class="t-img"><img src="{$item.goods_thumb}" alt=""></a>
                         <div class="t-info">
@@ -416,7 +398,7 @@
                 <h2>意见建议</h2>
             </div>
             <div class="user-message-warp clearfix">
-                <form action="user.php" method="post" enctype="multipart/form-data" name="formMsg">
+                <form action="user.php" method="post" enctype="multipart/form-data" name="formMsg" onSubmit="return submitMsg()">
                     <div class="user-items">
                         <!--{if $order_info}-->
                         <div class="item">
@@ -429,7 +411,7 @@
                         <input name="order_id" type="hidden" value="{$order_info.order_id}" />
                         <!--{else}-->
                         <div class="item">
-                            <div class="label"><em class="red">*</em>&nbsp;{$lang.message_type}：</div>
+                            <div class="label">{$lang.message_type}：</div>
                             <div class="value">
                                 <div class="radio-item">
                                     <input type="radio" checked="" name="msg_type" class="ui-radio" id="checkbox-message" value="0">
@@ -455,17 +437,16 @@
                         </div>
                         <!--{/if}-->
                         <div class="item">
-                            <div class="label"><em class="red">*</em>&nbsp;{$lang.message_title}：</div>
+                            <div class="label">{$lang.message_title}：</div>
                             <div class="value">
                                 <input type="text" name="msg_title" class="text text-2">
-                                <div class="form_prompt"></div>
+                                <div class="notic"></div>
                             </div>
                         </div>
                         <div class="item">
-                            <div class="label"><em class="red">*</em>&nbsp;{$lang.message_content}：</div>
+                            <div class="label">{$lang.message_content}：</div>
                             <div class="value">
                                 <textarea name="msg_content" class="textarea textarea2"></textarea>
-                                <div class="form_prompt"></div>
                             </div>
                         </div>
                         <div class="item">
@@ -479,26 +460,11 @@
                                 <span class="remind">{$lang.message_type_list}，附件大小不得超过{$upload_size_limit}。</span>
                             </div>
                         </div>
-                        <!--{if $enabled_captcha}-->
-                        <div class="item">
-                            <div class="label"><em class="red">*</em>&nbsp;{$lang.comment_captcha}：</div>
-                            <div class="item-value">
-                            	<div class="captcha_input">
-                                    <input type="text" class="text w100" id="captcha" name="captcha">
-                                    <img src="captcha_verify.php?captcha=is_common&{$rand}" alt="captcha" class="captcha_img" onClick="this.src='captcha_verify.php?captcha=is_common&'+Math.random()" data-key="captcha_common" />
-                                </div>
-								<div class="form_prompt"></div>
-                            </div>
-                        </div>
-                        <!--{/if}-->
                         <div class="item item-button">
                             <div class="label">&nbsp;</div>
                             <div class="value">
-								{if $is_order eq 1}
-								<input type="hidden" name="is_order" value="1" />
-								{/if}
                                 <input type="hidden" name="act" value="act_add_message" />
-                                <input type="submit" class="sc-btn sc-redBg-btn" value="{$lang.submit_goods}" id="pingjia_form">
+                                <input type="submit" class="sc-btn sc-redBg-btn pingjia_form" value="{$lang.submit_goods}">
                             </div>
                         </div>
                     </div>
@@ -507,14 +473,10 @@
             <!--{if $message_list}-->
             <div class="user-title">
                 <h2>{$lang.label_message}</h2>
-				<ul class="tabs">
-                    <li {if $is_order eq 0}class="active"{/if}><a href="user.php?act=message_list">普通留言</a></li>
-                    {if $is_have_order}<li {if $is_order eq 1}class="active"{/if}><a href="user.php?act=message_list&is_order=1">订单留言</a></li>{/if}
-                </ul>
             </div>
-            <div class="user-message-list"> 
+            <div class="user-message-list">
                 <!--{foreach from=$message_list item=message key=key name=message} -->
-                <div class="m-item{if $smarty.foreach.message.last} last{/if}">
+                <div class="m-item {if $smarty.foreach.message.last} last{/if}">
                     <div class="u-ico"><img src="{if $user_id}{if $user_info.user_picture}{$user_info.user_picture}{else}themes/<?php echo $GLOBALS['_CFG']['template']; ?>/images/touxiang.jpg{/if}{else}themes/<?php echo $GLOBALS['_CFG']['template']; ?>/images/avatar.png{/if}"></div>
                     <div class="ud-right">
                         <div class="m-tit">
@@ -526,20 +488,15 @@
                                 留言
                                 {/if}
                             </span>
-							{if $is_order eq 1}<div class="fl ml5">订单号:{$message.order_sn}</div>{/if}
                             <div class="fr">
-								{if $is_order eq 1}
-									<a href="user.php?act=del_msg&amp;id={$key}&amp;is_order=1&amp;order_id={$message.order_id}" onclick="if (!confirm('{$lang.confirm_remove_msg}')) return false;" class="ftx-05 fr ml0">{$lang.drop}</a>
-								{else}
-									<a href="user.php?act=del_msg&amp;id={$key}&amp;order_id={$message.order_id}" onclick="if (!confirm('{$lang.confirm_remove_msg}')) return false;" class="ftx-05 fr ml0">{$lang.drop}</a>
-								{/if}
+                                <a href="user.php?act=del_msg&amp;id={$key}&amp;order_id={$message.order_id}" onclick="if (!confirm('{$lang.confirm_remove_msg}')) return false;" class="ftx-05 fr ml0">{$lang.drop}</a>
                                 <em class="mr10">{$message.msg_time}</em>
                             </div>
                         </div>
                         <div class="txt">{$message.msg_content}</div>
                         <!-- {if $message.message_img} 如果上传了图片-->
                         <div class="fr">
-                            <a href="data/feedbackimg/{$message.message_img}" {if $message.message_type eq 1}class="nyroModal"{/if}>{$lang.view_upload_file}</a>
+                            <a href="data/feedbackimg/{$message.message_img}" class="nyroModal">{$lang.view_upload_file}</a>
                         </div>
                         <!--{/if}-->
                         <!-- {if $message.re_msg_content} -->
@@ -602,7 +559,7 @@
                         </div>
                         <div class="cont">
                             <div class="aff-form">
-                                <textarea class="aff-textarea" name="" id="affTextarea" value='{$shopurl}?u={$userid}'>{$shopurl}?u={$userid}</textarea>
+                                <textarea class="aff-textarea" name="" id="affTextarea" value='<a href="{$shopurl}?u={$userid}" target="_blank">{$dwt_shop_name}</a>'>{$shopurl}?u={$userid}</textarea>
                                 <div id="clip_container" class="fr relative">
                                     <a href="javascript:void(0);" class="sc-btn sc-redBg-btn" id="clip_button">{$lang.code_copy}</a>
                                 </div>
@@ -743,7 +700,6 @@
                                     <div class="c-info">
                                         <div class="info-name"><a href="{$item.goods_url}" target="_blank" title="{$item.goods_name}">{$item.goods_name}</a></div>
                                         <div class="info-price"><b>{$item.goods_price}</b><i>×</i><span>{$item.goods_number}</span></div>
-                                        <div class="info-attr">{if $item.goods_attr} [{$item.goods_attr}]{/if}</div>
                                     </div>
                                 </div>
                             </div>
@@ -815,7 +771,6 @@
                                     <div class="c-img"><a href="goods.php?id={$item.goods_id}" target="_blank" title="{$item.goods_name}"><img src="{$item.goods_thumb}" alt=""></a></div>
                                     <div class="c-info">
                                         <div class="info-name"><a href="goods.php?id={$item.goods_id}" target="_blank" title="{$item.goods_name}">{$item.goods_name}</a></div>
-                                        <div>{if $item.goods_attr} [{$item.goods_attr}]{/if}</div>
                                         <div class="info-price"><b>{$item.goods_price}</b><i>×</i><span>{$item.goods_number}</span></div>
                                     </div>
                                 </div>
@@ -1725,7 +1680,7 @@
                         </div>
 						<div class="item">
                             <div class="label"><em class="red">*</em>注册地址：</div>
-                            <div class="value"><input type="text" value="{$vat_info.company_address}" name="company_address" class="text"><div class="notic">请正确填写公司注册地址</div><div class="form_prompt"></div></div>
+                            <div class="value"><input type="text" value="{$vat_info.company_address}" name="company_address" class="text"><div class="notic">请正确填写公司名称</div><div class="form_prompt"></div></div>
                         </div>
                         <div class="item">
                             <div class="label"><em class="red">*</em>纳税人识别码：</div>
@@ -1740,7 +1695,7 @@
                             <div class="value"><input type="text" value="{$vat_info.bank_of_deposit}" name="bank_of_deposit" class="text"><div class="notic">开户行精确到某某支行</div><div class="form_prompt"></div></div>
                         </div>
                         <div class="item">
-                            <div class="label"><em class="red">*</em>银行账户：</div>
+                            <div class="label">银行账户：</div>
                             <div class="value"><input type="text" value="{$vat_info.bank_account}" name="bank_account" ectype="bank_card" class="text"><div class="notic">请正确银行账号</div><div class="form_prompt"><label class="error" ectype="bname"></label></div></div>
                         </div>
                         <div class="item mb0">
@@ -1748,7 +1703,7 @@
                             <div class="value">
                                 <div class="checkbox-item lh30">
                                     <input type="checkbox" name="have_read" checked="checked" value='1' class="ui-checkbox" id="invoice_checkbox">
-                                    <label for="invoice_checkbox" class="ui-label">我已阅读并同意<a href="article.php?id=56" target="_blank">《增票资质确认书》</a></label>
+                                    <label for="invoice_checkbox" class="ui-label">我已阅读并同意<a href="#" target="_blank">《增票资质确认书》</a></label>
                                 </div>
 								<div class="form_prompt" id="have_read"></div>
                             </div>
@@ -1917,6 +1872,7 @@
         <!-- 我的发票 end-->
      </div>
 </div>
+<!-- #BeginLibraryItem "/library/common_html.lbi" --><!-- #EndLibraryItem -->
 
 <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
 
@@ -1926,13 +1882,33 @@
 <!--{/if}-->
 <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/dsc-common.js"></script>
 <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/jquery.purebox.js"></script>
+<script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/ZeroClipboard/ZeroClipboard.js"></script>
+<!--{if $action eq 'collection_list' ||  $action eq 'store_list'||  $action eq 'focus_brand'}-->
+<script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/sc_memake.js"></script>
+<!--{/if}-->
+
 <script type="text/javascript">
-//复制粘贴邀请链接
-$("#clip_button").click(function(){
-	var val = $("#affTextarea").val();
-	
-	copyTextToClipboard(val);
-});
+function init() {
+    var clip = null;
+    var val = $("#affTextarea").text();
+    if(val){
+        clip = new ZeroClipboard.Client();
+        ZeroClipboard.setMoviePath("themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/ZeroClipboard/ZeroClipboard.swf");
+        clip.setHandCursor(true);   
+        clip.addEventListener('mouseOver', function (client) {
+            clip.setText(val);
+        });
+        
+        clip.addEventListener('complete', function (client, text) {
+            pbDialog(fuzhizgantie,"",0,"","",40);
+        });
+        clip.glue('clip_button', 'clip_container' );
+    }
+}
+
+$(window).load(function(){
+    init();
+})
 
 $(function(){
     $(".nyroModal").nyroModal();
@@ -1941,6 +1917,7 @@ $(function(){
 <!--{if $action eq 'store_list'}-->
 $(".shop-right").slide({mainCell:".shop-bd ul",effect:"left",pnLoop:false,autoPlay:false,autoPage:true,prevCell:".prev",nextCell:".next",vis:4});
 <!--{/if}-->
+
 </script>
     
 <!--{if $action eq 'add_booking'} 缺货登记-->
@@ -2210,10 +2187,6 @@ $("*[ectype='inv_form']").validate({
 		},
 		bank_of_deposit : {
 			required : true
-		},
-		bank_account : {
-			required : true,
-			bankCardNum : true
 		}
 	},
 	messages : {
@@ -2232,104 +2205,10 @@ $("*[ectype='inv_form']").validate({
 		},
 		bank_of_deposit : {
 			required : "请填写开户行名称"
-		},
-		bank_account : {
-			required : "请填写银行卡",
-			bankCardNum :"银行卡号不正确"
 		}
 	}
 });
 </script>
-<!--{/if}-->
-
-<!--{if $action eq 'message_list'} 我的留言界面 start-->
-<script type="text/javascript">
-$(function(){
-    $("#pingjia_form").on("click",function(){
-        if($("form[name='formMsg']").valid()){
-            $("form[name='formMsg']").submit();
-        }
-    });
-    
-    $("form[name='formMsg']").validate({
-        errorPlacement:function(error, element){
-            var error_div = element.parents('div.item').find('div.form_prompt');
-            error_div.html("").append(error);
-        },
-        ignore:".ignore",
-        rules : {
-            msg_title : {
-                required : true,
-                minlength: 2,
-                maxlength: 50
-            },
-            msg_content:{
-                required : true
-            },
-            user_email:{
-                required : true,
-                email : true
-            }
-            <!--{if $enabled_captcha}-->
-            ,captcha:{
-                required : true,
-                maxlength : 4,
-                remote : {
-                    cache: false,
-                    async:false,
-                    type:'POST',
-                    url:'ajax_dialog.php?act=ajax_captcha&seKey='+$("input[name='captcha']").siblings(".captcha_img").data("key"),
-                    data:{
-                        captcha:function(){
-                            return $("input[name='captcha']").val();
-                        }
-                    },
-                    dataFilter:function(data,type){
-                        if(data == "false"){
-                            $("input[name='captcha']").siblings(".captcha_img").click();
-                        }
-                        return data;
-                    }
-                }
-            }
-            <!--{/if}-->
-        },
-        messages : {
-            msg_title : {
-                required : "<i class='iconfont icon-info-sign'></i> {$lang.commentTitle_not}",
-                minlength: "<i class='iconfont icon-info-sign'></i> {$lang.commentTitle_xz}",
-                maxlength: "<i class='iconfont icon-info-sign'></i> {$lang.commentTitle_xz}"
-            },
-            msg_content : {
-                required : "<i class='iconfont icon-info-sign'></i> {$lang.content_not}"
-            },
-            user_email:{
-                required : "<i class='iconfont icon-info-sign'></i> " + json_languages.null_email_goods,
-                email : "<i class='iconfont icon-info-sign'></i> " + json_languages.email_error
-            }
-            <!--{if $enabled_captcha}-->
-            ,captcha:{
-                required : "<i class='iconfont icon-info-sign'></i> " + json_languages.captcha_not,
-                maxlength: "<i class='iconfont icon-info-sign'></i> " + json_languages.captcha_xz,
-                remote : "<i class='iconfont icon-info-sign'></i> " + json_languages.captcha_cw
-            }
-            <!--{/if}-->
-        },
-        success:function(label){
-            label.removeClass().addClass("succeed").html("<i></i>");
-        },
-        onkeyup:function(element,event){
-            var name = $(element).attr("name");
-            if(name == "captcha"){
-                //不可去除，当是验证码输入必须失去焦点才可以验证（错误刷新验证码）
-                return true;
-            }else{
-                $(element).valid();
-            }
-        }
-    });
-});
-</script>
-<!--{/if} 我的留言界面 end-->
+<!--{/if}--> 
 </body>
 </html>

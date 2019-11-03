@@ -1,7 +1,11 @@
 {if $transport_express}
-<table class="t-tab mb10">
+<style>
+.t-tab{width:80%; border:1px solid #ddd;}
+.t-tab td{padding:3px 5px; border-bottom:1px solid #ddd;}
+</style>
+<table class="t-tab">
 	<tr>
-		<td width="60%">快递名称</td>
+		<td width="60%">快递</td>
 		<td width="20%">额外运费（元）</td>
 		<td width="20%" align="center">操作</td>
 	</tr>
@@ -13,8 +17,8 @@
 			<input type="text" name="shipping_fee[{$express.id}]" class="text w80" autocomplete="off" value="{$express.shipping_fee}" />
 		</td>
 		<td width="20%" align="center">
-			<input type="button" value="编辑" class="button mr10" data-role="edit_express" ectype="edit_express">
-			<input type="button" value="删除" class="button" data-role="drop_express" ectype="drop_express">
+			<input type="button" value="编辑" class="button" data-role="edit_express">
+			<input type="button" value="删除" class="button ml" data-role="drop_express">
 		</td>
 	</tr>
 	{/foreach}

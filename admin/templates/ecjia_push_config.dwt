@@ -12,9 +12,9 @@
                 </ul>
             </div>
             <div class="explanation" id="explanation">
-                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content_common}</li>
+                    <li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
                     <li>推送消息相关信息设置，请谨慎填写信息。</li>
                 </ul>
             </div>
@@ -74,8 +74,8 @@
                                             <div class="ps-scrollbar-x-rail" style="width: 692px; display: none; left: 0px; bottom: -97px;"><div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 100px; height: 250px; display: inherit; right: 0px;"><div class="ps-scrollbar-y" style="top: 10px; height: 25px;"></div></div></div>
                                         </div>
                                         <div class="move_handle">
-                                            <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">{$lang.check_all}</a>
-                                            <a href="javascript:void(0);" onclick="addGoods()" class="btn btn25 red_btn" ectype="sub">{$lang.button_submit_alt}</a>
+                                            <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">全选</a>
+                                            <a href="javascript:void(0);" onclick="addGoods()" class="btn btn25 red_btn" ectype="sub">确定</a>
                                         </div>
                                     </div>
                                     <div class="move_middle">
@@ -101,7 +101,7 @@
                                             </div>
                                         </div>
                                         <div class="move_handle">
-                                            <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">{$lang.check_all}</a><a href="javascript:void(0);" onclick="delGoods()" class="btn btn25 btn_red">{$lang.remove}</a>
+                                            <a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">全选</a><a href="javascript:void(0);" onclick="delGoods()" class="btn btn25 btn_red">移除</a>
                                         </div>
                                     </div>
                                 </div>

@@ -93,8 +93,7 @@
 <!--
   listTable.recordCount = {$record_count};
   listTable.pageCount = {$page_count};
-  listTable.query = 'query_bonus';
-  
+
   {foreach from=$filter item=item key=key}
   listTable.filter.{$key} = '{$item}';
   {/foreach}

@@ -20,10 +20,8 @@ $_LANG['lang_goods_coupons']['all_pay'] = "全场券";
 $_LANG['lang_goods_coupons']['user_pay'] = "会员券";
 $_LANG['lang_goods_coupons']['goods_pay'] = "购物券";
 $_LANG['lang_goods_coupons']['reg_pay'] = "注册券";
-$_LANG['lang_goods_coupons']['free_pay'] = "免邮券";
 $_LANG['lang_goods_coupons']['not_pay'] = "未知";
 $_LANG['lang_goods_coupons']['is_goods'] = "限商品";
-$_LANG['lang_goods_coupons']['is_cate'] = "限分类";
 $_LANG['lang_goods_coupons']['is_all'] = "全品类通用";
 
 $_LANG['lang_coupons_receive_failure'] = "领取失败,券已经被领完了";
@@ -92,6 +90,8 @@ $_LANG['set_gcolor'] = '设置商品颜色'; //by zhang
 //ecmoban模板堂 --zhuo start
 $_LANG['ff'][FF_NOMAINTENANCE] =  '未维修';
 $_LANG['ff'][FF_MAINTENANCE] =  '已维修';
+$_LANG['ff'][FF_REFOUND] = '已退款';
+$_LANG['ff'][FF_NOREFOUND] = '未退款';
 $_LANG['ff'][FF_NOEXCHANGE] =  '未换货';
 $_LANG['ff'][FF_EXCHANGE] =  '已换货';
 
@@ -138,7 +138,6 @@ $_LANG['icp_number'] = 'ICP备案证书号';
 $_LANG['plugins_not_found'] = "插件 %s 无法定位";
 $_LANG['home'] = '首页';
 $_LANG['back_up_page'] = '返回上一页';
-$_LANG['illegal_operate'] = '非法操作';
 $_LANG['close_window'] = '关闭窗口';
 $_LANG['back_home'] = '返回首页';
 $_LANG['ur_here'] = '当前位置:';
@@ -192,7 +191,6 @@ $_LANG['shop_prices'] = "本 店 价";
 $_LANG['market_prices'] = "市 场 价";
 $_LANG['group_buy_price'] = "团 购 价";
 $_LANG['seckill_price'] = "秒 杀 价";
-$_LANG['presale_price'] = "预 售 价";
 $_LANG['deposit'] = '团购保证金';
 $_LANG['amount'] = '商品总价';
 $_LANG['number'] = '购买数量';
@@ -215,7 +213,6 @@ $_LANG['old_price'] = '原  价：';
 $_LANG['package_price'] = '礼包价：';
 $_LANG['then_old_price'] = '节  省：';
 $_LANG['free_goods'] = '免运费商品';
-$_LANG['back_auction_home'] = '返回拍卖首页';
 
 $_LANG['searchkeywords_notice'] = '匹配多个关键字全部，可用 "空格" 或 "AND" 连接。如 win32 AND unix<br />匹配多个关键字其中部分，可用"+"或 "OR" 连接。如 win32 OR unix';
 $_LANG['hidden_outstock'] = '隐藏已脱销的商品';
@@ -489,7 +486,6 @@ $_LANG['cod'] = '配送决定';
 $_LANG['curr_stauts'] = '当前状态';
 $_LANG['use_bonus'] = '使用红包';
 $_LANG['use_value_card'] = '使用储值卡';
-$_LANG['value_card_dis'] = '储值卡折扣';
 $_LANG['use_bonus_kill'] = '使用线下红包';
 $_LANG['invoice'] = '开发票';
 $_LANG['invoice_type'] = '发票类型';
@@ -546,7 +542,7 @@ $_LANG['next_article'] = '下一篇';
 $_LANG['prev_article'] = '上一篇';
 
 /* 虚拟商品 */
-$_LANG['virtual_goods_ship_fail'] = '部分商品自动发货失败，请尽快联系商家重新发货';
+$_LANG['virtual_goods_ship_fail'] = '自动发货失败，请尽快联系商家重新发货';
 
 /* 选购中心 */
 $_LANG['pick_out'] = '选购中心';
@@ -683,7 +679,6 @@ $_LANG['ws_goods_attr_exists'] = "该商品已经在购物车中，不能再次�
 $_LANG['ws_remark'] = '请输入您的联系方式、付款方式和配送方式等信息';
 $_LANG['ws_order_submitted'] = '您的订单已提交成功，请记住您的订单号: %s。';
 $_LANG['ws_price_list'] = '价格单';
-$_LANG['give_integral'] = '商品赠送积分';
 
 /* 积分兑换部分语言项 */
 $_LANG['exchange'] = '积分商城';
@@ -947,7 +942,6 @@ $_LANG['divided_into'] = '分成规则';
 $_LANG['store_street'] = '店铺街';
 
 $_LANG['no_goods_in_cart'] = "您的购物车中没有商品！";
-$_LANG['no_consignee'] = "请填写您的收货地址";
 $_LANG['over_bind_limit'] = "您即将绑定的储值卡已超出该类卡可绑定上限！";
 
 //瀑布流加载分类商品 by wu
@@ -1201,7 +1195,7 @@ $_LANG['address'] = '地址';
 $_LANG['sales_hotline'] = "销售热线";
 $_LANG['working_time'] = "工作时间";
 $_LANG['change_choice'] = "更改选择";
-$_LANG['change_choice_desc'] = "该地区暂无门店或属性没有库存";
+$_LANG['change_choice_desc'] = "该地区占无门店或属性没有库存";
 $_LANG['select_store_info'] = "选择门店";
 $_LANG['wu'] = "无";	
 $_LANG['all_goods'] = '所有自营商品';
@@ -1244,11 +1238,4 @@ $_LANG['self_merchants'] = '自营店铺';
 $_LANG['assign_merchants'] = '指定店铺';
 
 $_LANG['overdue_login'] = '登陆过期，请重新登陆！';
-
-$_LANG['no_address'] = '收货地址不能为空!';
-
-//b2b
-$_LANG['not_seller_user'] = '您不是商家用户，无权查看此页面!';
-$_LANG['not_login_user'] = '您还没有登录，无权查看此页面!';
-
 ?>

@@ -1,0 +1,91 @@
+{include file="pageheader"}
+<div class="wrapper">
+	<div class="title">{$lang['wechat_menu']} - 摇一摇广告管理</div>
+	<div class="content_tips">
+        <div class="tabs_info">
+            <ul>
+                <li class="curr"><a href="{url('index')}">现金红包</a></li>
+                <li><a href="{url('share_setting')}">设置分享内容</a></li>
+            </ul>
+        </div>
+	    <div class="explanation" id="explanation">
+            <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
+            <ul>
+                <li>1、每个活动建议至少添加两则以上的摇一摇广告</li>
+                <li>2、用户参与活动，会按随机抽取获得领取红包资格，如果没有抽到资格的，则会随机推送一则广告展示给用户。</li>
+                <li>3、另一方面摇一摇广告可以用作商城推广的一个引流入口，比如推荐商品链接，推荐文章链接等等引导用户进入商城购买商品。</li>
+            </ul>
+        </div>
+		<div class="flexilist of">
+			<div class="common-head">
+                <div class="fl">
+                	<a href="{url('shake_edit', array('market_id' => $market_id))}" class="fancybox" ><div class="fbutton"><div class="add " title="添加摇一摇广告"><span><i class="fa fa-plus"></i>添加摇一摇广告</span></div></div></a>
+                </div>
+            </div>
+            <div class="common-content">
+                <div class="list-div">
+<!--                     <div class="panel panel-default">
+                        <div class="panel-heading">网页摇一摇入口地址，请将以下链接通过文本消息或者图文消息发送至用户，用户在微信客户端进入该链接即可进入活动页面！</div>
+                        <div class="panel-body">
+                            {$url}
+                        </div>
+                    </div> -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading"> <font class="li_color">{$act_name}</font> -- 摇一摇广告列表</div>
+                        <div class="table-responsive">
+                            <table class="table table-hover" style="min-width: 300px;">
+                                <thead class="navbar-inner">
+                                    <tr>
+                                        <th class="col-sm-1 text-center">id</th>
+                                        <th class="col-sm-2 text-center">广告图标</th>
+                                        <th class="col-sm-4 text-center">广告内容</th>
+                                        <th class="col-sm-3 text-center">广告链接</th>
+                                        <th class="col-sm-2 text-center">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {foreach $advertices as $advertice}
+                                    <tr class="text-center adv-list">
+                                        <td>{$advertice['id']}</td>
+                                        <td><img src="{$advertice['icon']}" style="width:20%;height:auto;"/></td>
+                                        <td>{$advertice['content']}</td>
+                                        <td>{$advertice['url']}</td>
+                                        <td class="handle">
+                                        <div class="tDiv a2">
+                                            <a class="btn_edit" href="{url('shake_edit', array('market_id' => $market_id,'id' => $advertice['id']))}" data-toggle="tooltip" data-placement="top" title="编辑" ><i class="fa fa-edit"></i>{$lang['wechat_editor']}</a>
+                                            <a class="btn_trash" onclick="if(!confirm('删除后将不可恢复,确定删除吗?')) return false;" href="{url('shake_delete', array('market_id' => $market_id,'id' => $advertice['id']))}" data-toggle="tooltip" data-placement="top" title="删除" ><i class="fa fa-trash-o"></i>{$lang['drop']}</a>
+                                        </div>
+                                        </td>
+                                    </tr>
+                                    {/foreach}
+                                    {if empty($advertices)}
+                                    <tr class="no-records" ><td colspan="5">没有找到任何记录</td></tr>
+                                    {/if}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+		    </div>
+	    </div>
+        <div class="list-div of">
+            <table cellspacing="0" cellpadding="0" border="0">
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            {include file="pageview"}
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(function(){
+
+});
+</script>
+{include file="pagefooter_copyright"}
+{include file="pagefooter"}

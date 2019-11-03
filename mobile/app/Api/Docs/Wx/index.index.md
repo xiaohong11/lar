@@ -1,10 +1,13 @@
-## api/wx/index  小程序首页接口
+##ecapi.wx.index.index  小程序首页接口
 
 
 ####链接
-     http://domain/dsc/mobile/?app=api
+     http://10.10.10.145/dsc/mobile/?app=api
 
 ####参数
+1. method   ecapi.wx.index.index
+
+
 
 ####返回参数
 1. code : 0 为正常   **1 为不正常**
@@ -25,5 +28,3 @@
     > 5. "goods_sales": 0,    //销售量
     > 6. "market_price": "957.59",    //   市场价格
     > 7. "goods_stock": 998   //  商品库存
-    > 8. "market_price_formated": "¥574.80"   //  格式化市场价格
-    > 9. "shop_price_formated": "¥479.00"   //  格式化商店价格

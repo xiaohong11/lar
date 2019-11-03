@@ -5,7 +5,7 @@
         <%each list as val%>
         <section class="com-nav m-top06" id="delete_mycom<%val.dis_id%>">
                 <%if action == 'index' ||  $action == 'list'%>
-                <ul class="dis-box com-header-pall">
+                <ul class="dis-box padding-all">
                     <li class="com-left">
                         <div class="com-left-box"><img src="<%val.user_picture%>"></div>
                     </li>
@@ -19,23 +19,19 @@
                     </li>
                 </ul>
                 <%else%>
-                <div class="dis-box com-header-pall">
+                <div class="dis-box padding-all">
                     <div class="box-flex position-rel">
                         <a href="<%val.url%>" class="link-abs"> </a>
-                            <div class="com-left fl">
-                               <div class="com-left-img ">
-                                    <div class="p-r img-commom"><img src="<%val.user_picture%>"></div>
-                                </div>
-                            </div>
-                            <div class="fl com-adm-box" style="padding-top:0">
+                            <div class="com-left-box fl"><img src="<%val.user_picture%>"></div>
+                            <div class="fl com-adm-box">
                                 <h4><%val.user_name%></h4>
                                 <p><%val.add_time%></p>
                             </div>
                     </div>
-                    <%if val.delete_com == 1%><span><i class="iconfont icon-xiao10 my-com-size" onclick="delete_com(<%val.dis_type%>,<%val.dis_id%>)"></i></span><%/if%>
+                    <span><i class="iconfont icon-xiao10 my-com-size" onclick="delete_com(<%val.dis_type%>,<%val.dis_id%>)"></i></span>
                 </div>
                 <%/if%>
-            <div class="margin-lr com-min-tit position-rel dis-box">
+            <div class="margin-lr com-min-tit position-rel">
                 <a href="<%val.url%>" class="link-abs"> </a>
                 <%if val.dis_type == 1%>
                 <em class="em-promotion-1 tm-ns">讨</em>
@@ -46,28 +42,32 @@
                 <%else if val.dis_type == 4%>
                 <em class="em-promotion-1 tm-hs-1">晒</em>
                 <%/if%>
-                <div class="box-flex onelist-hidden"><span class=""> <strong><%val.dis_text%></strong></span></div>
+                <span> <%val.dis_title%></span>
             </div>
             <div class="com-list dis-box text-center">
                 <div class="box-flex" onClick="tz_dianzan(<%val.dis_type%>,<%val.dis_id%>)">
-                    <a href="javascript:;" id="red<%val.dis_id%>" <%if val.islike == 1%> class="active" <%else%><%/if%> >
+                    <a href="javascript:;" id="red<%val.dis_id%>" <%if val.islike == 1%>
+                    class="active"<%else%><%/if%>>
                     <div class="com-icon">
                         <i class="iconfont icon-zan"></i>
                         <span id="like_num<%val.dis_id%>"><%val.like_num%></span>
-                        <input id="islike<%val.dis_id%>" type="hidden" id="<%val.dis_id%>" name="islike" value="<%val.islike%>"/>
+                        <input id="islike<%val.dis_id%>" type="hidden" id="<%val.dis_id%>" name="islike"
+                               value="<%val.islike%>"/>
                         <input id="isclick" type="hidden" name="isclick" value="0"/>
                     </div>
                     </a>
                 </div>
                 <div class="box-flex">
                     <a href="<%val.url%>">
-                        <div class="com-icon"><i class="iconfont icon-daipingjia"></i><span><%val.community_num%></span></div>
+                        <div class="com-icon"><i
+                                class="iconfont icon-daipingjia"></i><span><%val.community_num%></span></div>
                     </a>
                 </div>
 
                 <div class="box-flex">
                     <a href="javascript:;">
-                        <div class="com-icon"><i class="iconfont icon-liulan"></i><span><%val.dis_browse_num%></span></div>
+                        <div class="com-icon"><i
+                                class="iconfont icon-liulan"></i><span><%val.dis_browse_num%></span></div>
                     </a>
                 </div>
             </div>
@@ -86,20 +86,20 @@
 {include file="index/footer"}
 </div>
      <!--快捷导航-->
-    {include file="float_nav"}
+    {include file="float_nav"} 
      <li>
         <a href="{url('community/index/index')}">
             <i class="iconfont icon-medal"></i>
-            <p>社区首页</p>
-        </a>
+            <p>社区圈子</p>
+        </a> 
      </li>
-    {include file="float_nav_footer"}
+    {include file="float_nav_footer"} 
 <!--引用js-->
 <script>
     function delete_com(dis_type, dis_id) {
         layer.open({
             content: '确实要删除该帖吗？',
-            btn: ['确定', '取消'],
+            btn: ['删除', '取消'],
             shadeClose: false,
             yes: function (index) {
                 $.ajax({
@@ -152,11 +152,5 @@
                 }
             });
         }
-    }
-window.onload = function(){
-    header_img()
-}
-    window.onresize = function(){
-        header_img()
     }
 </script>

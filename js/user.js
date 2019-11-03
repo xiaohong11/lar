@@ -379,7 +379,6 @@ function userLogin()
 	var password = frm.find("input[name='password']");
 	var captcha = frm.find("input[name='captcha']");
 	var remember = frm.find("input[name='remember']");
-	var dsc_token = frm.find("input[name='dsc_token']");
 	var error = frm.find(".msg-error");
 	var msg = '';
 	var remember_string = "";
@@ -416,7 +415,7 @@ function userLogin()
 	}
 	var back_act = frm.find("input[name='back_act']").val();
 	
-	Ajax.call( 'user.php?act=act_login', 'username=' + username.val()+'&password='+password.val()+remember_string+'&captcha='+captcha.val()+'&dsc_token='+dsc_token.val()+'&back_act='+back_act, return_login , 'POST', 'JSON');
+	Ajax.call( 'user.php?act=act_login', 'username=' + username.val()+'&password='+password.val()+remember_string+'&captcha='+captcha.val()+'&back_act='+back_act, return_login , 'POST', 'JSON');
 }
 
 function return_login(result)
@@ -424,19 +423,12 @@ function return_login(result)
 	if(result.error>0)
 	{
 		showMesInfo(result.message);	
-    if(result.captcha){
-      if($("[ectype='captcha']").length > 0){
-        $("[ectype='captcha']").replaceWith(result.captcha);
-      }else{
-        $("[ectype='password']").after(result.captcha);
-      }
-    }
 	}
 	else
 	{
-		if(result.ucdata){
-			$("body").append(result.ucdata)
-		}
+            if(result.ucdata){
+                $("body").append(result.ucdata)
+            }
 		if(result.is_validated == 1){
 			location.href = result.url;
 		}else{
@@ -519,12 +511,12 @@ function is_registered( username, register_mode )
         $('#username_notice_'+register_mode).html(msg_un_format);
         var submit_disabled = true;
     }
-    if ( unlen < 4 )
+    if ( unlen < 3 )
     { 
         $('#username_notice_'+register_mode).html(username_shorter);
         var submit_disabled = true;
     }
-    if ( unlen > 15 )
+    if ( unlen > 14 )
     {
         $('#username_notice_'+register_mode).html(msg_un_length);
         var submit_disabled = true;

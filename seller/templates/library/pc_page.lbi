@@ -110,7 +110,5 @@
     </div>
 </div>
 {/if}
-{if $hearder_body neq 1}
 <div class="prompt" data-html="not">以上为页头区域</div>
 <div class="demo ui-sortable"></div>
-{/if}

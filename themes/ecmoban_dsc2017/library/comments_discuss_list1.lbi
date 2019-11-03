@@ -23,13 +23,13 @@
                 {if $list.dis_type eq 4}
                 <a href="single_sun.php?act=discuss_show&did={$list.dis_id}&dis_type=4" target="_blank">{$list.dis_title}</a>
                 <img src="images/image_s.jpg">
-                {else}
-                <a href="single_sun.php?act=discuss_show&did={$list.dis_id}" target="_blank">{$list.dis_title}</a>
-                {/if}
+                    {else}
+                    <a href="single_sun.php?act=discuss_show&did={$list.dis_id}" target="_blank">{$list.dis_title}</a>
+                    {/if}
             </div>
             <div class="td td2">{$list.reply_num}</div>
             <div class="td td3">{$list.dis_browse_num}</div>
-            <div class="td td4">{$list.user_name}</div>
+            <div class="td td4">{$list.nick_name}</div>
             <div class="td td5">{$list.add_time}</div>
         </div>
         <!-- {/foreach} -->

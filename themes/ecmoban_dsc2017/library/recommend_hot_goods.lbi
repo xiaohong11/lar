@@ -12,8 +12,8 @@
 		<ul>
 			<!--{foreach from=$hot_goods item=goods name=hot}-->
 			<li>
-				<div class="p-img"><a href="{$goods.url}" title="{$goods.short_style_name|escape:html}"><img src="{$goods.thumb}" width="130" height="130"></a></div>
-				<div class="p-name"><a href="{$goods.url}" title="{$goods.short_style_name|escape:html}">{$goods.short_style_name}</a></div>
+				<div class="p-img"><a href="{$goods.url}" title="{$goods.name|escape:html}"><img src="{$goods.thumb}" width="130" height="130"></a></div>
+				<div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a></div>
 				<div class="p-price">
 					{if $goods.promote_price neq ''}
 						{$goods.promote_price}

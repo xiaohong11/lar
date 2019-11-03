@@ -38,7 +38,7 @@
 <div class="prompt" data-html="not">
 	以上为页头区域
 </div>
-<div class="demo ui-sortable" data-default="default_temp" style="min-height: 864px; background-image: none; background-position: right center; background-repeat: repeat; background-color: transparent;">
+<div class="demo ui-sortable" style="min-height: 864px; background-image: none; background-position: right center; background-repeat: repeat; background-color: transparent;">
 	<div class="visual-item lyrow lunbotu ui-draggable" data-mode="lunbo" data-purebox="adv" data-li="1" data-length="5" data-diff="0" style="display: block;">
 		<div class="drag" data-html="not">
 			<div class="navLeft">

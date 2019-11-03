@@ -5,23 +5,23 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="javascript:window.history.go(-1);" class="s-back"></a>{$lang.seller} - {$ur_here}</div>
+    	<div class="title"><a href="merchants_commission.php?act=list" class="s-back"></a>商家 - {$ur_here}</div>
         <div class="content">
         	{include file="library/commission_tab.lbi"}
             <div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content.bill_goods.0}</li>
-                    <li class="red">{$lang.operation_prompt_content.bill_goods.1}</li>
-                    <li class="red">{$lang.operation_prompt_content.bill_goods.2}</li>
-                    <li class="red">{$lang.operation_prompt_content.bill_goods.3}</li>
+                    <li>佣金账单明细。</li>
+                    <li class="red">当前页面仅显示订单商品。</li>
+                    <li class="red">【订单】：表示是按店铺佣金比例或者分类佣金比例</li>
+                    <li class="red">【商品】：表示是商品单独设置佣金比例</li>
                 </ul>
             </div>
             <div class="flexilist">
                 <div class="common-content">
                 	<div class="list-div"  id="listDiv" >
 						{/if}
-						<form method="post" action="" name="listForm" onsubmit="return confirm('{$lang.batch_confirm_settlement}');">
+						<form method="post" action="" name="listForm" onsubmit="return confirm('确定批量结算？');">
                     	<table cellpadding="1" cellspacing="1">
                         	<thead>
                             	<tr>
@@ -31,17 +31,17 @@
                                         	<label for="all_list" class="checkbox_stars"></label>
                                         </div>
                                     </th>
-                                    <th><div class="tDiv">{$lang.record_id}<div></th>
-                                    <th><div class="tDiv">{$lang.goods_sn}</div></th>
-                                    <th width="35%"><div class="tDiv">{$lang.goods_name}</div></th>
-                                    <th><div class="tDiv">{$lang.category_name}</div></th>
+                                    <th><div class="tDiv">编号</div></th>
+                                    <th><div class="tDiv">商品编号</div></th>
+                                    <th width="35%"><div class="tDiv">商品名称</div></th>
+                                    <th><div class="tDiv">分类名称</div></th>
                                     {if $filter.commission_model eq 1}
-                                    <th><div class="tDiv">{$lang.commission_rate}</div></th>
+                                    <th><div class="tDiv">佣金比例</div></th>
                                     {/if}
-                                    <th><div class="tDiv">{$lang.goods_price}</div></th>
-                                    <th><div class="tDiv">{$lang.goods_number}</div></th>
+                                    <th><div class="tDiv">商品价格</div></th>
+                                    <th><div class="tDiv">商品数量</div></th>
                                     {if $is_dir}
-                                    <th><div class="tDiv">{$lang.drp_money}</div></th>
+                                    <th><div class="tDiv">分销金额</div></th>
                                     {/if}
                                 </tr>
                             </thead>
@@ -58,10 +58,10 @@
                                     <td><div class="tDiv">{$goods.goods_id}</div></td>
                                     <td>
                                     	<div class="tDiv">
-                                        	<p>{$goods.goods_name}{if $goods.is_return}<em class="red">【{$lang.return_goods}】</em>{/if}</p>
+                                        	<p>{$goods.goods_name}{if $goods.is_return}<em class="red">【已退货】</em>{/if}</p>
                                             
                                             {if $goods.commission_rate}
-                                            <p><em style="color:#31b4e1;">【{$lang.goods_alt}】：{$goods.commission_rate}%</em></p>
+                                            <p><em style="color:#31b4e1;">【商品】：{$goods.commission_rate}%</em></p>
                                             {/if}
                                         </div>
                                     </td>
@@ -101,16 +101,16 @@
             </div>
         </div>
     </div>
- 	{include file ='library/pagefooter.lbi'}
+ {include file ='library/pagefooter.lbi'}
 	<script type="text/javascript">
-	//分页传值
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
-	listTable.query = "bill_goods_query";
-
-	{foreach from=$filter item=item key=key}
-	listTable.filter.{$key} = '{$item}';
-	{/foreach}
+        //分页传值
+        listTable.recordCount = '{$record_count}';
+        listTable.pageCount = '{$page_count}';
+        listTable.query = "bill_goods_query";
+    
+        {foreach from=$filter item=item key=key}
+        listTable.filter.{$key} = '{$item}';
+        {/foreach}
     </script>
 </body>
 </html>

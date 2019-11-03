@@ -13,32 +13,15 @@
     <script type="text/javascript">var ROOT_URL = '__ROOT__/';</script>
     {:global_assets('js')}
     {if condition="$is_wechat"}
-    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
     <script type="text/javascript">
         // 分享内容
         var shareContent = {
-            title: '{$share_data.title}',
-            desc: '{$share_data.desc}',
-            link: '{$share_data.link}',
-            imgUrl: '{$share_data.img}',
-            success: function (res) {
-                // 用户确认分享后执行的回调函数
-                // res {"checkResult":{"onMenuShareTimeline":true},"errMsg":"onMenuShareTimeline:ok"}
-                var msg = res.errMsg;
-                var jsApiname = msg.replace(':ok','');
-                shareCount(jsApiname,'{$share_data.link}');
-            }
+            title: '{$page_title}',
+            desc: '{$description}',
+            link: '',
+            imgUrl: '{if condition="$page_img"}{$page_img}{else}{elixir("img/wxsdk.png", true)}{/if}'
         };
-
-        // 分享统计
-        function shareCount(jsApiname = '', link = ''){
-            $.post('{url("wechat/api/count")}', {jsApiname: jsApiname, link:link}, function (res) {
-                if(res.status == 200){
-                    //
-                }
-            }, 'json');
-        }
-
         $(function(){
             var url = window.location.href;
             var jsConfig = {
@@ -47,10 +30,11 @@
                     'onMenuShareTimeline',
                     'onMenuShareAppMessage',
                     'onMenuShareQQ',
+                    'onMenuShareWeibo',
                     'onMenuShareQZone'
                 ]
             };
-            $.post('{url("wechat/api/jssdk")}', {url: url}, function (res) {
+            $.post('{url("wechat/jssdk/index")}', {url: url}, function (res) {
                 if(res.status == 200){
                     jsConfig.appId = res.data.appId;
                     jsConfig.timestamp = res.data.timestamp;
@@ -63,6 +47,7 @@
                         wx.onMenuShareTimeline(shareContent);
                         wx.onMenuShareAppMessage(shareContent);
                         wx.onMenuShareQQ(shareContent);
+                        wx.onMenuShareWeibo(shareContent);
                         wx.onMenuShareQZone(shareContent);
                     });
                 }
@@ -74,6 +59,6 @@
 <body>
 <div id="loading"><img src="{:elixir('img/loading.gif')}" /></div>
 {__CONTENT__}
-<p style="display:none;">{:C('shop.stats_code')}</p>
+<p style="display:none;">{:config('shop.stats_code')}</p>
 </body>
 </html>

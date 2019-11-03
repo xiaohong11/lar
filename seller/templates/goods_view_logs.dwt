@@ -73,8 +73,8 @@
 {include file ='library/seller_footer.lbi'}
 	{insert_scripts files="jquery.purebox.js"}   
 	<script type="text/javascript">
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
+	listTable.recordCount = '{$record_count}';
+	listTable.pageCount = '{$page_count}';
 	listTable.query = 'view_query';
 
 	{foreach from=$filter item=item key=key}

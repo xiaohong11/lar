@@ -7,7 +7,7 @@
     	<div class="title">移动应用 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                 	<li>该页面展示了商城所有的手机端iPad轮播图。</li>
                     <li>可在页面中编辑轮播图的显示和排序。</li>
@@ -19,8 +19,8 @@
                         <a href="ecjia_cycleimage_ipad.php?act=add"><div class="fbutton"><div class="add" title="添加商品"><span><i class="icon icon-plus"></i>添加手机端iPad轮播图</span></div></div></a>
                     </div>
                     <div class="refresh{if !$action_link} ml0{/if}">
-                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    	<div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>
                 </div>
                 <div class="common-content">
@@ -57,7 +57,7 @@
                                     <td class="handle">
                                         <div class="tDiv a3">
                                             <a href="ecjia_cycleimage_ipad.php?act=edit&id={$key}" title="{$lang.edit}" class="btn_edit"><i class="icon icon-edit"></i>{$lang.edit}</a>
-                                            <a href="javascript:;" onclick="listTable.remove({$key}, '{$lang.drop_confirm}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                            <a href="javascript:;" onclick="listTable.remove({$key}, '{$lang.drop_confirm}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -74,8 +74,8 @@
     </div>
  	{include file ='library/pagefooter.lbi'}
     <script type="text/javascript">
-		listTable.recordCount = {$record_count|default:0};
-		listTable.pageCount = {$page_count|default:1};
+		listTable.recordCount = '{$record_count}';
+		listTable.pageCount = '{$page_count}';
 		
 		{foreach from=$filter item=item key=key}
 		listTable.filter.{$key} = '{$item}';

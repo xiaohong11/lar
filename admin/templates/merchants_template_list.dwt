@@ -4,10 +4,10 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.seller} - 入驻商家列表</div>
+    	<div class="title">商家 - 入驻商家列表</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                 	<li>请选择合适的店铺模板。</li>
                     <li>更多模板持续开发中。</li>
@@ -82,7 +82,7 @@
 			$('.btnSeeImg').nyroModal();
 		});
     </script>	
-	<script type="text/javascript">
+	<script language="JavaScript">
 	<!--
 	{literal}
 

@@ -5,11 +5,14 @@
 
     <section class="store-nav-list padding-all b-color-f">
                 <div class="product-one-list product-one-list-nav of-hidden scrollbar-none j-g-s-p-con swiper-container-horizontal">
-                    <div class="swiper-wrapper store-nav-box  j-catid">
+                    <div class="swiper-wrapper store-nav-box j-store-nav-box j-catid">
                         {foreach $category as $list}
                             <li data-catid="{$list.cat_id}" class="swiper-slide swiper-slide-active">
                                 <div class="store-box">
-                                    <img class="img" src="{$list.touch_icon}">
+                                         <img class="img" src="{$list.touch_icon}">
+                                </div>
+                                <div class="store-box-active">
+                                         <img class="img" src="{$list.touch_icon}">
                                 </div>
                                 <h5 class="text-c col-6 m-top04 f-5">{$list.cat_alias_name}</h5>
                             </li>
@@ -23,10 +26,9 @@
                 <nav class="j-g-s-p-con shopping-list-nav m-top1px">
                     <ul class="dis-box text-center">
                         <!--<li class="box-flex s-nav-select j-s-nav-select onelist-hidden"><span class="onelist-hidden">类别</span><i class="iconfont icon-xiajiantou"></i></li>-->
-                        <li class="box-flex s-remen-select j-s-remen-select translate store-jt"> <a id="remen"  order="sort" sort="DESC">热门<i class="iconfont icon-xiajiantou"></i></a></li>
                         <li class="box-flex s-position-select j-s-position-select store-jt"><span class="onelist-hidden">地区<i class="iconfont icon-xiajiantou"></i></span></li>
-                        <li class="box-flex s-distance-select j-s-distance-select translate store-jt"> <a id="paixu"  order="distance" sort="DESC">距离<i class="iconfont icon-xiajiantou"></i></a></li>
-                        <li class="box-flex"><a href="{url('store/map/index')}">附近</a></li>
+                        <li class="box-flex s-distance-select j-s-distance-select translate store-jt"> <a id="paixu"  order="distance" sort="DESC"> 排序<i class="iconfont icon-xiajiantou"></i></a></li>
+                      <!--  <li class="box-flex"><a href="{url('store/map/index')}">附近</a></li>-->
                     </ul>
                 </nav>
             </div>
@@ -102,7 +104,7 @@
                                 <li class="swiper-slide">
                                     <div class="product-div">
                                         <a class="product-div-link" href="<%list.goods_url%>"></a>
-                                        <img class="product-list-img" src="<%list.goods_thumb%>" />
+                                        <img class="product-list-img" src="<%list.goods_img%>" />
                                         <div class="product-text m-top06">
                                             <!--<h4><%list.goods_name%></h4>-->
                                             <p class="text-c"><span class="p-price t-first ">
@@ -156,7 +158,7 @@ $(function(){
         type = '{$type}',
         lat = 0,
         lng = 0,
-        order = 'sort',
+        order = 'distance ',
         sort = 'asc';
     // 首次加载
     var infinite = $('.store_info').infinite({url: url,params:'sort='+sort+'&order='+order+'&keywords='+keywords+'&type='+type,template: 'j-product'});
@@ -178,7 +180,7 @@ $(function(){
     $(window).scroll(function() {
         loadimgCont()
     });
-    var geolocation = new qq.maps.Geolocation("{C('shop.tengxun_key')}", "myapp");
+    var geolocation = new qq.maps.Geolocation("{config('shop.tengxun_key')}", "myapp");
     var options = {timeout: 8000};
 
     geolocation.getLocation(showPosition, showErr, options);
@@ -212,20 +214,7 @@ $(function(){
 		mousewheelControl: true,
 		freeMode: true
 	});
-    $(".j-s-remen-select").click(function () {
-        if ($(".mask-filter-div").hasClass("show")) {
-            $(".mask-filter-div").removeClass("show");
-        }
-        if (!$(".shopping-menu").hasClass("remen-active")) {
-            $(this).addClass("active").siblings().removeClass("active");
-            $(".shopping-menu").addClass("remen-active");
-            $(".shopping-menu").removeClass("position-active distance-active");
-            $("mask-filter-div").addClass("show");
-        } else {
-            $(".shopping-menu").removeClass("remen-active");
-            $("mask-filter-div").removeClass("show");
-        }
-    });
+
     // 点击省份
     $('.j-province li').click(function(){
     	$(this).addClass("active").siblings().removeClass("active");
@@ -263,21 +252,6 @@ $(function(){
     //　点击排序
         var  off = true;
         $("#paixu").on('click', function(e) {
-         var sort = "";
-         var order = $(this).attr("order");
-           if(off){
-               sort = $(this).attr("sort");
-               $(this).attr("sort","ASC");
-               off = false;
-            }else{
-               sort = $(this).attr("sort");
-               $(this).attr("sort","DESC");
-               off = true;
-            }
-           infinite.onload('lat='+ lat +'&lng='+lng+'&sort='+sort+'&order='+order+'&cat_id='+cat_id+'&city_id='+city_id+'&keywords='+keywords+'&type='+type);
-        })
-
-        $("#remen").on('click', function(e) {
          var sort = "";
          var order = $(this).attr("order");
            if(off){

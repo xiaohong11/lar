@@ -237,7 +237,7 @@
     </div>
 </div>
 {include file ='library/seller_footer.lbi'}
-<script type="text/javascript" src="../js/jquery.picTip.js"></script>
+<script type="text/javascript" src="js/jquery.picTip.js"></script>
 <script type="text/javascript">
     $.divselect("#media_type_div","#media_typeval",function(obj){
 		var val = obj.attr("data-value");

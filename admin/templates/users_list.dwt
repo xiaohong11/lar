@@ -5,11 +5,11 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.08_members} - {$ur_here}</div>
+    	<div class="title">会员 - {$ur_here}</div>
         <div class="content">
         	{include file="library/users_tab.lbi"}
         	<div class="explanation" id="explanation">
-                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                     <li>会员列表展示商城所有的会员信息。</li>
                     <li>可通过会员名称关键字进行搜索，如需详细搜索请在侧边栏进行高级搜索。</li>
@@ -24,19 +24,16 @@
                     </div>
                     
                    	<div class="refresh">
-                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    	<div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>
-                    
-                    <div class="search">
-                    	<form action="javascript:;" name="searchForm" onSubmit="searchGoodsname(this);">
-                        <div class="input">
-                            <input type="text" name="keywords" class="text nofocus" placeholder="会员名称" autocomplete="off" />
-                            <input type="submit" class="btn" name="secrch_btn" ectype="secrch_btn" value="" />
+                    <form action="javascript:searchUserName()" name="searchForm">
+                        <div class="search">
+                            <div class="input">
+                                <input type="text" name="user_name" class="text nofocus" placeholder="会员名称" autocomplete="off" /><input type="submit" value="" class="not_btn" />
+                            </div>
                         </div>
-                        </form>
-                    </div>
-                    
+                    </form>
                 </div>
                 <div class="common-content">
                     <form method="POST" action="" name="listForm" onsubmit="return confirm_bath()">
@@ -86,7 +83,6 @@
                                     <td class="handle">
                                     	<div class="tDiv a2">
                                             <a href="users.php?act=edit&id={$list.user_id}" class="btn_see"><i class="sc_icon sc_icon_see"></i>{$lang.view}</a>
-                                            <a href="users.php?act=users_log&id={$list.user_id}" class="btn_see"><i class="sc_icon sc_icon_see"></i>日志</a>
                                             <a href="javascript:confirm_redirect('{if $user.user_money ne 0}{$lang.still_accounts}{/if}{$lang.remove_confirm}', 'users.php?act=remove&id={$list.user_id}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
                                         </div>
                                     </td>
@@ -119,11 +115,11 @@
             
             <div class="gj_search">
                 <div class="search-gao-list" id="searchBarOpen">
-                    <i class="icon icon-zoom-in"></i>{$lang.advanced_search}
+                    <i class="icon icon-zoom-in"></i>高级搜索
                 </div>
                 <div class="search-gao-bar">
-                    <div class="handle-btn" id="searchBarClose"><i class="icon icon-zoom-out"></i>{$lang.pack_up}</div>
-                    <div class="title"><h3>{$lang.advanced_search}</h3></div>
+                    <div class="handle-btn" id="searchBarClose"><i class="icon icon-zoom-out"></i>收起边栏</div>
+                    <div class="title"><h3>高级搜索</h3></div>
                     <form method="get" name="formSearch_senior" action="javascript:searchUser()">
                         <div class="searchContent">
                             <div class="layout-box">
@@ -147,7 +143,7 @@
                                     <dt>{$lang.label_rank_name}</dt>
                                     <dd>
                                         <div  class="select_w145 imitate_select">
-                                            <div class="cite">{$lang.please_select}</div>
+                                            <div class="cite">请选择</div>
                                             <ul>
                                                <li><a href="javascript:;" data-value="0">{$lang.all_option}</a></li>
                                                {foreach from=$user_ranks item=user_ranks key=k}
@@ -162,7 +158,7 @@
                                     <dt>{$lang.steps_shop_name}</dt>
                                     <dd>
                                         <div id="shop_name_select" class="select_w145 imitate_select">
-                                            <div class="cite">{$lang.please_select}</div>
+                                            <div class="cite">请选择</div>
                                             <ul>
                                                <li><a href="javascript:;" data-value="0">{$lang.select_please}</a></li>
                                                <li><a href="javascript:;" data-value="1">{$lang.s_shop_name}</a></li>
@@ -176,9 +172,9 @@
                                 <dl style="display:none" id="merchant_box">
                                     <dd>
                                         <div class="select_w145 imitate_select">
-                                            <div class="cite">{$lang.please_select}</div>
+                                            <div class="cite">请选择</div>
                                             <ul>
-                                               <li><a href="javascript:;" data-value="0">{$lang.please_select}</a></li>
+                                               <li><a href="javascript:;" data-value="0">请选择</a></li>
                                                {foreach from=$store_list item=store}
                                                <li><a href="javascript:;" data-value="{$store.ru_id}">{$store.store_name}</a></li>
                                                {/foreach}
@@ -193,7 +189,7 @@
                                 <dl style="display:none" id="store_type">
                                     <dd>
                                         <div class="select_w145 imitate_select">
-                                            <div class="cite">{$lang.please_select}</div>
+                                            <div class="cite">请选择</div>
                                             <ul>
                                                <li><a href="javascript:;" data-value="0">{$lang.steps_shop_type}</a></li>
                                                <li><a href="javascript:;" data-value="{$lang.flagship_store}">{$lang.flagship_store}</a></li>
@@ -205,9 +201,10 @@
                                         </div>
                                     </dd>
                                 </dl>
-                                <dl class="bot_btn">
-                                    <dd>
-                                       <input type="submit" class="btn red_btn" name="tj_search" value="{$lang.button_inquire}" /><input type="reset" class="btn btn_reset" name="reset" value="{$lang.button_reset_alt}" />
+                                <dl class="clear"></dl>
+                                <dl>
+                                    <dd class="bot_btn">
+                                       <input type="submit" class="btn red_btn" name="tj_search" value="提交查询" /><input type="reset" class="btn btn_reset" name="reset" value="重置" />
                                     </dd>
                                 </dl>
                             </div>
@@ -219,96 +216,114 @@
         </div>
     </div>
     {include file ='library/pagefooter.lbi'}
-	<script type="text/javascript">
-    listTable.recordCount = {$record_count|default:0};
-    listTable.pageCount = {$page_count|default:1};
-    
-    {foreach from=$filter item=item key=key}
-    listTable.filter.{$key} = '{$item}';
-    {/foreach}
-    
-    //列表导航栏设置下路选项
-    $(".ps-container").perfectScrollbar();
-    
-    //高级搜索
-    $.divselect("#divselect","#quesetion");
-    
-    $.divselect("#shop_name_select","#shop_name_val",function(obj){
-        var val = obj.attr("data-value");
-        get_store_search(val);
-    });
-	
-    function get_store_search(val){
-        if(val == 1){
+<script type="text/javascript">
+listTable.recordCount = '{$record_count}';
+listTable.pageCount = '{$page_count}';
+
+{foreach from=$filter item=item key=key}
+listTable.filter.{$key} = '{$item}';
+{/foreach}
+
+//列表导航栏设置下路选项
+$(".ps-container").perfectScrollbar();
+
+//高级搜索
+$.divselect("#divselect","#quesetion");
+
+$.divselect("#shop_name_select","#shop_name_val",function(obj){
+    var val = obj.attr("data-value");
+    get_store_search(val);
+});
+function get_store_search(val){
+	if(val == 1){
 			$("#merchant_box").css("display",'');
 			$("#store_keyword").css("display",'none');
-			$("#store_type").css("display",'none');
-        }else if(val == 2){
+			$("#store_type").css("display",'none')
+	}else if(val == 2){
 			$("#merchant_box").css("display",'none');
 			$("#store_keyword").css("display",'');
-			$("#store_type").css("display",'none');
-        }else if(val == 3){
+			$("#store_type").css("display",'none')
+	}else if(val == 3){
 			$("#merchant_box").css("display",'none');
 			$("#store_keyword").css("display",'');
-			$("#store_type").css("display",'');
-        }else{
-			$("#merchant_box").css("display",'none');
+			$("#store_type").css("display",'')
+	}else{
+			 $("#merchant_box").css("display",'none');
 			$("#store_keyword").css("display",'none');
-			$("#store_type").css("display",'none');
-        }
-    }
-	
-    //导出会员
-    function download_userlist()
+			$("#store_type").css("display",'none')
+	}
+}
+//导出会员
+function download_userlist()
+{
+  var args = '';
+  for (var i in listTable.filter)
+  {
+    if (typeof(listTable.filter[i]) != "function" && typeof(listTable.filter[i]) != "undefined")
     {
-		var args = '';
-		for (var i in listTable.filter)
-		{
-			if(typeof(listTable.filter[i]) != "function" && typeof(listTable.filter[i]) != "undefined"){
-				args += "&" + i + "=" + encodeURIComponent(listTable.filter[i]);
-			}
-		}
-		
-		location.href = "users.php?act=export" + args;
+      args += "&" + i + "=" + encodeURIComponent(listTable.filter[i]);
     }
-    
-    function confirm_bath(){
-		userItems = $("input[name='checkboxes[]']");
-		
-		cfm = '{$lang.list_remove_confirm}';
-		
-		for (i=0; userItems[i]; i++){
-			if (userItems[i].checked && userItems[i].notice == 1){
-				cfm = '{$lang.list_still_accounts}' + '{$lang.list_remove_confirm}';
-				break;
-			}
-		}
-		
-		return confirm(cfm);
+  }
+  
+  location.href = "users.php?act=export" + args;
+}
+
+function confirm_bath()
+{
+
+  userItems = $("input[name='checkboxes[]']");
+
+  cfm = '{$lang.list_remove_confirm}';
+
+  for (i=0; userItems[i]; i++)
+  {
+    if (userItems[i].checked && userItems[i].notice == 1)
+    {
+      cfm = '{$lang.list_still_accounts}' + '{$lang.list_remove_confirm}';
+      break;
     }
-    
-    /**
-     * 搜索用户
-     */
-    function searchUser(){
-        var frm = $("form[name='formSearch_senior']");
-        listTable.filter['store_search'] = Utils.trim(frm.find("input[name='store_search']").val());
-        listTable.filter['merchant_id'] = Utils.trim(frm.find("input[name='merchant_id']").val());
-        listTable.filter['store_keyword'] = Utils.trim(frm.find("input[name='store_keyword']").val());
-        listTable.filter['store_type'] = Utils.trim(frm.find("input[name='store_type']").val());
-    
-        listTable.filter['keywords'] = Utils.trim(frm.find("input[name='keyword']").val());
-        listTable.filter['mobile_phone'] = Utils.trim(frm.find("input[name='mobile_phone']").val());
-        listTable.filter['email'] = Utils.trim(frm.find("input[name='email']").val());
-        listTable.filter['rank'] = frm.find("input[name='user_rank']").val();
-        listTable.filter['pay_points_gt'] = Utils.trim(frm.find("input[name='pay_points_gt']").val());
-        listTable.filter['pay_points_lt'] = Utils.trim(frm.find("input[name='pay_points_lt']").val());
-        listTable.filter['page'] = 1;
-        listTable.loadList();
-    }
-    
-    $.gjSearch("-240px");  //高级搜索
-	</script>
+  }
+
+  return confirm(cfm);
+}
+
+/**
+ * 搜索用户
+ */
+function searchUser()
+{
+    var frm = $("form[name='formSearch_senior']");
+    listTable.filter['store_search'] = Utils.trim(frm.find("input[name='store_search']").val());
+    listTable.filter['merchant_id'] = Utils.trim(frm.find("input[name='merchant_id']").val());
+    listTable.filter['store_keyword'] = Utils.trim(frm.find("input[name='store_keyword']").val());
+    listTable.filter['store_type'] = Utils.trim(frm.find("input[name='store_type']").val());
+
+    listTable.filter['keywords'] = Utils.trim(($("form[name='searchForm']").find("input[name='keyword']").val() != '') ? $("form[name='searchForm']").find("input[name='keyword']").val() :  frm.find("input[name='keyword']").val());
+    listTable.filter['mobile_phone'] = Utils.trim(frm.find("input[name='mobile_phone']").val());
+    listTable.filter['email'] = Utils.trim(frm.find("input[name='email']").val());
+    listTable.filter['rank'] = frm.find("input[name='user_rank']").val();
+    listTable.filter['pay_points_gt'] = Utils.trim(frm.find("input[name='pay_points_gt']").val());
+    listTable.filter['pay_points_lt'] = Utils.trim(frm.find("input[name='pay_points_lt']").val());
+    listTable.filter['page'] = 1;
+    listTable.loadList();
+}
+
+/**
+ * 搜索用户名称
+ */
+function searchUserName()
+{
+	var frm = $("form[name='searchForm']");
+	
+	listTable.filter = [];
+	listTable.filter['keywords'] = Utils.trim(frm.find("input[name='user_name']").val());
+	
+	listTable.filter['page'] = 1;
+    listTable.loadList();
+}
+
+$.gjSearch("-240px");  //高级搜索
+</script>
 {/if}
 </body>
 </html>

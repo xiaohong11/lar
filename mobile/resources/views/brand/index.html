@@ -1,27 +1,25 @@
 {include file="page_header"}
 <div class="con">
+		<section>
 		{foreach $list.top as $top}
-		<div class="brand-cont-box">
-			<div class="bg-img">
-				<img src="{elixir('img/brand_header_bg.jpg')}" />
-			</div>
-			<div class="dis-box cont-box">
-				<div class="box-flex">
-					<img class="img-box" src="{$list1}">
-				</div>
-				<div class="box-flex">
-					<div class="cont">
-						<h4>今日最大牌</h2>
-						<p>每日精选  品牌大促</p>
+			<ul class="brand-header-box">
+				<li>
+					<div class="brand-img-box">
+						<img src="{$list1}">
+						<div class="brand-n-box-pos">
+							<h2>今日之最</h2>
+							<p>爆款新品 等你秒杀</p>
+						</div>
+						<div class="brend-day-box"><em>{$mday}/</em><span>{$mon}</span></div>
+				</li>
+				<li>
+					<div class="brand-right-box ">
+						<h2>{$top.brand_name}</h2>
+						<p class="fourlist-hidden">{$top.brand_desc}</p>
 					</div>
-					<div class="cont">
-						<h5>日期：<label class="color-red">{$mon}-{$mday}</label></h5>
-						<span>品牌：<label class="col-3">{$top.brand_name}</label></span>
-						<!--<p class="fourlist-hidden">{$top.brand_desc}</p>-->
-					</div>
-				</div>
-			</div>
-		</div>
+				</li>
+
+			</ul>
 		{if $top.goods}
 		<div class="box mb-1 b-color-f">
 			<div class="hot-container-div">
@@ -32,15 +30,13 @@
 						<li  class="swiper-slide ">
 							<a href="{$topgoods.url}">
 								<img src="{$topgoods.goods_thumb}" />
-								<p class="index-price text-c">
-									<em>
- 										{if $topgoods.is_promote==1 && $topgoods.promote_price } {$topgoods.promote_price} {else} {$topgoods.shop_price} {/if}
-									</em>
-									<br>
-									<del>
-										<em>{$topgoods.market_price}</em>
-									</del>
-								</p>
+								<p class="index-price text-c"><em>
+                                                                        {if $topgoods.is_promote==1 && $topgoods.promote_price }
+                                                                        {$topgoods.promote_price}
+                                                                        {else}
+                                                                        {$topgoods.shop_price}
+                                                                        {/if}
+                                                                    </em><br><del><em>{$topgoods.market_price}</em></del></p>
 							</a>
 						</li>
 					{/foreach}
@@ -78,7 +74,7 @@
 														<a href="{$centerbrand.url} ">进入专区</a>
 													</div>
 												</section>
-												<img class="bg " src="{$centerbrand.brand_bg}">
+												<img class="bg " src="{elixir('img/shopping_info_b.png ')}">
 											</div>
 										</div>
 									</div>
@@ -114,7 +110,8 @@
 						</h3>
 				</div>
 			</div>
-
+		</section>
+		<section class="">
 			<ul class="my-brand-login ">
 			{foreach $brand15 as $brand}
 				<li>
@@ -123,21 +120,13 @@
 			{/foreach}
 				<li class="my-brand-text "><a href="{url('brand/index/nav')}">查看更多</a></li>
 			</ul>
-
+		</section>
 		</div>
 	<!-- Initialize Swiper -->
 	{include file="float_nav"} 
     {include file="float_nav_footer"} 
 	<script>
 		$(function($) {
-			function brandHeight(){
-				var brand_cont_height = $(".brand-cont-box .cont-box").outerHeight(true);
-				var brand_box = $(".brand-cont-box").height(brand_cont_height)
-			}
-			brandHeight()
-			window.onresize = function(){
-				brandHeight()
-			}
 			var swiper = new Swiper('.h-b-swiper-container', {
 				pagination: '.swiper-pagination',
 				nextButton: '.swiper-button-next',

@@ -21,13 +21,13 @@
     .chat-box p span{margin-left:10px;}
     .footer-tool-date.j-footer-tool-date a,.footer-tool-date.j-footer-tool-date a:hover{color:#707070;}
 </style>
-<link rel="stylesheet" id=cal_style type="text/css" href="../mobile/public/assets/chat/css/flatpickr.min.css">
+<link rel="stylesheet" id=cal_style type="text/css" href="../kefu/public/assets/css/flatpickr.min.css">
 <body class="iframe_body">
 	<div class="warpper">
     	<div class="title">权限 - 客服管理</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                 	<li>该页面展示了统计聊天的信息。</li>
                 </ul>
@@ -59,8 +59,8 @@
                                                     	<p class="brand"><em>{$list.user_name}</em></p>
                                                 		<div class="name">
                                                         	<span title="{$list.goods_name}" data-toggle="tooltip" class="span">{$list.goods_name}</span>
-                                                        </div>
-                                                    	<p class="activity">
+                                                        </div>   
+                                                    	<p class="activity"> 
                                                             <span class="mr10">开始时间：{$list.start_time}</span>
                                                             <span class="mr10">结束时间：{$list.end_time}</span>
                                                         </p>
@@ -123,7 +123,7 @@
 	</div>
 </body>
 
-<script src='../mobile/public/assets/chat/js/flatpickr.js'></script>
+<script src='../kefu/public/assets/js/flatpickr.js'></script>
 <script>
     var service_id = {$id};
     var customer_id ;

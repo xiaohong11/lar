@@ -1,9 +1,11 @@
-##api/wx/category  小程序分类列表
+##ecapi.wx.category.index  小程序分类列表
 
 ####链接
-     http://domain/mobile/public/api/wx/category
+     http://10.10.10.145/dsc/mobile/?app=api
 
 ####参数
+1. method   ecapi.wx.category.index
+
 
 
 ####返回参数

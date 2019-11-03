@@ -1,3 +1,13 @@
+body {
+	padding-bottom: 40px;
+	margin-left:200px;
+	margin-right:20px;
+	-webkit-transition: margin 500ms ease;
+	-moz-transition: margin 500ms ease;
+	-ms-transition: margin 500ms ease;
+	-o-transition: margin 500ms ease;
+	transition: margin 500ms ease;
+}
 .navbar-layoutit .btn-donate {padding: 0 0 0 10px;}
 .navbar-layoutit .btn-donate form { margin:0;}
 

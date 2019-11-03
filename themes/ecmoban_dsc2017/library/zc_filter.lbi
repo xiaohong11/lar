@@ -31,15 +31,7 @@
         </div>
         {/foreach}
     {else}
-    	<div class="no_records">
-            <i class="no_icon_two"></i>
-            <div class="no_info no_info_line">
-                <h3>{$lang.information_null}</h3>
-                <div class="no_btn">
-                    <a href="index.php" class="btn sc-redBg-btn">返回首页</a>
-                </div>
-            </div>
-        </div>
+    	<div class="Module_c">暂无众筹商品</div>
     {/if}
 </div>
 

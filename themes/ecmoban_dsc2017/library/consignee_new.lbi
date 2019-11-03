@@ -5,7 +5,7 @@
             <div class="form-label"><span class="red">*</span>{$lang.Consignee}：</div>
             <div class="form-value">
                 <input type="text" class="form-input" value="{$consignee.consignee}" maxlength="20" name="consignee" id="consignee_name">
-                <div class="form_prompt"></div>
+                <span id="consigneeNameNote" class="status error hide">{$lang.input_Consignee_name}</span>
             </div>
         </div>
         <div class="form-row">
@@ -14,14 +14,14 @@
                 <input type="text" class="form-input" maxlength="11" name="mobile" value="{$consignee.mobile}" id="consignee_mobile">
                 <span class="fl">{$lang.Fixed_telephone}：</span>
                 <input type="text" class="form-input" maxlength="20" value="{$consignee.tel}" name="tel" id="consignee_phone">
-                <div class="form_prompt"></div>
+                <span id="consigneeMobileTelNote" class="status error hide">{$lang.input_contact}</span>
             </div>
         </div>
-        
+        {if $goods_flow_type eq 101}
         <div class="form-row">
             <div class="form-label form-label-lh"><span class="red">*</span>{$lang.Local_area}：</div>
             <div class="form-value" ectype="regionLinkage">
-                <dl class="mod-select mod-select-small fl" ectype="smartdropdown" id="selCountries_">
+                <dl class="mod-select mod-select-small" ectype="smartdropdown" id="selCountries_">
                     <dt>
                     	<span class="txt" ectype="txt">{$please_select}{$name_of_region[0]}</span>
                         <input type="hidden" value="{$consignee.country}" name="country">
@@ -32,7 +32,7 @@
                         <!-- {/foreach} -->
                     </dd>
                 </dl>
-                <dl class="mod-select mod-select-small fl" ectype="smartdropdown" id="selProvinces_">
+                <dl class="mod-select mod-select-small" ectype="smartdropdown" id="selProvinces_">
                     <dt>
                         <span class="txt" ectype="txt">{$please_select}{$name_of_region[1]}</span>
                         <input type="hidden" value="{$consignee.province}" name="province">
@@ -44,7 +44,7 @@
                         <!-- {/foreach} -->
                     </dd>
                 </dl>
-                <dl class="mod-select mod-select-small fl" ectype="smartdropdown" id="selCities_">
+                <dl class="mod-select mod-select-small" ectype="smartdropdown" id="selCities_">
                     <dt>
                         <span class="txt" ectype="txt">{$please_select}{$name_of_region[2]}</span>
                         <input type="hidden" value="{$consignee.city}" name="city">
@@ -56,7 +56,7 @@
                         <!-- {/foreach} -->
                     </dd>
                 </dl>
-                <dl class="mod-select mod-select-small fl" ectype="smartdropdown" id="selDistricts_" style="display:none;">
+                <dl class="mod-select mod-select-small" ectype="smartdropdown" id="selDistricts_" style="display:none;">
                     <dt>
                         <span class="txt" ectype="txt">{$please_select}{$name_of_region[3]}</span>
                         <input type="hidden" value="{$consignee.district}" name="district">
@@ -68,10 +68,10 @@
                         {/foreach}
                     </dd>
                 </dl>
-                <dl class="mod-select mod-select-small fl" ectype="smartdropdown" id="selStreets_" style="display:none;">
+                <dl class="mod-select mod-select-small" ectype="smartdropdown" id="selStreets_" style="display:none;">
                     <dt>
                         <span class="txt" ectype="txt">{$please_select}{$name_of_region[3]}</span>
-                        <input type="hidden" value="{$consignee.street}" name="street" class="ignore">
+                        <input type="hidden" value="{$consignee.street}" name="street">
                     </dt>
                     <dd ectype="layer">
                         <div class="option" data-value="0">{$please_select}{$name_of_region[3]}</div>
@@ -80,21 +80,14 @@
                         {/foreach}
                     </dd>
                 </dl>
-                <div class="form_prompt lh40"></div>
+                <span id="consigneeEreaNote" class="status error hide"></span>
             </div>
         </div>
         <div class="form-row">
             <div class="form-label"><span class="red">*</span>{$lang.address_info}：</div>
             <div class="form-value">
                 <input type="text" class="form-input form-input-long" name="address" value="{$consignee.address}" id="consignee_address">
-                <div class="form_prompt"></div>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-label"><span class="red">*</span>{$lang.con_email}：</div>
-            <div class="form-value">
-                <input type="text" class="form-input" name="email" value="{$consignee.email}" id="consignee_email">
-                <div class="form_prompt"></div>
+                <span id="consigneeAddressNote" class="status error hide">{$lang.input_address_info}</span>
             </div>
         </div>
         <div class="form-row">
@@ -104,6 +97,15 @@
                 <span id="consigneeZipcodeNote" class="status error"></span>
             </div>
         </div>
+        {/if}
+        <div class="form-row">
+            <div class="form-label">{$lang.con_email}：</div>
+            <div class="form-value">
+                <input type="text" class="form-input" name="email" value="{$consignee.email}" id="consignee_email">
+                <span id="emailNote" class="status error hide">{$lang.con_email_input}</span>
+            </div>
+        </div>
+        {if $goods_flow_type eq 101}
         <div class="form-row">
             <div class="form-label">{$lang.con_sign_building}：</div>
             <div class="form-value"><input type="text" class="form-input fl" value="{$consignee.sign_building}" name="sign_building" id="consignee_sign_building"><div class="notic">{$lang.sign_building_desc}&nbsp;&nbsp;</div></div>
@@ -116,6 +118,8 @@
                 <span id="consigneeBestTimeNote" class="status error"></span>
             </div>
         </div>
+        {/if}
+        
         <input name="goods_flow_type" value="{$goods_flow_type}" type="hidden">
         <input name="address_id" value="{$consignee.address_id}" type="hidden">
     </form>

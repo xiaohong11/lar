@@ -4,14 +4,14 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$lang.file_management} - {$ur_here}</div>
+    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>文件管理 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content_common}</li>
-                	<li>{$lang.operation_prompt_content.info.0}</li>
-                    <li>{$lang.operation_prompt_content.info.1}</li>
+                	<li>填写在阿里云创建的OSS信息。</li>
+                    <li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
+                    <li>需要在系统设置->商品设置->扩展信息中开启该功能即可使用。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -24,7 +24,7 @@
                                     <div class="label_value">
 										<input type='text' name='bucket' value='{$bucket.bucket|escape:html}' size='55' class="text" />
                                    		<div class="form_prompt"></div>
-                                        <div class="notic">{$lang.bucket_oss_notic}</div>	
+                                        <div class="notic">与阿里云OSS开通对象名称一致</div>	
                                     </div>
                                 </div>
                                 <div class="item">
@@ -32,7 +32,7 @@
                                     <div class="label_value">
 										<input type='text' name='keyid' value='{$bucket.keyid|escape:html}' size='55' class="text" />
                                         <div class="form_prompt"></div>
-                                        <div class="notic">{$lang.bucket_keyid_notic}</div>	
+                                        <div class="notic">填写阿里云Access Key管理的(ID)</div>	
                                     </div>
                                 </div>								
                                 <div class="item">
@@ -40,7 +40,7 @@
                                     <div class="label_value">
 										<input type='text' name='keysecret' value='{$bucket.keysecret|escape:html}' size='55' class="text" />
                                         <div class="form_prompt"></div>
-                                        <div class="notic">{$lang.bucket_secret_notic}</div>	
+                                        <div class="notic">填写阿里云Access Key管理的(Secret)</div>	
                                     </div>
                                 </div>
                                 <div class="item" style="margin-bottom:0px;">
@@ -61,7 +61,7 @@
                                 <div class="item">
                                     <div class="label">&nbsp;</div>
                                     <div class="label_value">
-                                        <div class="notic">{$lang.bucket_url_notic}</div>	
+                                        <div class="notic">默认选关闭，官方建议开启绑定域名，域名格式：http://xx.xxxx.com/（不可绑定当前网站域名，建议新开二级域名）</div>	
                                     </div>
                                 </div>						
                                 <div class="item" id="iscname" {if $bucket.is_cname eq 0} style="display:none"{/if}>
@@ -131,21 +131,6 @@
                                             </div>
                                         </div>	
                                     </div>
-                                </div>
-                                <div class="item">
-                                    <div class="label">{$lang.delimg}：</div>
-                                    <div class="label_value">
-                                        <div class="checkbox_items">
-                                            <div class="checkbox_item">
-                                                <input type="radio" class="ui-radio" name="is_delimg" id="delimg_0" value="0" {if $bucket.is_delimg eq 0} checked="true" {/if}  />
-                                                <label for="delimg_0" class="ui-radio-label">{$lang.no}</label>
-                                            </div>
-                                            <div class="checkbox_item">
-                                                <input type="radio" class="ui-radio" name="is_delimg" id="delimg_1" value="1" {if $bucket.is_delimg eq 1} checked="true" {/if}  />
-                                                <label for="delimg_1" class="ui-radio-label">{$lang.yes}</label>
-                                            </div>
-                                        </div>	
-                                    </div>
                                 </div>									
                                 <div class="item">
                                     <div class="label">&nbsp;</div>
@@ -164,7 +149,8 @@
 		</div>
     </div>
  	{include file ='library/pagefooter.lbi'}
-	<script type="text/javascript">
+	{literal}
+	<script language="JavaScript">
 	$(function(){
 		$("input[name='is_cname']").change(function(){
 			var isval = $(this).val();
@@ -173,8 +159,9 @@
 			}else{
 				$("#iscname").hide();
 			}
-		});
-		
+		})
+	});
+	$(function(){
 		//表单验证
 		$("#submitBtn").click(function(){
 			if($("#oss_configure_form").valid()){
@@ -201,17 +188,18 @@
 			},
 			messages:{
 				bucket:{
-					required:'<i class="icon icon-exclamation-sign"></i>' + oss_bucket_null
+					required:'<i class="icon icon-exclamation-sign"></i>Bucket不能为空'
 				},
 				keyid:{
-					required:'<i class="icon icon-exclamation-sign"></i>' + oss_keyid_null
+					required:'<i class="icon icon-exclamation-sign"></i>KeyId不能为空'
 				},
 				keysecret:{
-					required:'<i class="icon icon-exclamation-sign"></i>' + oss_keysecret_null
+					required:'<i class="icon icon-exclamation-sign"></i>KeySecret不能为空'
 				}
 			}
 		});
 	});
 	</script>
+	{/literal}
 </body>
 </html>

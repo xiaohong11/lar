@@ -37,7 +37,6 @@
                                 <div class="text_time" id="text_time2">
                                 <input type="text" name="end_time" class="text" size="40" value="{$package.end_time}" readonly="readonly" id ="end_time_id" />
                                 </div>
-                                <div class="form_prompt"></div>
                             </dd>
                         </dl>
                         <dl>
@@ -56,7 +55,7 @@
                                     {/if}
                                 </div>
                                 <div class="form_prompt"></div>
-                                <div class="notic">尺寸：580*270</div>
+                                <div class="notic">{$lang.pixel80}</div>
                             </dd>
                         </dl>
                         <dl>
@@ -100,65 +99,80 @@
                             </dl>
                             {/if}
                         {/if}
-                       <dl>
-                            <dt>礼包商品：</dt>
+                        <dl class="notBg border-bottom0">
+                        	<dt>{$lang.search_goods}：</dt>
                             <dd>
-                                <input type="button" class="sc-btn btn30 sc-blueBg-btn valid" value="设置商品" ectype="setupGroupGoods" data-diffeseller="1" data-pbmode="setpackagegoods" data-pbtype="package" aria-invalid="false">
+                                <div class="goods_search_div bor_bt_das">
+                                    <div class="search_select">
+                                        <div class="categorySelect">
+                                            <div class="selection">
+                                                <input type="text" name="category_name" id="category_name" class="text w250 valid" value="请选择分类" autocomplete="off" readonly data-filter="cat_name" />
+                                                <input type="hidden" name="category_id" id="category_id" value="0" data-filter="cat_id" />
+                                            </div>
+                                            <div class="select-container" style="display:none;">
+                                                {include file="library/filter_category.lbi"}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="search_select">
+                                        <div class="brandSelect">
+                                            <div class="selection">
+                                                <input type="text" name="brand_name" id="brand_name" class="text w120 valid" value="请选择品牌" autocomplete="off" readonly data-filter="brand_name" />
+                                                <input type="hidden" name="brand_id" id="brand_id" value="0" data-filter="brand_id" />
+                                            </div>
+                                            <div class="brand-select-container" style="display:none;">
+                                                {include file="library/filter_brand.lbi"}
+                                            </div>
+                                        </div>                            
+                                    </div>
+                                    <input type="hidden" name="ru_id" value="{$ru_id}" />
+                                    <input type="text" name="keyword" class="text w150 mr10" placeholder="请输入关键字" data-filter="keyword" autocomplete="off" />
+                                    <a href="javascript:void(0);" class="sc-btn sc-blueBg-btn" onclick="searchGoods()">搜索</a>
+                                </div>
                             </dd>
                         </dl>
-                        <div class="list-div mt20">
-                            <table class="ecsc-default-table">
-                                <thead>
-                                    <tr>
-                                        <th width="30%">商品名称</th>
-                                        <th width="15%">商品价格</th>
-                                        <th width="10%">数量</th>
-                                        <th width="15%">属性</th>
-                                        <th width="10%">操作</th>
-                                    </tr>
-                                </thead>
-                                <tbody ectype="group_list">
-                                    {foreach from=$package_goods_list item=package_goods}
-                                    <tr data-goods="{$package_goods.goods_id}">
-                                        <td class="tl">{$package_goods.goods_name_pack}</td>
-                                        <td>{$package_goods.shop_price}</td>
-                                        <td><input class="text w50 tc fn mr0" onblur="edit_package_nuber(this)" name="goods_number[]" autocomplete="off" value="{$package_goods.goods_number}" type="text"></td>
-                                        <td>
-                                            {if $package_goods.products}
-                                            <div class="imitate_select select_w120">
-                                                <div class="cite">请选择...</div>
-                                                <ul style="display: none;" class="ps-container">
-                                                    <li><a href="javascript:;" data-value="" class="ftx-01">请选择...</a></li>
-                                                    {foreach from=$package_goods.products item=products}
-
-                                                    <li><a href="javascript:;" data-value="{$products.product_id}" class="ftx-01" ectype="package_checked">{$products.goods_attr_str}</a></li>
-
+                        <dl class="dl_alien notBg">
+                            <dd>
+                                <div class="move_div m0">
+                                    <div class="move_left">
+                                        <h4>{$lang.all_goods}</h4>
+                                        <div class="move_info" >
+                                            <div class="move_list" id="source_select">
+                                                <ul></ul>	
+                                            </div>
+                                        </div>
+                                        <div class="move_handle">
+                                            <a href="javascript:void(0);" class="sc-btn btn25 moveAll" ectype="moveAll">全选</a>
+                                            <a href="javascript:void(0);" class="sc-btn sc-blueBg-btn btn25" onclick="addGoods()">确定</a>
+                                        </div>
+                                    </div>
+                                    <div class="move_middle">
+                                        <div class="tc"><p>{$lang.goods_number}</p><input name="number" id="number" type="text" size="6" value="1" class="text w30 tc fn mt10" autocomplete="off" /></p></div>
+                                    </div>
+                                    <div class="move_right">
+                                        <h4>{$lang.package_goods}</h4>
+                                        <div class="move_info">
+                                            <div class="move_list" id="target_select">
+                                                <ul>
+                                                    {foreach from=$package_goods_list item=package_goods}
+                                                    <li><i class='sc_icon sc_icon_no'></i><a href='javascript:;' data-value='{$package_goods.g_p}' class='ftx-01'>{$package_goods.goods_name}</a></li>
                                                     {/foreach}
                                                 </ul>
-                                                <input type="hidden" name="product_id[]" value="{$package_goods.product_id}" data-oldproduct="{$package_goods.product_id}" >
                                             </div>
-                                            {/if}
-                                        </td>
-                                        <td class="ecsc-table-handle">
-                                            {if $package_goods.products}
-                                            <span><a href="javascript:;" ectype="add_package_goods" title="增加" class="btn-blue"><i class="icon icon-plus"></i><p>增加</p></a></span>
-                                            {/if}
-                                            <span><a href="javascript:;" ectype="remove_group" title="{$lang.remove}" data-operation="package" data-msg="确定删除该礼包商品吗？" class="btn-red"><i class="icon icon-trash"></i><p>{$lang.remove}</p></a></span>
-                                        </td>
-                                    </tr>
-                                    {foreachelse}
-                                    <tr><td class="no-records" colspan="12">{$lang.no_records}</td></tr>
-                                    {/foreach}
-                                </tbody>
-                            </table>							
-                        </div>
+                                        </div>
+                                        <div class="move_handle">
+                                            <a href="javascript:void(0);" class="sc-btn btn25 moveAll" ectype="moveAll">全选</a><a href="javascript:void(0);" class="sc-btn sc-blueBg-btn btn25" onclick="delGoods()">移除</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </dd>
+                        </dl>
                       <div class="bottom tc">
                         <div class="button_info">
                             <input type="submit" value="{$lang.button_submit}" class="sc-btn sc-blueBg-btn btn35" id="submitBtn" />
                             <input type="reset" value="{$lang.button_reset}" class="sc-btn btn35 sc-blue-btn" />
                             <input type="hidden" name="act" value="{$form_action}" />
                             <input type="hidden" name="id" value="{$package.id}" />
-                            <input type="hidden" name="ru_id" value="{$package.ru_id}" />
                         </div>
                       </div>
                     </div>  
@@ -169,13 +183,13 @@
     </div>
 </div>
 {include file ='library/seller_footer.lbi'}
-{insert_scripts files="jquery.purebox.js"}
-<script type="text/javascript" src="../js/jquery.picTip.js"></script>
+<script type="text/javascript" src="js/jquery.picTip.js"></script>
 <script type="text/javascript">
 //滚动轴
 $(".move_list").perfectScrollbar();
 $(".brand-list").perfectScrollbar();
-
+<!--
+{literal}
 var elements = document.forms['theForm'].elements;
 
 //表单验证
@@ -203,13 +217,6 @@ $(function(){
 			desc : {
 				required : true
 			},
-			start_time :{
-				required : true
-			},
-			end_time :{
-				required : true,
-				compareDate:"#start_time_id",
-			}
 		},
 		messages : {
 			package_name : {
@@ -221,30 +228,6 @@ $(function(){
 			},
 			desc : {
 				required : '<i class="icon icon-exclamation-sign"></i>' + no_desc
-			},
-			start_time :{
-				required : '<i class="icon icon-exclamation-sign"></i>'+start_data_notnull
-			},
-			end_time :{
-				required : '<i class="icon icon-exclamation-sign"></i>'+end_data_notnull,
-				compareDate:'<i class="icon icon-exclamation-sign"></i>'+data_invalid_gt
-			}
-		},
-		onfocusout:function(element,event){
-			//实时去除结束时间是否大于开始时间验证
-			var name = $(element).attr("name");
-			
-			if(name == "end_time"){
-				var endDate = $(element).val();
-				var startDate = $(element).parents("dd").find("input[name='start_time']").val();
-				
-				var date1 = new Date(Date.parse(startDate.replace(/-/g, "/")));
-				var date2 = new Date(Date.parse(endDate.replace(/-/g, "/")));
-				
-				if(date1 > date2){
-					$(element).removeClass("error");
-					$(element).parents("dd").find(".form_prompt").html("");
-				}
 			}
 		}
 	});
@@ -252,6 +235,104 @@ $(function(){
 	$('.nyroModal').nyroModal();
 });
 
+function searchGoods()
+	{
+		var filter = new Object;
+		filter.keyword    = document.forms['theForm'].elements['keyword'].value;
+		filter.cat_id     = document.forms['theForm'].elements['category_id'].value;
+		filter.brand_id   = document.forms['theForm'].elements['brand_id'].value;
+		filter.ru_id = document.forms['theForm'].elements['ru_id'].value;
+		
+		$("#source_select").find("ul").html("<i class='icon-spinner icon-spin'></i>");
+		
+		setTimeout(function(){Ajax.call('package.php?is_ajax=1&act=search_goods', filter, searchGoodsResponse, 'GET', 'JSON')},300);
+	}
+	
+	function searchGoodsResponse(result)
+	{
+		var step = $("#source_select").parents(".step[ectype=filter]:first");	
+		  if (result.error == 0)
+		  {	 
+			  $("#source_select").find("li,i").remove();
+			
+			  var goods = result.content;
+			
+			  if (goods)
+			  {
+				  for (i = 0; i < goods.length; i++)
+				  {
+					
+					  if (goods[i].products.length > 0)
+					  {
+						  for (var j = 0; goods[i].products[j]; j++)
+						  {
+							  var value = goods[i].value + '_' + goods[i].products[j].product_id;
+							  var text  = goods[i].text + '[' + goods[i].products[j].goods_attr_str + ']';
+							  $("#source_select").children("ul").append("<li><i class='sc_icon sc_icon_ok'></i><a href='javascript:;' data-value='"+value+"' class='ftx-01'>"+text+"</a></li>")
+						  }
+					  }else{
+							$("#source_select").children("ul").append("<li><i class='sc_icon sc_icon_ok'></i><a href='javascript:;' data-value='"+goods[i].value+"' class='ftx-01'>"+goods[i].text+"</a></li>")
+					  }
+				  }
+			  }
+		  }
+	
+		if (result.message.length > 0)
+		{
+			alert(result.message);
+		}
+		step.find(".move_list").perfectScrollbar();	
+	}
+	
+	function addGoods()
+	{
+		var goodsId = [];
+		var num = document.getElementById('number').value;
+		var packageId = document.forms['theForm'].elements['id'].value;
+		$("#source_select").find("li").each(function(){
+			if($(this).attr("class") == 'current'){
+				var value = $(this).find("a").data('value');
+				goodsId.push(value);
+			}
+		});
+		Ajax.call('package.php?is_ajax=1&act=add_package_goods&num='+ num +'&pid='+ packageId, goodsId, addGoodsResponse, 'GET', 'JSON');
+	}	
+	
+	function addGoodsResponse(result){
+		if(result.error == 0){
+			$("#target_select").find('li').remove();
+			var goods = result.content;
+			for(i=0;i<goods.length;i++){
+				$("#target_select").children("ul").append("<li><i class='sc_icon sc_icon_no'></i><a href='javascript:;' data-value='"+goods[i].value+"' class='ftx-01'>"+goods[i].text+"</a></li>")
+			}
+		}
+	}
+	
+	function delGoods()
+	{
+		var goodsId = [];
+		var packageId = document.forms['theForm'].elements['id'].value;
+		
+		$("#target_select").find("li").each(function(){
+			if($(this).attr("class") == 'current'){
+				var value = $(this).find("a").data('value');
+				goodsId.push(value);
+			}
+		});	
+		Ajax.call('package.php?is_ajax=1&act=drop_package_goods&pid='+ packageId, goodsId, delGoodsResponse, 'GET', 'JSON');
+	}
+	
+	function delGoodsResponse(result){
+		if(result.error == 0){
+			$("#target_select").find('li').remove();
+			var goods = result.content;
+			if(goods){
+				for(i=0;i<goods.length;i++){
+					$("#target_select").children("ul").append("<li><i class='sc_icon sc_icon_no'></i><a href='javascript:;' data-value='"+goods[i].value+"' class='ftx-01'>"+goods[i].text+"</a></li>")
+				}
+			}
+		}	
+	}
 //日期选择插件调用start sunle
 var opts1 = {
   'targetId':'start_time_id',//时间写入对象的id
@@ -268,6 +349,7 @@ var opts1 = {
 xvDate(opts1);
 xvDate(opts2);
 //日期选择插件调用end sunle
+{/literal}
 </script>
 </body>
 </html>

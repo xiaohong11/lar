@@ -133,7 +133,7 @@
 
 						<li class="box-flex">
                             <!--{if $has_kefu == 1}-->
-                            <a class="filter-btn-kefu filter-btn-a" href="{url('chat/index/index', array('ru_id'=> $info.ru_id))}"><i class="iconfont icon-kefu"></i><em>客服</em></a>
+                            <a class="filter-btn-kefu filter-btn-a" href="{url('touchim/index/index', array('ru_id'=> $info.ru_id))}"><i class="iconfont icon-kefu"></i><em>客服</em></a>
                             <!--{else}-->
                             <i class="iconfont icon-kefu"></i>客服
                             <!--{if $info.shop_wangwang || $info.shop_qq ||$info.kf_appkey}-->
@@ -145,7 +145,7 @@
                                 <li><a href="http://www.taobao.com/webww/ww.php?ver=3&touid=$info.shop_wangwang&siteid=cntaobao&status=1&charset=utf-8" target="_blank">旺旺</a></li>
                                 <!--{/if}-->
                                   <!-- {if $info.kf_appkey &&$info.is_im ==1 }-->
-                                <li><a class="box-flex btn-default" href="{url('chat/yunwang/index', array('ru_id'=> $info.ru_id))}">IM</a></li>
+                                <li><a class="box-flex btn-default" href="{url('chat/index/index', array('ru_id'=> $info.ru_id))}">IM</a></li>
                                <!-- {/if}-->
                                   <!-- {if $info.meiqia }-->
                                 <li><a class="box-flex btn-default" href="https://static.meiqia.com/dist/standalone.html?eid={$info.meiqia}">美恰</a></li>

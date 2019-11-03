@@ -1,5 +1,4 @@
 <div class="categorys-items" id="cata-nav">
-    <!--{if $categories_pro}-->
     <!--{foreach from=$categories_pro item=cat name=categories_pro}-->
     <!--{if $smarty.foreach.categories_pro.index < $nav_cat_num}-->
     <div class="categorys-item{if $nav_cat_model} nav_cat_model{/if}" ectype="cateItem" data-id="{$cat.id}" data-eveval="0">
@@ -28,12 +27,17 @@
                 {/if}
             </div>
         </div>
-        <div class="categorys-items-layer" ectype='cateLayer'>
-            <div class="cate-layer-con clearfix" ectype='cateLayerCon_{$cat.id}'></div>
+        <div class="categorys-items-layer" ectype="cateLayer">
+            <div class="cate-layer-con clearfix">
+                <div class="cate-layer-left">
+                    <div class="cate_channel" ectype="channels_{$cat.id}"></div>
+                    <div class="cate_detail" ectype="subitems_{$cat.id}"></div>
+                </div>
+                <div class="cate-layer-rihgt" ectype="brands_{$cat.id}"></div>
+            </div>
         </div>
         <div class="clear"></div>
     </div>
     <!-- {/if} -->
     <!-- {/foreach} -->
-    <!-- {/if} -->
 </div>

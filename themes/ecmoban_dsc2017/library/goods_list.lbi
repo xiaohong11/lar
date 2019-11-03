@@ -13,246 +13,120 @@
         	<!-- {if $category > 0} -->
             <form name="compareForm" action="compare.php" method="post" onSubmit="return compareGoods(this);" class="goodslistForm" data-state="0">
             <!-- {/if} -->
-            <div class="goods-list-warp">
-                <ul ectype="items">
-                    <!--{foreach from=$goods_list item=goods }-->
-                    <!-- {if $goods.goods_id} -->
-                    {if $goods.act_id}
-                    <li class="gl-item">
-                        <div class="gl-i-wrap">
-                            <div class="p-img"><a href="{$goods.purl}" target="_blank"><img src="{$goods.goods_thumb}" /></a></div>
-                            <!--{if $goods.pictures}-->
-                            <div class="sider">
-                                <a href="javascript:void(0);" class="sider-prev"><i class="iconfont icon-left"></i></a>
-                                <ul>
-                                    <!-- {foreach from=$goods.pictures name=picture item=picture}-->
-                                    <!--{if $smarty.foreach.picture.index < 4}-->
-                                    <li <!--{if $smarty.foreach.picture.index eq 0}--> class="curr"<!--{/if}-->><img src="{if $picture.thumb_url}{$picture.thumb_url}{else}{$picture.img_url}{/if}" width="26" height="26" /></li>
-                                    <!-- {/if} -->
-                                    <!--{/foreach}-->
-                                </ul>
-                                <a href="javascript:void(0);" class="sider-next"><i class="iconfont icon-right"></i></a>
-                            </div>
-                            <!-- {/if} -->
-                            <div class="p-lie">
-                                <div class="p-price">
-                                    <span>{$goods.shop_price}</span>
-                                </div>
-                                <div class="p-num">{$lang.existing}<em>{$goods.sales_volume}</em>预约</div>
-                            </div>
-                            <div class="p-name"><a href="{$goods.purl}" title="{$goods.goods_name|escape:html}" target="_blank">{if $script_name eq 'search'}{$goods.goods_name_keyword}{else}{$goods.goods_name}{/if}</a></div>
-                            <div class="p-store">
-                                {if $goods.user_id eq 0}
-                                <a href="javascript:;" title="{$goods.rz_shopName}" class="store">{$goods.rz_shopName}</a>
-                                {else}
-                                <a href="{$goods.store_url}" title="{$goods.rz_shopName}" class="store" target="_blank">{$goods.rz_shopName}</a>
-                                {/if}
-                                <!--start 在线客服 -->
-                                {if $goods.is_IM eq 1 || $goods.is_dsc}
-                                <a href="javascript:;" id="IM" onclick="openWin(this)" ru_id="{$goods.user_id}" class="p-kefu{if $goods.user_id eq 0} p-c-violet{/if}"><i class="iconfont icon-kefu"></i></a>
-                                {else}
-                                    {if $goods.kf_type eq 1}
-                                    <a href="http://www.taobao.com/webww/ww.php?ver=3&touid={$goods.kf_ww}&siteid=cntaobao&status=1&charset=utf-8" class="p-kefu{if $goods.user_id eq 0} p-c-violet{/if}" target="_blank"><i class="iconfont icon-kefu"></i></a>
-                                    {else}
-                                    <a href="http://wpa.qq.com/msgrd?v=3&uin={$goods.kf_qq}&site=qq&menu=yes" class="p-kefu{if $goods.user_id eq 0} p-c-violet{/if}" target="_blank"><i class="iconfont icon-kefu"></i></a>
-                                    {/if}
-                                {/if}
-                                <!--end 在线客服 -->
-                            </div>
-                            {if $goods.is_new || $goods.is_hot || $goods.is_best || $goods.is_shipping || $goods.self_run || $goods.user_id eq 0}
-                            <div class="p-activity">
-                                {if $goods.act_id}
-                                <span class="tag tac-mn">
-                                    <i class="i-left"></i>
-                                    {$goods.presale}
-                                    <i class="i-right"></i>
-                                </span>
-                                {/if}
-                                {if $goods.is_new}
-                                <span class="tag tac-mn">
-                                    <i class="i-left"></i>
-                                    {$lang.is_new}
-                                    <i class="i-right"></i>
-                                </span>
-                                {/if}
-                                {if $goods.is_hot}
-                                <span class="tag tac-mh">
-                                    <i class="i-left"></i>
-                                    {$lang.is_hot}
-                                    <i class="i-right"></i>
-                                </span>
-                                {/if}
-                                {if $goods.is_best}
-                                <span class="tag tac-mb">
-                                    <i class="i-left"></i>
-                                    {$lang.is_best}
-                                    <i class="i-right"></i>
-                                </span>
-                                {/if}
-                                {if $goods.is_shipping}
-                                <span class="tag tac-by">
-                                    <i class="i-left"></i>
-                                    {$lang.Free_shipping}
-                                    <i class="i-right"></i>
-                                </span>
-                                {/if}
-                                {if $goods.self_run || $goods.user_id eq 0}
-                                <span class="tag tac-sr">
-                                    <i class="i-left"></i>
-                                    {$lang.self_run}
-                                    <i class="i-right"></i>
-                                </span>
-                                {/if}
-                            </div>
-                            {else}
-                            <div class="p-activity">&nbsp;</div>
-                            {/if}
-                            <div class="p-operate">
-                                <a href="javascript:void(0);" id="compareLink"{if $script_name eq 'search' && $goods.type eq 0} title="没有设置属性类型无法对比" class="not_compareLink"{/if}>
-                                    <input id="{$goods.goods_id}" type="checkbox" name="duibi" class="ui-checkbox"{if $script_name neq 'search' || $goods.type neq 0} onClick="Compare.add(this, {$goods.goods_id},'{$goods.goods_name|escape:html}','{$goods.type}', '{$goods.goods_thumb}', '{$goods.shop_price}', '{$goods.market_price}')"{/if}>
-                                    <label class="ui-label"{if $script_name neq 'search' || $goods.type neq 0} for="{$goods.goods_id}"{/if}>{$lang.compare}</label>
-                                </a>
-                                <a href="javascript:collect({$goods.goods_id});" class="choose-btn-coll{if $goods.is_collect} selected{/if}"><i class="iconfont{if $goods.is_collect} icon-zan-alts{else} icon-zan-alt{/if}"></i>{$lang.btn_collect}</a>
-                                {if $goods.prod eq 1}
-                                    {if $goods.goods_number > 0}
-                                    <a href="{$goods.purl}" rev="{$goods.goods_thumb}" class="addcart"><i class="iconfont icon-carts"></i>抢先预购</a>
-                                    {else}
-                                    <a href="javascript:void(0);" class="addcart btn_disabled"><i class="iconfont icon-carts"></i>{$lang.have_no_goods}</a>
-                                    {/if}
-                                {else}
-                                <a href="{$goods.purl}" rev="{$goods.goods_thumb}" class="addcart"><i class="iconfont icon-carts"></i>抢先预购</a>
-                                {/if}                               
-                            </div>
-                            
-                            <!--{if $dwt_filename eq 'history_list'}--> 
-                            <div class="history_close">
-                                <a href="javascript:delHistory({$goods.goods_id})"><img src="../images/p-del.png"></a>
-                            </div>
-                            <!--{/if}-->
+            <ul>
+                <!--{foreach from=$goods_list item=goods }-->
+                <!-- {if $goods.goods_id} -->
+                <li class="gl-item">
+                    <div class="gl-i-wrap">
+                        <div class="p-img"><a href="{$goods.url}" target="_blank"><img src="{$goods.goods_thumb}" /></a></div>
+                        <!--{if $goods.pictures}-->
+                        <div class="sider">
+                            <a href="javascript:void(0);" class="sider-prev"><i class="iconfont icon-left"></i></a>
+                            <ul>
+                                <!-- {foreach from=$goods.pictures name=picture item=picture}-->
+                                <!--{if $smarty.foreach.picture.index < 4}-->
+                                <li <!--{if $smarty.foreach.picture.index eq 0}--> class="curr"<!--{/if}-->><img src="{if $picture.thumb_url}{$picture.thumb_url}{else}{$picture.img_url}{/if}" width="26" height="26" /></li>
+                                <!-- {/if} -->
+                                <!--{/foreach}-->
+                            </ul>
+                            <a href="javascript:void(0);" class="sider-next"><i class="iconfont icon-right"></i></a>
                         </div>
-                    </li>
-                    {else}
-                    <li class="gl-item">
-                        <div class="gl-i-wrap">
-                            <div class="p-img"><a href="{$goods.url}" target="_blank"><img src="{$goods.goods_thumb}" /></a></div>
-                            <!--{if $goods.pictures}-->
-                            <div class="sider">
-                                <a href="javascript:void(0);" class="sider-prev"><i class="iconfont icon-left"></i></a>
-                                <ul>
-                                    <!-- {foreach from=$goods.pictures name=picture item=picture}-->
-                                    <!--{if $smarty.foreach.picture.index < 4}-->
-                                    <li <!--{if $smarty.foreach.picture.index eq 0}--> class="curr"<!--{/if}-->><img src="{if $picture.thumb_url}{$picture.thumb_url}{else}{$picture.img_url}{/if}" width="26" height="26" /></li>
-                                    <!-- {/if} -->
-                                    <!--{/foreach}-->
-                                </ul>
-                                <a href="javascript:void(0);" class="sider-next"><i class="iconfont icon-right"></i></a>
-                            </div>
-                            <!-- {/if} -->
-                            <div class="p-lie">
-                                <div class="p-price">
-                                    {if $goods.promote_price neq ''}
-                                        {$goods.promote_price}
-                                    {else}
-                                        {$goods.shop_price}
-                                    {/if}
-                                </div>
-                                <div class="p-num">{$lang.Sold}<em>{$goods.sales_volume}</em>件</div>
-                            </div>
-                            <div class="p-name"><a href="{$goods.url}" title="{$goods.goods_name|escape:html}" target="_blank">{if $script_name eq 'search'}{$goods.goods_name_keyword}{else}{$goods.goods_name}{/if}</a></div>
-                            <div class="p-store">
-                                {if $goods.user_id eq 0}
-                                <a href="javascript:;" title="{$goods.rz_shopName}" class="store">{$goods.rz_shopName}</a>
+                        <!-- {/if} -->
+                        <div class="p-lie">
+                            <div class="p-price">
+                                {if $goods.promote_price neq ''}
+                                    {$goods.promote_price}
                                 {else}
-                                <a href="{$goods.store_url}" title="{$goods.rz_shopName}" class="store" target="_blank">{$goods.rz_shopName}</a>
-                                {/if}
-                                <!--start 在线客服 -->
-                                {if $goods.is_IM eq 1 || $goods.is_dsc}
-                                <a href="javascript:;" id="IM" onclick="openWin(this)" ru_id="{$goods.user_id}" class="p-kefu{if $goods.user_id eq 0} p-c-violet{/if}"><i class="iconfont icon-kefu"></i></a>
-                                {else}
-                                    {if $goods.kf_type eq 1}
-                                    <a href="http://www.taobao.com/webww/ww.php?ver=3&touid={$goods.kf_ww}&siteid=cntaobao&status=1&charset=utf-8" class="p-kefu{if $goods.user_id eq 0} p-c-violet{/if}" target="_blank"><i class="iconfont icon-kefu"></i></a>
-                                    {else}
-                                    <a href="http://wpa.qq.com/msgrd?v=3&uin={$goods.kf_qq}&site=qq&menu=yes" class="p-kefu{if $goods.user_id eq 0} p-c-violet{/if}" target="_blank"><i class="iconfont icon-kefu"></i></a>
-                                    {/if}
-                                {/if}
-                                <!--end 在线客服 -->
-                            </div>
-                            {if $goods.is_new || $goods.is_hot || $goods.is_best || $goods.is_shipping || $goods.self_run || $goods.user_id eq 0}
-                            <div class="p-activity">
-                                {if $goods.is_new}
-                                <span class="tag tac-mn">
-                                    <i class="i-left"></i>
-                                    {$lang.is_new}
-                                    <i class="i-right"></i>
-                                </span>
-                                {/if}
-                                {if $goods.is_hot}
-                                <span class="tag tac-mh">
-                                    <i class="i-left"></i>
-                                    {$lang.is_hot}
-                                    <i class="i-right"></i>
-                                </span>
-                                {/if}
-                                {if $goods.is_best}
-                                <span class="tag tac-mb">
-                                    <i class="i-left"></i>
-                                    {$lang.is_best}
-                                    <i class="i-right"></i>
-                                </span>
-                                {/if}
-                                {if $goods.is_shipping}
-                                <span class="tag tac-by">
-                                    <i class="i-left"></i>
-                                    {$lang.Free_shipping}
-                                    <i class="i-right"></i>
-                                </span>
-                                {/if}
-                                {if $goods.self_run || $goods.user_id eq 0}
-                                <span class="tag tac-sr">
-                                    <i class="i-left"></i>
-                                    {$lang.self_run}
-                                    <i class="i-right"></i>
-                                </span>
+                                    {$goods.shop_price}
                                 {/if}
                             </div>
-                            {else}
-                            <div class="p-activity">&nbsp;</div>
-                            {/if}
-                            <div class="p-operate">
-                                <a href="javascript:void(0);" id="compareLink"{if $script_name eq 'search' && $goods.type eq 0} title="没有设置属性类型无法对比" class="not_compareLink"{/if}>
-                                    <input id="{$goods.goods_id}" type="checkbox" name="duibi" class="ui-checkbox"{if $script_name neq 'search' || $goods.type neq 0} onClick="Compare.add(this, {$goods.goods_id},'{$goods.goods_name|escape:html}','{$goods.type}', '{$goods.goods_thumb}', '{$goods.shop_price}', '{$goods.market_price}')"{/if}>
-                                    <label class="ui-label"{if $script_name neq 'search' || $goods.type neq 0} for="{$goods.goods_id}"{/if}>{$lang.compare}</label>
-                                </a>
-                                <a href="javascript:collect({$goods.goods_id});" class="choose-btn-coll{if $goods.is_collect} selected{/if}"><i class="iconfont{if $goods.is_collect} icon-zan-alts{else} icon-zan-alt{/if}"></i>{$lang.btn_collect}</a>
-                                {if $goods.prod eq 1}
-                                    {if $goods.goods_number > 0}
-                                    <a href="javascript:void(0);" onClick="javascript:addToCart({$goods.goods_id},0,event,this,'flyItem');" rev="{$goods.goods_thumb}" data-dialog="addCart_dialog" data-divid="addCartLog" data-title="{$lang.select_attr}" class="addcart">
-                                        <i class="iconfont icon-carts"></i>{$lang.add_to_cart}
-                                    </a>
-                                    {else}
-                                    <a href="javascript:void(0);" class="addcart btn_disabled"><i class="iconfont icon-carts"></i>{$lang.have_no_goods}</a>
-                                    {/if}
-                                {else}
-                                {if $goods.seckill}
-                                <a href="{$goods.url}" rev="{$goods.goods_thumb}" class="addcart"><i class="iconfont icon-carts"></i>立即秒杀</a>
-                                {else}
-                                <a href="javascript:void(0);" onClick="javascript:addToCart({$goods.goods_id},0,event,this,'flyItem');" class="addcart" rev="{$goods.goods_thumb}"><i class="iconfont icon-carts"></i>{$lang.add_to_cart}</a>
-                                {/if}
-                                {/if}
-                            </div>
-                            
-                            <!--{if $dwt_filename eq 'history_list'}--> 
-                            <div class="history_close">
-                                <a href="javascript:delHistory({$goods.goods_id})"><img src="../images/p-del.png"></a>
-                            </div>
-                            <!--{/if}-->
+                            <div class="p-num">{$lang.Sold}<em>{$goods.sales_volume}</em>件</div>
                         </div>
-                    </li>
-                    {/if}
-                    <!-- {/if} --> 
-                    <!--{/foreach}--> 
-                </ul>
-            </div>            
+                        <div class="p-name"><a href="{$goods.url}" title="{$goods.goods_name|escape:html}" target="_blank">{if $script_name eq 'search'}{$goods.goods_name_keyword}{else}{$goods.goods_name|escape:html}{/if}</a></div>
+                        <div class="p-store">
+                            <a href="{$goods.store_url}" title="{$goods.rz_shopName}" class="store" target="_blank">{$goods.rz_shopName}</a>
+                            <!--start 在线客服 -->
+                            {if $goods.is_IM eq 1 || $goods.is_dsc}
+                            <a href="javascript:;" id="IM" onclick="openWin(this)" ru_id="{$goods.user_id}" class="p-kefu{if $goods.user_id eq 0} p-c-violet{/if}"><i class="iconfont icon-kefu"></i></a>
+                            {else}
+                                {if $goods.kf_type eq 1}
+                                <a href="http://www.taobao.com/webww/ww.php?ver=3&touid={$goods.kf_ww}&siteid=cntaobao&status=1&charset=utf-8" class="p-kefu{if $goods.user_id eq 0} p-c-violet{/if}" target="_blank"><i class="iconfont icon-kefu"></i></a>
+                                {else}
+                                <a href="http://wpa.qq.com/msgrd?v=3&uin={$goods.kf_qq}&site=qq&menu=yes" class="p-kefu{if $goods.user_id eq 0} p-c-violet{/if}" target="_blank"><i class="iconfont icon-kefu"></i></a>
+                                {/if}
+                            {/if}
+                            <!--end 在线客服 -->
+                        </div>
+                        {if $goods.is_new || $goods.is_hot || $goods.is_best || $goods.is_shipping || $goods.self_run || $goods.user_id eq 0}
+                        <div class="p-activity">
+                        	{if $goods.is_new}
+                        	<span class="tag tac-mn">
+                            	<i class="i-left"></i>
+                                {$lang.is_new}
+                                <i class="i-right"></i>
+                            </span>
+                            {/if}
+                            {if $goods.is_hot}
+                        	<span class="tag tac-mh">
+                            	<i class="i-left"></i>
+                                {$lang.is_hot}
+                                <i class="i-right"></i>
+                            </span>
+                            {/if}
+                            {if $goods.is_best}
+                        	<span class="tag tac-mb">
+                            	<i class="i-left"></i>
+                                {$lang.is_best}
+                                <i class="i-right"></i>
+                            </span>
+                            {/if}
+                            {if $goods.is_shipping}
+                        	<span class="tag tac-by">
+                            	<i class="i-left"></i>
+                                {$lang.Free_shipping}
+                                <i class="i-right"></i>
+                            </span>
+                            {/if}
+                            {if $goods.self_run || $goods.user_id eq 0}
+                        	<span class="tag tac-sr">
+                            	<i class="i-left"></i>
+                                {$lang.self_run}
+                                <i class="i-right"></i>
+                            </span>
+                            {/if}
+                        </div>
+                        {else}
+                        <div class="p-activity">&nbsp;</div>
+                        {/if}
+                        <div class="p-operate">
+                            <a href="javascript:void(0);" id="compareLink">
+                                <input id="{$goods.goods_id}" type="checkbox" name="duibi" class="ui-checkbox" onClick="Compare.add(this, {$goods.goods_id},'{$goods.goods_name|escape:"html"}','{$goods.type}', '{$goods.goods_thumb}', '{$goods.shop_price}', '{$goods.market_price}')">
+                                <label class="ui-label" for="{$goods.goods_id}">{$lang.compare}</label>
+                            </a>
+                            <a href="javascript:collect({$goods.goods_id});" class="choose-btn-coll{if $goods.is_collect} selected{/if}"><i class="iconfont{if $goods.is_collect} icon-zan-alts{else} icon-zan-alt{/if}"></i>{$lang.btn_collect}</a>
+                            {if $goods.prod eq 1}
+                                {if $goods.goods_number > 0}
+                                <a href="javascript:void(0);" onClick="javascript:addToCart({$goods.goods_id},0,event,this,'flyItem');" rev="{$goods.goods_thumb}" data-dialog="addCart_dialog" data-divid="addCartLog" data-title="{$lang.select_attr}" class="addcart">
+                                    <i class="iconfont icon-carts"></i>{$lang.add_to_cart}
+                                </a>
+                                {else}
+                                <a href="javascript:void(0);" class="addcart btn_disabled"><i class="iconfont icon-carts"></i>{$lang.have_no_goods}</a>
+                                {/if}
+                            {else}
+                            <a href="javascript:void(0);" onClick="javascript:addToCart({$goods.goods_id},0,event,this,'flyItem');" class="addcart" rev="{$goods.goods_thumb}"><i class="iconfont icon-carts"></i>{$lang.add_to_cart}</a>
+                            {/if}
+                        </div>
+                        
+                        <!--{if $dwt_filename eq 'history_list'}--> 
+                        <div class="history_close">
+                            <a href="javascript:delHistory({$goods.goods_id})"><img src="../images/p-del.png"></a>
+                        </div>
+                        <!--{/if}-->
+                    </div>
+                </li>
+                <!-- {/if} --> 
+                <!--{/foreach}--> 
+            </ul>
             <!-- {if $category > 0} -->
             </form>
             <!-- {/if} -->
@@ -262,8 +136,7 @@
         	<!-- {if $category > 0} -->
             <form name="compareForm_cat" id="compareForm_cat" action="compare.php" method="post" onSubmit="return compareGoods(this);" class="goodslistForm" data-state="0">
             <!-- {/if} -->
-            <div class="goods-list-warp">
-            <ul ectype="items">
+            <ul>
                 <!--{foreach from=$goods_list item=goods name=name}-->
                 <!-- {if $goods.goods_id} -->
                 <li class="gl-h-item {if $smarty.foreach.name.iteration mod 2 eq 0}item_bg{/if}">
@@ -271,7 +144,7 @@
                         <div class="col col-1">
                             <div class="p-img"><a href="{$goods.url}" target="_blank"><img src="{$goods.goods_thumb}" /></a></div>
                             <div class="p-right">
-                                <div class="p-name"><a href="{$goods.url}" title="{$goods.goods_name|escape:html}" target="_blank">{$goods.goods_name}</a></div>
+                                <div class="p-name"><a href="{$goods.url}" title="{$goods.goods_name|escape:html}" target="_blank">{$goods.goods_name|escape:html}</a></div>
                                 <div class="p-lie">
                                     <div class="p-num">{$lang.sales_volume}：{$goods.sales_volume}</div>
                                     <div class="p-comm">{$lang.comments_rank}：{$goods.review_count}{if $filename neq 'category'}+{/if}</div>
@@ -280,12 +153,8 @@
                         </div>
                         <div class="col col-2">
                             <div class="p-store">
-                            {if $goods.user_id eq 0}
-                            <a href="javascript:;" title="{$goods.rz_shopName}" class="store">{$goods.rz_shopName}</a>
-                            {else}
-                            <a href="{$goods.store_url}" title="{$goods.rz_shopName}" class="store" target="_blank">{$goods.rz_shopName}</a>
-                            {/if}
-                            <!--start 在线客服 -->
+                                <a href="{$goods.store_url}" title="{$goods.rz_shopName}" target="_blank">{$goods.rz_shopName}</a>
+                                <!--start 在线客服 -->
                             {if $goods.is_IM eq 1 || $goods.is_dsc}
                             <a href="javascript:;" id="IM" onclick="openWin(this)" ru_id="{$goods.user_id}" class="p-kefu"><i class="iconfont icon-kefu"></i></a>
                             {else}
@@ -312,9 +181,9 @@
                         </div>
                         <div class="col col-4">
                             <div class="p-operate">
-                                <a href="javascript:void(0);" id="compareLink"{if $script_name eq 'search' && $goods.type eq 0} title="没有设置属性类型无法对比" class="not_compareLink"{/if}>
-                                <input id="duibi_{$goods.goods_id}" type="checkbox" name="duibi" class="ui-checkbox"{if $script_name neq 'search' || $goods.type neq 0} onClick="Compare.add(this, {$goods.goods_id},'{$goods.goods_name|escape:"html"}','{$goods.type}', '{$goods.goods_thumb}', '{$goods.shop_price}', '{$goods.market_price}')"{/if}>
-                                <label class="ui-label" {if $script_name neq 'search' || $goods.type neq 0}for="duibi_{$goods.goods_id}"{/if}>{$lang.compare}</label>
+                                <a href="javascript:void(0);" id="compareLink">
+                                <input id="duibi_{$goods.goods_id}" type="checkbox" name="duibi" class="ui-checkbox" onClick="Compare.add(this, {$goods.goods_id},'{$goods.goods_name|escape:"html"}','{$goods.type}', '{$goods.goods_thumb}', '{$goods.shop_price}', '{$goods.market_price}')">
+                                <label class="ui-label" for="duibi_{$goods.goods_id}">{$lang.compare}</label>
                             </a>
                             <a href="javascript:collect({$goods.goods_id});" class="choose-btn-coll{if $goods.is_collect} selected{/if}"><i class="iconfont{if $goods.is_collect} icon-zan-alts{else} icon-zan-alt{/if}"></i>{$lang.btn_collect}</a>
                             {if $goods.prod eq 1}
@@ -335,7 +204,6 @@
                 <!-- {/if} -->
                 <!--{/foreach}--> 
             </ul>
-            </div>
             <!-- {if $category > 0} -->
             </form>
             <!-- {/if} -->
@@ -355,9 +223,7 @@
         </div>
         {/if}
         
-        <!-- {if $category_load_type} AJAX 商品瀑布流加载-->
-        <div class="floor-loading goods-floor-loading" ectype="floor-loading"><div class="floor-loading-warp"><img src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/images/load/loading.gif"></div></div>
-        <!-- {else}-->
+        {if !$category_load_type}
             <!-- TemplateBeginEditable name="列表分页" -->
             <!-- #BeginLibraryItem "/library/pages.lbi" -->
             <!-- {if $pager.page_count > 1} -->
@@ -412,7 +278,7 @@
             <!-- {/if} -->
             <!-- #EndLibraryItem -->
             <!-- TemplateEndEditable -->
-        <!-- {/if}-->
+        {/if}
         <div class="clear"></div>
     </div>
     {include file="/library/category_recommend_best.lbi"}

@@ -6,7 +6,7 @@
 
 <body class="iframe_body">
 <div class="warpper">
-    <div class="title">{$lang.report_form} - {$lang.sale_statistics}</div>
+    <div class="title">报表 - 销售统计</div>
     <div class="content">
         <div class="tabs_info">
             <ul>
@@ -16,10 +16,10 @@
             </ul>
         </div>
         <div class="explanation" id="explanation">
-            <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
             <ul>
-                <li>{$lang.operation_prompt_content.list.0}</li>
-                <li>{$lang.operation_prompt_content.list.1}</li>
+                <li>统计所有销售统计信息。</li>
+                <li>根据订单时间、订单类型、发货状态等筛选出某个时间段的订单信息。</li>
             </ul>
         </div>
         <div class="flexilist mt30">
@@ -29,7 +29,7 @@
                         <from id="from1" name="from1">
                             <div class="items pb30 bor_bt_das">
                             <div class="item">
-                                <div class="label"><em class="require-field">*</em>{$lang.start_end_date}：</div>
+                                <div class="label"><em class="require-field">*</em>起止时间：</div>
                                 <div class="label_value">
                                     <div class="text_time" id="text_time_start">
                                         <input type="text" class="text" name="use_start_date" id="use_start_date" value="{$start_date}" readonly>
@@ -43,7 +43,7 @@
                             <div class="item mt20">
                                 <div class="label">&nbsp;</div>
                                 <div class="label_value">
-                                    <a href="javascript:void(0);" onclick="getList(this)" class="btn btn30 blue_btn" ectype="query"><i class="icon icon-search"></i>{$lang.query}</a>
+                                    <a href="javascript:void(0);" onclick="getList(this)" class="btn btn30 blue_btn" ectype="query"><i class="icon icon-search"></i>查询</a>
                                 </div>
                             </div>
                         </div>
@@ -52,22 +52,22 @@
                         <div class="query_result mt30">
                             <div class="common-head">
                                 <div class="fl">
-                                    <div class="fbutton m0" id="fbutton_1"><a href="javascript:void(0);"><div class="csv" title="{$lang.export_data}"><span><i class="icon icon-download-alt"></i>{$lang.export_list}</span></div></a></div>
+                                    <div class="fbutton m0" id="fbutton_1"><a href="javascript:void(0);"><div class="csv" title="导出数据"><span><i class="icon icon-download-alt"></i>导出列表</span></div></a></div>
                                 </div>
                                 <div class="refresh">
-                                    <div class="refresh_tit" onclick="getList(this)" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
+                                    <div class="refresh_tit" onclick="getList(this)" title="刷新数据"><i class="icon icon-refresh"></i></div>
 
                                 </div>
                             </div>
                             <div class="list-div" id="listDiv" style="position: relative">
                             	{/if}
-                                <div class="refresh_span" style="position: absolute;left:122px;top: 0px;">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                                <div class="refresh_span" style="position: absolute;left:135px;top: 0px;">刷新 - 共{$record_count}条记录</div>
                                 <table cellpadding="0" cellspacing="0" border="0">
                                     <thead>
                                     <tr>
                                         <th width="10%"><div class="tDiv">{$lang.order_by}</div></th>
-                                        <th width="30%"><div class="tDiv">{$lang.goods_name}</div></th>
-                                        <th width="10%"><div class="tDiv">{$lang.goods_steps_name}</div></th>
+                                        <th width="10%"><div class="tDiv">{$lang.goods_name}</div></th>
+                                        <th width="30%"><div class="tDiv">{$lang.goods_steps_name}</div></th>
                                         <th width="10%"><div class="tDiv">{$lang.goods_sn}</div></th>
                                         <th width="10%"><div class="tDiv"><a href="javascript:listTable.sort('goods_num', 'DESC'); ">{$lang.sell_amount}</a>{$sort_goods_num}</div></th>
                                         <th width="10%"><div class="tDiv"><a href="javascript:listTable.sort('turnover', 'DESC'); ">{$lang.sell_sum}</a>{$sort_turnover}</div></th>
@@ -101,14 +101,17 @@
                                     </tr>
                                     </tfoot>
                                 </table>
+                                
                                 <script type="text/javascript">
-								listTable.recordCount = {$record_count|default:0};
-								listTable.pageCount = {$page_count|default:1};
+
+								listTable.recordCount = '{$record_count}';
+								listTable.pageCount = '{$page_count}';
 							
 								{foreach from=$filter item=item key=key}
 								listTable.filter.{$key} = '{$item}';
 								{/foreach}
 								</script>
+                                
                                 {if $full_page}
                             </div>
                         </div>
@@ -118,7 +121,8 @@
         </div>
     </div>
 </div>
-{include file ='library/pagefooter.lbi'}
+ {include file ='library/pagefooter.lbi'}
+</body>
 <script type="text/javascript">									
     //时间选择1
     var opts1 = {
@@ -166,6 +170,5 @@
         location.href='sale_order.php?act=download&start_date='+start_date+'&end_date='+end_date;
     });
 </script>
-</body>
 </html>
 {/if}

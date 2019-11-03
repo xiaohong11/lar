@@ -56,7 +56,7 @@
                     </td>
                     <td align="center">{if $comment.user_name}{$comment.user_name}{else}{$lang.anonymous}{/if}</td>
                     <td align="center">{$lang.type[$comment.comment_type]}</td>
-                    <td align="center"><a href="../{if $comment.comment_type eq '0' || $comment.comment_type eq '2' || $comment.comment_type eq '3'}goods{else}article{/if}.php?id={$comment.id_value}" target="_blank">{$comment.title}</a></td>
+                    <td align="center"><a href="../{if $comment.comment_type eq '0' || $comment.comment_type eq '2'}goods{else}article{/if}.php?id={$comment.id_value}" target="_blank">{$comment.title}</a></td>
                     <td align="center">{$comment.ip_address}</td>
                     <td align="center">{$comment.add_time}</td>
                     <td align="center">{if $comment.status eq 0}{$lang.hidden}{else}{$lang.display}{/if}</td>

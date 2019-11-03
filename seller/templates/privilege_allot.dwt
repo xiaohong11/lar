@@ -30,8 +30,8 @@
                                     <div class="checkbox_items">
                                         {foreach from=$priv.priv key=priv_list item=list}
                                         <div class="checkbox_item">
-                                            <input type="checkbox" value="{$priv_list}" name="action_code[]" class="ui-checkbox" id="{$priv_list}_{$priv.action_id}" date="{$priv.action_code}" {if $list.cando eq 1} checked="true" {/if} title="{$list.relevance}"/>
-                                            <label for="{$priv_list}_{$priv.action_id}" class="ui-label">{$lang[$list.action_code]}</label>
+                                            <input type="checkbox" value="{$priv_list}" name="action_code[]" class="ui-checkbox" id="{$priv_list}" date="{$priv.action_code}" {if $list.cando eq 1} checked="true" {/if} title="{$list.relevance}"/>
+                                            <label for="{$priv_list}" class="ui-label">{$lang[$list.action_code]}</label>
                                         </div>
                                         {/foreach}
                                     </div>

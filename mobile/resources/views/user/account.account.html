@@ -1,7 +1,7 @@
 {include file="page_header"}
 		<div class="con">
     {if $type}
-            <section class=" j-f-tel padding-lr b-color-f m-top10 mb-1">
+            <section class=" j-f-tel padding-lr b-color-f mb-1">
                 <div class="text-all dis-box j-text-all b-color-f card-div">
                     <div>
                         <p>账户充值</p>
@@ -15,9 +15,10 @@
             </section>
 
             <section class=" j-f-tel padding-lr b-color-f">
-                <div class="text-all dis-box j-text-all b-color-f ">
+                <div class="text-all dis-box j-text-all b-color-f card-div">
                     <div>
-                        <p class="t-remark2">支付方式<span class="pl color-red" >{$payment.pay_name} {if $pay_fee}<em class="t-first">手续费：[{$pay_fee}]</em>{/if}</span></p>
+                        <p>支付方式<span>{$payment.payment}&nbsp;手续费：[{$pay_fee}]</span></p>
+
                     </div>
                 </div>
                 <div class="text-all dis-box j-text-all b-color-f card-div">
@@ -29,8 +30,8 @@
             </section>
             <div class="margin-lr">
                 <div class="ect-button-more dis-box m-top12">
-                    <a class="btn-reset box-flex" href="{url('user/account/index')}">取消</a>
-                    {$payment.pay_button}
+                    <a class="btn-reset box-flex" href="javascript:history.go(-1)">取消</a>
+                    {$but}
                 </div>
             </div>
     {else}
@@ -52,7 +53,7 @@
 				<section class=" j-f-tel padding-lr b-color-f">
 					<div class="text-all dis-box j-text-all b-color-f card-div">
 						<div>
-							<p>{if $item.type=='提现'}银行卡{else}支付方式{/if}<span>{$item.payment}&nbsp;手续费：[{$item.deposit_fee}]</span></p>
+							<p>{if $item.type=='提现'}银行卡{else}支付方式{/if}<span>{$item.payment}&nbsp;手续费：[{$item.pay_fee}]</span></p>
 							<span>{$item.bank_number}</span>
 
 						</div>

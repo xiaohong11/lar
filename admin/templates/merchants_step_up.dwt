@@ -3,7 +3,7 @@
 <head>{include file ='library/admin_html_head.lbi'}</head>
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.19_merchants_store} - {$ur_here}</div>
+    	<div class="title">店铺 - {$ur_here}</div>
         <div class="content">
         	{include file ='library/seller_step_tab.lbi'}	
             
@@ -12,7 +12,7 @@
                     <form enctype="multipart/form-data" name="theForm" action="shop_config.php?act=post" method="post" id="shopConfigForm">
                         <div class="switch_info">
                             {foreach from=$group_list item=var key=key}
-                            {include file ='library/shop_config_form.lbi'}
+                                {include file ='library/shop_config_form.lbi'}
                             {/foreach}
                             <div class="item">
                                 <div class="label">&nbsp;</div>
@@ -27,6 +27,15 @@
             </div>	
 		</div>
 	</div>
+
 	{include file ='library/pagefooter.lbi'}
+    
+    {insert_scripts files="jquery.purebox.js"}
+    
+    {literal}
+	<script type="text/javascript">
+	
+	</script>
+    {/literal}
 </body>
 </html>

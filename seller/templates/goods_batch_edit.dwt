@@ -60,8 +60,8 @@
                             <div class="cite">{$lang.select_please}</div>
                             <ul style="display: none;">
                                 <li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.select_please}</a></li>
-                                {foreach from=$goods.brand_list  item=list key=key}
-                                <li><a href="javascript:;" data-value="{$list.brand_id}" class="ftx-01">{$list.brand_name}</a></li>
+                                {foreach from=$goods.brand_list  item= list key=key}
+                                <li><a href="javascript:;" data-value="{$key}" class="ftx-01">{$list}</a></li>
                                 {/foreach}
                             </ul>
                             <input name="brand_id[{$goods.goods_id}]" type="hidden" value="{$goods.brand_id}">
@@ -130,7 +130,7 @@
                             <ul style="display: none;">
                                 <li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.select_please}</a></li>
                                 {foreach from=$brand_list  item= list key=key}
-                                <li><a href="javascript:;" data-value="{$key}" class="ftx-01">{$list.brand_name}</a></li>
+                                <li><a href="javascript:;" data-value="{$key}" class="ftx-01">{$list}</a></li>
                                 {/foreach}
                             </ul>
                             <input name="brand_id" type="hidden" value="0">
@@ -161,5 +161,30 @@
     </div>
 </div>
 {include file ='library/seller_footer.lbi'}
+<script type="text/javascript">
+$(function(){
+	// 获取商品列表
+	$('i[ectype="GoodsList"]').on("click",function(){
+			if($(this).hasClass("icon-plus-sign")){
+				$(this).removeClass('icon-plus-sign').addClass('icon-minus-sign');
+				var parenttr = $(this).parents('tr');
+				parenttr.next().show()
+			}else{
+				$(this).removeClass('icon-minus-sign').addClass('icon-plus-sign');
+				$(this).parents('tr').next().hide();
+			}
+		}
+	);
+				
+	$('.tip').poshytip({
+		className: 'tip-yellowsimple',
+		showTimeout:300,
+		alignTo: 'target',
+		alignX: 'center',
+		alignY: 'top',
+		offsetY: 5,
+	});
+});
+</script>
 </body>
 </html>

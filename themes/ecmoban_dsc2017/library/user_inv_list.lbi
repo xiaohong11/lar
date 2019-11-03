@@ -18,7 +18,7 @@
                     {/if}
                     {/if}
                 </span>
-                <span class="info-item">{$list.mobile}</span>
+                <span class="info-item">400-610-1360转119877</span>
             </div>
         </dt>
         <dd class="item-c relative">

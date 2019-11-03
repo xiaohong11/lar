@@ -4,10 +4,10 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.08_members} - {$ur_here}</div>
+    	<div class="title">会员 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                     <li>搜索某个时间的商城用户充值总额。</li>
                     <li>搜索出来的信息只能查看不能修改。</li>
@@ -29,41 +29,37 @@
                                         <div class="text_time" id="text_time_end">
                                             <input type="text" name="end_date" value="{$end_date}" id="end_time_id" class="text" readonly />
                                         </div>
-                                        <a href="javascript:void(0);" class="btn btn30 blue_btn_2" ectype="search" id="submitBtn"><i class="icon icon-search"></i>{$lang.search_word}</a>
+                                        <a href="javascript:void(0);" class="btn btn30 blue_btn_2" ectype="search" id="submitBtn"><i class="icon icon-search"></i>搜索</a>
                                     </div>
                                 </div>
                                 
                                 <div class="item">
                                 	<div class="label">{$lang.user_add_money}：</div>
                                     <div class="label_value">
-                                    	<div class="text_div mr10">{$account.voucher_amount}</div>
-                                        <a href="javascript:void(0);" data-url="user_account.php?act=list&process_type=0&ispaid=1&start_date={$start_date}&end_date={$end_date}" data-param="menuplatform|09_user_account" ectype="iframeHref" class="fl mr70">查看</a>
+                                    	<div class="text_div mr70">{$account.voucher_amount}</div>
                                         <div class="dl_div">
                                         	<div class="dt_div">{$lang.order_surplus}：</div>
-                                            <div class="dd_div mr10">{$account.surplus}</div>
-                                            <a href="javascript:void(0);" data-url="user_account_manage.php?act=surplus&start_date={$start_date}&end_date={$end_date}" data-param="menuplatform|10_user_account_manage" ectype="iframeHref" class="fl">查看</a>
+                                            <div class="dd_div">{$account.surplus}</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="item">
                                 	<div class="label">{$lang.user_repay_money}：</div>
                                     <div class="label_value">
-                                    	<div class="text_div mr10">{$account.to_cash_amount}</div>
-                                        <a href="javascript:void(0);" data-url="user_account.php?act=list&process_type=1&ispaid=1&start_date={$start_date}&end_date={$end_date}" data-param="menuplatform|09_user_account" ectype="iframeHref" class="fl mr70">查看</a>
+                                    	<div class="text_div mr70">{$account.to_cash_amount}</div>
                                     	<div class="dl_div">
                                         	<div class="dt_div">{$lang.integral_money}：</div>
-                                            <div class="dd_div mr10">{$account.integral_money}</div>
-                                            <a href="javascript:void(0);" data-url="user_account_manage.php?act=surplus&start_date={$start_date}&end_date={$end_date}" data-param="menuplatform|10_user_account_manage" ectype="iframeHref" class="fl">查看</a>
+                                            <div class="dd_div">{$account.integral_money}</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="item">
                                 	<div class="label">{$lang.user_money}：</div>
-                                    <div class="label_value"><div class="text_div mr10">{$account.user_money}</div><a href="users.php?act=list" data-param="menuplatform|03_users_list" ectype="iframeHref" class="fl">查看</a></div>
+                                    <div class="label_value"><div class="text_div">{$account.user_money}</div></div>
                                 </div>
                                 <div class="item">
                                 	<div class="label">{$lang.frozen_money}：</div>
-                                    <div class="label_value"><div class="text_div mr10">{$account.frozen_money}</div><a href="users.php?act=list" data-param="menuplatform|03_users_list" ectype="iframeHref" class="fl">查看</a></div>
+                                    <div class="label_value"><div class="text_div">{$account.frozen_money}</div></div>
                                 </div> 
                             </div>
                         </div>

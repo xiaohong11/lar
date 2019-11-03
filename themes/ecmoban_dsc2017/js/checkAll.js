@@ -15,32 +15,14 @@ $(function(){
 	cart_value = "", 									//商品购物ID字符串
 	favourable_id = 0,									//活动ID
 	select_flag = "";									//活动商品选中id拼接字符串
-
-	function sessionCartValue(cartValue){
-		console.log(cartValue);
-		if(cartValue){
-			var result = cartValue.split(",");
-			
-			for(var i = 0; i<result.length; i++){
-				if(result[i] != ""){
-					$("#checkItem_"+result[i]).prop("checked",true);
-				}else{
-					$(ck).prop("checked",true);
-				}
-			}
-		}
-	}
-
 	//购物车选择
 	function cartCheckbox(){
 		
-		//初始化根据session 获取勾选状态
-		sessionCartValue(cartValue.val());
+		//初始化全选状态
+		$(ck).prop("checked",true);
 		
 		cart_value = get_cart_value();
-		cartValue.val(cart_value);
-		
-		sfAll();
+		cartValue.val(cart_value);	
 		
 		//获取选择的购物车ID的商品信息
 		change_cart_goods_number(cart_value);
@@ -50,21 +32,9 @@ $(function(){
 		//全选
 		$(document).on("click",ckAll,function(){
 			var t = $(this);
-			var ver = 0;
 			if(t.prop("checked")==true){
-				$(ck).each(function(){
-					if($(this).prop("disabled")==true){
-						ver++;
-					}
-				})
-
-				if(ver > 0){
-					$(ckAll).prop("checked",false);
-					pbDialog("有失效商品不可以全选","",0);
-				}else{
-					$(ck).prop("checked",true);
-					$(ck).parents("*[ectype='item']").addClass("selected");
-				}
+				$(ck).prop("checked",true);
+				$(ck).parents("*[ectype='item']").addClass("selected");
 			}else{
 				$(ck).prop("checked",false);
 				$(ck).parents("*[ectype='item']").removeClass("selected");
@@ -82,20 +52,10 @@ $(function(){
 		$(document).on("click",ckShopAll,function(){
 			var t = $(this);
 			var shopItem = t.parents("*[ectype='shopItem']");
-			var ver = 0;
 			if(t.prop("checked")==true){
-					shopItem.find(ck).each(function(){
-						if($(this).prop("disabled")==true){
-							ver++;
-						}
-					})
-					if(ver > 0){
-						pbDialog("有失效商品不可以全选","",0);
-					}else{
-						shopItem.find(ck).prop("checked",true);
-						shopItem.find("*[ectype='item']").addClass("selected");
-						favourable_id = 0;
-					}
+				shopItem.find(ck).prop("checked",true);
+				shopItem.find("*[ectype='item']").addClass("selected");
+				favourable_id = 0;
 			}else{
 				shopItem.find(ck).prop("checked",false);
 				shopItem.find("*[ectype='item']").removeClass("selected");
@@ -129,21 +89,11 @@ $(function(){
 				
 				//组合购买配件商品
 				$(".m_goods_1_"+goodsid).find("*[ectype='ckGoods']").prop("checked",true);
-
-				//勾选配件主商品 配件默认勾选
-				if(t.parents("*[ectype='promoItem']").data("actid") > 0){
-					Item.siblings(".zp").find(ckGoods).prop("checked",true);
-				}
 			}else{
 				Item.removeClass("selected");
 				
 				//组合购买配件商品
 				$(".m_goods_1_"+goodsid).find("*[ectype='ckGoods']").prop("checked",false);
-
-				//勾选配件主商品 配件默认勾选
-				if(t.parents("*[ectype='promoItem']").data("actid") > 0){
-					Item.siblings(".zp").find(ckGoods).prop("checked",false);
-				}
 			}
 			
 			//判断店铺商品是否全选
@@ -212,10 +162,11 @@ $(function(){
 			$("#cart_gift_goods").find("*[ectype='giftNumber']").html(num);
 			if(length > num){
 				$(this).prop("checked",false);
+				
 				var content = $("#cart_gift_goods").html();			
 				pb({
 					id:"",
-					title:json_languages.pb_title,
+					title:pb_title,
 					width:455,
 					height:58,
 					content:content, 	//调取内容
@@ -252,7 +203,7 @@ $(function(){
 		
 		//改变购物车选择商品数量
 		$("*[ectype='cartNum']").html(num);
-	
+		
 		return num;
 	}
 	
@@ -306,22 +257,13 @@ $(function(){
 		});
 		
 		str = str.substring(str.length-1,0);
-		console.log(str);
+
 		if (str != '') {
 			select_flag = '&sel_id=' + str + '&sel_flag=' + 'cart_sel_flag';
 		}
 
 		Ajax.call('flow.php?step=ajax_cart_goods_amount', 'rec_id=' + rec_id + select_flag + ajax_where, replace_cart_goods_response, 'POST','JSON');                
 	}
-	
-	//点击换购更新换购商品
-	function show_gift_div_response(result)
-    {
-        var giftInfo = $("#gift_box_list_" + result.act_id + "_" + result.ru_id);
-        if (giftInfo.length > 0){
-        	giftInfo.html(result.content);
-        }
-    }
 	
 	function replace_cart_goods_response(result)
 	{	
@@ -334,6 +276,15 @@ $(function(){
 			$("#product_promo_" + result.ru_id + "_" + result.act_id).html(result.favourable_box_content);
 		}
 	}
+	
+	//点击换购更新换购商品
+	function show_gift_div_response(result)
+    {
+        var giftInfo = $("#gift_box_list_" + result.act_id + "_" + result.ru_id);
+        if (giftInfo.length > 0){
+        	giftInfo.html(result.content);
+        }
+    }
 	
 	function add_gift_cart(act_id, ru_id)
 	{
@@ -372,7 +323,7 @@ $(function(){
 	function add_gift_cart_response(result)
 	{
 		if (result.error){
-			pbDialog(result.message,"",0,550,100,50);
+			get_flow_prompt_message(result.message);
 			return false;
 		}else{
 			var cart_favourable_box = document.getElementById('product_promo_' + result.ru_id + "_" + result.act_id);
@@ -381,8 +332,6 @@ $(function(){
 			}
 		}
 		
-		sessionCartValue(result.cart_value);
-
 		cart_value = get_cart_value();
 		cartValue.val(cart_value);
 		
@@ -395,31 +344,9 @@ $(function(){
 	
 	//判断是否全选了
 	function sfAll(){
-		var shopItem = $("*[ectype='shopItem']");
-		var shoplength = shopItem.length;
-		var shopedlength = 0;
-		
-		//判断是否店铺全选
-		shopItem.each(function(index,element){
-			var c = $(element).find("*[ectype='itemList']").find(ck);
-			var length = c.filter(":checked").length;
-
-			if(length == c.length){
-				$(element).find(".shop").find(ck).prop("checked",true);
-			}else{
-				$(element).find(".shop").find(ck).prop("checked",false);
-			}
-		});
-		
-		//统计店铺勾选数量
-		shopItem.find(".shop").find(ck).each(function(){
-			if($(this).prop("checked") == true){
-				shopedlength++;
-			}
-		});
-		
-		//判断店铺是否全选，达到购物车全选
-		if(shopedlength == shoplength){
+		var c = $("*[ectype='cartTboy']").find(ck);
+		var length = c.filter(":checked").length;
+		if(length == c.length){
 			$(ckAll).prop("checked",true);
 		}else{
 			$(ckAll).prop("checked",false);

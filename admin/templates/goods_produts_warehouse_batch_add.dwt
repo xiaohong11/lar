@@ -4,17 +4,17 @@
   
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="brand.php?act=list" class="s-back">{$lang.back}</a>{$lang.goods_alt} - {$ur_here}</div>
+    	<div class="title"><a href="brand.php?act=list" class="s-back">{$lang.back}</a>商品 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>使用说明：</h4><span id="explanationZoom" title="使用说明"></span></div>
                 {$lang.use_help}
             </div>
             <div class="flexilist">
                 <div class="common-content">
                     <div class="mian-info">
 						<div class="list-div">
-						{$lang.current_modification_data}{$record_count|default:0}{$lang.tiao}
+						当前需要修改的数据有{$record_count|default:0}条
 						</div>
 						<div style=" width:100px; height:10px; clear:both; overflow:hidden;"></div>
 						<div class="list-div">
@@ -23,20 +23,15 @@
                             	{foreach from=$attr_names item=vo}
                             	<th><div class="tDiv">{$vo}</div></th>
                                 {/foreach}
-                                <th><div class="tDiv">{$lang.upload_product.goods_id}</div></th>
-                                <th><div class="tDiv">{$lang.upload_product.warehouse_id}</div></th>
-                                {if $cfg.add_shop_price eq 0}
-								<th><div class="tDiv">{$lang.market_price}</div></th>
-                                {/if}
-								<th><div class="tDiv">{$lang.product_price}</div></th>
-                                {if $cfg.add_shop_price eq 0}
-                                <th><div class="tDiv">{$lang.promote_price}</div></th>
-                                {/if}
-								<th><div class="tDiv">{$lang.product_number}</div></th>
-                                <th><div class="tDiv">{$lang.product_warn_number}</div></th>
-                                <th><div class="tDiv">{$lang.product_sn}</div></th>
-                                <th><div class="tDiv">{$lang.bar_code}</div></th>
-                                <th><div class="tDiv">{$lang.state}</div></th>
+                                <th><div class="tDiv">商品ID</div></th>
+                                <th><div class="tDiv">仓库ID</div></th>
+								<th><div class="tDiv">本店价格</div></th>
+								<th><div class="tDiv">库存</div></th>
+								<th><div class="tDiv">起订量</div></th>
+                                <th><div class="tDiv">预警值</div></th>
+                                <th><div class="tDiv">货号</div></th>
+                                <th><div class="tDiv">条形码</div></th>
+                                <th><div class="tDiv">状态</div></th>
 							</tr>
 						</table>
 						</div>
@@ -68,7 +63,6 @@
 		function start_response(result)
 		{
 			if(result.list){
-				var attr_value;
 				var tbl = document.getElementById("listTable"); //获取表格对象
 				var row = tbl.insertRow(-1);
 				var attr_arr = result.list.goods_attr_name.split('|');
@@ -77,41 +71,10 @@
 				
 				for(var i=0;i<attr_num;i++){
 					cell = row.insertCell(i);
-					
-					attr_value = attr_arr[i].split('-');
-					cell.innerHTML = "<div class='tDiv'>"+attr_value[0]+"</div>";
-				}
-				
-				if(!result.list.product_sn){
-					result.list.product_sn = "（空）";
-				}
-				
-				if(!result.list.bar_code){
-					result.list.bar_code = "（空）";
+					cell.innerHTML = "<div class='tDiv'>"+attr_arr[i]+"</div>";
 				}
 				
 				cell = row.insertCell(attr_num);
-				{if $cfg.add_shop_price eq 0}
-				cell.innerHTML = "<div class='tDiv'>"+result.list.goods_id+"</div>";
-				cell = row.insertCell(attr_num+1);
-				cell.innerHTML = "<div class='tDiv'>"+result.list.warehouse_id+"</div>";
-				cell = row.insertCell(attr_num+2);
-				cell.innerHTML = "<div class='tDiv'>"+result.list.product_market_price+"</div>";
-				cell = row.insertCell(attr_num+3);
-				cell.innerHTML = "<div class='tDiv'>"+result.list.product_price+"</div>";
-				cell = row.insertCell(attr_num+4);
-				cell.innerHTML = "<div class='tDiv'>"+result.list.product_promote_price+"</div>";
-				cell = row.insertCell(attr_num+5);
-				cell.innerHTML = "<div class='tDiv'>"+result.list.product_number+"</div>";
-				cell = row.insertCell(attr_num+6);
-				cell.innerHTML = "<div class='tDiv'>"+result.list.product_warn_number+"</div>";
-				cell = row.insertCell(attr_num+7);
-				cell.innerHTML = "<div class='tDiv'>"+result.list.product_sn+"</div>";
-				cell = row.insertCell(attr_num+8);
-				cell.innerHTML = "<div class='tDiv'>"+result.list.bar_code+"</div>";
-				cell = row.insertCell(attr_num+9);
-				cell.innerHTML = "<div class='tDiv'>"+result.status_lang+"</div>";
-				{else}
 				cell.innerHTML = "<div class='tDiv'>"+result.list.goods_id+"</div>";
 				cell = row.insertCell(attr_num+1);
 				cell.innerHTML = "<div class='tDiv'>"+result.list.warehouse_id+"</div>";
@@ -127,7 +90,7 @@
 				cell.innerHTML = "<div class='tDiv'>"+result.list.bar_code+"</div>";
 				cell = row.insertCell(attr_num+7);
 				cell.innerHTML = "<div class='tDiv'>"+result.status_lang+"</div>";
-				{/if}
+				
 				if(result.is_stop == 1){
                     start(result.page);
                 }	
@@ -135,9 +98,9 @@
 			
 			if(result.is_stop == 0){
 				$("#title_name").addClass("red");
-				$("#title_name").html(title_name_one);
+				$("#title_name").html("已完成更新，请关闭该窗口！");
 			}else{
-				$("#title_name").html(title_name_two);
+				$("#title_name").html("正在更新数据中，请勿关闭该窗口！");
 			}
 		}
     </script>

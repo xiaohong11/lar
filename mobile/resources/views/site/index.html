@@ -358,7 +358,7 @@
             }
         });
         // GPS
-        var geolocation = new qq.maps.Geolocation("{C('shop.tengxun_key')}", "h5");
+        var geolocation = new qq.maps.Geolocation("{config('shop.tengxun_key')}", "h5");
         var options = {timeout: 8000};
 
         geolocation.getLocation(showPosition, showErr, options)

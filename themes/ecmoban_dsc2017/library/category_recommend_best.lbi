@@ -16,7 +16,7 @@
                             {$goods.shop_price}
                         {/if}
                         </div>
-                    <div class="p-name"><a href="{$goods.url}" target="_blank" title="{$goods.short_style_name|escape:html}">{$goods.short_style_name}</a></div>
+                    <div class="p-name"><a href="{$goods.url}" target="_blank" title="{$goods.short_style_name}">{$goods.short_style_name}</a></div>
                     <div class="p-num">{$lang.Sold}<em>{$goods.sales_volume}</em>{$lang.jian}</div>
                 </div>
             </li>

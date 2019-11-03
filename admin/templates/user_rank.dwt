@@ -4,11 +4,11 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.08_members} - {$ur_here}</div>
+    	<div class="title">会员 - {$ur_here}</div>
         <div class="content">
         	{include file ='library/users_tab.lbi'}
         	<div class="explanation" id="explanation">
-                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                     <li>该页面展示所有会员等级的信息。</li>
                     <li>可以添加会员等级、编辑会员等级、删除会员等级。</li>
@@ -57,7 +57,7 @@
                                     <td class="handle">
                                         <div class="tDiv a2">
                                             <a href="user_rank.php?act=edit&id={$rank.rank_id}" title="{$lang.edit}" class="btn_edit"><i class="icon icon-edit"></i>{$lang.edit}</a>
-                                            <a href="javascript:;" onclick="listTable.remove({$rank.rank_id}, '{$lang.drop_confirm}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                            <a href="javascript:;" onclick="listTable.remove({$rank.rank_id}, '{$lang.drop_confirm}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>删除</a>
                                         </div>
                                     </td>
                                 </tr>

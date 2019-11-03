@@ -5,34 +5,33 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.goods_alt} - {$ur_here}</div>
+    	<div class="title">商品 - {$ur_here}</div>
         <div class="content">
         	<div class="tabs_info">
             	<ul>
-                    <li {if $menu_select.current eq '06_goods_brand_list'}class="curr"{/if}><a href="brand.php?act=list">{$lang.06_goods_brand_list}</a></li>
-                    <li {if $menu_select.current eq '07_merchants_brand'}class="curr"{/if}><a href="merchants_brand.php?act=list">{$lang.07_merchants_brand}</a></li>
+                    <li {if $menu_select.current eq '06_goods_brand_list'}class="curr"{/if}><a href="brand.php?act=list">自营品牌</a></li>
+                    <li {if $menu_select.current eq '07_merchants_brand'}class="curr"{/if}><a href="merchants_brand.php?act=list">商家品牌</a></li>
                 </ul>
             </div>			
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.list.0}</li>
-                    <li>{$lang.operation_prompt_content.list.1}</li>
+                	<li>展示了所有商家品牌的相关信息。</li>
+                    <li>可以通过品牌名称关键字搜索相关品牌信息。</li>
                 </ul>
             </div>
             <div class="flexilist">
+            	<!--商品列表-->
                 <div class="common-head">
                     <div class="refresh">
-                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    	<div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>
 					<div class="search">
-                    	<form action="javascript:;" name="searchForm" onSubmit="searchGoodsname(this);">
                     	<div class="input">
                         	<input type="text" name="brand_name" class="text nofocus" placeholder="品牌名称" autocomplete="off">
-							<input type="submit" class="btn" name="secrch_btn" ectype="secrch_btn" value="" />
+							<button class="btn" name="secrch_btn"></button>
                         </div>
-                        </form>
                     </div>
                 </div>
                 <div class="common-content">
@@ -68,7 +67,7 @@
 									<td>
                                     <div class="tDiv">
                                     	<span class="show">
-                                            <a href="{if $brand.brand_logo}{$brand.brand_logo}{else}images/default/brand_logo_default.jpg{/if}" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="{if $brand.brand_logo}{$brand.brand_logo}{else}images/default/brand_logo_default.jpg{/if}" ectype="tooltip" title="tooltip"></i></a>
+                                            <a href="{$brand.brand_logo}" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$brand.brand_logo}>')" onmouseout="toolTip()"></i></a>
                                         </span>                                    
                                     </div>
                                     </td>
@@ -76,7 +75,7 @@
 									<td><div class="tDiv">{if $brand.user_name}<font class="red">{$brand.user_name}</font>{else}<font class="navy2">{$lang.is_application}</font>{/if}</div></td>
 									<!--<td><div class="tDiv"><p class="ellipsis w200">{$brand.site_url}</p></div></td>-->
 									<td><div class="tDiv">{$brand.brand_desc|truncate:36}</div></td>
-                                    <td><div class="tDiv"><input name="sort_order" class="text w40" value="{$brand.sort_order}" onkeyup="listTable.editInput(this, 'edit_sort_order',{$brand.brand_id} )" type="text"></div></td>
+                                                                        <td><div class="tDiv"><input name="sort_order" class="text w40" value="{$brand.sort_order}" onkeyup="listTable.editInput(this, 'edit_sort_order',{$brand.brand_id} )" type="text"></div></td>
                                     <td>
                                         <div class="tDiv">
                                             <div class="switch {if $brand.is_show}active{/if}" title="{if $brand.is_show}是{else}否{/if}" onclick="listTable.switchBt(this, 'toggle_show', {$brand.brand_id})">
@@ -98,8 +97,8 @@
                                     </td>                               
                                     <td class="handle">
                                         <div class="tDiv a2">
-                                            <a href="merchants_brand.php?act=edit&id={$brand.brand_id}" class="btn_edit"><i class="icon icon-edit"></i>{$lang.edit}</a>
-                                            <a href="javascript:;" onclick="listTable.remove({$brand.brand_id}, '{$lang.drop_confirm}')" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                            <a href="merchants_brand.php?act=edit&id={$brand.brand_id}" class="btn_edit"><i class="icon icon-edit"></i>编辑</a>
+                                            <a href="javascript:;" onclick="listTable.remove({$brand.brand_id}, '{$lang.drop_confirm}')" class="btn_trash"><i class="icon icon-trash"></i>删除</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -120,21 +119,21 @@
 						{if $full_page}
                     </div>
                 </div>
+                <!--商品列表end-->
             </div>
 		</div>
 	</div>
- 	{include file ='library/pagefooter.lbi'}
+ {include file ='library/pagefooter.lbi'}
+    
 	<script type="text/javascript" language="javascript">
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
-	
-	{foreach from=$filter item=item key=key}
-	listTable.filter.{$key} = '{$item}';
-	{/foreach}
-	
-	$(function(){
-		$('.nyroModal').nyroModal();
-	});
+	  <!--
+	  listTable.recordCount = '{$record_count}';
+	  listTable.pageCount = '{$page_count}';
+
+	  {foreach from=$filter item=item key=key}
+	  listTable.filter.{$key} = '{$item}';
+	  {/foreach}
+	  //-->
 	</script>
 </body>
 </html>

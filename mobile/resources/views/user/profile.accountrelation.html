@@ -63,7 +63,7 @@
         <h3 class="f-05 col-3">当前登录账号</h3>
         <ul class="dis-box  padding-all" for="logo">
             <li class="user-img p-r">
-                <div class="user-head-img-box-1 img-commom">
+                <div class="user-head-img-box-1 p-r">
                     {if $now_user_info.user_picture !=='' }<img src="{$now_user_info.user_picture}">{else}<img src="{elixir('img/no_image.jpg')}">{/if}
                     {if $is_remove_relation == 0}<div class="guanlian_icon"><i class="iconfont icon-guanlian1"></i></div>{/if}
                 </div>
@@ -85,7 +85,7 @@
     <section class=" user_relation_index b-color-f" >
         <ul class="dis-box padding-all  br-5" for="logo">
             <li class="user-img p-r">
-                <div class="user-head-img-box-1 img-commom">
+                <div class="user-head-img-box-1 p-r">
                     {if $change_user_info.user_picture !=='' }<img src="{$change_user_info.user_picture}">{else}<img src="{elixir('img/no_image.jpg')}">{/if}
                     {if $is_remove_relation == 1}<div class="guanlian_icon"><i class="iconfont icon-guanlian1"></i></div>{/if}
                 </div>
@@ -201,10 +201,7 @@
 
     })
 
-    header_img()
-    window.onresize = function(){
-        header_img()
-    }
+
 </script>
 </body>
 </html>

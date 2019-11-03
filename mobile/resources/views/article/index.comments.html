@@ -2,15 +2,14 @@
 <div class="con mb-7">
     <section>
         <!--评论列表-->
-
-        {if $article.comment}
+        {if $article['comment']}
         <div class="dis-box padding-all my-bottom b-color-f my-nav-box m-top06">
             <h3 class="box-flex text-all-span my-u-title-size-1">评论列表</h3>
         </div>
         {foreach $article['comment'] as $key => $cf}
         <ul class="padding-all b-color-f my-com-max-box">
             <li class="com-img-left">
-                <div class="com-left-box"><div class="p-r img-commom"><img src="{$cf.user.user_picture}"></div></div>
+                <div class="com-left-box"><img src="{$cf.user.user_picture}"></div>
             </li>
             <li class="com-con-right">
                 <ul class="dis-box">
@@ -48,11 +47,6 @@
             </li>
         </ul>
         {/foreach}
-        {else}
-            <div class="no-div-message">
-                <i class="iconfont icon-biaoqingleiben"></i>
-                <p>亲，此处没有内容～！</p>
-            </div>
         {/if}
     </section>
 </div>
@@ -169,10 +163,6 @@
         centeredSlides: false,
         grabCursor: true
     });
-            header_img()
-    window.onresize = function(){
-        header_img()
-    }
 </script>
 
 </body>

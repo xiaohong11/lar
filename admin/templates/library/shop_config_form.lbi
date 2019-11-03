@@ -49,7 +49,7 @@
     {elseif $var.type eq "options"}
     <div class="label_value">
         <div id="select{$var.id}_{$k}" class="imitate_select select_w320">
-          <div class="cite">{$lang.please_select}</div>
+          <div class="cite">请选择</div>
           <ul>
              {foreach from=$lang.cfg_range[$var.code] item=options key=k}
              <li><a href="javascript:;" data-value="{$k}" class="ftx-01">{$options}</a></li>
@@ -67,13 +67,13 @@
             <input type="file" class="type-file-file"  name="{$var.code}" size="30" data-state="imgfile" hidefocus="true" value="" />
             {if $var.value}
             <span class="show">
-                <a href="{$var.value}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="{$var.value}" ectype="tooltip" title="tooltip"></i></a>
+                <a href="{$var.value}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$var.value}>')" onmouseout="toolTip()"></i></a>
             </span>
             {/if}
             <input type="text" name="textfile" class="type-file-text" id="textfield" readonly />
         </div>
         {if $var.del_img}
-            <a href="shop_config.php?act=del&code={$var.code}" class="btn red_btn h30 mr10 fl" style="line-height:30px;">{$lang.drop}</a>
+            <a href="?act=del&code={$var.code}" class="btn red_btn h30 mr10 fl" style="line-height:30px;">{$lang.drop}</a>
         {else}
             {if $var.value neq ""}
             <img src="images/yes.gif" alt="yes" class="fl mt10" />
@@ -122,7 +122,7 @@
         {elseif $var.code eq "lang"}
         <div class="label_value">
             <div id="select{$var.id}_{$k}" class="imitate_select select_w320" >
-              <div class="cite">{$lang.please_select}</div>
+              <div class="cite">请选择</div>
               <ul>
                  {foreach from=$lang_list item=options key=k}
                  <li><a href="javascript:;" data-value="{$options}" class="ftx-01">{$options}</a></li>

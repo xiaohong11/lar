@@ -5,12 +5,12 @@
 	<!-- {foreach from=$collection_brands item=collection_brands name=coll_brands} -->
 		<li>
 			<div class="c-brand-left">
-				<div class="b-logo"><a href="brandn.php?act=cat&id={$collection_brands.brand_id}" target="_blank"><img src="data/brandlogo/{$collection_brands.brand_logo}"></a></div>
-				<div class="b-name"><a href="brandn.php?act=cat&id={$collection_brands.brand_id}" target="_blank">{$collection_brands.brand_name}</a></div>
+				<div class="b-logo"><a href="{$collection_brands.url}"><img src="data/brandlogo/{$collection_brands.brand_logo}"></a></div>
+				<div class="b-name"><a href="{$collection_brands.url}">{$collection_brands.brand_name}</a></div>
 				<div class="b-btn">
-					<a href="brandn.php?act=cat&id={$collection_brands.brand_id}" target="_blank" class="sc-btn">{$lang.Enter_brand_page}</a>
+					<a href="{$collection_brands.url}" class="sc-btn">{$lang.Enter_brand_page}</a>
 				</div>
-				<div class="p-oper"><a href="javascript:void(0)" class="btn btn-10" data-dialog="goods_collect_dialog" data-url="brandn.php?act=cancel&amp;id={$collection_brands.brand_id}&amp;mbid={$collection_brands.ru_id}&amp;user_id={$user_id}&amp;type=1" data-divid="delete_brand_collect" data-goodsid="0">{$lang.Cancel_attention}</a></div>
+				<div class="p-oper"><a href="javascript:void(0)" class="btn btn-10" data-dialog="goods_collect_dialog" data-url="brandn.php?act=cancel&amp;id={$collection_brands.brand_id}&amp;mbid={$collection_brands.ru_id}&amp;type=1" data-width="455" data-height="58" data-title="{$lang.Prompt}" data-divid="delete_brand_collect" data-goodsid="0" target="_blank">{$lang.Cancel_attention}</a></div>
 			</div>
 			<div class="c-brand-right">
             	<!--{if $collection_brands.brand_goods}-->
@@ -18,7 +18,7 @@
                     <!-- {foreach from=$collection_brands.brand_goods item=brand_goods name=b_goods} -->
                     <!--{if $smarty.foreach.b_goods.iteration <5}-->
                         <li>
-                            <div class="p-img"><a href="{$brand_goods.url}" target="_blank"><img src="{$brand_goods.goods_thumb}"></a></div>
+                            <div class="p-img"><a href="{$brand_goods.url}"><img src="{$brand_goods.goods_thumb}"></a></div>
                             <div class="p-price">{$brand_goods.shop_price}</div>
                         </li>
                     <!--{/if}-->   

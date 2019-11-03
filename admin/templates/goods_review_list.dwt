@@ -4,59 +4,56 @@
 <head>{include file ='library/admin_html_head.lbi'}</head>
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.goods_alt} - {$ur_here}</div>
+    	<div class="title">商品 - {$ur_here}</div>
         <div class="content">
-            {include file="library/common_tabs_info.lbi"}
-        	<div class="explanation mb10" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
-                <ul>
-                	<li>{$lang.operation_prompt_content.review.0}</li>
-                    <li>{$lang.operation_prompt_content.review.1}</li>
-                </ul>
-            </div>            
         	<div class="tabs_info">
             	<ul>
                     <li {if $menu_select.current eq '01_goods_list'}class="curr"{/if}>
-                    	<a href="goods.php?act=list{$seller_list}">{$lang.ordinary_goods} {if $menu_select.current neq '01_goods_list'}{if $goods_list_type}<em class="li_color">({$goods_list_type.ordinary|default:0})</em>{/if}{/if}</a>
+                    	<a href="goods.php?act=list">普通商品 {if $menu_select.current neq '01_goods_list'}{if $goods_list_type}<em class="li_color">({$goods_list_type.ordinary|default:0})</em>{/if}</a>
                     </li>
                     <li {if $menu_select.current eq '50_virtual_card_list'}class="curr"{/if}>
-                    	<a href="goods.php?act=list&extension_code=virtual_card{$seller_list}">{$lang.virtual_goods} {if $menu_select.current neq '50_virtual_card_list'}{if $goods_list_type}<em class="li_color">({$goods_list_type.virtual_card|default:0})</em>{/if}{/if}</a>
+                    	<a href="goods.php?act=list&extension_code=virtual_card">虚拟商品 {if $menu_select.current neq '50_virtual_card_list'}{if $goods_list_type}<em class="li_color">({$goods_list_type.virtual_card|default:0})</em>{/if}{/if}</a>
                     </li>
                     {if $cfg.review_goods}
                 	<li {if $menu_select.current eq '01_review_status'}class="curr"{/if}>
-                    	<a href="goods.php?act=review_status{$seller_list}">{$lang.01_review_status} {if $menu_select.current neq '01_review_status'}{if $goods_list_type}<em class="li_color">({$goods_list_type.review_status|default:0})</em>{/if}{/if}</a>
+                    	<a href="goods.php?act=review_status">商品审核 {if $menu_select.current neq '01_review_status'}{if $goods_list_type}<em class="li_color">({$goods_list_type.review_status|default:0})</em>{/if}{/if}</a>
                     </li>
                     {/if}
 					<li {if $menu_select.current eq '11_goods_trash'}class="curr"{/if}>
-                    	<a href="goods.php?act=trash{$seller_list}">{$lang.11_goods_trash} {if $menu_select.current neq '11_goods_trash'}{if $goods_list_type}<em class="li_color">({$goods_list_type.delete|default:0})</em>{/if}{/if}</a>
+                    	<a href="goods.php?act=trash">商品回收站 {if $menu_select.current neq '11_goods_trash'}{if $goods_list_type}<em class="li_color">({$goods_list_type.delete|default:0})</em>{/if}{/if}</a>
                     </li>
                     <li {if $menu_select.current eq '19_is_sale'}class="curr"{/if}>
-                    	<a href="goods.php?act=is_sale{$seller_list}">{$lang.shelves_goods} {if $menu_select.current neq '19_is_sale'}{if $goods_list_type}<em class="li_color">({$goods_list_type.is_sale|default:0})</em>{/if}{/if}</a>
+                    	<a href="goods.php?act=is_sale">已上架商品 {if $menu_select.current neq '19_is_sale'}{if $goods_list_type}<em class="li_color">({$goods_list_type.is_sale|default:0})</em>{/if}{/if}</a>
                     </li>
                     
                     <li {if $menu_select.current eq '20_is_sale'}class="curr"{/if}>
-                    	<a href="goods.php?act=on_sale{$seller_list}">{$lang.off_the_shelf_goods} {if $menu_select.current neq '20_is_sale'}{if $goods_list_type}<em class="li_color">({$goods_list_type.on_sale|default:0})</em>{/if}{/if}</a>
+                    	<a href="goods.php?act=on_sale">未上架商品 {if $menu_select.current neq '20_is_sale'}<em class="li_color">({$goods_list_type.on_sale|default:0})</em>{/if}{/if}</a>
                     </li>
                 </ul>
             </div>			
+        	<div class="explanation" id="explanation">
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
+                <ul>
+                	<li>该页面展示了商城所有的商品信息，可对商品进行编辑修改操作。</li>
+                    <li>可输入商品名称关键字进行搜索，侧边栏进行高级搜索。</li>
+                </ul>
+            </div>
             <div class="flexilist">
             	<!--商品列表-->
                 <div class="common-head">
                     <div class="fl">
-                        <a href="goods.php?act=review_status&type=not_audit{$seller_list}"><div class="fbutton"><div class="edit" title="{$lang.lab_review_not_audit}"><span><i class="icon icon-edit"></i>{$lang.lab_review_not_audit} ({$goods_list_type.not_status|default:0})</span></div></div></a>
-                    	<a href="goods.php?act=review_status&type=not_pass{$seller_list}"><div class="fbutton"><div class="add" title="{$lang.audited_not_adopt}"><span><i class="icon icon-edit"></i>{$lang.audited_not_adopt} ({$goods_list_type.not_pass|default:0})</span></div></div></a>
+                        <a href="goods.php?act=review_status&type=not_audit"><div class="fbutton"><div class="edit" title="未审核"><span><i class="icon icon-edit"></i>未审核 ({$goods_list_type.not_status|default:0})</span></div></div></a>
+                    	<a href="goods.php?act=review_status&type=not_pass"><div class="fbutton"><div class="add" title="审核未通过"><span><i class="icon icon-edit"></i>审核未通过 ({$goods_list_type.not_pass|default:0})</span></div></div></a>
                     </div>
                     <div class="refresh">
-                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    	<div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>
 					<div class="search">
-                    	<form action="javascript:;" name="searchForm" onSubmit="searchGoodsname(this);">
                     	<div class="input">
-                        	<input type="text" name="keyword" class="text nofocus w140" placeholder="{$lang.search_keyword_placeholder}" autocomplete="off">
-							<input type="submit" class="btn" name="secrch_btn" ectype="secrch_btn" value="" />
+                        	<input type="text" name="keyword" class="text nofocus w140" placeholder="商品名称/商品货号" autocomplete="off">
+							<button class="btn" name="secrch_btn"></button>
                         </div>
-                        </form>
                     </div>					
                 </div>
                 <div class="common-content">
@@ -95,37 +92,33 @@
                                         	<div class="name">
                                                 	<span onclick="listTable.edit(this, 'edit_goods_name', {$goods.goods_id})" title="{$goods.goods_name|escape:html}" data-toggle="tooltip" class="span">{$goods.goods_name|escape:html}</span>
                                                 </div>
-                                            	{if $goods.brand_name}<p class="brand">{$lang.brand}：<em>{$goods.brand_name}</em></p>{/if}
+                                            	{if $goods.brand_name}<p class="brand">品牌：<em>{$goods.brand_name}</em></p>{/if}
                                                 <p class="activity"> 
                                                     {if $goods.is_shipping}
-                                                    <em class="free">{$alng.free_shipping_alt}</em>
+                                                    <em class="free">免邮</em>
                                                     {/if}
     
                                                     {if $goods.stages}
-                                                    <em class="byStage">{$lang.by_stages}</em>
+                                                    <em class="byStage">分期</em>
                                                     {/if}
                                                     {if !$goods.is_alone_sale}
-                                                    <em class="parts">{$lang.tab_groupgoods}</em>
+                                                    <em class="parts">配件</em>
                                                     {/if}
                                                     
                                                     {if $goods.is_promote}
                                                         {if $nowTime gte $goods.promote_end_date}
-                                                    <em class="saleEnd">{$lang.promote_end_date}</em>
+                                                    <em class="saleEnd">特卖结束</em>
                                                         {else}
-                                                    <em class="sale">{$lang.promote_date}</em>    
+                                                    <em class="sale">特卖</em>    
                                                         {/if}
                                                     {/if}
                                                     
                                                     {if $goods.is_xiangou}
                                                         {if $nowTime gte $goods.xiangou_end_date}
-                                                    <em class="purchaseEnd">{$lang.xiangou_end}</em>
+                                                    <em class="purchaseEnd">限购结束</em>
                                                         {else}
-                                                    <em class="purchase">{$lang.xiangou}</em>    
+                                                    <em class="purchase">限购</em>    
                                                         {/if}
-                                                    {/if}
-													
-                                                    {if $goods.is_distribution}
-                                                    <em class="distribution">{$lang.distribution}</em>
                                                     {/if}
                                                 </p>
                                             </div>
@@ -150,19 +143,19 @@
                                     	<div class="tDiv">
                                             <div class="tlist">
                                             	<span>{$lang.is_best}：</span>
-                                            	{if $goods.is_best}{$lang.yes}{else}{$lang.no}{/if}
+                                            	{if $goods.is_best}是{else}否{/if}
                                             </div>
                                             <div class="tlist">
                                             	<span>{$lang.is_new}：</span>
-                                                {if $goods.is_new}{$lang.yes}{else}{$lang.no}{/if}
+                                                {if $goods.is_new}是{else}否{/if}
                                             </div>
                                             <div class="tlist">
                                             	<span>{$lang.is_hot}：</span>
-                                            	{if $goods.is_hot}{$lang.yes}{else}{$lang.no}{/if}
+                                            	{if $goods.is_hot}是{else}否{/if}
                                             </div>
                                             <div class="tlist tlist-last">
                                             	<span>{$lang.on_sale}：</span>
-                                            	{if $goods.is_on_sale}{$lang.yes}{else}{$lang.no}{/if}
+                                            	{if $goods.is_on_sale}是{else}否{/if}
                                             </div>
                                         </div>
                                     </td>
@@ -183,8 +176,8 @@
                                     </td>
                                     <td class="handle">
                                     	<div class="tDiv ht_tdiv">
-                                        	<a href="../goods.php?id={$goods.goods_id}" target="_blank" class="btn_see"><i class="sc_icon sc_icon_see"></i>{$lang.view}</a>
-                                            <a href="javascript:;" ectype="review_status" class="btn_see" data-type="{$type}" data-goodsid="{$goods.goods_id|default:0}" data-goodsname="{$goods.goods_name|escape:html}"><i class="icon icon-edit"></i>{$lang.check}</a>
+                                        	<a href="../goods.php?id={$goods.goods_id}" target="_blank" class="btn_see"><i class="sc_icon sc_icon_see"></i>查看</a>
+                                            <a href="javascript:;" ectype="review_status" class="btn_see" data-type="{$type}" data-goodsid="{$goods.goods_id|default:0}" data-goodsname="{$goods.goods_name|escape:html}"><i class="icon icon-edit"></i>审核</a>										
                                         </div>
                                     </td>
                                 </tr>
@@ -198,12 +191,12 @@
                                     	<div class="tDiv">
                                             <div class="tfoot_btninfo">
                                                 <div class="checkbox_item fl font12 mt5 mr5">
-                                                	<input type="checkbox" name="all_list" class="ui-checkbox" id="all_list"><label for="all_list" class="ui-label">{$lang.check_all}</label>
+                                                	<input type="checkbox" name="all_list" class="ui-checkbox" id="all_list"><label for="all_list" class="ui-label">全选</label>
                                                 </div>
                                                 <input type="hidden" name="act" value="batch" />
                                                 <!-- 操作类型 start -->
                                                 <div class="imitate_select select_w120">
-                                                    <div class="cite">{$lang.please_select}</div>
+                                                    <div class="cite">请选择</div>
                                                     <ul>
                                                         <li><a href="javascript:changeAction();" data-value="" class="ftx-01">{$lang.select_please}</a></li>
                                                         <li><a href="javascript:changeAction();" data-value="trash" class="ftx-01">{$lang.trash}</a></li>
@@ -231,7 +224,7 @@
                                                 <div class="search_select fl" id="move_cat_list" style="display: none;">
                                                     <div class="categorySelect">
                                                         <div class="selection">
-                                                            <input type="text" name="category_name" id="category_name" class="text w250 valid" value="{$lang.select_cat}" autocomplete="off" readonly data-filter="cat_name" />
+                                                            <input type="text" name="category_name" id="category_name" class="text w250 valid" value="请选择分类" autocomplete="off" readonly data-filter="cat_name" />
                                                             <input type="hidden" name="target_cat" id="category_id" value="0" data-filter="cat_id" />
                                                         </div>
                                                         <div class="select-container" style="display:none;">
@@ -244,7 +237,7 @@
                                               
                                                 <!-- 审核商品 start -->
                                                 <div id="review_status" class="imitate_select select_w120" style="display:none">
-                                                    <div class="cite">{$lang.please_select}</div>
+                                                    <div class="cite">请选择</div>
                                                     <ul>
                                                         <li><a href="javascript:get_review_status(2);" data-value="2" class="ftx-01">{$lang.audited_not_adopt}</a></li>
                                                         <li><a href="javascript:get_review_status(3);" data-value="3" class="ftx-01">{$lang.audited_yes_adopt}</a></li>
@@ -257,7 +250,7 @@
                                                 <!-- 转移供货商 start -->
                                                 {if $suppliers_list > 0}
                                                 <div id="suppliers_id" class="imitate_select select_w120" style="display:none;">
-                                                    <div class="cite">{$lang.please_select}</div>
+                                                    <div class="cite">请选择</div>
                                                     <ul>
                                                         <li><a href="javascript:;" data-value="-1" class="ftx-01">{$lang.select_please}</a></li>
                                                         <li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.lab_to_shopex}</a></li>
@@ -297,9 +290,13 @@
 	{include file="library/goods_review_search.lbi"}
 	<!--高级搜索 end-->
 	{include file ='library/pagefooter.lbi'}
+    
+    {insert_scripts files="jquery.purebox.js"}
+    
+    {literal}
 	<script type="text/javascript">
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
+	listTable.recordCount = '{$record_count}';
+	listTable.pageCount = '{$page_count}';
 	listTable.query = 'review_query';
 	
 	{foreach from=$filter item=item key=key}
@@ -436,8 +433,8 @@
 				title:title,
 				content:result.content,
 				drag:false,
-				ok_title:"{$lang.button_submit_alt}",
-				cl_title:"{$lang.cancel}"
+				ok_title:"确定",
+				cl_title:"取消"
 			});
 		}
 	});
@@ -489,11 +486,11 @@
 			var content = data.content;
 			pb({
 				id:"categroy_dialog",
-				title:"{$lang.warehouse_region_price}",
+				title:"仓库/地区价格",
 				width:864,
 				content:content,
-				ok_title:"{$lang.button_submit_alt}",
-				cl_title:"{$lang.cancel}",
+				ok_title:"确定",
+				cl_title:"取消",
 				drag:true,
 				foot:false
 			});
@@ -512,11 +509,11 @@
 			var content = data.content;
 			pb({
 				id:"categroy_dialog",
-				title:"{$lang.edit_goods_sku}",
+				title:"编辑商品货品信息",
 				width:863,
 				content:content,
-				ok_title:"{$lang.button_submit_alt}",
-				cl_title:"{$lang.cancel}",
+				ok_title:"确定",
+				cl_title:"取消",
 				drag:true,
 				foot:false
 			});
@@ -533,11 +530,11 @@
 			var content = data.content;
 			pb({
 				id:"attr_sku_dialog",
-				title:"{$lang.edit_goods_sku_price}",
+				title:"编辑商品货品价格",
 				width:563,
 				content:content,
-				ok_title:"{$lang.button_submit_alt}",
-				cl_title:"{$lang.cancel}",
+				ok_title:"确定",
+				cl_title:"取消",
 				drag:true,
 				foot:true,
 				onOk:function(){
@@ -571,18 +568,18 @@
 		
 		var content  = 	'<form id="reviewForm" enctype="multipart/form-data" method="post" action="dialog.php?act=update_review_status">' +
 						'<div class="item fl" style="padding:20px 0px 10px; width:333px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">' +
-							'{$lang.goods_name}：<em title="' + goods_name + '">' + goods_name + '</em>' +
+							'商品名称：<em title="' + goods_name + '">' + goods_name + '</em>' +
 						'</div>' +
 						'<div class="item fl" style="width:333px">' +
-							'<div class="fl" style="padding-top:9px">{$lang.01_review_status}：</div>' +
+							'<div class="fl" style="padding-top:9px">商品审核：</div>' +
 							'<div class="checkbox_items" style="padding-top:10px; width:80%">' +
 								'<div class="checkbox_item">' + 
 									'<input name="review_status" class="ui-radio review_status" id="pro_no" value="3" checked="checked" type="radio" onclick="handleReviewStatus(this);">' +
-									'<label for="pro_no" class="ui-radio-label">{$lang.audited_adopt}</label>' +
+									'<label for="pro_no" class="ui-radio-label">审核通过</label>' +
 								'</div>' +
 								'<div class="checkbox_item mr15">' +
 									'<input name="review_status" class="ui-radio review_status" id="pro_yes" value="2" type="radio" onclick="handleReviewStatus(this);">' + 
-									'<label for="pro_yes" class="ui-radio-label">{$lang.audited_not_adopt}</label> ' +
+									'<label for="pro_yes" class="ui-radio-label">审核未通过</label> ' +
 								'</div>' +
 							'</div>' +
 						'</div>' +
@@ -594,11 +591,11 @@
 						'</form>';
 		pb({
 			id:"review_status_dialog",
-			title:"{$lang.01_review_status}",
+			title:"商品审核",
 			width:403,
 			content:content,
-			ok_title:"{$lang.button_submit_alt}",
-			cl_title:"{$lang.cancel}",
+			ok_title:"确定",
+			cl_title:"取消",
 			drag:true,
 			foot:true,
 			onOk:function(){

@@ -28,9 +28,15 @@
                 <div class="catalog-side">
                     <div class="catalog-menu">
                         <ul class="menu-list">
-                            <!--{foreach from=$categories_pro item=categories name=nocat}-->
-                            <li {if $smarty.foreach.nocat.first}class="current"{/if}><a href="javascript:void(0);">{if $smarty.foreach.nocat.iteration lt 10}0{/if}{$smarty.foreach.nocat.iteration} {$categories.nolinkname}</a></li>
-                            <!--{/foreach}-->
+                            <!--{if $ru_id}-->
+                                <!--{foreach from=$categories_list item=categories name=nocat}-->
+                                <li {if $smarty.foreach.nocat.first}class="current"{/if}><a href="javascript:void(0);">{if $smarty.foreach.nocat.iteration lt 10}0{/if}{$smarty.foreach.nocat.iteration} {$categories.nolinkname}</a></li>
+                                <!--{/foreach}-->
+                            <!--{else}-->
+                                <!--{foreach from=$categories_pro item=categories name=nocat}-->
+                                <li {if $smarty.foreach.nocat.first}class="current"{/if}><a href="javascript:void(0);">{if $smarty.foreach.nocat.iteration lt 10}0{/if}{$smarty.foreach.nocat.iteration} {$categories.nolinkname}</a></li>
+                                <!--{/foreach}-->
+                            <!--{/if}-->
                         </ul>
                         <div class="back-top-wp">
                             <a href="javascript:;" class="back-top" ectype="returnTop">返回顶部</a>
@@ -50,7 +56,7 @@
                         </ul>
                         <!--{/foreach}-->
                         <div class="catalog-item-ad clearfix">
-                            {* DSC 提醒您：动态载入category_all_right.lbi，显示首页分类小广告 *}{insert name='get_adv_child' ad_arr=$category_all_right id=$categories.id ru_id=$ru_id}
+                            {* ECSHOP 提醒您：动态载入category_all_right.lbi，显示首页分类小广告 *}{insert name='get_adv_child' ad_arr=$category_all_right id=$categories.id ru_id=$ru_id}
                         </div>
                     </div>
                     <!--{/foreach}-->
@@ -58,7 +64,7 @@
             </div>
         </div>
     </div>
-    {* DSC 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
+    {* ECSHOP 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
     <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
     <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/dsc-common.js"></script>
     {insert_scripts files='cart_common.js,parabola.js,cart_quick_links.js'}

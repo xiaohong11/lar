@@ -5,10 +5,10 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.seller} - {$ur_here}</div>
+    	<div class="title">商家 - {$ur_here}</div>
         <div class="content">		
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                 	<li>店铺轮播图设置信息管理。</li>
                     <li>幻灯片展示了店铺的门面，请高度重视。</li>
@@ -42,7 +42,7 @@
                                     <td>
                                         <div class="tDiv">
                                             <span class="show">
-                                                <a href="{$slide_list.img_url}" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="{$slide_list.img_url}" ectype="tooltip" title="tooltip"></i></a>
+                                                <a href="{$slide_list.img_url}" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$slide_list.img_url}>')" onmouseout="toolTip()"></i></a>
                                             </span>
                                         </div>
                                     </td>
@@ -61,7 +61,7 @@
                                     <td class="handle">
                                         <div class="tDiv a2">
                                             <a href="seller_shop_slide.php?act=edit&id={$slide_list.id}" class="btn_edit"><i class="icon icon-edit"></i>{$lang.edit}</a>
-                                            <a href="javascript:;" onclick="listTable.remove({$slide_list.id}, '{$lang.drop_confirm}')" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+                                            <a href="javascript:;" onclick="listTable.remove({$slide_list.id}, '{$lang.drop_confirm}')" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>
                                         </div>
                                     </td>
                                 </tr>

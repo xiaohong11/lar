@@ -5,14 +5,10 @@
     <div class="ck-goods-item" ectype="shoppingList">
         <div class="ck-goods-tit">
             <div class="ck-store">
-            	{if $goodsRu.ru_id eq 0}
-                <a href="javascript:;" class="shop-name">{$goodsRu.ru_name}</a>
-                {else}
                 <a href="{$goodsRu.url}" target="_blank" class="shop-name">{$goodsRu.ru_name}</a>
-                {/if}
                 <!--start 在线客服 -->
                 {if $goodsRu.is_IM eq 1 || $goodsRu.is_dsc}
-                <a href="javascript:;" id="IM" onclick="openWin(this)" ru_id="{$goodsRu.ru_id}" class="p-kefu {if $goodsRu.ru_id eq 0} p-c-violet{/if}" target="_blank"><i class="iconfont icon-kefu"></i></a>
+                <a href="javascript:;" id="IM" onclick="openWin(this)" goods_id="{$goodsRu.goods_id}" class="p-kefu {if $goodsRu.ru_id eq 0} p-c-violet{/if}" target="_blank"><i class="iconfont icon-kefu"></i></a>
                 {else}
                 {if $goodsRu.kf_type eq 1}
                 <a href="http://www.taobao.com/webww/ww.php?ver=3&touid={$goodsRu.kf_ww}&siteid=cntaobao&status=1&charset=utf-8" class="p-kefu" target="_blank"><i class="iconfont icon-kefu"></i></a>
@@ -66,21 +62,19 @@
                 </div>
                 <!--{else}-->
                 <div class="ck-dis-modes">
-                	<div class="ck-dis-tit">{$lang.shipping_method}：</div>
-                    <!-- {if $goodsRu.shipping} -->
+                    <div class="ck-dis-tit">{$lang.shipping_method}：</div>
+                    <!-- {if $goodsRu.shipping} 该地区支持配送-->
                     <div class="ck-dis-info" ectype="disInfo">
                         <ul class="ck-sp-type">
-                        	<!-- {if $goodsRu.shipping} -->
                             <!-- {foreach from=$goodsRu.shipping item=shipping} -->
-                            {if $shipping.shipping_code neq 'cac' && $goodsRu.tmp_shipping_id eq $shipping.shipping_id}
-                            <li class="mode-tab-item mode-tab-log shopping-list-checked {if $goodsRu.shipping_type eq 0 && $shipping.default eq 1}item-selected{/if}" ectype="tabLog" data-ruid="{$goodsRu.ru_id}" data-type="0" data-shipping="{$shipping.shipping_id}" data-shippingcode="{$shipping.shipping_code}">
-                            <span>{if $shipping.shipping_name}{$shipping.shipping_name}{else}未设置配送方式{/if}</span>
+                            {if $shipping.shipping_code != 'cac' && $goodsRu.tmp_shipping_id == $shipping.shipping_id}
+                            <li class="mode-tab-item mode-tab-log shopping-list-checked {if $goodsRu.shipping_type eq 0}item-selected{/if}" ectype="tabLog" data-ruid="{$goodsRu.ru_id}" data-type="0" data-shipping="{$shipping.shipping_id}" data-shippingcode="{$shipping.shipping_code}">
+                            <span>{$shipping.shipping_name}</span>
                             </li>
                             {/if}
                             <!-- {/foreach} -->
-                            <!-- {/if} -->
                             
-                            {if $goodsRu.ru_id eq 0 && $goodsRu.self_point neq ""}
+                            {if $goodsRu.ru_id == 0 && $goodsRu.self_point != ""}
                             <li class="mode-tab-item shopping-list-checked {if $goodsRu.shipping_type eq 1}item-selected{/if}" ectype="tabCac" data-ruid="{$goodsRu.ru_id}" data-type="1" data-shipping="{$goodsRu.self_point.shipping_id}" data-shippingcode="{$goodsRu.self_point.shipping_code}">
                                 <span>{$lang.Door_self}</span>
                             </li>
@@ -95,8 +89,8 @@
                                     {foreach from=$goodsRu.shipping item=shipping} 
                                     {if $shipping.shipping_code != 'cac'}
                                     <li class="logistics_li {if $goodsRu.tmp_shipping_id == $shipping.shipping_id}item-selected{/if}" data-ruid="{$goodsRu.ru_id}" data-type="0" data-shipping="{$shipping.shipping_id}" data-shippingcode="{$shipping.shipping_code}" data-text="{$shipping.shipping_name}">
-                                        <span>{if $shipping.shipping_name}{$shipping.shipping_name}{else}未设置配送方式{/if}</span>
-                                        {if $shipping.shipping_name && $shipping.shipping_code neq 'fpd'}<em>（{if $shipping.shipping_fee}{$shipping.format_shipping_fee}{else}{$lang.Free_shipping}{/if}）</em>{/if}
+                                        <span>{$shipping.shipping_name}</span>
+                                        <em>（{if $shipping.shipping_fee}{$shipping.format_shipping_fee}{else}{$lang.Free_shipping}{/if}）</em>
                                     </li>
                                     {/if}
                                     {/foreach} 
@@ -128,11 +122,11 @@
                         </div>
                     </div>
                     <!--{else}-->
-                    	<!-- {if !$user_address} -->
-                        <span class="ftx-01">请填写收货地址</span>	
-                        <!-- {else} -->
-                        <span class="ftx-01">暂不支持配送</span>
-                        <!-- {/if} -->
+					{if !$user_address}
+					<span class="ftx-01">请填写收货地址</span>	
+					{else}
+                    <span class="ftx-01">该地区暂不支持配送</span>
+					{/if}
                     <!--{/if}-->
                     
                     <input type="hidden" name="ru_id[]" value="{$goodsRu.ru_id}" />
@@ -307,7 +301,7 @@
                         </div>
                     </div>
                     <!-- {else}-->
-                    <a href="{if $order.extension_code eq 'seckill'}seckill.php?id={$seckill_id}&act=view{else}{$goods.url}{/if}" target="_blank">
+                    <a href="{$goods.url}" target="_blank">
                         <div class="p-img"><img src="{$goods.goods_thumb}" width="48" height="48"></div>
                         <div class="p-info">
                             <div class="p-name">{$goods.goods_name}</div>

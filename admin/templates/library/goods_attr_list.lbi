@@ -24,7 +24,7 @@
         {elseif $goods.model_attr eq 2}
         <span class="item">
             <span class="tit">地区名称</span>
-            <div class="imitate_select select_w120" id="warehouse_area_name">
+            <div class="imitate_select select_w140" id="warehouse_area_name">
                 <div class="cite" id="w_select_please">{$lang.select_please}</div>
                 <ul>
                     {foreach from=$warehouse_list item=warehouse name=nowarehouse key=key}
@@ -40,7 +40,7 @@
             <span class="tit"></span>
             <div class="search mt0">
                 <div class="input">
-                    <input name="product_sn" id="product_sn" class="text nofocus w120" placeholder="SKU编号" autocomplete="off" type="text">
+                    <input name="product_sn" id="product_sn" class="text nofocus w140" placeholder="SKU编号" autocomplete="off" type="text">
                     <button type="button" class="btn pro_btn" name="secrch_btn"></button>
                 </div>
             </div>					
@@ -123,8 +123,6 @@ $(function(){
 		});
 		
 		get_warehouse_area_name({$warehouse_id}, 1 ,{$goods_id}, {$user_id}, 0);
-		
-		get_attr_area_city({$area_id}, 1 ,{$goods_id}, {$user_id}, 0);
 	{/if}
 	
 	$("[data-toggle='tooltip']").tooltip({
@@ -142,25 +140,17 @@ $(function(){
 	});
 	
 	$(".pro_btn").click(function(){
-		
-		listTable_pb.filter['area_id'] = $(":input[name='area_name']").val();
-		listTable_pb.filter['city_id'] = $(":input[name='area_city_name']").val();
 		listTable_pb.filter['product_sn'] = $("#product_sn").val();
 		listTable_pb.filter['page'] = 1;
-		
+	
 		listTable_pb.loadList();
 	});
 });
 
-function product_list(warehouse_id, area_id, city_id)
+function product_list(warehouse_id, area_id)
 {
 	listTable_pb.filter['warehouse_id'] = warehouse_id;
 	listTable_pb.filter['area_id'] = area_id;
-	
-	if(city_id){
-		listTable_pb.filter['city_id'] = city_id;
-	}
-	
 	listTable_pb.filter['page'] = 1;
 
 	listTable_pb.loadList();
@@ -177,25 +167,6 @@ function ResponseWarehouse_area(result)
 		$('#warehouse_area_list_' + result.content.key).html(result.content.html);
 	}else{
 		$('#warehouse_area_list_' + result.content.key).find('select').remove();
-	}
-}
-
-
-function get_attr_area_city(area_id, key, goods_id, ru_id, type){
-	Ajax.call('goods.php?is_ajax=1&act=edit_warehouse_area_city', "id="+area_id + "&key="+key + "&goods_id=" + goods_id + "&ru_id=" + ru_id + "&type=" + type, ResponseAttr_area_city, "GET", "JSON");
-
-}
-
-function ResponseAttr_area_city(result)
-{
-	if (result.content.error == 0)
-	{
-		$("#warehouse_area_city_" + result.content.key).removeClass('hide');
-		$("#warehouse_area_city_" + result.content.key).addClass('show');
-		$('#warehouse_area_city_' + result.content.key).html(result.content.html);
-	}else{
-		$('#warehouse_area_city_' + result.content.key).find('select').remove();
-		alert('{$lang.warehouse_null_region}');
 	}
 }
 </script>

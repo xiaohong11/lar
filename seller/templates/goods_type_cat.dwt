@@ -26,18 +26,18 @@
                 {/if}
                 <table id="list-table" class="ecsc-default-table">
 					<thead>
-                        <tr>
-                            {if $level lt 3}
-                            <th width="8%">级别({$lang.cat_level.$level})</th>
-                            {/if}
-                            <th width="20%">分类名称</th>
-                            {if $level gt 1}
-                            <th width="10%">父级分类</th>
-                            {/if}
-                            <th width="10%">类型数量</th>
-                            <th width="10%">排序</th>
-                            <th width="12%" class="handle">操作</th>
-                        </tr>
+                                            <tr>
+                                                {if $level lt 3}
+                                                <th width="8%">级别({$lang.cat_level.$level})</th>
+                                                {/if}
+                                                <th width="20%">分类名称</th>
+                                                {if $level gt 1}
+                                                <th width="10%">父级分类</th>
+                                                {/if}
+                                                <th width="10%">类型数量</th>
+                                                <th width="10%">排序</th>
+                                                <th width="12%" class="handle">操作</th>
+                                            </tr>
 					</thead>
 					<tbody>
                         {foreach from=$goods_type_arr item=cat}
@@ -55,36 +55,21 @@
                                 </div>
                             </td>
                             {/if}
-							<td>
-							{if $attr_set_up eq 1}
-							<a href="goods_type.php?act=manage&cat_id={$cat.cat_id}" class="ftx-01">{$cat.cat_name}</a>
-							{else}
-							{$cat.cat_name}
-							{/if}
-							</td>
+                            <td><a href="goods_type.php?act=manage&cat_id={$cat.cat_id}" class="ftx-01">{$cat.cat_name}</a></td>
                             {if $level gt 1}
                             <td>{$cat.parent_name}</td>
                             {/if}
                             <td>{$cat.type_num}</td>
                             <td align="center"><span onclick="listTable.edit(this, 'edit_sort_order', {$cat.cat_id})">{$cat.sort_order}</span></td>
                             <td class="ecsc-table-handle tr">
-							{if $attr_set_up eq 1}
                                 <span><a href="goods_type.php?act=cat_edit&amp;cat_id={$cat.cat_id}" class="btn-green"><i class="icon icon-edit"></i><p>{$lang.edit}</p></a></span>
                                 <span><a href="javascript:void(0);" onclick="listTable.remove({$cat.cat_id}, '{$lang.drop_confirm}','remove_cat')" class="btn-red"><i class="icon icon-trash"></i><p>{$lang.drop}</p></a></span>
-							{/if}
-							</td>
+                            </td>
                         </tr>
                         {foreachelse}
                         <tr><td class="no-records" colspan="11">{$lang.no_records}</td></tr>
                         {/foreach}
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="20">
-                            {include file="page.dwt"}
-                            </td>
-                        </tr>
-                    </tfoot>
                 </table>
                     {if $full_page}
                 </div>
@@ -95,8 +80,8 @@
 {include file ='library/seller_footer.lbi'}
 <script type="text/javascript" src="js/jquery.purebox.js"></script>
 <script type="text/javascript">
-	listTable.recordCount = {$record_count|default:0};
-	  listTable.pageCount = {$page_count|default:1};
+	listTable.recordCount = '{$record_count}';
+	  listTable.pageCount = '{$page_count}';
           listTable.query = 'cat_list_query';
 
 	  {foreach from=$filter item=item key=key}

@@ -4,13 +4,13 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$lang.order_word} - {$ur_here}</div>
+    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>订单 - {$ur_here}</div>
             <div class="content">
             <div class="explanation" id="explanation">
-                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
-                <ul>                    
-                    <li>{$lang.operation_prompt_content_common}</li>
-                    <li>{$lang.operation_prompt_content.info.0}</li>
+                <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
+                <ul>
+                    <li>投诉类型添加/编辑</li>
+                    <li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -60,40 +60,40 @@
             </div>
         </div>
     </div>
-	{include file ='library/pagefooter.lbi'}
+ {include file ='library/pagefooter.lbi'}
     <script type="text/javascript">
-	//表单验证
-	$(function(){
-		$("#submitBtn").click(function(){
-			if($("#report_form").valid()){
-				$("#report_form").submit();
-			}
-		});
-	
-		$('#report_form').validate({
-			errorPlacement:function(error, element){
-				var error_div = element.parents('div.label_value').find('div.form_prompt');
-				element.parents('div.label_value').find(".notic").hide();
-				error_div.append(error);
-			},
-			rules:{
-				title_name:{
-					required:true
-				},
-				title_desc:{
-					required:true
+		//表单验证
+		$(function(){
+			$("#submitBtn").click(function(){
+				if($("#report_form").valid()){
+					$("#report_form").submit();
 				}
-			},
-			messages:{
-				title_name:{
-					required:'<i class="icon icon-exclamation-sign"></i>'+title_name_null
+			});
+		
+			$('#report_form').validate({
+				errorPlacement:function(error, element){
+					var error_div = element.parents('div.label_value').find('div.form_prompt');
+					element.parents('div.label_value').find(".notic").hide();
+					error_div.append(error);
 				},
-				title_desc:{
-					required:'<i class="icon icon-exclamation-sign"></i>'+title_desc_null
+				rules:{
+					title_name:{
+						required:true
+					},
+                                        title_desc:{
+						required:true
+					}
+				},
+				messages:{
+					title_name:{
+						required:'<i class="icon icon-exclamation-sign"></i>'+title_name_null
+					},
+                                        title_desc:{
+						required:'<i class="icon icon-exclamation-sign"></i>'+title_desc_null
+					}
 				}
-			}
+			});
 		});
-	});
     </script>
 </body>
 </html>

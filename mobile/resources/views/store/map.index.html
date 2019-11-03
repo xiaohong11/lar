@@ -17,7 +17,7 @@
 </head>
 <body>
 <script>
-    var geolocation = new qq.maps.Geolocation("{C('shop.tengxun_key')}", "myapp");
+    var geolocation = new qq.maps.Geolocation("{config('shop.tengxun_key')}", "myapp");
     var options = {timeout: 8000};
 
     geolocation.getLocation(showPosition, showErr, options);

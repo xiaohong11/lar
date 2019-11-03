@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                             <div class="summary">
-                            	<form action="auction.php" method="post" name="ECS_FORMBUY" id="formBid" onsubmit="return auction_view(this)">
+                            	<form action="auction.php" method="post" name="formBid" id="formBid" onsubmit="return auction_view(this)">
                                 <div class="summary-price-wrap">
                                     <div class="s-p-w-wrap clearfix">
                                         <div class="summary-item">
@@ -70,69 +70,12 @@
                                             <div class="si-tit">{$lang.au_deposit}：</div>
                                             <div class="si-warp">
                                                 <span class="price">{$auction.formated_deposit}</span>
-                                                用户账号当前余额不能低于保证金金额
+                                                用户账号当前余额不低于保证金金额
                                             </div>
                                         </div>
                                         <!--{/if}-->
                                     </div>
                                 </div>
-                                
-                                <!-- {if $specification} -->
-                                <div class="summary-basic-info">
-                                    <!-- {foreach from=$specification item=spec key=spec_key} -->
-                                    <!-- {if $spec.values} -->
-                                    <div class="summary-item is-attr goods_info_attr" ectype="is-attr" data-type="<!-- {if $spec.attr_type eq 1} -->radio<!-- {else} -->checkbox<!-- {/if} -->">
-                                        <div class="si-tit">{$spec.name}</div>
-                                        <!-- {if $cfg.goodsattr_style eq 1} -->
-                                        <div class="si-warp">
-                                            <ul>
-                                                <!-- {foreach from=$spec.values item=value key=key name=attrvalues} -->
-                                                {if $spec.is_checked > 0}
-                                                <li class="item{if $value.checked eq 1} selected{/if}" data-name="{$value.id}">
-                                                    <b></b>
-                                                    <a href="{if $value.img_site}{$value.img_site}{else}javascript:void(0);{/if}">
-                                                        {if $value.img_flie}
-                                                        <img src="{$value.img_flie}" width="24" height="24" />
-                                                        {/if}
-                                                        <i>{$value.label}</i>
-                                                        <input id="spec_value_{$value.id}" type="{if $spec.attr_type eq 2}checkbox{else}radio{/if}" data-attrtype="{if $spec.attr_type eq 2}2{else}1{/if}" name="spec_{$spec_key}" value="{$value.id}" autocomplete="off" class="hide" />
-                                                        {if $value.checked eq 1}
-                                                        <script type="text/javascript">
-                                                            $(function(){
-                                                                $("#spec_value_{$value.id}").prop("checked", true);
-                                                            });
-                                                        </script>
-                                                        {/if}
-                                                    </a>
-                                                </li>
-                                                {else}
-                                                <li class="item {if $key eq 0} selected{/if}" data-name="{$value.id}">
-                                                    <b></b>
-                                                    <a href="javascript:void(0);" name="{$value.id}" class="noimg">
-                                                        <i>{$value.label}</i>
-                                                        <input id="spec_value_{$value.id}" type="{if $spec.attr_type eq 2}checkbox{else}radio{/if}" data-attrtype="{if $spec.attr_type eq 2}2{else}1{/if}" name="spec_{$spec_key}" value="{$value.id}" autocomplete="off" class="hide" /></a>
-                                                        {if $key eq 0}
-                                                        <script type="text/javascript">
-                                                            $(function(){
-                                                                $("#spec_value_{$value.id}").prop("checked", true);
-                                                            });
-                                                        </script>
-                                                        {/if}
-                                                    </a>
-                                                </li>
-                                                {/if}
-                                                <!-- {/foreach} -->
-                                            </ul>
-                                        </div>
-                                        <!-- {else} 列表下拉-->
-                                        ...
-                                        <!-- {/if} -->
-                                        <input type="hidden" name="spec_list" value="{$spec_key}" data-spectype="{if $spec.attr_type eq 1}attr-radio{else}attr-check{/if}" />
-                                    </div>
-                                    <!-- {/if} -->
-                                    <!-- {/foreach} -->
-                                </div>
-                                <!-- {/if} -->
                                 
                                 <!-- {if $auction.status_no eq 0} 未进行 -->
                                 <div class="choose-btns clearfix">
@@ -141,9 +84,8 @@
                                 <!-- {elseif $auction.status_no eq 1} 进行中 -->
                                 <div class="summary-count-wp">
                                     <div class="amount-wrap-2">
-                                    	<input type="hidden" name="max-price" id="maxPrice" value="{if $auction.end_price gt 0}{$auction.end_price}{else}100000000000000{/if}" />
                                         <i class="iconfont icon-reduce" onclick="decre()"></i>
-                                        <input type="text" name="buy-price" value="{$auction.current_price_int}" id="buyPrice">
+                                        <input type="text"  name="buy-price" value="{$auction.current_price_int}" id="buyPrice">
                                         <i class="iconfont icon-plus" onclick="incre()"></i>
                                     </div>
                                     <span>{$lang.min_fare}：<em>¥</em><span id="priceLowerOffset">{$auction.amplitude}</span>
@@ -173,12 +115,6 @@
                                     </div>
                                     <!-- {/if} -->
                                 <!--{/if}-->
-                                
-                                	<input type="hidden" value="" name="goods_attr_id" id="goods_attr_id" />
-                                	<input type="hidden" value="{$goods_id|default:0}" name="goods_id" />
-                                    <input type="hidden" value="{$region_id|default:0}" name="region_id" />
-                                    <input type="hidden" value="{$area_id|default:0}" name="area_id" />
-                                    <input type="hidden" value="{$cfg.add_shop_price}" name="add_shop_price" ectype="add_shop_price" />
                                 </form>
                                 <div class="summary-item summary-row-2">
                                     <div class="si-tit">{$lang.au_start_price_two}：</div>
@@ -316,7 +252,7 @@
                             <div class="p-img">
                                 <a href="{$goods.url}" target="_blank"><img src="{$goods.thumb}" title="{$goods.short_style_name}" /></a>
                             </div>
-                            <div class="p-name"><a href="{$goods.url}" target="_blank" title="{$goods.short_style_name|escape:html}">{$goods.short_style_name}</a></div>
+                            <div class="p-name"><a href="{$goods.url}" target="_blank" title="{$goods.short_style_name}">{$goods.short_style_name}</a></div>
                             <div class="p-price"><em>￥</em>{$goods.auction.start_price}</div>
                         </li>
                         <!--{/foreach}-->
@@ -326,32 +262,16 @@
         </div>
     </div>
     
-    {* DSC 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
+    {* ECSHOP 提醒您：动态载入user_menu_position.lbi，显示首页分类小广告 *}{insert name='user_menu_position'}
     
     <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
    
-    {insert_scripts files='jquery.SuperSlide.2.1.1.js,jquery.yomi.js,magiczoomplus.js,common.js,cart_common.js,cart_quick_links.js'}
+    {insert_scripts files='jquery.SuperSlide.2.1.1.js,jquery.yomi.js,magiczoomplus.js,cart_common.js,cart_quick_links.js'}
+    <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/ecsc-increase.js"></script>
     <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/dsc-common.js"></script>
     <script type="text/javascript" src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/jquery.purebox.js"></script>
     
     <script type="text/javascript">	
-	
-	//全局变量
-	var goods_id = {$goods_id|default:0};
-	var goodsId = {$goods_id|default:0};
-	var add_shop_price = $("*[ectype='add_shop_price']").val();
-	
-	$(function(){
-		changePrice('onload');
-		
-		if(add_shop_price == 0){
-			$(":input[name='goods_attr_id']").val('');
-		}
-	});
-	
-	//价格加减
-	increase();
-	
 	//商品相册小图滚动
 	$(".spec-list").slide({mainCell:".spec-items ul",effect:"left",trigger:"click",pnLoop:false,autoPage:true,scroll:1,vis:5,prevCell:".spec-prev",nextCell:".spec-next"});
 	
@@ -369,13 +289,12 @@
 		//判断登录
 		if(user_id > 0){
 			var buyPrice=$("#buyPrice").val();//写入价格
-			var qp_price = Number({$auction.start_price|default:0});
-			var current_price = Number({$auction.current_price|default:0});//当前价格
-			var amplitude = Number({$auction.amplitude|default:0});//加价幅度
+			var current_price = {$auction.current_price|default:0};//当前价格
+			var amplitude = {$auction.amplitude|default:0};//加价幅度
 			var all_price= amplitude + current_price;
 			var is_winner = "{$auction.is_winner|default:0}";
-			var deposit= Number({$auction.deposit|default:0});
-			var user_money = Number({$user.user_money|default:0});
+			var deposit={$auction.deposit|default:0};
+			var user_money = {$user.user_money|default:0};
 
 			if({$auction.end_price})
 			{
@@ -390,7 +309,7 @@
 			if(is_winner > 0){
 				return true;
 			}else{
-				if(buyPrice < all_price && qp_price != buyPrice){
+				if(buyPrice<all_price){
 					var message = "{$lang.au_your_lowest_price_wen}" + all_price + "!";
 					
 					pbDialog(message,"",0);
@@ -426,7 +345,7 @@
 						if(user_money < deposit){
 							var message = "{$lang.au_user_money_short}";
 							
-							pbDialog(message,"",0,'','',40);
+							pbDialog(message,"",0);
 							return false;
 						}
 					}
@@ -441,52 +360,6 @@
 		}
 	}
 	//by kong end
-	
-	/* 点击可选属性或改变数量时修改商品价格的函数 */
-	function changePrice(onload){
-		var qty = 1;
-		var goods_attr_id = '';
-		var goods_attr = '';
-		var attr_id = '';
-		var attr = '';
-		var region_id = $(":input[name='region_id']").val();
-		var area_id = $(":input[name='area_id']").val();
-
-		if(document.forms['ECS_FORMBUY']){
-			goods_attr_id = getSelectedAttributes(document.forms['ECS_FORMBUY']);
-			$("#goods_attr_id").val(goods_attr_id);
-		}
-
-		if(onload != 'onload'){
-			if(add_shop_price == 0){
-				if(document.forms['ECS_FORMBUY']){
-					attr_id = getSelectedAttributesGroup(document.forms['ECS_FORMBUY']);
-					goods_attr = '&goods_attr=' + attr_id;
-				}
-			}
-			Ajax.call('goods.php', 'act=price&id=' + goodsId + '&attr=' + goods_attr_id + goods_attr + '&number=' + qty + '&warehouse_id=' + region_id + '&area_id=' + area_id, changePriceResponse, 'GET', 'JSON');
-		}else{
-			attr = '&attr=' + goods_attr_id;
-			Ajax.call('goods.php', 'act=price&id=' + goodsId + attr + '&number=' + qty + '&warehouse_id=' + region_id + '&area_id=' + area_id + '&onload=' + onload, changePriceResponse, 'GET', 'JSON');
-		}
-	}
-
-	/* 接收返回的信息 回调函数 */
-	function changePriceResponse(res){
-		if(res.err_msg.length > 0){
-			pbDialog(res.err_msg," ",0,450,80,50);
-		}else{
-
-			if(res.attr_number <= 0){
-				
-				$(".btn-append").hide();
-				
-				pbDialog("很抱歉，您拍卖的商品暂时缺货，请及时联系客服！"," ",0,450,80,50);
-			}else{
-				$(".btn-append").show();
-			}
-		}
-	}
    </script>
 </body>
 </html>

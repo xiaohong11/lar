@@ -16,16 +16,12 @@
                 	<div class="order-step-info order-step-handle">
                     	<div class="step-title"><i class="dian"></i><h3>{$lang.action_info}</h3></div>
                         <div class="handle-info">
-                        	<div class="return_item return_reason">
-                            	<div class="return_item_label">{$lang.buyers_return_reason}：</div>
-                                <span class="return_item_value red">{$back_order.return_cause}</span>
-                            </div>
-                            {if $back_order.img_list}
-                            <div class="return_item back_img_list mb10">
-                            	<div class="return_item_label">{$lang.user_file_image}：</div>
-                                <div class="return_item_value">
+                        	{if $back_order.img_list}
+                            <div class="back_img_list">
+                            	<div>{$lang.user_file_image}</div>
+                                <div>
                                 	{foreach from=$back_order.img_list item=img}
-                                    <a href="{$img.img_file}" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$img.img_file}>')" onmouseout="toolTip()"></i></a>
+                                    <a href="../{$img.img_file}" target="_blank"><img src="../{$img.img_file}" width="100" height="100" style="border:1px #ccc solid; padding:2px;" /></a>
                                 	{/foreach}
                                 </div>
                             </div>
@@ -33,15 +29,15 @@
                         	<div class="handle-note"><textarea name="action_note" cols="80" rows="3" class="textarea" placeholder="{$lang.operation_notes}"></textarea></div>
                         	<div class="handle-btn">
                             	{if $back_order.return_status1 neq 6}
-                                    {if $back_order.agree_apply neq 1 && $back_order.return_status1 lt 2}
+                                    {if $back_order.agree_apply neq 1}
                                     <input class="sc-btn sc-redBg-btn" type="submit" value="{$lang.agree_apply}" name="agree_apply">
                                     {/if}
                                     
-                                    {if $back_order.return_status1 lt 1 && $back_order.return_status1 ge 0 && $back_order.agree_apply}
+                                    {if $back_order.return_status1 lt 1 && $back_order.return_status1 ge 0 }
                                     <input class="sc-btn sc-redBg-btn" type="submit" value="{$lang.receive_goods}" name="receive_goods">
                                     {/if}
                                     
-                                    {if $back_order.return_type eq 1 || $back_order.return_type eq 3 && $back_order.chargeoff_status eq 0 && $back_order.agree_apply}
+                                    {if $back_order.return_type eq 1 || $back_order.return_type eq 3 && $back_order.chargeoff_status eq 0}
                                         {if $back_order.refound_status1 eq 0 }
                                         <input class="sc-btn sc-redBg-btn" type="submit" value="{$lang.refound}" name="refound">
                                         {/if}
@@ -61,7 +57,7 @@
                                     {/if} 
                                 {/if}
                                 
-                                {if $back_order.refound_status1 neq 1 && $back_order.agree_apply neq 1}
+                                {if $back_order.refound_status1 neq 1}
                                 	{if $back_order.return_status1 neq 6}
 									<input class="sc-btn sc-redBg-btn" type="submit" value="拒绝" name="refuse_apply">	
                                     {else}
@@ -182,7 +178,7 @@
                         </div>
                     </div>
                     <div class="order-step-info">
-                    	<div class="step-title"><i class="dian"></i><h3>{if $back_order.return_type eq 0}{$lang.product_repair}{elseif $back_order.return_type eq 1}{$lang.product_return}{elseif $back_order.return_type eq 2}{$lang.product_change}{elseif $back_order.return_type eq 3}{$lang.only_return_money}{/if}</h3></div>
+                    	<div class="step-title"><i class="dian"></i><h3>{if $back_order.return_type eq 0}{$lang.product_repair}{elseif $back_order.return_type eq 1}{$lang.product_return}{elseif $back_order.return_type eq 2}{$lang.product_change}{/if}</h3></div>
                     	<div class="ecsc-order-content">
                         	<table class="ecsc-default-table order">
                                 <thead>
@@ -237,27 +233,20 @@
                                          {/if}
                                          {if $back_order.return_type eq 1 || $back_order.return_type eq 3}
                                          <td colspan="6" class="bdr" style="border-right:0px;"> 
-                                         	{if $back_order.actual_return > 0}
-                                            <span class="pr20 fr">{$lang.actual_return}：<span class="red">{$back_order.formated_actual_return}</span></span>
-                                            {else}
                                             <span class="pr20 fr">{$lang.label_total}<span class="red">{$back_order.formated_return_amount}</span></span>
-                                            {/if}
                                             {if $back_order.return_shipping_fee > 0}
                                             <span class="pr20 fr">{$lang.is_shipping_money}：<span class="red">{$back_order.formated_return_shipping_fee}</span></span>
                                             <input type="hidden" name="return_shipping_fee" value="{$back_order.return_shipping_fee}"/>
                                             {/if}
-                                            
-                                            {if $back_order.discount_percent_decimal > 0}
-                                            <span class="pr20 fr">{$lang.amount_return}：<span class="red">{$back_order.formated_goods_amount} - {$back_order.formated_discount_amount} = {$back_order.formated_should_return}<input type="hidden" name="refound_amount" value="{$back_order.should_return1}"/></span></span>
-                                         	<span class="pr20 fr">{$lang.return_discount}：<span class="red">{$back_order.formated_discount_amount}({$back_order.discount_percent}%)<input type="hidden" name="discount_percent" value="{$back_order.discount_percent_decimal}"/></span></span>
-                                            {else}
                                             <span class="pr20 fr">{$lang.amount_return}：<span class="red">{$back_order.formated_should_return}<input type="hidden" name="refound_amount" value="{$back_order.should_return1}"/></span></span>
-                                            {/if}
                                          </td>
                                          {else}
                                          <td colspan="2" class="bdr">&nbsp;</td>
                                          {/if}
 									</tr>
+                                    <tr>
+                                        <td colspan="6" class="bdl bdr tr"><span class="pr20">{$lang.buyers_return_reason}：<span class="red">{$back_order.return_cause}</span></span></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -268,12 +257,7 @@
     </div>
 </div>
 </form>
-{include file ='library/seller_footer.lbi'}
-<script type="text/javascript" src="../js/jquery.picTip.js"></script>
 <script type="text/javascript">
-$(function(){
-	$('.nyroModal').nyroModal();
-});
 function check_shipping(){
 	var frm =  document.forms['theForm'] ;
 	var shipping_name = frm['shipping_name'].value;
@@ -288,5 +272,6 @@ function check_shipping(){
 	}
 }
 </script>
+{include file ='library/seller_footer.lbi'}
 </body>
 </html>

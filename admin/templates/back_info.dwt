@@ -4,7 +4,7 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$lang.order_word} - {$ur_here}</div>
+    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>订单 - {$ur_here}</div>
         <div class="content">
         	<div class="flexilist order_info">
                 <div class="common-content">
@@ -151,6 +151,38 @@
             </div>
 		</div>
 	</div>
- 	{include file ='library/pagefooter.lbi'}    
+    <!--这个地方要提到lib文件里面
+    <div id="order_goods_layer" style="display:none;">
+    	<div class="brank_s"></div>
+        <div class="delivery_content">
+        	<div class="items">
+            	<div class="item">
+                	<div class="label">收货人：</div>
+                    <div class="value">ecmobana</div>
+                </div>
+                <div class="item">
+                	<div class="label">手机：</div>
+                    <div class="value">15993242854</div>
+                </div>
+                <div class="item">
+                	<div class="label">收货地址：</div>
+                    <div class="value">上海普陀区中山北路3553号伸大厦301室</div>
+                </div>
+                <div class="item">
+                	<div class="label">应付款金额：</div>
+                    <div class="value">￥315.00</div>
+                </div>
+                <div class="item">
+                	<div class="label ftx-02"><em class="require-field">*</em>发货单号：</div>
+                    <div class="value"><input type="text" name="" class="text" autocomplete="off" /><a href="#" class="btn btn25 blue_btn">发货</a></div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+ 	{include file ='library/pagefooter.lbi'}
+    <script type="text/javascript">
+		//移动到一键发货悬浮展示详情方法调用
+		//orderLevitate("one_delivery","order_goods_layer",12.5);
+    </script>     
 </body>
 </html>

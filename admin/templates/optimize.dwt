@@ -4,13 +4,13 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.13_backup} - {$ur_here}</div>
+    	<div class="title">数据库管理 - {$ur_here}</div>
 		<div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.optimize.0}</li>
-                    <li>{$lang.operation_prompt_content.optimize.1}</li>
+                	<li>手动清理数据表碎片。</li>
+                    <li>定期清理数据表碎片可以提升数据库的查询速度。</li>
                 </ul>
             </div>
             <div class="flexilist">

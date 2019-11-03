@@ -168,11 +168,9 @@ $(function(){
 			element.parents('dl').find(".notic").hide();
 			error_div.append(error);
 		},
-		ignore:'.ignore',
 		rules : {
 			goods_id : {
 				required : true,
-				min:1
 			},
 			exchange_integral : {
 				required : true,
@@ -181,8 +179,7 @@ $(function(){
 		},
 		messages : {
 			goods_id : {
-				required : '<i class="icon icon-exclamation-sign"></i>'+no_goods_id,
-				min : '<i class="icon icon-exclamation-sign"></i>'+no_goods_id
+				required : '<i class="icon icon-exclamation-sign"></i>'+no_goods_id
 			},
 			exchange_integral : {
 				required : '<i class="icon icon-exclamation-sign"></i>'+invalid_exchange_integral,

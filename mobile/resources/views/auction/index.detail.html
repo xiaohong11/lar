@@ -17,16 +17,12 @@
 					<span class="goods-num" id="goods-num">
 						<span id="g-active-num"></span>/<span id="g-all-num"></span>
 					</span>
-					<div class="swiper-wrapper my-gallery-box" data-pswp-uid="10">
-						  {foreach $pictures as $li}
-						<figure class="swiper-slide tb-lr-center">
-							<div class="img-box">
-							<a href="{$li.img_url}" data-size="640x640">
-								<img src="{$li.img_url}" />
-							</a>
-						</div>
-						</figure>
-						{/foreach}
+					<div class="swiper-wrapper">
+                        {foreach $pictures as $li}
+                        <li class="swiper-slide tb-lr-center">
+                            <img src="{$li.img_url}" />
+                        </li>
+                        {/foreach}
 					</div>
 					<!-- Add Pagination -->
 					<div class="swiper-pagination"></div>
@@ -39,8 +35,6 @@
 				<section class="goods-price padding-all b-color-f">
                     <p class="p-price"><span class="t-first">{$auction.formated_current_price}</span></p>
                     <p class="p-market">一口价 <del>{$auction.formated_end_price}</del></p>
-                    <p class=" dis-box g-p-tthree m-top06">
-                    <p class="p-market">保证金 {$auction.formated_deposit}</p>
 					<p class=" dis-box g-p-tthree m-top06">
                     <span class="box-flex text-left">加价幅度 {$auction.formated_amplitude}</span>
                     <span class="box-flex text-right">拍送机构  {$auction_goods.rz_shopName}</span>
@@ -139,7 +133,7 @@
                     {/foreach}
                     <a href="{url('auction_log', array('id'=>$auction['act_id']))}">
 						<div class=" padding-all ect-button-more dis-box">
-							<span class="box-flex btn-default br-5 min-btn">查看更多</span>
+							<span class="box-flex btn-default-new br-5 min-btn">查看更多</span>
 						</div>
 					</a>
 				</section>
@@ -243,7 +237,7 @@
                  {/if}
                   <a class="filter-btn-shop heart" href="{$auction_goods.store_url}">       
 	            		<i class="dianpu ts-2"></i><em>店铺</em></a>
-                  <a class="filter-btn-flow  heart j-heart {if $goods_collect}active{/if}" onclick="collect({$auction.goods_id})" id="ECS_COLLECT">
+                  <a class="filter-btn-flow  heart j-heart {if $goods_collect}active{/if}" onclick="collect({$goods.goods_id})" id="ECS_COLLECT">
                 <i class="shoucang ts-2"></i>
                 <em>收藏</em>
            	  </a>  
@@ -273,10 +267,7 @@
 		        </a> 
 		    </li>  
 		    {include file="float_nav_footer"}
-		    {include file="image"}
 			<script>
-			//相册
-    		initPhotoSwipeFromDOM('.my-gallery-box');
 			var tabsSwiper = new Swiper('#j-tab-con', {
 						speed: 100,
 						noSwiping: true,
@@ -300,7 +291,6 @@
 				$(".product-sequence a").click(function (){
 					$(this).addClass("active").siblings().removeClass("active");
 				})
-				
 				/*展开全部内容*/
 				$(document).ready(function() {
 					$(".but-mu").click(function() {

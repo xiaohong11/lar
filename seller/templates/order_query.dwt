@@ -242,6 +242,7 @@
 <script type="text/javascript" src="js/jquery.purebox.js"></script>
 <script type="text/javascript">
     $.levelLink();
+	region.isAdmin = true;
 	
 	{if $priv_ru eq 1}
 	function get_store_search(val){

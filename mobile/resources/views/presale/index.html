@@ -2,23 +2,25 @@
 		<div class="con mb-7">
 			<div class="index-banner swiper-container box position-rel banner-first">
 				<div class="swiper-wrapper">
-					{insert_ads(array('id'=>1050, 'num'=>6))}
+					{insert_ads(array('id'=>1000, 'num'=>6))}
 				</div>
 				<!-- 分页器 -->
-				<div class="swiper-pagination banner-first-pagination"></div>
+				<div class="swiper-pagination banner-first-pagination"></div>				
 				<!--search-->
 			</div>
-			<section class="index-activity m-top10">
-				<div class="dis-box m-top1px">
-					<div class="box-flex activity-list">
-						<!--广告位left-->
-						{insert_ads(array('id'=>1051, 'num'=>1))}
-					</div>
-					<div class="box-flex activity-list">
-						<!--广告位right-->
-						{insert_ads(array('id'=>1052, 'num'=>2))}
+
+			<section class="dis-box m-top06">
+				<div class="box-flex">
+					<div class="index-banner swiper-container box position-rel banner-second">
+						<div class="swiper-wrapper">
+							{insert_ads(array('id'=>1001, 'num'=>6))}
+						</div>
+						<!-- 分页器 -->
+						<div class="swiper-pagination banner-second-pagination"></div>
+						<!--search-->
 					</div>
 				</div>
+				<div class="presell-right"><span>{insert_ads(array('id'=>1002, 'num'=>1))}</span></div>
 			</section>
 			{foreach $pre_cat_goods as $cat_goods}
 			{if $cat_goods.count_goods != 0}
@@ -58,12 +60,12 @@
 						</ul>
 					</li>
 					<li class="box-flex"><a href="{$pre_new_url}" class="onelist-hidden">新品发布</a></li>
-
+					
 				</ul>
 			</div>
 		</div>
 		    <!--快捷导航-->
-    {include file="float_nav"}
+    {include file="float_nav"} 
     {include file="float_nav_footer"}
 			<script type="text/javascript ">
 				$(function($) {

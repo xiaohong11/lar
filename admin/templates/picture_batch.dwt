@@ -4,14 +4,14 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.goods_alt} - {$ur_here}</div>
+    	<div class="title">商品 - {$ur_here}</div>
         <div class="content">
             {include file ='library/batch_tab.lbi'}
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content.batch.0}</li>
-                    <li>{$lang.operation_prompt_content.batch.1}</li>
+                    <li>根据商品分类选择商品进行图片处理。</li>
+                    <li>勾选处理图片的方式。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -24,7 +24,7 @@
 								<div class="search_select">
 									<div class="categorySelect">
 										<div class="selection">
-											<input type="text" name="category_name" id="category_name" class="text w250 valid" value="{$lang.select_cat}" autocomplete="off" readonly data-filter="cat_name" />
+											<input type="text" name="category_name" id="category_name" class="text w250 valid" value="请选择分类" autocomplete="off" readonly data-filter="cat_name" />
 											<input type="hidden" name="category_id" id="category_id" value="0" data-filter="cat_id" />
 										</div>
 										<div class="select-container" style="display:none;">
@@ -35,7 +35,7 @@
 								<div class="search_select">
 									<div class="brandSelect">
 										<div class="selection">
-											<input type="text" name="brand_name" id="brand_name" class="text w120 valid" {$lang.select_barnd} autocomplete="off" readonly data-filter="brand_name" />
+											<input type="text" name="brand_name" id="brand_name" class="text w120 valid" value="请选择品牌" autocomplete="off" readonly data-filter="brand_name" />
 											<input type="hidden" name="brand_id" id="brand_id" value="0" data-filter="brand_id" />
 										</div>
 										<div class="brand-select-container" style="display:none;">
@@ -43,62 +43,63 @@
 										</div>
 									</div>                            
 								</div>
-								<input type="text" name="keyword" class="text w150" value="" placeholder={$lang.input_keywords} data-filter="keyword" autocomplete="off" />
-								<a href="javascript:void(0);" class="btn btn30" ectype="search"><i class="icon icon-search"></i>{$lang.search_word}</a>
+								<input type="text" name="keyword" class="text w150" value="" placeholder="请输入关键字" data-filter="keyword" autocomplete="off" />
+								<a href="javascript:void(0);" class="btn btn30" ectype="search"><i class="icon icon-search"></i>搜索</a>
 							</div>
 							<!--通用部分 end-->
                             <div class="move_div">
                                 <div class="move_all">
-                                    <h4>{$lang.all_goods}</h4>
+                                    <h4>所有商品</h4>
                                     <div class="move_info">
                                         <div class="move_list">
 											{include file="library/move_left.lbi"}
                                         </div>
                                     </div>
                                     <div class="move_handle">
-										<a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">{$lang.check_all}</a>
+										<a href="javascript:void(0);" class="btn btn25 moveAll" ectype="moveAll">全选</a>
                                     	<div class="checkbox_items mt20">
                                         	<div class="checkbox_item">
                                             	<input type="checkbox" name="do_icon" id="do_icon" class="ui-checkbox" checked  value="1"/>
-                                                <label for="do_icon" class="ui-label">{$lang.do_icon}</label>
+                                                <label for="do_icon" class="ui-label">处理商品图片</label>
                                             </div>
                                             <div class="checkbox_item">
                                             	<input type="checkbox" name="do_album" id="do_album" class="ui-checkbox" checked value="1"/>
-                                                <label for="do_album" class="ui-label">{$lang.do_album}</label>
+                                                <label for="do_album" class="ui-label">处理商品相册	</label>
                                             </div>
                                             <div class="checkbox_item">
                                             	<input type="checkbox" name="process_thumb" id="process_thumb" class="ui-checkbox" checked value="1"/>
-                                                <label for="process_thumb" class="ui-label">{$lang.thumb}</label>
+                                                <label for="process_thumb" class="ui-label">重新生成缩略图</label>
                                             </div>
                                             <div class="checkbox_item">
                                             	<input type="checkbox" name="process_watermark" id="process_watermark" class="ui-checkbox" checked value="1"/>
-                                                <label for="process_watermark" class="ui-label">{$lang.watermark}</label>
+                                                <label for="process_watermark" class="ui-label">重新生成商品详情图</label>
                                             </div>
                                         </div>
                                         <div class="checkbox_items">
                                         	<div class="checkbox_item">
                                             	<input type="radio" name="change_link" id="yes_change" class="ui-radio" value="1"/>
-                                                <label for="yes_change" class="ui-radio-label">{$lang.yes_change}</label>
+                                                <label for="yes_change" class="ui-radio-label">新生成图片使用新名称，并删除旧图片</label>
                                             </div>
                                             <div class="checkbox_item">
                                             	<input type="radio" name="change_link" id="no_change" class="ui-radio" checked value="0"/>
-                                                <label for="no_change" class="ui-radio-label">{$lang.no_change}</label>
+                                                <label for="no_change" class="ui-radio-label">新生成图片覆盖旧图片</label>
                                             </div>
                                         </div>
                                         <div class="checkbox_items">
                                         	<div class="checkbox_item">
                                             	<input type="radio" name="silent" id="silent" class="ui-radio" checked value="1"/>
-                                                <label for="silent" class="ui-radio-label">{$lang.silent}</label>
+                                                <label for="silent" class="ui-radio-label">出错时忽略错误,继续执行程序</label>
                                             </div>
                                             <div class="checkbox_item">
                                             	<input type="radio" name="silent" id="no_silent" class="ui-radio" value="0"/>
-                                                <label for="no_silent" class="ui-radio-label">{$lang.no_silent}</label>
+                                                <label for="no_silent" class="ui-radio-label">出错时立即提示，并中止程序</label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="batch_btn">
 									<input type="submit" class="btn btn35 red_btn" value="{$lang.button_submit}" />
+                                	<!--<a href="javascript:void(0);" class="btn btn35 red_btn">确定</a>-->
                                 </div>
                             </div>							
 							<!--直接引用 start-->
@@ -122,7 +123,7 @@
             </div>
 		</div>
 	</div>
-	{include file ='library/pagefooter.lbi'}
+ {include file ='library/pagefooter.lbi'}
 	<script type="text/javascript">
 	<!--
 	{literal}
@@ -170,7 +171,7 @@
 		var goods_div = document.createElement("div");
 		goods_div.className = 'goods_item'
 		goods_div.id = 'goods_' + goods_id;
-		goods_div.innerHTML = '<p class="goods_item_p"><span>' + goods_name + '</span><img alt="{$lang.drop}" onclick="del_search_goods(\'' + 'goods_' + goods_id + '\');" src="images/no.gif"/>'+'<input type="hidden" name="multi_goods_id[]" value="' + goods_id + '"></p>';
+		goods_div.innerHTML = '<p class="goods_item_p"><span>' + goods_name + '</span><img alt="删除" onclick="del_search_goods(\'' + 'goods_' + goods_id + '\');" src="images/no.gif"/>'+'<input type="hidden" name="multi_goods_id[]" value="' + goods_id + '"></p>';
 		document.getElementById('goods_list').appendChild(goods_div);
 	}
 	function del_search_goods(gid)

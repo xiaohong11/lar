@@ -4,20 +4,20 @@
 <head>{include file ='library/admin_html_head.lbi'}</head>
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="bonus.php?act=list" class="s-back">{$lang.back}</a>{$lang.promotion} - {$ur_here}</div>
+    	<div class="title"><a href="bonus.php?act=list" class="s-back">{$lang.back}</a>促销 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content.view.0}</li>
-                    <li>{$lang.operation_prompt_content.view.1}</li>
+                    <li>如果红包类型是线下发放的红包，则查看的是发放红包的个数列表，展示生成所有红包的序列号和密码。</li>
+                    <li>除此红包类型查看的是红包发放的情况，如发放的会员的使用情况，可进行发送邮件或删除等操作。</li>
                 </ul>
             </div>
             <div class="flexilist">
 				<div class="common-head">
 			        <div class="refresh ml0">
-                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    	<div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>
 				</div>
                 <div class="common-content">
@@ -47,8 +47,8 @@
 							{foreach from=$bonus_list item=bonus}
 								<tr>
                                 <td class="sign"><div class="tDiv">
-									<input type="checkbox" name="checkboxes[]" value="{$bonus.bonus_id}" class="checkbox" id="checkbox_{$bonus.bonus_id}" />
-									<label for="checkbox_{$bonus.bonus_id}" class="checkbox_stars"></label>
+									<input type="checkbox" name="checkboxes[]" value="{$bonus.bonus_id}" class="checkbox" id="checkbox_{$list.ad_id}" />
+									<label for="checkbox_{$list.ad_id}" class="checkbox_stars"></label>
 								</div></td>
 								<td><div class="tDiv">{$bonus.bonus_id}</div></td>
 								{if $show_bonus_sn}
@@ -64,7 +64,7 @@
 								{/if}
 								<td align="center"  class="handle">
 									<div class="tDiv">
-										<a href="javascript:;" onclick="listTable.remove({$bonus.bonus_id}, '{$lang.drop_confirm}', 'remove_bonus')" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+										<a href="javascript:;" onclick="listTable.remove({$bonus.bonus_id}, '{$lang.drop_confirm}', 'remove_bonus')" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>
 										{if $show_mail and $bonus.order_id eq 0 and $bonus.email}<a href="bonus.php?act=send_mail&bonus_id={$bonus.bonus_id}" class="btn_region"><i class="icon icon-screenshot"></i>{$lang.send_mail}</a>{/if}
 									</div>
 								</td>
@@ -97,18 +97,18 @@
             </div>
         </div>
     </div>
-	<script type="text/javascript">
+<script type="text/javascript">
 	//列表导航栏设置下路选项
 	$(".ps-container").perfectScrollbar();
-            
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
-	listTable.query = "query_bonus";
-	
-	{foreach from=$filter item=item key=key}
-	listTable.filter.{$key} = '{$item}';
-	{/foreach}
-    </script>
+		
+  listTable.recordCount = '{$record_count}';
+  listTable.pageCount = '{$page_count}';
+  listTable.query = "query_bonus";
+
+  {foreach from=$filter item=item key=key}
+  listTable.filter.{$key} = '{$item}';
+  {/foreach}
+</script>
 </body>
 </html>
 {/if}

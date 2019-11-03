@@ -5,13 +5,13 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="gift_gard.php?act=list" class="s-back">{$lang.back}</a>{$lang.promotion} - {$ur_here}</div>
+    	<div class="title"><a href="gift_gard.php?act=list" class="s-back">{$lang.back}</a>促销 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.gift_list.0}</li>
-                    <li>{$lang.operation_prompt_content.gift_list.1}</li>
+                	<li>不同类型下的礼品卡列表。</li>
+                    <li>可勾选编号对礼品卡进行配置商品，可添加、删除和导出礼品卡。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -22,12 +22,9 @@
                         <a href="{$action_link.href}"><div class="fbutton"><div class="reply" title="{$action_link.text}"><span><i class="icon icon-reply"></i>{$action_link.text}</span></div></div></a>
                     </div>
                     <div class="search">
-                    	<form action="javascript:;" name="searchForm" onSubmit="searchGoodsname(this);">
                     	<div class="input">
-                        	<input type="text" name="search_text" class="text nofocus" placeholder="{$lang.act_name}" autocomplete="off" />
-                            <input type="submit" class="btn" name="secrch_btn" ectype="secrch_btn" value="" />
+                        	<input type="text" name="search_text" class="text nofocus" placeholder="活动名称" autocomplete="off" /><button class="btn" name="secrch_btn"></button>
                         </div>
-                        </form>
                     </div>
                 </div>
                 <div class="common-content">
@@ -61,7 +58,7 @@
                                     <td><div class="tDiv">{if $bonus.config_goods_id}{$lang.yes_goods}{else}{$lang.not_goods}{/if}</div></td>   
                                     <td class="handle">
 										<div class="tDiv a2">
-											<a href="javascript:;" onclick="listTable.remove({$bonus.gift_gard_id}, '{$lang.drop_confirm}', 'remove_bonus')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>									
+											<a href="javascript:;" onclick="listTable.remove({$bonus.gift_gard_id}, '{$lang.drop_confirm}', 'remove_bonus')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>									
 											<!--{if $show_mail and $bonus.order_id eq 0 and $bonus.email}<a href="gift_.php?act=send_mail&bonus_id={$bonus.gift_gard_id}" class="btn_inst"><i class="icon icon-envelope"></i>{$lang.send_mail}</a>{/if}-->
 										</div>
 									</td>
@@ -77,7 +74,7 @@
                                             <div class="tfoot_btninfo">
                                                 <div class="shenhe">
                                                     <input type="submit" name="drop" id="btnSubmit" value="{$lang.drop}" class="btn btn_disabled" disabled="true" ectype="btnSubmit" />
-                                                    <input type="submit" name="configure_goods" id="btnSubmit1" value="{$lang.gift_from_goods}" style="margin-left:10px;" class="btn btn_disabled" disabled="true" ectype="btnSubmit"/>
+                                                    <input type="submit" name="configure_goods" id="btnSubmit1" value="配置商品" style="margin-left:10px;" class="btn btn_disabled" disabled="true" ectype="btnSubmit"/>
                                                 </div>										
                                             </div>
                                             <div class="list-page">
@@ -99,8 +96,8 @@
 </body>
 <script type="text/javascript">
 	//分页传值
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
+	listTable.recordCount = '{$record_count}';
+	listTable.pageCount = '{$page_count}';
 	listTable.query = 'query_bonus';
 
 	{foreach from=$filter item=item key=key}

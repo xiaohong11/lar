@@ -137,8 +137,8 @@
     </div>
 </div>
 {include file ='library/seller_footer.lbi'}
-<script type="text/javascript" src="../js/jquery.picTip.js"></script>
-<script type="text/javascript">
+<script type="text/javascript" src="js/jquery.picTip.js"></script>
+<script>
 $(function(){
 	$('.nyroModal').nyroModal();
 	

@@ -9,7 +9,7 @@
         	<div class="explanation" id="explanation">
             	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content_common}</li>
+                	<li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
                     <li>请设置合适的广告位名称和图片尺寸。</li>
                     <li>步骤：添加广告位-添加广告信息-设置模板，每一步都不用返回，直接按提示一步步进行。</li>
                     <li>手机端广告位不限宽度与高度</li>
@@ -48,16 +48,6 @@
                                             <option value="right"{if $posit_arr.tc_type == 'right'}selected{/if}>右边</option>
                                             <option value="left" {if $posit_arr.tc_type == 'left'}selected{/if}>左边</option>
                                             <option value="bottom"{if $posit_arr.tc_type == 'bottom'}selected{/if}>底部</option>
-                                        </select>
-                                        <div class="form_prompt"></div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="label">广告位所属：</div>
-                                    <div class="label_value">
-                                        <select name="ad_type" class="text">
-                                            <option value="0">请选择所属类型</option>
-                                            <option value="wxapp"{if $posit_arr.ad_type == 'wxapp'}selected{/if}>小程序</option>
                                         </select>
                                         <div class="form_prompt"></div>
                                     </div>
@@ -127,14 +117,14 @@
     <script type="text/javascript">
 		//列表导航栏设置下路选项
     	$(".ps-container").perfectScrollbar();
-
+  
 		$(function(){
 			$("#submitBtn").click(function(){
 				if($("#posit_arr_form").valid()){
 					$("#posit_arr_form").submit();
 				}
 			});
-
+		
 			$('#posit_arr_form').validate({
 					errorPlacement: function(error, element){
 						var error_div = element.parents('div.label_value').find('div.form_prompt');
@@ -183,6 +173,6 @@
 					}
 			});
 		});
-    </script>
+    </script>     
 </body>
 </html>

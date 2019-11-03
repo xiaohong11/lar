@@ -13,41 +13,21 @@
     <div class="td thd1">
         <div class="img"><img src="{$goods.goods_thumb}" width="50" height="50" /></div>
         <div class="name">
-			{if $goods.oi_extension_code eq "group_buy"}
-			<a href="../group_buy.php?act=view&id={$goods.extension_id}" target="_blank">
-			{elseif $goods.oi_extension_code eq "snatch"}
-			<a href="../snatch.php?id={$goods.extension_id}" target="_blank">
-			{elseif $goods.oi_extension_code eq "seckill"}
-			<a href="../seckill.php?id={$goods.extension_id}&act=view" target="_blank">
-			{elseif $goods.oi_extension_code eq "auction"}
-			<a href="../auction.php?id={$goods.extension_id}&act=view" target="_blank">	
-			{elseif $goods.oi_extension_code eq "exchange_goods"}
-			<a href="../exchange.php?id={$goods.extension_id}&act=view" target="_blank">
-			{elseif $goods.oi_extension_code eq "presale"}
-			<a href="../presale.php?id={$goods.extension_id}&act=view" target="_blank">
-			{elseif $goods.o_extension_code eq "package_buy"}
-			<a href="../package.php" target="_blank">
-			{else}
-                {if $goods_type eq 'wholesale'}
-                <a href="../wholesale_goods.php?id={$goods.act_id}" target="_blank">
-                {else}
-                <a href="../goods.php?id={$goods.goods_id}" target="_blank">
+            <a href="../goods.php?id={$goods.goods_id}" target="_blank">
+                {$goods.goods_name}
+                {if $goods.brand_name}<span class="org">[ {$goods.brand_name} ]</span>{/if}
+				{if $goods.trade_url}<a href="{$goods.trade_url}" target="_blank"><span class="org">[{$lang.trade_snapshot}]</span></a>{/if}
+                {if $goods.is_gift}
+                    <span class="red">
+                        {if $goods.goods_price > 0}
+                            {$lang.remark_favourable}
+                        {else}
+                            {$lang.remark_gift}
+                        {/if}
+                    </span>
                 {/if}
-			{/if}
-            {$goods.goods_name}
-            {if $goods.brand_name}<span class="org">[ {$goods.brand_name} ]</span>{/if}
-            {if $goods.is_gift}
-            <span class="red">
-                {if $goods.goods_price > 0}
-                    {$lang.remark_favourable}
-                {else}
-                    {$lang.remark_gift}
-                {/if}
-            </span>
-            {/if}
-            {if $goods.parent_id > 0}<span class="red">{$lang.remark_fittings}</span>{/if}
+                {if $goods.parent_id > 0}<span class="red">{$lang.remark_fittings}</span>{/if}
             </a>
-            {if $goods.trade_url}<a href="{$goods.trade_url}" target="_blank"><span class="org">[{$lang.trade_snapshot}]</span></a>{/if}
         </div>
     </div>
     <div class="td thd2">{$goods.goods_sn}</div>

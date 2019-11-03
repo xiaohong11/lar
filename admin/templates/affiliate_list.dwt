@@ -5,10 +5,10 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.08_members} - {$ur_here}</div>
+    	<div class="title">会员 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                 	<li>显示推荐会员信息。</li>
                 </ul>
@@ -47,12 +47,12 @@
 								<td align="center"><div class="tDiv">{$user.reg_time}</div></td>
 								<td align="center" class="handle">
 									<div class='tDiv a2'>
-									  <a href="users.php?act=edit&id={$user.user_id}" title="{$lang.edit}" class="btn_edit"><i class="icon icon-edit"></i>{$lang.edit}</a>
+									  <a href="users.php?act=edit&id={$user.user_id}" title="{$lang.edit}"><i class="icon icon-edit"></i>{$lang.edit}</a>
 									  <a href="users.php?act=address_list&id={$user.user_id}" class="btn_see"><i class="sc_icon sc_icon_see"></i>{$lang.address_list}</a>
 									  <a href="order.php?act=list&user_id={$user.user_id}" class="btn_see"><i class="sc_icon sc_icon_see"></i>{$lang.view_order}</a>
                                       <br/>
 									  <a href="account_log.php?act=list&user_id={$user.user_id}" class="btn_see"><i class="sc_icon sc_icon_see"></i>{$lang.view_deposit}</a>
-									  <a href="javascript:confirm_redirect('{$lang.remove_confirm}', 'users.php?act=remove&id={$user.user_id}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+									  <a href="javascript:confirm_redirect('{$lang.remove_confirm}', 'users.php?act=remove&id={$user.user_id}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>
 									</div>
 								</td>
 							  </tr>
@@ -67,7 +67,20 @@
             </div>
         </div>
     </div>
-	{include file ='library/pagefooter.lbi'}
+{include file ='library/pagefooter.lbi'}
+<script type="text/javascript" language="JavaScript">
+<!--
+{literal}
+onload = function()
+{
+    document.forms['searchForm'].elements['keyword'].focus();
+    // 开始检查订单
+    startCheckOrder();
+}
+
+{/literal}
+//-->
+</script> 
 </body>
 </html>
 {/if}

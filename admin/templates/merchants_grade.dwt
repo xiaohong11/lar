@@ -4,32 +4,32 @@
  
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.19_merchants_store} - {$ur_here}</div>
+    	<div class="title"><a href="merchants_users_list.php?act=list" class="s-back">{$lang.back}</a>店铺 - {$ur_here}</div>
         <div class="content">
         	{include file ='library/seller_comment_tab.lbi'}
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>使用说明：</h4><span id="explanationZoom" title="使用说明"></span></div>
                 <ul> 
-                	<li>{$lang.operation_prompt_content.grade.0}</li>
+                	<li>订单商品评分数量为0时，默认给5分</li>
                 </ul>
             </div>
             <div class="flexilist">
                 <div class="common-content">
                     <div class="mian-info">
 						<div class="list-div">
-						{$lang.current_modification_data}{$record_count|default:0}{$lang.tiao}
+						当前需要修改的数据有{$record_count|default:0}条
 						</div>
 						<div style=" width:100px; height:10px; clear:both; overflow:hidden;"></div>
 						<div class="list-div">
 						<table id="listTable">
 							<tr>
-                            	<th width="10%"><div class="tDiv">{$lang.record_id}<div></th>
-                            	<th width="10%"><div class="tDiv">{$lang.upload_grade.seller_id}</div></th>
-								<th width="10%"><div class="tDiv">{$lang.upload_grade.shop_name}</div></th>
-								<th width="15%"><div class="tDiv">{$lang.upload_grade.goods_desc_consistent}</div></th>
-								<th width="15%"><div class="tDiv">{$lang.upload_grade.service_attitude}</div></th>
-                                <th width="15%"><div class="tDiv">{$lang.upload_grade.logistics_delivery}</div></th>
-                                <th width="15%"><div class="tDiv">{$lang.upload_grade.comment_number}</div></th>
+                            	<th width="10%"><div class="tDiv">编号</div></th>
+                            	<th width="10%"><div class="tDiv">商家ID</div></th>
+								<th width="10%"><div class="tDiv">店铺名称</div></th>
+								<th width="15%"><div class="tDiv">商品描述相符(分)</div></th>
+								<th width="15%"><div class="tDiv">卖家服务态度(分)</div></th>
+                                <th width="15%"><div class="tDiv">物流发货速度(分)</div></th>
+                                <th width="15%"><div class="tDiv">订单商品评分数量(条)</div></th>
 							</tr>
 						</table>
 						</div>
@@ -84,9 +84,9 @@
             
             if(result.is_stop == 0){
 				$("#title_name").addClass("red");
-                $("#title_name").html(title_name_one_grade);
+                $("#title_name").html("已完成更新，请关闭该窗口！");
             }else{
-				$("#title_name").html(title_name_two_grade);
+				$("#title_name").html("正在生成商家评分中，请勿关闭该窗口！");
 			}
         }
     </script>

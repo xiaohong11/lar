@@ -11,18 +11,18 @@
         		{include file ='library/store_tab.lbi'}
             {/if}
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.stats.0}</li>
-                    <li>{$lang.operation_prompt_content.stats.1}</li>
-                    <li>{$lang.operation_prompt_content.stats.2}</li>
+                	<li>门店订单相关信息管理。</li>
+                    <li>可对门店订单进行确认、打印订单等操作。</li>
+                    <li>门店订单可进行订单查询和合并订单操作。</li>
                 </ul>
             </div>
             <div class="flexilist">
             	<div class="common-head">
                     <div class="refresh">
-                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    	<div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>
 				</div>
                 <div class="common-content">
@@ -30,7 +30,7 @@
 					<div class="mian-info">
 						<div class="switch_info">
 							<div class="item">
-								<div class="label">{$lang.select_date}：</div>
+								<div class="label">选择日期：</div>
 								<div class="label_value">
 									<div class="text_time select_time" id="text_time1">
 										<input name="date_start_time" type="text" id="start_time" value="{$start_time}" class="text text_2" />
@@ -42,10 +42,10 @@
 								</div>
 							</div>
 							<div class="item">
-								<div class="label">{$lang.order_type}：</div>
+								<div class="label">订单类型：</div>
 								<div class="label_value">
 									<div id="" class="imitate_select select_w120">
-										<div class="cite">{$lang.please_select}</div>
+										<div class="cite">请选择</div>
 										<ul>
 											<li><a href="javascript:;" data-value="0" class="ftx-01">全部订单</a></li>
 											<li><a href="javascript:;" data-value="1" class="ftx-01">抢单订单</a></li>
@@ -55,7 +55,7 @@
 								</div>
 							</div>
 							<div class="item">
-								<div class="label">{$lang.order_state}：</div>
+								<div class="label">订单状态：</div>
 								<div class="label_value">
 									<div class="checkbox_items">
 										{foreach from=$os_list item=os key=key}
@@ -68,7 +68,7 @@
 								</div>
 							</div>
 							<div class="item">
-								<div class="label">{$lang.deliver_state}：</div>
+								<div class="label">发货状态：</div>
 								<div class="label_value">
 									<div class="checkbox_items">
 										{foreach from=$ss_list item=ss key=key}
@@ -80,15 +80,15 @@
 									</div>
 								</div>
 							</div>
-							<!-- <div class="item"> -->
-								<!-- <div class="label">店铺：</div> -->
-								<!-- <div class="label_value"> -->
-									<!-- {include file ='library/search_store.lbi'}	 -->
-								<!-- </div> -->
-							<!-- </div>	 -->
+							<div class="item">
+								<div class="label">店铺：</div>
+								<div class="label_value">
+									{include file ='library/search_store.lbi'}	
+								</div>
+							</div>	
                             
                             <div class="item">
-								<div class="label">{$lang.stores}：</div>
+								<div class="label">门店：</div>
 								<div class="label_value">
 									<input name="store_name" value="" type="text" class="text text_5" />
 								</div>
@@ -109,14 +109,14 @@
                     	<table cellpadding="0" cellspacing="0" border="0">
                         	<thead>
                             	<tr>
-                                	<th width="10%"><div class="tDiv">{$lang.goods_steps_name}</div></th>
-                                    <th width="34%"><div class="tDiv">{$lang.goods_name}</div></th>
-                                    <th width="10%"><div class="tDiv">{$lang.sku}</div></th>
-                                    <th width="10%"><div class="tDiv">{$lang.stores}</div></th>
-                                    <th width="8%"><div class="tDiv">{$lang.number}</div></th>
-                                    <th width="8%"><div class="tDiv">{$lang.price}</div></th>
-                                    <th width="8%"><div class="tDiv">{$lang.total}</div></th>
-                                    <th width="12%"><div class="tDiv">{$lang.sellout_date}</div></th>
+                                	<th width="10%"><div class="tDiv">商家名称</div></th>
+                                    <th width="34%"><div class="tDiv">商品名称</div></th>
+                                    <th width="10%"><div class="tDiv">货号</div></th>
+                                    <th width="10%"><div class="tDiv">门店</div></th>
+                                    <th width="8%"><div class="tDiv">数量</div></th>
+                                    <th width="8%"><div class="tDiv">单价</div></th>
+                                    <th width="8%"><div class="tDiv">总金额</div></th>
+                                    <th width="12%"><div class="tDiv">售出日期</div></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -152,10 +152,10 @@
             </div>
 		</div>
 	</div>
- 	{include file ='library/pagefooter.lbi'}
+ {include file ='library/pagefooter.lbi'}
 	<script type="text/javascript">
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
+	listTable.recordCount = '{$record_count}';
+	listTable.pageCount = '{$page_count}';
 	listTable.query = "order_stats_query";
 	{foreach from=$filter item=item key=key}
 	listTable.filter.{$key} = '{$item}';
@@ -175,57 +175,57 @@
 	});
 
 	function searchGeneral(){
-		var where_cat = '';
-		var where_order = '';
-		var where_shipping = '';
-		var order_arr = new Array();
-		var order_status = document.forms['searchForm'].elements['order_status[]'];
+					var where_cat = '';
+			var where_order = '';
+			var where_shipping = '';
+			var order_arr = new Array();
+			var order_status = document.forms['searchForm'].elements['order_status[]'];
 
-		var shipping_arr = new Array();
-		var shipping_status = document.forms['searchForm'].elements['shipping_status[]'];
+			var shipping_arr = new Array();
+			var shipping_status = document.forms['searchForm'].elements['shipping_status[]'];
 
-		for(var i=0; i<order_status.length;i++){
-			if(order_status[i].checked == true){
-				order_arr.push(order_status[i].value);
+			for(var i=0; i<order_status.length;i++){
+				if(order_status[i].checked == true){
+					order_arr.push(order_status[i].value);
+				}
 			}
-		}
 
-		listTable.filter['order_status'] = order_arr;
+			listTable.filter['order_status'] = order_arr;
 
-		for(var i=0; i<shipping_status.length;i++){
-			if(shipping_status[i].checked == true){
-				shipping_arr.push(shipping_status[i].value);
+			for(var i=0; i<shipping_status.length;i++){
+				if(shipping_status[i].checked == true){
+					shipping_arr.push(shipping_status[i].value);
+				}
 			}
-		}
 
-		listTable.filter['shipping_status'] = shipping_arr;
-		
-		<!-- listTable.filter['store_search'] = Utils.trim(document.forms['searchForm'].elements['store_search'].value); -->
-		<!-- listTable.filter['merchant_id'] = Utils.trim(document.forms['searchForm'].elements['merchant_id'].value); -->
-		<!-- listTable.filter['store_keyword'] = Utils.trim(document.forms['searchForm'].elements['store_keyword'].value); -->
-		<!-- listTable.filter['store_type'] = Utils.trim(document.forms['searchForm'].elements['store_type'].value); -->
-		
-		listTable.filter['order_type'] = document.forms['searchForm'].elements['order_type'].value;
-		listTable.filter['date_start_time'] = document.forms['searchForm'].elements['date_start_time'].value;
-		listTable.filter['date_end_time'] = document.forms['searchForm'].elements['date_end_time'].value;
-		listTable.filter['store_name'] = document.forms['searchForm'].elements['store_name'].value;
-		if(listTable.filter['order_status'] != ''){
-			where_order = '&order_status=' + listTable.filter['order_status'];
-		}
+			listTable.filter['shipping_status'] = shipping_arr;
+			
+			listTable.filter['store_search'] = Utils.trim(document.forms['searchForm'].elements['store_search'].value);
+            listTable.filter['merchant_id'] = Utils.trim(document.forms['searchForm'].elements['merchant_id'].value);
+            listTable.filter['store_keyword'] = Utils.trim(document.forms['searchForm'].elements['store_keyword'].value);
+            listTable.filter['store_type'] = Utils.trim(document.forms['searchForm'].elements['store_type'].value);
+			
+			listTable.filter['order_type'] = document.forms['searchForm'].elements['order_type'].value;
+			listTable.filter['date_start_time'] = document.forms['searchForm'].elements['date_start_time'].value;
+			listTable.filter['date_end_time'] = document.forms['searchForm'].elements['date_end_time'].value;
+			listTable.filter['store_name'] = document.forms['searchForm'].elements['store_name'].value;
+			if(listTable.filter['order_status'] != ''){
+				where_order = '&order_status=' + listTable.filter['order_status'];
+			}
 
-		if(listTable.filter['shipping_status'] != ''){
-					
-			where_shipping = '&shipping_status=' + listTable.filter['shipping_status'];
-		}
+			if(listTable.filter['shipping_status'] != ''){
+						
+				where_shipping = '&shipping_status=' + listTable.filter['shipping_status'];
+			}
 
-		if(listTable.filter['cat_name'] != ''){
-			where_cat = '&store_name=' + listTable.filter['store_name'];
-		}
-		//var a_action = document.getElementById('actionSpan');
-		//a_action.href = 'sale_general.php?act=download&date_start_time=' + listTable.filter['date_start_time'] + '&shop_name=' + listTable.filter['shop_name'] + '&date_end_time=' + listTable.filter['date_end_time'] + '&order_type=' + listTable.filter['order_type'] + where_order + where_shipping + where_cat;
+			if(listTable.filter['cat_name'] != ''){
+				where_cat = '&store_name=' + listTable.filter['store_name'];
+			}
+			//var a_action = document.getElementById('actionSpan');
+			//a_action.href = 'sale_general.php?act=download&date_start_time=' + listTable.filter['date_start_time'] + '&shop_name=' + listTable.filter['shop_name'] + '&date_end_time=' + listTable.filter['date_end_time'] + '&order_type=' + listTable.filter['order_type'] + where_order + where_shipping + where_cat;
 
-		listTable.filter['page'] = 1;
-		listTable.loadList();
+			listTable.filter['page'] = 1;
+			listTable.loadList();
 	}
 	
 	//时间选择

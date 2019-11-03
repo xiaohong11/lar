@@ -49,15 +49,15 @@
                     	<thead>
                         <tr>
                             <th width="6%">编号</th>
-                            <th width="15%" class="tl">优惠劵名称</th>
-                            <th width="8%">类型</th>
+                            <th width="20%" class="tl">优惠劵名称</th>
+                            <th width="10%">类型</th>
                             <th width="8%">使用门槛(元)</th>
                             <th width="8%">面值(元)</th>
                             <th width="8%">总发行数(张)</th>
                             <th width="8%">有效期</th>
                             <th width="8%">已过期</th>
                             <th width="10%">{$lang.adopt_status}</th>
-                            <th width="21%">{$lang.handle}</th>
+                            <th width="14%">{$lang.handle}</th>
 						</tr>
                         </thead>
                         <tbody>
@@ -65,7 +65,7 @@
                         <tr>
                             <td>{$vo.cou_id}</td>
                             <td class="tl">{$vo.cou_name}</td>
-                            <td {if $vo.type eq 5} title='{$vo.free_value_name}' data-toggle="tooltip"{/if}>{$vo.cou_type}</td>
+                            <td>{$vo.cou_type}</td>
                             <td>{$vo.cou_man}</td>
                             <td>{$vo.cou_money}</td>
                             <td>{$vo.cou_total}</td>
@@ -82,9 +82,6 @@
                                 {/if}
                             </td>
                             <td class="ecsc-table-handle tr">
-                                {if $vo.type eq 3 || $vo.type eq 4 || $vo.type eq 5}
-                                <span id="clip_container"><a href="javascript:void(0);" data-url="{$url}coupons.php?act=coupons_info&id={$vo.cou_id}" class="btn-green" id="clip_button" ectype="clip_button"><i class="icon icon-copy"></i><p>{$lang.copy_url}</p></a></span>
-                                {/if}
                             	<span><a href="coupons.php?act=coupons_list&cou_id={$vo.cou_id}" title="{$lang.view}" class="btn-orange"><i class="icon sc_icon_see"></i><p>{$lang.view}</p></a></span>
                                 <span><a href="coupons.php?act=edit&cou_id={$vo.cou_id}" title="{$lang.edit}" class="btn-green"><i class="icon icon-edit"></i><p>{$lang.edit}</p></a></span>
                                 <span><a href="javascript:void(0);" onclick="coupons_del({$vo.cou_id})" title="{$lang.drop}" class="btn-red"><i class="icon icon-trash"></i><p>{$lang.drop}</p></a></span>
@@ -196,6 +193,7 @@
   {/literal}
 //-->
 
+/*  @author-bylu 优惠券删除 start  */
 function coupons_del(cou_id){
     if(confirm('确定删除吗?'))
         $.get('coupons.php?act=remove_coupons', { cou_id:cou_id }, function (data) { if(data=='ok')location.href=location.href;else alert('删除失败!') });
@@ -209,6 +207,10 @@ $(function(){
         $.get('coupons.php?act=change_order', { cou_id:cou_id,cou_order:cou_order }, function (data) { if(data=='ok')alert('修改成功') });
     })
 })
+
+
+/*  @author-bylu  end  */
+
 </script>
 </body>
 </html>

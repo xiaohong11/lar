@@ -1,0 +1,99 @@
+{include file="pageheader"}
+<div class="wrapper">
+	<div class="title"><a href="{url('shake', array('market_id' => $market_id))}" class="s-back">返回</a>{$lang['wechat_menu']} - 添加 / 编辑摇一摇广告</div>
+	<div class="content_tips">
+        <div class="tabs_info">
+            <ul>
+                <li class="curr"><a href="{url('index')}">现金红包</a></li>
+                <li><a href="{url('share_setting')}">设置分享内容</a></li>
+            </ul>
+        </div>
+		<div class="flexilist of">
+            <div class="common-content">
+            <form action="{url('shake_edit')}" method="post" class="form-horizontal form" id="form" enctype="multipart/form-data">
+                <div class="panel panel-default">
+                    <div class="panel-heading">添加 / 编辑摇一摇广告</div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">活动名称</label>
+                            <div class="col-xs-12 col-sm-2">
+                                <input type="text" class="form-control" value="{$info['act_name']}" readonly >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">广告图标</label>
+                            <div class="col-md-2">
+                                <div class="type-file-box">
+                                    <input type="button"  class="type-file-button">
+                                    <input type="file" class="type-file-file" name="icon" data-state="imgfile" hidefocus="true" >
+                                    <span class="show">
+                                        <a href="#inline_logo" class="nyroModal fancybox" title="预览">
+                                            <i class="fa fa-picture-o" ></i>
+                                        </a>
+                                    </span>
+                                    <input type="text" name="icon_path" class="type-file-text" value="{$info['icon']}" style="display:none">
+                                </div>
+                            </div>
+                            <div class="notic">logo图片建议尺寸：50×50px，支持格式：jpeg,png</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">广告内容</label>
+                            <div class="col-xs-12 col-sm-5">
+                                <input type="text" name="advertice[content]" class="form-control" value="{$info['content']}" >
+                            </div>
+                            <div class="notic">广告内容示例：很遗憾没有中奖，请再接再励！</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">广告链接</label>
+                            <div class="col-xs-12 col-sm-5">
+                                <input type="text" name="advertice[url]" class="form-control" value="{$info['url']}" placeholder="http://" >
+                            </div>
+                            <div class="notic">广告链接示例：可填写商城其他推广页地址，如商品详情页，提高站内转化率</div>
+                        </div>
+
+                        <div class="form-group info_btn">
+                            <div class="col-xs-12 col-sm-9 col-md-10 col-lg-10 col-sm-offset-3 col-md-offset-2 col-lg-offset-2">
+                                <input type="hidden" name="advertice[market_id]" value="{$info['market_id']}" />
+                                <input type="hidden" name="id" value="{$info['id']}" />
+                                <input type="submit" name="submit" class="button btn-primary" value="确认" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+		    </div>
+	    </div>
+	</div>
+</div>
+
+<!-- 图片预览 start -->
+<div class="panel panel-default" style="display: none;" id="inline_logo">
+  <div class="panel-body">
+     <img src="{$info['icon']}" class="img-responsive" />
+  </div>
+</div>
+<script type="text/javascript">
+    //file移动上去的js
+    $(".type-file-box").hover(function(){
+        $(this).addClass("hover");
+    },function(){
+        $(this).removeClass("hover");
+    });
+
+    $(function(){
+        $('#form').submit(function(){
+            if($('input[name="advertice[content]"]').val() == ''){
+                layer.msg('请填写广告内容.');
+                return false;
+            }
+
+            if($('input[name="advertice[url]"]').val() == ''){
+                layer.msg('请填写广告链接.');
+                return false;
+            }
+            return true;
+        });
+    });
+</script>
+{include file="pagefooter_copyright"}
+{include file="pagefooter"}

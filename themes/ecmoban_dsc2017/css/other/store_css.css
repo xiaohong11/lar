@@ -123,7 +123,7 @@ caption, th {text-align: left;}
 .store_nav_right ul li a:hover, .store_nav_right ul li a.nav_hover{ background:#cf5925; color:#fff;}
 
 /*店铺默认页 轮播*/
-.picScroll-left{ width:100%; position:relative; overflow:hidden; max-height:480px;}
+.picScroll-left{ width:100%; position:relative; overflow:hidden; height:480px;}
 .picScroll-left .bd ul{ overflow:hidden; zoom:1; }
 .picScroll-left .bd ul li{ float:left; _display:inline; overflow:hidden; text-align:center; width:100%; height:480px; float:left;}
 .picScroll-left .bd ul li a{ width:100%; height:480px; float:left;}
@@ -286,7 +286,7 @@ caption, th {text-align: left;}
 .checkbox_item .checkbox:checked + label{ background:url(../images/input_checked.png) 3px 6px no-repeat;}
 .btnSubmit{ width:60px; color:#fff; height:25px; background:#e3423a; border:0; text-align:center; margin-left:10px; cursor:pointer;}
 
-.filter{ width:100%; line-height:34px;}
+.filter{ width:100%; border-top:2px solid #ebebeb; line-height:34px;}
 .filter .tit{ border-bottom:1px solid #ebebeb; padding-left:15px; color:#6e6e6e;}
 .filter li{ border-bottom:1px solid #ebebeb; overflow:hidden;}
 .filter li:last-child{ border-bottom:0;}

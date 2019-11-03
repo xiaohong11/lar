@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 {include file ='library/seller_html_head.lbi'}
+{insert_scripts files='./sms/sms.js'}
 </head>
 
 <body>
@@ -17,6 +18,8 @@
                 <div class="explanation clear" id="explanation">
                     <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4></div>
                     <ul>
+                    	<li>店铺佣金设置基本信息</li>
+                        <li>备注：</li>
                         <li>1、按佣金结算周期生成账单进行结算，比如1个月，则账单是（2017-01-01至2017-01-31）</li>
                         <li>2、设置天数按10天，记账日期设定为2017-01-01，则出账时间为2017-01-11， 以此类推，下一个出账日期为2017-01-21</li>
                     </ul>

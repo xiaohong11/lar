@@ -4,15 +4,15 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$lang.seller} - {$ur_here}</div>
+    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>商家 - {$ur_here}</div>
         <div class="content">
 			{include file ='library/seller_manage_tab.lbi'}
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content.seller_shopinfo.0}</li>
-                    <li>{$lang.operation_prompt_content.seller_shopinfo.1}</li>
-                    <li>{$lang.operation_prompt_content_common}</li>
+                	<li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
+                    <li>请准确无误的设置店铺信息。</li>
+                    <li>其中部分店铺信息需要其他地方先配置，比如配送方式等。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -78,7 +78,7 @@
                                     </div>
                                 </div>								
                                 <div class="item">
-                                    <div class="label">{$lang.lab_seller_site}：</div>
+                                    <div class="label">店铺二级域名：</div>
                                     <div class="label_value">
 										<input type="text" size="40" value="{$shop_info.domain_name}" name="domain_name" class="text" autocomplete="off" />
                                     </div>
@@ -88,7 +88,7 @@
                                     <div class="label_value">
 										<div id="dlcountry" class="ui-dropdown smartdropdown alien">
                                             <input type="hidden" value="{$shop_info.country}" name="shop_country" id="selcountry">
-                                            <div class="txt">{$lang.country}</div>
+                                            <div class="txt">国家</div>
                                             <i class="down u-dropdown-icon"></i>
                                             <div class="options clearfix" style="max-height:300px;">
                                                 {foreach from=$countries item=list}
@@ -103,7 +103,7 @@
                                     <div class="label_value">
                                         <div id="dlProvinces" class="ui-dropdown smartdropdown alien">
                                             <input type="hidden" value="{$shop_info.province}" name="shop_province" id="selProvinces">
-                                            <div class="txt">{$lang.province_alt}</div>
+                                            <div class="txt">省/直辖市</div>
                                             <i class="down u-dropdown-icon"></i>
                                             <div class="options clearfix" style="max-height:300px;">
                                                 {foreach from=$provinces item=list}
@@ -118,7 +118,7 @@
                                     <div class="label_value">
                                         <div id="dlCity" class="ui-dropdown smartdropdown alien">
                                             <input type="hidden" value="{$shop_info.city}" name="shop_city" id="selCities">
-                                            <div class="txt">{$lang.city}</div>
+                                            <div class="txt">市</div>
                                             <i class="down u-dropdown-icon"></i>
                                             <div class="options clearfix" style="max-height:300px;">
                                                 {foreach from=$cities item=list}
@@ -133,7 +133,7 @@
                                     <div class="label_value">
                                         <div id="dlRegion" class="ui-dropdown smartdropdown alien">
                                             <input type="hidden" value="{$shop_info.district}" name="shop_district" id="selDistricts">
-                                            <div class="txt">{$lang.area_alt}</div>
+                                            <div class="txt">区/县</div>
                                             <i class="down u-dropdown-icon"></i>
                                             <div class="options clearfix" style="max-height:300px;">
                                                 {foreach from=$districts item=list}
@@ -168,9 +168,9 @@
                                     <div class="label">{$lang.03_shipping_list}：</div>
                                     <div class="label_value">
 										<div id="shipping_id_div" class="imitate_select select_w320">
-											<div class="cite">{$lang.please_select}</div>
+											<div class="cite">请选择</div>
 											<ul>
-												<li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.please_select}</a></li>
+												<li><a href="javascript:;" data-value="0" class="ftx-01">请选择</a></li>
 												{foreach from=$shipping_list item=list}
 												{if $ru_id == 0 || ($ru_id > 0 && $list.shipping_code != 'cac')}
 												<li><a href="javascript:;" data-value="{$list.shipping_id}" class="ftx-01">{$list.shipping_name}</a></li>
@@ -183,10 +183,9 @@
                                     </div>
                                 </div>
                                 <div class="item">
-                                    <div class="label">{$lang.customer_service_mobile}：</div>
+                                    <div class="label">客服手机号码：</div>
                                     <div class="label_value">
 										<input type="text" size="40" value="{$shop_info.mobile}" name="mobile" class="text" autocomplete="off" />
-                                        <div class="form_prompt">{$lang.mobile_prompt}</div>
                                     </div>
                                 </div>
                                 <div class="item">
@@ -213,7 +212,7 @@
 								{if $shop_information.is_IM eq 1 || $shop_information.is_dsc}
 								{if $shop_information.is_dsc}
                                 <div class="item">
-                                    <div class="label">{$lang.is_kf_im_switch}：</div>
+                                    <div class="label">是否开启IM在线客服：</div>
                                     <div class="label_value">
                                     	<div class="checkbox_items">
                                             <div class="checkbox_item">
@@ -224,54 +223,54 @@
                                                 <input type="radio" name="kf_im_switch" value="0" class="ui-radio" id="kf_im_switch0" {if $shop_info.kf_im_switch eq 0} checked="checked" {/if}>
                                                 <label class="ui-radio-label" for="kf_im_switch0">关闭</label>
                                             </div>
-                                            <div class="fn_notic">{$lang.is_kf_im_switch_prompt}</div>
+                                            <div class="fn_notic">开启后即可使用IM在线客服,否则只能使用默认的 (平台)</div>
                                         </div>
                                     </div>
                                 </div>
 								{/if}
                                 <div class="item">
-                                    <div class="label">{$lang.kf_touid}：</div>
+                                    <div class="label">在线客服账号：</div>
                                     <div class="label_value">
 										<input type="text" size="40" value="{$shop_info.kf_touid}" name="kf_touid" class="text text_1" autocomplete="off" />
-										<div class="notic">{$lang.kf_touid_prompt}</div>
+										<div class="notic">在<a target="_blank" href="http://my.open.taobao.com/app/app_list.htm"> 淘宝开放平台 </a>已开通云旺客服的账号。</div>
                                     </div>
                                 </div>
                                 <div class="item">
-                                    <div class="label">{$lang.kf_appkey}：</div>
+                                    <div class="label">在线客服appkey：</div>
                                     <div class="label_value">
 										<input type="text" size="40" value="{$shop_info.kf_appkey}" name="kf_appkey" class="text text_1" autocomplete="off" />
-										<div class="notic">{$lang.kf_appkey_prompt}</div>
+										<div class="notic">在淘宝开放平台创建一个应用(百川无线)即可获得appkey。</div>
                                     </div>
                                 </div>
                                 <div class="item">
-                                    <div class="label">{$lang.kf_secretkey}：</div>
+                                    <div class="label">在线客服secretkey：</div>
                                     <div class="label_value">
 										<input type="text" size="40" value="{$shop_info.kf_secretkey}" name="kf_secretkey" class="text text_1" autocomplete="off" />
-										<div class="notic">{$lang.kf_secretkey_prompt}</div>
+										<div class="notic">在淘宝开放平台创建一个应用(百川无线)即可获得secretkey。</div>
                                     </div>
                                 </div>
                                 <div class="item">
-                                    <div class="label">{$lang.kf_logo}：</div>
+                                    <div class="label">在线客服头像LOGO：</div>
                                     <div class="label_value">
 										<input type="text" size="40" value="{$shop_info.kf_logo}" name="kf_logo" class="text text_1" autocomplete="off" />
-										<div class="notic">{$lang.kf_logo_prompt}</div>
+										<div class="notic">直接黏贴图片网址(推荐40 x 40),不填即使用默认头像。</div>
                                     </div>
                                 </div>
                                 <div class="item">
-                                    <div class="label">{$lang.kf_welcomeMsg}：</div>
+                                    <div class="label">在线客服欢迎信息：</div>
                                     <div class="label_value">
 										<input type="text" size="40" value="{$shop_info.kf_welcomeMsg}" name="kf_welcomeMsg" class="text text_1" autocomplete="off" />
-										<div class="notic">{$lang.kf_welcomeMsg_prompt}</div>
+										<div class="notic">向用户发送的一条欢迎信息。</div>
                                     </div>
                                 </div>								
 								{/if}
 								<!-- 平台 IM end -->
 								<!-- 美洽客服 start -->
                                 <div class="item">
-                                    <div class="label">{$lang.meiqia}：</div>
+                                    <div class="label">美恰客服：</div>
                                     <div class="label_value">
 										<input type="text" size="40" value="{$shop_info.meiqia}" name="meiqia" class="text" autocomplete="off" />
-										<div class="notic">{$lang.meiqia_prompt}</div>
+										<div class="notic">此功能仅手机端（wap）使用</div>
                                     </div>
                                 </div>
 								<!-- 美洽客服 end -->
@@ -279,7 +278,6 @@
                                     <div class="label">{$lang.customer_service_tel}：</div>
                                     <div class="label_value">
 										<input type="text" size="40" value="{$shop_info.kf_tel}" name="kf_tel" class="text" autocomplete="off" />
-                                        <div class="notic">{$lang.kf_tel_prompt}</div>
                                     </div>
                                 </div>
                                 <div class="item">
@@ -301,7 +299,7 @@
                                 <div class="item">
                                     <div class="label">{$lang.seller_logo}：</div>
                                     <div class="label_value">
-										<input type="file" name="shop_logo" class="file mt5 mb5"/><label class="blue_label">{$lang.shop_logo_prompt}</label><br />
+										<input type="file" name="shop_logo" class="file mt5 mb5"/><label class="blue_label">(无限制*128像素)</label><br />
 										{if $shop_info.shop_logo}
 										<div class="seller_img"><img src="{$shop_info.shop_logo}" width="150" /></div>
 										{/if}
@@ -310,77 +308,59 @@
                                 <div class="item">
                                     <div class="label">{$lang.logo_sbt}：</div>
                                     <div class="label_value">
-										<input type="file" name="logo_thumb" class="file mt5 mb5"/><label class="blue_label">{$lang.logo_thumb_prompt}</label><br />
+										<input type="file" name="logo_thumb" class="file mt5 mb5"/><label class="blue_label">(80*80像素)</label><br />
 										{if $shop_info.logo_thumb}
-										<div class="seller_img"><img src="{$shop_info.logo_thumb}" width="120" height="120" /></div>
+										<div class="seller_img"><img src="{$shop_info.logo_thumb}" width="80" height="80" /></div>
 										{/if}
                                     </div>
                                 </div>
 								<div class="item">
                                     <div class="label">{$lang.shop_street_sbt}：</div>
                                     <div class="label_value">
-										<input type="file" name="street_thumb" class="file mt5 mb5"/><label class="blue_label">{$lang.street_thumb_prompt}</label><br />
+										<input type="file" name="street_thumb" class="file mt5 mb5"/><label class="blue_label">(388*187像素)</label><br />
 										{if $shop_info.street_thumb}
-										<div class="seller_img"><img src="{$shop_info.street_thumb}" width="128" height="62" /></div>
+										<div class="seller_img"><img src="../{$shop_info.street_thumb}" width="128" height="62" /></div>
 										{/if}
                                     </div>
                                 </div>
 								<div class="item">
                                     <div class="label">{$lang.shop_street_brand_sbt}：</div>
                                     <div class="label_value">
-										<input type="file" name="brand_thumb" class="file mt5 mb5"/><label class="blue_label">{$lang.brand_thumb_prompt}</label><br />
+										<input type="file" name="brand_thumb" class="file mt5 mb5"/><label class="blue_label">(180*60像素)</label><br />
 										{if $shop_info.brand_thumb}
-										<div class="seller_img"><img src="{$shop_info.brand_thumb}" width="180" height="60" /></div>
+										<div class="seller_img"><img src="../{$shop_info.brand_thumb}" width="180" height="60" /></div>
 										{/if}
                                     </div>
                                 </div>
 								<div class="item">
-                                    <div class="label">{$lang.qrcode_thumb}: </div>
+                                    <div class="label">二维码中间Logo: </div>
                                     <div class="label_value">
-										<input type="file" name="qrcode_thumb"/><label class="blue_label">{$lang.qrcode_thumb_prompt}</label><br />
+										<input type="file" name="qrcode_thumb"/><label class="blue_label">(80*80像素)</label><br />
 										{if $shop_info.qrcode_thumb}
 										<img src="{$shop_info.qrcode_thumb}" width="80" height="80" /> 
 										{/if}
                                     </div>
                                 </div>
+								<div class="item">
+                                    <div class="label">{$lang.shop_street_desc}：</div>
+                                    <div class="label_value">
+										<textarea name="street_desc" class="textarea">{$shop_info.street_desc}</textarea>
+                                    </div>
+                                </div>
 								{/if}
                                 <div class="item">
-                                    <div class="label">{$lang.js_appkey}：</div>
+                                    <div class="label">扫码appkey（极速数据）：</div>
                                     <div class="label_value">
 										<input type="text" size="40" value="{$shop_info.js_appkey}" name="js_appkey" class="text text_1" autocomplete="off" id="code_appkey" />
-										<div class="notic">{$lang.js_appkey_prompt}</div>
+										<div class="notic">在<a target="_blank" href="http://www.jisuapi.com/api/barcode2/"> 极速数据 </a>申请账号。</div>
                                     </div>
                                 </div>	
                                 <div class="item">
-                                    <div class="label">{$lang.js_appsecret}：</div>
+                                    <div class="label">扫码appsecret（极速数据）：</div>
                                     <div class="label_value">
 										<input type="text" size="40" value="{$shop_info.js_appsecret}" name="js_appsecret" class="text text_1" autocomplete="off" />
                                     </div>
-                                </div>
-								<!--快递鸟设置 start-->
-                                <div class="item">
-                                    <div class="label">{$lang.print_type}：</div>
-                                    <div class="label_value">
-                                        <div class="checkbox_items">
-                                            <div class="checkbox_item">
-                                                <input type="radio" class="ui-radio" name="print_type" id="print_type_0" value="0" {if $shop_info.print_type eq 0} checked="true" {/if}  />
-                                                <label for="print_type_0" class="ui-radio-label">{$lang.print_type_0}</label>
-                                            </div>
-                                            <div class="checkbox_item">
-                                                <input type="radio" class="ui-radio" name="print_type" id="print_type_1" value="1" {if $shop_info.print_type eq 1} checked="true" {/if}  />
-                                                <label for="print_type_1" class="ui-radio-label">{$lang.print_type_1}</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="label">{$lang.kdniao_printer}：</div>
-                                    <div class="label_value">
-										<input type="text" size="40" value="{$shop_info.kdniao_printer}" name="kdniao_printer" class="text text_1" autocomplete="off" />
-										<div class="notic">{$lang.kdniao_printer_prompt}</div>
-                                    </div>
                                 </div>								
-								<!--快递鸟设置 end-->									
                                 <div class="item">
                                     <div class="label">{$lang.shop_notice}：</div>
                                     <div class="label_value">
@@ -391,23 +371,22 @@
                                     <div class="label">{$lang.shop_street_desc}：</div>
                                     <div class="label_value">
 										<textarea name="street_desc" class="textarea">{$shop_info.street_desc}</textarea>
-                                        <div class="notic">{$lang.street_desc}</div>
                                     </div>
                                 </div>	
 								<div class="item">
 									<div class="label">{$lang.adopt_status}：</div>
 									<div class="label_value">
-										<div class="checkbox_items" ectype="general_audit_status">
+										<div class="checkbox_items">
 											<div class="checkbox_item"> 
-												<input name="review_status" type="radio" class="ui-radio" value="1" id="review_status_1" {if $shop_info.review_status eq 1 or !$shop_info.review_status}checked="checked"{/if} />
+												<input name="review_status" type="radio" class="ui-radio" value="1" id="review_status_1" {if $shop_info.review_status eq 1 or !$shop_info.review_status}checked="checked"{/if} onclick="get_review_status(this.value)" />
 												<label for="review_status_1" class="ui-radio-label">{$lang.not_audited}</label>
 											</div>
 											<div class="checkbox_item"> 
-												<input name="review_status" type="radio" class="ui-radio" value="2" id="review_status_2" {if $shop_info.review_status eq 2}checked="checked"{/if} />
+												<input name="review_status" type="radio" class="ui-radio" value="2" id="review_status_2" {if $shop_info.review_status eq 2}checked="checked"{/if} onclick="get_review_status(this.value)" />
 												<label for="review_status_2" class="ui-radio-label">{$lang.audited_not_adopt}</label>
 											</div>
 											<div class="checkbox_item"> 
-												<input name="review_status" type="radio" class="ui-radio" value="3" id="review_status_3" {if $shop_info.review_status eq 3}checked="checked"{/if} />
+												<input name="review_status" type="radio" class="ui-radio" value="3" id="review_status_3" {if $shop_info.review_status eq 3}checked="checked"{/if} onclick="get_review_status(this.value)" />
 												<label for="review_status_3" class="ui-radio-label">{$lang.audited_yes_adopt}</label>
 											</div>
 										</div>
@@ -422,12 +401,9 @@
                                 <div class="item">
                                     <div class="label">&nbsp;</div>
                                     <div class="label_value info_btn">
-                                        <input name="lngX" type="hidden" value="0" />
-                                        <input name="latY" type="hidden" value="0" />
 										<input type="hidden" name="ru_id" value="{$ru_id}"/>
 										<input type="hidden" name="data_op" value="{$data_op}"/>
-										<input type="submit" value="{$lang.adopt_edit}" class="button" id="submitBtn" />
-                                        <input name="templates_mode" type="hidden" value="1" />
+										<input type="submit" value="审核修改" class="button" id="submitBtn" />
                                     </div>
                                 </div>								
                             </div>
@@ -470,15 +446,13 @@
 			},
 			messages:{
 				shop_name : {
-					required : '<i class="icon icon-exclamation-sign"></i>'+shop_name_not_null
+					required : '<i class="icon icon-exclamation-sign"></i>店铺名称不能为空'
 				},
 				shipping_id:{
-					 min : '<i class="icon icon-exclamation-sign"></i>'+select_shipping
+					 min : '<i class="icon icon-exclamation-sign"></i>请选择配送方式'
 				}
 			}			
 		});
-                //加载获取地区坐标值
-	get_lngxlaty();
 	});
 	
 	<!--
@@ -577,9 +551,17 @@
 	//-->
 	</script>
 	<script type="text/javascript">
+	function get_review_status(val){
+		if(val == 2){
+			$("#review_content").show();
+		}else{
+			$("#review_content").hide();
+		}
+	}
 	
 	/* 点击弹出地图 获取坐标 by kong start*/
 	function get_coordinate(){
+		
 		var lngX;
 		var latY;
 		
@@ -589,11 +571,11 @@
 		var content = data.content;
 				 pb({
 				id: "getlnglat",
-				title: "{$lang.longitude_latitude_title}",
+				title: "获取经纬度",
 				width: 1050,
 				height:460,
 				content: content,
-				ok_title: "{$lang.button_submit_alt}",
+				ok_title: "确定",
 				drag: true,
 				foot: true,
 				cl_cBtn: false,
@@ -677,7 +659,7 @@
 		var mapObj = new AMap.Map('iCenter'); 
 		mapObj.plugin(["AMap.Geocoder"], function() {     //加载地理编码插件
 			MGeocoder = new AMap.Geocoder({
-				city:"{$lang.whole_country}", //城市，默认：“全国”
+				city:"全国", //城市，默认：“全国”
 				radius:500 //范围，默认：500
 			});
 			//返回地理编码结果

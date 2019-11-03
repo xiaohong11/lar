@@ -61,7 +61,6 @@
                                 	<div class="order-sku">
                                         <div class="item"><span>{$lang.order_sn}：</span><a href="order.php?act=info&order_id={$order.order_id}" id="order_{$okey}">{$order.order_sn}</a></div>
                                         <div class="item"><span>{$lang.order_time}：</span><span>{$order.short_order_time}</span></div>
-                                    	<div class="item"><div class="order_icon order_icon_wholesale" title="批发">批发</div></div>
                                     </div>
                                 </th>
                             </tr>

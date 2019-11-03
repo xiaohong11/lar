@@ -5,10 +5,8 @@
     
     <link href="css/style.css" rel="stylesheet" type="text/css">
     <link href="css/purebox.css" rel="stylesheet" type="text/css">
-    <link href="css/feijiao.css" rel="stylesheet" type="text/css">
     <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="../js/perfect-scrollbar/perfect-scrollbar.min.css" />
-    {insert_scripts files="../js/jquery-1.9.1.min.js,../js/jquery.json.js,../js/transport_jquery.js,../js/utils.js,listtable.js,common.js,jquery.validation.min.js,../js/jquery.form.js,../js/perfect-scrollbar/perfect-scrollbar.min.js,../js/lib_ecmobanFunc.js"}
+    {insert_scripts files="../js/jquery-1.9.1.min.js,../js/jquery.json.js,../js/transport_jquery.js,../js/utils.js,listtable.js,common.js,jquery.validation.min.js,../js/jquery.form.js"}
 	<!--[if lt IE 9]>
 		<script src="js/css3-mediaqueries.js"></script>
 	<![endif]-->
@@ -19,13 +17,7 @@
         <div class="logo_info">
             <div class="logo">
             	<a href="goods.php?act=list">
-                    <div class="img">
-                    {if $stores_logo}
-                    <img src="{$stores_logo}" />
-                    {else}
-                    <img src="images/store_logo.png" />
-                    {/if}
-                    </div>
+                    <div class="img"><img src="images/store_logo.png" /></div>
                     <div class="wz">门店管理</div>
                 </a>
             </div>

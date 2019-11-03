@@ -23,15 +23,17 @@
                     </div>
                 </div>
                 <form method="POST" action="gift_gard.php?act=batch&bonus_type={$smarty.get.bonus_type}" name="listForm">
+                <!-- start user_bonus list -->
                 <div class="list-div" id="listDiv">
                 {/if}
                 <table class="ecsc-default-table">
                     <thead>
                         <tr>
-                        <th width="8%"><div class="first_all"><input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox" id="all" class="ui-checkbox"><label for="all" class="ui-label">{$lang.record_id}</label></div></th>
-                        <th width="10%" class="tl">{$lang.gift_sn}</th>
-                        <th width="24%" class="tl">{$lang.gift_goods_name}</th>
-                        <th width="20%" class="tl">{$lang.address}</th>
+                        <th width="6%"><div class="first_all"><input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox" id="all" class="ui-checkbox"><label for="all" class="ui-label">{$lang.record_id}</label></div></th>
+                        <th width="13%">{$lang.gift_sn}</th>
+                        <th width="22%">{$lang.gift_goods_name}</th>
+                        <th width="10%">{$lang.consignee_name}</th>
+                        <th width="8%">{$lang.mobile}</th>
                         <th width="10%">{$lang.gift_user_name}</th>
                         <th width="8%">{$lang.confirm_ship}</th>
                         <th width="10%">{$lang.status}</th>
@@ -42,20 +44,14 @@
                     {foreach from=$bonus_list item=bonus}
                     <tr>
                       <td class="first_td_checkbox"><div class="first_all"><input value="{$bonus.gift_gard_id}" name="checkboxes[]" type="checkbox" id="checkbox_{$bonus.gift_gard_id}" class="ui-checkbox"><label for="checkbox_{$bonus.gift_gard_id}" class="ui-label">{$bonus.gift_gard_id}</label></div></td>
-                      <td class="tl">{$bonus.gift_sn}</td>
+                      <td>{$bonus.gift_sn}</td>
                       <td class="tl"><a target="_blank" href="../goods.php?id={$bonus.goods_id}">{$bonus.goods_name}</a></td>
-                      <td class="tl">
-                      	<p>{$bonus.address}</p>
-                      	<p>{$lang.consignee_name}：{$bonus.consignee_name}</p>
-                        <p>联系方式：{$bonus.mobile}</p>
-                      </td>
+                      <td>{$bonus.consignee_name}</td>
+                      <td>{$bonus.mobile}</td>
                       <td>{if $bonus.user_name}{$bonus.user_name}{else}匿名用户{/if}</td>
-                      <td><img src="images/{if $bonus.status eq 2 || $bonus.status eq 3}yes{else}no{/if}.png" /></td>
+                      <td><img src="images/{if $bonus.status eq 2 || $bonus.status eq 3}yes{else}no{/if}.png" onclick="listTable.remove({$bonus.gift_gard_id}, '{if $bonus.status eq 2}此订单已发货，您确定取消发货吗？{elseif $bonus.status eq 1}确定发货吗？{elseif $bonus.status eq 3}此订单已完成，不能修改发货状态{/if}', 'confirm_ship')" /></td>
                       <td>{if $bonus.status eq 1}已提货,未发货{elseif $bonus.status eq 2}已提货,已发货{elseif $bonus.status eq 3}已完成{else}未提货{/if}</td>
                       <td>
-                      	{if $bonus.status neq 2 && $bonus.status neq 3}
-                        <a href="javascript:;" class="btn_edit mr10"  onclick="listTable.remove({$bonus.gift_gard_id}, '{if $bonus.status eq 2}此订单已发货，您确定取消发货吗？{elseif $bonus.status eq 1}确定发货吗？{elseif $bonus.status eq 3}此订单已完成，不能修改发货状态{/if}', 'confirm_ship')">发货</a>
-                        {/if}
                         <a href="gift_gard.php?act=handle_log&id={$bonus.gift_gard_id}" class="blue">{$lang.handle_log}</a>
                       </td>
                     </tr>
@@ -74,6 +70,7 @@
 
                 {if $full_page}
             </div>
+            <!-- end user_bonus list -->
             </form>
             </div>
         </div>
@@ -81,6 +78,7 @@
 </div>
 {include file ='library/seller_footer.lbi'}
 <script type="text/javascript">
+<!--
   listTable.recordCount = {$record_count};
   listTable.pageCount = {$page_count};
   listTable.query = "query_take";
@@ -92,6 +90,7 @@
   {literal}
   onload = function()
   {
+    // 寮�妫�煡璁㈠崟
     startCheckOrder();
     document.forms['listForm'].reset();
   }
@@ -117,7 +116,47 @@
     }
   }
   {/if}
+  
+  function searchSnatch()
+  {
+    {if $priv_ru eq 1}
+    listTable.filter['store_search'] = Utils.trim(document.forms['searchForm'].elements['store_search'].value);
+    listTable.filter['merchant_id'] = Utils.trim(document.forms['searchForm'].elements['merchant_id'].value);
+    listTable.filter['store_keyword'] = Utils.trim(document.forms['searchForm'].elements['store_keyword'].value);
+    listTable.filter['store_type'] = Utils.trim(document.forms['searchForm'].elements['store_type'].value);
+    {/if}
+    
+    var keyword = Utils.trim(document.forms['searchForm'].elements['keyword'].value);
+    listTable.filter.keywords = keyword;
+    listTable.filter.page = 1;
+    listTable.loadList();
+  }
   {/literal}
+  
+  $(function(){
+    // 获取商品列表
+    $('i[ectype="GoodsList"]').on("click",function(){
+            if($(this).hasClass("icon-plus-sign")){
+                $(this).removeClass('icon-plus-sign').addClass('icon-minus-sign');
+                var parenttr = $(this).parents('tr');
+                parenttr.next().show()
+            }else{
+                $(this).removeClass('icon-minus-sign').addClass('icon-plus-sign');
+                $(this).parents('tr').next().hide();
+            }
+        }
+    );
+                
+    $('.tip').poshytip({
+        className: 'tip-yellowsimple',
+        showTimeout:300,
+        alignTo: 'target',
+        alignX: 'center',
+        alignY: 'top',
+        offsetY: 5,
+    });
+});
+//-->
 </script>
 </body>
 </html>

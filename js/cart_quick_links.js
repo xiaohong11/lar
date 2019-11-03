@@ -75,13 +75,8 @@ jQuery(function($){
 			var fn = quickDataFns[type];
 			
 			quickShell.css({width:320});
-                        var goods_id = $("input[name='goods_id']").val();
-                        var where = '';
-                        
-                        if(goods_id && goods_id != 'undefind'){
-                            where = "&goods_id=" + goods_id;
-                        }
-			Ajax.call('get_ajax_content.php?act=get_content', 'data_type=' + type + where, return_content, 'POST', 'JSON');
+			
+			Ajax.call('get_ajax_content.php?act=get_content', 'data_type=' + type, return_content, 'POST', 'JSON');
 			
 			function return_content(result)
 			{
@@ -89,7 +84,7 @@ jQuery(function($){
 				quickPop.html(ds.tmpl(popTmpl, fn));
 				fn.init.call(this, fn);
 				
-				tbplHeigth();
+				windowHeigth();
 			}
 		}
 		//doc.unbind('click.quick_links').one('click.quick_links', hideQuickPop);
@@ -204,6 +199,19 @@ jQuery(function($){
 		quickPanel.removeClass('quick_links_allow_gotop');
 	}
 	
+	function windowHeigth(){
+		var winHeight = view.height();
+		var chaHeight = $("*[ectype='tbpl-content']").data("height");
+		
+		$("*[ectype='tbpl-main']").css({"height":winHeight-38});
+		$("*[ectype='tbpl-content']").css({"height":winHeight-chaHeight});
+
+		view.resize(function(){
+			winHeight = $(this).height();
+			$("*[ectype='tbpl-main']").css({"height":winHeight-38});
+			$("*[ectype='tbpl-content']").css({"height":winHeight - chaHeight});
+		});
+	}
 	view.bind('scroll.go_top', resizeHandler).bind('resize.quick_links', scrollHandler);
 	quickLinkCollapsed && quickShell.addClass('quick_links_min');
 	resizeHandler();

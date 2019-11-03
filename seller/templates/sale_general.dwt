@@ -14,7 +14,7 @@
 				{include file ='library/seller_menu_tab.lbi'}
                 <div class="clear"></div>
                 <div class="order_stats">
-                    <div class="order_stats_search clearfix">
+                    <div class="order_stats_search">
                         <form action="javascript:searchGeneral()" name="searchForm">
                             <div class="screeItme">
                                 <strong class="fl lh mr10">选择日期：</strong>
@@ -34,31 +34,31 @@
                                         <li><a href="javascript:;" data-value="0" class="ftx-01">按发货时间</a></li>
                                         <li><a href="javascript:;" data-value="1" class="ftx-01">按下单时间</a></li>
                                     </ul>
-                                    <input name="time_type" type="hidden" value="1" autocomplete="off" />
+                                    <input name="time_type" type="hidden" value="" />
                                 </div>
                             </div>
                             <div class="screeItme mt10">
-                                <div class="bf100 fl order_status">
+                                <div class="bf100 fl">
                                     <strong class="fl lh mr10">订单状态：</strong>
                                     {foreach from=$os_list item=os key=key}
                                     <div class="checkbox_item fl lh mr10">
-                                        <input name="order_status[]" type="checkbox" value="{$key}" class="ui-checkbox" id="order_{$key}"  autocomplete="off" />
+                                        <input name="order_status[]" type="checkbox" value="{$key}" class="ui-checkbox" id="order_{$key}" />
                                         <label class="ui-label" for="order_{$key}">{$os}</label>
                                     </div>
                                     {/foreach}
                                 </div>
-                                <div class="bf100 fl mt5 shipping_status">
+                                <div class="bf100 fl mt5">
                                     <strong class="fl lh mr10">发货状态：</strong>
                                     {foreach from=$ss_list item=ss key=key}
                                     <div class="checkbox_item fl lh mr10">
-                                    <input name="shipping_status[]" type="checkbox" value="{$key}" class="ui-checkbox" id="shipping_{$key}"  autocomplete="off" />
+                                    <input name="shipping_status[]" type="checkbox" value="{$key}" class="ui-checkbox" id="shipping_{$key}" />
                                     <label class="ui-label" for="shipping_{$key}">{$ss}</label>
                                     </div>
                                     {/foreach}
                                 </div>
                                 <div class="bf100 fl mt5">
                                     <strong class="fl lh mr10">分类名称：</strong>
-                                    <input name="cat_name" value="" type="text" class="text text_2 mr10"  autocomplete="off" />
+                                    <input name="cat_name" value="" type="text" class="text text_2 mr10" />
                                     <input type="submit" name="query_by_date" value="{$lang.query}" class="sc-btn sc-blueBg-btn btn30" />
                                 </div>
                             </div>
@@ -74,11 +74,7 @@
                                 <th width="10%"><a href="javascript:listTable.sort('goods_number');">数量</a></th>
                                 <th width="10%">单价</th>
                                 <th width="10%">总金额</th>
-                                {if $filter.time_type eq 1}
-                                <th width="10%">下单日期</th>
-                                {else}
-                                <th width="10%">发货日期</th>
-                                {/if}
+                                <th width="10%">售出日期</th>
                             </tr>
                             {foreach from=$data_list item=list}
                             <tr align="center">
@@ -88,11 +84,7 @@
                                 <td align="center">{$list.goods_number}</td>
                                 <td align="center">{$list.goods_price}</td>
                                 <td align="center">{$list.total_fee}</td>
-                                {if $filter.time_type eq 1}
-                                	<td align="center">{$list.add_time}</td>
-                                {else}
-                                	<td align="center">{$list.shipping_time}</td>
-                                {/if}
+                                <td align="center">{$list.add_time}</td>
                             </tr>
                             {foreachelse}
                             <tr><td class="no-records" colspan="7">{$lang.no_records}</td></tr>
@@ -103,6 +95,15 @@
                                 </tr>
                             </tfoot>
                         </table>
+                        
+                        <script type="text/javascript">
+							listTable.recordCount = {$record_count};
+							listTable.pageCount = {$page_count};
+						
+							{foreach from=$filter item=item key=key}
+							listTable.filter.{$key} = '{$item}';
+							{/foreach}
+						</script>
                         {if $full_page}
                     </div>
                 </div>
@@ -112,14 +113,6 @@
 </div>
 {include file ='library/seller_footer.lbi'}
 <script type="text/javascript">
-	
-	listTable.recordCount = {$record_count};
-	listTable.pageCount = {$page_count};
-	
-	{foreach from=$filter item=item key=key}
-	listTable.filter.{$key} = '{$item}';
-	{/foreach}
-							
 	{literal}
 	onload = function()
 	{
@@ -129,19 +122,6 @@
 		// 开始检查订单
 		startCheckOrder();
 	}
-	
-	$(function(){
-		$(".screeItme .imitate_select ul li a.ftx-01").click(function(){
-			var val = $(this).data('value');
-			if(val == 1){
-				$(".order_status").show();
-				$(".shipping_status").show();
-			}else{
-				$(".order_status").hide();
-				$(".shipping_status").hide();
-			}
-		});
-	});
 
 	function searchGeneral(){
 
@@ -174,17 +154,13 @@
 		listTable.filter['date_end_time'] = document.forms['searchForm'].elements['date_end_time'].value;
 		listTable.filter['cat_name'] = document.forms['searchForm'].elements['cat_name'].value;
 
-		if(listTable.filter['order_status'] == ''){
-			listTable.filter['order_status'] = -1;
+		if(listTable.filter['order_status'] != ''){
+			where_order = '&order_status=' + listTable.filter['order_status'];
 		}
-		
-		where_order = '&order_status=' + listTable.filter['order_status'];
 
-		if(listTable.filter['shipping_status'] == ''){
-			listTable.filter['shipping_status'] = -1;
+		if(listTable.filter['shipping_status'] != ''){
+			where_shipping = '&shipping_status=' + listTable.filter['shipping_status'];
 		}
-		
-		where_shipping = '&shipping_status=' + listTable.filter['shipping_status'];
 
 		if(listTable.filter['cat_name'] != ''){
 			where_cat = '&cat_name=' + listTable.filter['cat_name'];

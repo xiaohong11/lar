@@ -131,8 +131,8 @@
         $(".ps-container").perfectScrollbar();
     
         //分页传值
-        listTable.recordCount = {$record_count|default:0};
-        listTable.pageCount = {$page_count|default:1};
+        listTable.recordCount = '{$record_count}';
+        listTable.pageCount = '{$page_count}';
         listTable.query = 'detection_query';
     
         {foreach from=$filter item=item key=key}

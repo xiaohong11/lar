@@ -5,37 +5,33 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.promotion} - {$ur_here}</div>
+    	<div class="title">数据库管理 - {$ur_here}</div>
         <div class="content">
-            {include file="library/common_tabs_info.lbi"}
-        	<div class="explanation m10" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+        	<div class="tabs_info">
+            	<ul>
+                    <li><a href="gift_gard.php?act=list">礼品卡列表</a></li>
+                    <li class="curr"><a href="gift_gard.php?act=take_list">礼品卡提货列表</a></li>
+				</ul>
+            </div>	
+        	<div class="explanation" id="explanation">
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                 	<li>商城所有的订单列表，包括平台自营和入驻商家的订单。</li>
                     <li>点击订单号即可进入详情页面对订单进行操作。</li>
                     <li>Tab切换不同状态下的订单，便于分类订单。</li>
                 </ul>
-            </div>            
-        	<div class="tabs_info">
-            	<ul>
-                    <li><a href="gift_gard.php?act=list{$seller_list}">礼品卡列表</a></li>
-                    <li class="curr"><a href="gift_gard.php?act=take_list{$seller_list}">礼品卡提货列表</a></li>
-				</ul>
-            </div>	
+            </div>
             <div class="flexilist">
             	<div class="common-head">
                     <div class="refresh ml0">
-                    	<div class="refresh_tit" title="{$lang.refresh_data}"><i class="icon icon-refresh"></i></div>
-                    	<div class="refresh_span">{$lang.refresh_common}{$record_count}{$lang.record}</div>
+                    	<div class="refresh_tit" title="刷新数据"><i class="icon icon-refresh"></i></div>
+                    	<div class="refresh_span">刷新 - 共{$record_count}条记录</div>
                     </div>
                     <div class="search">
-                    	<form action="javascript:;" name="searchForm" onSubmit="searchGoodsname(this);">
 						{include file ='library/search_store.lbi'}
                     	<div class="input">
-                        	<input type="text" name="keywords" class="text nofocus" placeholder="序列号/联系人/联系电话" autocomplete="off" />
-                            <input type="submit" class="btn" name="secrch_btn" ectype="secrch_btn" value="" />
+                        	<input type="text" name="keywords" class="text nofocus" placeholder="序列号/联系人/联系电话" autocomplete="off" /><button class="btn" name="secrch_btn"></button>
                         </div>
-                        </form>
                     </div>
                 </div>
                 <div class="common-content">
@@ -46,7 +42,7 @@
                         	<thead>
                             	<tr>
                                 	<th width="3%" class="sign"><div class="tDiv"><input type="checkbox" name="all_list" class="checkbox" id="all_list" /><label for="all_list" class="checkbox_stars"></label></div></th>
-									<th width="4%"><div class="tDiv">{$lang.record_id}<div></th>
+									<th width="4%"><div class="tDiv">编号</div></th>
                                     <th width="6%"><div class="tDiv">{$lang.gift_sn}</div></th>
                                     <th width="7%"><div class="tDiv">{$lang.goods_steps_name}</div></th>
                                     <th width="13%"><div class="tDiv">{$lang.gift_goods_name}</div></th>
@@ -85,7 +81,7 @@
 											{/if}
                                             <a href="gift_gard.php?act=handle_log&id={$bonus.gift_gard_id}" class="btn_see"><i class="sc_icon sc_icon_see"></i>{$lang.handle_log}</a>
 											{if $priv_ru eq 1}
-											<a href="javascript:;" onclick="listTable.remove({$bonus.gift_gard_id}, '{$lang.drop_confirm}', 'remove_take')" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>
+											<a href="javascript:;" onclick="listTable.remove({$bonus.gift_gard_id}, '{$lang.drop_confirm}', 'remove_take')" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>
 											{/if}
 											<!--{if $show_mail and $bonus.order_id eq 0 and $bonus.email}<a href="bonus.php?act=send_mail&bonus_id={$bonus.gift_gard_id}" class="btn_inst"><i class="icon icon-envelope"></i>{$lang.send_mail}</a>{/if}	-->							
 										</div>
@@ -125,8 +121,8 @@
 	$(".ps-container").perfectScrollbar();
 	
 	//分页传值
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
+	listTable.recordCount = '{$record_count}';
+	listTable.pageCount = '{$page_count}';
 	listTable.query = "query_take";
 
 	{foreach from=$filter item=item key=key}

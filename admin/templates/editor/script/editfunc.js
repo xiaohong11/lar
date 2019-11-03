@@ -45,13 +45,9 @@ function fSetFrmClick(){
 	f.document.onclick = function(){
 		fHideMenu();
 	}
-	
-	if(top.frames["jsFrame"].gIsEdited != 'undefined'){
-		f.document.onkeydown = function(){
-			top.frames["jsFrame"].gIsEdited = true;
-		}
+	f.document.onkeydown = function(){
+		top.frames["jsFrame"].gIsEdited = true;
 	}
-	
 }
 function fSetHtmlContent(){
 	try{

@@ -1,5 +1,9 @@
 {if $transport_area}
-<table class="t-tab mb10">
+<style>
+.t-tab{width:80%; border:1px solid #ddd;}
+.t-tab td{padding:3px 5px; border-bottom:1px solid #ddd;}
+</style>
+<table class="t-tab">
 	<tr>
 		<td width="50%">运送到</td>
 		<td width="20%">运费（元）</td>
@@ -21,8 +25,8 @@
 			<input type="text" name="sprice[{$area.id}]" class="text w80" autocomplete="off" value="{$area.sprice}" />
 		</td>
 		<td width="30%" align="center">
-			<input type="button" value="编辑" class="button" data-role="edit_area" ectype="edit_area">
-			<input type="button" value="删除" class="button" data-role="drop_area" ectype="drop_area">
+			<input type="button" value="编辑" class="button mt10 mb10" data-role="edit_area">
+			<input type="button" value="删除" class="button ml" data-role="drop_area">
 		</td>
 	</tr>
 	{/foreach}

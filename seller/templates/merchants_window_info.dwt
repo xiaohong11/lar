@@ -101,7 +101,8 @@
     </div>
 </div>
 {include file="library/seller_footer.lbi"}      
-{insert_scripts files="../js/spectrum-master/spectrum.js"}
+{insert_scripts files="spectrum-master/spectrum.js"}
+<link rel="stylesheet" type="text/css" href="js/spectrum-master/spectrum.css">
 {literal}
 <script language="JavaScript">
 {if $seller_win.win_type eq 0}

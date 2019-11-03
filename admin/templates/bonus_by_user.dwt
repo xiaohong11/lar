@@ -4,14 +4,14 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="bonus.php?act=list" class="s-back">{$lang.back}</a>{$lang.promotion} - {$ur_here}</div>
+    	<div class="title"><a href="bonus.php?act=list" class="s-back">{$lang.back}</a>促销 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content.send.0}</li>
-                    <li>{$lang.operation_prompt_content.send.1}</li>
-                    <li>{$lang.operation_prompt_content.send.2}</li>
+                    <li>根据会员等级发放红包，也可搜索具体会员发放红包。</li>
+                    <li>请合理发放红包。</li>
+                    <li>被发红包的会员可在个人主页中的账户中心查看红包信息，如果红包类型是线下发放的红包需要输入卡号和密码。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -22,19 +22,20 @@
                             	<div class="checkbox_items">
                                 	<div class="checkbox_item">
                                     	<input type="radio" name="issue_bonus" id="user_name" class="ui-radio-16x16" value="name" checked="">
-                                        <label for="user_name" class="ui-radio-label-16x16">{$lang.user_name_send}</label>
+                                        <label for="user_name" class="ui-radio-label-16x16">根据会员名称发放红包</label>
                                     </div>
                                     <div class="checkbox_item">
                                     	<input type="radio" name="issue_bonus" id="user_grade" value="grade" class="ui-radio-16x16">
-                                        <label for="user_grade" class="ui-radio-label-16x16">{$lang.user_grade_send}</label>
+                                        <label for="user_grade" class="ui-radio-label-16x16">根据会员等级发放红包</label>
                                     </div>
                                 </div>
                             </div>
                             <div id="user_name_bonus">
 							<form name="theForm" action="bonus.php" method="post" id="username_form">
                                 <div class="goods_search_div">
-                                    <input type="text" name="keyword" class="text w120" value="" placeholder="{$lang.keywords}" autocomplete="off" />
-									<input type="button" class="btn btn30" name="search" value="{$lang.search_word}" ectype="search" onclick="searchUser();" class="button" />
+                                    <input type="text" name="keyword" class="text w120" value="" placeholder="关键字" autocomplete="off" />
+									<input type="button" class="btn btn30" name="search" value="搜索" ectype="search" onclick="searchUser();" class="button" />
+									<!--<a href="javascript:void(0);" class="btn btn30" ectype="search"><i class="icon icon-plus"></i>添加</a>-->
                                 </div>
                                 <div class="move_div">
                                     <div class="move_left">
@@ -46,8 +47,8 @@
                                             </div>
                                         </div>
                                         <div class="move_handle">
-                                            <a href="javascript:void(0);" id="sellectAll" class="btn btn25 moveAll" ectype="moveAll"><span>{$lang.check_all}</span></a>
-                                            <a href="javascript:void(0);" onclick="addUser()" class="btn btn25 red_btn" ectype="sub">{$lang.button_submit_alt}</a>
+                                            <a href="javascript:void(0);" id="sellectAll" class="btn btn25 moveAll" ectype="moveAll"><span>全选</span></a>
+                                            <a href="javascript:void(0);" onclick="addUser()" class="btn btn25 red_btn" ectype="sub">确定</a>
                                         </div>
                                     </div>
                                     <div class="move_middle">
@@ -62,7 +63,7 @@
                                             </div>
                                         </div>
                                         <div class="move_handle">
-                                            <a href="javascript:void(0);" id="selectAllUser" class="btn btn25 moveAll" ectype="moveAll">{$lang.check_all}</a><a href="javascript:void(0);" onclick="delUser()" class="btn btn25 btn_red">{$lang.remove}</a>
+                                            <a href="javascript:void(0);" id="selectAllUser" class="btn btn25 moveAll" ectype="moveAll">全选</a><a href="javascript:void(0);" onclick="delUser()" class="btn btn25 btn_red">移除</a>
                                         </div>
                                     </div>
                                 </div>
@@ -73,14 +74,14 @@
 								</div>	
 							</form>								
                             </div>
-                            <div id="user_grade_bonus" style="display:none;">
+                            <div  id="user_grade_bonus" style="display:none;">
 							<form action="bonus.php" method="post" name="theForm2" id="usergrade_form">
                                 <div class="move_buttom_div" style="border-top:0;">
                                     <div class="data_format_select">
-                                        <div class="label">{$lang.senduserrank}：</div>
+                                        <div class="label">按用户等级发放红包：</div>
                                         <div class="value">
                                             <div id="rank_id" class="imitate_select select_w320">
-                                                <div class="cite">{$lang.select_user_grade}</div>
+                                                <div class="cite">请选择会员等级</div>
                                                 <ul style="display: none;">
 													{foreach from=$ranklist item=list key=key}
                                                     <li><a href="javascript:;" data-value="{$key}" class="ftx-01">{$list}</a></li>
@@ -94,7 +95,7 @@
                                         <div class="item">
                                             <div class="label">{$lang.validated_email}：</div>
                                             <div class="value">
-                                                <div class="switch switch_2" title="{$lang.no}">
+                                                <div class="switch switch_2" title="否">
                                                     <div class="circle"></div>
                                                 </div>
 												<input type="hidden" name="validated_email" value="0">

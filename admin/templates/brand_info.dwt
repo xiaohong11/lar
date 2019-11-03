@@ -4,13 +4,13 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$lang.goods_alt} - {$ur_here}</div>
+    	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>商品 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content_common}</li>
-                    <li>{$lang.operation_prompt_content.info.0}</li>
+                	<li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
+                    <li>请按提示文案填写信息，以免出错。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -37,7 +37,7 @@
                                     <div class="label_value">
 										<input type="text" name="brand_first_char" maxlength="60" value="{$brand.brand_first_char}" class="text" autocomplete="off" />
                                     	<div class="form_prompt"></div>
-										<div class="notic">{$lang.brand_first_char_desc}</div>
+										<div class="notic">用于解决某些生僻字无法正确生成品牌首字母的情况。</div>
                                     </div>
                                 </div>								
                                 <div class="item">
@@ -54,7 +54,7 @@
                                             <input type="file" class="type-file-file" id="logo" name="brand_logo" size="30" data-state="imgfile" hidefocus="true" value="">
                                             {if $brand.brand_logo neq ""}
                                             <span class="show">
-                                            	<a href="{$brand.brand_logo}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="{$brand.brand_logo}" ectype="tooltip" title="tooltip"></i></a>
+                                            	<a href="{$brand.brand_logo}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$brand.brand_logo}>')" onmouseout="toolTip()"></i></a>
                                             </span>
                                             {/if}
 											<input type="text" name="textfile" class="type-file-text" id="textfield" value="{$brand.brand_logo}" autocomplete="off" readonly>
@@ -62,14 +62,15 @@
                                         <div class="form_prompt"></div>
 										<div class="notic" id="warn_brandlogo">
 										{if $brand.brand_logo eq ''}
-											{$lang.up_brandlogo}
+											{$lang.up_brandlogo}标准尺寸200*88
 										{else}
-											{$lang.warn_brandlogo}
+											{$lang.warn_brandlogo}标准尺寸200*88
 										{/if}
                                         </div>
                                     </div>
                                 </div>
-								<!-- {if $is_need} 品牌专区大图 by wu start-->
+								<!--品牌专区大图 by wu start-->						
+								{if $is_need}
                                 <div class="item">
                                     <div class="label">{$lang.index_img}：</div>
                                     <div class="label_value">
@@ -78,35 +79,17 @@
                                             <input type="file" class="type-file-file" id="logo" name="index_img" size="30" data-state="imgfile" hidefocus="true" value="">
                                             {if $brand.index_img neq ""}
                                             <span class="show">
-                                            	<a href="{$brand.index_img}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="{$brand.index_img}" ectype="tooltip" title="tooltip"></i></a>
+                                            	<a href="{$brand.index_img}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src={$brand.index_img}>')" onmouseout="toolTip()"></i></a>
                                             </span>
                                             {/if}
                                         	<input type="text" name="textfile" class="type-file-text" id="textfield" value="{$brand.index_img}" autocomplete="off" readonly>
                                         </div>
                                         <div class="form_prompt"></div>
-										<div class="notic">{$lang.index_img_desc}</div>
+										<div class="notic" id="warn_brandlogo">标准尺寸278*285</div>
                                     </div>
                                 </div>		
-								<!-- {/if} end-->
-								<!-- 品牌背景图 start -->
-								<div class="item">
-                                    <div class="label">{$lang.brand_bg}：</div>
-                                    <div class="label_value">
-                                        <div class="type-file-box">
-                                            <input type="button" name="button" id="button" class="type-file-button" value="">
-                                            <input type="file" class="type-file-file" id="logo" name="brand_bg" size="30" data-state="imgfile" hidefocus="true" value="">
-                                            {if $brand.brand_bg neq ""}
-                                            <span class="show">
-                                            	<a href="{$brand.brand_bg}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="{$brand.brand_bg}" ectype="tooltip" title="tooltip"></i></a>
-                                            </span>
-                                            {/if}
-                                        	<input type="text" name="textfile" class="type-file-text" id="textfield" value="{$brand.brand_bg}" autocomplete="off" readonly>
-                                        </div>
-                                        <div class="form_prompt"></div>
-										<div class="notic">{$lang.brand_bg_desc}</div>
-                                    </div>
-                                </div>
-								<!-- 品牌背景图 end -->
+								{/if}
+								<!--品牌专区大图 by wu end-->								
                                 <div class="item">
                                     <div class="label">{$lang.brand_desc}：</div>
                                     <div class="label_value">
@@ -199,10 +182,10 @@
 			},
 			messages:{
 				brand_name:{
-					required : '<i class="icon icon-exclamation-sign"></i>' + brand_zh_name_null
+					required : '<i class="icon icon-exclamation-sign"></i>请输入中文品牌名称'
 				},
 				textfile:{
-					required : '<i class="icon icon-exclamation-sign"></i>' + brand_logo_null
+					required : '<i class="icon icon-exclamation-sign"></i>请上传品牌logo'
 				}
 			}			
 		});

@@ -23,7 +23,7 @@
                 	<div class="seckill-time-tabs" ectype="seckillTab">
                     	<ul>
 							{foreach from=$seckill_list item=tb name=sec}
-							{if $smarty.foreach.sec.index lt 5}
+							{if $smarty.foreach.sec.index lt 4}
                         	<li {if !$tb.is_end && $tb.status}class="curr"{/if}{if $smarty.foreach.sec.total == 5} style="width:20%;"{/if}>
                                 <strong>{if $tb.tomorrow}明日  {/if}{$tb.title}</strong>
                                 <div class="time" ectype="time" data-time="{if !$tb.is_end && !$tb.status}{$tb.begin_time_formated}{elseif !$tb.is_end && $tb.status}{$tb.end_time_formated}{/if}">
@@ -59,12 +59,12 @@
                     </div>
 					<div class="seckill-warp">
 					{foreach from=$seckill_list item=tb name=sec}
-					{if $smarty.foreach.sec.index lt 5}
+					{if $smarty.foreach.sec.index lt 4}
                     	<ul class="gb-index-list clearfix" {if !(!$tb.is_end && $tb.status)}style="display:none;"{/if}>
 							{foreach from=$tb.goods item=goods}
                         	<li class="mod-shadow-card">
-                            	<div class="p-img"><a href="{$goods.url}" target="_blank"><img src="{$goods.goods_thumb}"></a></div>
-                                <div class="p-name"><a href="{$goods.url}" title="{$goods.goods_name|escape:html}" target="_blank">{$goods.goods_name}</a></div>
+                            	<div class="p-img"><a href="{$goods.url}"  target="_blank"><img src="{$goods.goods_thumb}"></a></div>
+                                <div class="p-name"><a href="{$goods.url}"  target="_blank">{$goods.goods_name}</a></div>
                                 <div class="p-lie clearfix">
                                 	<div class="p-pirce">{$goods.sec_price_formated}</div>
                                     <div class="p-del"><del>{$goods.market_price_formated}</del></div>
@@ -73,23 +73,15 @@
                                 	<span>已售{$goods.percent}%</span>
                                     <div class="timebar"><i style="width:{$goods.percent}%;"></i></div>
                                 </div>
+                                <a href="{$goods.url}"  target="_blank" class="btn sc-redBg-btn">
 								{if !$tb.is_end && !$tb.status}
-                                <a href="javascript:;" ectype="collSecGoods" data-id="{$goods.id}" class="btn {if $goods.is_remind}sc-redBg-btn{else}sc-greenBg-btn{/if}">
-                                {if $goods.is_remind}取消提醒{else}提醒我{/if}
-                                </a>
+								即将开始
 								{elseif !$tb.is_end && $tb.status}
-                                {if $goods.sec_num le 0}
-                                <a href="javascript:;" class="btn sc-redBg-btn">已抢完</a>
-                                {else}
-                                <a href="{$goods.url}"  target="_blank" class="btn sc-redBg-btn">
 								立即购买
-								</a>
-                                {/if}                   
 								{else}
-                                <a href="{$goods.url}"  target="_blank" class="btn sc-redBg-btn">
 								已结束
-                                </a> 
-								{/if} 	
+								{/if} 								
+								</a>
                             </li>
 							{/foreach}
                         </ul>

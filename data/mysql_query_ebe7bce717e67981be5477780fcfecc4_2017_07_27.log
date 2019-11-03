@@ -1,0 +1,2932 @@
+SELECT value FROM `wechat_dscmall_226`.`dsc_shop_config` WHERE code = 'open_oss' LIMIT 1
+
+SELECT value FROM `wechat_dscmall_226`.`dsc_shop_config` WHERE code = 'is_downconfig' LIMIT 1
+
+SELECT value FROM `wechat_dscmall_226`.`dsc_shop_config` WHERE code = 'server_model' LIMIT 1
+
+SELECT value FROM `wechat_dscmall_226`.`dsc_shop_config` WHERE code = 'certi'
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `wechat_dscmall_226`.`dsc_sessions` WHERE sesskey = '6238c4e8a2b5650b1cd7839d5e9edfe2'
+
+INSERT INTO `wechat_dscmall_226`.`dsc_sessions` (sesskey, expiry, ip, data) VALUES ('6238c4e8a2b5650b1cd7839d5e9edfe2', '1501156531', '127.0.0.1', 'a:0:{}')
+
+SELECT kf_im_switch FROM `wechat_dscmall_226`.`dsc_seller_shopinfo`WHERE ru_id=0
+
+SELECT region_name FROM `wechat_dscmall_226`.`dsc_region` where region_id = '221'
+
+INSERT INTO `wechat_dscmall_226`.`dsc_stats` ( ip_address, visit_times, browser, system, language, area, referer_domain, referer_path, access_url, access_time) VALUES ('127.0.0.1', '2', 'FireFox 54.0', 'Windows NT', 'zh-CN,zh', '苏州', '', '', '/index.php', '1501127731')
+
+SELECT region_id FROM `wechat_dscmall_226`.`dsc_region` WHERE parent_id = ''  LIMIT 1
+
+SELECT region_id FROM `wechat_dscmall_226`.`dsc_region` WHERE parent_id = ''  LIMIT 1
+
+SELECT r1.parent_id, r2.region_name FROM `wechat_dscmall_226`.`dsc_region` as r1, `wechat_dscmall_226`.`dsc_region` as r2  WHERE 1 AND r1.parent_id = r2.region_id AND r1.region_id = ''
+
+SELECT r1.parent_id, r2.region_name FROM `wechat_dscmall_226`.`dsc_region` as r1, `wechat_dscmall_226`.`dsc_region` as r2  WHERE 1 AND r1.parent_id = r2.region_id AND r1.region_id = ''
+
+SELECT region_id,region_name FROM `wechat_dscmall_226`.`dsc_region_warehouse` WHERE regionId = '16' LIMIT 1
+
+SELECT * FROM `wechat_dscmall_226`.`dsc_seller_shopinfo` where ru_id = '0' LIMIT 1
+
+SELECT region_name FROM `wechat_dscmall_226`.`dsc_region` WHERE region_id = '221' LIMIT 1
+
+SELECT region_id,region_name FROM `wechat_dscmall_226`.`dsc_region` WHERE parent_id = '16' order by region_id asc
+
+SELECT r.region_id, r.region_name FROM `wechat_dscmall_226`.`dsc_region_warehouse` as rw, `wechat_dscmall_226`.`dsc_region` as r  WHERE  rw.regionId > 0 and r.region_id = rw.regionId AND r.region_type = '1' GROUP BY r.region_id order by r.region_id ASC
+
+SELECT r.region_id, r.region_name FROM `wechat_dscmall_226`.`dsc_region_warehouse` as rw, `wechat_dscmall_226`.`dsc_region` as r  WHERE  r.parent_id = '16' AND r.region_type = '2' GROUP BY r.region_id order by r.region_id ASC
+
+SELECT r.region_id, r.region_name FROM `wechat_dscmall_226`.`dsc_region_warehouse` as rw, `wechat_dscmall_226`.`dsc_region` as r  WHERE  r.parent_id = '221' AND r.region_type = '3' GROUP BY r.region_id order by r.region_id ASC
+
+select kf_qq, kf_ww, kf_type, kf_tel from `wechat_dscmall_226`.`dsc_seller_shopinfo` where ru_id = 0 LIMIT 1
+
+SELECT region_id, regionId, region_name, parent_id FROM `wechat_dscmall_226`.`dsc_region_warehouse` WHERE regionId = '16' LIMIT 1
+
+SELECT parent_id FROM `wechat_dscmall_226`.`dsc_region_warehouse` WHERE regionId = '16' LIMIT 1
+
+SELECT value FROM`wechat_dscmall_226`.`dsc_shop_config` WHERE code= 'hometheme' AND store_range = 'ecmoban_dsc2017'
+
+SELECT cat_id , cat_name, cat_alias_name, cat_icon, style_icon FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '0'  AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT * FROM `wechat_dscmall_226`.`dsc_nav`
+            WHERE ifshow = '1' ORDER BY type, vieworder
+
+SELECT cat_id,cat_name ,parent_id,is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '12' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '619' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '619' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '646' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '647' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '648' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '649' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '650' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '651' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '652' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '653' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '654' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '655' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '616' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '616' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '636' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '632' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '633' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '634' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '635' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '637' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '623' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '623' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1415' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1416' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1417' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1418' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1419' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '615' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '615' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '627' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '625' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '626' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '628' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '629' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '631' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '620' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '620' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '662' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '656' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '658' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '659' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '660' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '661' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '667' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '617' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '617' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '638' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '639' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '640' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '642' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '643' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '644' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '645' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '621' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '621' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1432' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1433' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1434' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1435' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1436' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '622' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '622' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1420' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1421' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1422' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1423' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1424' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1425' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1426' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '624' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '624' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1427' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1428' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1429' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1430' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1431' AND is_show = 1 
+
+SELECT cat_id,cat_name ,parent_id,is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '6' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '347' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '347' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '349' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '350' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '351' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '352' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '354' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '356' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '358' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '361' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '363' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '365' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '367' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '369' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '370' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '372' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '374' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '377' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '379' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '381' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '383' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '385' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '388' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '390' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '395' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '400' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '429' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '431' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '444' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '448' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '451' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '454' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '455' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '463' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '463' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '473' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '466' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '474' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '475' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '478' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '480' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '485' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '486' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '488' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '494' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '498' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '502' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '504' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '505' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '507' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '508' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '510' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '512' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '513' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '516' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '517' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '520' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '630' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '630' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '641' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '657' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '663' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '664' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '665' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '666' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '668' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '669' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '670' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '671' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '672' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '673' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '674' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '675' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '676' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '547' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '547' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '592' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '550' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '554' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '555' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '557' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '560' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '562' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '564' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '566' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '567' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '568' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '569' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '570' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '571' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '580' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '582' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '583' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '590' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1442' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '1442' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1443' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1444' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1445' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1446' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1447' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1448' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1449' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1450' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1451' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1452' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1453' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1454' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1455' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1456' AND is_show = 1 
+
+SELECT cat_id,cat_name ,parent_id,is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '858' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1105' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '1105' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1106' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '1106' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1475' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1107' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1108' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1109' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1110' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1111' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1112' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1113' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1114' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1115' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '1115' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1116' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1117' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1118' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1119' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1120' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1121' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1122' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1123' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1124' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1125' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1126' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1127' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1128' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1175' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1129' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '1129' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1131' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1130' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1132' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1133' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1134' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1135' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1136' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1137' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1138' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1139' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1140' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1141' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1142' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1143' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1144' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1145' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '1145' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1152' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1146' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1147' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1148' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1149' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1150' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1151' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1153' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1154' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1155' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1156' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1157' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1158' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1159' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1160' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '1160' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1161' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1162' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1163' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1164' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1165' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1166' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1167' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1168' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1169' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1170' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1171' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1172' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1173' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1174' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1176' AND is_show = 1 
+
+SELECT cat_id,cat_name ,parent_id,is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '8' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '362' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '362' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '443' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '439' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '440' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '441' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '442' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '445' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '446' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '447' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '360' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '360' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '427' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '428' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '430' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '432' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '433' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '434' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '435' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '436' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '437' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '438' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '355' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '355' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '399' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '401' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '402' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '403' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '404' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '405' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '406' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '407' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '408' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '409' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '410' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '411' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '412' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '353' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '353' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '368' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '371' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '373' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '375' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '376' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '378' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '380' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '382' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '384' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '386' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '387' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '389' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '391' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '392' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '393' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '394' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '396' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '397' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '398' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '357' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '357' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '413' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '414' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '415' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '416' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '417' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '418' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '419' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '420' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '359' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '359' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '421' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '422' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '423' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '424' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '425' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '426' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '364' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '364' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '449' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '450' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '452' AND is_show = 1 
+
+SELECT count(*) FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '453' AND is_show = 1 
+
+SELECT link_logo, link_name, link_url FROM `wechat_dscmall_226`.`dsc_friend_link` ORDER BY show_order
+
+SELECT link_logo, link_name, link_url FROM `wechat_dscmall_226`.`dsc_partner_list` ORDER BY show_order
+
+SELECT c.cat_id, c.cat_name, c.sort_order, a.article_id, a.title, a.file_url, a.open_type FROM `wechat_dscmall_226`.`dsc_article` AS a LEFT JOIN `wechat_dscmall_226`.`dsc_article_cat` AS c ON a.cat_id = c.cat_id WHERE c.cat_type = 5 AND a.is_open = 1 ORDER BY c.sort_order ASC, a.article_id
+
+SELECT id, number, type, sort_order FROM `wechat_dscmall_226`.`dsc_template` WHERE filename = 'index' AND type > 0 AND remarks ='' AND theme='ecmoban_dsc2017'
+
+SELECT bg_color ,img_file ,if_show,bgrepeat,align,fileurl FROM`wechat_dscmall_226`.`dsc_templates_left` WHERE ru_id = '0' AND type = 'bonusadv' AND seller_templates = 'backup_tpl_1' AND theme = 'ecmoban_dsc2017'
+
+SELECT ap.ad_width, ap.ad_height, ad.ad_id, ad.ad_name, ad.ad_code, ad.ad_link, ad.link_color, ad.start_time, ad.end_time, ad.ad_type, ad.goods_name FROM `wechat_dscmall_226`.`dsc_ad_position` AS ap LEFT JOIN `wechat_dscmall_226`.`dsc_ad` AS ad ON ad.position_id = ap.position_id  WHERE ad.ad_name = '' AND  ad.media_type=0 AND '1501127732' > ad.start_time AND '1501127732' < ad.end_time AND ad.enabled=1 AND theme = 'ecmoban_dsc2017'
+
+SELECT c.*,g.goods_thumb,g.goods_id,c.goods_number,c.goods_price FROM `wechat_dscmall_226`.`dsc_cart` AS c  LEFT JOIN `wechat_dscmall_226`.`dsc_goods` AS g ON g.goods_id=c.goods_id  WHERE  c.session_id = '127.0.0.1_6238c4e8a2b5650b1cd7839d5e9edfe2'  AND rec_type = '0' and c.stages_qishu='-1' AND c.store_id = 0 
+
+SELECT SUM(goods_number) AS number, SUM(goods_price * goods_number) AS amount FROM `wechat_dscmall_226`.`dsc_cart` WHERE  session_id = '127.0.0.1_6238c4e8a2b5650b1cd7839d5e9edfe2'  AND rec_type = '0' and stages_qishu='-1' AND store_id = 0
+
+SELECT cat_id, cat_name, style_icon, cat_icon, category_links, cat_alias_name FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = 0 AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC limit 16
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '858' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '3' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '4' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '5' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '6' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '8' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '860' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '11' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '866' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '864' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '861' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '12' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '863' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '865' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '867' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id, cat_name, style_icon, cat_icon, category_links, cat_alias_name FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = 0 AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC limit 16
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '858' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '3' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '4' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '5' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '6' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '8' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '860' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '11' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '866' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '864' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '861' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '12' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '863' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '865' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT *  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '867' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT SUM(bt.type_money) AS bonus_value, COUNT(*) AS bonus_count FROM `wechat_dscmall_226`.`dsc_user_bonus` AS ub, `wechat_dscmall_226`.`dsc_bonus_type` AS bt WHERE ub.user_id = '0' AND ub.bonus_type_id = bt.type_id AND ub.order_id = 0 AND bt.use_start_date < 1501142399 AND bt.use_end_date > 1501142399
+
+SELECT user_name, email, mobile_phone, pay_points, user_money, credit_line, last_login, is_validated, user_picture, rank_points,user_rank, nick_name FROM `wechat_dscmall_226`.`dsc_users` WHERE user_id = '0' LIMIT 1
+
+SELECT COUNT(*) FROM `wechat_dscmall_226`.`dsc_order_info` WHERE user_id = '0' AND add_time > '1498535732'
+
+SELECT order_id, order_sn  FROM `wechat_dscmall_226`.`dsc_order_info` WHERE user_id = '0' AND shipping_time > '1501127732' AND order_status = '1' AND shipping_status  IN ('1','2')  
+
+SELECT c.*,g.goods_thumb,g.goods_id,c.goods_number,c.goods_price FROM `wechat_dscmall_226`.`dsc_cart` AS c  LEFT JOIN `wechat_dscmall_226`.`dsc_goods` AS g ON g.goods_id=c.goods_id  WHERE  c.session_id = '127.0.0.1_6238c4e8a2b5650b1cd7839d5e9edfe2'  AND rec_type = '0' and c.stages_qishu='-1' AND c.store_id = 0 
+
+SELECT SUM(goods_number) AS number, SUM(goods_price * goods_number) AS amount FROM `wechat_dscmall_226`.`dsc_cart` WHERE  session_id = '127.0.0.1_6238c4e8a2b5650b1cd7839d5e9edfe2'  AND rec_type = '0' and stages_qishu='-1' AND store_id = 0
+
+SELECT SUM(bt.type_money) AS bonus_value, COUNT(*) AS bonus_count FROM `wechat_dscmall_226`.`dsc_user_bonus` AS ub, `wechat_dscmall_226`.`dsc_bonus_type` AS bt WHERE ub.user_id = '0' AND ub.bonus_type_id = bt.type_id AND ub.order_id = 0 AND bt.use_start_date < 1501142399 AND bt.use_end_date > 1501142399
+
+SELECT user_name, email, mobile_phone, pay_points, user_money, credit_line, last_login, is_validated, user_picture, rank_points,user_rank, nick_name FROM `wechat_dscmall_226`.`dsc_users` WHERE user_id = '0' LIMIT 1
+
+SELECT COUNT(*) FROM `wechat_dscmall_226`.`dsc_order_info` WHERE user_id = '0' AND add_time > '1498535732'
+
+SELECT order_id, order_sn  FROM `wechat_dscmall_226`.`dsc_order_info` WHERE user_id = '0' AND shipping_time > '1501127732' AND order_status = '1' AND shipping_status  IN ('1','2')  
+
+SELECT c.*,g.goods_thumb,g.goods_id,c.goods_number,c.goods_price FROM `wechat_dscmall_226`.`dsc_cart` AS c  LEFT JOIN `wechat_dscmall_226`.`dsc_goods` AS g ON g.goods_id=c.goods_id  WHERE  c.session_id = '127.0.0.1_6238c4e8a2b5650b1cd7839d5e9edfe2'  AND rec_type = '0' and c.stages_qishu='-1' AND c.store_id = 0  LIMIT 0,4
+
+SELECT SUM(goods_number) AS number, SUM(goods_price * goods_number) AS amount FROM `wechat_dscmall_226`.`dsc_cart` WHERE  session_id = '127.0.0.1_6238c4e8a2b5650b1cd7839d5e9edfe2'  AND rec_type = '0' and stages_qishu='-1' AND store_id = 0
+
+SELECT COUNT(*) FROM `wechat_dscmall_226`.`dsc_sessions`
+
+UPDATE `wechat_dscmall_226`.`dsc_sessions` SET expiry = '1501156532', ip = '127.0.0.1', userid = '0', adminid = '0', user_name='0', user_rank='0', discount='1', email='0', data = 'a:4:{s:7:\"from_ad\";i:0;s:7:\"referer\";s:6:\"本站\";s:10:\"login_fail\";i:0;s:9:\"last_time\";i:1501127732;}' WHERE sesskey = '6238c4e8a2b5650b1cd7839d5e9edfe2' LIMIT 1
+
+DELETE FROM `wechat_dscmall_226`.`dsc_sessions` WHERE expiry < 1500976532
+
+SELECT value FROM `wechat_dscmall_226`.`dsc_shop_config` WHERE code = 'open_oss' LIMIT 1
+
+SELECT value FROM `wechat_dscmall_226`.`dsc_shop_config` WHERE code = 'is_downconfig' LIMIT 1
+
+SELECT value FROM `wechat_dscmall_226`.`dsc_shop_config` WHERE code = 'server_model' LIMIT 1
+
+SELECT value FROM `wechat_dscmall_226`.`dsc_shop_config` WHERE code = 'certi'
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `wechat_dscmall_226`.`dsc_sessions` WHERE sesskey = '6238c4e8a2b5650b1cd7839d5e9edfe2'
+
+SELECT kf_im_switch FROM `wechat_dscmall_226`.`dsc_seller_shopinfo`WHERE ru_id=0
+
+SELECT value FROM `wechat_dscmall_226`.`dsc_shop_config` WHERE code = 'open_oss' LIMIT 1
+
+SELECT value FROM `wechat_dscmall_226`.`dsc_shop_config` WHERE code = 'is_downconfig' LIMIT 1
+
+SELECT value FROM `wechat_dscmall_226`.`dsc_shop_config` WHERE code = 'server_model' LIMIT 1
+
+SELECT value FROM `wechat_dscmall_226`.`dsc_shop_config` WHERE code = 'certi'
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `wechat_dscmall_226`.`dsc_sessions` WHERE sesskey = '6238c4e8a2b5650b1cd7839d5e9edfe2'
+
+SELECT kf_im_switch FROM `wechat_dscmall_226`.`dsc_seller_shopinfo`WHERE ru_id=0
+
+SELECT category_topic FROM `wechat_dscmall_226`.`dsc_category` WHERE cat_id = '8' LIMIT 1
+
+SELECT category_topic FROM `wechat_dscmall_226`.`dsc_category` WHERE cat_id = '5' LIMIT 1
+
+SELECT cat_id , cat_name, cat_alias_name, cat_icon, style_icon FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '8'  AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '362'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id , cat_name, cat_alias_name, cat_icon, style_icon FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '5'  AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '362' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '143' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '439'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '149'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '152'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '153'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '445'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '154'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '446'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '156'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '159'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '447'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '360'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '159' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '160'  AND is_show = 1 LIMIT 1
+
+0' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '427'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '161'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '428'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '430'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '432'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '163'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '165'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '433'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '167'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '169'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '435'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '172'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '175'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '436'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '437'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '438'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '355'  AND is_show = 1 LIMIT 1
+
+SELECT value FROM `wechat_dscmall_226`.`dsc_shop_config` WHERE code = 'open_oss' LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '355' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT value FROM `wechat_dscmall_226`.`dsc_shop_config` WHERE code = 'is_downconfig' LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '399'  AND is_show = 1 LIMIT 1
+
+SELECT value FROM `wechat_dscmall_226`.`dsc_shop_config` WHERE code = 'server_model' LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '401'  AND is_show = 1 LIMIT 1
+
+SELECT value FROM `wechat_dscmall_226`.`dsc_shop_config` WHERE code = 'certi'
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '402'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '403'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '404'  AND is_show = 1 LIMIT 1
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `wechat_dscmall_226`.`dsc_sessions` WHERE sesskey = '6238c4e8a2b5650b1cd7839d5e9edfe2'
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '405'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '406'  AND is_show = 1 LIMIT 1
+
+SELECT kf_im_switch FROM `wechat_dscmall_226`.`dsc_seller_shopinfo`WHERE ru_id=0
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '407'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '408'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '409'  AND is_show = 1 LIMIT 1
+
+SELECT category_topic FROM `wechat_dscmall_226`.`dsc_category` WHERE cat_id = '3' LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '410'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '411'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '412'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '353'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '353' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '176'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '368'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '371'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '179'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '182'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '373'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '375'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '376'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '378'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '380'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '382'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '384'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '184'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '188'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '188' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '190'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id , cat_name, cat_alias_name, cat_icon, style_icon FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '3'  AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '191'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '112'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '192'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '112' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '193'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '113'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '194'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '114'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '195'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '115'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '196'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '116'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '386'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '197'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '387'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '117'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '198'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '389'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '199'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '391'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '200'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '392'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '201'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '393'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '120'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '202'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '122'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '205'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '124'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '205' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '76'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '397'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '206'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '76' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '398'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '209'  AND is_show = 1 LIMIT 1
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '357'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '210'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '357' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '82'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '211'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '413'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '84'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '212'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '414'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '85'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '214'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '415'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '87'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '217'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '416'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '88'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '219'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '417'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '90'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '221'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '418'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '91'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '223'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '419'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '93'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '226'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '420'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '95'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '227'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '359'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '96'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '229'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '359' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '230'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '421'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '231'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '33'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '422'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '232'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '33' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '423'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '233'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '34'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '424'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '35'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '233' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '425'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '42'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '235'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '42' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '237'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '43'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '238'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '44'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '240'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '364'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '46'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '242'  AND is_show = 1 LIMIT 1
+
+4' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '47'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '449'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '243'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '450'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '47' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '244'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '452'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '49'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '248'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '453'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '250'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '52'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '53'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '252'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '54'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '255'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '55'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '255' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT ap.ad_width, ap.ad_height, ad.ad_id, ad.ad_name, ad.ad_code, ad.ad_bg_code, ad.ad_link, ad.link_man, ad.link_color, ad.b_title, ad.s_title, ad.start_time, ad.end_time, ad.ad_type, ad.goods_name FROM `wechat_dscmall_226`.`dsc_ad_position` AS ap  LEFT JOIN `wechat_dscmall_226`.`dsc_ad` AS ad ON ad.position_id = ap.position_id  WHERE  ad.ad_name in('cat_tree_8_1','cat_tree_8_2','cat_tree_8_3','cat_tree_8_4','cat_tree_8_5','cat_tree_8_6','cat_tree_8_7','cat_tree_8_8','cat_tree_8_9','cat_tree_8_10','cat_tree_8_11','cat_tree_8_12','cat_tree_8_13','cat_tree_8_14','cat_tree_8_15','cat_tree_8_16','cat_tree_8_17','cat_tree_8_18','cat_tree_8_19','cat_tree_8_20') and  ad.media_type=0 AND '1501127734' > ad.start_time AND '1501127734' < ad.end_time and ad.enabled=1 AND theme = 'ecmoban_dsc2017' ORDER BY ad_name,ad.ad_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '56'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '257'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '57'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '8'  AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '259'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '59'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '362'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '261'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '60'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '362' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '263'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '61'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '62'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '440'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '64'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '441'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '64' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '442'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '66'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '445'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '68'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '446'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '69'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '447'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '70'  AND is_show = 1 LIMIT 1
+
+SELECT ap.ad_width, ap.ad_height, ad.ad_id, ad.ad_name, ad.ad_code, ad.ad_bg_code, ad.ad_link, ad.link_man, ad.link_color, ad.b_title, ad.s_title, ad.start_time, ad.end_time, ad.ad_type, ad.goods_name FROM `wechat_dscmall_226`.`dsc_ad_position` AS ap  LEFT JOIN `wechat_dscmall_226`.`dsc_ad` AS ad ON ad.position_id = ap.position_id  WHERE  ad.ad_name in('cat_tree_5_1','cat_tree_5_2','cat_tree_5_3','cat_tree_5_4','cat_tree_5_5','cat_tree_5_6','cat_tree_5_7','cat_tree_5_8','cat_tree_5_9','cat_tree_5_10','cat_tree_5_11','cat_tree_5_12','cat_tree_5_13','cat_tree_5_14','cat_tree_5_15','cat_tree_5_16','cat_tree_5_17','cat_tree_5_18','cat_tree_5_19','cat_tree_5_20') and  ad.media_type=0 AND '1501127734' > ad.start_time AND '1501127734' < ad.end_time and ad.enabled=1 AND theme = 'ecmoban_dsc2017' ORDER BY ad_name,ad.ad_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '360'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '71'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '5'  AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+Y sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '72'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '428'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '73'  AND is_show = 1 LIMIT 1
+
+43' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '430'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '74'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '432'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '75'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '149'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '433'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '152'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '99'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '434'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '153'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '99' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '435'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '154'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '101'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '156'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '102'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '437'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '159'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '103'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '438'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '159' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '105'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '355'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '160'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '106'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '355' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '161'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '108'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '399'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '163'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '111'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '401'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '165'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '402'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '169'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '172'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '175'  AND is_show = 1 LIMIT 1
+
+SELECT ap.ad_width, ap.ad_height, ad.ad_id, ad.ad_name, ad.ad_code, ad.ad_bg_code, ad.ad_link, ad.link_man, ad.link_color, ad.b_title, ad.s_title, ad.start_time, ad.end_time, ad.ad_type, ad.goods_name FROM `wechat_dscmall_226`.`dsc_ad_position` AS ap  LEFT JOIN `wechat_dscmall_226`.`dsc_ad` AS ad ON ad.position_id = ap.position_id  WHERE  ad.ad_name in('cat_tree_3_1','cat_tree_3_2','cat_tree_3_3','cat_tree_3_4','cat_tree_3_5','cat_tree_3_6','cat_tree_3_7','cat_tree_3_8','cat_tree_3_9','cat_tree_3_10','cat_tree_3_11','cat_tree_3_12','cat_tree_3_13','cat_tree_3_14','cat_tree_3_15','cat_tree_3_16','cat_tree_3_17','cat_tree_3_18','cat_tree_3_19','cat_tree_3_20') and  ad.media_type=0 AND '1501127734' > ad.start_time AND '1501127734' < ad.end_time and ad.enabled=1 AND theme = 'ecmoban_dsc2017' ORDER BY ad_name,ad.ad_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '176'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '179'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '3'  AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '112'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '182'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '112' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '404'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '113'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '188'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '114'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '405'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '188' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '406'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '190'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '407'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '191'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '117'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '408'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '192'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '119'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '409'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '193'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '120'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '194'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '411'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '122'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '195'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '412'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '196'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '353'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '76'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '197'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '353' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '76' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '198'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '81'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '368'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '199'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '82'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '201'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '85'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '87'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '378'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '205' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '90'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '206'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '382'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '207'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '384'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '209'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '386'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '210'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '387'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '211'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '96'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '389'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '212'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '97'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '391'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '214'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '33'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '392'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '217'  AND is_show = 1 LIMIT 1
+
+' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '393'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '34'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '219'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '221'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '35'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '396'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '42'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '397'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '42' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '398'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '43'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '44'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '223'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '46'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '357' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '226'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '47'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '413'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '227'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '414'  AND is_show = 1 LIMIT 1
+
+' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '229'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '230'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '49'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '231'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '51'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '52'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '418'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '419'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '233' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '420'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '235'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '237'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '238'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '359' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '421'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '422'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '423'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '54'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '424'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '55'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '425'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '56'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '426'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '240'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '57'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '364'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '242'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '59'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '243'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '364' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '60'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '244'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '449'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '61'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '450'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '62'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '246'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '64'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '248'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '453'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '250'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '252'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '255'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '8'  AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '255' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '362'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '257'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '362' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '259'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '443'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '261'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '439'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '263'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '440'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '64' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '441'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '264'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '442'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '66'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '445'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '68'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '69'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '70'  AND is_show = 1 LIMIT 1
+
+
+ort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '143'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '360'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '143' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '360' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '146'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '427'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '149'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '428'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '152'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '430'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '71'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '153'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '432'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '154'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '72'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '156'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '73'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '434'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '159'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '74'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '159' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '436'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '160'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '437'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '161'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '438'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '99' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '163'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '101'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '165'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '102'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '355' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '103'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '399'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '105'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '401'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '167'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '106'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '402'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '108'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '169'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '111'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '404'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '172'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '405'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '175'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '406'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '176'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '407'  AND is_show = 1 LIMIT 1
+
+ort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '179'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '182'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '184'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '112' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '188'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '113'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '410'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '114'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '411'  AND is_show = 1 LIMIT 1
+
+8' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '115'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '412'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '116'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '191'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '117'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '192'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '353' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '119'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '193'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '120'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '194'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '122'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '195'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '124'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '196'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '375'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '76'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '376'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '198'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '76' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '378'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '199'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '81'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '380'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '200'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '82'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '382'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '201'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '84'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '384'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '202'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '85'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '386'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '205'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '87'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '387'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '205' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '88'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '389'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '90'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '391'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '207'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '91'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '392'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '209'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '393'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '210'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '95'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '394'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '211'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '96'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '396'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '97'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '397'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '212'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '33'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '214'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '357'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '33' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '219'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '357' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '35'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '413'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '414'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '226'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '42' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '227'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '43'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '229'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '44'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '230'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '46'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '415'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '231'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '47'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '416'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '232'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '47' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '233'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '418'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '49'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '233' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '51'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '419'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '420'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '53'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '54'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '359' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '55'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '421'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '56'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '57'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '235'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '424'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '60'  AND is_show = 1 LIMIT 1
+
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '426'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '240'  AND is_show = 1 LIMIT 1
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '364'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '64'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '364' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '243'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '449'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '64' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '244'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '66'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '246'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '68'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '453'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '69'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '250'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '252'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '255'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '73'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '255' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '74'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '257'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '75'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '259'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '99'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '261'  AND is_show = 1 LIMIT 1
+
+SELECT b.brand_id, b.brand_name,  b.brand_logo, COUNT(*) AS goods_num, IF(b.brand_logo > '', '1', '0') AS tag FROM `wechat_dscmall_226`.`dsc_brand`AS b  LEFT JOIN `wechat_dscmall_226`.`dsc_goods` AS g ON g.brand_id = b.brand_id AND g.user_id = 0 AND g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0  LEFT JOIN `wechat_dscmall_226`.`dsc_goods_cat` AS gc ON g.goods_id = gc.goods_id WHERE (g.cat_id  IN ('8','362','443','439','440','441','442','445','446','447','360','427','428','430','432','433','434','435','436','437','438','355','399','401','402','403','404','405','406','407','408','409','410','411','412','353','368','371','373','375','376','378','380','382','384','386','387','389','391','392','393','394','396','397','398','357','413','414','415','416','417','418','419','420','359','421','422','423','424','425','426','364','449','450','452','453')  OR gc.cat_id  IN ('8','362','443','439','440','441','442','445','446','447','360','427','428','430','432','433','434','435','436','437','438','355','399','401','402','403','404','405','406','407','408','409','410','411','412','353','368','371','373','375','376','378','380','382','384','386','387','389','391','392','393','394','396','397','398','357','413','414','415','416','417','418','419','420','359','421','422','423','424','425','426','364','449','450','452','453') ) AND b.is_show = 1 GROUP BY b.brand_id HAVING goods_num > 0 ORDER BY b.sort_order, b.brand_id ASC LIMIT 0,12
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '99' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '263'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '101'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '264'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '102'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '266'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '103'  AND is_show = 1 LIMIT 1
+
+SELECT b.brand_id, b.brand_name,  b.brand_logo, COUNT(*) AS goods_num, IF(b.brand_logo > '', '1', '0') AS tag, g.user_id FROM `wechat_dscmall_226`.`dsc_brand`AS b  LEFT JOIN `wechat_dscmall_226`.`dsc_link_brand`AS lb ON lb.brand_id = b.brand_id  LEFT JOIN `wechat_dscmall_226`.`dsc_merchants_shop_brand`AS msb ON msb.bid = lb.bid AND msb.audit_status = 1 AND msb.is_show = 1  LEFT JOIN `wechat_dscmall_226`.`dsc_goods` AS g ON g.brand_id = msb.bid AND g.user_id > 0 AND g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0  LEFT JOIN `wechat_dscmall_226`.`dsc_goods_cat` AS gc ON g.goods_id = gc.goods_id WHERE (g.cat_id  IN ('8','362','443','439','440','441','442','445','446','447','360','427','428','430','432','433','434','435','436','437','438','355','399','401','402','403','404','405','406','407','408','409','410','411','412','353','368','371','373','375','376','378','380','382','384','386','387','389','391','392','393','394','396','397','398','357','413','414','415','416','417','418','419','420','359','421','422','423','424','425','426','364','449','450','452','453')  OR gc.cat_id  IN ('8','362','443','439','440','441','442','445','446','447','360','427','428','430','432','433','434','435','436','437','438','355','399','401','402','403','404','405','406','407','408','409','410','411','412','353','368','371','373','375','376','378','380','382','384','386','387','389','391','392','393','394','396','397','398','357','413','414','415','416','417','418','419','420','359','421','422','423','424','425','426','364','449','450','452','453') ) AND b.is_show = 1 GROUP BY b.brand_id HAVING goods_num > 0 ORDER BY b.sort_order, b.brand_id ASC LIMIT 0,12
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '105'  AND is_show = 1 LIMIT 1
+
+SELECT cat_name FROM `wechat_dscmall_226`.`dsc_category` WHERE cat_id = '8' LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '106'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '108'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '111'  AND is_show = 1 LIMIT 1
+
+SELECT b.brand_id, b.brand_name,  b.brand_logo, COUNT(*) AS goods_num, IF(b.brand_logo > '', '1', '0') AS tag FROM `wechat_dscmall_226`.`dsc_brand`AS b  LEFT JOIN `wechat_dscmall_226`.`dsc_goods` AS g ON g.brand_id = b.brand_id AND g.user_id = 0 AND g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0  LEFT JOIN `wechat_dscmall_226`.`dsc_goods_cat` AS gc ON g.goods_id = gc.goods_id WHERE (g.cat_id  IN ('5','143','146','149','152','153','154','156','159','160','161','163','165','167','169','172','175','176','179','182','184','188','190','191','192','193','194','195','196','197','198','199','200','201','202','205','206','207','209','210','211','212','214','217','219','221','223','226','227','229','230','231','232','233','235','237','238','240','242','243','244','246','248','250','252','255','257','259','261','263','264','266')  OR gc.cat_id  IN ('5','143','146','149','152','153','154','156','159','160','161','163','165','167','169','172','175','176','179','182','184','188','190','191','192','193','194','195','196','197','198','199','200','201','202','205','206','207','209','210','211','212','214','217','219','221','223','226','227','229','230','231','232','233','235','237','238','240','242','243','244','246','248','250','252','255','257','259','261','263','264','266') ) AND b.is_show = 1 GROUP BY b.brand_id HAVING goods_num > 0 ORDER BY b.sort_order, b.brand_id ASC LIMIT 0,12
+
+SELECT b.brand_id, b.brand_name,  b.brand_logo, COUNT(*) AS goods_num, IF(b.brand_logo > '', '1', '0') AS tag, g.user_id FROM `wechat_dscmall_226`.`dsc_brand`AS b  LEFT JOIN `wechat_dscmall_226`.`dsc_link_brand`AS lb ON lb.brand_id = b.brand_id  LEFT JOIN `wechat_dscmall_226`.`dsc_merchants_shop_brand`AS msb ON msb.bid = lb.bid AND msb.audit_status = 1 AND msb.is_show = 1  LEFT JOIN `wechat_dscmall_226`.`dsc_goods` AS g ON g.brand_id = msb.bid AND g.user_id > 0 AND g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0  LEFT JOIN `wechat_dscmall_226`.`dsc_goods_cat` AS gc ON g.goods_id = gc.goods_id WHERE (g.cat_id  IN ('5','143','146','149','152','153','154','156','159','160','161','163','165','167','169','172','175','176','179','182','184','188','190','191','192','193','194','195','196','197','198','199','200','201','202','205','206','207','209','210','211','212','214','217','219','221','223','226','227','229','230','231','232','233','235','237','238','240','242','243','244','246','248','250','252','255','257','259','261','263','264','266')  OR gc.cat_id  IN ('5','143','146','149','152','153','154','156','159','160','161','163','165','167','169','172','175','176','179','182','184','188','190','191','192','193','194','195','196','197','198','199','200','201','202','205','206','207','209','210','211','212','214','217','219','221','223','226','227','229','230','231','232','233','235','237','238','240','242','243','244','246','248','250','252','255','257','259','261','263','264','266') ) AND b.is_show = 1 GROUP BY b.brand_id HAVING goods_num > 0 ORDER BY b.sort_order, b.brand_id ASC LIMIT 0,12
+
+SELECT cat_name FROM `wechat_dscmall_226`.`dsc_category` WHERE cat_id = '5' LIMIT 1
+
+SELECT b.brand_id, b.brand_name,  b.brand_logo, COUNT(*) AS goods_num, IF(b.brand_logo > '', '1', '0') AS tag FROM `wechat_dscmall_226`.`dsc_brand`AS b  LEFT JOIN `wechat_dscmall_226`.`dsc_goods` AS g ON g.brand_id = b.brand_id AND g.user_id = 0 AND g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0  LEFT JOIN `wechat_dscmall_226`.`dsc_goods_cat` AS gc ON g.goods_id = gc.goods_id WHERE (g.cat_id  IN ('3','112','113','114','115','116','117','119','120','122','124','76','81','82','84','85','87','88','90','91','93','95','96','97','33','34','35','42','43','44','46','47','49','51','52','53','54','55','56','57','59','60','61','62','64','66','68','69','70','71','72','73','74','75','99','101','102','103','105','106','108','111')  OR gc.cat_id  IN ('3','112','113','114','115','116','117','119','120','122','124','76','81','82','84','85','87','88','90','91','93','95','96','97','33','34','35','42','43','44','46','47','49','51','52','53','54','55','56','57','59','60','61','62','64','66','68','69','70','71','72','73','74','75','99','101','102','103','105','106','108','111') ) AND b.is_show = 1 GROUP BY b.brand_id HAVING goods_num > 0 ORDER BY b.sort_order, b.brand_id ASC LIMIT 0,12
+
+SELECT b.brand_id, b.brand_name,  b.brand_logo, COUNT(*) AS goods_num, IF(b.brand_logo > '', '1', '0') AS tag, g.user_id FROM `wechat_dscmall_226`.`dsc_brand`AS b  LEFT JOIN `wechat_dscmall_226`.`dsc_link_brand`AS lb ON lb.brand_id = b.brand_id  LEFT JOIN `wechat_dscmall_226`.`dsc_merchants_shop_brand`AS msb ON msb.bid = lb.bid AND msb.audit_status = 1 AND msb.is_show = 1  LEFT JOIN `wechat_dscmall_226`.`dsc_goods` AS g ON g.brand_id = msb.bid AND g.user_id > 0 AND g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0  LEFT JOIN `wechat_dscmall_226`.`dsc_goods_cat` AS gc ON g.goods_id = gc.goods_id WHERE (g.cat_id  IN ('3','112','113','114','115','116','117','119','120','122','124','76','81','82','84','85','87','88','90','91','93','95','96','97','33','34','35','42','43','44','46','47','49','51','52','53','54','55','56','57','59','60','61','62','64','66','68','69','70','71','72','73','74','75','99','101','102','103','105','106','108','111')  OR gc.cat_id  IN ('3','112','113','114','115','116','117','119','120','122','124','76','81','82','84','85','87','88','90','91','93','95','96','97','33','34','35','42','43','44','46','47','49','51','52','53','54','55','56','57','59','60','61','62','64','66','68','69','70','71','72','73','74','75','99','101','102','103','105','106','108','111') ) AND b.is_show = 1 GROUP BY b.brand_id HAVING goods_num > 0 ORDER BY b.sort_order, b.brand_id ASC LIMIT 0,12
+
+SELECT cat_name FROM `wechat_dscmall_226`.`dsc_category` WHERE cat_id = '3' LIMIT 1
+
+SELECT value FROM `wechat_dscmall_226`.`dsc_shop_config` WHERE code = 'open_oss' LIMIT 1
+
+SELECT value FROM `wechat_dscmall_226`.`dsc_shop_config` WHERE code = 'is_downconfig' LIMIT 1
+
+SELECT value FROM `wechat_dscmall_226`.`dsc_shop_config` WHERE code = 'server_model' LIMIT 1
+
+SELECT value FROM `wechat_dscmall_226`.`dsc_shop_config` WHERE code = 'certi'
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `wechat_dscmall_226`.`dsc_sessions` WHERE sesskey = '6238c4e8a2b5650b1cd7839d5e9edfe2'
+
+SELECT kf_im_switch FROM `wechat_dscmall_226`.`dsc_seller_shopinfo`WHERE ru_id=0
+
+SELECT SUM(bt.type_money) AS bonus_value, COUNT(*) AS bonus_count FROM `wechat_dscmall_226`.`dsc_user_bonus` AS ub, `wechat_dscmall_226`.`dsc_bonus_type` AS bt WHERE ub.user_id = '0' AND ub.bonus_type_id = bt.type_id AND ub.order_id = 0 AND bt.use_start_date < 1501142399 AND bt.use_end_date > 1501142399
+
+SELECT user_name, email, mobile_phone, pay_points, user_money, credit_line, last_login, is_validated, user_picture, rank_points,user_rank, nick_name FROM `wechat_dscmall_226`.`dsc_users` WHERE user_id = '0' LIMIT 1
+
+SELECT COUNT(*) FROM `wechat_dscmall_226`.`dsc_order_info` WHERE user_id = '0' AND add_time > '1498535735'
+
+SELECT order_id, order_sn  FROM `wechat_dscmall_226`.`dsc_order_info` WHERE user_id = '0' AND shipping_time > '1501127732' AND order_status = '1' AND shipping_status  IN ('1','2')  
+
+select b.* from `wechat_dscmall_226`.`dsc_brand` as b left join `wechat_dscmall_226`.`dsc_brand_extend` as be on b.brand_id=be.brand_id  where be.is_recommend=1 AND b.is_show = 1  AND b.brand_id in (204,93,110,113,116,195,79,95,76,126,73,122,98,82,101,85,105)  order by b.sort_order asc  limit 0,17
+
+SELECT COUNT(*) FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '204' AND ru_id = '0'
+
+SELECT rec_id FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '204' AND ru_id = '0' AND user_id = '0' LIMIT 1
+
+SELECT COUNT(*) FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '93' AND ru_id = '0'
+
+SELECT rec_id FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '93' AND ru_id = '0' AND user_id = '0' LIMIT 1
+
+SELECT COUNT(*) FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '195' AND ru_id = '0'
+
+SELECT rec_id FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '195' AND ru_id = '0' AND user_id = '0' LIMIT 1
+
+SELECT COUNT(*) FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '73' AND ru_id = '0'
+
+SELECT rec_id FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '73' AND ru_id = '0' AND user_id = '0' LIMIT 1
+
+SELECT COUNT(*) FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '76' AND ru_id = '0'
+
+SELECT rec_id FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '76' AND ru_id = '0' AND user_id = '0' LIMIT 1
+
+SELECT COUNT(*) FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '79' AND ru_id = '0'
+
+SELECT rec_id FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '79' AND ru_id = '0' AND user_id = '0' LIMIT 1
+
+SELECT COUNT(*) FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '82' AND ru_id = '0'
+
+SELECT rec_id FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '82' AND ru_id = '0' AND user_id = '0' LIMIT 1
+
+SELECT COUNT(*) FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '85' AND ru_id = '0'
+
+SELECT rec_id FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '85' AND ru_id = '0' AND user_id = '0' LIMIT 1
+
+SELECT COUNT(*) FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '110' AND ru_id = '0'
+
+SELECT rec_id FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '110' AND ru_id = '0' AND user_id = '0' LIMIT 1
+
+SELECT COUNT(*) FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '113' AND ru_id = '0'
+
+SELECT rec_id FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '113' AND ru_id = '0' AND user_id = '0' LIMIT 1
+
+SELECT COUNT(*) FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '116' AND ru_id = '0'
+
+SELECT rec_id FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '116' AND ru_id = '0' AND user_id = '0' LIMIT 1
+
+SELECT COUNT(*) FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '122' AND ru_id = '0'
+
+SELECT rec_id FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '122' AND ru_id = '0' AND user_id = '0' LIMIT 1
+
+SELECT COUNT(*) FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '126' AND ru_id = '0'
+
+SELECT rec_id FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '126' AND ru_id = '0' AND user_id = '0' LIMIT 1
+
+SELECT COUNT(*) FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '95' AND ru_id = '0'
+
+SELECT rec_id FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '95' AND ru_id = '0' AND user_id = '0' LIMIT 1
+
+SELECT COUNT(*) FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '98' AND ru_id = '0'
+
+SELECT rec_id FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '98' AND ru_id = '0' AND user_id = '0' LIMIT 1
+
+SELECT COUNT(*) FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '101' AND ru_id = '0'
+
+SELECT rec_id FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '101' AND ru_id = '0' AND user_id = '0' LIMIT 1
+
+SELECT COUNT(*) FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '105' AND ru_id = '0'
+
+SELECT rec_id FROM `wechat_dscmall_226`.`dsc_collect_brand` WHERE brand_id = '105' AND ru_id = '0' AND user_id = '0' LIMIT 1
+
+SELECT GROUP_CONCAT(s2.sec_id) AS sec_id FROM `wechat_dscmall_226`.`dsc_seckill` as s2 WHERE s2.begin_time <= '1501056000' AND s2.acti_time >= '1501056000' ORDER BY s2.acti_time ASC LIMIT 1
+
+ SELECT g.goods_id, g.goods_thumb, g.shop_price, g.market_price, g.goods_name, sg.id, sg.sec_price, sg.sec_num, sg.sec_limit, stb.begin_time, stb.end_time, s.sec_id, s.acti_title, s.acti_time FROM `wechat_dscmall_226`.`dsc_seckill_goods` AS sg LEFT JOIN `wechat_dscmall_226`.`dsc_seckill_time_bucket` AS stb ON sg.tb_id = stb.id  LEFT JOIN `wechat_dscmall_226`.`dsc_seckill` AS s ON s.sec_id = sg.sec_id  LEFT JOIN `wechat_dscmall_226`.`dsc_goods` AS g ON sg.goods_id = g.goods_id  WHERE s.is_putaway = 1 AND s.begin_time <= '1501056000' AND s.acti_time >= '1501056000'  AND s.sec_id  IN ('1','2')  ORDER BY stb.begin_time ASC 
+
+ SELECT MIN(begin_time) AS begin_time, MAX(end_time) AS end_time FROM `wechat_dscmall_226`.`dsc_seckill_time_bucket`
+
+DELETE FROM `wechat_dscmall_226`.`dsc_sessions_data` WHERE expiry < 1500976535
+
+SELECT value FROM `wechat_dscmall_226`.`dsc_shop_config` WHERE code = 'open_oss' LIMIT 1
+
+SELECT value FROM `wechat_dscmall_226`.`dsc_shop_config` WHERE code = 'is_downconfig' LIMIT 1
+
+SELECT value FROM `wechat_dscmall_226`.`dsc_shop_config` WHERE code = 'server_model' LIMIT 1
+
+SELECT value FROM `wechat_dscmall_226`.`dsc_shop_config` WHERE code = 'certi'
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `wechat_dscmall_226`.`dsc_sessions` WHERE sesskey = '6238c4e8a2b5650b1cd7839d5e9edfe2'
+
+SELECT kf_im_switch FROM `wechat_dscmall_226`.`dsc_seller_shopinfo`WHERE ru_id=0
+
+SELECT category_topic FROM `wechat_dscmall_226`.`dsc_category` WHERE cat_id = '6' LIMIT 1
+
+SELECT cat_id , cat_name, cat_alias_name, cat_icon, style_icon FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '6'  AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '347'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '347' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '349'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '350'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '351'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '352'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '354'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '356'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '358'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '361'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '363'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '365'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '367'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '369'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '370'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '372'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '374'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '377'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '379'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '381'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '383'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '385'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '388'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '390'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '395'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '400'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '429'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '431'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '444'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '448'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '451'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '454'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '455'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '463'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '463' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '473'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '466'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '474'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '475'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '478'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '480'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '485'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '486'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '488'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '494'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '498'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '502'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '504'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '505'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '507'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '508'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '510'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '512'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '513'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '516'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '517'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '520'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '630'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '630' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '641'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '657'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '663'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '664'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '665'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '666'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '668'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '669'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '670'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '671'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '672'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '673'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '674'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '675'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '676'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '547'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '547' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '592'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '550'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '554'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '555'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '557'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '560'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '562'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '564'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '566'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '567'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '568'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '569'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '570'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '571'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '580'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '582'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '583'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '590'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1442'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '1442' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1443'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1444'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1445'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1446'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1447'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1448'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1449'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1450'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1451'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1452'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1453'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1454'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1455'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1456'  AND is_show = 1 LIMIT 1
+
+SELECT ap.ad_width, ap.ad_height, ad.ad_id, ad.ad_name, ad.ad_code, ad.ad_bg_code, ad.ad_link, ad.link_man, ad.link_color, ad.b_title, ad.s_title, ad.start_time, ad.end_time, ad.ad_type, ad.goods_name FROM `wechat_dscmall_226`.`dsc_ad_position` AS ap  LEFT JOIN `wechat_dscmall_226`.`dsc_ad` AS ad ON ad.position_id = ap.position_id  WHERE  ad.ad_name in('cat_tree_6_1','cat_tree_6_2','cat_tree_6_3','cat_tree_6_4','cat_tree_6_5','cat_tree_6_6','cat_tree_6_7','cat_tree_6_8','cat_tree_6_9','cat_tree_6_10','cat_tree_6_11','cat_tree_6_12','cat_tree_6_13','cat_tree_6_14','cat_tree_6_15','cat_tree_6_16','cat_tree_6_17','cat_tree_6_18','cat_tree_6_19','cat_tree_6_20') and  ad.media_type=0 AND '1501127736' > ad.start_time AND '1501127736' < ad.end_time and ad.enabled=1 AND theme = 'ecmoban_dsc2017' ORDER BY ad_name,ad.ad_id ASC
+
+SELECT cat_id  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '6'  AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '347'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '347' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '349'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '350'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '351'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '352'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '354'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '356'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '358'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '361'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '363'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '365'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '367'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '369'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '370'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '372'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '374'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '377'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '379'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '381'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '383'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '385'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '388'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '390'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '395'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '400'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '429'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '431'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '444'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '448'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '451'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '454'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '455'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '463'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '463' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '473'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '466'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '474'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '475'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '478'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '480'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '485'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '486'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '488'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '494'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '498'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '502'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '504'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '505'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '507'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '508'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '510'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '512'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '513'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '516'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '517'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '520'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '630'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '630' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '641'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '657'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '663'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '664'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '665'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '666'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '668'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '669'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '670'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '671'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '672'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '673'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '674'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '675'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '676'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '547'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '547' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '592'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '550'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '554'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '555'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '557'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '560'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '562'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '564'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '566'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '567'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '568'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '569'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '570'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '571'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '580'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '582'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '583'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '590'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1442'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '1442' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1443'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1444'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1445'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1446'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1447'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1448'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1449'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1450'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1451'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1452'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1453'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1454'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1455'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1456'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id  FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '6'  AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '347'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '347' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '349'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '350'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '351'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '352'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '354'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '356'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '358'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '361'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '363'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '365'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '367'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '369'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '370'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '372'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '374'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '377'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '379'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '381'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '383'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '385'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '388'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '390'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '395'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '400'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '429'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '431'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '444'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '448'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '451'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '454'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '455'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '463'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '463' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '473'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '466'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '474'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '475'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '478'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '480'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '485'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '486'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '488'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '494'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '498'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '502'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '504'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '505'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '507'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '508'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '510'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '512'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '513'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '516'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '517'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '520'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '630'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '630' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '641'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '657'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '663'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '664'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '665'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '666'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '668'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '669'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '670'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '671'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '672'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '673'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '674'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '675'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '676'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '547'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '547' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '592'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '550'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '554'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '555'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '557'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '560'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '562'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '564'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '566'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '567'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '568'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '569'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '570'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '571'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '580'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '582'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '583'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '590'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1442'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `wechat_dscmall_226`.`dsc_category`WHERE parent_id = '1442' AND is_show = 1  ORDER BY sort_order ASC, cat_id ASC
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1443'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1444'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1445'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1446'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1447'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1448'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1449'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1450'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1451'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1452'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1453'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1454'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1455'  AND is_show = 1 LIMIT 1
+
+SELECT cat_id FROM `wechat_dscmall_226`.`dsc_category` WHERE parent_id = '1456'  AND is_show = 1 LIMIT 1
+
+SELECT b.brand_id, b.brand_name,  b.brand_logo, COUNT(*) AS goods_num, IF(b.brand_logo > '', '1', '0') AS tag FROM `wechat_dscmall_226`.`dsc_brand`AS b  LEFT JOIN `wechat_dscmall_226`.`dsc_goods` AS g ON g.brand_id = b.brand_id AND g.user_id = 0 AND g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0  LEFT JOIN `wechat_dscmall_226`.`dsc_goods_cat` AS gc ON g.goods_id = gc.goods_id WHERE (g.cat_id  IN ('6','347','349','350','351','352','354','356','358','361','363','365','367','369','370','372','374','377','379','381','383','385','388','390','395','400','429','431','444','448','451','454','455','463','473','466','474','475','478','480','485','486','488','494','498','502','504','505','507','508','510','512','513','516','517','520','630','641','657','663','664','665','666','668','669','670','671','672','673','674','675','676','547','592','550','554','555','557','560','562','564','566','567','568','569','570','571','580','582','583','590','1442','1443','1444','1445','1446','1447','1448','1449','1450','1451','1452','1453','1454','1455','1456')  OR gc.cat_id  IN ('6','347','349','350','351','352','354','356','358','361','363','365','367','369','370','372','374','377','379','381','383','385','388','390','395','400','429','431','444','448','451','454','455','463','473','466','474','475','478','480','485','486','488','494','498','502','504','505','507','508','510','512','513','516','517','520','630','641','657','663','664','665','666','668','669','670','671','672','673','674','675','676','547','592','550','554','555','557','560','562','564','566','567','568','569','570','571','580','582','583','590','1442','1443','1444','1445','1446','1447','1448','1449','1450','1451','1452','1453','1454','1455','1456') ) AND b.is_show = 1 GROUP BY b.brand_id HAVING goods_num > 0 ORDER BY b.sort_order, b.brand_id ASC LIMIT 0,12
+
+SELECT b.brand_id, b.brand_name,  b.brand_logo, COUNT(*) AS goods_num, IF(b.brand_logo > '', '1', '0') AS tag, g.user_id FROM `wechat_dscmall_226`.`dsc_brand`AS b  LEFT JOIN `wechat_dscmall_226`.`dsc_link_brand`AS lb ON lb.brand_id = b.brand_id  LEFT JOIN `wechat_dscmall_226`.`dsc_merchants_shop_brand`AS msb ON msb.bid = lb.bid AND msb.audit_status = 1 AND msb.is_show = 1  LEFT JOIN `wechat_dscmall_226`.`dsc_goods` AS g ON g.brand_id = msb.bid AND g.user_id > 0 AND g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0  LEFT JOIN `wechat_dscmall_226`.`dsc_goods_cat` AS gc ON g.goods_id = gc.goods_id WHERE (g.cat_id  IN ('6','347','349','350','351','352','354','356','358','361','363','365','367','369','370','372','374','377','379','381','383','385','388','390','395','400','429','431','444','448','451','454','455','463','473','466','474','475','478','480','485','486','488','494','498','502','504','505','507','508','510','512','513','516','517','520','630','641','657','663','664','665','666','668','669','670','671','672','673','674','675','676','547','592','550','554','555','557','560','562','564','566','567','568','569','570','571','580','582','583','590','1442','1443','1444','1445','1446','1447','1448','1449','1450','1451','1452','1453','1454','1455','1456')  OR gc.cat_id  IN ('6','347','349','350','351','352','354','356','358','361','363','365','367','369','370','372','374','377','379','381','383','385','388','390','395','400','429','431','444','448','451','454','455','463','473','466','474','475','478','480','485','486','488','494','498','502','504','505','507','508','510','512','513','516','517','520','630','641','657','663','664','665','666','668','669','670','671','672','673','674','675','676','547','592','550','554','555','557','560','562','564','566','567','568','569','570','571','580','582','583','590','1442','1443','1444','1445','1446','1447','1448','1449','1450','1451','1452','1453','1454','1455','1456') ) AND b.is_show = 1 GROUP BY b.brand_id HAVING goods_num > 0 ORDER BY b.sort_order, b.brand_id ASC LIMIT 0,12
+
+SELECT cat_name FROM `wechat_dscmall_226`.`dsc_category` WHERE cat_id = '6' LIMIT 1
+
+DELETE FROM `wechat_dscmall_226`.`dsc_sessions_data` WHERE expiry < 1500976537
+

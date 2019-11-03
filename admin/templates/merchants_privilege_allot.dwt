@@ -4,24 +4,24 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title"><a href="seller_grade.php?act=list" class="s-back" ></a>{$lang.seller} - {$ur_here}</div>
+    	<div class="title"><a href="seller_grade.php?act=list" class="s-back" ></a>商家 - {$ur_here}</div>
         <div class="content">
         	{include file ='library/seller_step_tab.lbi'}		
         	<div class="explanation" id="explanation">
             	<div class="ex_tit">
-					<i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span>
+					<i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span>
                     {if $open eq 1}
                     <div class="view-case">
-                    	<div class="view-case-tit"><i></i>{$lang.view_tutorials}</div>
+                    	<div class="view-case-tit"><i></i>查看教程</div>
                         <div class="view-case-info">
-                        	<a href="http://help.ecmoban.com/article-3221.html" target="_blank">{$lang.tutorials_bonus_list_one}</a>
+                        	<a href="http://help.ecmoban.com/article-3221.html" target="_blank">入驻商家权限使用说明</a>
                         </div>
                     </div>			
                     {/if}				
 				</div>
                 <ul>
-                	<li>{$lang.operation_prompt_content.allot.0}</li>
-                    <li>{$lang.operation_prompt_content.allot.1}</li>
+                	<li>根据不同的入驻商家等级进行分派权限。</li>
+                    <li>修改权限将导致商家后台改变，请谨慎操作。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -42,7 +42,7 @@
                                                 <div class="cite">{$lang.select_please}</div>
                                                 <ul>
                                                     {foreach from=$seller_grade item=seller_grade}
-                                                    <li><a href='javascript:;' data-value='{$seller_grade.id}' class='ftx-01'>{$seller_grade.grade_name}</a></li>
+                                                        <li><a href='javascript:;' data-value='{$seller_grade.id}' class='ftx-01'>{$seller_grade.grade_name}</a></li>
                                                     {/foreach}
                                                 </ul>
                                                 <input name="grade_id" type="hidden" value="{$grade_id}" id="grade_id_val">

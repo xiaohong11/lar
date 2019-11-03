@@ -7,10 +7,10 @@
     	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                	<li>{$lang.operation_prompt_content_common}</li>
-                    <li>{$lang.operation_prompt_content.2}</li>
+                	<li>标识“<em>*</em>”的选项为必填项，其余为选填项。</li>
+                    <li>请按提示文案正确填写信息。</li>
                 </ul>
             </div>
             <div class="flexilist">
@@ -47,7 +47,7 @@
 											<ul style="display: none;">
                                             	<li><a data-value="-1">{$lang.select_please}</a></li>
 												{foreach from=$attr_groups key=key item=item}
-												<li><a data-value="{$key}">{$item}</a></li>
+													<li><a data-value="{$key}">{$item}</a></li>
 												{/foreach}
 											</ul>
 											<input name="attr_group" type="hidden" value="{$attr.attr_group}">
@@ -57,16 +57,16 @@
                                     </div>
                                 </div>
                                 <div class="item">
-                                    <div class="label">{$lang.category_style}：</div>
+                                    <div class="label">分类筛选样式：</div>
                                     <div class="label_value">
                                         <div class="checkbox_items">
                                             <div class="checkbox_item">
                                                 <input type="radio" class="ui-radio" name="attr_cat_type" id="attr_cat_type_0" value="0" {if $attr.attr_cat_type eq 0} checked="true" {/if}  />
-                                                <label for="attr_cat_type_0" class="ui-radio-label">{$lang.category_style_one}</label>
+                                                <label for="attr_cat_type_0" class="ui-radio-label">普通</label>
                                             </div>
                                             <div class="checkbox_item">
                                                 <input type="radio" class="ui-radio" name="attr_cat_type" id="attr_cat_type_1" value="1" {if $attr.attr_cat_type eq 1} checked="true" {/if}  />
-                                                <label for="attr_cat_type_1" class="ui-radio-label">{$lang.category_style_color}</label>
+                                                <label for="attr_cat_type_1" class="ui-radio-label">颜色</label>
                                             </div>
                                         </div>
                                     </div>
@@ -184,8 +184,17 @@
             </div>
 		</div>
     </div>
- 	{include file ='library/pagefooter.lbi'}
-	<script type="text/javascript">
+ {include file ='library/pagefooter.lbi'}
+	{literal}
+	<script language="JavaScript">
+	<!--
+	onload = function()
+	{
+		{/literal}
+		  onChangeGoodsType({$attr.cat_id});
+		{literal}
+	}
+	
 	$(function(){
 		//表单验证
 		$("#submitBtn").click(function(){
@@ -207,7 +216,7 @@
 			},
 			messages:{
 				attr_name:{
-					required : '<i class="icon icon-exclamation-sign"></i>' + name_not_null
+					required : '<i class="icon icon-exclamation-sign"></i>属性名称不能为空'
 				}
 			}			
 		});
@@ -225,35 +234,50 @@
 		if($("#attr_input_type_0").is(":checked")){
 			$("textarea[name='attr_values']").attr("disabled",true);
 		}
-		
-		onChangeGoodsType({$attr.cat_id});
-	});
-	
-	/* 防止报错 start*/
-	function changeCat(obj){}
-	/* 防止报错 end*/
+	});	
 	
 	/**
 	 * 改变商品类型的处理函数
 	 */
-	function onChangeGoodsType(catId){
-		Ajax.call('attribute.php?act=get_attr_groups&cat_id=' + catId, '', changeGoodsTypeResponse, 'GET', 'JSON');
+	function onChangeGoodsType(catId)
+	{
+	  Ajax.call('attribute.php?act=get_attr_groups&cat_id=' + catId, '', changeGoodsTypeResponse, 'GET', 'JSON');
 	}
-	
-	function changeGoodsTypeResponse(res){
-		if (res.error == 0){
-			var row = document.getElementById('attrGroups');
-			if (res.content.length == 0) {
-				row.style.display = 'none';
-			}else{
-				row.style.display = document.all ? 'block' : 'table-row';
+
+	function changeGoodsTypeResponse(res)
+	{
+	  if (res.error == 0)
+	  {
+		var row = document.getElementById('attrGroups');
+		if (res.content.length == 0) {
+		  row.style.display = 'none';
+		} else {
+		  row.style.display = document.all ? 'block' : 'table-row';
+
+		  var sel = document.forms['theForm'].elements['attr_group'];
+
+		  sel.length = 0;
+
+		  for (var i = 0; i < res.content.length; i++)
+		  {
+			var opt = document.createElement('OPTION');
+			opt.value = i;
+			opt.text = res.content[i];
+			sel.options.add(opt);
+			if (i == '{$attr.attr_group}')
+			{
+			  opt.selected=true;
 			}
+		  }
 		}
-		
-		if(res.message){
-			alert(res.message);
-		}
+	  }
+
+	  if (res.message)
+	  {
+		alert(res.message);
+	  }
 	}
 	</script>
+	{/literal}
 </body>
 </html>

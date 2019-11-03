@@ -1,20 +1,18 @@
 <div class="select">
-    {if $common_tabs.info}
 	<div class="fl" id="steps_shop_name">{$lang.steps_shop_name}：</div>
 	<div id="" class="imitate_select select_w170">
-		<div class="cite">{$lang.please_select}</div>
+		<div class="cite">请选择</div>
 		<ul>
 			<li><a href="javascript:get_store_search(-1);" data-value="-1" class="ftx-01">{$lang.select_please}</a></li>
-			<!--<li id="store_0"><a href="javascript:get_store_search(0);" data-value="0" class="ftx-01">{$lang.platform_self}</a></li>-->
+			<li id="store_0"><a href="javascript:get_store_search(0);" data-value="0" class="ftx-01">{$lang.platform_self}</a></li>
 			<li><a href="javascript:get_store_search(1);" data-value="1" class="ftx-01">{$lang.s_shop_name}</a></li>
 			<li><a href="javascript:get_store_search(2);" data-value="2" class="ftx-01">{$lang.s_qw_shop_name}</a></li>
 			<li><a href="javascript:get_store_search(3);" data-value="3" class="ftx-01">{$lang.s_brand_type}</a></li>
 		</ul>
 		<input name="store_search" type="hidden" value="-1" id="">
 	</div>
-    {/if}
 	<div id="" class="imitate_select select_w170" style="display:none">
-		<div class="cite">{$lang.please_select}</div>
+		<div class="cite">请选择</div>
 		<ul>
 			<li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.please_select}</a></li>
 			{foreach from=$store_list item=store}
@@ -25,7 +23,7 @@
 	</div>
 	<input name="store_keyword" type="text" style="display:none" class="text text_2"/>
 	<div id="" class="imitate_select select_w170" style="display:none">
-		<div class="cite">{$lang.please_select}</div>
+		<div class="cite">请选择</div>
 		<ul>
 			<li><a href="javascript:;" data-value="0" class="ftx-01">{$lang.steps_shop_type}</a></li>
 			<li><a href="javascript:;" data-value="{$lang.flagship_store}" class="ftx-01">{$lang.flagship_store}</a></li>

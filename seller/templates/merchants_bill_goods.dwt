@@ -28,7 +28,11 @@
                   <table class="ecsc-default-table mt20">	
                     <thead>
                     <tr>
-                      <th width="6%">{$lang.record_id}</th>
+                      <th width="6%">
+                        <div class="first_all">
+                            <input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox" id="all" class="ui-checkbox" /><label class="ui-label" for="all">{$lang.record_id}</label>
+                        </div>
+                      </th>
                       <th width="15%">商品编号</th>
                       <th width="35%" class="tl">商品名称</th>
                       <th>分类名称</th>
@@ -45,8 +49,11 @@
                     <tbody>
                     {foreach from=$goods_list item=goods name=noorder}
                     <tr>
-                      <td >
-                        {$goods.rec_id}
+                      <td class="first_td_checkbox">
+                        <div class="first_all">
+                            <input type="checkbox" name="checkboxes[]" value="{$goods.rec_id}" id="checkbox_{$goods.rec_id}" class="ui-checkbox" />
+                            <label class="ui-label" for="checkbox_{$goods.rec_id}">{$goods.rec_id}</label>
+                        </div>
                       </td>
                       <td>{$goods.goods_id}</td>
                       <td class="tl">

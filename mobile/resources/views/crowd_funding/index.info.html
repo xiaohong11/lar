@@ -14,17 +14,11 @@
         </nav>
         </h3>
     </header>
-		<div class="goods-photo j-show-goods-img new-crowd-img">
+		<div class="goods-photo j-show-goods-img">
 			<span class="goods-num" id="goods-num"><span id="g-active-num"></span>/<span id="g-all-num"></span></span>
-			<div class="swiper-wrapper my-gallery-box" data-pswp-uid="10">
-						<figure class="swiper-slide tb-lr-center">
-							<div class="img-box">
-							<a href="{$goods.title_img}" data-size="640x640">
-								<img src="{$goods.title_img}" />
-							</a>
-						</div>
-						</figure>
-					</div>
+			<div class="swiper-wrapper">
+				<li class="swiper-slide tb-lr-center"><img src="{$goods.title_img}" /></li>
+			</div>
 			<!-- Add Pagination -->
 			<div class="swiper-pagination"></div>
 		</div>
@@ -33,38 +27,31 @@
 		<section class="raise-list-default">
 			<div class="dis-box raise-header padding-all b-color-f">
 				<div class="raise-admin-left">
-					<div class="raise-admin-img">
-						<div class="img-commom p-r"><img src="{$init.img}"></div>
-					</div>
+					<div class="raise-admin-img"><img src="{$init.img}"></div>
 				</div>
-				<div class="box-flex"><label class="color-red f-06 name">{$init.name}</label></div>
+				<div class="box-flex"><label class="color-red f-06">{$init.name}</label></div>
 
-				<div class="box-flex raise-goods-btn-box p-r">
+				<div class="box-flex raise-goods-btn-box">
 					<label class="fr color-whie f-04 raise-button-1 text-c ">
-						{if $kefu}
-			                <a class="filter-btn-kefu" href="{url('chat/index/index')}">咨询</a>
-			            {else}
-			                {if $basic_info.is_im == 1 || $basic_info.is_dsc}
-			                    <a class="box-fle" href="{url('chat/yunwang/index')}">咨询</a>
-			                {elseif isset($basic_info.meiqia) && !empty($basic_info.meiqia)}
-			                    <a class="box-flex" href="https://static.meiqia.com/dist/standalone.html?eid={$basic_info.meiqia}">咨询</a>
-			                {else}
-			                    {if $basic_info.kf_type}
-			                    <a class="box-flex" href="http://www.taobao.com/webww/ww.php?ver=3&touid={$basic_info.kf_ww}&siteid=cntaobao&status=1&charset=utf-8">咨询</a>
-			                    {else}
-			                    <a class="box-flex" href="http://wpa.qq.com/msgrd?v=3&uin={$basic_info.kf_qq}&site=qq&menu=yes">咨询</a>
-			                    {/if}
-			                {/if}
-			            {/if}
-					</label>
-				</div>
+                        {if isset($basic_info.meiqia) && !empty($basic_info.meiqia)}
+                            <a class="box-flex" href="https://static.meiqia.com/dist/standalone.html?eid={$basic_info.meiqia}">咨询</a>
+                        {else}
+                            {if $basic_info.kf_type}
+                            <a class="box-flex" href="http://www.taobao.com/webww/ww.php?ver=3&touid={$basic_info.kf_ww}&siteid=cntaobao&status=1&charset=utf-8">咨询</a>
+                            {else}
+                            <a class="box-flex" href="http://wpa.qq.com/msgrd?v=3&uin={$basic_info.kf_qq}&site=qq&menu=yes">咨询</a>
+                            {/if}
+                        {/if}
+
+
+						</label></div>
 			</div>
-			<div class="b-color-f raise-cont m-top08 raise-category">
+			<div class="b-color-f raise-cont m-top08">
 				<h4 class="col-3 f-06">{$goods.title}</h4>
 				<p class=" dis-box g-p-tthree m-top06">
 					<span class="box-flex text-right">
 									{if $goods.result == 2}
-									 {$goods.zc_status}<!-- 项目状态 -->
+									 项目完成
 									 {else}
 									 还剩:<label class="color-red">{$goods.shenyu_time}</label>天
 									 {/if}
@@ -140,7 +127,6 @@
 							</h4>
 					<p class="col-4 f-03 m-top06">{$good.content}</p>
 					<h4 class="col-7 f-03 m-top08">回报时间：项目成功{$good.return_time}天内</h4>
-					<h4 class="col-7 f-03 m-top08">配送费用：{if $good.shipping_fee}{$good.shipping_fee}{else}免运费{/if}</h4>
 				</div>
 			</div>
 			{/foreach}
@@ -170,9 +156,9 @@
 							<div class="dis-box raise-header padding-all b-color-f">
 								<div class="raise-admin-left">
 									{if $vo.user_picture!=='' }
-									<div class="raise-admin-img"><div class="img-commom p-r"><img src="{$vo.user_picture}"></div></div>
+									<div class="raise-admin-img"><img src="{$vo.user_picture}"></div>
 									{else}
-									<div class="raise-admin-img"><div class="img-commom p-r"><img src="{elixir('img/no_image.jpg')}"></div></div>
+									<div class="raise-admin-img"><img src="{elixir('img/no_image.jpg')}"></div>
 									{/if}
 
 								</div>
@@ -213,9 +199,9 @@
 							<div class="dis-box raise-header padding-all b-color-f">
 								<div class="raise-admin-left">
 									{if $vo.user_picture!=='' }
-									<div class="raise-admin-img"><div class="img-commom p-r"><img src="{$vo.user_picture}"></div></div>
+									<div class="raise-admin-img"><img src="{$vo.user_picture}"></div>
 									{else}
-									<div class="raise-admin-img"><div class="img-commom p-r"><img src="{elixir('img/no_image.jpg')}"></div></div>
+									<div class="raise-admin-img"><img src="{elixir('img/no_image.jpg')}"></div>
 									{/if}
 								</div>
 								<div class="box-flex">
@@ -279,7 +265,7 @@
                 <em>话题</em>
             </a>
 			{if $goods.result == 2}
-			<a class="btn-reset box-flex j-goods-attr ">{$goods.zc_status}</a> <!-- 项目状态 -->
+			<a class="btn-reset box-flex j-goods-attr ">项目结束</a>
 			{else}
 			<a class="btn-submit box-flex j-goods-attr j-show-div-1">支持</a>
 			{/if}
@@ -317,7 +303,6 @@
 													{/if}</h4>
 													<p class="col-3 f-03 m-top06">{$good.content}</p>
 													<h4 class="col-7 f-03 m-top08">回报时间：项目成功{$good.return_time}天内</h4>
-													<h4 class="col-7 f-03 m-top08">配送费用：{if $good.shipping_fee}{$good.shipping_fee}{else}免运费{/if}</h4>
 												</div>
 											</div>
 										<i class="fr iconfont icon-gou ts-1 raise-goods-right"></i>
@@ -371,21 +356,10 @@
 	              <p>微筹中心</p>
 	        </a>
         </li>
-        	{include file="image"}
     {include file="float_nav_footer"}
 	<!--悬浮菜单e-->
 				<script>
-				//相册
-    				initPhotoSwipeFromDOM('.my-gallery-box');
 					$(function() {
-					function crowdHeight(){
-						var crowd_cont_height = $(".new-goods-nav").outerHeight(true);
-						var crowd_box = $(".new-crowd-img").css("margin-top",crowd_cont_height)
-					}
-					crowdHeight()
-					window.onresize = function(){
-						crowdHeight()
-					}
 						$(".j-fengxiang-box").click(function(){
 								document.addEventListener("touchmove", handler, false);
 							$(".fengxiang-img-box").addClass("active");
@@ -447,13 +421,13 @@
 							}
 						})
 						if(id==''){
-							d_messages('请先择回报方案');
+							alert('请先择回报方案');
 							return false;
 						}
 						var qty = parseInt($("#number").val());
 						if(limit > 0){
 							if(qty > number ){
-								d_messages('该方案已售罄，请选择其他方案');
+								alert('该方案已售罄，请选择其他方案');
 								return false;
 							}
 						}
@@ -503,7 +477,7 @@
 					function changePriceResponse(res) {
 						if (res.err_msg.length > 0) {
 							document.getElementById('ECS_GOODS_AMOUNT').innerHTML = res.result;
-							d_messages(res.err_msg);
+							alert(res.err_msg);
 						} else {
 							if (document.getElementById('ECS_GOODS_AMOUNT'))
 								document.getElementById('ECS_GOODS_AMOUNT').innerHTML = res.result;
@@ -540,10 +514,7 @@
 							}
 						}
 					}
-				header_img()
-			    window.onresize = function(){
-			        header_img()
-			    }
+
 				</script>
 	</body>
 </html>

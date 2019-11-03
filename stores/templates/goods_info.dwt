@@ -14,7 +14,6 @@
     </div>
     <form method="post" action="{$product_php}" name="addForm" id="addForm" onsubmit="return false;" >
     <input type="hidden" name="goods_id" value="{$goods_id}" />
-    <input type="hidden" name="page" value="{$page}" />
     <input type="hidden" name="act" value="product_add_execute" />
     <div class="product_stock">
     	<div class="porduct_info">

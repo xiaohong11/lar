@@ -1,33 +1,36 @@
 {include file="page_header"}
 
 <section class="b-color-f  my-nav-box">
-	<div class="s-user-top">
-		<div class="user-bg-box-1">
-			<img src="{elixir('img/user-1.png')}">
-		</div>
-		<div class="user-bg2-box-1"><img src="{elixir('img/user-2.png')}"></div>
-		<div class="s-xian-box user_profile_box s-user-top-1 p-r">
-			<div class="dis-box t-goods1 onelist-hidden jian-top" for="logo">
-				<div class="user-img ">
-                    {if $is_wechat == 0}<input id="headimg" type="file" class="user-profile-img" style="opacity: 0" />{/if}
-					<div class="user-head-img-box-1 img-commom">
-                    {if $info.user_picture !=='' }<img src="{$info.user_picture}">{else}<img src="{elixir('img/no_image.jpg')}">{/if}
-                    </div>
-                </div>
-                <div class="box-flex profile-index-top">
-                    <h3 class="text-all-span my-u-title-size">{$info.nick_name}</h3>
-                    <p class="text-all-span f-02"><span>用户名</span> {$user_name}</p>
-                </div>
+	<a href="javascript:;">
+		<div class="s-user-top">
+			<div class="user-bg-box-1">
+				<img src="{elixir('img/user-1.png')}">
 			</div>
-            <i class="iconfont icon-jiantou tf-180 jian-top"></i>
-		</div>
-	</div>
+			<div class="user-bg2-box-1"><img src="{elixir('img/user-2.png')}"></div>
+			<div class="s-xian-box user_profile_box s-user-top-1 p-r">
+				<div class="dis-box t-goods1 onelist-hidden jian-top" for="logo">
+					<div class="user-img ">
+                        <input id="headimg" type="file" class="user-profile-img" style="opacity: 0" />
+    					<div class="user-head-img-box-1">
+                        {if $info.user_picture !=='' }<img src="{$info.user_picture}">{else}<img src="{elixir('img/no_image.jpg')}">{/if}
+                        </div>
+                    </div>
+                    <div class="box-flex profile-index-top">
+                        <h3 class="text-all-span my-u-title-size">{$info.nick_name}</h3>
+                        <p class="text-all-span f-02"><span>用户名</span> {$user_name}</p>
+                    </div>
+				</div>
+                <i class="iconfont icon-jiantou tf-180 jian-top"></i>
+			</div>
 
-	<div class="s-user-top {if !$is_wechat} onclik-nick_name {/if}">
+		</div>
+	</a>
+
+	<div class="s-user-top onclik-nick_name">
 		<div class="dis-box s-xian-box s-user-top-1">
 			<h3 class="box-flex text-all-span my-u-title-size">昵称</h3>
 			<div id="nick_name" class="box-flex t-goods1 text-right onelist-hidden jian-top">{$info.nick_name}</div>
-            {if !$is_wechat} <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>{/if}
+            <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
 		</div>
 	</div>
 	<div class="s-user-top onclik-sex">
@@ -44,7 +47,7 @@
             <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
         </div>
     </div>
-    <a href="{url('index/addresslist')}">
+<a href="{url('index/addresslist')}">
         <div class="s-user-top">
             <div class="dis-box s-user-top-1">
                 <h3 class="box-flex text-all-span my-u-title-size">收货地址</h3>
@@ -84,7 +87,7 @@
    {/if}
 </section>
 <section class="b-color-f my-nav-box m-top10">
-    <a href="{url('user/index/help')}">
+    <a href="{url('user/index/userhelp')}">
         <div class="s-user-top">
             <div class="dis-box s-user-top-1">
                 <h3 class="box-flex text-all-span my-u-title-size">使用帮助</h3>
@@ -94,7 +97,7 @@
     </a>
 </section>
 
-{if !$is_wechat && !$in_ecjia}
+{if $is_connect_user == 0}
 <div class="ect-button-more padding-all">
     <a class="btn-submit box-flex br-5 bg-hui" type="button" href="{url('user/login/logout')}">退出</a>
 </div>
@@ -103,7 +106,7 @@
 <!-- 修改昵称 -->
 <div class=" my-nick_name-box">
     <div class="flow-consignee margin-lr ">
-        <div class="text-all j-text-all dis-box">
+        <div class="text-all dis-box">
             <label>昵称</label>
             <div class="box-flex input-text">
                 <input class="j-input-text inputcard" type="text" name="nick_name" placeholder="昵称" value="{$info.nick_name}">
@@ -143,7 +146,7 @@
         <div class="weui-cell f-05 text-all col-3">
             <div class="weui-cell__hd"><span for="" class="weui-label">出生日期：</span></div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="date" value="{if $info.birthday}{$info.birthday}{else}1970-01-01{/if}" name="birthday">
+                <input class="weui-input" type="date" value="{if $info.birthday}{$info.birthday}{else}1900-00-00{/if}" name="birthday">
             </div>
         </div>
         <div class="ect-button-more dis-box m-top12 my-birthday-close">
@@ -216,7 +219,6 @@ $(function($) {
 /* 修改头像*/
 $('.user-head-img-box-1 img').click(function(){
 	$('#headimg').click();
-
 });
 $('#headimg').change(function(e){
 	var file = e.target.files[0];
@@ -250,20 +252,15 @@ $('#headimg').change(function(e){
 				var res = xhr.responseText;
 				res = JSON.parse(res);
 				if(res.error == 0){
-					$('.user-head-img-box-1 img').attr('src', res.path);
+					$('.user-head-img-box-1 img').attr('src', '../' + res.path);
 				}
 			}
 		}
 	};
 	xhr.open("post", "{url('changeheader')}", true);
 	xhr.send(form);
-
 });
 {/if}
-    header_img()
-    window.onresize = function(){
-        header_img()
-    }
 </script>
 </body>
 </html>

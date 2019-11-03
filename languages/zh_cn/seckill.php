@@ -58,30 +58,4 @@ $_LANG['gong'] = "共";
 $_LANG['di_no'] = "第";
 
 $_LANG['shipping'] = "快递";
-$_LANG['is_shipping_area'] = "[ 暂不支持配送 ]";
-$_LANG['remind_goods_existed'] = "已设置提醒 ";
-$_LANG['remind_goods_success'] = "设置提醒成功！";
-$_LANG['cancel_remind_success'] = "取消提醒成功！";
-
-$_LANG['login_please'] = "请先登录";
-
-
-//20161214
-$_LANG['js_languages']['see_store'] = '查看门店';
-$_LANG['js_languages']['Purchase_quantity'] = '超过限购数量';
-$_LANG['js_languages']['shiping_prompt'] = "暂不支持配送";
-$_LANG['js_languages']['Have_goods'] = "有货"; 
-$_LANG['js_languages']['No_goods'] = "无货";
-$_LANG['js_languages']['Deliver_back_order'] = "下单后立即发货";
-$_LANG['js_languages']['goods_over'] = "此商品暂时售完";
-$_LANG['js_languages']['qi'] = "期";
-$_LANG['js_languages']['free_desc'] = "含手续费：费率";
-$_LANG['js_languages']['see_store'] = '查看门店';
-$_LANG['js_languages']['Already_buy'] = '已购买';
-$_LANG['js_languages']['Already_buy_two'] = '件商品达到限购条件,无法再购买';
-$_LANG['js_languages']['bid_prompt_error'] = '价格输入格式不正确！';
-$_LANG['js_languages']['mobile_error_goods'] = '&nbsp;&nbsp;手机格式不正确！';
-$_LANG['js_languages']['null_email_goods'] = '邮箱不能为空'; 
-
-$_LANG['js_languages']['common']['Stock_goods_null'] = "您秒杀的商品暂时缺货，请耐心等待！";
-$_LANG['buy_error'] = "很抱歉，您秒杀的商品暂时缺货，请及时联系客服！";
+$_LANG['is_shipping_area'] = "[ 该地区不支持配送 ]";

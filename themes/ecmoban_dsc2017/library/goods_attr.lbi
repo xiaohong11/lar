@@ -10,7 +10,7 @@
                 {if $spe_list.is_checked > 0}
                 <ul>
                     {foreach from=$spe_list.values item=val name=spe}
-                    <li {if $val.checked eq 1}class="selected"{/if}>
+                    <li {if $val.checked eq 1 && $cfg.add_shop_price eq 1}class="selected"{/if}>
                         <b></b>
                         <a href="javascript:void(0)">
                         {if $val.img_flie}
@@ -20,17 +20,17 @@
                         {$val.label}
                         {/if}
                         </a>
-                        <input class="hide" id="spec_value_{$val.id}" type="{if $spe_list.attr_type eq 2}checkbox{else}radio{/if}" {if $val.checked eq 1}checked="checked"{/if} name="spec_{$spe_list.attr_id}" value="{$val.id}" />
+                        <input class="hide" id="spec_value_{$val.id}" type="{if $spe_list.attr_type eq 2}checkbox{else}radio{/if}" {if $val.checked eq 1 && $cfg.add_shop_price eq 1}checked="checked"{/if} name="spec_{$spe_list.attr_id}" value="{$val.id}" />
                     </li>
                     {/foreach}
                 </ul>
                 {else}
                 <ul>
                     {foreach from=$spe_list.values item=val name=spe key=key}
-                    <li {if $key eq 0}class="selected"{/if}>
+                    <li {if $key eq 0 && $cfg.add_shop_price eq 1}class="selected"{/if}>
                         <b></b>
                         <a href="javascript:void(0)">{$val.label}</a>
-                        <input class="hide" id="spec_value_{$val.id}" onClick="cat_changePrice();" type="{if $spe_list.attr_type eq 2}checkbox{else}radio{/if}" {if $key eq 0}checked="checked"{/if} name="spec_{$spe_list.attr_id}" value="{$val.id}" />
+                        <input class="hide" id="spec_value_{$val.id}" onClick="cat_changePrice();" type="{if $spe_list.attr_type eq 2}checkbox{else}radio{/if}" {if $key eq 0 && $cfg.add_shop_price eq 1}checked="checked"{/if} name="spec_{$spe_list.attr_id}" value="{$val.id}" />
                     </li>
                     {/foreach}
                 </ul>
@@ -101,8 +101,13 @@ function cat_changePrice(onload)
 	   Ajax.call('goods.php', 'act=price&id=' + {$goods_id|default:0} + '&attr=' + goods_attr_id + goods_attr + '&number=' + qty + '&warehouse_id=' + {$region_id|default:0} + '&area_id=' + {$area_id|default:0}, changePriceResponse, 'GET', 'JSON');
   }else{
 	  
-	  var attr = getSelectedAttributes(document.forms['ECS_FORMBUY']);
-	  attr = '&attr=' + attr;
+	  {if $cfg.add_shop_price eq 1}	
+	  	var attr = getSelectedAttributes(document.forms['ECS_FORMBUY']);
+		
+		attr = '&attr=' + attr;
+	  {else}
+	  	var attr = '';
+	  {/if}
 	  
 	  Ajax.call('goods.php', 'act=price&id=' + {$goods_id|default:0} + attr + '&number=' + qty + '&warehouse_id=' + {$region_id|default:0} + '&area_id=' + {$area_id|default:0} + '&onload=' + onload, changePriceResponse, 'GET', 'JSON');
   }
@@ -126,11 +131,15 @@ function changePriceResponse(res)
 		if(res.onload == 'onload'){
 			document.getElementById('ECS_SHOPPRICE').innerHTML = res.result;
 		}else{
-			if(res.show_goods == 1){
-				document.getElementById('ECS_SHOPPRICE').innerHTML = res.spec_price;
-			}else{
+			{if $cfg.add_shop_price eq 1}	
 				document.getElementById('ECS_SHOPPRICE').innerHTML = res.result;
-			}
+			{else}
+				if(res.show_goods == 1){
+					document.getElementById('ECS_SHOPPRICE').innerHTML = res.spec_price;
+				}else{
+					document.getElementById('ECS_SHOPPRICE').innerHTML = res.result;
+				}
+			{/if}
 		}
 	}
 }

@@ -4,16 +4,16 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.11_system} - {$ur_here}</div>
+    	<div class="title">系统设置 - {$ur_here}</div>
         <div class="content">
         	<div class="explanation" id="explanation">
             	<div class="ex_tit">
-					<i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span>
+					<i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span>
                     {if $open eq 1}
                     <div class="view-case">
-                    	<div class="view-case-tit"><i></i>{$lang.view_tutorials}</div>
+                    	<div class="view-case-tit"><i></i>查看教程</div>
                         <div class="view-case-info">
-                        	<a href="http://help.ecmoban.com/article-6879.html" target="_blank">{$lang.tutorials_bonus_list_two}</a>
+                        	<a href="http://help.ecmoban.com/article-6879.html" target="_blank">商城邮件服务器设置</a>
                         </div>
                     </div>			
                     {/if}	
@@ -93,6 +93,10 @@
 			  '&smtp_user=' + smtp_user + '&smtp_pass=' + encodeURIComponent(smtp_pass) + '&reply_email=' + reply_email + '&mail_charset=' + mail_charset,function(result){
 				alert(result.message);
 		}, 'POST', 'JSON');
+	//  Ajax.call('shop_config.php?is_ajax=1&act=send_test_email',
+	//    'email=' + test_mail_address + '&mail_service=' + mail_service + '&smtp_host=' + smtp_host + '&smtp_port=' + smtp_port +
+	//    '&smtp_user=' + smtp_user + '&smtp_pass=' + encodeURIComponent(smtp_pass) + '&reply_email=' + reply_email + '&mail_charset=' + mail_charset,
+	//    emailResponse, 'POST', 'JSON');
 	}
 	
 	/**

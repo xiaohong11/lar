@@ -2,7 +2,6 @@
 <div class="gift_gard_list">
     <h3 class="title">
       <span>{$lang.goods_list}</span>
-      <em class="ml10 red">每个礼品卡仅支持提货一次，提货成功后该礼品卡即失效，礼品卡商品不支持退换货，请谨慎选择</em>
       <div class="fr">{$lang.Credit_Card_Number}：<i>{$gift_sn}</i><a href="gift_gard.php?act=exit_gift">{$lang.Exit_gift_card}</a></div>
     </h3>
 	<div class="gift_list_form">

@@ -7,7 +7,7 @@
         <div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>活动列表 - {$ur_here}</div>
         <div class="content">
             <div class="explanation" id="explanation">
-                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                     <li>奖项等级默认为特等奖，请酌情选择。</li>
                     <li>奖品名称为必填项。</li>
@@ -42,7 +42,7 @@
                                             <div class="item-item bf100">
                                                 <input type="hidden" name="prize_id[]">
                                                 <div id="prize_level" class="imitate_select select_w120">
-                                                    <div class="cite">{$lang.please_select}</div>
+                                                    <div class="cite">请选择</div>
                                                     <ul class="ps-container" style="display: none;">
                                                         <li><a href="javascript:;" data-value="0" class="ftx-01">特等奖</a></li>
                                                         <li><a href="javascript:;" data-value="1" class="ftx-01">一等奖</a></li>
@@ -55,7 +55,7 @@
                                                 </div>
                                                 <input type="text" name="prize_name[]" class="text w120" autocomplete="off">
                                                 <div id="prize_type" class="imitate_select select_w120">
-                                                    <div class="cite">{$lang.please_select}</div>
+                                                    <div class="cite">请选择</div>
                                                     <ul class="ps-container" style="display: none;">
                                                         <li><a href="javascript:;" data-value="1" class="ftx-01">红包</a></li>
                                                         <li><a href="javascript:;" data-value="3" class="ftx-01">积分</a></li>

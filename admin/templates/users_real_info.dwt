@@ -7,7 +7,7 @@
     	<div class="title"><a href="{$action_link.href}" class="s-back">{$lang.back}</a>{if $user_type eq 1}商家{else}会员{/if} - {$ur_here}</div>
         <div class="content">
             <div class="explanation" id="explanation">
-            	<div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+            	<div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
                 	<li>对商家实名认证详情进行审核操作。</li>
                     <li>请严格审核商家实名认证相关信息。</li>
@@ -66,10 +66,10 @@
                                         <div class="type-file-box">
                                             
                                             <span class="show">
-                                            	<a href="{$user_real_info.front_of_id_card}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="{$user_real_info.front_of_id_card}" ectype="tooltip" title="tooltip"></i></a>
+                                            	<a href="../{$user_real_info.front_of_id_card}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../{$user_real_info.front_of_id_card}>')" onmouseout="toolTip()"></i></a>
                                             </span>
                                             
-											<input type="text" name="textfile" class="type-file-text" id="textfield" value="{$user_real_info.front_of_id_card}" autocomplete="off" readonly>
+											<input type="text" name="textfile" class="type-file-text" id="textfield" value="../{$user_real_info.front_of_id_card}" autocomplete="off" readonly>
                                         </div>
                                         <div class="form_prompt"></div>
                                     </div>
@@ -82,10 +82,10 @@
                                         <div class="type-file-box">
                                             
                                             <span class="show">
-                                            	<a href="{$user_real_info.reverse_of_id_card}" target="_blank" class="nyroModal"><i class="icon icon-picture" data-tooltipimg="{$user_real_info.reverse_of_id_card}" ectype="tooltip" title="tooltip"></i></a>
+                                            	<a href="../{$user_real_info.reverse_of_id_card}" target="_blank" class="nyroModal"><i class="icon icon-picture" onmouseover="toolTip('<img src=../{$user_real_info.reverse_of_id_card}>')" onmouseout="toolTip()"></i></a>
                                             </span>
                                             
-											<input type="text" name="textfile" class="type-file-text" id="textfield" value="{$user_real_info.reverse_of_id_card}" autocomplete="off" readonly>
+											<input type="text" name="textfile" class="type-file-text" id="textfield" value="../{$user_real_info.reverse_of_id_card}" autocomplete="off" readonly>
                                         </div>
                                         <div class="form_prompt"></div>
                                     </div>

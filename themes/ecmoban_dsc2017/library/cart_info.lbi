@@ -26,7 +26,7 @@
                     <!-- {elseif $goods.rec_id gt 0 && $goods.is_gift neq 0} -->
                     <div class="p-name"><a href="javascript:void(0);">{$goods.short_name}<span style="color:#FF0000">（{$lang.largess}）</span></a></div>
                     <!-- {else} -->
-                    <div class="p-name"><a href="{$goods.url}" target="_blank" title="{$goods.short_name|escape:html}">{$goods.short_name}</a></div>
+                    <div class="p-name"><a href="{$goods.url}" target="_blank">{$goods.short_name}</a></div>
                     <!-- {/if} -->
                     <div class="p-number">
                         <span class="num" id="goods_number_{$goods.rec_id}">{$goods.goods_number|default:1}</span>
@@ -141,6 +141,5 @@ function return_cart_list(result)
 {
 	$(".cart_num").html(result.cart_num);
 	$(".pop_panel").html(result.content);
-	tbplHeigth();
 }
 </script>

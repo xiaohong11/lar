@@ -35,11 +35,11 @@
             appkey: '{$kf_appkey}',
             credential: '{$user_id}',
             touid: '{$kf_touid}',
-			customData: {
-				item: {
-					id: '{$goods_id}'
-				}
-			},
+                customData: {
+                    item: {
+                        id: '{$goods_id}'
+                    }
+                },
             sendMsgToCustomService: true,
             logo: '{$kf_logo}',//客服小头像
             toAvatar: '{$kf_logo}',//客服大头像

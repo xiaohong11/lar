@@ -5,32 +5,31 @@
 
 <body class="iframe_body">
 	<div class="warpper">
-    	<div class="title">{$lang.seller} - {$ur_here}</div>
+    	<div class="title">商家 - {$ur_here}</div>
         <div class="content">
         	{include file ='library/seller_tab.lbi'}
         	<div class="explanation" id="explanation">
-                <div class="ex_tit"><i class="sc_icon"></i><h4>{$lang.operating_hints}</h4><span id="explanationZoom" title="{$lang.fold_tips}"></span></div>
+                <div class="ex_tit"><i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span></div>
                 <ul>
-                    <li>{$lang.operation_prompt_content.list.0}</li>
-                    <li>{$lang.operation_prompt_content.list.1}</li>
+                    <li>等级入驻商相关信息管理。</li>
+                    <li>可进入查看进行审核入驻信息。</li>
                 </ul>
             </div>
             <div class="flexilist">
             	<div class="common-head">
-                    <div class="search">
-                    	<form action="javascript:;" name="searchForm" onSubmit="searchGoodsname(this);">
-                        <div class="input">
-                            <input type="text" name="apply_sn" class="text nofocus" placeholder="{$lang.apply_sn}" autocomplete="off" />
-                            <input type="submit" class="btn" name="secrch_btn" ectype="secrch_btn" value="" />
+                    <form action="javascript:searchOrder()" name="searchForm">
+                        <div class="search">
+                            <div class="input">
+                                <input type="text" name="apply_sn" class="text nofocus" placeholder="{$lang.apply_sn}" autocomplete="off" /><input type="submit" value="" class="not_btn" />
+                            </div>
                         </div>
-                        </form>
-                    </div>
+                    </form>
 					<div class="fl">
 						<a href="{$action_link.href}"><div class="fbutton"><div class="csv" title="{$action_link.text}"><span><i class="icon icon icon-download-alt"></i>{$action_link.text}</span></div></div></a>
 					</div>
                 </div>
                 <div class="common-content">
-                	<div class="list-div" id="listDiv" >
+                	<div class="list-div"  id="listDiv" >
 						{/if}
                     	<table cellpadding="1" cellspacing="1">
                         	<thead>
@@ -65,7 +64,7 @@
                                     <div class="tDiv a2">
                                         <a href="seller_apply.php?act=info&apply_id={$list.apply_id}&grade_id={$list.grade_id}" title="{$lang.view_detail}" class="btn_see" ><i class="sc_icon sc_icon_see"></i>{$lang.view}</a>
                                         {if $list.apply_status eq 3 || $pre_admin eq 0}
-                                        <a href="javascript:;" onclick="listTable.remove({$list.apply_id}, '{$lang.drop_confirm}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.drop}</a>	
+                                        <a href="javascript:;" onclick="listTable.remove({$list.apply_id}, '{$lang.drop_confirm}')" title="{$lang.remove}" class="btn_trash"><i class="icon icon-trash"></i>{$lang.remove}</a>	
                                         {/if}
                                     </div>
 								</td>
@@ -90,11 +89,11 @@
             </div>
             <div class="gj_search">
                 <div class="search-gao-list" id="searchBarOpen">
-                    <i class="icon icon-zoom-in"></i>{$lang.advanced_search}
+                    <i class="icon icon-zoom-in"></i>高级搜索
                 </div>
                 <div class="search-gao-bar">
-                    <div class="handle-btn" id="searchBarClose"><i class="icon icon-zoom-out"></i>{$lang.pack_up}</div>
-                    <div class="title"><h3>{$lang.advanced_search}</h3></div>
+                    <div class="handle-btn" id="searchBarClose"><i class="icon icon-zoom-out"></i>收起边栏</div>
+                    <div class="title"><h3>高级搜索</h3></div>
                     <form method="get" name="formSearch_senior" action="javascript:searchOrder()">
                         <div class="searchContent">
                             <div class="layout-box">
@@ -137,22 +136,22 @@
                                     </dd>
                                 </dl>
                                 <dl>
-                                    <dt>{$lang.effective_grade_apply}</dt>
+                                    <dt>有效等级申请</dt>
                                     <dd>
                                         <div  class="select_w145 imitate_select">
                                             <div class="cite">{$lang.select_please}</div>
                                             <ul>
                                                <li><a href="javascript:;" data-value="-1">{$lang.select_please}</a></li>
-                                               <li><a href="javascript:;" data-value="0">{$lang.invalid}</a></li>
-                                               <li><a href="javascript:;" data-value="1">{$lang.effective}</a></li>
+                                               <li><a href="javascript:;" data-value="0">无效</a></li>
+                                               <li><a href="javascript:;" data-value="1">有效</a></li>
                                             </ul>
                                             <input name="valid" type="hidden" value="-1">
                                         </div>
                                     </dd>
                                 </dl>
-                                <dl class="bot_btn">
-                                    <dd>
-                                       <input type="submit" class="btn red_btn" name="tj_search" value="{$lang.button_inquire}" /><input type="reset" class="btn btn_reset" name="reset" value="{$lang.button_reset_alt}" />
+                                <dl>
+                                    <dd class="bot_btn">
+                                       <input type="submit" class="btn red_btn" name="tj_search" value="提交查询" /><input type="reset" class="btn btn_reset" name="reset" value="重置" />
                                     </dd>
                                 </dl>
                             </div>
@@ -162,11 +161,11 @@
             </div>
         </div>
     </div>
-	{include file ='library/pagefooter.lbi'}
-	<script type="text/javascript">	
+ {include file ='library/pagefooter.lbi'}
+<script type="text/javascript">	
 	//分页传值
-	listTable.recordCount = {$record_count|default:0};
-	listTable.pageCount = {$page_count|default:1};
+	listTable.recordCount = '{$record_count}';
+	listTable.pageCount = '{$page_count}';
 
 	{foreach from=$filter item=item key=key}
 	listTable.filter.{$key} = '{$item}';
@@ -189,7 +188,7 @@
 	
 	//高级搜索
 	$.gjSearch("-240px");
-	</script>
+</script>
 </body>
 </html>
 {/if}

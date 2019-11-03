@@ -3,7 +3,7 @@
 <!--{foreach from=$ad_child item=ad name=noad}-->
 <div class="item item{$smarty.foreach.noad.iteration}">
     <div class="item-top">
-        <a href="{$ad.ad_link}" target="_blank"><img src="{$ad.ad_code}"></a>
+        <a href="{$ad.ad_link}" target="_blank"><img src="{$ad.ad_code}" width="{$ad.ad_width}" height="{$ad.ad_height}"></a>
     </div>
     <div class="item-bot">
         <div class="tit">{$ad.b_title}</div>
