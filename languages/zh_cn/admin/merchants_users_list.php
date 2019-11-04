@@ -305,6 +305,7 @@ $_LANG['drp_set_config'] = '分销比例设置';
 $_LANG['drp'] = '微分销管理';
 $_LANG['drp_config'] = '店铺设置';
 $_LANG['drp_shop'] = '分销商管理';
+$_LANG['shop_price'] = '发表产品商家价';
 $_LANG['drp_list'] = '分销排行';
 $_LANG['drp_order_list'] = '分销订单操作';
 $_LANG['drp_set_config'] = '分销比例设置';
